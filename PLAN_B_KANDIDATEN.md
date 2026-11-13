@@ -2,6 +2,13 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
+Fortschreibung 13.11.2026: Maßgeblich sind die aktuelle Ausführungsreihenfolge
+in [open_tasks.md](docs/open_tasks.md) und die
+[Katalogeinschätzung](docs/project_status_2026-11-13.md).
+CHECKER-05 ist begrenzt synthetisch abgeschlossen; nächstes P0-Paket ist
+FALLBACK-GROUPS-CLEANUP-06 für die zusätzlichen Restbildstriche des produktiven
+Fallbacks. Keine Reservefreigabe oder Erhöhung der belegten Katalogabdeckung.
+
 ## Aktueller Fokus (2026-10-23)
 
 Die [neue Schwächenprüfung](docs/weakness_review_2026-10-23.md) priorisiert

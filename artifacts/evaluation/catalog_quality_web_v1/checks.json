@@ -1,0 +1,76 @@
+{
+  "source_sha256": {
+    "src/imageConverterCatalog.py": "b5364284af4495fb19f0bdb99aaea238bf4b7f095d6792a4028c0aab159712f2",
+    "src/imageConverterGui.py": "c4cacc954ac138b94c39819a91957fa336da5743bebc36147eaa275d135594c4",
+    "tools/build_catalog_inventory.py": "13adac568ea995705f1371e346003e6f041b88b5d550a1e7dfb2f912e27619b4",
+    "web/catalog.html": "7f9e0df52412a173c6e8282d8976e4c961bbac8fa69fa775160f3a5e59ee3d1e",
+    "web/catalog.js": "b78230b7b27791bb09b5b1742c3585296366ff39bde5c28ffec472613f798d01",
+    "web/catalog.css": "fd9027fa47ec3efa0c9d709440671ef26d77fc922c3b8e09ebc89fe7c8361e5e",
+    "tests/test_catalog_quality_server.py": "b7e37c1ee31ff5834f934ed2a996078cd52390e06fed1b131ba04219c48c9d09"
+  },
+  "tests": [
+    {
+      "profile": "catalog_quality_server_inventory_gui",
+      "passed": 56,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 41.84
+    },
+    {
+      "profile": "segment_native_composition_reserves",
+      "passed": 477,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "profile": "core-green",
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "final_http": {
+    "status": "cancelled",
+    "rows": 1787,
+    "pixel_pass": 348,
+    "archived": 379,
+    "reserved": 6,
+    "last_complete_measurement": "2026-11-07",
+    "current_reservations_applied": true
+  },
+  "failed_attempts": [
+    {
+      "kind": "long_catalog_measurement",
+      "run_id": "0cd3d201754b449bbb3638fca80fc06e",
+      "completed_images": 1102,
+      "reason": "Windows progress-file replacement PermissionError; fixed and regression-tested"
+    },
+    {
+      "kind": "integration_test",
+      "elapsed_seconds": 1509.31,
+      "passed": 55,
+      "failed": 1,
+      "reason": "System interruption invalidated 8-second child-start wait"
+    },
+    {
+      "kind": "integration_test",
+      "passed": 55,
+      "failed": 1,
+      "reason": "Windows aborted intentionally rejected unread-body TCP test; focused retry passed, final test avoids body-packet race"
+    }
+  ],
+  "latest_catalog_run": {
+    "id": "9732d05e8bf14d359b2a8c6e4661dd86",
+    "status": "cancelled",
+    "full_new_measurement_published": false
+  },
+  "power_request_final_tests": {
+    "acquired": true,
+    "released": true,
+    "cleanup_errors": []
+  },
+  "fresh_catalog_conversion": false,
+  "real_reserves_executed": false,
+  "model_promotions": 0,
+  "github_ci_started": false
+}

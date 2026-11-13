@@ -27,6 +27,8 @@ import warnings
 import webbrowser
 import zipfile
 
+from src.imageConverterCatalog import CatalogError, CatalogQuality
+
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
 MAX_UPLOAD = 25 * 1024 * 1024
@@ -645,9 +647,11 @@ class GuiServer(ThreadingHTTPServer):
     def __init__(self, address: tuple[str, int], jobs: Jobs):
         self.jobs = jobs
         self.workbench = Workbench(jobs)
+        self.catalog = CatalogQuality(ROOT, jobs.directory/'catalog-quality', stop_process_tree)
         super().__init__(address, Handler)
 
     def server_close(self):
+        self.catalog.close()
         self.workbench.close()
         super().server_close()
 
@@ -690,6 +694,9 @@ class Handler(BaseHTTPRequestHandler):
             name = parse_qs(url.query).get("name", ["Bild"])[0]
             match = re.fullmatch(r"/api/jobs/([0-9a-f]{32})(?:/([a-z]+)(/remove)?)?", path)
             static = {"/": ("index.html", "text/html; charset=utf-8"),
+                      "/catalog": ("catalog.html", "text/html; charset=utf-8"),
+                      "/catalog.js": ("catalog.js", "text/javascript; charset=utf-8"),
+                      "/catalog.css": ("catalog.css", "text/css; charset=utf-8"),
                       "/workbench": ("workbench.html", "text/html; charset=utf-8"),
                       "/workbench.js": ("workbench.js", "text/javascript; charset=utf-8"),
                       "/workbench.css": ("workbench.css", "text/css; charset=utf-8"),
@@ -701,6 +708,8 @@ class Handler(BaseHTTPRequestHandler):
                     return self.file(WEB / filename, mime)
                 if path.startswith('/api/workbench'):
                     return self.workbench_get(path, url.query)
+                if path.startswith('/api/catalog'):
+                    return self.catalog_get(path, url.query)
                 if path == "/api/jobs":
                     with jobs.lock:
                         ids = sorted(jobs.jobs, key=lambda key: jobs.jobs[key]["created"], reverse=True)[:20]
@@ -729,6 +738,12 @@ class Handler(BaseHTTPRequestHandler):
                     raise RequestError("Upload unvollständig.")
                 if path == "/api/upload":
                     return self.json(jobs.upload(name, data), 201)
+                if path in {'/api/catalog/start','/api/catalog/cancel'}:
+                    payload = json.loads(data)
+                    if not isinstance(payload, dict):
+                        raise RequestError('Ungültige Anfrage.')
+                    operation = self.server.catalog
+                    return self.json(operation.start(payload.get('force',False)) if path.endswith('/start') else operation.cancel())
                 if path.startswith('/api/workbench/'):
                     payload = json.loads(data)
                     if not isinstance(payload, dict):
@@ -758,7 +773,7 @@ class Handler(BaseHTTPRequestHandler):
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))
             raise RequestError("Nicht gefunden.", 404)
-        except RequestError as exc:
+        except (RequestError, CatalogError) as exc:
             self.json({"error": str(exc)}, exc.status)
         except (ValueError, TypeError):
             self.json({"error": "Ungültige Anfrage."}, 400)
@@ -766,6 +781,31 @@ class Handler(BaseHTTPRequestHandler):
             pass
 
     do_GET = do_POST = handle_request
+
+    def catalog_get(self, path, query):
+        catalog = self.server.catalog
+        if path == '/api/catalog':
+            return self.json(catalog.snapshot())
+        if path == '/api/catalog/list':
+            return self.json(catalog.payload())
+        if path == '/api/catalog/csv':
+            return self.respond(catalog.export_csv(), 'text/csv; charset=utf-8', download='konvertierungsqualitaet.csv')
+        if path == '/api/catalog/json':
+            return self.respond(json.dumps(catalog.payload(),ensure_ascii=False).encode('utf-8'),
+                                'application/json; charset=utf-8', download='konvertierungsqualitaet.json')
+        if path == '/api/catalog/log':
+            snapshot = catalog.snapshot()
+            if not snapshot.get('id'):
+                raise RequestError('Noch kein Prüfprotokoll vorhanden.',404)
+            return self.file(catalog.directory/snapshot['id']/'console.log','text/plain; charset=utf-8')
+        if path == '/api/catalog/asset':
+            relative = parse_qs(query).get('path',[''])[0]
+            target = catalog.asset(relative)
+            mime = {'.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg',
+                    '.gif':'image/gif','.webp':'image/webp','.bmp':'image/bmp',
+                    '.tif':'image/tiff','.tiff':'image/tiff'}.get(target.suffix.lower(),'text/plain; charset=utf-8')
+            return self.file(target,mime)
+        raise RequestError('Nicht gefunden.',404)
 
     def workbench_get(self, path, query):
         workbench = self.server.workbench

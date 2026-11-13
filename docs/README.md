@@ -1,5 +1,10 @@
 # Dokumentationsindex
 
+- [Stand zum Ziel einer breiten Konvertierung: belegte Katalogabdeckung und verbleibender Weg (2026-11-13)](project_status_2026-11-13.md)
+
+- [Vollständige Qualitätsliste im Webserver: Fortschritt, Abbruch, Bildvergleich und CSV/JSON](catalog_quality_webserver.md)
+- [P0: logische Geraden aus Segmenten unabhängig zuordnen; 255 Gegenproben und unveränderte reale Sperre (2026-11-13)](next_arbeitspaket_2026-11-13_segment_checker.md)
+
 - [P0: unabhängiger nativer Objekt-/Relationsprüfer mit separatem Freeze; 60 Fehlerkontrollen, verdeckte Geometrie und neue Segmentierungsgrenze (2026-11-13)](next_arbeitspaket_2026-11-13_fallback_checker.md)
 
 - [P0: Gruppen in vorhandenen Szenen hinzufügen, entfernen und ersetzen; 18/18 direkte und 6/6 CLI-Abnahmen, reale Reserven gesperrt (2026-11-13)](next_arbeitspaket_2026-11-13_fallback_composition.md)

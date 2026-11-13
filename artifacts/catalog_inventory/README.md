@@ -1,5 +1,10 @@
 # Vollständige Katalogübersicht
 
+Die Liste ist auch im lokalen Webserver unter **Konvertierungsqualität**
+(`http://127.0.0.1:8766/catalog`) verfügbar. Dort kann die Neumessung mit
+Fortschrittsanzeige gestartet und abgebrochen werden; die letzte vollständige
+Liste bleibt erhalten. [Bedienung](../../docs/catalog_quality_webserver.md).
+
 Die durchsuchbare [Gesamtliste](index.html) verbindet jede vorhandene
 Katalogbitmap mit ihrer aktuellen Beschreibung, gespeicherten SVG-Ausgaben,
 historischen Archivnachweisen und nachgemessener Rasterqualität.

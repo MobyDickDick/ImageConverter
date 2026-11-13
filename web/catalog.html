@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ImageConverter · Konvertierungsqualität</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/catalog.css">
+  <script src="/catalog.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/"><span class="brand-icon" aria-hidden="true">◈</span><span>IMAGECONVERTER<small>Vom Bild zur Vektorgrafik</small></span></a>
+    <nav aria-label="Hauptnavigation"><a href="/">Bild konvertieren</a><a href="/workbench">Plan-B-Workbench</a></nav>
+  </header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">DER GESAMTE KATALOG</p><h1>Konvertierungsqualität</h1><p>Alle Bitmaps, gespeicherte SVGs und ihre überprüfte Rasterqualität an einem Ort.</p></div></div>
+    <div id="notice" role="alert" hidden></div>
+    <section class="card">
+      <div class="catalog-actions">
+        <button id="refresh" class="primary">Qualitätsliste aktualisieren</button>
+        <button id="stop" class="secondary" hidden>Prüfung abbrechen</button>
+        <label class="force"><input id="force" type="checkbox"> Alle Paarprüfungen neu messen</label>
+        <a href="/api/catalog/csv" download>CSV herunterladen</a><a href="/api/catalog/json" download>JSON herunterladen</a>
+      </div>
+      <p id="run-status" role="status" aria-live="polite">Qualitätsliste wird geladen …</p>
+      <progress id="progress" aria-label="Fortschritt der Qualitätsprüfung" hidden></progress>
+      <p class="hint">Die Prüfung vergleicht vorhandene SVGs mit ihren Originalbildern mit zwei Renderern. Sie startet keine neue Konvertierung. Beim Abbruch bleibt die letzte vollständige Liste erhalten. Reservierte Prüfbilder bleiben ungeprüft.</p>
+      <a id="log" href="/api/catalog/log" target="_blank" rel="noopener" hidden>Prüfprotokoll öffnen</a>
+    </section>
+    <section class="stats" id="stats" aria-label="Katalogbilanz"></section>
+    <p class="hint" id="updated"></p>
+    <p class="hint">„Rastergates erfüllt“ bestätigt den Bildvergleich, keine vollständige fachliche Prüfung. Historische Archivabnahme wird separat ausgewiesen; die Zahlen überlappen.</p>
+    <section class="card">
+      <div class="filters">
+        <label>Suchen<input id="search" type="search" placeholder="Dateiname oder Beschreibung"></label>
+        <label>Qualität<select id="status"><option value="">Alle Qualitätsstände</option></select></label>
+        <label>Archiv<select id="archive"><option value="">Alle Bilder</option><option value="yes">Historisch archiviert</option><option value="no">Nicht archiviert</option></select></label>
+        <label>Sortierung<select id="sort"><option value="filename">Dateiname</option><option value="status">Qualitätsstand</option><option value="mse-asc">MSE aufsteigend</option><option value="mse-desc">MSE absteigend</option></select></label>
+        <label>Pro Seite<select id="page-size"><option>25</option><option>75</option><option>150</option><option value="all">Alle</option></select></label>
+      </div>
+      <div class="pagination"><span id="count"></span><button class="secondary" id="previous">← Zurück</button><span id="page"></span><button class="secondary" id="next">Weiter →</button></div>
+      <div class="table-scroll"><table><thead><tr><th scope="col">Bitmap / SVG</th><th scope="col">Qualitätsstand</th><th scope="col">MSE / Kanten / IoU</th><th scope="col">Archiv</th><th scope="col">Beschreibung und Prüfbefunde</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <p id="empty" hidden>Keine Bilder für diese Auswahl.</p>
+    </section>
+  </main>
+</body>
+</html>

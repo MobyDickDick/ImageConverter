@@ -106,3 +106,9 @@ Ein unabhängiger menschlicher Annotationsaudit fehlt weiterhin. Der neue Freeze
 erteilt keine Reservefreigabe und schließt diese Voraussetzungen nicht.
 HC0010, Rail, AC5041 und AC5050 bleiben gesperrt und ungetestet.
 SEARCH-STRUCTURE-01, GENERAL-SCENE-REAL-05 und SEMANTIC-COMPLETENESS-02 bleiben offen.
+
+Fortschreibung vom 13.11.2026: [CHECKER-05 ist als begrenzter logischer
+Geraden-/Segmentprüfer separat eingefroren](next_arbeitspaket_2026-11-13_segment_checker.md).
+Ausgelassene verdeckte Geometrie bleibt ausdrücklich unbestätigt.
+Zusätzliche historische Restbildstriche bleiben negativ im Inventarvertrag;
+die reale Sperre wird nicht aufgehoben.

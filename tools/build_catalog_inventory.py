@@ -58,6 +58,24 @@ def utcnow():
     return datetime.now(timezone.utc).isoformat()
 
 
+def publish_progress(path, payload):
+    """Windows readers can briefly deny replacement; UI progress is best effort.
+
+    Never sacrifice a catalog measurement because a polling request still has
+    the previous progress file open. The next tick retries with current counts.
+    """
+    temporary = path.with_suffix('.tmp')
+    temporary.write_text(json.dumps(payload), encoding='utf-8')
+    for attempt in range(5):
+        try:
+            temporary.replace(path)
+            return True
+        except PermissionError:
+            if attempt < 4:
+                time.sleep(.02*(attempt+1))
+    return False
+
+
 def _quality_worker(connection):
     # Native viewport parsing and rendering both stay in the bounded child.
     import cv2
@@ -192,6 +210,8 @@ def build(root, *, measure, cache=None, signature='uncached', force=False, progr
     desc_path, descriptions, image_names, copies, archive_root, archive, svgs, reserved = discover(root)
     cache = {} if cache is None else cache
     rows, used_cache, measured = [], 0, 0
+    if progress:
+        progress(0, len(copies), measured, used_cache)
     for number, (name, paths) in enumerate(sorted(copies.items()), 1):
         source = paths[0]
         variant = source.stem
@@ -251,10 +271,12 @@ def build(root, *, measure, cache=None, signature='uncached', force=False, progr
                     measured += 1
                 candidate['measurement'] = measurement
                 row['candidates'].append(candidate)
+                if progress:
+                    progress(number-1, len(copies), measured, used_cache)
             row['selected'] = min(row['candidates'], key=quality_order)
             row['status'] = classify(row['selected']['measurement'])
         rows.append(row)
-        if progress and number % 100 == 0:
+        if progress:
             progress(number, len(copies), measured, used_cache)
     catalog = [r for r in rows if r['role'] == 'catalog']
     archived = [r for r in catalog if r['archived']]
@@ -317,10 +339,13 @@ def write_report(root, output, rows, summary, metadata):
 
 
 def main():
+    from src.iCCModules.imageCompositeConverterPower import conversion_awake
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=ROOT)
     parser.add_argument('--output', type=Path, default=ROOT/'artifacts/catalog_inventory')
     parser.add_argument('--force', action='store_true', help='Remeasure instead of reusing hash-identical checks')
+    parser.add_argument('--cache', type=Path, help='Read a previous measurement cache; writes stay in --output')
+    parser.add_argument('--progress-file', type=Path, help='Atomically publish current measurement counts')
     parser.add_argument('--render-only', action='store_true', help='Rebuild the HTML from the saved manifest without new measurements')
     args = parser.parse_args()
     root, output = args.root.resolve(), args.output.resolve()
@@ -338,13 +363,28 @@ def main():
         print(f'HTML rebuilt: {len(payload["rows"])} entries; no new measurements')
         return 0
     signature, metadata = runtime_signature(root)
-    cache = read_json(output/'measurements.json', {})
+    cache = read_json(args.cache or output/'measurements.json', {})
     worker = QualityWorker()
     started = time.monotonic()
+    last_progress = 0.
+
+    def progress(n, total, measured, cached):
+        nonlocal last_progress
+        now = time.monotonic()
+        if n != total and now-last_progress < .25:
+            return
+        last_progress = now
+        payload = dict(completed=n, total=total, measured=measured, cached=cached,
+                       elapsed_seconds=round(now-started, 3))
+        if args.progress_file:
+            publish_progress(args.progress_file, payload)
+        if n % 100 == 0 or n == total:
+            print(f'Inventar {n}/{total}; neue Paarprüfungen {measured}; Cache {cached}', flush=True)
+
     try:
-        rows, summary, cache = build(root, measure=worker.measure, cache=cache, signature=signature,
-            force=args.force, progress=lambda n, total, measured, cached:
-                print(f'Inventar {n}/{total}; neue Paarprüfungen {measured}; Cache {cached}', flush=True))
+        with conversion_awake():
+            rows, summary, cache = build(root, measure=worker.measure, cache=cache, signature=signature,
+                force=args.force, progress=progress)
     finally:
         worker.close()
     summary['measurement_signature'] = signature

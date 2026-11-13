@@ -380,6 +380,14 @@ Unter Windows **`startWebServer.cmd` doppelklicken**. Der lokale Server nutzt
 `--port 8767` wählt einen anderen Port, `--no-browser` unterdrückt den Browserstart;
 Strg+C beendet den Server.
 
+Über **Konvertierungsqualität** öffnet sich die vollständige
+[Katalogliste im Webserver](http://127.0.0.1:8766/catalog): Original-/SVG-Vergleich,
+Rasterbefunde, Archivstatus, Suche, Filter und CSV-/JSON-Export aller Bilder.
+**Qualitätsliste aktualisieren** prüft die vorhandenen SVGs mit Fortschrittsanzeige;
+**Prüfung abbrechen** beendet den Prüfprozess samt Unterprozessen und erhält die
+letzte vollständige Liste. Dabei wird keine neue Konvertierung gestartet.
+[Bedienung und Qualitätsbegriffe](docs/catalog_quality_webserver.md).
+
 1. Bild auswählen oder ins Uploadfeld ziehen: PNG, JPG, BMP, WebP oder TIFF,
    maximal 25 MB / 20 Megapixel. EXIF-Drehung wird berücksichtigt, Transparenz
    auf Weiss gelegt. Die Vorschau zeigt die tatsächliche Konvertierungseingabe.
