@@ -5,8 +5,8 @@
   "auxiliary_bitmaps": 0,
   "unique_catalog_variants": 1787,
   "catalog_statuses": {
-    "pixel_fail": 1312,
-    "pixel_pass": 347,
+    "pixel_fail": 1311,
+    "pixel_pass": 348,
     "no_svg": 124,
     "measurement_error": 2,
     "reserved": 2
@@ -28,8 +28,8 @@
       "total": 930,
       "archived": 174,
       "statuses": {
-        "pixel_fail": 767,
-        "pixel_pass": 128,
+        "pixel_fail": 766,
+        "pixel_pass": 129,
         "no_svg": 35
       }
     },
@@ -292,11 +292,16 @@
   "elapsed_seconds": 29.344,
   "targeted_refresh": {
     "variants": [
-      "AC100_1_M"
+      "AC0110_L"
     ],
-    "measured_at": "2026-11-13T06:35:54.309406+00:00",
-    "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
-    "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+    "description_variants": [
+      "AC0110_L",
+      "AC0110_M",
+      "AC0110_S"
+    ],
+    "measured_at": "2026-11-13T07:13:10.403999+00:00",
+    "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+    "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
   },
   "targeted_refreshes": [
     {
@@ -314,6 +319,19 @@
       "measured_at": "2026-11-13T06:35:54.309406+00:00",
       "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
       "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+    },
+    {
+      "variants": [
+        "AC0110_L"
+      ],
+      "description_variants": [
+        "AC0110_L",
+        "AC0110_M",
+        "AC0110_S"
+      ],
+      "measured_at": "2026-11-13T07:13:10.403999+00:00",
+      "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+      "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
     }
   ]
 }

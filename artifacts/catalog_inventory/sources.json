@@ -231,15 +231,20 @@
     "max_svg_elements": 80,
     "max_path_commands": 160
   },
-  "description_source_sha256": "d5b6dcc604bf64e9108ea07e24e3120431da2de82f7e8db5466df2d753dc0a6a",
+  "description_source_sha256": "49f1572989fa0125fc1bde08363070fd3f9fa5fb7b7437ca26310cb1a8ca1774",
   "archive_index_sha256": "cfe4d3387f10d73ab31e20332d8760025cb30ab9a6dbb5d985fc2d80494ff691",
   "targeted_refresh": {
     "variants": [
-      "AC100_1_M"
+      "AC0110_L"
     ],
-    "measured_at": "2026-11-13T06:35:54.309406+00:00",
-    "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
-    "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements.",
+    "description_variants": [
+      "AC0110_L",
+      "AC0110_M",
+      "AC0110_S"
+    ],
+    "measured_at": "2026-11-13T07:13:10.403999+00:00",
+    "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+    "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical.",
     "runtime": {
       "versions": {
         "python": "3.10.11",
@@ -278,6 +283,7 @@
         "src/iCCModules/imageCompositeConverterConversionReporting.py": "cf8e645153705626a442136f42c66be5f5c6030c00fca1612be6b89066d7f801",
         "src/iCCModules/imageCompositeConverterConversionRows.py": "c42a57030e966584a9870bf85b63424c61fb38a7dd8fb20e212d3ba62415aeec",
         "src/iCCModules/imageCompositeConverterCoreClasses.py": "1ecee60b8950bc04ce3d05daad678a76b8cc5bf541bc8b815e055aa961f558ef",
+        "src/iCCModules/imageCompositeConverterCrossedGradientPanel.py": "61b335ff53a05786b068516ace52d0deb99f48ef27b6c74c185dc372674a7098",
         "src/iCCModules/imageCompositeConverterCrossPanelDisk.py": "ba7a04627f1c49adb392263b14619b7f197ce0026e07fc93b2b45f3f7a1d1cc1",
         "src/iCCModules/imageCompositeConverterDeadline.py": "e277af59ef75d048f0f2a747d2999b6853b92c4d635bc29afb07f658ee4ba466",
         "src/iCCModules/imageCompositeConverterDebugTrace.py": "e51a0ca100fb9709faeff49d365f01f66a215e368dc3ff577533a0af9e0ee244",
@@ -352,7 +358,7 @@
         "src/iCCModules/imageCompositeConverterNaming.py": "c9909706d2523e9e040421c174562eed744484086dfdd43bcb3de64280b7968c",
         "src/iCCModules/imageCompositeConverterNestedPanel.py": "eb19d93de51c799a2d565627b5d2b3951a4d4bcad20a82512a6fae2bb74ae9f4",
         "src/iCCModules/imageCompositeConverterNeuralElements.py": "a5a80d5d91122bad928b5b207664ca09dfc70d619c7b0f7996ec97ac5e9405be",
-        "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "175e37918c53aa5876648573326255703ee260ccc49c536fda7e074fedfe1f86",
+        "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "80a4ab5c6276e5b6127a23f080e8b1bd97406f4fa79384581a5b3272381214d0",
         "src/iCCModules/imageCompositeConverterOptimizationCircleGeometry.py": "8aa0605201b063401e007f0821d95b7dcd2d4516f0e41c1ea081525476a46c05",
         "src/iCCModules/imageCompositeConverterOptimizationCirclePose.py": "152017dcf431570f93887aa7484df14d74e37c74c389e0909083ff3e20e104d6",
         "src/iCCModules/imageCompositeConverterOptimizationCircleRadius.py": "6ce88633f9412c2919fda78f278693dd1f8d1aea5c549a1b7822634e2417763d",

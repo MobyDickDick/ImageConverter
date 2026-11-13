@@ -1,0 +1,100 @@
+{
+  "model_tests": {
+    "passed": 16,
+    "exit_code": 0
+  },
+  "affected_runtime_and_form_tests": {
+    "passed": 114,
+    "exit_code": 0
+  },
+  "catalog_tests": {
+    "passed": 18,
+    "exit_code": 0
+  },
+  "compileall": {
+    "exit_code": 0
+  },
+  "cli_help": {
+    "exit_code": 0
+  },
+  "image_id_hardcoding": {
+    "exit_code": 0,
+    "occurrences": 0
+  },
+  "diff_check": {
+    "exit_code": 0
+  },
+  "cli": {
+    "status": "validated",
+    "search_satisfactory": true,
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "fit": {
+      "details": {
+        "diagonal_mse": [
+          0.000126745708542105,
+          0.00014231955408425996
+        ],
+        "minus_mse": 8.66333461489171e-05,
+        "passed": true,
+        "profile_error_p95": 1.0
+      },
+      "error": 1.71375,
+      "evaluations": 3266,
+      "initial_error": 6.686354166666667,
+      "parameters": [
+        1.2066314853073703,
+        0.2841849645866023,
+        38.85541305413183,
+        79.75,
+        1.45,
+        15.79070438394197,
+        1.650846400116151,
+        38.43832884402624,
+        3.2183889456686186,
+        38.47946997784678,
+        1.5518721374871465,
+        3.19943081314574,
+        15.25,
+        7.562632372441291,
+        9.5625,
+        2.4948192569573733,
+        195.58847829163673,
+        254.47357873741632,
+        197.7633318947756,
+        156.34707865824802,
+        132.53233140527584,
+        133.46166718782993,
+        101.3159176855038
+      ],
+      "quality": {
+        "edge_alignment": 0.9741178750991821,
+        "foreground_iou": 0.9608177172061328,
+        "foreground_mse": 0.00015314367192331702,
+        "normalized_mse": 0.0001180411345558241,
+        "passed": true
+      }
+    }
+  },
+  "full_suite": {
+    "passed": 744,
+    "failed": 1,
+    "exit_code": 1,
+    "stop_on_first_failure": true,
+    "failure": "tests/detailtests/test_gradient_stripe_strategy_helpers.py::test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns",
+    "preexisting_failure": true
+  },
+  "catalog_refresh": {
+    "measured_variants": [
+      "AC0110_L"
+    ],
+    "description_variants": [
+      "AC0110_L",
+      "AC0110_M",
+      "AC0110_S"
+    ],
+    "base_description_preserved": true,
+    "other_measurements": "historical"
+  }
+}

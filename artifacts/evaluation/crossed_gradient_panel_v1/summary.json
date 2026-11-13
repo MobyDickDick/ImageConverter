@@ -1,0 +1,125 @@
+{
+  "variant": "AC0110_L",
+  "source_sha256": "298688a7e99f3b6a1da01ea64094fe428215c5087a58759aa57a4aae4e8dc400",
+  "svg_sha256": "463b3e470d42f81c6e17eb845887ba1c356d6ab0d5ca6a1f67279099e990ae3a",
+  "limits_changed": false,
+  "reference_svg_reads": false,
+  "measurements": {
+    "before": {
+      "mupdf": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.01342717930674553,
+          "foreground_mse": 0.02141243778169155,
+          "edge_alignment": 0.6848531365394592,
+          "foreground_iou": 0.3346069868995633
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 10,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "librsvg": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit",
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.013436334207654,
+          "foreground_mse": 0.02143777534365654,
+          "edge_alignment": 0.6300333738327026,
+          "foreground_iou": 0.3346049046321526
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 10,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    "after": {
+      "mupdf": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0001180411345558241,
+          "foreground_mse": 0.00015314367192331702,
+          "edge_alignment": 0.9741178750991821,
+          "foreground_iou": 0.9608177172061328
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 7,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "librsvg": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.00018074136460199952,
+          "foreground_mse": 0.00016855225840117782,
+          "edge_alignment": 0.9327071905136108,
+          "foreground_iou": 0.9385041551246538
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 7,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    }
+  }
+}

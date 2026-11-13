@@ -50,6 +50,7 @@ from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, 
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
 from src.iCCModules.imageCompositeConverterHeatPanel import fit_heat_panel
 from src.iCCModules.imageCompositeConverterDiagonalCrossPanel import fit_diagonal_cross_panel
+from src.iCCModules.imageCompositeConverterCrossedGradientPanel import fit_crossed_gradient_panel
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1470,6 +1471,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_crossed_gradient_panel, "non_composite_raster_crossed_gradient_panel"),
             (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
             (fit_heat_panel, "non_composite_raster_heat_panel"),
             (fit_paired_line_panel, "non_composite_raster_paired_line_panel"),
@@ -1513,6 +1515,9 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if status == "non_composite_raster_crossed_gradient_panel":
+                    params[fitted['source']] = {key: fitted[key] for key in
+                        ('initial_error','error','parameters','evaluations','quality','details')}
                 if status == "non_composite_raster_heat_panel":
                     params['heat_panel_registration'] = {
                         key: value for key, value in fitted.items() if key not in {'svg', 'rendered'}

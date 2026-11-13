@@ -6,8 +6,8 @@
     "auxiliary_bitmaps": 0,
     "unique_catalog_variants": 1787,
     "catalog_statuses": {
-      "pixel_fail": 1312,
-      "pixel_pass": 347,
+      "pixel_fail": 1311,
+      "pixel_pass": 348,
       "no_svg": 124,
       "measurement_error": 2,
       "reserved": 2
@@ -29,8 +29,8 @@
         "total": 930,
         "archived": 174,
         "statuses": {
-          "pixel_fail": 767,
-          "pixel_pass": 128,
+          "pixel_fail": 766,
+          "pixel_pass": 129,
           "no_svg": 35
         }
       },
@@ -293,11 +293,16 @@
     "elapsed_seconds": 29.344,
     "targeted_refresh": {
       "variants": [
-        "AC100_1_M"
+        "AC0110_L"
       ],
-      "measured_at": "2026-11-13T06:35:54.309406+00:00",
-      "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
-      "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+      "description_variants": [
+        "AC0110_L",
+        "AC0110_M",
+        "AC0110_S"
+      ],
+      "measured_at": "2026-11-13T07:13:10.403999+00:00",
+      "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+      "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
     },
     "targeted_refreshes": [
       {
@@ -315,6 +320,19 @@
         "measured_at": "2026-11-13T06:35:54.309406+00:00",
         "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
         "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+      },
+      {
+        "variants": [
+          "AC0110_L"
+        ],
+        "description_variants": [
+          "AC0110_L",
+          "AC0110_M",
+          "AC0110_S"
+        ],
+        "measured_at": "2026-11-13T07:13:10.403999+00:00",
+        "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+        "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
       }
     ]
   },
@@ -7087,33 +7105,31 @@
         "artifacts/images_to_convert/AC0110_L.jpg"
       ],
       "source_conflict": false,
-      "description": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel",
+      "description": "Graues Rechteck hochkant mit grauer Umrandung. Ein graues Kreuz besteht aus den beiden durchgehenden Diagonalen des Rechtecks; die Linien werden an den Ecken abgeschnitten. Oben in der Mitte steht ein Minuszeichen. Der Hintergrund besitzt einen horizontalen Helligkeitsverlauf von dunkel nach hell nach dunkel. Das Helligkeitsmaximum liegt leicht links der vertikalen Mittellinie des Rechtecks. Der Hintergrund ist überall heller als der Rand.",
       "description_key": "AC0110_L.jpg",
       "description_source": "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
       "archived": false,
       "candidates": [
         {
           "svg": "artifacts/converted_images/converted_svgs/AC0110_L.svg",
-          "svg_sha256": "60bfc808e86bbb03e913a2ac881c20042fde16baf7cad3f5f22064518ee48526",
+          "svg_sha256": "463b3e470d42f81c6e17eb845887ba1c356d6ab0d5ca6a1f67279099e990ae3a",
           "all_paths": [
             "artifacts/converted_images/converted_svgs/AC0110_L.svg",
             "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0110_L.svg"
           ],
           "measurement": {
-            "measured_at": "2026-11-07T12:06:43.541991+00:00",
+            "measured_at": "2026-11-13T07:13:10.403999+00:00",
+            "width": 40,
+            "height": 80,
             "renderers": {
               "mupdf": {
-                "satisfactory": false,
-                "failures": [
-                  "normalized_mse_outside_limit",
-                  "edge_alignment_outside_limit",
-                  "foreground_iou_outside_limit"
-                ],
+                "satisfactory": true,
+                "failures": [],
                 "metrics": {
-                  "normalized_mse": 0.025178909301757812,
-                  "foreground_mse": 0.03718506172299385,
-                  "edge_alignment": 0.6581123471260071,
-                  "foreground_iou": 0.7040229885057471
+                  "normalized_mse": 0.0001180411345558241,
+                  "foreground_mse": 0.00015314367192331702,
+                  "edge_alignment": 0.9741178750991821,
+                  "foreground_iou": 0.9608177172061328
                 },
                 "limits": {
                   "max_normalized_mse": 0.01,
@@ -7126,24 +7142,20 @@
                 "complexity": {
                   "parse_error": null,
                   "embedded_raster_count": 0,
-                  "vector_element_count": 67,
+                  "vector_element_count": 7,
                   "path_count": 0,
                   "path_command_count": 0,
                   "path_complexity_ratio": 0.0
                 }
               },
               "librsvg": {
-                "satisfactory": false,
-                "failures": [
-                  "normalized_mse_outside_limit",
-                  "edge_alignment_outside_limit",
-                  "foreground_iou_outside_limit"
-                ],
+                "satisfactory": true,
+                "failures": [],
                 "metrics": {
-                  "normalized_mse": 0.025809098035097122,
-                  "foreground_mse": 0.03690933436155319,
-                  "edge_alignment": 0.6595686674118042,
-                  "foreground_iou": 0.6918793503480278
+                  "normalized_mse": 0.00018074136460199952,
+                  "foreground_mse": 0.00016855225840117782,
+                  "edge_alignment": 0.9327071905136108,
+                  "foreground_iou": 0.9385041551246538
                 },
                 "limits": {
                   "max_normalized_mse": 0.01,
@@ -7156,40 +7168,36 @@
                 "complexity": {
                   "parse_error": null,
                   "embedded_raster_count": 0,
-                  "vector_element_count": 67,
+                  "vector_element_count": 7,
                   "path_count": 0,
                   "path_command_count": 0,
                   "path_complexity_ratio": 0.0
                 }
               }
-            },
-            "width": 40,
-            "height": 80
+            }
           }
         }
       ],
       "selected": {
         "svg": "artifacts/converted_images/converted_svgs/AC0110_L.svg",
-        "svg_sha256": "60bfc808e86bbb03e913a2ac881c20042fde16baf7cad3f5f22064518ee48526",
+        "svg_sha256": "463b3e470d42f81c6e17eb845887ba1c356d6ab0d5ca6a1f67279099e990ae3a",
         "all_paths": [
           "artifacts/converted_images/converted_svgs/AC0110_L.svg",
           "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0110_L.svg"
         ],
         "measurement": {
-          "measured_at": "2026-11-07T12:06:43.541991+00:00",
+          "measured_at": "2026-11-13T07:13:10.403999+00:00",
+          "width": 40,
+          "height": 80,
           "renderers": {
             "mupdf": {
-              "satisfactory": false,
-              "failures": [
-                "normalized_mse_outside_limit",
-                "edge_alignment_outside_limit",
-                "foreground_iou_outside_limit"
-              ],
+              "satisfactory": true,
+              "failures": [],
               "metrics": {
-                "normalized_mse": 0.025178909301757812,
-                "foreground_mse": 0.03718506172299385,
-                "edge_alignment": 0.6581123471260071,
-                "foreground_iou": 0.7040229885057471
+                "normalized_mse": 0.0001180411345558241,
+                "foreground_mse": 0.00015314367192331702,
+                "edge_alignment": 0.9741178750991821,
+                "foreground_iou": 0.9608177172061328
               },
               "limits": {
                 "max_normalized_mse": 0.01,
@@ -7202,24 +7210,20 @@
               "complexity": {
                 "parse_error": null,
                 "embedded_raster_count": 0,
-                "vector_element_count": 67,
+                "vector_element_count": 7,
                 "path_count": 0,
                 "path_command_count": 0,
                 "path_complexity_ratio": 0.0
               }
             },
             "librsvg": {
-              "satisfactory": false,
-              "failures": [
-                "normalized_mse_outside_limit",
-                "edge_alignment_outside_limit",
-                "foreground_iou_outside_limit"
-              ],
+              "satisfactory": true,
+              "failures": [],
               "metrics": {
-                "normalized_mse": 0.025809098035097122,
-                "foreground_mse": 0.03690933436155319,
-                "edge_alignment": 0.6595686674118042,
-                "foreground_iou": 0.6918793503480278
+                "normalized_mse": 0.00018074136460199952,
+                "foreground_mse": 0.00016855225840117782,
+                "edge_alignment": 0.9327071905136108,
+                "foreground_iou": 0.9385041551246538
               },
               "limits": {
                 "max_normalized_mse": 0.01,
@@ -7232,22 +7236,21 @@
               "complexity": {
                 "parse_error": null,
                 "embedded_raster_count": 0,
-                "vector_element_count": 67,
+                "vector_element_count": 7,
                 "path_count": 0,
                 "path_command_count": 0,
                 "path_complexity_ratio": 0.0
               }
             }
-          },
-          "width": 40,
-          "height": 80
+          }
         }
       },
       "semantic_revalidated": false,
       "manual_review": "not_systematically_recorded",
-      "status": "pixel_fail",
+      "status": "pixel_pass",
       "image_url": "../images_to_convert/AC0110_L.jpg",
-      "svg_url": "../converted_images/converted_svgs/AC0110_L.svg"
+      "svg_url": "../converted_images/converted_svgs/AC0110_L.svg",
+      "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee"
     },
     {
       "filename": "AC0110_M.jpg",
@@ -7260,7 +7263,7 @@
         "artifacts/images_to_convert/AC0110_M.jpg"
       ],
       "source_conflict": false,
-      "description": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel",
+      "description": "Graues Rechteck hochkant mit grauer Umrandung. Ein graues Kreuz besteht aus den beiden durchgehenden Diagonalen des Rechtecks; die Linien werden an den Ecken abgeschnitten. Oben in der Mitte steht ein Minuszeichen. Der Hintergrund besitzt einen horizontalen Helligkeitsverlauf von dunkel nach hell nach dunkel. Das Helligkeitsmaximum liegt leicht links der vertikalen Mittellinie des Rechtecks. Der Hintergrund ist überall heller als der Rand.",
       "description_key": "AC0110_M.jpg",
       "description_source": "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
       "archived": false,
@@ -7431,7 +7434,7 @@
         "artifacts/images_to_convert/AC0110_S.jpg"
       ],
       "source_conflict": false,
-      "description": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel",
+      "description": "Graues Rechteck hochkant mit grauer Umrandung. Ein graues Kreuz besteht aus den beiden durchgehenden Diagonalen des Rechtecks; die Linien werden an den Ecken abgeschnitten. Oben in der Mitte steht ein Minuszeichen. Der Hintergrund besitzt einen horizontalen Helligkeitsverlauf von dunkel nach hell nach dunkel. Das Helligkeitsmaximum liegt leicht links der vertikalen Mittellinie des Rechtecks. Der Hintergrund ist überall heller als der Rand.",
       "description_key": "AC0110_S.jpg",
       "description_source": "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
       "archived": false,
