@@ -12,6 +12,28 @@ import pytest
 from src import imageConverterGui as gui
 
 
+def test_unedited_user_description_converts_through_real_gui_worker(jobs):
+    from pathlib import Path
+    from xml.etree import ElementTree as ET
+
+    root = Path(__file__).resolve().parents[1]
+    description = (root/'tests/fixtures/descriptions/crossed_gradient_panel_user.txt').read_text(encoding='utf-8').strip()
+    uploaded = jobs.upload('neutrales-motiv.jpg', (root/'artifacts/images_to_convert/AC0110_L.jpg').read_bytes())
+    started = jobs.start(uploaded['id'],description,'quick')
+    jobs.threads[-1].join(timeout=75)
+    job = jobs.snapshot(started['id'])
+    assert job['status'] == 'done', job.get('log')
+    assert job['quality'] == 'passed' and job['search_summary']['satisfactory'], job
+    assert job['description'] == description
+    folder = jobs.folder(job['id'])
+    record = json.loads((folder/'output/reports/conversion_result_map.json').read_text())['UPLOAD.png']
+    assert 'raster_crossed_gradient_panel_v1' in record['params']
+    svg = ET.parse(folder/'result.svg')
+    group = svg.getroot().find('{http://www.w3.org/2000/svg}g')
+    assert len(group.findall('{http://www.w3.org/2000/svg}line')) == 2
+    assert group.find('{http://www.w3.org/2000/svg}rect') is not None
+
+
 def image_bytes(mode="RGB", color="white", size=(32, 24)):
     buffer = io.BytesIO()
     Image.new(mode, size, color).save(buffer, format="PNG")

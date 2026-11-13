@@ -10,11 +10,12 @@ import cv2
 import numpy as np
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register
 
 
 def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, error_fn):
-    text = ' '.join(str(description or '').casefold().split())
+    text = ' '.join(normalize_description(description).casefold().split())
     if not (all(t in text for t in ('grau', 'rechteck', 'kreuz', 'diagonal', 'minus', 'horizontal', 'verlauf'))
             and any(t in text for t in ('rand', 'umrandung', 'rahmen'))
             and any(t in text for t in ('abgeschnitten', 'begrenzt'))):

@@ -300,8 +300,8 @@
         "AC0110_M",
         "AC0110_S"
       ],
-      "measured_at": "2026-11-13T07:13:10.403999+00:00",
-      "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+      "measured_at": "2026-11-13T11:26:04.022455+00:00",
+      "measurement_signature": "1b697ecf831537bf4232f5d7a4f617dc71b824aceefe008a53e2d77e1d7dc20c",
       "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
     },
     "targeted_refreshes": [
@@ -332,6 +332,19 @@
         ],
         "measured_at": "2026-11-13T07:13:10.403999+00:00",
         "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee",
+        "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
+      },
+      {
+        "variants": [
+          "AC0110_L"
+        ],
+        "description_variants": [
+          "AC0110_L",
+          "AC0110_M",
+          "AC0110_S"
+        ],
+        "measured_at": "2026-11-13T11:26:04.022455+00:00",
+        "measurement_signature": "1b697ecf831537bf4232f5d7a4f617dc71b824aceefe008a53e2d77e1d7dc20c",
         "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
       }
     ]
@@ -7118,7 +7131,7 @@
             "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0110_L.svg"
           ],
           "measurement": {
-            "measured_at": "2026-11-13T07:13:10.403999+00:00",
+            "measured_at": "2026-11-13T11:26:04.022455+00:00",
             "width": 40,
             "height": 80,
             "renderers": {
@@ -7186,7 +7199,7 @@
           "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0110_L.svg"
         ],
         "measurement": {
-          "measured_at": "2026-11-13T07:13:10.403999+00:00",
+          "measured_at": "2026-11-13T11:26:04.022455+00:00",
           "width": 40,
           "height": 80,
           "renderers": {
@@ -7250,7 +7263,7 @@
       "status": "pixel_pass",
       "image_url": "../images_to_convert/AC0110_L.jpg",
       "svg_url": "../converted_images/converted_svgs/AC0110_L.svg",
-      "measurement_signature": "5a57742b364cf819b8d456582ad84b7a987caf5e5cb491eafa3da87bc11638ee"
+      "measurement_signature": "1b697ecf831537bf4232f5d7a4f617dc71b824aceefe008a53e2d77e1d7dc20c"
     },
     {
       "filename": "AC0110_M.jpg",

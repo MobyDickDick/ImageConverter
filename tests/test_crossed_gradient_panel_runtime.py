@@ -100,3 +100,14 @@ def test_failed_renderer_or_nonfinite_error_is_not_accepted():
     image = render(drawing(),40,80)
     assert fit(image,render_fn=lambda *args:None) is None
     assert fit(image,error_fn=lambda *args:float('nan')) is None
+
+
+def test_original_gui_description_selects_the_same_model_without_rewriting_user_text():
+    description = (ROOT/'tests/fixtures/descriptions/crossed_gradient_panel_user.txt').read_text(encoding='utf-8').strip()
+    original = description
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0110_L.jpg'))
+    result = fit(image,description)
+    assert result is not None
+    assert description == original and 'Minnus-Zeichen' in description and 'horizonalen' in description
+    assert measure_quality(image,result['svg'])['satisfactory']
+    assert_structure(result['svg'])

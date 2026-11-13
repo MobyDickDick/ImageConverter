@@ -1,0 +1,39 @@
+{
+  "targeted_language_model_and_real_gui_worker_tests": {
+    "passed": 42,
+    "exit_code": 0
+  },
+  "catalog_tests": {
+    "passed": 18,
+    "exit_code": 0
+  },
+  "compileall": {
+    "exit_code": 0
+  },
+  "cli_help": {
+    "exit_code": 0
+  },
+  "image_id_hardcoding": {
+    "exit_code": 0,
+    "occurrences": 0
+  },
+  "diff_check": {
+    "exit_code": 0
+  },
+  "full_suite": {
+    "passed": 744,
+    "failed": 1,
+    "exit_code": 1,
+    "stop_on_first_failure": true,
+    "preexisting_failure": "tests/detailtests/test_gradient_stripe_strategy_helpers.py::test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns"
+  },
+  "live_gui": {
+    "existing_server": true,
+    "description_unchanged": true,
+    "job_id": "dc337b38746243288b8157d49d1c881a",
+    "api_status": "done",
+    "api_quality": "passed",
+    "model_satisfactory": true,
+    "both_renderers_passed": true
+  }
+}

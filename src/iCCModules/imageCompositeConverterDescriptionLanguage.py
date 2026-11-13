@@ -26,6 +26,9 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
         part = re.sub(r'\brunde[nrms]?\s+((?:(?:(?:hell|dunkel)?(?:grau|blau|rot|grün|gelb|weiß|weiss|orange|violett)|einfarbig|gefüllt)[enrms]?\s+)+)scheibe\b',
                       r'\1Kreisscheibe', part, flags=re.IGNORECASE)
         replacements = (
+            (r'\bminnus\b', 'Minus'),
+            (r'\bhorizonal(e|er|en|em|es)?\b', r'horizontal\1'),
+            (r'\bvertial(e|er|en|em|es)?\b', r'vertikal\1'),
             (r'\brunde[nrms]?\s+scheibe\b', 'Kreisscheibe'),
             (r'\bumriss\b', 'Randkontur'),
             (r'\baufschrift\b', 'Beschriftung'),

@@ -21,6 +21,15 @@ def test_quoted_labels_are_never_normalized():
     assert normalize_description(normalized, orientations=True)==normalized
 
 
+def test_common_minus_and_axis_spellings_preserve_labels_and_negation():
+    text = ('Kein Minnus-Zeichen. Ein horizonaler Farbverlauf neben der vertialen Linie. '
+            'Die Beschriftung lautet "Minnus horizonaler vertialen".')
+    normalized = normalize_description(text)
+    assert normalized.startswith('Kein Minus-Zeichen. Ein horizontaler Farbverlauf neben der vertikalen Linie.')
+    assert '"Minnus horizonaler vertialen"' in normalized
+    assert normalize_description(normalized) == normalized
+
+
 @pytest.mark.parametrize('word', ['Farbübergang', 'Farbenübergang', 'Farbuebergang',
                                  'Graustufenübergang', 'Graustufenuebergang', 'Graustufenverlauf'])
 def test_gradient_synonyms_preserve_label_bytes_and_absence(word):
