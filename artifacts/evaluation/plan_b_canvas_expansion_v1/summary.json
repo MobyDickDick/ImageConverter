@@ -1,0 +1,467 @@
+{
+  "schema": "plan_b_canvas_expansion_recheck_v1",
+  "date": "2026-11-13",
+  "name": "AC0022.svg",
+  "seed": 472,
+  "source_svg_sha256": "e01cc7d5ba526f991c94a089850e0b39b93d35d4429b9ac0e6723be920035533",
+  "iterations": 64,
+  "timeout_seconds": 60,
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "before": {
+    "total": 17,
+    "completed": 17,
+    "passed": 14,
+    "quality_failed": 3,
+    "execution_failed": 0,
+    "failure_counts": {
+      "normalized_mse_outside_limit": 3,
+      "foreground_mse_outside_limit": 3,
+      "foreground_iou_outside_limit": 3
+    },
+    "satisfactory": false
+  },
+  "after": {
+    "total": 17,
+    "completed": 17,
+    "passed": 17,
+    "quality_failed": 0,
+    "execution_failed": 0,
+    "failure_counts": {},
+    "satisfactory": true
+  },
+  "variation_profile": "whole_motif_scale_0.94_1.06_translate_0.025_expand_canvas_v2",
+  "cases": [
+    {
+      "case_id": "original",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 1.6507256077602506e-05,
+        "foreground_mse": 8.804760000202805e-05,
+        "edge_alignment": 0.9975168704986572,
+        "foreground_iou": 0.9971631205673759
+      },
+      "after_metrics": {
+        "normalized_mse": 1.6507256077602506e-05,
+        "foreground_mse": 8.804760000202805e-05,
+        "edge_alignment": 0.9975168704986572,
+        "foreground_iou": 0.9971631205673759
+      }
+    },
+    {
+      "case_id": "probe_01",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        39,
+        124
+      ],
+      "before_passed": false,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.016505220904946327,
+        "foreground_mse": 0.08797607570886612,
+        "edge_alignment": 0.8327192068099976,
+        "foreground_iou": 0.689795918367347
+      },
+      "after_metrics": {
+        "normalized_mse": 1.7809315977501683e-05,
+        "foreground_mse": 0.00011616411939030513,
+        "edge_alignment": 0.99824458360672,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_02",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        116
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 4.0662016544956714e-05,
+        "foreground_mse": 0.00027206094819121063,
+        "edge_alignment": 0.9962206482887268,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 3.7528283428400755e-05,
+        "foreground_mse": 0.00027114208205603063,
+        "edge_alignment": 0.9962513446807861,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_03",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        114
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.8162898161099292e-05,
+        "foreground_mse": 0.00018871566862799227,
+        "edge_alignment": 0.9976499676704407,
+        "foreground_iou": 0.9982425307557118
+      },
+      "after_metrics": {
+        "normalized_mse": 2.9130880648153834e-05,
+        "foreground_mse": 0.00019757916743401438,
+        "edge_alignment": 0.9976677894592285,
+        "foreground_iou": 0.9982547993019197
+      }
+    },
+    {
+      "case_id": "probe_04",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.838259570125956e-05,
+        "foreground_mse": 0.00016080185014288872,
+        "edge_alignment": 0.9955838918685913,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 2.684840001165867e-05,
+        "foreground_mse": 0.00016080185014288872,
+        "edge_alignment": 0.9962025284767151,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_05",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 3.137594831059687e-05,
+        "foreground_mse": 0.00021567645308095962,
+        "edge_alignment": 0.9955008029937744,
+        "foreground_iou": 0.9982174688057041
+      },
+      "after_metrics": {
+        "normalized_mse": 2.273981226608157e-05,
+        "foreground_mse": 0.0001553312613395974,
+        "edge_alignment": 0.9980721473693848,
+        "foreground_iou": 0.9982174688057041
+      }
+    },
+    {
+      "case_id": "probe_06",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        118
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.2854894268675707e-05,
+        "foreground_mse": 0.00015448119665961713,
+        "edge_alignment": 0.9968841075897217,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 2.364454667258542e-05,
+        "foreground_mse": 0.00017454431508667767,
+        "edge_alignment": 0.9981751441955566,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_07",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.2895434085512534e-05,
+        "foreground_mse": 0.00015618416364304721,
+        "edge_alignment": 0.9993578195571899,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 2.3829139536246657e-05,
+        "foreground_mse": 0.00016394726117141545,
+        "edge_alignment": 0.9987103343009949,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_08",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 1.6046940800151788e-05,
+        "foreground_mse": 0.00010852479317691177,
+        "edge_alignment": 0.9981193542480469,
+        "foreground_iou": 0.9982425307557118
+      },
+      "after_metrics": {
+        "normalized_mse": 1.8591748812468722e-05,
+        "foreground_mse": 0.0001256288232980296,
+        "edge_alignment": 0.9987471103668213,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_09",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        39,
+        122
+      ],
+      "before_passed": false,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.011663938872516155,
+        "foreground_mse": 0.057054001837968826,
+        "edge_alignment": 0.8360313177108765,
+        "foreground_iou": 0.7303370786516854
+      },
+      "after_metrics": {
+        "normalized_mse": 9.86708328127861e-05,
+        "foreground_mse": 0.0006374131771735847,
+        "edge_alignment": 0.9957629442214966,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_10",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        122
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.1630872652167454e-05,
+        "foreground_mse": 0.00011703827476594597,
+        "edge_alignment": 0.9993884563446045,
+        "foreground_iou": 0.99860529986053
+      },
+      "after_metrics": {
+        "normalized_mse": 2.2678528694086708e-05,
+        "foreground_mse": 0.0001367571239825338,
+        "edge_alignment": 0.9988260269165039,
+        "foreground_iou": 0.9986522911051213
+      }
+    },
+    {
+      "case_id": "probe_11",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 1.858652103692293e-05,
+        "foreground_mse": 0.00011677385919028893,
+        "edge_alignment": 0.9974761605262756,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 1.7218157154275104e-05,
+        "foreground_mse": 0.00011623516911640763,
+        "edge_alignment": 0.9974839091300964,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_12",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        112
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.3931141186039895e-05,
+        "foreground_mse": 0.00013699782721232623,
+        "edge_alignment": 0.9968714714050293,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 2.7354730264050886e-05,
+        "foreground_mse": 0.0001563273835927248,
+        "edge_alignment": 0.9968714714050293,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_13",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        35,
+        114
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 1.9932156646973453e-05,
+        "foreground_mse": 0.00011606537009356543,
+        "edge_alignment": 0.9974473714828491,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 2.100856181641575e-05,
+        "foreground_mse": 0.0001227906468557194,
+        "edge_alignment": 0.9974631667137146,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_14",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        120
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 1.9241682821302675e-05,
+        "foreground_mse": 0.0001321881136391312,
+        "edge_alignment": 0.9975318312644958,
+        "foreground_iou": 1.0
+      },
+      "after_metrics": {
+        "normalized_mse": 4.795106724486686e-05,
+        "foreground_mse": 0.00033753711613826454,
+        "edge_alignment": 0.9957709908485413,
+        "foreground_iou": 1.0
+      }
+    },
+    {
+      "case_id": "probe_15",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        39,
+        122
+      ],
+      "before_passed": false,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 0.014860848896205425,
+        "foreground_mse": 0.07067608833312988,
+        "edge_alignment": 0.7765713930130005,
+        "foreground_iou": 0.6444174757281553
+      },
+      "after_metrics": {
+        "normalized_mse": 2.2945227101445198e-05,
+        "foreground_mse": 0.0001465149107389152,
+        "edge_alignment": 0.9976698160171509,
+        "foreground_iou": 0.9986320109439124
+      }
+    },
+    {
+      "case_id": "probe_16",
+      "before_canvas": [
+        35,
+        112
+      ],
+      "after_canvas": [
+        37,
+        120
+      ],
+      "before_passed": true,
+      "after_passed": true,
+      "before_metrics": {
+        "normalized_mse": 2.5416704374947585e-05,
+        "foreground_mse": 0.00014391452714335173,
+        "edge_alignment": 0.9975193738937378,
+        "foreground_iou": 0.998546511627907
+      },
+      "after_metrics": {
+        "normalized_mse": 2.2381089365808293e-05,
+        "foreground_mse": 0.00013867620145902038,
+        "edge_alignment": 0.997582733631134,
+        "foreground_iou": 1.0
+      }
+    }
+  ]
+}

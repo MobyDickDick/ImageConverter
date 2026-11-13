@@ -33,10 +33,26 @@ def test_preparation_retains_exact_source_and_17_distinct_rasters(prepared, tmp_
     assert [c['input_sha256'] for c in other['cases']] == [c['input_sha256'] for c in report['cases']]
     assert report['provenance']['python_sources_sha256']
     assert report['purpose'] == 'diagnostic'
+    assert report['variation_profile'] == wb.VARIATION_PROFILE
     assert wb.summary(report)['completed'] == 0
     assert not wb.summary(report)['satisfactory']
     with pytest.raises(FileExistsError):
         wb.prepare(SVG, DESCRIPTION, folder, seed=42)
+
+
+def test_tight_ac0022_source_keeps_all_transformed_viewports_inside_canvas(tmp_path):
+    import math
+    source = Path(__file__).resolve().parents[1] / 'fixtures/plan_b_templates/AC0022_canvas.svg'
+    svg = source.read_text(encoding='utf-8-sig')
+    report = wb.prepare(svg, 'Zwei vertikale Striche mit zwei Dreiecken und einer Verbindung.', tmp_path / 'run', seed=472)
+    assert (report['cases'][0]['width'], report['cases'][0]['height']) == (35, 112)
+    for case in report['cases'][1:]:
+        v, canvas = case['variation'], case['canvas']
+        assert case['width'] == 35 + 2 * math.ceil(max(0, ((v['scale'] - 1) / 2 + abs(v['relative_x'])) * 35))
+        assert case['height'] == 112 + 2 * math.ceil(max(0, ((v['scale'] - 1) / 2 + abs(v['relative_y'])) * 112))
+        assert canvas['policy'] == 'expand_symmetric_v1'
+        assert wb.battery.viewport((tmp_path / 'run' / case['reference_svg']).read_text(encoding='utf-8'))[-2:] == (case['width'], case['height'])
+    assert (report['cases'][1]['width'], report['cases'][1]['height']) == (39, 124)
 
 
 @pytest.mark.parametrize('svg,description,seed', [
@@ -161,6 +177,34 @@ def test_cancellation_kills_process_and_restart_preserves_completed_results(serv
     restored = gui.Workbench(server.jobs).snapshot(report['id'])
     assert restored['status'] == 'interrupted'
     assert restored['attempts'][0]['results'][0]['case_id'] == 'probe_01'
+
+
+def test_http_reprepare_retains_legacy_report_and_source_with_same_seed(server):
+    workbench = server.workbench
+    original = workbench.prepare(dict(svg=SVG, description=DESCRIPTION, seed=472, name='Quelle.svg'))
+    folder = workbench.folder(original['id'])
+    legacy = wb.read_report(folder)
+    legacy['variation_profile'] = 'whole_motif_scale_0.94_1.06_translate_0.025'
+    legacy['notes'] = {'original': 'Bisheriger Befund'}
+    wb.save_report(folder, legacy)
+    previous_bytes = (folder / 'report.json').read_bytes()
+    base = '/api/workbench/' + original['id']
+    assert send(server, base + '/reprepare', {}, headers={})[0] == 403
+    status, data = send(server, base + '/reprepare', {})
+    fresh = json.loads(data)
+    assert status == 200 and fresh['id'] != original['id']
+    assert fresh['seed'] == '472' and fresh['source_description'] == DESCRIPTION
+    assert fresh['variation_profile'] == wb.VARIATION_PROFILE
+    assert fresh['reprepared_from'] == original['id']
+    assert fresh['attempts'] == [] and fresh['notes'] == {}
+    assert (workbench.folder(fresh['id']) / 'source.svg').read_text(encoding='utf-8') == SVG
+    assert (folder / 'report.json').read_bytes() == previous_bytes
+    assert any(c['width'] > 80 or c['height'] > 80 for c in fresh['cases'][1:])
+    legacy['status'] = 'running'
+    wb.save_report(folder, legacy)
+    assert send(server, base + '/reprepare', {})[0] == 409
+    legacy['status'] = 'prepared'
+    wb.save_report(folder, legacy)
 
 
 def test_workbench_respects_active_gui_conversion(server):

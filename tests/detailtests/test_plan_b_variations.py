@@ -269,6 +269,59 @@ def test_defs_viewbox_and_existing_transforms_survive():
     assert root.get("viewBox") == "10 20 40 40"
 
 
+@pytest.mark.parametrize('source', [
+    '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="70" viewBox="10 20 50 35"><rect x="10" y="20" width="100%" height="100%" fill="#204080"/></svg>',
+    '<svg width="100" height="70"><rect width="100" height="70" fill="green"/></svg>',
+])
+def test_expanded_canvas_preserves_edge_geometry_against_larger_render(source):
+    import numpy as np
+    cases = battery.make_variations(source, 'Ein farbiges Rechteck.', 472, expand_canvas=True)
+    assert cases == battery.make_variations(source, 'Ein farbiges Rechteck.', 472, expand_canvas=True)
+    assert len(cases) == 16
+    for case in cases:
+        width, height = case['width'], case['height']
+        v, canvas = case['variation'], case['canvas']
+        pad_x, pad_y = canvas['padding_x'], canvas['padding_y']
+        assert width == 100 + 2 * pad_x and height == 70 + 2 * pad_y
+        # Independent screen-space bounds of the transformed source viewport.
+        left = pad_x + v['relative_x'] * 100 + (1 - v['scale']) * 50
+        top = pad_y + v['relative_y'] * 70 + (1 - v['scale']) * 35
+        assert left >= -1e-7 and top >= -1e-7
+        assert left + 100 * v['scale'] <= width + 1e-7
+        assert top + 70 * v['scale'] <= height + 1e-7
+        actual = battery.render(case['svg'], width, height)
+        # Render on a substantially larger independent canvas: no painted
+        # pixels may exist beyond the proposed bounds, including antialiasing.
+        oracle = ET.fromstring(case['svg'])
+        oracle.set('width', str(width + 40)); oracle.set('height', str(height + 40))
+        oracle.set('viewBox', f'0 0 {width + 40} {height + 40}')
+        group = ET.Element(oracle[0].tag, transform='translate(20 20)')
+        group.append(oracle[0]); oracle.remove(oracle[0]); oracle.append(group)
+        larger = battery.render(ET.tostring(oracle, encoding='unicode'), width + 40, height + 40)
+        assert np.array_equal(actual, larger[20:-20, 20:-20])
+        larger[20:-20, 20:-20] = 255
+        assert np.all(larger == 255)
+
+
+def test_expansion_keeps_percentage_geometry_and_local_paint_in_source_viewport():
+    svg = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="70" viewBox="10 20 50 35"><defs><linearGradient id="paint"><stop stop-color="green"/></linearGradient></defs><g transform="translate(1 2)"><rect x="10" y="20" width="100%" height="100%" fill="url(#paint)"/></g></svg>'
+    cases = battery.make_variations(svg, DESCRIPTION, 472, expand_canvas=True)
+    root = ET.fromstring(cases[0]['svg'])
+    nested = root[0][0]
+    assert nested.get('viewBox') == '10 20 50 35'
+    assert nested.get('width') == '100' and nested.get('height') == '70'
+    assert nested[0][0].get('id') == 'paint'
+    assert nested[1].get('transform') == 'translate(1 2)'
+    assert nested[1][0].get('width') == '100%'
+
+
+def test_expanded_canvas_is_bounded_before_raster_generation(monkeypatch):
+    svg = '<svg width="4096" height="10"><rect width="4096" height="10"/></svg>'
+    monkeypatch.setattr(battery, 'render', lambda *args: pytest.fail('render started'))
+    with pytest.raises(ValueError, match='vergrösserte Zeichenfläche'):
+        battery._make_variation_candidates(svg, DESCRIPTION, 472, expand_canvas=True)
+
+
 def test_tiny_issue_source_replaces_only_duplicate_rasters_and_replays(tmp_path, monkeypatch):
     # Freeze the historical renderer for the duplicate-preparation regression.
     # Correct pink rendering produces distinct rasters for this seed, and has

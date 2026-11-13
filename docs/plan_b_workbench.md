@@ -6,6 +6,23 @@ Ein SVG wird in das unveränderte Original und 16 geometrische Varianten
 Konverter-CLI wieder als SVG rekonstruiert. Eingabe, Ergebnis und absolutes
 Differenzbild stehen direkt nebeneinander.
 
+Seit dem 13.11.2026 wächst bei neuen Workbench-Aufgaben die Zeichenfläche
+symmetrisch mit, sobald Skalierung oder Verschiebung über den ursprünglichen
+Rand hinausreichen. Das Motiv wird dabei nicht wieder verkleinert. Seine
+ursprüngliche SVG-Zeichenfläche bleibt als innere Zeichenfläche erhalten,
+einschliesslich Prozentangaben, Farbverläufen und internen Ausschnitten.
+Die Tabelle zeigt die tatsächlichen Rasterabmessungen jedes Falls.
+Die Grenze von 4096 Pixeln pro Seite und 4 Megapixeln gilt auch nach Erweiterung.
+
+Ältere Aufgaben behalten ihre Raster und Befunde. Die Oberfläche kennzeichnet
+sie und bietet **Mit passender Zeichenfläche neu vorbereiten →** an. Dies
+erstellt mit derselben Quelle, Beschreibung und demselben Seed eine neue
+Aufgabe; alte Messwerte werden nicht auf die veränderten Eingaben übertragen.
+Neue Berichte verwenden das Profil
+`whole_motif_scale_0.94_1.06_translate_0.025_expand_canvas_v2` und speichern
+Quellabmessungen sowie hinzugefügte Ränder pro Variante. Die bisherige
+CLI-Abnahme behält ihre festen Zeichenflächen für historische Wiederholungen.
+
 ## Start und Bedienung
 
 1. `startWebServer.cmd` starten und in der Oberfläche **Plan-B-Workbench** öffnen.

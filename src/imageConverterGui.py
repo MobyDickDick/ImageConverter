@@ -690,6 +690,22 @@ class Workbench:
         except (ValueError, SyntaxError) as exc:
             raise RequestError(str(exc)) from exc
 
+    def reprepare(self, run_id, payload):
+        from tools.plan_b_workbench import read_report, save_report
+        with self.jobs.lock:
+            folder = self.folder(run_id)
+            previous = read_report(folder)
+            if previous['status'] == 'running':
+                raise RequestError('Bitte die laufende Aufgabe zuerst beenden.', 409)
+            result = self.prepare(dict(svg=(folder / 'source.svg').read_text(encoding='utf-8'),
+                                       description=previous['source_description'],
+                                       name=previous['name'], seed=previous['seed']))
+            new_folder = self.folder(result['id'])
+            report = read_report(new_folder)
+            report['reprepared_from'] = run_id
+            save_report(new_folder, report)
+            return self.snapshot(result['id'])
+
     def from_job(self, job_id):
         with self.jobs.lock:
             job = self.jobs.snapshot(job_id)
@@ -890,7 +906,7 @@ class Handler(BaseHTTPRequestHandler):
                         return self.json(workbench.inspect(payload))
                     if path == '/api/workbench/prepare':
                         return self.json(workbench.prepare(payload), 201)
-                    wb = re.fullmatch(r'/api/workbench/([0-9a-f]{32})/(start|cancel|note)', path)
+                    wb = re.fullmatch(r'/api/workbench/([0-9a-f]{32})/(start|cancel|note|reprepare)', path)
                     if wb:
                         run_id, action = wb.groups()
                         return self.json(workbench.cancel(run_id) if action == 'cancel' else getattr(workbench, action)(run_id, payload))

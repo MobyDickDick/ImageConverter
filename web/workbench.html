@@ -31,7 +31,7 @@
           <p id="description-source" class="hint" role="status">Beim Auswählen des SVGs wird automatisch in den vorhandenen Beschreibungsdateien gesucht.</p>
           <label class="field-label" for="seed">Varianten- und Suchseed <span class="optional">optional</span></label>
           <input id="seed" inputmode="numeric" placeholder="Leer = neuer zufälliger Seed">
-          <p class="hint">Original + 16 Varianten: Skalierung ±6 %, Verschiebung ±2,5 %. Die Beschreibung wird passend ergänzt.</p>
+          <p class="hint">Original + 16 Varianten: Skalierung ±6 %, Verschiebung ±2,5 %. Die Zeichenfläche wächst bei Bedarf mit, damit das Motiv vollständig bleibt. Die Beschreibung wird passend ergänzt.</p>
           <button id="prepare" class="primary full" disabled>Varianten vorbereiten →</button>
         </section>
         <section class="card">
@@ -49,8 +49,10 @@
         <section class="card">
           <div class="preview-heading"><h2><span class="number">03</span> Varianten und Befunde</h2><span id="run-info" class="hint">Noch keine Aufgabe geladen.</span></div>
           <p id="summary" role="status" aria-live="polite">Lade ein SVG und bereite seine Varianten vor.</p>
+          <p id="canvas-warning" class="hint quality-warning" hidden>Diese ältere Aufgabe verwendet feste Zeichenflächen. Dabei können vergrösserte oder verschobene Motive abgeschnitten sein. Bereite sie mit passender Zeichenfläche neu vor; die bisherigen Befunde bleiben erhalten.</p>
+          <button id="reprepare" class="secondary" hidden>Mit passender Zeichenfläche neu vorbereiten →</button>
           <p class="hint">Diagnosemodus · Anzeige des letzten Ergebnisses je Fall. „Bestanden“ bezieht sich auf die festen Pixel- und Vektorprüfungen. Kleine fehlende Objekte und die vollständige Semantik benötigen zusätzlich eine Sichtprüfung.</p>
-          <div class="table-scroll"><table><thead><tr><th><input id="select-all" type="checkbox" aria-label="Alle Fälle auswählen" disabled></th><th>Fall</th><th>Skalierung</th><th>Versatz x / y</th><th>Befund</th><th>MSE</th><th>Vorschau</th></tr></thead><tbody id="cases"></tbody></table></div>
+          <div class="table-scroll"><table><thead><tr><th><input id="select-all" type="checkbox" aria-label="Alle Fälle auswählen" disabled></th><th>Fall</th><th>Skalierung</th><th>Versatz x / y</th><th>Zeichenfläche</th><th>Befund</th><th>MSE</th><th>Vorschau</th></tr></thead><tbody id="cases"></tbody></table></div>
           <div id="exports" class="exports" hidden><a id="report">Bericht (JSON)</a><a id="csv">Messdaten (CSV)</a><a id="bundle">Gesamte Aufgabe (ZIP)</a></div>
         </section>
         <section id="detail" class="card" hidden>

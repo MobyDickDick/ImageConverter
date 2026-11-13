@@ -20,6 +20,8 @@ import time
 
 from tools import run_plan_b_variations as battery
 
+VARIATION_PROFILE = 'whole_motif_scale_0.94_1.06_translate_0.025_expand_canvas_v2'
+
 
 def save_report(folder: Path, report: dict) -> None:
     temporary = folder / 'report.json.tmp'
@@ -80,7 +82,7 @@ def prepare(svg: str, description: str, folder: Path, *, seed: int | None = None
     # uploaded bytes as evidence; prepare_sample is used only for validation.
     inspect_svg(svg)
     cases = [battery.make_original_case(svg, description.strip()),
-             *battery.make_variations(svg, description.strip(), seed)]
+             *battery.make_variations(svg, description.strip(), seed, expand_canvas=True)]
     folder.mkdir(parents=True, exist_ok=False)
     (folder / 'source.svg').write_text(svg, encoding='utf-8')
     (folder / 'source_description.txt').write_text(description.strip(), encoding='utf-8')
@@ -100,7 +102,7 @@ def prepare(svg: str, description: str, folder: Path, *, seed: int | None = None
                   revision=revision, working_tree_dirty=dirty, status='prepared', active_case=None,
                   provenance=provenance(),
                   cases=cases, attempts=[], notes={}, purpose='diagnostic',
-                  variation_profile='whole_motif_scale_0.94_1.06_translate_0.025')
+                  variation_profile=VARIATION_PROFILE)
     save_report(folder, report)
     return report
 

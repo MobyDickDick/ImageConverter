@@ -155,7 +155,37 @@ def make_original_case(svg: str, description: str) -> dict:
             "svg": svg, "description": description}
 
 
-def _make_variation_candidates(svg: str, description: str, seed: int) -> list[dict]:
+def _expanded_variation(original, namespace, viewport_values, scale, dx, dy):
+    """Keep the source viewport intact inside a larger, symmetric pixel canvas.
+
+    The nested SVG retains percentage coordinates, CSS, clipping and viewBox
+    mapping. Symmetric margins retain the described direction of translation.
+    """
+    x, y, w, h, width, height = viewport_values
+    pad_x = math.ceil(max(0., ((scale - 1) / 2 + abs(dx)) * width))
+    pad_y = math.ceil(max(0., ((scale - 1) / 2 + abs(dy)) * height))
+    canvas_width, canvas_height = width + 2 * pad_x, height + 2 * pad_y
+    if max(canvas_width, canvas_height) > 4096 or canvas_width * canvas_height > 4_000_000:
+        raise ValueError('Die vergrösserte Zeichenfläche darf höchstens 4096 Pixel pro Seite und 4 Megapixel umfassen.')
+    root = ET.Element(namespace + 'svg', width=str(canvas_width), height=str(canvas_height),
+                      viewBox=f'0 0 {canvas_width} {canvas_height}')
+    group = ET.SubElement(root, namespace + 'g', transform=(
+        f'translate({pad_x + dx * width:.8f} {pad_y + dy * height:.8f}) '
+        f'translate({width / 2:.8f} {height / 2:.8f}) scale({scale:.8f}) '
+        f'translate({-width / 2:.8f} {-height / 2:.8f})'))
+    source = copy.deepcopy(original)
+    source.set('x', '0')
+    source.set('y', '0')
+    source.set('width', str(width))
+    source.set('height', str(height))
+    source.set('viewBox', original.get('viewBox', f'{x:g} {y:g} {w:g} {h:g}'))
+    group.append(source)
+    return root, canvas_width, canvas_height, dict(
+        policy='expand_symmetric_v1', source_width=width, source_height=height,
+        padding_x=pad_x, padding_y=pad_y)
+
+
+def _make_variation_candidates(svg: str, description: str, seed: int, *, expand_canvas=False) -> list[dict]:
     """Change geometry and wording together; never expose numeric geometry in text."""
     make_original_case(svg, description)
     x, y, w, h, width, height = viewport(svg)
@@ -179,6 +209,11 @@ def _make_variation_candidates(svg: str, description: str, seed: int) -> list[di
                 varied.remove(child)
                 group.append(child)
         varied.append(group)
+        case_width, case_height = width, height
+        canvas = None
+        if expand_canvas:
+            varied, case_width, case_height, canvas = _expanded_variation(
+                original, namespace, (x, y, w, h, width, height), scale, dx, dy)
         size = "kleiner" if scale < 1 else "größer"
         horizontal, vertical = ("links" if dx < 0 else "rechts"), ("oben" if dy < 0 else "unten")
         # Vary wording without dropping/reversing any facts in the original description.
@@ -192,10 +227,12 @@ def _make_variation_candidates(svg: str, description: str, seed: int) -> list[di
                                   f"und {position} nach {horizontal} und {vertical} {verb}.")
             if varied_description not in existing_descriptions:
                 break
-        cases.append({"case_id": f"probe_{index+1:02d}", "width": width, "height": height,
+        cases.append({"case_id": f"probe_{index+1:02d}", "width": case_width, "height": case_height,
                       "variation": {"scale": scale, "relative_x": dx, "relative_y": dy},
                       "svg": ET.tostring(varied, encoding="unicode"),
                       "description": varied_description})
+        if canvas is not None:
+            cases[-1]['canvas'] = canvas
     if len({case["svg"] for case in cases}) != CASE_COUNT:
         raise ValueError("Variations are not unique")
     return cases
@@ -205,18 +242,21 @@ class VariationSpaceExhausted(ValueError):
     """The bounded geometry search could not supply distinct raster inputs."""
 
 
-def make_variations(svg: str, description: str, seed: int) -> list[dict]:
+def make_variations(svg: str, description: str, seed: int, *, expand_canvas=False) -> list[dict]:
     """Keep the seeded probes; replace only raster duplicates within a fixed budget.
 
     Tiny or tightly cropped sources can quantize different transforms to the same
     pixels. A separate retry stream preserves every unaffected legacy probe and
-    never selects candidates using conversion quality.
+    never selects candidates using conversion quality. Workbench callers opt in
+    to expanding canvases; the default preserves historical acceptance replays.
     """
     original = make_original_case(svg, description)
     width, height = original['width'], original['height']
-    seen = {sha256(render(svg, width, height).tobytes())}
+    def raster_digest(svg, width, height):
+        return sha256(f'{width}x{height}:'.encode() + render(svg, width, height).tobytes())
+    seen = {raster_digest(svg, width, height)}
     descriptions = set()
-    cases = _make_variation_candidates(svg, description, seed)
+    cases = _make_variation_candidates(svg, description, seed, expand_canvas=expand_canvas)
     retry_rng = random.Random(seed)
     replacements = iter(())
     checked = 0
@@ -229,14 +269,15 @@ def make_variations(svg: str, description: str, seed: int) -> list[dict]:
                     f'Raster variation space exhausted after {checked} candidates: '
                     f'{index}/{CASE_COUNT} distinct probes; canvas={width}x{height}; seed={seed}')
             checked += 1
-            digest = sha256(render(candidate['svg'], width, height).tobytes())
+            digest = raster_digest(candidate['svg'], candidate['width'], candidate['height'])
             if digest not in seen and candidate['description'] not in descriptions:
                 break
             rejected += 1
             try:
                 candidate = next(replacements)
             except StopIteration:
-                replacements = iter(_make_variation_candidates(svg, description, retry_rng.getrandbits(63)))
+                replacements = iter(_make_variation_candidates(
+                    svg, description, retry_rng.getrandbits(63), expand_canvas=expand_canvas))
                 candidate = next(replacements)
         candidate['case_id'] = initial['case_id']
         candidate['variation_generation'] = {'candidates_checked': rejected + 1,
@@ -324,7 +365,7 @@ def write_cases(cases: list[dict], output: Path, *, render_fn=None) -> None:
         inputs = case_dir / "input"
         inputs.mkdir(parents=True)
         image = (render_fn or render)(source.read_text(encoding="utf-8"), case["width"], case["height"])
-        digest = sha256(image.tobytes())
+        digest = sha256(f'{case["width"]}x{case["height"]}:'.encode() + image.tobytes())
         if digest in raster_hashes:
             raise ValueError("Duplicate raster variation; choose a larger reference SVG or a different seed")
         raster_hashes.add(digest)

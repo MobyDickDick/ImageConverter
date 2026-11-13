@@ -23,6 +23,7 @@ function controls() {
   const unpreparedSource = loadedSource && loadedSource.preparedId !== current?.id;
   for (const id of ["file", "description", "seed", "iterations", "timeout"]) $(id).disabled = busy || running;
   $("pick-reference").disabled = busy || running;
+  $("reprepare").disabled = busy || running || !current;
   $("prepare").disabled = busy || running || !loadedSource || !$("description").value.trim();
   $("run-selected").disabled = busy || running || Boolean(activity) || unpreparedSource || !current || !selected.size;
   $("run-all").disabled = busy || running || Boolean(activity) || unpreparedSource || !current;
@@ -145,6 +146,9 @@ function render(report, reset = false) {
   if (reset) { selected = new Set(report.cases.map(c => c.case_id)); activeCase = null; logUrl = null; }
   const s = report.summary;
   $("run-info").textContent = `${report.name} · Seed ${report.seed}`;
+  const fixedCanvas = report.variation_profile !== "whole_motif_scale_0.94_1.06_translate_0.025_expand_canvas_v2";
+  $("canvas-warning").hidden = !fixedCanvas;
+  $("reprepare").hidden = !fixedCanvas;
   $("summary").textContent = `${labels[report.status] || report.status}${report.active_case ? " · " + report.active_case : ""} · ${s.completed}/${s.total} geprüft · ${s.passed} bestanden · ${s.quality_failed} Qualitätsfehler · ${s.execution_failed} Ausführungsfehler · ${report.attempts.length} Versuche`;
   $("cases").replaceChildren();
   for (const c of report.cases) {
@@ -156,6 +160,7 @@ function render(report, reset = false) {
     row.insertCell().append(button);
     textCell(row, `${(c.variation.scale * 100).toFixed(2)} %`);
     textCell(row, `${(c.variation.relative_x * 100).toFixed(2)} / ${(c.variation.relative_y * 100).toFixed(2)} %`);
+    textCell(row, `${c.width} × ${c.height} px`);
     const r = c.result;
     textCell(row, report.active_case === c.case_id ? "Läuft …" : !r ? "Offen" : r.satisfactory ? "Bestanden" : r.metrics ? "Qualitätsfehler" : "Ausführungsfehler");
     textCell(row, r?.metrics?.normalized_mse?.toFixed(6) ?? "—");
@@ -219,6 +224,11 @@ async function run(all) {
 }
 $("run-selected").addEventListener("click", () => operation(() => run(false)));
 $("run-all").addEventListener("click", () => operation(() => run(true)));
+$("reprepare").addEventListener("click", () => operation(async () => {
+  const report = await request(`/api/workbench/${current.id}/reprepare`, {});
+  restoreSource(report); render(report, true); await history();
+  window.history.replaceState(null, "", `/workbench?run=${encodeURIComponent(report.id)}`);
+}));
 $("cancel").addEventListener("click", () => operation(async () => { render(await request(`/api/workbench/${current.id}/cancel`)); await history(); }));
 $("activity-cancel").addEventListener("click", () => {
   const target = activity;
