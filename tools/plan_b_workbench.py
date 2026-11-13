@@ -16,6 +16,7 @@ import secrets
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 
 from tools import run_plan_b_variations as battery
@@ -24,9 +25,22 @@ VARIATION_PROFILE = 'whole_motif_scale_0.94_1.06_translate_0.025_expand_canvas_v
 
 
 def save_report(folder: Path, report: dict) -> None:
-    temporary = folder / 'report.json.tmp'
-    temporary.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8')
-    temporary.replace(folder / 'report.json')
+    content = json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + '\n'
+    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=folder,
+                                     prefix='report.', suffix='.tmp', delete=False) as stream:
+        temporary = Path(stream.name)
+        stream.write(content)
+    # Polling readers (or sync/indexing software) can briefly deny replacement
+    # on Windows. Keep the previous JSON readable until replacement succeeds.
+    # A permanent failure still raises and retains the unsaved snapshot.
+    for attempt in range(8):
+        try:
+            temporary.replace(folder / 'report.json')
+            return
+        except PermissionError:
+            if attempt == 7:
+                raise
+            time.sleep(.01 * 2**attempt)
 
 
 def read_report(folder: Path) -> dict:

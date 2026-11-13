@@ -147,3 +147,14 @@ Ausgabe, während das ältere Ergebnis erhalten bleibt. Der Audit-Hook
 protokolliert bei allen diesen Versuchen keine fremden SVG-Zugriffe.
 Das ist ein Funktionsnachweis der Workbench, kein allgemeiner Qualitätsnachweis
 für beliebige SVG-Motive.
+
+## Kreisvarianten und Speicherfehler vom 13.11.2026
+
+Ein späterer Lauf mit einem kleinen grauen Kreis bestand das Original, scheiterte
+aber an allen 13 ausgeführten Varianten. Die Kreisregistrierung lehnte den
+ergänzten Satz zur globalen Verschiebung und Skalierung ab. Diese Modellauswahl
+ist korrigiert; der vollständige Wiederholungslauf besteht alle 17 Fälle mit
+identischen Eingaben, Beschreibungen, Seed, Budgets und Qualitätsgrenzen.
+Kurzzeitige Windows-Dateisperren beim Speichern des Berichts werden jetzt
+begrenzt erneut versucht. Details und Gegenproben stehen in der
+[Untersuchung des Kreisfehlers](plan_b_plain_disk_2026-11-13.md).

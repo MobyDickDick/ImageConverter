@@ -17,6 +17,39 @@ SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect widt
 DESCRIPTION = 'Ein grüner Kreis auf weissem Hintergrund.'
 
 
+@pytest.mark.parametrize('failures', [1, 5])
+def test_report_retries_windows_reader_conflicts(tmp_path, monkeypatch, failures):
+    wb.save_report(tmp_path, {'completed': 0})
+    replace = Path.replace
+    calls = []
+    def busy(source, target):
+        calls.append(source)
+        # Every failed attempt must leave a valid, complete prior report.
+        assert wb.read_report(tmp_path) == {'completed': 0}
+        if len(calls) <= failures:
+            raise PermissionError('Windows reader still holds report.json')
+        return replace(source, target)
+    monkeypatch.setattr(Path, 'replace', busy)
+    monkeypatch.setattr(wb.time, 'sleep', lambda seconds: None)
+    wb.save_report(tmp_path, {'completed': 1})
+    assert wb.read_report(tmp_path) == {'completed': 1}
+    assert len(calls) == failures + 1
+    assert not list(tmp_path.glob('report.*.tmp'))
+
+
+def test_permanent_report_lock_preserves_old_and_unsaved_results(tmp_path, monkeypatch):
+    wb.save_report(tmp_path, {'completed': 0})
+    def busy(source, target):
+        raise PermissionError('persistent lock')
+    monkeypatch.setattr(Path, 'replace', busy)
+    monkeypatch.setattr(wb.time, 'sleep', lambda seconds: None)
+    with pytest.raises(PermissionError, match='persistent lock'):
+        wb.save_report(tmp_path, {'completed': 1})
+    assert wb.read_report(tmp_path) == {'completed': 0}
+    pending, = tmp_path.glob('report.*.tmp')
+    assert json.loads(pending.read_text(encoding='utf-8')) == {'completed': 1}
+
+
 @pytest.fixture
 def prepared(tmp_path):
     folder = tmp_path / 'run'

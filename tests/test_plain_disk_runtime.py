@@ -8,10 +8,16 @@ import pytest
 
 from src.iCCModules.imageCompositeConverterPlainDisk import fit_plain_disk
 from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
-from tools.run_plan_b_variations import render, measure_quality
+from tools.run_plan_b_variations import render, measure_quality, make_variations
 
 DESCRIPTION = 'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund'
 ROOT = Path(__file__).resolve().parents[1]
+WORKBENCH_SOURCE = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">'
+    '<rect width="20" height="20" fill="#fefefe"/>'
+    '<circle cx="10.0000" cy="9.9299" r="8.9788" stroke-width="1.2000" '
+    'fill="#f2f2f2" stroke="#949494"/></svg>'
+)
 
 
 def fit(image, description=DESCRIPTION):
@@ -66,13 +72,14 @@ def test_additional_description_content_is_not_erased(extra):
     assert fit(render(synthetic(40), 40, 40), DESCRIPTION+extra) is None
 
 
+@pytest.mark.parametrize('pose', ['', ' Die Darstellung ist etwas größer dargestellt und leicht nach rechts und unten verschoben.'])
 @pytest.mark.parametrize('body', [
     '<rect x="18" y="19" width="2" height="2" fill="#333333"/>',
     '<line x1="18" y1="17" x2="18" y2="23" stroke="#333333"/>',
     '<circle cx="37" cy="3" r="1" fill="#333333"/>',
 ])
-def test_small_unmentioned_details_cannot_be_certified_as_plain_circle(body):
-    assert fit(render(synthetic(40, body), 40, 40)) is None
+def test_small_unmentioned_details_cannot_be_certified_as_plain_circle(body, pose):
+    assert fit(render(synthetic(40, body), 40, 40), DESCRIPTION + pose) is None
 
 
 def test_rectangle_is_not_replaced_with_circle():
@@ -81,3 +88,25 @@ def test_rectangle_is_not_replaced_with_circle():
            '<rect x="5" y="5" width="30" height="30" fill="#f2f2f2" '
            'stroke="#7f7f7f" stroke-width="1"/></svg>')
     assert fit(render(svg, 40, 40)) is None
+
+
+@pytest.mark.parametrize('seed', [8019332433889847450, 47021])
+def test_expanded_plan_b_pose_descriptions_keep_circle_model(seed):
+    # Tight, subpixel ring and an independent colour/pose holdout. The fitter
+    # receives only the raster and the full, unmodified variant description.
+    source = WORKBENCH_SOURCE if seed == 8019332433889847450 else synthetic(48)
+    for case in make_variations(source, DESCRIPTION, seed, expand_canvas=True):
+        image = render(case['svg'], case['width'], case['height'])
+        result = fit(image, case['description'])
+        assert result is not None, case['case_id']
+        assert measure_quality(image, result['svg'])['satisfactory'], case['case_id']
+        tags = [node.tag.rsplit('}', 1)[-1] for node in ET.fromstring(result['svg']).iter()]
+        assert tags == ['svg', 'rect', 'circle']
+
+
+@pytest.mark.parametrize('extra', [' Text im Kreis: "VOC".', ' und ein Rechteck', ' mit einem Punkt'])
+@pytest.mark.parametrize('before_pose', [False, True])
+def test_pose_sentence_does_not_hide_additional_content(extra, before_pose):
+    pose = ' Die Darstellung ist etwas größer dargestellt und leicht nach rechts und unten verschoben.'
+    description = DESCRIPTION + (extra + pose if before_pose else pose + extra)
+    assert fit(render(synthetic(40), 40, 40), description) is None

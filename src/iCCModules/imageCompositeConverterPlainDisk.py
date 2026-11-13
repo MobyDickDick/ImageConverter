@@ -21,6 +21,13 @@ _DESCRIPTION = re.compile(
     rf'(?:\s+mit\s+(?:{_COLOR}\s+)?(?:rand|kontur|umrandung)'
     rf'(?:\s+und\s+{_COLOR}\s+(?:hintergrund|füllung|fuellung))?)?'
     r'\.?\s*(?:(?:keine beschriftung|ohne text)\.?)?'
+    # Whole-motif pose/scale wording adds no objects. Keep the full match so
+    # labels or attachments before/after this sentence still reject the model.
+    # Geometry continues to come from pixels, never from these relative words.
+    r'(?:\s+(?:das (?:gesamte )?motiv|die (?:gesamte )?darstellung) ist '
+    r'(?:geringfügig|etwas|ein wenig|leicht) (?:kleiner|grösser|groesser) dargestellt '
+    r'und (?:geringfügig|etwas|ein wenig|leicht) nach (?:links|rechts) '
+    r'und (?:oben|unten) (?:versetzt|verschoben)\.)?'
 )
 
 
