@@ -1,0 +1,23 @@
+{
+  "schema": "category_collection_checks_v1",
+  "categories": 15,
+  "every_category_available": true,
+  "distinct_originals": true,
+  "saved_pixel_pass_categories": 14,
+  "selected_examples_with_saved_pixel_pass": 14,
+  "open_categories": [
+    "panel_curves"
+  ],
+  "no_new_success_claimed": true,
+  "tests_passed": 86,
+  "javascript_syntax": "passed",
+  "diff_whitespace": "passed",
+  "browser_verified": [
+    "15 cards on regular port 8766",
+    "load original into converter",
+    "load next example",
+    "primary catalog description preserved",
+    "no automatic conversion started"
+  ],
+  "selection_sha256": "ff772f5e3808ee473ebf209cedd3957e2617c403a6b3fce56c512be3f097b0cc"
+}

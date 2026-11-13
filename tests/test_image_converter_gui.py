@@ -12,6 +12,25 @@ import pytest
 from src import imageConverterGui as gui
 
 
+def test_plain_circle_converts_through_real_gui_worker_with_neutral_filename(jobs):
+    from xml.etree import ElementTree as ET
+
+    source = gui.ROOT/'artifacts/images_to_convert/AC0800_M.jpg'
+    description = 'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund'
+    uploaded = jobs.upload('neutraler-kreis.jpg', source.read_bytes())
+    started = jobs.start(uploaded['id'], description, 'quick')
+    jobs.threads[-1].join(timeout=75)
+    job = jobs.snapshot(started['id'])
+    assert job['status'] == 'done', job.get('log')
+    assert job['quality'] == 'passed' and job['search_summary']['satisfactory'], job
+    assert job['description'] == description
+    folder = jobs.folder(job['id'])
+    assert 'status=non_composite_raster_plain_disk' in '\n'.join(
+        path.read_text(encoding='utf-8') for path in (folder/'output').rglob('*validation*.log'))
+    root = ET.parse(folder/'result.svg').getroot()
+    assert [node.tag.rsplit('}', 1)[-1] for node in root.iter()] == ['svg', 'rect', 'circle']
+
+
 def test_unedited_user_description_converts_through_real_gui_worker(jobs):
     from pathlib import Path
     from xml.etree import ElementTree as ET

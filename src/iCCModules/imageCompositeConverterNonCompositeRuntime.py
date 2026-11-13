@@ -44,6 +44,7 @@ from src.iCCModules.imageCompositeConverterArcShaft import fit_arc_shaft
 from src.iCCModules.imageCompositeConverterGradientJunction import fit_gradient_junction
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
+from src.iCCModules.imageCompositeConverterPlainDisk import fit_plain_disk
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
 from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, panel_contract
@@ -1479,6 +1480,7 @@ def runNonCompositeIterationImpl(
             (fit_axial_panel, "non_composite_raster_axial_panel"),
             (fit_short_label_disk, "non_composite_raster_short_label_disk"),
             (fit_primitive_scene, "non_composite_raster_primitive_scene"),
+            (fit_plain_disk, "non_composite_raster_plain_disk"),
             (fit_circle_linework, "non_composite_raster_circle_linework"),
             (fit_arc_shaft, "non_composite_raster_arc_shaft"),
             (fit_gradient_junction, "non_composite_raster_gradient_junction"),
