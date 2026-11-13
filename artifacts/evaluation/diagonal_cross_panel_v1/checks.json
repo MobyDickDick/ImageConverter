@@ -1,0 +1,95 @@
+{
+  "model_tests": {
+    "passed": 13,
+    "exit_code": 0
+  },
+  "combined_arrow_and_panel_tests": {
+    "passed": 34,
+    "exit_code": 0
+  },
+  "affected_runtime_tests": {
+    "passed": 101,
+    "exit_code": 0
+  },
+  "catalog_tests": {
+    "passed": 18,
+    "exit_code": 0
+  },
+  "compileall": {
+    "exit_code": 0
+  },
+  "cli_help": {
+    "exit_code": 0
+  },
+  "image_id_hardcoding": {
+    "occurrences": 0,
+    "exit_code": 0
+  },
+  "full_suite": {
+    "passed": 744,
+    "failed": 1,
+    "exit_code": 1,
+    "stop_on_first_failure": true,
+    "failure": "tests/detailtests/test_gradient_stripe_strategy_helpers.py::test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns",
+    "preexisting_failure": true
+  },
+  "catalog_refresh": {
+    "variant": "AC100_1_M",
+    "status": "pixel_pass",
+    "other_measurements": "historical"
+  },
+  "source_sha256": "fb97a734c6d3e75e4efae839ef78ac2a72f108dfe1b483aef40f85a57479c949",
+  "cli": {
+    "status": "validated",
+    "search_satisfactory": true,
+    "source": {
+      "evaluations": 3281,
+      "final_error": 6.759074074074074,
+      "initial_error": 9.458518518518519,
+      "parameters": [
+        1.675,
+        0.9750000000000001,
+        26.65,
+        58.1125,
+        0.8875,
+        28.200925523197256,
+        0.8136731797731329,
+        2.532747916177138,
+        0.7875,
+        10.022463647948344,
+        8.0625,
+        3.375,
+        3.125,
+        2.803236822033731,
+        0.125,
+        170.0,
+        155.53311248675524,
+        226.89181744635673,
+        95.5,
+        79.5,
+        167.64953034587026,
+        72.5,
+        38.5,
+        220.70684752585944,
+        69.0,
+        75.88336033826509,
+        242.0,
+        68.90953256572253,
+        30.0,
+        221.6810564658983,
+        227.30947093644633,
+        206.10948360708016,
+        246.8331738427839,
+        108.46950013989743,
+        86.609741199861,
+        132.71643940425923,
+        90.5,
+        87.25,
+        148.68089669896509
+      ]
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    }
+  }
+}

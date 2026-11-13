@@ -5,9 +5,9 @@
   "auxiliary_bitmaps": 0,
   "unique_catalog_variants": 1787,
   "catalog_statuses": {
-    "pixel_fail": 1314,
+    "pixel_fail": 1312,
+    "pixel_pass": 347,
     "no_svg": 124,
-    "pixel_pass": 345,
     "measurement_error": 2,
     "reserved": 2
   },
@@ -28,9 +28,9 @@
       "total": 930,
       "archived": 174,
       "statuses": {
-        "pixel_fail": 769,
-        "no_svg": 35,
-        "pixel_pass": 126
+        "pixel_fail": 767,
+        "pixel_pass": 128,
+        "no_svg": 35
       }
     },
     "AL": {
@@ -289,5 +289,31 @@
   "semantic_revalidation_performed": false,
   "manual_reviews_systematically_recorded": false,
   "measurement_signature": "e56c278eac7aa255cf33bc5e4e6f77164834707809c92ff30fdbc30806478d9e",
-  "elapsed_seconds": 29.344
+  "elapsed_seconds": 29.344,
+  "targeted_refresh": {
+    "variants": [
+      "AC100_1_M"
+    ],
+    "measured_at": "2026-11-13T06:35:54.309406+00:00",
+    "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
+    "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+  },
+  "targeted_refreshes": [
+    {
+      "variants": [
+        "AC0020_L"
+      ],
+      "measured_at": "2026-11-13T06:23:45.664437+00:00",
+      "measurement_signature": "05edbdb762504b075352610f095f58e2f95b3b2b56c2985b4d56533b3d1070be",
+      "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+    },
+    {
+      "variants": [
+        "AC100_1_M"
+      ],
+      "measured_at": "2026-11-13T06:35:54.309406+00:00",
+      "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
+      "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+    }
+  ]
 }

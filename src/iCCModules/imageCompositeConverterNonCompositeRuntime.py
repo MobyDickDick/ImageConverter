@@ -49,6 +49,7 @@ from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
 from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, panel_contract
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
 from src.iCCModules.imageCompositeConverterHeatPanel import fit_heat_panel
+from src.iCCModules.imageCompositeConverterDiagonalCrossPanel import fit_diagonal_cross_panel
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1469,6 +1470,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
             (fit_heat_panel, "non_composite_raster_heat_panel"),
             (fit_paired_line_panel, "non_composite_raster_paired_line_panel"),
             (fit_framed_panel, "non_composite_raster_framed_panel"),
@@ -1536,7 +1538,7 @@ def runNonCompositeIterationImpl(
                         key: fitted[key] for key in ('scene_detectors', 'scene_hypotheses', 'instance_groups', 'scene_attempts')
                         if key in fitted
                     })
-                if status in {"non_composite_raster_circle_linework", "non_composite_raster_alarm_bell", "non_composite_raster_zigzag_panel", "non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve"}:
+                if status in {"non_composite_raster_circle_linework", "non_composite_raster_alarm_bell", "non_composite_raster_zigzag_panel", "non_composite_raster_checkbox_checkmark", "non_composite_raster_chevron_panel", "non_composite_raster_three_way_valve", "non_composite_raster_diagonal_cross_panel"}:
                     params[fitted['source']] = {
                         'initial_error': fitted['initial_error'], 'final_error': fitted['error'],
                         'parameters': fitted['parameters'], 'evaluations': fitted['evaluations'],

@@ -1,0 +1,59 @@
+{
+  "targeted_tests": {
+    "passed": 117,
+    "exit_code": 0
+  },
+  "compileall": {
+    "exit_code": 0
+  },
+  "cli_help": {
+    "exit_code": 0
+  },
+  "image_id_hardcoding": {
+    "exit_code": 0,
+    "occurrences": 0
+  },
+  "regression_old_loss": {
+    "expected_failure": true,
+    "case": "test_thin_jpeg_shafts_keep_native_fit_instead_of_legacy_fallback[L]"
+  },
+  "full_suite": {
+    "collected": 5406,
+    "status": "stopped_after_failures",
+    "completed_progress_symbols": {
+      ".": 1548,
+      "F": 6,
+      "s": 29,
+      "E": 1
+    },
+    "confirmed_unrelated_failures": [
+      "tests/detailtests/test_gradient_stripe_strategy_helpers.py::test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns",
+      "tests/detailtests/test_plan_b_workbench.py::test_http_prepare_notes_exports_seed_precision_and_path_isolation"
+    ],
+    "reasons": [
+      "Unchanged AC0VR2_ZL_M saved SVG differs from its fixture",
+      "Sandbox rejects the HTTP connection to 127.0.0.1 with WinError 10013"
+    ]
+  },
+  "advisory_report_consistency": {
+    "status": "invalid",
+    "reason": "empty_chain_summary_for_nonempty_result_map"
+  },
+  "quality": {
+    "mupdf_passed": 3,
+    "librsvg_passed": 3,
+    "unchanged_limits": true
+  },
+  "catalog_tests": {
+    "passed": 18,
+    "exit_code": 0
+  },
+  "catalog_inventory": {
+    "scope": "AC0020_L saved output refreshed with both renderers; other rows retain historical measurements",
+    "status": "pixel_pass",
+    "full_runtime_remeasurement": "stopped; targeted refresh completed"
+  },
+  "diff_check": {
+    "exit_code": 0
+  }
+}

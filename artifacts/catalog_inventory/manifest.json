@@ -6,9 +6,9 @@
     "auxiliary_bitmaps": 0,
     "unique_catalog_variants": 1787,
     "catalog_statuses": {
-      "pixel_fail": 1314,
+      "pixel_fail": 1312,
+      "pixel_pass": 347,
       "no_svg": 124,
-      "pixel_pass": 345,
       "measurement_error": 2,
       "reserved": 2
     },
@@ -29,9 +29,9 @@
         "total": 930,
         "archived": 174,
         "statuses": {
-          "pixel_fail": 769,
-          "no_svg": 35,
-          "pixel_pass": 126
+          "pixel_fail": 767,
+          "pixel_pass": 128,
+          "no_svg": 35
         }
       },
       "AL": {
@@ -290,7 +290,33 @@
     "semantic_revalidation_performed": false,
     "manual_reviews_systematically_recorded": false,
     "measurement_signature": "e56c278eac7aa255cf33bc5e4e6f77164834707809c92ff30fdbc30806478d9e",
-    "elapsed_seconds": 29.344
+    "elapsed_seconds": 29.344,
+    "targeted_refresh": {
+      "variants": [
+        "AC100_1_M"
+      ],
+      "measured_at": "2026-11-13T06:35:54.309406+00:00",
+      "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
+      "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+    },
+    "targeted_refreshes": [
+      {
+        "variants": [
+          "AC0020_L"
+        ],
+        "measured_at": "2026-11-13T06:23:45.664437+00:00",
+        "measurement_signature": "05edbdb762504b075352610f095f58e2f95b3b2b56c2985b4d56533b3d1070be",
+        "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+      },
+      {
+        "variants": [
+          "AC100_1_M"
+        ],
+        "measured_at": "2026-11-13T06:35:54.309406+00:00",
+        "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd",
+        "scope": "Only the corrected saved SVG was refreshed. Other rows retain their historical measurements."
+      }
+    ]
   },
   "labels": {
     "pixel_pass": "Rastergates erfüllt",
@@ -661,27 +687,25 @@
       "archived": false,
       "candidates": [
         {
-          "svg": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0020_L.svg",
-          "svg_sha256": "b2e708ef57e2a26290fd24be0a70ce36cc17e543718ee02515a46a9db1d5de7a",
+          "svg": "artifacts/converted_images/converted_svgs/AC0020_L.svg",
+          "svg_sha256": "735ebfd23f6eb8c6e9de5bbe2064ae9a213f3156ceb5bc92ffb4ee22405f9508",
           "all_paths": [
+            "artifacts/converted_images/converted_svgs/AC0020_L.svg",
             "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0020_L.svg"
           ],
           "measurement": {
-            "measured_at": "2026-11-07T12:06:40.653091+00:00",
+            "measured_at": "2026-11-13T06:23:45.664437+00:00",
+            "width": 40,
+            "height": 140,
             "renderers": {
               "mupdf": {
-                "satisfactory": false,
-                "failures": [
-                  "normalized_mse_outside_limit",
-                  "foreground_mse_outside_limit",
-                  "edge_alignment_outside_limit",
-                  "foreground_iou_outside_limit"
-                ],
+                "satisfactory": true,
+                "failures": [],
                 "metrics": {
-                  "normalized_mse": 0.013835389167070389,
-                  "foreground_mse": 0.08387143164873123,
-                  "edge_alignment": 0.4117504358291626,
-                  "foreground_iou": 0.6468039003250271
+                  "normalized_mse": 0.00024704233510419726,
+                  "foreground_mse": 0.0020142358262091875,
+                  "edge_alignment": 0.9909300804138184,
+                  "foreground_iou": 1.0
                 },
                 "limits": {
                   "max_normalized_mse": 0.01,
@@ -701,18 +725,13 @@
                 }
               },
               "librsvg": {
-                "satisfactory": false,
-                "failures": [
-                  "normalized_mse_outside_limit",
-                  "foreground_mse_outside_limit",
-                  "edge_alignment_outside_limit",
-                  "foreground_iou_outside_limit"
-                ],
+                "satisfactory": true,
+                "failures": [],
                 "metrics": {
-                  "normalized_mse": 0.013020476326346397,
-                  "foreground_mse": 0.07892519980669022,
-                  "edge_alignment": 0.408426433801651,
-                  "foreground_iou": 0.6446370530877573
+                  "normalized_mse": 0.0004105517582502216,
+                  "foreground_mse": 0.0034051043912768364,
+                  "edge_alignment": 0.9904043674468994,
+                  "foreground_iou": 1.0
                 },
                 "limits": {
                   "max_normalized_mse": 0.01,
@@ -731,34 +750,30 @@
                   "path_complexity_ratio": 0.0
                 }
               }
-            },
-            "width": 40,
-            "height": 140
+            }
           }
         }
       ],
       "selected": {
-        "svg": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0020_L.svg",
-        "svg_sha256": "b2e708ef57e2a26290fd24be0a70ce36cc17e543718ee02515a46a9db1d5de7a",
+        "svg": "artifacts/converted_images/converted_svgs/AC0020_L.svg",
+        "svg_sha256": "735ebfd23f6eb8c6e9de5bbe2064ae9a213f3156ceb5bc92ffb4ee22405f9508",
         "all_paths": [
+          "artifacts/converted_images/converted_svgs/AC0020_L.svg",
           "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0020_L.svg"
         ],
         "measurement": {
-          "measured_at": "2026-11-07T12:06:40.653091+00:00",
+          "measured_at": "2026-11-13T06:23:45.664437+00:00",
+          "width": 40,
+          "height": 140,
           "renderers": {
             "mupdf": {
-              "satisfactory": false,
-              "failures": [
-                "normalized_mse_outside_limit",
-                "foreground_mse_outside_limit",
-                "edge_alignment_outside_limit",
-                "foreground_iou_outside_limit"
-              ],
+              "satisfactory": true,
+              "failures": [],
               "metrics": {
-                "normalized_mse": 0.013835389167070389,
-                "foreground_mse": 0.08387143164873123,
-                "edge_alignment": 0.4117504358291626,
-                "foreground_iou": 0.6468039003250271
+                "normalized_mse": 0.00024704233510419726,
+                "foreground_mse": 0.0020142358262091875,
+                "edge_alignment": 0.9909300804138184,
+                "foreground_iou": 1.0
               },
               "limits": {
                 "max_normalized_mse": 0.01,
@@ -778,18 +793,13 @@
               }
             },
             "librsvg": {
-              "satisfactory": false,
-              "failures": [
-                "normalized_mse_outside_limit",
-                "foreground_mse_outside_limit",
-                "edge_alignment_outside_limit",
-                "foreground_iou_outside_limit"
-              ],
+              "satisfactory": true,
+              "failures": [],
               "metrics": {
-                "normalized_mse": 0.013020476326346397,
-                "foreground_mse": 0.07892519980669022,
-                "edge_alignment": 0.408426433801651,
-                "foreground_iou": 0.6446370530877573
+                "normalized_mse": 0.0004105517582502216,
+                "foreground_mse": 0.0034051043912768364,
+                "edge_alignment": 0.9904043674468994,
+                "foreground_iou": 1.0
               },
               "limits": {
                 "max_normalized_mse": 0.01,
@@ -808,16 +818,15 @@
                 "path_complexity_ratio": 0.0
               }
             }
-          },
-          "width": 40,
-          "height": 140
+          }
         }
       },
       "semantic_revalidated": false,
       "manual_review": "not_systematically_recorded",
-      "status": "pixel_fail",
+      "status": "pixel_pass",
       "image_url": "../images_to_convert/AC0020_L.jpg",
-      "svg_url": "../converted_images/reports/conversion_bestlist_snapshots/AC0020_L.svg"
+      "svg_url": "../converted_images/converted_svgs/AC0020_L.svg",
+      "measurement_signature": "05edbdb762504b075352610f095f58e2f95b3b2b56c2985b4d56533b3d1070be"
     },
     {
       "filename": "AC0020_M.jpg",
@@ -181652,31 +181661,31 @@
         "artifacts/images_to_convert/AC100_1_M.jpg"
       ],
       "source_conflict": false,
-      "description": "Unzugeordnete Wurzelform aus der Serie AC100_1. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als \"manuell prüfen\" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+      "description": "Stehendes rotes Rechteck mit dunkelrotem Rand, einem dunklen Kreuz oben links und einer Diagonalen von unten links nach oben rechts. Die Diagonale besitzt eine dunkle Mittellinie und zwei fast weiße Seitenlinien. Das Bild ist stark verpixelt. Die Diagonale ist am Rechteck abgeschnitten; ihre Enden ragen nicht über das Rechteck hinaus.",
       "description_key": "AC100_1_M.jpg",
       "description_source": "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
       "archived": false,
       "candidates": [
         {
-          "svg": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC100_1_M.svg",
-          "svg_sha256": "ca9be41cdf345aafbb76f3ca6e1ac2046b6ad679e6e08e29d951cf2b7755ddce",
+          "svg": "artifacts/converted_images/converted_svgs/AC100_1_M.svg",
+          "svg_sha256": "70e0b44edf50b1cead489b9d528530428e349555a81965b1b492ab7a535ff75d",
           "all_paths": [
+            "artifacts/converted_images/converted_svgs/AC100_1_M.svg",
             "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC100_1_M.svg"
           ],
           "measurement": {
-            "measured_at": "2026-11-07T12:10:28.825295+00:00",
+            "measured_at": "2026-11-13T06:35:54.309406+00:00",
+            "width": 30,
+            "height": 60,
             "renderers": {
               "mupdf": {
-                "satisfactory": false,
-                "failures": [
-                  "normalized_mse_outside_limit",
-                  "edge_alignment_outside_limit"
-                ],
+                "satisfactory": true,
+                "failures": [],
                 "metrics": {
-                  "normalized_mse": 0.01796165481209755,
-                  "foreground_mse": 0.01796165481209755,
-                  "edge_alignment": 0.5655686855316162,
-                  "foreground_iou": 0.9266666666666666
+                  "normalized_mse": 0.0020000769291073084,
+                  "foreground_mse": 0.002087053842842579,
+                  "edge_alignment": 0.9561249017715454,
+                  "foreground_iou": 0.9671445639187575
                 },
                 "limits": {
                   "max_normalized_mse": 0.01,
@@ -181689,23 +181698,20 @@
                 "complexity": {
                   "parse_error": null,
                   "embedded_raster_count": 0,
-                  "vector_element_count": 3,
-                  "path_count": 1,
-                  "path_command_count": 2,
-                  "path_complexity_ratio": 0.6667
+                  "vector_element_count": 8,
+                  "path_count": 2,
+                  "path_command_count": 4,
+                  "path_complexity_ratio": 0.5
                 }
               },
               "librsvg": {
-                "satisfactory": false,
-                "failures": [
-                  "normalized_mse_outside_limit",
-                  "edge_alignment_outside_limit"
-                ],
+                "satisfactory": true,
+                "failures": [],
                 "metrics": {
-                  "normalized_mse": 0.01796940341591835,
-                  "foreground_mse": 0.01796940341591835,
-                  "edge_alignment": 0.5655686855316162,
-                  "foreground_iou": 0.9266666666666666
+                  "normalized_mse": 0.002160038100555539,
+                  "foreground_mse": 0.0022692596539855003,
+                  "edge_alignment": 0.9556896686553955,
+                  "foreground_iou": 0.9671641791044776
                 },
                 "limits": {
                   "max_normalized_mse": 0.01,
@@ -181718,38 +181724,36 @@
                 "complexity": {
                   "parse_error": null,
                   "embedded_raster_count": 0,
-                  "vector_element_count": 3,
-                  "path_count": 1,
-                  "path_command_count": 2,
-                  "path_complexity_ratio": 0.6667
+                  "vector_element_count": 8,
+                  "path_count": 2,
+                  "path_command_count": 4,
+                  "path_complexity_ratio": 0.5
                 }
               }
-            },
-            "width": 30,
-            "height": 60
+            }
           }
         }
       ],
       "selected": {
-        "svg": "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC100_1_M.svg",
-        "svg_sha256": "ca9be41cdf345aafbb76f3ca6e1ac2046b6ad679e6e08e29d951cf2b7755ddce",
+        "svg": "artifacts/converted_images/converted_svgs/AC100_1_M.svg",
+        "svg_sha256": "70e0b44edf50b1cead489b9d528530428e349555a81965b1b492ab7a535ff75d",
         "all_paths": [
+          "artifacts/converted_images/converted_svgs/AC100_1_M.svg",
           "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC100_1_M.svg"
         ],
         "measurement": {
-          "measured_at": "2026-11-07T12:10:28.825295+00:00",
+          "measured_at": "2026-11-13T06:35:54.309406+00:00",
+          "width": 30,
+          "height": 60,
           "renderers": {
             "mupdf": {
-              "satisfactory": false,
-              "failures": [
-                "normalized_mse_outside_limit",
-                "edge_alignment_outside_limit"
-              ],
+              "satisfactory": true,
+              "failures": [],
               "metrics": {
-                "normalized_mse": 0.01796165481209755,
-                "foreground_mse": 0.01796165481209755,
-                "edge_alignment": 0.5655686855316162,
-                "foreground_iou": 0.9266666666666666
+                "normalized_mse": 0.0020000769291073084,
+                "foreground_mse": 0.002087053842842579,
+                "edge_alignment": 0.9561249017715454,
+                "foreground_iou": 0.9671445639187575
               },
               "limits": {
                 "max_normalized_mse": 0.01,
@@ -181762,23 +181766,20 @@
               "complexity": {
                 "parse_error": null,
                 "embedded_raster_count": 0,
-                "vector_element_count": 3,
-                "path_count": 1,
-                "path_command_count": 2,
-                "path_complexity_ratio": 0.6667
+                "vector_element_count": 8,
+                "path_count": 2,
+                "path_command_count": 4,
+                "path_complexity_ratio": 0.5
               }
             },
             "librsvg": {
-              "satisfactory": false,
-              "failures": [
-                "normalized_mse_outside_limit",
-                "edge_alignment_outside_limit"
-              ],
+              "satisfactory": true,
+              "failures": [],
               "metrics": {
-                "normalized_mse": 0.01796940341591835,
-                "foreground_mse": 0.01796940341591835,
-                "edge_alignment": 0.5655686855316162,
-                "foreground_iou": 0.9266666666666666
+                "normalized_mse": 0.002160038100555539,
+                "foreground_mse": 0.0022692596539855003,
+                "edge_alignment": 0.9556896686553955,
+                "foreground_iou": 0.9671641791044776
               },
               "limits": {
                 "max_normalized_mse": 0.01,
@@ -181791,22 +181792,21 @@
               "complexity": {
                 "parse_error": null,
                 "embedded_raster_count": 0,
-                "vector_element_count": 3,
-                "path_count": 1,
-                "path_command_count": 2,
-                "path_complexity_ratio": 0.6667
+                "vector_element_count": 8,
+                "path_count": 2,
+                "path_command_count": 4,
+                "path_complexity_ratio": 0.5
               }
             }
-          },
-          "width": 30,
-          "height": 60
+          }
         }
       },
       "semantic_revalidated": false,
       "manual_review": "not_systematically_recorded",
-      "status": "pixel_fail",
+      "status": "pixel_pass",
       "image_url": "../images_to_convert/AC100_1_M.jpg",
-      "svg_url": "../converted_images/reports/conversion_bestlist_snapshots/AC100_1_M.svg"
+      "svg_url": "../converted_images/converted_svgs/AC100_1_M.svg",
+      "measurement_signature": "4255b3dc43f235140139e1fbbf5827828bbb63165a459a6c291dd38db4ac18dd"
     },
     {
       "filename": "AC110_1_M.jpg",

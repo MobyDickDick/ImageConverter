@@ -149,8 +149,13 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
 
     def loss(reference, rendered):
         predicted = np.max(abs(rendered.astype(float)-background), axis=2) > 25
+        # Near-equal coverage of adjacent shaft pixels can have a tiny RGB
+        # error while Canny locates a different edge (especially after JPEG
+        # compression). Guide subpixel refinement with the acceptance metric
+        # too, so an accurate native fit is not discarded for the old fallback.
+        edge = pixel_quality(reference, rendered)['edge_alignment']
         return float(np.mean((reference.astype(float)-rendered.astype(float))**2)
-                     + 1000*np.mean(observed ^ predicted))
+                     + 1000*np.mean(observed ^ predicted) + 25*(1-edge))
 
     result = _register(parameters, geometry_count, build, valid, arr, render_fn, error_fn,
                        'raster_arrow_pair_v1', loss_fn=loss,

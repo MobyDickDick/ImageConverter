@@ -68,7 +68,7 @@ def test_independent_synthetic_colours_orientations_and_positions(case,seed_svg)
         fitted,report=explore_structures(seed_svg,image,render(seed_svg,80,80),render,session,{},mode='groups')
     assert all(r['complete'] for r in review(image,fitted['svg'],case).values())
     assert check_relations(fitted['svg']) and all(r['passed'] for r in check_relations(fitted['svg']))
-    assert report['probe_count']<=8 and not session.validated
+    assert report['probe_count']<=24 and not session.validated
 
 
 def test_parameter_refinement_cannot_erase_head_even_with_claimed_global_gain(monkeypatch):

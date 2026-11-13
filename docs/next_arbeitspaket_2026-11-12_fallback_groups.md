@@ -131,6 +131,11 @@ unter unveränderten Budgets negative Evidenz liefern. Vor einer ersten
 reservierten Familienprüfung ist der vollständige unabhängige Prüfer separat
 einzufrieren; Reserven bleiben bis dahin gesperrt.
 
+Nachtrag 13.11.2026: Dieses [Kompositionspaket ist begrenzt synthetisch
+abgeschlossen](next_arbeitspaket_2026-11-13_fallback_composition.md). Als Nächstes
+steht der vollständige unabhängige Prüfer FALLBACK-GROUPS-CHECKER-04 an;
+die reale Reservensperre bleibt bestehen.
+
 Sitzungslog: getestet wurden 36 vergleichbare Fortsetzungen, acht CLI-Läufe,
 48 synthetische Ablationen, 33 beschädigte Kontrollen sowie Regressionen und
 Kernprofil. Ergebnis: 9/12 statt 3/12 sowie 3/4 statt 1/4. Blocker: allgemeine

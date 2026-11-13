@@ -1,15 +1,55 @@
 {
+  "actual_iterations": 64,
   "base": "AC0020",
-  "best_error": 9.689226190476191,
+  "best_error": 1.128095238095238,
+  "best_error_metric": "optimizer_objective",
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0017302189625850342,
+  "current_svg_mae": 1.128095238095238,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.7030000000086147,
+  "error_per_pixel": 0.0002014455782312925,
+  "error_pixel_cluster_count": 19.0,
+  "error_pixel_cluster_excess": 0.5677456239412761,
+  "error_pixel_count": 506.0,
   "filename": "AC0020_L.jpg",
   "h": 140,
-  "mean_delta2": 2698.938720703125,
+  "largest_error_pixel_cluster_fraction": 0.658102766798419,
+  "localized_error_fraction": 0.9489502508578077,
+  "mean_delta2": 48.1917839050293,
+  "optimization_render_telemetry": {
+    "render_errors": 0,
+    "render_timeouts": 0
+  },
+  "optimizer_best_error": 1.128095238095238,
   "params": {
+    "adaptive_search": {
+      "candidate_evaluations": 439,
+      "elapsed_seconds": 2.703,
+      "external_max_seconds": null,
+      "isolated": true,
+      "limit_seconds": 60.0,
+      "max_seconds": 120.0,
+      "minimum_seconds": 30.0,
+      "stop_reason": "satisfactory",
+      "time_extensions": 0
+    },
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -19,8 +59,8 @@
     },
     "description_fragments": [
       {
-        "key": "AC0020",
-        "source": "base_name",
+        "key": "AC0020_L",
+        "source": "variant_name",
         "text": "zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben"
       }
     ],
@@ -30,7 +70,47 @@
     ],
     "geometry_ir": [],
     "label": "",
+    "language_assertions": {
+      "counts": [],
+      "no_text": false
+    },
     "mode": "dual_arrow_badge",
+    "raster_arrow_pair_v1": {
+      "error": 1.128095238095238,
+      "evaluations": 414,
+      "initial_error": 1.5520833333333333,
+      "parameters": [
+        6.06534090909091,
+        0.0,
+        135.4807692307692,
+        1.4874286921614197,
+        6.0,
+        140.3990384615384,
+        129.5625,
+        5.304166666666646,
+        34.06848802395209,
+        0.0,
+        133.51086956521738,
+        1.2473039215686275,
+        33.9465579710145,
+        129.20923913043475,
+        140.0,
+        5.455357142857146,
+        173.0,
+        110.0,
+        21.35,
+        6.0,
+        13.0,
+        234.0
+      ],
+      "quality": {
+        "edge_alignment": 0.9909300804138184,
+        "foreground_iou": 1.0,
+        "foreground_mse": 0.0020142358262091875,
+        "normalized_mse": 0.00024704233510419726,
+        "passed": true
+      }
+    },
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +121,29 @@
     "top_source_ref": null,
     "variant_name": "AC0020_L"
   },
-  "std_delta2": 10800.740234375,
+  "reference_access": {
+    "blocked_svg_reads": []
+  },
+  "requested_iterations": 64,
+  "rgb_rmse_per_channel": 4.007983029946995,
+  "search_control": {
+    "candidate_evaluations": 439,
+    "elapsed_seconds": 2.703,
+    "external_max_seconds": null,
+    "isolated": true,
+    "limit_seconds": 60.0,
+    "max_seconds": 120.0,
+    "minimum_seconds": 30.0,
+    "stop_reason": "satisfactory",
+    "time_extensions": 0
+  },
+  "search_satisfactory": true,
+  "source_file_sha256": "ff47184a00d9ca57fb480abd1eccd17e8ed96b9f4a48e58c51647d0403e63ab4",
+  "spatial_quality_score": 246.94088531861513,
+  "status": "validated",
+  "std_delta2": 648.0686645507812,
+  "svg_sha256": "735ebfd23f6eb8c6e9de5bbe2064ae9a213f3156ceb5bc92ffb4ee22405f9508",
+  "tile_std_delta2": 151.1273681374135,
   "variant": "AC0020_L",
   "w": 40
 }

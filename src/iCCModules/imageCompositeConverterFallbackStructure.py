@@ -194,6 +194,9 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
             return None
         row = dict(origin=origin, inventory=inventory(candidate), accepted=False)
         report['proposals'].append(row)
+        if sum(row['inventory'].values()) > 48:
+            row['rejection'] = 'element_limit'
+            return None
         try:
             validate_svg_assertions(candidate, assertions)
         except ValueError:
@@ -219,12 +222,19 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         support = float((after[changed] < before[changed]).mean()) if changed.any() else 0.
         row['improved_fraction'] = support
         accepted = measured < parent['error']-1e-8 and local_gain > 1e-6 and support >= .6
-        if 'native_object_group:' in parent['origin']:
+        if mode in {'groups', 'combined'}:
+            from src.iCCModules.imageCompositeConverterFallbackComposition import retained_paint
+            if not retained_paint(image, parent['rendered'], raster):
+                accepted = False
+                row['rejection'] = 'protected_existing_paint'
+        if mode in {'groups', 'combined'}:
             from src.iCCModules.imageCompositeConverterFallbackGroups import part_regions, check_parts
             protected = part_regions(parent['svg'], w, h)
             before_parts = check_parts(image, parent['rendered'], protected)
             after_parts = check_parts(image, raster, protected)
-            if any((a['passed'] and not b['passed']) or b['normalized_mse'] > a['normalized_mse']+1/255**2
+            # A failing old group may be repaired/replaced. Only previously
+            # verified details constrain edits; all new parts are checked below.
+            if any(a['passed'] and (not b['passed'] or b['normalized_mse'] > a['normalized_mse']+1/255**2)
                    for a,b in zip(before_parts,after_parts)):
                 accepted = False
                 row['rejection'] = 'protected_group_part'
@@ -243,23 +253,54 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
 
     bases = [best]
     if mode in {'groups', 'combined'}:
+        # Keep complete constructions as alternatives for old, deeply
+        # transformed drafts; composition then builds on the best valid scene.
         from src.iCCModules.imageCompositeConverterFallbackGroups import group_proposals, part_regions
         for candidate, family in group_proposals(image, session):
-            if session.time_reason() or len(report['proposals']) >= min(8, max_probes):
+            if session.time_reason() or len(report['proposals']) >= min(8,max_probes):
                 break
-            regions = part_regions(candidate, w, h)
-            probe(candidate, 'native_object_group:'+family, bases[0], regions)
+            probe(candidate, 'native_object_group:'+family, bases[0], part_regions(candidate,w,h))
+        from src.iCCModules.imageCompositeConverterFallbackComposition import compose
+        compose(image, session, lambda: best, probe, min(24,max_probes)-len(report['proposals']))
     if mode in {'primitives', 'combined', 'legacy_combined'}:
+        primitive_limit = min(max_probes-6 if mode == 'combined' else max_probes,
+                              len(report['proposals'])+12)
         for candidate in _primitive_scenes(image, session):
             result = probe(candidate, 'raster_primitive_reconstruction', bases[0])
             if result:
                 bases.append(result)
-            if session.time_reason() or len(report['proposals']) >= min(12, max_probes):
+            if mode == 'combined' and part_regions(best['svg'],w,h):
+                # A complete primitive alternative may omit the newly composed
+                # groups. Its plain observed objects can instead join that scene.
+                from src.iCCModules.imageCompositeConverterFallbackComposition import edits, bounds, atoms, overlaps
+                for node in ET.fromstring(candidate):
+                    if (node.tag.rsplit('}',1)[-1] not in {'circle','rect'}
+                            or 'url(' in node.get('fill','')):
+                        continue
+                    box = bounds(node,w,h)
+                    if box is None or np.prod(box[2:]-box[:2]) >= w*h*.8:
+                        continue
+                    # Existing groups own their full bounds. Do not stack a
+                    # primitive over one, or duplicate an already present shape.
+                    occupied = [bounds(n,w,h) for _,n in atoms(ET.fromstring(best['svg']))
+                                if n.get('data-fallback-group') or n.tag == node.tag]
+                    if any(overlaps(box,old) for old in occupied):
+                        continue
+                    parent = best
+                    for edited, operation in edits(parent['svg'],node,w,h):
+                        if session.time_reason() or len(report['proposals']) >= primitive_limit:
+                            break
+                        probe(edited,'raster_primitive:'+operation,parent,part_regions(edited,w,h))
+                    if session.time_reason() or len(report['proposals']) >= primitive_limit:
+                        break
+            if session.time_reason() or len(report['proposals']) >= primitive_limit:
                 break
     if mode in {'lines', 'combined', 'legacy_combined'}:
-        # Reserve line work for the original and the best alternate, rather than
-        # spending all probes on descendants of the initially chosen topology.
+        # Complete the best composed scene first; an obsolete original must not
+        # consume every remaining probe before its missing details are visited.
         parents = [bases[0]] + ([best] if best is not bases[0] else [])
+        if mode == 'combined' and part_regions(best['svg'],w,h):
+            parents.reverse()
         for parent in parents:
             current = parent
             for line in _line_proposals(image, parent['rendered'], session):

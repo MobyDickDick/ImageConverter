@@ -142,3 +142,30 @@ def test_original_catalog_jpeg_is_an_independent_raster_holdout():
                             render_fn=render,error_fn=lambda a,b:normalized_mse(a,b)[0])
     assert result is not None
     assert measure_quality(image,result['svg'])['satisfactory']
+
+
+@pytest.mark.parametrize('size', ['L', 'M', 'S'])
+def test_thin_jpeg_shafts_keep_native_fit_instead_of_legacy_fallback(size):
+    image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/AC0020_{size}.jpg'))
+    description = ET.parse(ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml').find(
+        ".//entry[@key='AC0020']/beschreibung").text
+    height, width = image.shape[:2]
+    outputs, params = [], {}
+
+    def forbidden(*args, **kwargs):
+        pytest.fail('an accurate thin-shaft fit must not fall back to normalized geometry')
+
+    result = runDualArrowBadgeIterationImpl(
+        perc_img=image, filename='neutral.png', base_name='neutral', description=description,
+        params=params, width=width, height=height,
+        detect_dual_arrow_badge_params_fn=forbidden, generate_dual_arrow_badge_svg_fn=forbidden,
+        render_embedded_raster_svg_fn=forbidden, write_validation_log_fn=lambda lines: None,
+        render_svg_to_numpy_fn=render, record_render_failure_fn=forbidden,
+        write_attempt_artifacts_fn=lambda svg, raster: outputs.append(svg),
+        calculate_error_fn=lambda a, b: normalized_mse(a, b)[0])
+
+    assert result and 'raster_arrow_pair_v1' in params
+    quality = measure_quality(image, outputs[0])
+    assert quality['satisfactory'], quality
+    assert quality['complexity']['vector_element_count'] == 4
+    assert quality['complexity']['embedded_raster_count'] == 0

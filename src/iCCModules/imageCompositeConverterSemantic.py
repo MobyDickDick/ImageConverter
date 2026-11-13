@@ -462,6 +462,13 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
     if re.search(r"\b(?:warn)?dreieck\b", normalized) and "ausrufezeichen" in normalized:
         return False
 
+    # Explicitly separate scene objects cannot be collapsed into one badge
+    # merely because a direction and a circle occur somewhere in the prose.
+    shape_mentions = [bool(re.search(pattern, normalized)) for pattern in
+                      (r'\bkreis\b', r'\b(?:quadrat|rechteck)\b', r'\bpfeil\b')]
+    if re.search(r'\b(?:daneben|nebeneinander|getrennte\w*)\b', normalized) and sum(shape_mentions) >= 2:
+        return False
+
     has_badge_shape = any(token in normalized for token in ("kelle", "kreis", "badge"))
     has_orientation_hint = bool(
         re.search(r"\b(?:griff|anschluss|linie|strich)\b", normalized)

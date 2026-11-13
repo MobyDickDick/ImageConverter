@@ -147,6 +147,10 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     # Parameter polish must not erase a small newly added feature to improve a
     # much larger background. Preserve the already measured structural draft.
     if structure and structure['selected_origin'] != 'incumbent':
+        from src.iCCModules.imageCompositeConverterFallbackComposition import retained_paint
+        if not retained_paint(image, initial, result['rendered']):
+            result.update(svg=svg, rendered=initial, error=error(initial))
+            structure['refinement_reverted_for_local_detail'] = True
         from src.iCCModules.imageCompositeConverterFallbackGroups import part_regions, check_parts
         regions = part_regions(svg, w, h)
         if regions:

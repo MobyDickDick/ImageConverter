@@ -1,11 +1,17 @@
 # ImageConverter
 
+Der [Fallback komponiert native Objektgruppen in vorhandene Szenen](docs/next_arbeitspaket_2026-11-13_fallback_composition.md):
+hinzufügen, entfernen und atomar ersetzen, richtige Kontextobjekte erhalten.
+Sechs eingefrorene synthetische Szenen bestehen mit beiden Renderern, ebenso
+sechs echte CLI-Prüfungen; alle 30 beschädigten Gegenproben werden abgelehnt.
+Vollständige unabhängige Semantik und reale Familienabnahmen bleiben offen.
+
 Der [Fallback erkennt jetzt native Pfeil- und Gelenkgruppen](docs/next_arbeitspaket_2026-11-12_fallback_groups.md)
 mit einzeln geprüften Köpfen, Diagonalen, Anschlüssen und Gelenken. Auf vier
 bekannten Auditfällen steigen die echten CLI-Pixel-/Detailabnahmen bei gleichen
 Budgets von 1/4 auf 3/4; MuPDF und librsvg bestätigen beide neuen Verbesserungen.
 16 synthetische Varianten bestehen und 33 beschädigte Einzelteilkontrollen
-werden zurückgewiesen. Allgemeine Gruppenkomposition und vollständige
+werden zurückgewiesen. Beliebige Gruppenkomposition und vollständige
 Semantik bleiben offen; neue reale Reserven bleiben gesperrt und ungetestet.
 
 Die [Plan-B-Workbench](docs/plan_b_workbench.md) ergänzt die lokale Weboberfläche:
