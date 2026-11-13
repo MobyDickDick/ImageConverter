@@ -1,5 +1,11 @@
 # ImageConverter
 
+Die [Kategorien-Kollektion](docs/category_collection.md) im lokalen Webserver
+stellt je ein Original aus allen 15 geometrischen Kategorien bereit:
+einzeln laden und konvertieren, Fortschritt erhalten und bestandene Ergebnisse
+direkt als erweiterte Plan-B-Aufgabe übernehmen. Für 14 Kategorien gibt es
+bereits gespeicherte Rasterbelege; Kurven/Röhren bleiben als offener Fall dabei.
+
 Die [neue geometrische Klassenbildung](docs/catalog_geometry_classes_2026-11-13.md)
 ordnet alle 1.781 nicht reservierten Katalogbilder anhand ihrer Originalbilder ein.
 Die vollständige Sichtprüfung korrigiert 586 frühere Zuordnungen. Beobachtete

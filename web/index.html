@@ -10,12 +10,18 @@
 <body>
   <header>
     <a class="brand" href="/" aria-label="ImageConverter Startseite"><span class="brand-icon" aria-hidden="true">◈</span><span>IMAGECONVERTER<small>Vom Bild zur Vektorgrafik</small></span></a>
-    <nav aria-label="Hauptnavigation"><a href="/catalog">Konvertierungsqualität</a> · <a href="/workbench">Plan-B-Workbench →</a></nav>
+    <nav aria-label="Hauptnavigation"><a href="/collection">Kategorien-Kollektion</a> · <a href="/catalog">Konvertierungsqualität</a> · <a href="/workbench">Plan-B-Workbench →</a></nav>
   </header>
   <main>
     <div class="intro"><div><p class="eyebrow">DEINE KLEINE BILDWERKSTATT</p><h1>Bild rein. SVG raus.</h1><p>Bild laden, Formen beschreiben und das Ergebnis direkt vergleichen.</p></div><span class="intro-mark" aria-hidden="true">▧ <span>→</span> ◇</span></div>
     <div id="notice" role="alert" hidden></div>
     <div id="server-version-warning" class="status-bar" role="status" hidden></div>
+    <section id="collection-context" class="card" hidden>
+      <strong id="collection-category"></strong>
+      <p class="hint">Dieses Bild gehört zur Kategorien-Kollektion. Nach bestandener Qualitätsprüfung kannst Du unten eine erweiterte Plan-B-Aufgabe erstellen.</p>
+      <a href="/collection">Zur Kollektion und zum Fortschritt</a>
+      <button id="collection-next" class="secondary" hidden>Nächstes Beispiel laden →</button>
+    </section>
     <div class="workspace">
       <aside>
         <section class="card">

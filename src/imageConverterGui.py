@@ -28,6 +28,7 @@ import webbrowser
 import zipfile
 
 from src.imageConverterCatalog import CatalogError, CatalogQuality
+from src.imageConverterCollection import CategoryCollection
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
@@ -299,6 +300,9 @@ class Jobs:
                 shutil.copyfile(folder / "sample.svg", self.folder(job["id"]) / "sample.svg")
                 job.update(sample=True, sample_name=previous["sample_name"])
             job['previous_job_id'] = previous['id']
+            for key in ('collection_case_id','collection_image_sha256','collection_label','collection_next_case_id'):
+                if key in previous:
+                    job[key] = previous[key]
         return job
 
     def run(self, job_id: str) -> None:
@@ -794,6 +798,7 @@ class GuiServer(ThreadingHTTPServer):
         self.jobs = jobs
         self.workbench = Workbench(jobs)
         self.catalog = CatalogQuality(ROOT, jobs.directory/'catalog-quality', stop_process_tree)
+        self.collection = CategoryCollection(ROOT, self.catalog, jobs)
         super().__init__(address, Handler)
 
     def server_close(self):
@@ -843,6 +848,9 @@ class Handler(BaseHTTPRequestHandler):
                       "/catalog": ("catalog.html", "text/html; charset=utf-8"),
                       "/catalog.js": ("catalog.js", "text/javascript; charset=utf-8"),
                       "/catalog.css": ("catalog.css", "text/css; charset=utf-8"),
+                      "/collection": ("collection.html", "text/html; charset=utf-8"),
+                      "/collection.js": ("collection.js", "text/javascript; charset=utf-8"),
+                      "/collection.css": ("collection.css", "text/css; charset=utf-8"),
                       "/workbench": ("workbench.html", "text/html; charset=utf-8"),
                       "/workbench.js": ("workbench.js", "text/javascript; charset=utf-8"),
                       "/workbench.css": ("workbench.css", "text/css; charset=utf-8"),
@@ -854,6 +862,8 @@ class Handler(BaseHTTPRequestHandler):
                 if path in static:
                     filename, mime = static[path]
                     return self.file(WEB / filename, mime)
+                if path == '/api/collection':
+                    return self.json(self.server.collection.payload())
                 if path.startswith('/api/workbench'):
                     return self.workbench_get(path, url.query)
                 if path.startswith('/api/catalog'):
@@ -891,6 +901,12 @@ class Handler(BaseHTTPRequestHandler):
                     if not isinstance(payload, dict):
                         raise RequestError('Ungültige Anfrage.')
                     return self.json(jobs.pick(payload))
+                collection_case = re.fullmatch(r'/api/collection/([a-z_]{1,64})/load', path)
+                if collection_case:
+                    payload = json.loads(data)
+                    if not isinstance(payload, dict):
+                        raise RequestError('Ungültige Anfrage.')
+                    return self.json(self.server.collection.load(collection_case[1], fresh=payload.get('fresh',False)), 201)
                 if path in {'/api/catalog/start','/api/catalog/cancel'}:
                     payload = json.loads(data)
                     if not isinstance(payload, dict):

@@ -42,6 +42,7 @@ function controls() {
   for (const button of $("history").querySelectorAll("button")) button.disabled = running;
   $("pick-sample").disabled = running || !current;
   $("use-plan-b").disabled = running || preparingPlanB;
+  $("collection-next").disabled = running;
 }
 function zoom() {
   $("zoom-label").textContent = `${Math.round(scale * 100)} %`;
@@ -56,6 +57,9 @@ function zoom() {
 function renderJob(job, select = false) {
   if (current?.id !== job.id) { $("save-status").hidden = true; $("save-status").textContent = ""; }
   current = job;
+  $("collection-context").hidden = !job.collection_case_id;
+  $("collection-category").textContent = job.collection_label || '';
+  $("collection-next").hidden = !job.collection_next_case_id;
   if (select) {
     $("description").value = job.description;
     $("profile").value = job.profile;
@@ -277,11 +281,20 @@ async function init() {
     $("pick-sample").hidden = !nativeFileDialogs;
     await refreshHistory();
     const running = history.find((job) => job.status === "running");
-    const selected = running || history[0];
-    if (running) activeId = running.id;
+    const requestedId = new URLSearchParams(window.location.search).get('job');
+    const selected = requestedId ? await request(`/api/jobs/${encodeURIComponent(requestedId)}`) : running || history[0];
+    if (selected?.status === 'running') activeId = selected.id;
     if (selected) renderJob(selected, true);
     renderHistory();
     if (activeId) schedulePoll();
   } catch (error) { notice(`Die Oberfläche konnte nicht geladen werden. ${error.message}`); }
 }
+$("collection-next").addEventListener('click', async () => {
+  if (!current?.collection_next_case_id || busy || activeId) return;
+  busy = true; controls(); notice();
+  try {
+    const next = await post(`/api/collection/${current.collection_next_case_id}/load`, {});
+    window.location.assign(`/?job=${encodeURIComponent(next.id)}`);
+  } catch (error) {notice(error.message);} finally {busy=false;controls();}
+});
 init();

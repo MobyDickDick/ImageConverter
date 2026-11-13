@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Kategorien-Kollektion: 15 Originale einzeln konvertieren und erweiterte Plan-B-Aufgaben erstellen](category_collection.md)
+
 - [Neue geometrische Klassenbildung für alle 1.787 Bilder: vorhandene Teilmodelle, Sichtzuordnungen und verbleibende Konvertierungslücken (2026-11-13)](catalog_geometry_classes_2026-11-13.md)
 
 - [Stand zum Ziel einer breiten Konvertierung: belegte Katalogabdeckung und verbleibender Weg (2026-11-13)](project_status_2026-11-13.md)
