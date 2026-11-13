@@ -405,6 +405,23 @@ Nur messbare Verbesserungen werden übernommen; ohne Gewinn bleibt der Sample-St
 erhalten. **Entfernen** wechselt zurück zur normalen `semantic-only`-Konvertierung.
 Ergebnisse mit offenen Qualitätsprüfungen erscheinen als **Entwurf**.
 
+Unter Windows merken sich Rasterbild, Sample-SVG, Plan-B-Referenz und
+**Speichern unter …** ihren letzten Ordner getrennt, auch nach einem Neustart.
+Die lokalen Systemdialoge verwenden dafür `artifacts/gui/dialog_locations.json`.
+
+Nach bestandener Qualitätsprüfung wird das Ergebnis automatisch unter
+`artifacts/converted_images/converted_svgs/<Bildname>.svg` abgelegt.
+Ein vorhandenes SVG wird gegen dasselbe Original neu gemessen und nur bei
+kleinerem normalisiertem mittlerem Pixelfehler ersetzt. Seine vorherige Version
+bleibt unter `artifacts/converted_images/gui_history/` erhalten. Gleich gute
+oder bessere Projektversionen bleiben bestehen; der Ablagestatus erscheint
+unter dem Ergebnis.
+
+**Als erweiterte Plan-B-Aufgabe verwenden →** übernimmt ein bestandenes
+Ergebnis mit seiner Beschreibung und bereitet Original plus 16 Varianten
+direkt in der Workbench vor. Dort lassen sich Budget und Fallauswahl festlegen
+und die Rückkonvertierungen starten. Erneutes Klicken öffnet dieselbe Aufgabe.
+
 Die Suche läuft im Hintergrund und lässt sich abbrechen. Profile: 35–45, 60–120
 oder 120–240 Sekunden, zuzüglich bis zu 30 Sekunden für Start und Abschluss;
 der Sample-Modus nutzt jeweils das Basisbudget. Zusätzliche Qualitätsrunden

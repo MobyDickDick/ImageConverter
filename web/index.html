@@ -27,6 +27,7 @@
           <div class="sample-upload">
             <label class="field-label" for="sample-file">Sample-SVG <span class="optional">optional</span></label>
             <input id="sample-file" type="file" accept=".svg,image/svg+xml" disabled>
+            <button id="pick-sample" class="secondary" hidden>Sample-SVG auswählen …</button>
             <div class="sample-info"><span id="sample-info" class="hint">Gespeichertes SVG zusammen mit dem Original laden und weiter verbessern.</span><button id="remove-sample" class="text-button" hidden>Entfernen</button></div>
           </div>
           <h2 class="section-gap"><span class="number">02</span> Formen beschreiben</h2>
@@ -52,6 +53,8 @@
           <div class="status-bar" role="status" aria-live="polite"><span id="status-dot" class="status-dot"></span><span id="status">Bereit, wenn du es bist.</span><span id="elapsed"></span></div>
           <div class="result-actions"><span id="quality" class="hint">Original und Ergebnis lassen sich gemeinsam vergrössern.</span><div id="save-actions" class="save-actions" hidden><a id="download" class="browser-download">Browser-Download</a><button id="save-as" class="primary">Speichern unter … <span aria-hidden="true">↓</span></button></div></div>
           <p id="sample-metrics" class="hint" hidden></p>
+          <p id="project-status" class="hint" role="status" hidden></p>
+          <button id="use-plan-b" class="secondary" hidden>Als erweiterte Plan-B-Aufgabe verwenden →</button>
           <p id="save-status" class="hint save-status" role="status" hidden></p>
         </section>
         <details class="card log-card" id="log-details"><summary>Konvertierungsprotokoll <span>Details zur laufenden Suche</span></summary><pre id="log">Das Protokoll erscheint nach dem Start der Konvertierung.</pre></details>

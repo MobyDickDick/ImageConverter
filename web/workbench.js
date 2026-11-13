@@ -4,6 +4,7 @@ let current = null, activeCase = null, selected = new Set(), busy = false, timer
 let logUrl = null;
 let loadedSource = null, previewUrl = null;
 let activity = null;
+let nativeFileDialogs = false;
 const labels = {prepared: "Vorbereitet", running: "Läuft", completed: "Abgeschlossen", cancelled: "Abgebrochen", interrupted: "Unterbrochen", error: "Ausführungsfehler"};
 async function request(path, body) {
   const response = await fetch(path, body === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json", "X-ImageConverter": "1"}, body: JSON.stringify(body)});
@@ -17,6 +18,7 @@ function controls() {
   const running = current?.status === "running";
   const unpreparedSource = loadedSource && loadedSource.preparedId !== current?.id;
   for (const id of ["file", "description", "seed", "iterations", "timeout"]) $(id).disabled = busy || running;
+  $("pick-reference").disabled = busy || running;
   $("prepare").disabled = busy || running || !loadedSource || !$("description").value.trim();
   $("run-selected").disabled = busy || running || Boolean(activity) || unpreparedSource || !current || !selected.size;
   $("run-all").disabled = busy || running || Boolean(activity) || unpreparedSource || !current;
@@ -75,8 +77,7 @@ function restoreSource(report) {
   const original = report.cases[0];
   sourcePreview(`/api/workbench/${report.id}/asset?path=source.svg`, `${report.name} · ${original.width} × ${original.height} px`);
 }
-async function loadSource() {
-  const file = $("file").files[0];
+async function loadSource(file = $("file").files[0]) {
   loadedSource = null;
   $("description").value = "";
   $("source-image").hidden = true;
@@ -190,6 +191,10 @@ async function operation(callback) {
 }
 $("description").addEventListener("input", controls);
 $("file").addEventListener("change", () => operation(loadSource));
+$("pick-reference").addEventListener("click", () => operation(async () => {
+  const result = await request("/api/pick", {kind: "workbench"});
+  if (result.selected) await loadSource(new File([result.svg], result.name, {type: "image/svg+xml"}));
+}));
 $("source-image").addEventListener("load", () => { $("source-loading").hidden = true; });
 $("source-image").addEventListener("error", () => { $("source-image").hidden = true; $("source-loading").hidden = false; $("source-loading").textContent = "Die SVG-Vorschau konnte nicht angezeigt werden."; });
 $("prepare").addEventListener("click", () => operation(async () => {
@@ -224,5 +229,17 @@ $("activity-cancel").addEventListener("click", () => {
   });
 });
 $("save-note").addEventListener("click", () => operation(async () => { render(await request(`/api/workbench/${current.id}/note`, {case_id: activeCase, note: $("note").value})); $("note-status").textContent = "Gespeichert."; }));
-history().then(async runs => { if (runs.length && !loadedSource && !busy) { const report = await request(`/api/workbench/${runs[0].id}`); if (!loadedSource && !busy) { restoreSource(report); render(report, true); schedule(); } } }).catch(error => notice(error.message));
+async function init() {
+  nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+  $("file").hidden = nativeFileDialogs;
+  $("pick-reference").hidden = !nativeFileDialogs;
+  const runs = await history();
+  const requested = new URLSearchParams(window.location.search).get("run");
+  const id = requested || runs[0]?.id;
+  if (id && !loadedSource && !busy) {
+    const report = await request(`/api/workbench/${encodeURIComponent(id)}`);
+    if (!loadedSource && !busy) { restoreSource(report); render(report, true); schedule(); }
+  }
+}
+init().catch(error => notice(error.message));
 pollActivity();

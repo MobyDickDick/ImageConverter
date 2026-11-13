@@ -1,4 +1,5 @@
 "use strict";
+let nativeFileDialogs = false, preparingPlanB = false;
 const $ = (id) => document.getElementById(id);
 let current = null;
 let activeId = null;
@@ -35,6 +36,8 @@ function controls() {
   $("convert").querySelector("span").textContent = activeId ? "Konvertierung läuft …" : current?.sample ? "Sample weiter verbessern" : "In SVG konvertieren";
   for (const id of ["zoom-in", "zoom-out", "fit"]) $(id).disabled = !current;
   for (const button of $("history").querySelectorAll("button")) button.disabled = running;
+  $("pick-sample").disabled = running || !current;
+  $("use-plan-b").disabled = running || preparingPlanB;
 }
 function zoom() {
   $("zoom-label").textContent = `${Math.round(scale * 100)} %`;
@@ -79,6 +82,9 @@ function renderJob(job, select = false) {
   $("elapsed").textContent = job.elapsed ? `${Math.round(job.elapsed)} s` : "";
   $("log").textContent = job.log || "Das Protokoll erscheint nach dem Start der Konvertierung.";
   $("save-actions").hidden = !job.result;
+  $("project-status").hidden = !job.project_save;
+  $("project-status").textContent = job.project_save?.message || "";
+  $("use-plan-b").hidden = !job.result || job.quality !== "passed" || job.status !== "done";
   $("download").href = `${resultUrl}?download=1`;
   $("download").download = `${job.name.replace(/\.[^.]*$/, "")}.svg`;
   $("quality").className = `hint ${job.quality === "warning" ? "quality-warning" : job.quality === "passed" ? "quality-passed" : ""}`;
@@ -122,6 +128,7 @@ async function update(operation, select = false, input = null) {
   busy = true; controls(); notice();
   try {
     const job = await operation();
+    if (!job) return;
     activeId = job.status === "running" ? job.id : null;
     clearTimeout(pollTimer);
     renderJob(job, select);
@@ -145,6 +152,18 @@ function changeSample(file) {
   return update(() => file ? sendFile(`/api/jobs/${current.id}/sample`, file) : post(`/api/jobs/${current.id}/sample/remove`, {}), false, "sample-file");
 }
 $("sample-file").addEventListener("change", (event) => changeSample(event.target.files[0]));
+for (const [input, kind] of [["file", "image"], ["sample-file", "sample"]]) {
+  $(input).addEventListener("click", event => {
+    if (!nativeFileDialogs) return;
+    event.preventDefault();
+    if (busy || activeId || (kind === "sample" && !current)) return;
+    update(async () => {
+      const result = await post("/api/pick", {kind, job_id: current?.id});
+      return result.selected ? result.job : null;
+    }, kind === "image", input);
+  });
+}
+$("pick-sample").addEventListener("click", () => $("sample-file").click());
 $("remove-sample").addEventListener("click", () => changeSample(null));
 $("description").addEventListener("input", controls);
 $("drop-zone").addEventListener("keydown", (event) => {
@@ -189,6 +208,19 @@ $("save-as").addEventListener("click", async () => {
   }
 });
 function schedulePoll() { clearTimeout(pollTimer); pollTimer = setTimeout(poll, 1000); }
+$("use-plan-b").addEventListener("click", async () => {
+  if (!current || busy || activeId || preparingPlanB) return;
+  preparingPlanB = true; controls(); notice();
+  $("use-plan-b").textContent = "Plan-B-Varianten werden vorbereitet …";
+  try {
+    const report = await post(`/api/jobs/${current.id}/workbench`, {});
+    window.location.assign(`/workbench?run=${encodeURIComponent(report.id)}`);
+  } catch (error) { notice(error.message); }
+  finally {
+    preparingPlanB = false; controls();
+    $("use-plan-b").textContent = "Als erweiterte Plan-B-Aufgabe verwenden →";
+  }
+});
 async function poll() {
   const id = activeId;
   if (!id) return;
@@ -229,6 +261,9 @@ for (const prefix of ["source", "sample", "result"]) {
 }
 async function init() {
   try {
+    nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+    $("sample-file").hidden = nativeFileDialogs;
+    $("pick-sample").hidden = !nativeFileDialogs;
     await refreshHistory();
     const running = history.find((job) => job.status === "running");
     const selected = running || history[0];

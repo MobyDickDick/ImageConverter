@@ -119,11 +119,12 @@ def write_description_table(path: Path, description: str, catalog: dict[str, str
         writer.writerow(["UPLOAD", description])
 
 
-def save_svg_dialog(source: Path, suggested_name: str) -> dict:
+def save_svg_dialog(source: Path, suggested_name: str, initial_directory: str = '') -> dict:
     if os.name != "nt":
         raise RequestError("Der System-Speicherdialog ist unter Windows verfügbar. Bitte den Browser-Download verwenden.")
     environment = os.environ.copy()
-    environment.update(ICC_GUI_SOURCE=str(source), ICC_GUI_FILENAME=suggested_name)
+    environment.update(ICC_GUI_SOURCE=str(source), ICC_GUI_FILENAME=suggested_name,
+                       ICC_GUI_INITIAL_DIRECTORY=initial_directory)
     script = (ROOT / "tools" / "save_svg_dialog.ps1").read_text(encoding="utf-8")
     try:
         completed = subprocess.run(
@@ -139,12 +140,38 @@ def save_svg_dialog(source: Path, suggested_name: str) -> dict:
         raise RequestError("Der Speicherdialog konnte nicht geöffnet werden. Bitte den Browser-Download verwenden.") from exc
 
 
+def open_file_dialog(kind: str, initial_directory: str) -> dict:
+    if os.name != 'nt':
+        raise RequestError('Der System-Dateidialog ist nur unter Windows verfügbar.')
+    environment = dict(os.environ, ICC_GUI_PICKER_KIND=kind,
+                       ICC_GUI_INITIAL_DIRECTORY=initial_directory)
+    try:
+        completed = subprocess.run(
+            ['powershell.exe', '-NoProfile', '-STA', '-WindowStyle', 'Hidden', '-Command',
+             (ROOT / 'tools/open_file_dialog.ps1').read_text(encoding='utf-8')],
+            env=environment, stdin=subprocess.DEVNULL, capture_output=True,
+            encoding='utf-8-sig', creationflags=subprocess.CREATE_NO_WINDOW, timeout=600)
+        result = json.loads(completed.stdout)
+        if completed.returncode or result.get('error'):
+            raise RequestError(f"Dateiauswahl fehlgeschlagen: {result.get('error', 'Systemdialog nicht verfügbar.')}")
+        return result
+    except (OSError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
+        raise RequestError('Der Dateidialog konnte nicht geöffnet werden.') from exc
+
+
 class Jobs:
     def __init__(self, directory: Path):
         self.directory = directory.resolve()
         self.directory.mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
         self.save_lock = threading.Lock()
+        self.project_directory = ROOT / 'artifacts/converted_images'
+        try:
+            self.dialog_locations = json.loads((self.directory / 'dialog_locations.json').read_text(encoding='utf-8'))
+            if not isinstance(self.dialog_locations, dict):
+                self.dialog_locations = {}
+        except (OSError, ValueError):
+            self.dialog_locations = {}
         self.jobs: dict[str, dict] = {}
         self.processes: dict[str, subprocess.Popen] = {}
         self.threads: list[threading.Thread] = []
@@ -334,6 +361,10 @@ class Jobs:
                         job['same_as_previous'] = same
                         if same and job['quality'] == 'warning':
                             job['message'] += ' Die erneute Suche hat denselben besten Entwurf ergeben.'
+                    try:
+                        self.publish_best(job_id)
+                    except (OSError, ValueError) as exc:
+                        job['project_save'] = dict(status='error', message=f'Projektablage fehlgeschlagen: {exc}')
         except Exception as exc:
             if process is not None:
                 stop_process_tree(process)
@@ -393,9 +424,85 @@ class Jobs:
         if not self.save_lock.acquire(blocking=False):
             raise RequestError("Ein Speicherdialog ist bereits geöffnet.", 409)
         try:
-            return save_svg_dialog(folder / "result.svg", name + ".svg")
+            result = save_svg_dialog(folder / "result.svg", name + ".svg", self.dialog_locations.get('save', ''))
+            if result.get('saved'):
+                self.remember_location('save', Path(result['path']).parent)
+            return result
         finally:
             self.save_lock.release()
+
+    def remember_location(self, kind: str, directory: Path) -> None:
+        with self.lock:
+            self.dialog_locations[kind] = str(directory)
+            path = self.directory / 'dialog_locations.json'
+            temporary = path.with_suffix('.tmp')
+            temporary.write_text(json.dumps(self.dialog_locations, ensure_ascii=False), encoding='utf-8')
+            temporary.replace(path)
+
+    def pick(self, payload: dict) -> dict:
+        kind = payload.get('kind')
+        if kind not in {'image', 'sample', 'workbench'}:
+            raise RequestError('Unbekannte Dateiauswahl.')
+        if kind == 'sample':
+            with self.lock:
+                self.folder(payload.get('job_id'))
+        if not self.save_lock.acquire(blocking=False):
+            raise RequestError('Ein Dateidialog ist bereits geöffnet.', 409)
+        try:
+            result = open_file_dialog(kind, self.dialog_locations.get(kind, ''))
+            if not result.get('selected'):
+                return dict(selected=False)
+            path = Path(result['path'])
+            limit = MAX_UPLOAD if kind == 'image' else 2 * 1024 * 1024
+            with path.open('rb') as stream:
+                data = stream.read(limit + 1)
+            if len(data) > limit:
+                raise RequestError(f'Die Datei darf maximal {limit // (1024 * 1024)} MB gross sein.', 413)
+            if kind == 'image':
+                output = dict(job=self.upload(path.name, data))
+            elif kind == 'sample':
+                output = dict(job=self.attach_sample(payload.get('job_id'), path.name, data))
+            else:
+                output = dict(svg=data.decode('utf-8-sig'), name=path.name)
+            self.remember_location(kind, path.parent)
+            return dict(selected=True, **output)
+        except OSError as exc:
+            raise RequestError(f'Die gewählte Datei konnte nicht gelesen werden: {exc}') from exc
+        finally:
+            self.save_lock.release()
+
+    def publish_best(self, job_id: str) -> None:
+        """Re-measure both versions against this source; never replace with a draft."""
+        job = self.jobs[job_id]
+        if job.get('status') != 'done' or not job.get('result') or job.get('quality') != 'passed':
+            return
+        folder = self.folder(job_id)
+        quality = saved_svg_quality(folder / 'source.png', folder / 'result.svg')
+        if not quality or not quality['passed']:
+            job['project_save'] = dict(status='skipped', message='Keine Projektablage: erneute Pixelprüfung nicht bestanden.')
+            return
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', Path(job['name']).stem).rstrip('. ') or 'Bild'
+        if re.fullmatch(r'(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])', name, re.I):
+            name = '_' + name
+        target = self.project_directory / 'converted_svgs' / (name + '.svg')
+        if target.exists():
+            previous = saved_svg_quality(folder / 'source.png', target)
+            if previous is None:
+                job['project_save'] = dict(status='skipped', message='Vorhandenes Projekt-SVG konnte nicht verglichen werden; es bleibt erhalten.')
+                return
+            if quality['normalized_mse'] >= previous['normalized_mse'] - 1e-12:
+                job['project_save'] = dict(status='unchanged', path=str(target), message='Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten.')
+                return
+            old = target.read_bytes()
+            backup = self.project_directory / 'gui_history' / name / (hashlib.sha256(old).hexdigest() + '.svg')
+            backup.parent.mkdir(parents=True, exist_ok=True)
+            backup.write_bytes(old)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_suffix('.svg.tmp')
+        temporary.write_bytes((folder / 'result.svg').read_bytes())
+        temporary.replace(target)
+        job['project_save'] = dict(status='saved', path=str(target), normalized_mse=quality['normalized_mse'],
+                                   message=f'Automatisch im Projekt gespeichert: {target}')
 
     def close(self) -> None:
         with self.lock:
@@ -583,6 +690,29 @@ class Workbench:
         except (ValueError, SyntaxError) as exc:
             raise RequestError(str(exc)) from exc
 
+    def from_job(self, job_id):
+        with self.jobs.lock:
+            job = self.jobs.snapshot(job_id)
+            if job['status'] != 'done' or not job.get('result') or job.get('quality') != 'passed':
+                raise RequestError('Bitte zuerst ein SVG mit bestandener Qualitätsprüfung erstellen.', 409)
+            if job.get('workbench_id'):
+                return self.snapshot(job['workbench_id'])
+            folder = self.jobs.folder(job_id)
+            quality = saved_svg_quality(folder / 'source.png', folder / 'result.svg')
+            if not quality or not quality['passed']:
+                raise RequestError('Das gespeicherte SVG besteht die erneute Pixelprüfung nicht.', 409)
+            report = self.prepare(dict(svg=(folder / 'result.svg').read_text(encoding='utf-8'),
+                                       description=job['description'], name=Path(job['name']).stem + '.svg'))
+            from tools.plan_b_workbench import read_report, save_report
+            run_folder = self.folder(report['id'])
+            stored = read_report(run_folder)
+            stored['source_job_id'] = job_id
+            stored['source_raster_sha256'] = job.get('source_sha256')
+            save_report(run_folder, stored)
+            self.jobs.jobs[job_id]['workbench_id'] = report['id']
+            self.jobs.save(self.jobs.jobs[job_id])
+            return self.snapshot(report['id'])
+
     def start(self, run_id, payload):
         from tools.plan_b_workbench import read_report, save_report
         with self.jobs.lock:
@@ -703,6 +833,8 @@ class Handler(BaseHTTPRequestHandler):
                       "/app.js": ("app.js", "text/javascript; charset=utf-8"),
                       "/style.css": ("style.css", "text/css; charset=utf-8")}
             if self.command == "GET":
+                if path == '/api/config':
+                    return self.json(dict(native_file_dialogs=os.name == 'nt'))
                 if path in static:
                     filename, mime = static[path]
                     return self.file(WEB / filename, mime)
@@ -738,6 +870,11 @@ class Handler(BaseHTTPRequestHandler):
                     raise RequestError("Upload unvollständig.")
                 if path == "/api/upload":
                     return self.json(jobs.upload(name, data), 201)
+                if path == '/api/pick':
+                    payload = json.loads(data)
+                    if not isinstance(payload, dict):
+                        raise RequestError('Ungültige Anfrage.')
+                    return self.json(jobs.pick(payload))
                 if path in {'/api/catalog/start','/api/catalog/cancel'}:
                     payload = json.loads(data)
                     if not isinstance(payload, dict):
@@ -772,6 +909,8 @@ class Handler(BaseHTTPRequestHandler):
                     if not remove and action in {"cancel", "save"}:
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))
+                    if not remove and action == 'workbench':
+                        return self.json(self.server.workbench.from_job(job_id), 201)
             raise RequestError("Nicht gefunden.", 404)
         except (RequestError, CatalogError) as exc:
             self.json({"error": str(exc)}, exc.status)

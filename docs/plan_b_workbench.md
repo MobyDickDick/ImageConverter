@@ -10,7 +10,12 @@ Differenzbild stehen direkt nebeneinander.
 
 1. `startWebServer.cmd` starten und in der Oberfläche **Plan-B-Workbench** öffnen.
    Standardadresse: `http://127.0.0.1:8766/workbench`.
+   Alternativ beim geprüften Konvertierungsergebnis auf
+   **Als erweiterte Plan-B-Aufgabe verwenden →** klicken: SVG und Beschreibung
+   werden übernommen, die 17 Fälle vorbereitet und direkt geöffnet.
 2. Ein SVG wählen: Es erscheint sofort als Vorschau bei der Dateiauswahl.
+   Unter Windows bleibt der zuletzt verwendete Referenzordner unabhängig von
+   Rasterbild, Sample-SVG und Speicherziel erhalten, auch nach Serverneustarts.
    Die Workbench sucht seine Beschreibung automatisch anhand des Dateinamens,
    einschliesslich Zusätzen wie `_L` oder `_PlanB`. Verwendet werden zuerst
    passende `.txt`-Begleitdateien unter `artifacts/samples`, dann

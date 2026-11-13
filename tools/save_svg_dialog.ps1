@@ -12,6 +12,9 @@ try {
     $dialog.OverwritePrompt = $true
     $dialog.FileName = $env:ICC_GUI_FILENAME
     $dialog.RestoreDirectory = $true
+    if ($env:ICC_GUI_INITIAL_DIRECTORY -and (Test-Path -LiteralPath $env:ICC_GUI_INITIAL_DIRECTORY -PathType Container)) {
+        $dialog.InitialDirectory = $env:ICC_GUI_INITIAL_DIRECTORY
+    }
     $owner.ShowInTaskbar = $false
     $owner.TopMost = $true
     $owner.Opacity = 0

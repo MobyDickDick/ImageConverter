@@ -25,6 +25,8 @@ def test_unedited_user_description_converts_through_real_gui_worker(jobs):
     assert job['status'] == 'done', job.get('log')
     assert job['quality'] == 'passed' and job['search_summary']['satisfactory'], job
     assert job['description'] == description
+    assert job['project_save']['status'] == 'saved'
+    assert gui.Path(job['project_save']['path']).is_file()
     folder = jobs.folder(job['id'])
     record = json.loads((folder/'output/reports/conversion_result_map.json').read_text())['UPLOAD.png']
     assert 'raster_crossed_gradient_panel_v1' in record['params']
@@ -44,6 +46,7 @@ def image_bytes(mode="RGB", color="white", size=(32, 24)):
 def jobs(tmp_path, monkeypatch):
     monkeypatch.setattr(gui, "catalog_descriptions", lambda: {"AC1234": "Ein blauer Kreis."})
     manager = gui.Jobs(tmp_path / "jobs")
+    manager.project_directory = tmp_path / 'project'
     yield manager
     manager.close()
 
@@ -196,9 +199,10 @@ def test_save_as_proposes_original_name_and_preserves_svg(jobs, job, monkeypatch
     job["result"] = True
     target = tmp_path / "Anderer Name.svg"
 
-    def dialog(path, suggested):
+    def dialog(path, suggested, initial_directory):
         assert path == source
         assert suggested == "Mein Bild mit Umlaut ä.svg"
+        assert initial_directory == ''
         target.write_bytes(path.read_bytes())
         return {"saved": True, "path": str(target)}
 
@@ -230,6 +234,100 @@ def test_save_requires_an_existing_result(jobs):
     with pytest.raises(gui.RequestError) as exc:
         jobs.save_as(uploaded["id"])
     assert exc.value.status == 404
+
+
+def finished_svg(jobs, job, color='#225599'):
+    from src.imageConverterSample import render_svg
+    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"><circle cx="16" cy="12" r="7" fill="{color}"/></svg>'
+    folder = jobs.folder(job['id'])
+    (folder / 'result.svg').write_text(svg, encoding='utf-8')
+    Image.fromarray(render_svg(svg, 32, 24)).save(folder / 'source.png')
+    job.update(status='done', result=True, quality='passed', description='Ein blauer Kreis auf weissem Hintergrund.')
+    return svg
+
+
+def test_project_save_remeasures_versions_preserves_best_and_backs_up(jobs, job):
+    svg = finished_svg(jobs, job)
+    jobs.publish_best(job['id'])
+    target = gui.Path(job['project_save']['path'])
+    assert target.read_text(encoding='utf-8') == svg
+    assert job['project_save']['status'] == 'saved'
+    jobs.publish_best(job['id'])
+    assert job['project_save']['status'] == 'unchanged'
+
+    worse = svg.replace('#225599', '#265599')
+    (jobs.folder(job['id']) / 'result.svg').write_text(worse, encoding='utf-8')
+    jobs.publish_best(job['id'])
+    assert target.read_text(encoding='utf-8') == svg
+    assert job['project_save']['status'] == 'unchanged'
+
+    target.write_text(worse, encoding='utf-8')
+    (jobs.folder(job['id']) / 'result.svg').write_text(svg, encoding='utf-8')
+    jobs.publish_best(job['id'])
+    assert job['project_save']['status'] == 'saved'
+    backups = list((jobs.project_directory / 'gui_history').glob('*/*.svg'))
+    assert len(backups) == 1 and backups[0].read_text(encoding='utf-8') == worse
+    assert target.read_text(encoding='utf-8') == svg
+
+
+def test_project_save_excludes_drafts_and_false_passes(jobs, job):
+    finished_svg(jobs, job)
+    job['quality'] = 'warning'
+    jobs.publish_best(job['id'])
+    assert not jobs.project_directory.exists()
+    job['quality'] = 'passed'
+    (jobs.folder(job['id']) / 'result.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+    jobs.publish_best(job['id'])
+    assert not jobs.project_directory.exists()
+    assert job['project_save']['status'] == 'skipped'
+
+
+def test_picker_locations_are_separate_persistent_and_cancel_keeps_selection(jobs, job, tmp_path, monkeypatch):
+    image_folder, svg_folder = tmp_path / 'images', tmp_path / 'vectors'
+    image_folder.mkdir(); svg_folder.mkdir()
+    image = image_folder / 'image.png'
+    image.write_bytes(image_bytes())
+    svg = svg_folder / 'sample.svg'
+    svg.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"><circle cx="16" cy="12" r="7"/></svg>')
+    calls = []
+    def dialog(kind, initial):
+        calls.append((kind, initial))
+        return dict(selected=True, path=str(image if kind == 'image' else svg))
+    monkeypatch.setattr(gui, 'open_file_dialog', dialog)
+    selected = jobs.pick(dict(kind='image'))
+    assert selected['job']['name'] == 'image.png'
+    assert jobs.pick(dict(kind='sample', job_id=job['id']))['job']['sample']
+    assert jobs.pick(dict(kind='workbench'))['svg'] == svg.read_text()
+    restored = gui.Jobs(jobs.directory)
+    assert restored.dialog_locations == dict(image=str(image_folder), sample=str(svg_folder), workbench=str(svg_folder))
+    restored.pick(dict(kind='image'))
+    assert calls[-1] == ('image', str(image_folder))
+    monkeypatch.setattr(gui, 'open_file_dialog', lambda *args: dict(selected=False))
+    before = dict(restored.dialog_locations)
+    assert restored.pick(dict(kind='sample', job_id=job['id'])) == dict(selected=False)
+    assert restored.dialog_locations == before
+    assert restored.snapshot(job['id'])['sample']
+    with pytest.raises(gui.RequestError):
+        restored.pick(dict(kind='arbitrary', path=str(image)))
+    restored.close()
+
+
+def test_conversion_handoff_prepares_exact_svg_description_and_reuses_run(jobs, job):
+    svg = finished_svg(jobs, job)
+    workbench = gui.Workbench(jobs)
+    report = workbench.from_job(job['id'])
+    assert report['status'] == 'prepared' and len(report['cases']) == 17
+    assert report['source_description'] == job['description']
+    assert report['source_job_id'] == job['id']
+    saved = json.loads((workbench.folder(report['id']) / 'report.json').read_text(encoding='utf-8'))
+    assert type(saved['seed']) is int
+    assert (workbench.folder(report['id']) / 'source.svg').read_text(encoding='utf-8') == svg
+    assert workbench.from_job(job['id'])['id'] == report['id']
+    assert gui.Jobs(jobs.directory).snapshot(job['id'])['workbench_id'] == report['id']
+    job['quality'] = 'warning'
+    with pytest.raises(gui.RequestError) as error:
+        workbench.from_job(job['id'])
+    assert error.value.status == 409
 
 
 def test_restart_recovers_result_and_marks_unfinished_jobs(jobs, job):
@@ -320,7 +418,7 @@ def test_cancel_stops_a_real_background_process(jobs, job):
         process.wait(timeout=10)
 
 
-def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, request):
+def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, request, monkeypatch):
     from http.client import HTTPConnection
     import threading
 
@@ -352,3 +450,14 @@ def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, requ
     uploaded = json.loads(body)
     assert b"200" in send("/api/jobs/" + uploaded["id"] + "/source")[0]
     assert b"404" in send("/api/jobs/" + uploaded["id"] + "/result")[0]
+    assert 'native_file_dialogs' in json.loads(send('/api/config')[1])
+    monkeypatch.setattr(gui, 'open_file_dialog', lambda *args: dict(selected=False))
+    assert b'403' in send('/api/pick', 'POST', '', b'{"kind":"image"}')[0]
+    assert b'400' in send('/api/pick', 'POST', 'X-ImageConverter: 1', b'[]')[0]
+    assert json.loads(send('/api/pick', 'POST', 'X-ImageConverter: 1', b'{"kind":"image"}')[1]) == dict(selected=False)
+    path = '/api/jobs/' + uploaded['id'] + '/workbench'
+    assert b'409' in send(path, 'POST', 'X-ImageConverter: 1', b'{}')[0]
+    finished_svg(jobs, jobs.jobs[uploaded['id']])
+    code, data = send(path, 'POST', 'X-ImageConverter: 1', b'{}')
+    assert code == b'201'
+    assert json.loads(data)['source_job_id'] == uploaded['id']
