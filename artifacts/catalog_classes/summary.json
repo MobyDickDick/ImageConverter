@@ -1,0 +1,380 @@
+{
+  "schema": "catalog_geometry_classes_v1",
+  "catalog_bitmaps": 1787,
+  "classes": {
+    "disk_label": {
+      "label": "Kreis/Ellipse mit Text und optionalen Anschlüssen",
+      "total": 184,
+      "archived": 51,
+      "saved_pixel_pass": 17,
+      "description_issues": {
+        "reference_or_vague": 27,
+        "placeholder": 37
+      },
+      "model_modules": [
+        "SemanticBadgeRuntime",
+        "ShortLabelDisk",
+        "LabeledDisk"
+      ],
+      "model_limit": "Kreis und Kurztext vorhanden; Ellipsen, beliebige Labels und Anbauten nur teilweise.",
+      "examples": [
+        "AC0820_L.jpg",
+        "AC0820_M.jpg",
+        "AC0820_S.jpg"
+      ]
+    },
+    "disk_triangle": {
+      "label": "Kreis mit Dreieck / Pumpe / Kompressor",
+      "total": 122,
+      "archived": 21,
+      "saved_pixel_pass": 18,
+      "description_issues": {
+        "reference_or_vague": 3
+      },
+      "model_modules": [
+        "Pump",
+        "GeometryIr/runtime"
+      ],
+      "model_limit": "Native Kreis-/Dreieckmodelle; Variantenvertrag einzeln prüfen.",
+      "examples": [
+        "AC0251.jpg",
+        "AC0251_1.jpg",
+        "AC0251_2.jpg"
+      ]
+    },
+    "disk_marks": {
+      "label": "Kreis mit Linien, Kreuz, Balken oder Pfeil",
+      "total": 139,
+      "archived": 44,
+      "saved_pixel_pass": 26,
+      "description_issues": {
+        "placeholder": 1,
+        "reference_or_vague": 6
+      },
+      "model_modules": [
+        "CircleLinework",
+        "DiagonalCrossDisk",
+        "FilledSymbols",
+        "DiskArrow"
+      ],
+      "model_limit": "Mehrere konkrete Innenzeichen vorhanden; keine beliebige Kombination.",
+      "examples": [
+        "AC0201.jpg",
+        "AC0201_1.jpg",
+        "AC0201_2.jpg"
+      ]
+    },
+    "disk_spiral": {
+      "label": "Kreis mit Spirale oder gebogenen Innenlinien",
+      "total": 36,
+      "archived": 18,
+      "saved_pixel_pass": 12,
+      "description_issues": {
+        "placeholder": 18
+      },
+      "model_modules": [
+        "SpiralDisk"
+      ],
+      "model_limit": "Begrenztes Spiralmodell; andere Kurvenkompositionen offen.",
+      "examples": [
+        "AC0421_1_L.jpg",
+        "AC0421_1_M.jpg",
+        "AC0421_1_S.jpg"
+      ]
+    },
+    "disk_radial": {
+      "label": "Kreis/Kugel mit radialem Verlauf",
+      "total": 24,
+      "archived": 6,
+      "saved_pixel_pass": 6,
+      "description_issues": {
+        "placeholder": 1,
+        "reference_or_vague": 18
+      },
+      "model_modules": [
+        "RadialDisk"
+      ],
+      "model_limit": "Radiales Kreismodell vorhanden; zusätzliche Zeichen gesondert prüfen.",
+      "examples": [
+        "GE0280.jpg",
+        "GE0281.jpg",
+        "GE0282.jpg"
+      ]
+    },
+    "disk_plain": {
+      "label": "Kreis/Ellipse, Füllung, Kontur oder Verlauf",
+      "total": 9,
+      "archived": 3,
+      "saved_pixel_pass": 1,
+      "description_issues": {},
+      "model_modules": [
+        "FilledSymbols",
+        "LayeredScene",
+        "MixedGradientScene"
+      ],
+      "model_limit": "Kreise in begrenzten Szenen vorhanden; Ellipsen und 3-D-Effekte teilweise.",
+      "examples": [
+        "AC0800_L.jpg",
+        "AC0800_M.jpg",
+        "AC0800_S.jpg"
+      ]
+    },
+    "valve": {
+      "label": "Ventil / Dreiecksflügel mit Stellglied",
+      "total": 100,
+      "archived": 3,
+      "saved_pixel_pass": 10,
+      "description_issues": {
+        "placeholder": 12,
+        "reference_or_vague": 13
+      },
+      "model_modules": [
+        "ThreeWayValve",
+        "MotorValve",
+        "GeometryIr/runtime"
+      ],
+      "model_limit": "Zwei-/Dreiwegmodelle vorhanden; Quadratstellglieder und Kombinationen teilweise.",
+      "examples": [
+        "AC0201_L.jpg",
+        "AC0201_L_sia.jpg",
+        "AC0201_M.jpg"
+      ]
+    },
+    "panel_marks": {
+      "label": "Rechteck mit Linien, Kreuz, Zeichen oder Anschluss",
+      "total": 405,
+      "archived": 41,
+      "saved_pixel_pass": 49,
+      "description_issues": {
+        "missing": 1,
+        "reference_or_vague": 47,
+        "placeholder": 81
+      },
+      "model_modules": [
+        "HeatPanel",
+        "CrossedGradientPanel",
+        "DiagonalCrossPanel",
+        "PairedLinePanel",
+        "ZigzagPanel",
+        "SquareStem"
+      ],
+      "model_limit": "Mehrere native Panelmodelle; beliebige Innenzeichen/Gelenke nicht vollständig abgedeckt.",
+      "examples": [
+        "AC0010.jpg",
+        "AC0011.jpg",
+        "AC0030.jpg"
+      ]
+    },
+    "panel_plain": {
+      "label": "Rechteck/Quadrat mit Kontur, Füllung oder Verlauf",
+      "total": 116,
+      "archived": 0,
+      "saved_pixel_pass": 20,
+      "description_issues": {
+        "placeholder": 11,
+        "reference_or_vague": 1
+      },
+      "model_modules": [
+        "AxialPanel",
+        "FramedPanel",
+        "GradientScene",
+        "LayeredScene"
+      ],
+      "model_limit": "Native Rechteckmodelle einschließlich Rundung; Verlaufsart und Beschreibung müssen passen.",
+      "examples": [
+        "AC0VR2_M.jpg",
+        "AC0VR2_ZL_M.jpg",
+        "BackBottom.jpg"
+      ]
+    },
+    "panel_curves": {
+      "label": "Panel/Röhre mit Kurven oder räumlichem Effekt",
+      "total": 84,
+      "archived": 0,
+      "saved_pixel_pass": 0,
+      "description_issues": {
+        "placeholder": 10,
+        "reference_or_vague": 1
+      },
+      "model_modules": [
+        "ChevronPanel",
+        "ArcShaft",
+        "GeometryIr/runtime"
+      ],
+      "model_limit": "Gerade V-Panels und einzelne Bögen vorhanden; allgemeine Kurvenflächen offen.",
+      "examples": [
+        "AC0151_L.jpg",
+        "AC0151_M.jpg",
+        "AC0151_S.jpg"
+      ]
+    },
+    "arrows_lines": {
+      "label": "Pfeile, Linien, Dreiecke und Verzweigungen",
+      "total": 248,
+      "archived": 168,
+      "saved_pixel_pass": 164,
+      "description_issues": {
+        "reference_or_vague": 4,
+        "placeholder": 1
+      },
+      "model_modules": [
+        "ArrowPair",
+        "GradientArrow",
+        "GradientJunction",
+        "ArcShaft",
+        "FilledSymbols"
+      ],
+      "model_limit": "Native Grundformen, offene Bogenanschlüsse und Gruppen vorhanden; Topologie/Anzahl begrenzt.",
+      "examples": [
+        "AC0020_L.jpg",
+        "AC0020_M.jpg",
+        "AC0020_S.jpg"
+      ]
+    },
+    "diagram": {
+      "label": "Achsendiagramm / Stufen / Sinus",
+      "total": 20,
+      "archived": 3,
+      "saved_pixel_pass": 4,
+      "description_issues": {
+        "reference_or_vague": 3
+      },
+      "model_modules": [
+        "StepDiagram",
+        "SineDiagram",
+        "GeometryIr/runtime"
+      ],
+      "model_limit": "Stufen- und Sinusmodelle vorhanden; andere Kurven und Beschriftungen teilweise.",
+      "examples": [
+        "b_trend.jpg",
+        "b_trend_his.jpg",
+        "b_trend_online.jpg"
+      ]
+    },
+    "geometric_scene": {
+      "label": "Mehrere geometrische Formen / Überdeckung / Verschachtelung",
+      "total": 42,
+      "archived": 4,
+      "saved_pixel_pass": 4,
+      "description_issues": {
+        "reference_or_vague": 1
+      },
+      "model_modules": [
+        "PrimitiveScene",
+        "LayeredScene",
+        "SceneVisibility",
+        "MixedGradientScene"
+      ],
+      "model_limit": "Komposition vorhanden, aber Formvokabular, Anzahlen und Beschreibungsverträge begrenzt.",
+      "examples": [
+        "AC0152_L.jpg",
+        "AC0152_M.jpg",
+        "AC0152_S.jpg"
+      ]
+    },
+    "icon_geometric": {
+      "label": "Geometrisches Piktogramm / Button / Flagge / Haken",
+      "total": 107,
+      "archived": 13,
+      "saved_pixel_pass": 13,
+      "description_issues": {
+        "placeholder": 7,
+        "reference_or_vague": 7
+      },
+      "model_modules": [
+        "WarningDisk",
+        "HouseDisk",
+        "StripedPanelDisk",
+        "CheckboxCheckmark"
+      ],
+      "model_limit": "Einige Piktogramme direkt vorhanden; Uhren, Flaggen und neue Kombinationen teilweise.",
+      "examples": [
+        "b_alarm.jpg",
+        "b_climate1.jpg",
+        "b_clock.jpg"
+      ]
+    },
+    "icon_curved": {
+      "label": "Kurviges Piktogramm / Flamme / Glocke / Tropfen / Werkzeug",
+      "total": 120,
+      "archived": 4,
+      "saved_pixel_pass": 4,
+      "description_issues": {
+        "placeholder": 6,
+        "reference_or_vague": 3
+      },
+      "model_modules": [
+        "FlameDisk",
+        "AlarmBell",
+        "SpiralDisk"
+      ],
+      "model_limit": "Flamme/Glocke/Spirale teilweise vorhanden; freie Konturen und Kombinationen offen.",
+      "examples": [
+        "b_heating1.JPG",
+        "b_language.jpg",
+        "b_sanitary1.jpg"
+      ]
+    },
+    "complex_photo": {
+      "label": "Foto / dichtes oder organisches Motiv",
+      "total": 25,
+      "archived": 0,
+      "saved_pixel_pass": 0,
+      "description_issues": {
+        "placeholder": 1
+      },
+      "model_modules": [],
+      "model_limit": "Kein allgemeines natives Rekonstruktionsmodell; Vereinfachung oder neue Modelle nötig.",
+      "examples": [
+        "ALD1.jpg",
+        "ALE3.jpg",
+        "AWD3.jpg"
+      ]
+    },
+    "reserved": {
+      "label": "Reservierter Prüfbestand",
+      "total": 6,
+      "archived": 0,
+      "saved_pixel_pass": 0,
+      "description_issues": {
+        "placeholder": 3,
+        "reference_or_vague": 1
+      },
+      "model_modules": [],
+      "model_limit": "Keine neue Klassifikation oder Konvertierung.",
+      "examples": [
+        "AC5041_M.jpg",
+        "AC5050_L.jpg",
+        "AC5050_M.jpg"
+      ]
+    }
+  },
+  "assigned": 1781,
+  "unresolved": 0,
+  "reserved": 6,
+  "visual_audited": 1781,
+  "automatic_proposals": 0,
+  "description_issues": {
+    "reference_or_vague": 135,
+    "missing": 1,
+    "placeholder": 189
+  },
+  "fresh_conversion_performed": false,
+  "generated_at": "2026-11-13T18:54:34.389397+00:00",
+  "quality_snapshot_generated_at": "2026-11-07T12:17:37.986645+00:00",
+  "quality_snapshot": "artifacts/catalog_inventory/manifest.json",
+  "descriptions_sha256": "49f1572989fa0125fc1bde08363070fd3f9fa5fb7b7437ca26310cb1a8ca1774",
+  "quality_snapshot_sha256": "971f6645b8b9971564a3f4283955038a0c1e5992bcf0280dc11f484539c0a91c",
+  "classification_source_sha256": "c5c87c3ad759a5eb4c463db7eda66012dc9125da1a9fa20dc8bcdc80cb02d1a3",
+  "builder_source_sha256": "1aa6493f9194836dcdcd0c746ad2256f1893a02dd7c1bfa15e2e45e23a88d8c6",
+  "visual_review_sha256": "5262079fbada02ba8a2e0b0c0c3c88100832988d18cdf3797bbf437d2b276921",
+  "statuses": {
+    "unmeasured": 1,
+    "pixel_fail": 1306,
+    "pixel_pass": 348,
+    "no_svg": 124,
+    "reserved": 6,
+    "measurement_error": 2
+  },
+  "interpretation": "Geometric assignment and existing partial model availability; not full model-contract or conversion acceptance."
+}

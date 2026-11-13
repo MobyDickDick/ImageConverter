@@ -59,8 +59,11 @@ class CatalogQuality:
             if not path.is_file():
                 return dict(rows=[], summary={}, labels={})
             reservations = sorted((self.root/'config').glob('real_composition_holdout*.json'))
+            reviews = self.root/'config/catalog_class_visual_review.json'
+            descriptions = self.root/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
             stamp = (str(path), path.stat().st_mtime_ns, path.stat().st_size,
-                     tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in reservations))
+                     tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size)
+                           for p in [*reservations, reviews, descriptions] if p.is_file()))
             if stamp != self._manifest_stamp:
                 value = read_json(path)
                 if value.get('summary', {}).get('schema') != 'catalog_inventory_v1':
@@ -82,6 +85,8 @@ class CatalogQuality:
                 for group, summary in value['summary'].get('groups', {}).items():
                     summary['statuses'] = dict(Counter(r['status'] for r in catalog if r['group']==group))
                 value['summary']['current_reservations_applied'] = True
+                from src.imageConverterClasses import enrich_catalog
+                value['summary']['geometry_classes'] = enrich_catalog(self.root, value['rows'])
                 self._payload, self._manifest_stamp = value, stamp
             return self._payload
 
@@ -199,7 +204,8 @@ class CatalogQuality:
     def export_csv(self):
         buffer = io.StringIO(newline='')
         fields = ['filename','status','archived','normalized_mse','edge_alignment','foreground_iou',
-                  'failures','image','svg','description','semantic_revalidated','measured_at']
+                  'failures','image','svg','description','semantic_revalidated','measured_at',
+                  'geometry_class','geometry_subclass','class_label','class_basis','class_observation','description_issue','model_limit']
         writer = csv.DictWriter(buffer, fields)
         writer.writeheader()
         for row in self.payload()['rows']:
@@ -214,9 +220,14 @@ class CatalogQuality:
                         for name,r in renderers.items() if r.get('error') or r.get('failures')]
             if measurement.get('error'):
                 failures.append(measurement['error'])
+            classification = row.get('classification', {})
             writer.writerow(dict(filename=row['filename'], status=row['status'], archived=row['archived'],
                 normalized_mse=worst('normalized_mse', max), edge_alignment=worst('edge_alignment', min),
                 foreground_iou=worst('foreground_iou', min), failures='; '.join(failures),
                 image=row['image'], svg=candidate.get('svg', ''), description=row['description'],
-                semantic_revalidated=row['semantic_revalidated'], measured_at=measurement.get('measured_at','')))
+                semantic_revalidated=row['semantic_revalidated'], measured_at=measurement.get('measured_at',''),
+                geometry_class=classification.get('class_id',''), geometry_subclass=classification.get('subclass_id',''),
+                class_label=classification.get('label',''), class_observation=classification.get('reason',''),
+                class_basis=classification.get('basis',''), description_issue=classification.get('description_issue',''),
+                model_limit=classification.get('model_limit','')))
         return ('\ufeff'+buffer.getvalue()).encode('utf-8')

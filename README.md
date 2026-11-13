@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [neue geometrische Klassenbildung](docs/catalog_geometry_classes_2026-11-13.md)
+ordnet alle 1.781 nicht reservierten Katalogbilder anhand ihrer Originalbilder ein.
+Die vollständige Sichtprüfung korrigiert 586 frühere Zuordnungen. Beobachtete
+Unterformen, vorhandene Teilmodelle und ihre Grenzen bleiben erkennbar.
+Die Web-Katalogansicht bietet Klassenfilter und Export.
+Die Einteilung ist kein Nachweis von 1.781 erfolgreichen Konvertierungen.
+
 Ein [unabhängiger Objekt- und Relationsprüfer](docs/next_arbeitspaket_2026-11-13_fallback_checker.md)
 prüft jetzt vollständige native Einzelprimitivannotationen ohne Runtime-Markierungen.
 Fünf synthetische Transformationsszenen bestehen; alle 60 Fehlerkontrollen werden

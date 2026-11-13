@@ -1,5 +1,10 @@
 # Nicht konvertierbare Klassen – Beispiele (Stand 2026-05-14)
 
+Historischer Stand. Die aktuelle [geometrische Klassenbildung für den gesamten
+Katalog](catalog_geometry_classes_2026-11-13.md) ersetzt diese Bildnummernliste
+als Übersicht der Formklassen. Der damalige Ordnername ist keine heutige
+Aussage über grundsätzliche Nichtkonvertierbarkeit.
+
 Quelle: `artifacts/images_to_convert/nonconvertable` (27 Dateien).
 
 | Klasse | Beispiel-Datei |

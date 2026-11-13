@@ -33,12 +33,14 @@
     <p class="hint">„Rastergates erfüllt“ bestätigt den Bildvergleich, keine vollständige fachliche Prüfung. Historische Archivabnahme wird separat ausgewiesen; die Zahlen überlappen.</p>
     <section class="card">
       <div class="filters">
-        <label>Suchen<input id="search" type="search" placeholder="Dateiname oder Beschreibung"></label>
+        <label>Suchen<input id="search" type="search" placeholder="Dateiname, Klasse oder Beschreibung"></label>
+        <label>Geometrische Klasse<select id="geometry-class"><option value="">Alle Klassen</option></select></label>
         <label>Qualität<select id="status"><option value="">Alle Qualitätsstände</option></select></label>
         <label>Archiv<select id="archive"><option value="">Alle Bilder</option><option value="yes">Historisch archiviert</option><option value="no">Nicht archiviert</option></select></label>
         <label>Sortierung<select id="sort"><option value="filename">Dateiname</option><option value="status">Qualitätsstand</option><option value="mse-asc">MSE aufsteigend</option><option value="mse-desc">MSE absteigend</option></select></label>
         <label>Pro Seite<select id="page-size"><option>25</option><option>75</option><option>150</option><option value="all">Alle</option></select></label>
       </div>
+      <p class="hint">Geometrische Klassen verweisen auf vorhandene Modelle und deren Grenzen. Eine Klassenzuordnung bestätigt noch keine erfolgreiche Konvertierung. Zuordnungen aus Beschreibungen sind automatische Vorschläge; Sichtzuordnungen werden gesondert ausgewiesen.</p>
       <div class="pagination"><span id="count"></span><button class="secondary" id="previous">← Zurück</button><span id="page"></span><button class="secondary" id="next">Weiter →</button></div>
       <div class="table-scroll"><table><thead><tr><th scope="col">Bitmap / SVG</th><th scope="col">Qualitätsstand</th><th scope="col">MSE / Kanten / IoU</th><th scope="col">Archiv</th><th scope="col">Beschreibung und Prüfbefunde</th></tr></thead><tbody id="rows"></tbody></table></div>
       <p id="empty" hidden>Keine Bilder für diese Auswahl.</p>

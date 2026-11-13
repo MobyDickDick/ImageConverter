@@ -1,0 +1,18 @@
+{
+  "schema": "catalog_classes_checks_v2",
+  "all_catalog_filenames_unique": true,
+  "all_nonreserved_sources_visually_assigned": true,
+  "no_automatic_proposals": true,
+  "review_keys_exactly_match_nonreserved_catalog": true,
+  "all_current_source_bytes_match_review": true,
+  "no_source_bytes_changed_during_review": true,
+  "class_totals_conserve_catalog": true,
+  "all_reserved_rows_still_unclassified": true,
+  "no_reserved_input_in_sheets": true,
+  "all_sheet_cells_individually_assigned": true,
+  "all_13_sheets_replay_byte_identically": true,
+  "frozen_sheet_manifest_unchanged": true,
+  "pixel_pass_total_unchanged": true,
+  "archive_total_unchanged": true,
+  "no_conversion_success_inferred": true
+}

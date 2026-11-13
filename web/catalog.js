@@ -24,7 +24,7 @@ function metrics(row) {
 function link(text, path) { const a = node('a', text); a.href = asset(path); a.target = '_blank'; a.rel = 'noopener'; return a; }
 function render() {
   const search = el('search').value.trim().toLocaleLowerCase('de');
-  let rows = data.rows.filter(r => (!search || (r.filename + ' ' + r.description).toLocaleLowerCase('de').includes(search)) && (!el('status').value || r.status === el('status').value) && (!el('archive').value || r.archived === (el('archive').value === 'yes')));
+  let rows = data.rows.filter(r => (!search || (r.filename + ' ' + r.description + ' ' + (r.classification?.label || '')).toLocaleLowerCase('de').includes(search)) && (!el('geometry-class').value || r.classification?.class_id === el('geometry-class').value) && (!el('status').value || r.status === el('status').value) && (!el('archive').value || r.archived === (el('archive').value === 'yes')));
   const order = el('sort').value;
   rows.sort((a,b) => {
     if (order.startsWith('mse-')) {
@@ -62,7 +62,17 @@ function render() {
       if (ar.evidence_exists) archive.append(link('Abnahmebeleg', ar.evidence));
       else archive.append(node('small', 'Abnahmebeleg fehlt'));
     }
-    const detail = node('td'); detail.append(node('div', row.description || 'Keine Beschreibung vorhanden.'));
+    const detail = node('td');
+    const classification = row.classification;
+    if (classification) {
+      detail.append(node('strong', classification.label));
+      detail.append(node('small', classification.basis === 'visual_audit' ? 'Zuordnung durch Codex-Sichtprüfung' : classification.basis === 'reservation' ? 'Reserviert' : 'Automatischer Vorschlag aus der Beschreibung'));
+      if (classification.basis === 'visual_audit') detail.append(node('div', classification.reason));
+      if (classification.description_issue) detail.append(node('small', 'Beschreibung klären: ' + classification.description_issue));
+      const models = node('details'); models.append(node('summary', 'Vorhandene Modelle und Grenzen'));
+      models.append(node('p', classification.model_modules.join(', ') || 'Kein allgemeines Modell'), node('p', classification.model_limit)); detail.append(models);
+    }
+    detail.append(node('div', row.description || 'Keine Beschreibung vorhanden.'));
     const more = node('details'); more.append(node('summary', `${row.candidates.length} gespeicherte SVG-Kandidaten · Prüfbefunde`));
     const list = node('ul');
     for (const candidate of row.candidates) {
@@ -85,6 +95,9 @@ async function loadList() {
   const old = el('status').value;
   el('status').replaceChildren(new Option('Alle Qualitätsstände', ''), ...Object.entries(data.labels).map(([key,label]) => new Option(label,key)));
   el('status').value = old;
+  const oldClass = el('geometry-class').value;
+  el('geometry-class').replaceChildren(new Option('Alle Klassen', ''), ...Object.entries(data.summary.geometry_classes?.classes || {}).map(([key,value]) => new Option(`${value.label} (${value.total})`,key)));
+  el('geometry-class').value = oldClass;
   const s = data.summary, counts = s.catalog_statuses || {};
   el('stats').replaceChildren(...[[s.catalog_bitmaps || 0,'Katalogbilder'],[counts.pixel_pass || 0,'Rastergates erfüllt'],[s.archived || 0,'Historisch archiviert'],[counts.pixel_fail || 0,'Rastergates verfehlt'],[(counts.no_svg || 0) + (counts.measurement_error || 0),'Ohne SVG / Messfehler']].map(([value,label]) => {const n=node('div',undefined,'stat');n.append(node('strong',value.toLocaleString('de-CH')),node('span',label));return n;}));
   el('updated').textContent = s.generated_at ? 'Letzte vollständige Prüfung: ' + new Date(s.generated_at).toLocaleString('de-CH') : 'Noch keine vollständige Qualitätsliste vorhanden.';
@@ -108,7 +121,7 @@ async function poll() {
     if (reportKey(job.summary) !== lastReport) await loadList();
   } catch (error) {notice(error);} finally {polling = false;}
 }
-for (const id of ['search','status','archive','sort','page-size']) el(id).addEventListener(id === 'search' ? 'input' : 'change', () => {page=0;render();});
+for (const id of ['search','geometry-class','status','archive','sort','page-size']) el(id).addEventListener(id === 'search' ? 'input' : 'change', () => {page=0;render();});
 el('previous').onclick = () => {page--;render();}; el('next').onclick = () => {page++;render();};
 el('refresh').onclick = async () => {el('notice').hidden=true;el('refresh').disabled=true;try {showJob(await api('/api/catalog/start',{force:el('force').checked}));} catch(error) {notice(error);await poll();}};
 el('stop').onclick = async () => {el('stop').disabled=true;try {showJob(await api('/api/catalog/cancel',{}));} catch(error) {notice(error);await poll();}};

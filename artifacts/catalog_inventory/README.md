@@ -1,5 +1,10 @@
 # Vollständige Katalogübersicht
 
+Die neue [geometrische Klassenliste](../catalog_classes/index.html) ordnet den
+gesamten Bestand nach Bildaufbau und vorhandenen nativen Teilmodellen.
+Der lokale Webserver zeigt diese Klassen zusätzlich als Filter und im Export.
+[Befund und Grenzen](../../docs/catalog_geometry_classes_2026-11-13.md).
+
 Die Liste ist auch im lokalen Webserver unter **Konvertierungsqualität**
 (`http://127.0.0.1:8766/catalog`) verfügbar. Dort kann die Neumessung mit
 Fortschrittsanzeige gestartet und abgebrochen werden; die letzte vollständige

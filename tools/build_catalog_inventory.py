@@ -300,6 +300,8 @@ def build(root, *, measure, cache=None, signature='uncached', force=False, progr
         measurements_computed=measured, measurements_reused=used_cache, groups=groups,
         fresh_conversion_performed=False, semantic_revalidation_performed=False,
         manual_reviews_systematically_recorded=False)
+    from src.imageConverterClasses import enrich_catalog
+    summary['geometry_classes'] = enrich_catalog(root, rows)
     return rows, summary, cache
 
 
