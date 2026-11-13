@@ -1,5 +1,5 @@
 "use strict";
-let nativeFileDialogs = false, preparingPlanB = false;
+let nativeFileDialogs = false, preparingPlanB = false, serverNeedsRestart = false;
 const $ = (id) => document.getElementById(id);
 let current = null;
 let activeId = null;
@@ -13,7 +13,11 @@ let saving = false;
 async function request(path, options = {}) {
   const response = await fetch(path, options);
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error || "Die Anfrage ist fehlgeschlagen.");
+  if (!response.ok) {
+    const error = new Error(data.error || "Die Anfrage ist fehlgeschlagen.");
+    error.status = response.status;
+    throw error;
+  }
   return data;
 }
 function post(path, body) {
@@ -84,7 +88,7 @@ function renderJob(job, select = false) {
   $("save-actions").hidden = !job.result;
   $("project-status").hidden = !job.project_save;
   $("project-status").textContent = job.project_save?.message || "";
-  $("use-plan-b").hidden = !job.result || job.quality !== "passed" || job.status !== "done";
+  $("use-plan-b").hidden = serverNeedsRestart || !job.result || job.quality !== "passed" || job.status !== "done";
   $("download").href = `${resultUrl}?download=1`;
   $("download").download = `${job.name.replace(/\.[^.]*$/, "")}.svg`;
   $("quality").className = `hint ${job.quality === "warning" ? "quality-warning" : job.quality === "passed" ? "quality-passed" : ""}`;
@@ -261,7 +265,14 @@ for (const prefix of ["source", "sample", "result"]) {
 }
 async function init() {
   try {
-    nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+    try {
+      nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+    } catch (error) {
+      if (error.status !== 404) throw error;
+      serverNeedsRestart = true;
+      $("server-version-warning").textContent = "Der Webserver läuft noch mit einer älteren Version. Lass laufende Konvertierungen fertig werden und starte ihn danach über startWebServer.cmd neu. Lade anschliessend diese Seite neu, um die neuen Funktionen zu verwenden.";
+      $("server-version-warning").hidden = false;
+    }
     $("sample-file").hidden = nativeFileDialogs;
     $("pick-sample").hidden = !nativeFileDialogs;
     await refreshHistory();
@@ -271,6 +282,6 @@ async function init() {
     if (selected) renderJob(selected, true);
     renderHistory();
     if (activeId) schedulePoll();
-  } catch (error) { notice(`Der lokale Server ist nicht erreichbar. ${error.message}`); }
+  } catch (error) { notice(`Die Oberfläche konnte nicht geladen werden. ${error.message}`); }
 }
 init();

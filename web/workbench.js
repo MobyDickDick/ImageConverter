@@ -9,7 +9,11 @@ const labels = {prepared: "Vorbereitet", running: "Läuft", completed: "Abgeschl
 async function request(path, body) {
   const response = await fetch(path, body === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json", "X-ImageConverter": "1"}, body: JSON.stringify(body)});
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error || "Anfrage fehlgeschlagen.");
+  if (!response.ok) {
+    const error = new Error(data.error || "Anfrage fehlgeschlagen.");
+    error.status = response.status;
+    throw error;
+  }
   return data;
 }
 function notice(text = "") { $("notice").textContent = text; $("notice").hidden = !text; }
@@ -230,7 +234,13 @@ $("activity-cancel").addEventListener("click", () => {
 });
 $("save-note").addEventListener("click", () => operation(async () => { render(await request(`/api/workbench/${current.id}/note`, {case_id: activeCase, note: $("note").value})); $("note-status").textContent = "Gespeichert."; }));
 async function init() {
-  nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+  try {
+    nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+  } catch (error) {
+    if (error.status !== 404) throw error;
+    $("server-version-warning").textContent = "Der Webserver läuft noch mit einer älteren Version. Lass laufende Konvertierungen fertig werden und starte ihn danach über startWebServer.cmd neu. Lade anschliessend diese Seite neu, um die neuen Funktionen zu verwenden.";
+    $("server-version-warning").hidden = false;
+  }
   $("file").hidden = nativeFileDialogs;
   $("pick-reference").hidden = !nativeFileDialogs;
   const runs = await history();
