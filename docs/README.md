@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Luftbefeuchter: fünf getrennte Bauteilgruppen, echte Strichelung und neue CLI-Konvertierung des L-Originals (2026-11-14)](spray_panel_composition_2026-11-14.md)
+
 - [Kategorien-Kollektion: 15 Originale einzeln konvertieren und erweiterte Plan-B-Aufgaben erstellen](category_collection.md)
 
 - [Neue geometrische Klassenbildung für alle 1.787 Bilder: vorhandene Teilmodelle, Sichtzuordnungen und verbleibende Konvertierungslücken (2026-11-13)](catalog_geometry_classes_2026-11-13.md)
@@ -7,6 +9,7 @@
 - [Stand zum Ziel einer breiten Konvertierung: belegte Katalogabdeckung und verbleibender Weg (2026-11-13)](project_status_2026-11-13.md)
 
 - [Vollständige Qualitätsliste im Webserver: Fortschritt, Abbruch, Bildvergleich und CSV/JSON](catalog_quality_webserver.md)
+- [P0: zusätzliche Konturstriche und überdeckte Ausgangsobjekte vermeiden; 18/18 unabhängige direkte und 6/6 CLI-Abnahmen (2026-11-14)](next_arbeitspaket_2026-11-14_fallback_cleanup.md)
 - [P0: logische Geraden aus Segmenten unabhängig zuordnen; 255 Gegenproben und unveränderte reale Sperre (2026-11-13)](next_arbeitspaket_2026-11-13_segment_checker.md)
 
 - [P0: unabhängiger nativer Objekt-/Relationsprüfer mit separatem Freeze; 60 Fehlerkontrollen, verdeckte Geometrie und neue Segmentierungsgrenze (2026-11-13)](next_arbeitspaket_2026-11-13_fallback_checker.md)

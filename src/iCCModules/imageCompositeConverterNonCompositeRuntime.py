@@ -20,6 +20,7 @@ from src.iCCModules.imageCompositeConverterSquareStem import fit_square_stem
 from src.iCCModules.imageCompositeConverterCheckmark import fit_checkmark_disk
 from src.iCCModules.imageCompositeConverterCheckboxCheckmark import fit_checkbox_checkmark
 from src.iCCModules.imageCompositeConverterZigzagPanel import fit_zigzag_panel
+from src.iCCModules.imageCompositeConverterSprayPanel import fit_spray_panel
 from src.iCCModules.imageCompositeConverterAlarmBell import fit_alarm_bell
 from src.iCCModules.imageCompositeConverterTriangleStem import fit_triangle_stem
 from src.iCCModules.imageCompositeConverterDotPanel import fit_dot_panel
@@ -1472,6 +1473,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_spray_panel, "non_composite_raster_spray_panel"),
             (fit_crossed_gradient_panel, "non_composite_raster_crossed_gradient_panel"),
             (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
             (fit_heat_panel, "non_composite_raster_heat_panel"),
@@ -1517,6 +1519,9 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if status == "non_composite_raster_spray_panel":
+                    params[fitted['source']] = {key:value for key,value in fitted.items()
+                                                if key not in {'svg','rendered'}}
                 if status == "non_composite_raster_crossed_gradient_panel":
                     params[fitted['source']] = {key: fitted[key] for key in
                         ('initial_error','error','parameters','evaluations','quality','details')}

@@ -1,5 +1,7 @@
 # Fortschritt zum Ziel einer breiten Bitmap-zu-SVG-Konvertierung
 
+Aktualisiert am 14.11.2026 nach FALLBACK-GROUPS-CLEANUP-06.
+
 Die belegte Katalogabdeckung liegt bei ungefähr einem Fünftel. Ein Grossteil
 der Bilder ist noch nicht erfolgreich abgenommen. Die vielen abgeschlossenen
 Entwicklungs- und Prüfpakete dürfen nicht als Prozentwert der Bildabdeckung
@@ -53,9 +55,13 @@ CHECKER-04 und das jetzt abgeschlossene [CHECKER-05](next_arbeitspaket_2026-11-1
 schaffen eine unabhängige Objekt-/Relationsprüfung einschließlich zulässiger
 Linienteilungen. Sie verbessern die Verlässlichkeit der Abnahme und erzeugen
 selbst keine neuen erfolgreichen Konvertierungen. Die 18 alten direkten
-Kompositionsausgaben bleiben wegen zusätzlicher Striche unvollständig im
-annotierten Vertrag; die sichtbare Wirkung dieser Striche ist damit noch
-nicht vollständig fachlich klassifiziert.
+Kompositionsausgaben bleiben unvollständig im annotierten Vertrag.
+Das anschließende [CLEANUP-06](next_arbeitspaket_2026-11-14_fallback_cleanup.md)
+vermeidet bei unveränderten Prüfern und Bildgates die Konturüberzeichnung und
+ersetzt überdeckte unvollständige Ausgangsobjekte: 18/18 neue direkte und 6/6
+echte CLI-Ausgaben bestehen jetzt die vollständigen logischen Inventar- und
+Relationsprüfungen. Das bleibt ein begrenzter synthetischer Entwicklungsnachweis
+ohne neue reale Katalogabnahme.
 
 Die jüngsten echten Katalogstichproben vom 11.11.2026 hatten 13/38 bzw. 11/32
 reine Pixelpässe und 10/38 bzw. 3/32 Modellbestätigungen. Wegen kleiner,
@@ -84,9 +90,9 @@ lässt sich daraus noch nicht ableiten.
 
 ## Die nächsten wirksamen Schritte
 
-1. **FALLBACK-GROUPS-CLEANUP-06:** Zusätzliche Striche des tatsächlichen
-   Fallbacks erklären beziehungsweise vermeiden und vollständige logische
-   Inventare unter unveränderten Bild-/Relationsgates erreichen.
+1. **FALLBACK-GROUPS-CURVES-07:** Separaten unabhängigen Prüfumfang für native
+   Kurven/Bögen samt externen synthetischen Annotationen und Gegenproben
+   schaffen; danach entsprechende saubere produktive Gruppen untersuchen.
 2. **Allgemeine Form- und Abnahmeabdeckung:** Kurven, weitere Symbolkompositionen,
    passende Beschreibungen sowie fachliche Prüfung bisheriger guter Entwürfe.
    Keine Freigabe allein aufgrund eines globalen Pixelwerts.

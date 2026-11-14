@@ -188,7 +188,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         return best, report
     h, w = image.shape[:2]
 
-    def probe(candidate, origin, parent, regions=None):
+    def probe(candidate, origin, parent, regions=None, residual_line=None):
         nonlocal best
         if session.time_reason() or len(report['proposals']) >= max_probes:
             return None
@@ -202,6 +202,13 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         except ValueError:
             row['rejection'] = 'description_assertions'
             return None
+        if residual_line is not None and mode == 'combined':
+            from src.iCCModules.imageCompositeConverterFallbackComposition import residual_line_owner
+            owner = residual_line_owner(parent['svg'], residual_line)
+            if owner is not None:
+                row.update(rejection='existing_group_edge', owner=owner)
+                progress('native_svg_structure', event='structure_probe', **row)
+                return None
         report['render_evaluations'] += 1
         raster = render_fn(candidate, w, h)
         session.evaluations += 1
@@ -309,7 +316,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
                     break
                 root.append(copy.deepcopy(line))
                 candidate = ET.tostring(root, encoding='unicode')
-                result = probe(candidate, parent['origin']+'+residual_line_group', current)
+                result = probe(candidate, parent['origin']+'+residual_line_group', current, residual_line=line)
                 if result:
                     current = result
                 if session.time_reason() or len(report['proposals']) >= max_probes:

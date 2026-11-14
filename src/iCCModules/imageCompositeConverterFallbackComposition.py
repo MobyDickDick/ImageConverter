@@ -12,6 +12,81 @@ from src.iCCModules.imageCompositeConverterFallbackGroups import NS, part_region
 DRAWABLE = {'rect', 'circle', 'ellipse', 'line', 'polygon', 'polyline', 'path', 'text'}
 
 
+def residual_line_owner(svg, line):
+    """Identify a proposed line retracing an existing native group edge.
+
+    Raster registration errors on an outline are parameter errors, not evidence
+    for another logical line. Require both near parallelism and 90% longitudinal
+    overlap with one actual edge; merely crossing a group or sharing its bounds
+    never suffices. This only prunes additions, and grants no scene acceptance.
+    Styled/transformed/effected subtrees have no inferred viewport ownership.
+    """
+    point = lambda node, suffix: np.array([float(node.get('x'+suffix)), float(node.get('y'+suffix))])
+    a, b = point(line, '1'), point(line, '2')
+    length = np.linalg.norm(b-a)
+    if length < 1 or not np.isfinite(length):
+        return None
+    direction = (b-a)/length
+    samples = a + np.linspace(0, 1, min(1025, int(length*2)+2))[:, None]*(b-a)
+    proposed_width = float(line.get('stroke-width', '1'))
+    unsupported = {'transform', 'style', 'clip-path', 'mask', 'filter', 'opacity',
+                   'stroke', 'stroke-width', 'stroke-opacity', 'fill-opacity',
+                   'stroke-dasharray', 'vector-effect', 'display', 'visibility'}
+
+    def walk(node, group=None):
+        tag = node.tag.rsplit('}', 1)[-1]
+        if tag not in {'svg', 'g', 'line', 'rect', 'polygon'}:
+            return
+        effects = unsupported if tag in {'svg', 'g'} else unsupported-{'stroke', 'stroke-width'}
+        if any(key in node.attrib for key in effects):
+            return
+        group = node.get('data-fallback-group', group)
+        if group and tag in {'line', 'rect', 'polygon'}:
+            edges = []
+            if tag == 'line' and node.get('stroke', 'none') != 'none':
+                edges = [(point(node, '1'), point(node, '2'))]
+            elif tag == 'rect' and node.get('stroke', 'none') != 'none' and not (node.get('rx') or node.get('ry')):
+                x, y = float(node.get('x', '0')), float(node.get('y', '0'))
+                w, h = float(node.get('width')), float(node.get('height'))
+                corners = np.array([[x,y],[x+w,y],[x+w,y+h],[x,y+h]])
+                edges = list(zip(corners, np.roll(corners, -1, axis=0)))
+            elif tag == 'polygon':
+                # A filled arrow head owns its boundary even without a stroke.
+                corners = np.array([list(map(float, p.split(','))) for p in node.get('points', '').split()])
+                if len(corners) >= 3 and node.get('fill', 'black') != 'none':
+                    edges = list(zip(corners, np.roll(corners, -1, axis=0)))
+            width = float(node.get('stroke-width', '1')) if node.get('stroke', 'none') != 'none' else 0.
+            for p, q in edges:
+                axis = q-p
+                span = np.linalg.norm(axis)
+                if span < 1 or abs(direction[0]*axis[1]-direction[1]*axis[0])/span > .12:
+                    continue
+                t = np.clip((samples-p) @ axis / span**2, 0, 1)
+                distance = np.linalg.norm(samples-(p+t[:, None]*axis), axis=1)
+                # Half-pixel allowance accounts for raster-centre registration;
+                # stroke extents supply the remaining geometric neighbourhood.
+                coverage = float((distance <= (width+proposed_width)/2+.5).mean())
+                if coverage >= .9:
+                    yield dict(group=group, primitive=tag, part=node.get('data-part'),
+                               coverage=coverage, edge=[p.tolist(), q.tolist()])
+        for child in node:
+            if child.tag.rsplit('}', 1)[-1] != 'svg':
+                yield from walk(child, group)
+
+    try:
+        root = ET.fromstring(svg)
+        if root.get('viewBox'):
+            viewport = [float(v) for v in root.get('viewBox').replace(',', ' ').split()]
+            if viewport != [0., 0., float(root.get('width')), float(root.get('height'))]:
+                return None
+        if float(root.get('x', '0')) != 0 or float(root.get('y', '0')) != 0:
+            return None
+        return next(walk(root), None)
+    except (ValueError, TypeError, OverflowError):
+        # Unsupported SVG lengths are never guessed into viewport coordinates.
+        return None
+
+
 def retained_paint(image, before, after):
     """Keep already correct connected objects, including tiny unrelated marks."""
     background = np.median(np.concatenate((image[0],image[-1],image[:,0],image[:,-1])),axis=0)
@@ -95,7 +170,6 @@ def edits(svg, group, w, h):
     root=ET.fromstring(svg)
     added=copy.deepcopy(root)
     added.append(copy.deepcopy(group))
-    yield ET.tostring(added,encoding='unicode'),'add'
     target=bounds(group,w,h)
     paths=[]
     for path,node in atoms(root):
@@ -106,6 +180,7 @@ def edits(svg, group, w, h):
         if box is not None and np.prod(box[2:]-box[:2]) < w*h*.8 and overlaps(box,target):
             paths.append(path)
     if not paths:
+        yield ET.tostring(added,encoding='unicode'),'add'
         return
     # Replacing a split group removes all its overlapping parts atomically.
     # Unrelated correct paint is independently protected by the caller.
@@ -115,7 +190,11 @@ def edits(svg, group, w, h):
     for path in sorted(paths,reverse=True):
         at(candidate,path[:-1]).remove(at(candidate,path))
     parent.insert(first[-1],copy.deepcopy(group))
+    # Probe repair before overlay. Otherwise an opaque addition can hide an old
+    # incomplete primitive; its pixel-identical replacement can no longer win
+    # the strict error comparison, leaving a redundant hidden scene object.
     yield ET.tostring(candidate,encoding='unicode'),'replace'
+    yield ET.tostring(added,encoding='unicode'),'add'
 
 
 def compose(image, session, incumbent, probe, remaining):

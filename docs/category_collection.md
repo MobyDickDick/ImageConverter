@@ -37,6 +37,15 @@ Ein fehlgeschlagener Versuch bedeutet nicht grundsätzliche Nichtkonvertierbarke
 Ein erfolgreiches Exemplar bestätigt umgekehrt nicht alle Unterformen der Kategorie.
 Die Kategorie „Kurven/Röhren“ bleibt als gezielter offener Fall in derselben Folge.
 
+**Nutzerkorrektur zu Klasse 08 vom 14.11.2026:** `AC0130_L.jpg` ist ein
+mehrteiliger Luftbefeuchter mit Gehäuse, Balken, gestricheltem Rahmen, Düsen
+und Sprühnebel. Die frühere Zickzackbeschreibung war falsch. Die Auswahl
+kennzeichnet das Motiv nun ausdrücklich als komplexes Kompositionsbeispiel;
+es ist kein einfaches repräsentatives Einzelzeichen. Eine neue getrennte
+Konvertierung des L-Originals samt Teilprüfungen liegt
+[hier](spray_panel_composition_2026-11-14.md) vor. M-/S-Erfolge werden daraus
+nicht abgeleitet.
+
 ## Auswahl und Herkunft
 
 `config/catalog_conversion_collection.json` speichert Kategorie, Dateiname,
