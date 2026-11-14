@@ -1,0 +1,1622 @@
+{
+  "source_name": "AC0151_L.svg",
+  "source_zip_sha256": "0943055201dcedea58be3b63c28fff6380e3caeb78ce0cee02557b5bea967290",
+  "seed": 6710666133029594656,
+  "source_svg_sha256": "4816a503bc4a6cf97ca87f236a5f1007638c27d03c146695d916737d800408ec",
+  "source_description": "Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)",
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "iterations": 64,
+  "timeout_seconds": 60.0,
+  "hypotheses": {
+    "description_only": "All 16 complete variant descriptions rejected before raster inspection.",
+    "geometry_only": "Bypassing the old description contract still rejected all 16 unchanged variant rasters."
+  },
+  "before_provenance": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "python_sources_sha256": "a0264631a4576f0abc7844e2b4bcc99b9a9c62f4c684b26a69f4b3d52dbdabae",
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "4.14.0.94",
+      "PyMuPDF": "1.26.7",
+      "Pillow": "12.3.0"
+    }
+  },
+  "after_provenance": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "python_sources_sha256": "20bb0b10d2cf56d31ab9b29b403ef8aa99f4b4a5971f65286a9d8522de2b1998",
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "4.14.0.94",
+      "PyMuPDF": "1.26.7",
+      "Pillow": "12.3.0"
+    }
+  },
+  "attempts": [
+    {
+      "id": "attempt_0001",
+      "status": "completed",
+      "passed": 1,
+      "technical_failures": [],
+      "elapsed_seconds": 551.828
+    },
+    {
+      "id": "attempt_0002",
+      "status": "completed",
+      "passed": 15,
+      "technical_failures": [
+        "probe_09",
+        "probe_10"
+      ],
+      "elapsed_seconds": 4504.220000000001
+    },
+    {
+      "id": "attempt_0003",
+      "status": "completed",
+      "passed": 17,
+      "technical_failures": [],
+      "elapsed_seconds": 97.62400000000001
+    }
+  ],
+  "summary": {
+    "total": 17,
+    "completed": 17,
+    "passed": 17,
+    "quality_failed": 0,
+    "execution_failed": 0,
+    "failure_counts": {},
+    "satisfactory": true
+  },
+  "tests": {
+    "passed": 139,
+    "independent_pose_variants": 16
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "input_sha256": "cc30897135e68a38b12b23c1fc031b77dab07a2a5916176e54f01a6bfb8cd1e4",
+      "reference_svg_sha256": "4816a503bc4a6cf97ca87f236a5f1007638c27d03c146695d916737d800408ec",
+      "before": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 5.257592874841066e-06,
+          "foreground_mse": 5.007611889595864e-06,
+          "edge_alignment": 0.9961550831794739,
+          "foreground_iou": 0.9905584826132772
+        },
+        "elapsed_seconds": 2.156
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 5.211456937104231e-06,
+          "foreground_mse": 4.945383352605859e-06,
+          "edge_alignment": 0.9961550831794739,
+          "foreground_iou": 0.9905584826132772
+        },
+        "elapsed_seconds": 1.953,
+        "output_sha256": "1374135618952b98d0555cb8f30264b451b4a31fad2d890ca1badef40da77133",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.0,
+            0.0,
+            80.0,
+            400.0
+          ],
+          "caps": [
+            18.025,
+            382.0
+          ],
+          "colors": [
+            [
+              52.124780489335286,
+              219.115251978872,
+              235.22013144155355
+            ],
+            [
+              118.2730778834838,
+              170.03049306256494,
+              90.83502065951788
+            ]
+          ],
+          "shade": [
+            0.6515925504446491,
+            0.7146719845995027,
+            0.9993004437302928,
+            0.8070552971268232
+          ],
+          "shade_knots": [
+            0.0,
+            0.229,
+            0.656,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 1,
+        "search_candidate_evaluations": 1
+      }
+    },
+    {
+      "case_id": "probe_01",
+      "input_sha256": "6c127d59ab4d0841dc482c2a093e7d2c60fef496d5c1a9d7ef30a1340678f622",
+      "reference_svg_sha256": "cc0783c002c96715f452a3afd3a4e8a418e24237a6b1abe738ab8c38317e7bad",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014581198804080486,
+          "foreground_mse": 0.01619158871471882,
+          "edge_alignment": 0.6007062196731567,
+          "foreground_iou": 0.9928861435957942
+        },
+        "elapsed_seconds": 34.328
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 7.440887657139683e-06,
+          "foreground_mse": 8.32197747513419e-06,
+          "edge_alignment": 0.9454010725021362,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 3.359,
+        "output_sha256": "a3b8fe1c1a42bff088914abfa8e546a8d415044e26acf9601505116af3889319",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            3.0,
+            1.0625,
+            78.6875,
+            379.625
+          ],
+          "caps": [
+            18.125,
+            362.55
+          ],
+          "colors": [
+            [
+              52.10365245212321,
+              219.14575218415868,
+              235.24864848047065
+            ],
+            [
+              118.33953016299037,
+              169.94879510705988,
+              90.62666512269848
+            ]
+          ],
+          "shade": [
+            0.6520117624143068,
+            0.7140733589350869,
+            0.9988808872973716,
+            0.8054968809957551
+          ],
+          "shade_knots": [
+            0.0,
+            0.227,
+            0.653,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 109,
+        "search_candidate_evaluations": 109
+      }
+    },
+    {
+      "case_id": "probe_02",
+      "input_sha256": "1d4f1d3abed8def08cdf54661e0f74948503c0562a384df79e3058dc5788f979",
+      "reference_svg_sha256": "490ac399bf70da17fc6b78e67ccab02b28fbf8a8293f8fab26ad8fc0343f2bff",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014224933460354805,
+          "foreground_mse": 0.01551674772053957,
+          "edge_alignment": 0.5844287872314453,
+          "foreground_iou": 0.9907950361380062
+        },
+        "elapsed_seconds": 34.609
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.05669296317501e-05,
+          "foreground_mse": 1.1603086022660136e-05,
+          "edge_alignment": 0.9657260775566101,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 3.547,
+        "output_sha256": "9c4a3a518c2b84134e0b2b2637ca44b0815569ecf83d79ef6bd587b976076af1",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            2.25,
+            16.875,
+            78.25,
+            396.875
+          ],
+          "caps": [
+            34.025,
+            379.75
+          ],
+          "colors": [
+            [
+              51.985731507643834,
+              218.52414111163765,
+              234.6285552704972
+            ],
+            [
+              118.06015794283944,
+              169.55896971458517,
+              90.47774728029809
+            ]
+          ],
+          "shade": [
+            0.6546654004649936,
+            0.714759342406777,
+            1.0,
+            0.805208580048314
+          ],
+          "shade_knots": [
+            0.0,
+            0.225,
+            0.65,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 103,
+        "search_candidate_evaluations": 103
+      }
+    },
+    {
+      "case_id": "probe_03",
+      "input_sha256": "909d05efea09a0bc4f81da05655e4a7eabb9d4b6d46e2483bc3800be4a37cc4d",
+      "reference_svg_sha256": "7bd4242abafccb5c3a8896fe2add44b75eb864c09a5ddf32171de4581936d6dc",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.015138054266571999,
+          "foreground_mse": 0.015721190720796585,
+          "edge_alignment": 0.5669223070144653,
+          "foreground_iou": 0.9935735150925025
+        },
+        "elapsed_seconds": 34.484
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 6.397539436875377e-06,
+          "foreground_mse": 6.684767868136987e-06,
+          "edge_alignment": 0.9559965133666992,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 3.5,
+        "output_sha256": "df9abae12397528a9a63efb7dcbba6a6114247847b6c3b0c710ba57e5beca38a",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.375,
+            8.0625,
+            78.25,
+            397.5
+          ],
+          "caps": [
+            25.625,
+            379.95
+          ],
+          "colors": [
+            [
+              52.033890008180094,
+              219.19461344783417,
+              235.48417457845454
+            ],
+            [
+              118.23187939824263,
+              170.01447817330128,
+              90.78606496778559
+            ]
+          ],
+          "shade": [
+            0.6493147331821952,
+            0.7162251019233173,
+            0.999096466713313,
+            0.8021723363669401
+          ],
+          "shade_knots": [
+            0.0,
+            0.233,
+            0.651,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 96,
+        "search_candidate_evaluations": 96
+      }
+    },
+    {
+      "case_id": "probe_04",
+      "input_sha256": "99fed4b49e55d5eb4bc2fc1e771a57af8f07c08c230f627f388f8dca4ef2ab6c",
+      "reference_svg_sha256": "4842be9615dd5c488ed7cfa5ce69d45b54bf33aed34441f82918a6d644448280",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.011745125986635685,
+          "foreground_mse": 0.012709026224911213,
+          "edge_alignment": 0.5657669305801392,
+          "foreground_iou": 0.9868367485411861
+        },
+        "elapsed_seconds": 34.031
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 5.820036221848568e-06,
+          "foreground_mse": 5.942120878899004e-06,
+          "edge_alignment": 0.9654065370559692,
+          "foreground_iou": 0.9994198744198745
+        },
+        "elapsed_seconds": 3.313,
+        "output_sha256": "acc853ca04244b5e8bf7eca5c15909377c8e6e0f45599003c11e7a0ce75ff961",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            2.0625,
+            3.9375,
+            78.6875,
+            387.0
+          ],
+          "caps": [
+            21.2,
+            369.775
+          ],
+          "colors": [
+            [
+              52.08943801250644,
+              219.1421558728875,
+              235.3020425640636
+            ],
+            [
+              118.27205363682386,
+              170.00000753235662,
+              90.72165341055673
+            ]
+          ],
+          "shade": [
+            0.6521649557841684,
+            0.7124128253998133,
+            0.9990090922639822,
+            0.804896388546215
+          ],
+          "shade_knots": [
+            0.0,
+            0.225,
+            0.654,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 98,
+        "search_candidate_evaluations": 98
+      }
+    },
+    {
+      "case_id": "probe_05",
+      "input_sha256": "c1bcae0e427999b3da39a613d9ceee747849ef7a1387046969219a43e271fa9c",
+      "reference_svg_sha256": "b49d1b72fc907b458c39bf9f2f5859a21eefa28905bfdbfaeb3786d2d74c8567",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.010341450572013855,
+          "foreground_mse": 0.01075916737318039,
+          "edge_alignment": 0.5302215218544006,
+          "foreground_iou": 0.9560526482313485
+        },
+        "elapsed_seconds": 34.125
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 7.529796675953548e-06,
+          "foreground_mse": 6.157506504678167e-06,
+          "edge_alignment": 0.933387279510498,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 4.812,
+        "output_sha256": "70499abade629705b2100e072e0b5243421efaa98951362529d7a09b4a780180",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            2.25,
+            0.75,
+            81.3125,
+            396.0
+          ],
+          "caps": [
+            18.575,
+            378.225
+          ],
+          "colors": [
+            [
+              51.896149890209074,
+              218.62358923319428,
+              234.8409571889905
+            ],
+            [
+              118.00948338098053,
+              169.6015950046355,
+              90.70068670284265
+            ]
+          ],
+          "shade": [
+            0.6534390655051989,
+            0.7166658624850833,
+            1.0,
+            0.8057206367041923
+          ],
+          "shade_knots": [
+            0.0,
+            0.228,
+            0.651,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 85,
+        "search_candidate_evaluations": 165,
+        "vector_continuation": {
+          "evaluations": 80,
+          "improved": true,
+          "error": 7.529796675953548e-06,
+          "search_control": {
+            "candidate_evaluations": 165,
+            "elapsed_seconds": 2.891,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "minimum_seconds": 30.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "tube_model_passed": true
+        }
+      }
+    },
+    {
+      "case_id": "probe_06",
+      "input_sha256": "84ac873499d5557419a6761821a30e21b07d4933f368badc57f32ce15d4d76b5",
+      "reference_svg_sha256": "714d7e321e2fefc42ea70cc92cdee05a3fd576eeeb5d30de1a121cd6cf98276f",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014409185387194157,
+          "foreground_mse": 0.01574569009244442,
+          "edge_alignment": 0.40764665603637695,
+          "foreground_iou": 0.9916550368830281
+        },
+        "elapsed_seconds": 34.672
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 5.829941073898226e-06,
+          "foreground_mse": 6.409296929632546e-06,
+          "edge_alignment": 0.9218213558197021,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 4.031,
+        "output_sha256": "a7823cbe266ca081b62eb2f2180f7f224a06e8246a2fc6210ab3c39d83ef6cab",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            3.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            4.125,
+            0.4375,
+            87.4375,
+            417.1875
+          ],
+          "caps": [
+            19.225,
+            398.4
+          ],
+          "colors": [
+            [
+              52.074022864074266,
+              219.1548431025191,
+              235.29753253076376
+            ],
+            [
+              118.39131615821574,
+              169.92297353572255,
+              90.59247274577422
+            ]
+          ],
+          "shade": [
+            0.6506695644157198,
+            0.7155642946903461,
+            0.9990310690990377,
+            0.803747464724465
+          ],
+          "shade_knots": [
+            0.0,
+            0.23,
+            0.652,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 101,
+        "search_candidate_evaluations": 101
+      }
+    },
+    {
+      "case_id": "probe_07",
+      "input_sha256": "ee7cdd584c985f15b72d835610cf1027b269fff09db2f4e23aaaaf33ae6d800a",
+      "reference_svg_sha256": "9057bcfd2050e1d1eb14ae2889754220270e8d339f1daed8007b8b6d54d5ff9d",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014523478224873543,
+          "foreground_mse": 0.015180333517491817,
+          "edge_alignment": 0.4167653024196625,
+          "foreground_iou": 0.9402439024390243
+        },
+        "elapsed_seconds": 34.063
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.4667964023828972e-05,
+          "foreground_mse": 1.5321556929848157e-05,
+          "edge_alignment": 0.929785430431366,
+          "foreground_iou": 0.9942289584788749
+        },
+        "elapsed_seconds": 4.14,
+        "output_sha256": "51cea5a9b812c2b761b099cedb61972e521233007d4e1fd826ea0946cf43201f",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.875,
+            6.5625,
+            81.5625,
+            409.75
+          ],
+          "caps": [
+            24.75,
+            391.6
+          ],
+          "colors": [
+            [
+              51.86586557484969,
+              218.69299831377975,
+              234.97807793082268
+            ],
+            [
+              118.10495924253853,
+              169.54459425753652,
+              90.44632425166859
+            ]
+          ],
+          "shade": [
+            0.6523635567401135,
+            0.7156445577518104,
+            1.0,
+            0.8067397142179831
+          ],
+          "shade_knots": [
+            0.0,
+            0.233,
+            0.657,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 96,
+        "search_candidate_evaluations": 96
+      }
+    },
+    {
+      "case_id": "probe_08",
+      "input_sha256": "cb8a0281e0c6baf11b0d4f017bf97c0e1630c50357e8739b9eac73f4d35c6eaf",
+      "reference_svg_sha256": "db6257b084fa336adeeb2d0e1f6b9c1662d3647d030a66fa60dc2e90fc5cfcde",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.015077450312674046,
+          "foreground_mse": 0.015943441540002823,
+          "edge_alignment": 0.5806432366371155,
+          "foreground_iou": 0.9928681735223922
+        },
+        "elapsed_seconds": 34.219
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 7.877581992943306e-06,
+          "foreground_mse": 8.381700354220811e-06,
+          "edge_alignment": 0.9455188512802124,
+          "foreground_iou": 0.9999717210565013
+        },
+        "elapsed_seconds": 3.922,
+        "output_sha256": "39cdc291285f8cd60ba3581f590da345c101c53b415714f218fffb9a693b8e91",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            2.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.6875,
+            9.75,
+            84.3125,
+            427.6875
+          ],
+          "caps": [
+            28.625,
+            408.875
+          ],
+          "colors": [
+            [
+              52.03202749422432,
+              219.20168846716822,
+              235.42665851665532
+            ],
+            [
+              118.30532515402298,
+              170.01082161647108,
+              90.79105401303741
+            ]
+          ],
+          "shade": [
+            0.6501855605887971,
+            0.7136897729686307,
+            0.9993837833734424,
+            0.8029111657498273
+          ],
+          "shade_knots": [
+            0.0,
+            0.232,
+            0.653,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 93,
+        "search_candidate_evaluations": 93
+      }
+    },
+    {
+      "case_id": "probe_09",
+      "input_sha256": "3bbbdc31f5a1b0705ab5e27108638ac89784313716dca27c4b0046a69a2b2ce6",
+      "reference_svg_sha256": "64b215a8f8caca8568b7fd488a9f492f995dc208e6e8157cd3d476ca1c1ef45a",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.011728177778422832,
+          "foreground_mse": 0.011915729381144047,
+          "edge_alignment": 0.4825216829776764,
+          "foreground_iou": 0.9345973703515603
+        },
+        "elapsed_seconds": 33.266
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.2635057828447316e-05,
+          "foreground_mse": 8.986718057713006e-06,
+          "edge_alignment": 0.9440233707427979,
+          "foreground_iou": 0.996552804763397
+        },
+        "elapsed_seconds": 4.141,
+        "output_sha256": "c2e60b3fc9dbef0691940bb8f23c47955384a7fc86c631b259c9d475ba0244c4",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.9375,
+            1.4375,
+            84.5,
+            419.5625
+          ],
+          "caps": [
+            20.3,
+            400.7
+          ],
+          "colors": [
+            [
+              52.069164261154405,
+              219.13056371969023,
+              235.35040066175287
+            ],
+            [
+              118.35363268780833,
+              169.95033531649835,
+              90.70458728658093
+            ]
+          ],
+          "shade": [
+            0.6490437603728287,
+            0.7154867430905733,
+            0.9993104917847081,
+            0.8036252814989693
+          ],
+          "shade_knots": [
+            0.0,
+            0.238,
+            0.656,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 99,
+        "search_candidate_evaluations": 99
+      }
+    },
+    {
+      "case_id": "probe_10",
+      "input_sha256": "ae6e84a076bb8344e47896078c736632c58431620453bf40665e3c5d460e923c",
+      "reference_svg_sha256": "d0715327881593ac7dd7b342cf637b29220495b9a735651286d812f351a17045",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014707131311297417,
+          "foreground_mse": 0.015481284819543362,
+          "edge_alignment": 0.5950459241867065,
+          "foreground_iou": 0.9935814753393526
+        },
+        "elapsed_seconds": 33.343
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 9.994030733651016e-06,
+          "foreground_mse": 1.0585680684016552e-05,
+          "edge_alignment": 0.9483888149261475,
+          "foreground_iou": 0.9999690909652892
+        },
+        "elapsed_seconds": 3.703,
+        "output_sha256": "b8f9f911fefba2969fb812560983f45ba01cd83f8bd3a718f81a75470008105d",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.4375,
+            16.3125,
+            80.8125,
+            418.0
+          ],
+          "caps": [
+            34.45,
+            399.9
+          ],
+          "colors": [
+            [
+              51.92032907244552,
+              218.65832838258953,
+              234.82799828873073
+            ],
+            [
+              118.03524463307954,
+              169.57694537846783,
+              90.56445767974552
+            ]
+          ],
+          "shade": [
+            0.6523602566717279,
+            0.7173867397006238,
+            1.0,
+            0.8090218864523979
+          ],
+          "shade_knots": [
+            0.0,
+            0.233,
+            0.656,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 85,
+        "search_candidate_evaluations": 85
+      }
+    },
+    {
+      "case_id": "probe_11",
+      "input_sha256": "bfccc8728d35c97bb83c0b52620ba5b68b687d4ea239b30bbc5bab45190b5a76",
+      "reference_svg_sha256": "3c1602600331f2180c6714de549b745f8c9206bee6499929f8312b5192afb464",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.010225526057183743,
+          "foreground_mse": 0.010720268823206425,
+          "edge_alignment": 0.5542992353439331,
+          "foreground_iou": 0.9550166771838096
+        },
+        "elapsed_seconds": 34.266
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 8.212521606765222e-06,
+          "foreground_mse": 7.032353096292354e-06,
+          "edge_alignment": 0.953284740447998,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 7.032,
+        "output_sha256": "66cda419eb367abe5b08bf0189f55cc8026c45f526b19d5c8be84695cb8fd231",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            3.625,
+            0.125,
+            85.0625,
+            407.3125
+          ],
+          "caps": [
+            18.475,
+            388.95
+          ],
+          "colors": [
+            [
+              51.92132051896426,
+              218.65544957159182,
+              234.91586083129633
+            ],
+            [
+              118.05204896029815,
+              169.61214919203383,
+              90.597786427031
+            ]
+          ],
+          "shade": [
+            0.6519422660246549,
+            0.7191744940700372,
+            1.0,
+            0.8103669481856887
+          ],
+          "shade_knots": [
+            0.0,
+            0.238,
+            0.659,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 98,
+        "search_candidate_evaluations": 178,
+        "vector_continuation": {
+          "evaluations": 80,
+          "improved": true,
+          "error": 8.212521606765222e-06,
+          "search_control": {
+            "candidate_evaluations": 178,
+            "elapsed_seconds": 5.187,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "minimum_seconds": 30.0,
+            "stop_reason": "satisfactory",
+            "time_extensions": 0
+          },
+          "tube_model_passed": true
+        }
+      }
+    },
+    {
+      "case_id": "probe_12",
+      "input_sha256": "62c8ba159e7f23e48a5c801af4d37f85c0f2c8e55afbd46ce84a9d923fd4b2be",
+      "reference_svg_sha256": "1d7df81f4a95fc893ae9f6a4cc2f0d36aa7cdcec9820643b3b084f396996b13d",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.010157760232686996,
+          "foreground_mse": 0.01072387583553791,
+          "edge_alignment": 0.5695626735687256,
+          "foreground_iou": 0.9566688099298314
+        },
+        "elapsed_seconds": 35.297
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 5.4115353123052046e-06,
+          "foreground_mse": 5.741254426538944e-06,
+          "edge_alignment": 0.9163625240325928,
+          "foreground_iou": 0.9999719487222642
+        },
+        "elapsed_seconds": 4.125,
+        "output_sha256": "0f5bc9548fd29eceddef414b27d7d02d64393cf365c5526460d7e63d78d0b098",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            1.375,
+            0.0,
+            85.6875,
+            421.6875
+          ],
+          "caps": [
+            19.025,
+            402.7
+          ],
+          "colors": [
+            [
+              52.11228042171847,
+              219.1488659290003,
+              235.20342674723886
+            ],
+            [
+              118.3236347663987,
+              169.98163943186867,
+              90.70644265371662
+            ]
+          ],
+          "shade": [
+            0.6504735598125778,
+            0.7138962384992328,
+            0.9994932878730122,
+            0.805198336520217
+          ],
+          "shade_knots": [
+            0.0,
+            0.231,
+            0.655,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 93,
+        "search_candidate_evaluations": 93
+      }
+    },
+    {
+      "case_id": "probe_13",
+      "input_sha256": "9cbe5f24e42d7415e10e7dd156e52bbeb8adb459f7a2cec21ed7dcb012cf3b1a",
+      "reference_svg_sha256": "7127e30c6d1a90be01f8017179dfb59dd9d88b5055aac5d4c655b690a1c26570",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.014287716709077358,
+          "foreground_mse": 0.015757856890559196,
+          "edge_alignment": 0.416953980922699,
+          "foreground_iou": 0.9936394354999006
+        },
+        "elapsed_seconds": 34.828
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 6.867569936730433e-06,
+          "foreground_mse": 7.61722640163498e-06,
+          "edge_alignment": 0.9174644947052002,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 4.5,
+        "output_sha256": "49ecdb463f8ee3bc96739f7735641957dff595ad2b3af1d7b1ef07aae9dc502a",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            4.25,
+            0.5625,
+            81.4375,
+            386.625
+          ],
+          "caps": [
+            17.95,
+            369.225
+          ],
+          "colors": [
+            [
+              51.98680412792889,
+              218.57405480955373,
+              234.64254368259475
+            ],
+            [
+              118.03484567786394,
+              169.61642167493423,
+              90.6764010151334
+            ]
+          ],
+          "shade": [
+            0.653705637159062,
+            0.7164901600754411,
+            1.0,
+            0.8060930318492181
+          ],
+          "shade_knots": [
+            0.0,
+            0.228,
+            0.652,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 97,
+        "search_candidate_evaluations": 97
+      }
+    },
+    {
+      "case_id": "probe_14",
+      "input_sha256": "62f131a5e8733c5545afcf68a784f73f41f42b6d5b4a20fbd7472b19a6a75a74",
+      "reference_svg_sha256": "8439fca0b58d5bbf0f90e01b91e760f3952b01db8b400db104c03e0d04d21484",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.012188535183668137,
+          "foreground_mse": 0.01288958266377449,
+          "edge_alignment": 0.6157374382019043,
+          "foreground_iou": 0.9867455543068685
+        },
+        "elapsed_seconds": 34.687
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 7.082051524776034e-06,
+          "foreground_mse": 7.534849373769248e-06,
+          "edge_alignment": 0.9525900483131409,
+          "foreground_iou": 0.9994347840542608
+        },
+        "elapsed_seconds": 4.39,
+        "output_sha256": "8b71e347040fcc6472bc98f5ffd5125018f562648eee64ec8f9d9430437a3d08",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            2.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            0.625,
+            5.6875,
+            77.9375,
+            392.375
+          ],
+          "caps": [
+            23.1,
+            374.95
+          ],
+          "colors": [
+            [
+              52.1181364092341,
+              219.1184459346031,
+              235.28682530586934
+            ],
+            [
+              118.2332539013749,
+              169.9914495311639,
+              90.80049173577373
+            ]
+          ],
+          "shade": [
+            0.6488076152859438,
+            0.7164271429028555,
+            0.999372262371585,
+            0.8068920189439794
+          ],
+          "shade_knots": [
+            0.0,
+            0.238,
+            0.658,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 104,
+        "search_candidate_evaluations": 104
+      }
+    },
+    {
+      "case_id": "probe_15",
+      "input_sha256": "8fcf9c464cd40eac117c3c53ec33d8d23d57724712c5a1175f8a80b692e3ff74",
+      "reference_svg_sha256": "8569ad5635597f385913689ef250c6873f4d0090cb1915f2039573215826dfd5",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.013923617079854012,
+          "foreground_mse": 0.015121950767934322,
+          "edge_alignment": 0.39747536182403564,
+          "foreground_iou": 0.9925494904713524
+        },
+        "elapsed_seconds": 34.813
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 7.501185336877825e-06,
+          "foreground_mse": 8.193745998141821e-06,
+          "edge_alignment": 0.7989287376403809,
+          "foreground_iou": 0.9988845164688749
+        },
+        "elapsed_seconds": 32.438,
+        "output_sha256": "4c222963d91915184efbf5d7aa59f7098da213c3d917a329f462a289d68238b9",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            3.8125,
+            19.0,
+            83.875,
+            419.625
+          ],
+          "caps": [
+            37.075,
+            401.55
+          ],
+          "colors": [
+            [
+              52.14365570407936,
+              219.1142650038228,
+              235.25113606228254
+            ],
+            [
+              118.35993155250412,
+              169.94823230743498,
+              90.64454377598186
+            ]
+          ],
+          "shade": [
+            0.6490240551378883,
+            0.7155565856935072,
+            0.9993728221264719,
+            0.8065783331991053
+          ],
+          "shade_knots": [
+            0.0,
+            0.238,
+            0.658,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 91,
+        "search_candidate_evaluations": 914,
+        "vector_continuation": {
+          "evaluations": 823,
+          "improved": true,
+          "error": 7.501184882130474e-06,
+          "search_control": {
+            "candidate_evaluations": 914,
+            "elapsed_seconds": 30.046,
+            "limit_seconds": 60.0,
+            "max_seconds": 120.0,
+            "minimum_seconds": 30.0,
+            "stop_reason": "proposal_limit",
+            "time_extensions": 0
+          },
+          "tube_model_passed": true
+        }
+      }
+    },
+    {
+      "case_id": "probe_16",
+      "input_sha256": "4c5157bf295e9f0ccb5ef505e53a5c46624ab39ceb17d3e6b436103c4c67fbaf",
+      "reference_svg_sha256": "1ac5b135e4fc555f03b4b847694d5927e54968b5c743641ded61aba12817de76",
+      "before": {
+        "satisfactory": false,
+        "failures": [
+          "normalized_mse_outside_limit",
+          "edge_alignment_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.012022997252643108,
+          "foreground_mse": 0.013117389753460884,
+          "edge_alignment": 0.5660989880561829,
+          "foreground_iou": 0.9863380918545314
+        },
+        "elapsed_seconds": 34.641
+      },
+      "after": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 1.1008109140675515e-05,
+          "foreground_mse": 1.208638150274055e-05,
+          "edge_alignment": 0.9084003567695618,
+          "foreground_iou": 1.0
+        },
+        "elapsed_seconds": 4.718,
+        "output_sha256": "0bf0005b42881aacf04e1bb8e5849fe282d401ab9329e7987a4923224121da8b",
+        "details": {
+          "passed": true,
+          "region_error_p95": [
+            1.0,
+            1.0,
+            2.0
+          ]
+        },
+        "parameters": {
+          "bounds": [
+            3.5625,
+            0.75,
+            81.75,
+            391.9375
+          ],
+          "caps": [
+            18.4,
+            374.325
+          ],
+          "colors": [
+            [
+              51.91400505640972,
+              218.64996738776307,
+              234.85305440346988
+            ],
+            [
+              118.1956698419682,
+              169.4928937069297,
+              90.31837378601688
+            ]
+          ],
+          "shade": [
+            0.6522126752240265,
+            0.7170728194870475,
+            1.0,
+            0.8090120317648513
+          ],
+          "shade_knots": [
+            0.0,
+            0.233,
+            0.656,
+            1.0
+          ]
+        },
+        "tube_render_evaluations": 93,
+        "search_candidate_evaluations": 93
+      }
+    }
+  ],
+  "local_gui_recheck": {
+    "run_id": "71b65e2a8f1941a192f10e139fa7ca36",
+    "attempt": "attempt_0002",
+    "summary": {
+      "total": 17,
+      "completed": 17,
+      "passed": 17,
+      "quality_failed": 0,
+      "execution_failed": 0,
+      "failure_counts": {},
+      "satisfactory": true
+    },
+    "elapsed_seconds": 103.797,
+    "byte_identical_to_replay": false,
+    "results": [
+      {
+        "case_id": "original",
+        "output_sha256": "1374135618952b98d0555cb8f30264b451b4a31fad2d890ca1badef40da77133",
+        "metrics": {
+          "normalized_mse": 5.211456937104231e-06,
+          "foreground_mse": 4.945383352605859e-06,
+          "edge_alignment": 0.9961550831794739,
+          "foreground_iou": 0.9905584826132772
+        }
+      },
+      {
+        "case_id": "probe_01",
+        "output_sha256": "a3b8fe1c1a42bff088914abfa8e546a8d415044e26acf9601505116af3889319",
+        "metrics": {
+          "normalized_mse": 7.440887657139683e-06,
+          "foreground_mse": 8.32197747513419e-06,
+          "edge_alignment": 0.9454010725021362,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_02",
+        "output_sha256": "9c4a3a518c2b84134e0b2b2637ca44b0815569ecf83d79ef6bd587b976076af1",
+        "metrics": {
+          "normalized_mse": 1.05669296317501e-05,
+          "foreground_mse": 1.1603086022660136e-05,
+          "edge_alignment": 0.9657260775566101,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_03",
+        "output_sha256": "df9abae12397528a9a63efb7dcbba6a6114247847b6c3b0c710ba57e5beca38a",
+        "metrics": {
+          "normalized_mse": 6.397539436875377e-06,
+          "foreground_mse": 6.684767868136987e-06,
+          "edge_alignment": 0.9559965133666992,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_04",
+        "output_sha256": "acc853ca04244b5e8bf7eca5c15909377c8e6e0f45599003c11e7a0ce75ff961",
+        "metrics": {
+          "normalized_mse": 5.820036221848568e-06,
+          "foreground_mse": 5.942120878899004e-06,
+          "edge_alignment": 0.9654065370559692,
+          "foreground_iou": 0.9994198744198745
+        }
+      },
+      {
+        "case_id": "probe_05",
+        "output_sha256": "70499abade629705b2100e072e0b5243421efaa98951362529d7a09b4a780180",
+        "metrics": {
+          "normalized_mse": 7.529796675953548e-06,
+          "foreground_mse": 6.157506504678167e-06,
+          "edge_alignment": 0.933387279510498,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_06",
+        "output_sha256": "a7823cbe266ca081b62eb2f2180f7f224a06e8246a2fc6210ab3c39d83ef6cab",
+        "metrics": {
+          "normalized_mse": 5.829941073898226e-06,
+          "foreground_mse": 6.409296929632546e-06,
+          "edge_alignment": 0.9218213558197021,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_07",
+        "output_sha256": "51cea5a9b812c2b761b099cedb61972e521233007d4e1fd826ea0946cf43201f",
+        "metrics": {
+          "normalized_mse": 1.4667964023828972e-05,
+          "foreground_mse": 1.5321556929848157e-05,
+          "edge_alignment": 0.929785430431366,
+          "foreground_iou": 0.9942289584788749
+        }
+      },
+      {
+        "case_id": "probe_08",
+        "output_sha256": "39cdc291285f8cd60ba3581f590da345c101c53b415714f218fffb9a693b8e91",
+        "metrics": {
+          "normalized_mse": 7.877581992943306e-06,
+          "foreground_mse": 8.381700354220811e-06,
+          "edge_alignment": 0.9455188512802124,
+          "foreground_iou": 0.9999717210565013
+        }
+      },
+      {
+        "case_id": "probe_09",
+        "output_sha256": "c2e60b3fc9dbef0691940bb8f23c47955384a7fc86c631b259c9d475ba0244c4",
+        "metrics": {
+          "normalized_mse": 1.2635057828447316e-05,
+          "foreground_mse": 8.986718057713006e-06,
+          "edge_alignment": 0.9440233707427979,
+          "foreground_iou": 0.996552804763397
+        }
+      },
+      {
+        "case_id": "probe_10",
+        "output_sha256": "b8f9f911fefba2969fb812560983f45ba01cd83f8bd3a718f81a75470008105d",
+        "metrics": {
+          "normalized_mse": 9.994030733651016e-06,
+          "foreground_mse": 1.0585680684016552e-05,
+          "edge_alignment": 0.9483888149261475,
+          "foreground_iou": 0.9999690909652892
+        }
+      },
+      {
+        "case_id": "probe_11",
+        "output_sha256": "66cda419eb367abe5b08bf0189f55cc8026c45f526b19d5c8be84695cb8fd231",
+        "metrics": {
+          "normalized_mse": 8.212521606765222e-06,
+          "foreground_mse": 7.032353096292354e-06,
+          "edge_alignment": 0.953284740447998,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_12",
+        "output_sha256": "0f5bc9548fd29eceddef414b27d7d02d64393cf365c5526460d7e63d78d0b098",
+        "metrics": {
+          "normalized_mse": 5.4115353123052046e-06,
+          "foreground_mse": 5.741254426538944e-06,
+          "edge_alignment": 0.9163625240325928,
+          "foreground_iou": 0.9999719487222642
+        }
+      },
+      {
+        "case_id": "probe_13",
+        "output_sha256": "49ecdb463f8ee3bc96739f7735641957dff595ad2b3af1d7b1ef07aae9dc502a",
+        "metrics": {
+          "normalized_mse": 6.867569936730433e-06,
+          "foreground_mse": 7.61722640163498e-06,
+          "edge_alignment": 0.9174644947052002,
+          "foreground_iou": 1.0
+        }
+      },
+      {
+        "case_id": "probe_14",
+        "output_sha256": "8b71e347040fcc6472bc98f5ffd5125018f562648eee64ec8f9d9430437a3d08",
+        "metrics": {
+          "normalized_mse": 7.082051524776034e-06,
+          "foreground_mse": 7.534849373769248e-06,
+          "edge_alignment": 0.9525900483131409,
+          "foreground_iou": 0.9994347840542608
+        }
+      },
+      {
+        "case_id": "probe_15",
+        "output_sha256": "9abfcb448b980e19a5e0b6f53353c7e2138b9b5dc248d730a754bac384b4da03",
+        "metrics": {
+          "normalized_mse": 7.3676528700161725e-06,
+          "foreground_mse": 8.047771189012565e-06,
+          "edge_alignment": 0.7989287376403809,
+          "foreground_iou": 0.9988845164688749
+        }
+      },
+      {
+        "case_id": "probe_16",
+        "output_sha256": "0bf0005b42881aacf04e1bb8e5849fe282d401ab9329e7987a4923224121da8b",
+        "metrics": {
+          "normalized_mse": 1.1008109140675515e-05,
+          "foreground_mse": 1.208638150274055e-05,
+          "edge_alignment": 0.9084003567695618,
+          "foreground_iou": 1.0
+        }
+      }
+    ]
+  }
+}

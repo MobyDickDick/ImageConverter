@@ -163,3 +163,10 @@ Beim gelben Verlaufskreis wurde zusätzlich `geringfügig` fälschlich als
 Ringbeschreibung erkannt. Die Wortprüfung ist korrigiert; dieselben 17 Fälle
 bestehen jetzt mit unveränderten Qualitätsgrenzen. Details stehen in der
 [Untersuchung des gelben Verlaufskreises](plan_b_yellow_disk_2026-11-13.md).
+
+Bei der Röhre `AC0151_L` verhinderten sowohl der ergänzte Beschreibungssatz als
+auch gemischte Randpixel und ganzzahlige Außenkanten die Rekonstruktion aller
+16 Varianten. Die Textprüfung und die Kantensuche sind korrigiert; der
+Wiederholungslauf besteht alle 17 Fälle mit unveränderten Eingaben und Grenzen.
+Details stehen in der
+[Untersuchung der Röhrenvarianten](plan_b_gradient_tube_2026-11-14.md).

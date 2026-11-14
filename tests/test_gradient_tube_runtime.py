@@ -8,7 +8,7 @@ import pytest
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, SearchPolicy, image_search
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
 from src.iCCModules.imageCompositeConverterGradientTube import fit_gradient_tube, tube_contract, validate_tube_refinement
-from tools.run_plan_b_variations import render, measure_quality
+from tools.run_plan_b_variations import render, measure_quality, make_variations
 
 
 DESCRIPTION = ('Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. '
@@ -59,6 +59,71 @@ def test_independent_pixels_keep_two_paint_axes_and_both_caps(size, margin, frac
                                    ' Der Verlauf ist umgekehrt.'])
 def test_contract_does_not_discard_extra_objects_or_negations(suffix):
     assert not tube_contract(DESCRIPTION+suffix)
+
+
+POSE = (' Die gesamte Darstellung ist geringfügig grösser dargestellt '
+        'und ein wenig nach links und oben versetzt.')
+
+
+@pytest.mark.parametrize('detailed', [False, True])
+def test_whole_motif_sentence_keeps_the_complete_description_contract(detailed):
+    description = DESCRIPTION
+    if detailed:
+        description = next(e.findtext('beschreibung') for e in ET.parse(
+            ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml').getroot().iter('entry')
+            if e.get('key') == 'AC0151')
+    assert tube_contract(description+POSE)
+    for extra in [' Mit Text.', ' Mit einem Kreis rechts.', ' Ohne Kappen.']:
+        assert not tube_contract(description+extra+POSE)
+        assert not tube_contract(description+POSE+extra)
+    assert not tube_contract(description+POSE+POSE)
+
+
+def test_fractional_pose_variants_keep_caps_and_both_paint_axes():
+    # Independent colours, stop positions, aspect ratio and seed. The model
+    # receives only the rendered pixels and wording, never this source vector.
+    svg = '''<svg xmlns="http://www.w3.org/2000/svg" width="60" height="250">
+      <defs>
+        <linearGradient id="body" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#e6dc28"/><stop offset="1" stop-color="#41a56e"/>
+        </linearGradient>
+        <linearGradient id="shade">
+          <stop offset="0" stop-color="#000000" stop-opacity="0.38"/>
+          <stop offset="0.13" stop-color="#000000" stop-opacity="0.36"/>
+          <stop offset="0.63" stop-color="#000000" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000000" stop-opacity="0.24"/>
+        </linearGradient>
+        <linearGradient id="cap">
+          <stop offset="0" stop-color="#969696"/><stop offset="0.13" stop-color="#a0a0a0"/>
+          <stop offset="0.63" stop-color="#ebebeb"/><stop offset="1" stop-color="#b4b4b4"/>
+        </linearGradient>
+      </defs>
+      <rect width="60" height="250" fill="url(#body)" stroke="none"/>
+      <rect width="60" height="250" fill="url(#shade)" stroke="none"/>
+      <rect width="60" height="14" fill="url(#cap)" stroke="none"/>
+      <rect y="236" width="60" height="14" fill="url(#cap)" stroke="none"/>
+    </svg>'''
+    cases = make_variations(svg, DESCRIPTION, 98126, expand_canvas=True)
+    for case in cases:
+        image = render(case['svg'], case['width'], case['height'])
+        result = fit(image, case['description'])
+        assert result is not None, case['case_id']
+        assert result['quality']['passed'] and result['details']['passed'], case['case_id']
+        assert measure_quality(image, result['svg'])['satisfactory'], case['case_id']
+        assert len(ET.fromstring(result['svg']).findall('{*}rect')) == 4
+
+
+def test_budget_expiring_during_edge_search_does_not_certify_a_partial_fit():
+    session = ImageSearch(SearchPolicy(), clock=lambda: 0)
+    image = independent_raster(fractional=True)
+    calls = []
+    def expire(svg, w, h):
+        calls.append(svg)
+        session.spent = 120
+        return np.zeros((h, w, 3), dtype=np.uint8)
+    with image_search(session):
+        assert fit(image, render_fn=expire) is None
+    assert len(calls) == 1
 
 
 @pytest.mark.parametrize('damage', ['caps', 'vertical', 'horizontal', 'mark', 'color'])

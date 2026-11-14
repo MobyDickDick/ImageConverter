@@ -21,6 +21,13 @@ def tube_contract(description):
     def normalized(value):
         return re.sub(r'\s+', ' ', normalize_description(value).casefold()).strip().rstrip('.')
     text = normalized(description)
+    # The workbench changes the pose of the whole motif. Consume only its
+    # complete terminal sentence; other objects or changed paint still reject.
+    text = re.sub(
+        r'\s+(?:das (?:gesamte )?motiv|die (?:gesamte )?darstellung) ist '
+        r'(?:geringfügig|etwas|ein wenig|leicht) (?:kleiner|grösser|groesser) dargestellt '
+        r'und (?:geringfügig|etwas|ein wenig|leicht) nach (?:links|rechts) '
+        r'und (?:oben|unten) (?:versetzt|verschoben)$', '', text).rstrip('.')
     # Consume complete known contracts, including the original terse wording.
     # Extra objects/negations must not be silently discarded by this model.
     old = ('röhre oben und unten grau; vertikaler verlauf von gelbgrün nach dunkelgrün. '
@@ -106,6 +113,9 @@ def fit_gradient_tube(width, height, *, description, image, render_fn, error_fn)
     rows = np.flatnonzero(chroma > 20)
     if not len(rows):
         return None
+    # At a fractional outside edge the cap blends with the coloured body below
+    # it. Isolated chromatic edge rows are not the axial body interval.
+    rows = max(np.split(rows, np.flatnonzero(np.diff(rows) > 1)+1), key=len)
     top, bottom = y+int(rows[0]), y+int(rows[-1])+1
     if (min(top-y, Y-bottom) < 2 or max(top-y, Y-bottom) > (Y-y)*.2
             or bottom-top < 12 or np.any(chroma[top-y+2:bottom-y-2] <= 20)):
@@ -115,7 +125,7 @@ def fit_gradient_tube(width, height, *, description, image, render_fn, error_fn)
     cap_profiles = []
     for a, b in ((y, top), (bottom, Y)):
         inset = 1 if b-a >= 4 else 0
-        cap_profiles.append(np.median(pixels[a+inset:b-inset, x:X], axis=0))
+        cap_profiles.append(np.median(pixels[a+inset:b-inset, x+1:X-1], axis=0))
     if max(np.ptp(profile, axis=1).max() for profile in cap_profiles) > 12:
         return None
     # Rank-one lateral shading: the same factor multiplies every row/channel.
@@ -144,7 +154,7 @@ def fit_gradient_tube(width, height, *, description, image, render_fn, error_fn)
     predicted = (basis @ colors)[:, None, :]*factor[None, :, None]
     if np.percentile(abs(body-predicted), 95) > 6:
         return None
-    cap_paints = [_piecewise_profile(profile, (np.arange(X-x)+.5)/(X-x)) for profile in cap_profiles]
+    cap_paints = [_piecewise_profile(profile, t) for profile in cap_profiles]
 
     # A resized JPEG can blend a cap junction across a pixel. Recover that
     # coverage from both observed paints instead of snapping the cap to a row.
@@ -176,24 +186,72 @@ def fit_gradient_tube(width, height, *, description, image, render_fn, error_fn)
     definitions += paint('tubeShade', knots, np.zeros((4, 3)), opacity=1-values)
     for i, (cap_knots, cap_colors) in enumerate(cap_paints):
         definitions += paint(f'cap{i}', cap_knots, np.clip(cap_colors, 0, 255))
-    def rectangle(a, b, fill):
-        return f'<rect x="{x}" y="{a}" width="{X-x}" height="{b-a}" fill="url(#{fill})" stroke="none"/>'
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
-           f'<defs>{definitions}</defs>'+rectangle(y, Y, 'tubeColor')+
-           rectangle(y, Y, 'tubeShade')+rectangle(y, top_edge, 'cap0')+rectangle(bottom_edge, Y, 'cap1')+'</svg>')
+    def build(geometry):
+        left, upper, right, lower, cap_top, cap_bottom = geometry
+        def rectangle(a, b, fill):
+            return (f'<rect x="{left:.8g}" y="{a:.8g}" width="{right-left:.8g}" '
+                    f'height="{b-a:.8g}" fill="url(#{fill})" stroke="none"/>')
+        return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
+                f'<defs>{definitions}</defs>'+rectangle(upper, lower, 'tubeColor')+
+                rectangle(upper, lower, 'tubeShade')+rectangle(upper, cap_top, 'cap0')+
+                rectangle(cap_bottom, lower, 'cap1')+'</svg>')
+
+    geometry = np.array([x, y, X, Y, top_edge, bottom_edge], dtype=float)
+    svg = build(geometry)
     if session and session.time_reason():
         return None
     rendered = render_fn(svg, width, height)
+    evaluations = 1
     if session:
         session.evaluations += 1
     if rendered is None:
         return None
+    initial_error = float(error_fn(arr, rendered))
+    loss = float(np.mean((pixels-rendered)**2))
+    # Integer foreground bounds are only an initializer: transformed tubes have
+    # fractional outside edges as well as fractional cap junctions. Fit those
+    # six edges against actual rendered candidates, preserving the four paints.
+    seen = {tuple(geometry)}
+    if loss > 1:
+        origin = geometry.copy()
+        for step in (.5, .25, .125, .0625):
+            for _ in range(2):
+                improved = False
+                for index in range(6):
+                    anchor = geometry.copy()
+                    # Layered antialiasing need not have a monotone loss within
+                    # one edge pixel; sample across that pixel at coarse scale.
+                    for direction in ((-2, -1.5, -1, -.5, .5, 1, 1.5, 2) if step == .5 else (-1, 1)):
+                        proposal = anchor.copy()
+                        proposal[index] += direction*step
+                        key = tuple(proposal)
+                        if key in seen or np.max(abs(proposal-origin)) > 1.5:
+                            continue
+                        seen.add(key)
+                        left, upper, right, lower, cap_top, cap_bottom = proposal
+                        if not (0 <= left < right <= width and 0 <= upper < cap_top < cap_bottom < lower <= height):
+                            continue
+                        if session and session.time_reason():
+                            return None
+                        candidate = build(proposal)
+                        measured = render_fn(candidate, width, height)
+                        evaluations += 1
+                        if session:
+                            session.evaluations += 1
+                        if measured is None:
+                            continue
+                        candidate_loss = float(np.mean((pixels-measured)**2))
+                        if candidate_loss < loss:
+                            geometry, svg, rendered, loss = proposal, candidate, measured, candidate_loss
+                            improved = True
+                if not improved:
+                    break
     quality = pixel_quality(arr, rendered)
     details = tube_details(arr, rendered, [x, y, X, Y], [top, bottom])
     if not quality['passed'] or not details['passed']:
         return None
     error = float(error_fn(arr, rendered))
-    return dict(svg=svg, rendered=rendered, error=error, initial_error=error,
-                source='gradient_tube', evaluations=1, quality=quality, details=details,
-                parameters=dict(bounds=[x, y, X, Y], caps=boundaries,
+    return dict(svg=svg, rendered=rendered, error=error, initial_error=initial_error,
+                source='gradient_tube', evaluations=evaluations, quality=quality, details=details,
+                parameters=dict(bounds=geometry[:4].tolist(), caps=geometry[4:].tolist(),
                                 shade_knots=knots.tolist(), shade=values.tolist(), colors=colors.tolist()))
