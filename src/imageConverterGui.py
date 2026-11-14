@@ -23,6 +23,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
+from urllib.request import ProxyHandler, build_opener
 import uuid
 import warnings
 import webbrowser
@@ -883,7 +884,9 @@ class Handler(BaseHTTPRequestHandler):
                       "/style.css": ("style.css", "text/css; charset=utf-8")}
             if self.command == "GET":
                 if path == '/api/config':
-                    return self.json(dict(native_file_dialogs=os.name == 'nt'))
+                    return self.json(dict(native_file_dialogs=os.name == 'nt',
+                        application='imageconverter_gui', api_version=1,
+                        project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]
                     return self.file(WEB / filename, mime)
@@ -1052,6 +1055,25 @@ class Handler(BaseHTTPRequestHandler):
         return self.file(target, mime, 'result.svg' if 'download' in parse_qs(query) else None)
 
 
+def existing_gui(port: int, directory: Path) -> str | None:
+    """Reuse only this project's server with the requested data directory."""
+    url = f'http://127.0.0.1:{port}'
+    try:
+        # A local server probe must not depend on configured HTTP proxies.
+        with build_opener(ProxyHandler({})).open(url+'/api/config', timeout=3) as response:
+            config = json.loads(response.read(65536))
+        if (isinstance(config, dict) and config.get('application') == 'imageconverter_gui'
+                and config.get('api_version') == 1
+                and isinstance(config.get('project_root'), str)
+                and isinstance(config.get('data_directory'), str)
+                and Path(config['project_root']).resolve() == ROOT.resolve()
+                and Path(config['data_directory']).resolve() == directory.resolve()):
+            return url
+    except (OSError, ValueError):
+        pass
+    return None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8766)
@@ -1064,6 +1086,12 @@ def main(argv: list[str] | None = None) -> int:
         server = GuiServer(("127.0.0.1", args.port), directory=args.data_dir)
         jobs = server.jobs
     except OSError as exc:
+        existing = existing_gui(args.port, args.data_dir)
+        if existing:
+            print(f'ImageConverter läuft bereits: {existing}\nDie vorhandene Instanz wird verwendet.', flush=True)
+            if not args.no_browser:
+                webbrowser.open(existing)
+            return 0
         print(f"GUI konnte nicht gestartet werden: {exc}\n"
               f"Falls Port {args.port} bereits belegt ist: den vorhandenen Webserver zuerst beenden.\n"
               "Für einen getrennten Server einen anderen Port und ein eigenes --data-dir wählen.", file=sys.stderr)

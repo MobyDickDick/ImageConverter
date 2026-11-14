@@ -248,3 +248,55 @@ def test_second_server_cannot_share_port_or_read_the_running_servers_jobs(monkey
             assert server.socket.getsockopt(socket.SOL_SOCKET,socket.SO_EXCLUSIVEADDRUSE) == 1
     finally:
         server.server_close();jobs.close()
+
+
+@pytest.mark.parametrize('no_browser',[False,True])
+def test_start_reuses_matching_server_and_opens_it_without_reading_jobs(monkeypatch,tmp_path,capsys,no_browser):
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
+    jobs = gui.Jobs(tmp_path/'first')
+    server = gui.GuiServer(('127.0.0.1',0),jobs)
+    thread = threading.Thread(target=server.serve_forever,daemon=True)
+    thread.start()
+    opened = []
+    monkeypatch.setattr(gui.webbrowser,'open',opened.append)
+    def forbidden(*args, **kwargs):
+        pytest.fail('Opening an existing server must not reload its jobs')
+    monkeypatch.setattr(gui,'Jobs',forbidden)
+    try:
+        args = ['--port',str(server.server_port),'--data-dir',str(jobs.directory)]
+        if no_browser:
+            args.append('--no-browser')
+        assert gui.main(args) == 0
+        assert opened == ([] if no_browser else [f'http://127.0.0.1:{server.server_port}'])
+        output = capsys.readouterr()
+        assert 'läuft bereits' in output.out
+        assert not output.err
+    finally:
+        server.shutdown();thread.join(timeout=5);server.server_close();jobs.close()
+
+
+def test_start_rejects_server_with_different_data_directory(monkeypatch,tmp_path,capsys):
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
+    jobs = gui.Jobs(tmp_path/'first')
+    server = gui.GuiServer(('127.0.0.1',0),jobs)
+    thread = threading.Thread(target=server.serve_forever,daemon=True)
+    thread.start()
+    opened = []
+    monkeypatch.setattr(gui.webbrowser,'open',opened.append)
+    try:
+        assert gui.main(['--port',str(server.server_port),'--data-dir',str(tmp_path/'other')]) == 1
+        assert not opened and not (tmp_path/'other').exists()
+        assert 'GUI konnte nicht gestartet werden' in capsys.readouterr().err
+    finally:
+        server.shutdown();thread.join(timeout=5);server.server_close();jobs.close()
+
+
+@pytest.mark.parametrize('config', [dict(application='other'), [],
+    dict(application='imageconverter_gui',api_version=1,project_root='elsewhere',data_directory='elsewhere')])
+def test_existing_gui_rejects_unrelated_server_metadata(monkeypatch,tmp_path,config):
+    import io
+    class Opener:
+        def open(self,*args,**kwargs):
+            return io.BytesIO(json.dumps(config).encode())
+    monkeypatch.setattr(gui,'build_opener',lambda *args:Opener())
+    assert gui.existing_gui(8766,tmp_path) is None

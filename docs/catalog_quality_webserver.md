@@ -7,9 +7,12 @@ werden. Die statischen Webseiten werden von der Festplatte geladen, während
 Python-Code bis zum Neustart im laufenden Prozess verbleibt. Eine fehlende
 Hintergrunddienst-API wird mit einem konkreten Neustarthinweis angezeigt;
 die vorhandene Katalog- und Fortschrittsanzeige aktualisiert sich weiter.
-Unter Windows bindet der Server seinen Port exklusiv. Ein zweiter Start auf
-demselben Port scheitert vor dem Laden gespeicherter Aufträge, damit parallele
-Server weder unterschiedliche APIs liefern noch Auftragsstände verändern.
+Unter Windows bindet der Server seinen Port exklusiv. Läuft derselbe
+ImageConverter-Server bereits, öffnet ein erneuter Start dessen Oberfläche
+und endet erfolgreich. Mit `--no-browser` wird nur die Adresse ausgegeben.
+Projekt und Datenverzeichnis müssen übereinstimmen; andere Dienste auf
+demselben Port werden nicht übernommen. Der zweite Aufruf liest oder verändert
+keine gespeicherten Aufträge und startet keinen zusätzlichen Serverprozess.
 Die Oberfläche zeigt die letzte vollständige Liste aller 1.787 Katalogbitmaps.
 Suchen über Dateinamen und Beschreibungen, Qualitäts-/Archivfilter,
 MSE-Sortierung, Seitenauswahl und „Alle“ wirken auf den gesamten Bestand.
