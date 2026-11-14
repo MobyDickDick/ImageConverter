@@ -2,6 +2,14 @@
 
 Aufruf: `startWebServer.cmd`, dann **Konvertierungsqualität** oder
 [direkt die Qualitätsliste](http://127.0.0.1:8766/catalog).
+Nach einer Codeänderung muss der bisherige Server beendet und neu gestartet
+werden. Die statischen Webseiten werden von der Festplatte geladen, während
+Python-Code bis zum Neustart im laufenden Prozess verbleibt. Eine fehlende
+Hintergrunddienst-API wird mit einem konkreten Neustarthinweis angezeigt;
+die vorhandene Katalog- und Fortschrittsanzeige aktualisiert sich weiter.
+Unter Windows bindet der Server seinen Port exklusiv. Ein zweiter Start auf
+demselben Port scheitert vor dem Laden gespeicherter Aufträge, damit parallele
+Server weder unterschiedliche APIs liefern noch Auftragsstände verändern.
 Die Oberfläche zeigt die letzte vollständige Liste aller 1.787 Katalogbitmaps.
 Suchen über Dateinamen und Beschreibungen, Qualitäts-/Archivfilter,
 MSE-Sortierung, Seitenauswahl und „Alle“ wirken auf den gesamten Bestand.
@@ -99,6 +107,7 @@ Es gelten dieselben lokalen Host-/Origin- und Headerprüfungen wie für die GUI.
 
 ```powershell
 .venv/Scripts/python.exe -m pytest -q tests/test_catalog_background_conversion.py tests/test_catalog_quality_server.py tests/test_catalog_inventory.py tests/test_catalog_inventory_html.py tests/test_image_converter_gui.py tests/test_category_collection.py
+node --test tests/test_catalog_poll.js
 ```
 
 Die Dienstregressionen prüfen Auswahlreihenfolge, Ausschluss bestandener und

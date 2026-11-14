@@ -230,3 +230,21 @@ def test_http_catalog_routes_downloads_and_origin_protection(catalog,monkeypatch
         assert request('/api/catalog/conversion/stop','POST',{'X-ImageConverter':'1'},b'{}')[0] == 200
     finally:
         server.shutdown();thread.join(timeout=5);server.server_close();jobs.close()
+
+
+def test_second_server_cannot_share_port_or_read_the_running_servers_jobs(monkeypatch,tmp_path):
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
+    jobs = gui.Jobs(tmp_path/'first')
+    server = gui.GuiServer(('127.0.0.1',0),jobs)
+    def forbidden(*args, **kwargs):
+        pytest.fail('A duplicate server must fail before reading or changing persisted jobs')
+    monkeypatch.setattr(gui,'Jobs',forbidden)
+    try:
+        with pytest.raises(OSError):
+            gui.GuiServer(server.server_address,directory=tmp_path/'second')
+        assert not (tmp_path/'second').exists()
+        if sys.platform == 'win32':
+            import socket
+            assert server.socket.getsockopt(socket.SOL_SOCKET,socket.SO_EXCLUSIVEADDRUSE) == 1
+    finally:
+        server.server_close();jobs.close()

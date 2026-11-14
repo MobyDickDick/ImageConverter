@@ -16,6 +16,7 @@ import re
 import secrets
 import shutil
 import signal
+import socket
 import subprocess
 import sys
 import threading
@@ -796,19 +797,38 @@ class Workbench:
 
 class GuiServer(ThreadingHTTPServer):
     daemon_threads = True
+    allow_reuse_address = os.name != 'nt'
 
-    def __init__(self, address: tuple[str, int], jobs: Jobs):
+    def __init__(self, address: tuple[str, int], jobs: Jobs | None = None, *, directory: Path | None = None):
         self.jobs = jobs
-        self.workbench = Workbench(jobs)
-        self.catalog = CatalogQuality(ROOT, jobs.directory/'catalog-quality', stop_process_tree)
-        self.collection = CategoryCollection(ROOT, self.catalog, jobs)
-        self.catalog_conversion = CatalogConversion(self.catalog, jobs, self.workbench)
+        self.workbench = self.catalog = self.catalog_conversion = None
+        # Bind before reading persisted jobs: a second launch must not mark
+        # the running server's conversions as interrupted.
         super().__init__(address, Handler)
+        try:
+            if self.jobs is None:
+                self.jobs = Jobs(directory if directory is not None else ROOT/'artifacts/gui')
+            self.workbench = Workbench(self.jobs)
+            self.catalog = CatalogQuality(ROOT, self.jobs.directory/'catalog-quality', stop_process_tree)
+            self.collection = CategoryCollection(ROOT, self.catalog, self.jobs)
+            self.catalog_conversion = CatalogConversion(self.catalog, self.jobs, self.workbench)
+        except Exception:
+            self.server_close()
+            if jobs is None and self.jobs is not None:
+                self.jobs.close()
+            raise
+
+    def server_bind(self):
+        if os.name == 'nt':
+            # SO_REUSEADDR on Windows lets old and new processes listen on
+            # the same port and serve incompatible APIs at the same URL.
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
 
     def server_close(self):
-        self.catalog_conversion.close()
-        self.catalog.close()
-        self.workbench.close()
+        for manager in (self.catalog_conversion, self.catalog, self.workbench):
+            if manager is not None:
+                manager.close()
         super().server_close()
 
 
@@ -1041,10 +1061,12 @@ def main(argv: list[str] | None = None) -> int:
     from src.iCCModules.imageCompositeConverterDependencies import activate_vendored_site_packages
     activate_vendored_site_packages()
     try:
-        jobs = Jobs(args.data_dir)
-        server = GuiServer(("127.0.0.1", args.port), jobs)
+        server = GuiServer(("127.0.0.1", args.port), directory=args.data_dir)
+        jobs = server.jobs
     except OSError as exc:
-        print(f"GUI konnte nicht gestartet werden: {exc}\nAnderen Port mit --port 8767 wählen.", file=sys.stderr)
+        print(f"GUI konnte nicht gestartet werden: {exc}\n"
+              f"Falls Port {args.port} bereits belegt ist: den vorhandenen Webserver zuerst beenden.\n"
+              "Für einen getrennten Server einen anderen Port und ein eigenes --data-dir wählen.", file=sys.stderr)
         return 1
     url = f"http://127.0.0.1:{server.server_port}"
     print(f"ImageConverter: {url}\nErgebnisse: {jobs.directory}\nBeenden mit Strg+C.", flush=True)

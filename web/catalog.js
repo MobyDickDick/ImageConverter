@@ -1,6 +1,6 @@
 'use strict';
 const el = id => document.getElementById(id);
-let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polling = false, conversionActive = false;
+let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polling = false, conversionActive = false, conversionAvailable = true;
 const reportKey = summary => JSON.stringify([summary.generated_at || '', summary.catalog_statuses || {}]);
 const asset = path => '/api/catalog/asset?path=' + encodeURIComponent(path);
 function node(tag, text, cls) {
@@ -12,7 +12,11 @@ function node(tag, text, cls) {
 async function api(path, body) {
   const options = body === undefined ? {} : {method: 'POST', headers: {'Content-Type': 'application/json', 'X-ImageConverter': '1'}, body: JSON.stringify(body)};
   const response = await fetch(path, options), value = await response.json();
-  if (!response.ok) throw new Error(value.error || 'Die Anfrage ist fehlgeschlagen.');
+  if (!response.ok) {
+    const error = new Error(value.error || 'Die Anfrage ist fehlgeschlagen.');
+    error.status = response.status;
+    throw error;
+  }
   return value;
 }
 function notice(error) { el('notice').textContent = error.message; el('notice').hidden = false; }
@@ -107,7 +111,7 @@ function showJob(job) {
   const running = ['running','cancelling'].includes(job.status), p = job.progress || {};
   el('refresh').disabled = running || conversionActive; el('force').disabled = running || conversionActive;
   el('stop').hidden = !running || conversionActive; el('stop').disabled = job.status === 'cancelling';
-  el('conversion-start').disabled = running || conversionActive;
+  el('conversion-start').disabled = running || conversionActive || !conversionAvailable;
   el('progress').hidden = !running;
   if (p.total) {el('progress').max=p.total;el('progress').value=p.completed;} else el('progress').removeAttribute('value');
   const progress = running && p.total ? ` ${p.completed}/${p.total} Bilder; ${p.measured} neue Paarprüfungen, ${p.cached} wiederverwendet.` : '';
@@ -116,6 +120,7 @@ function showJob(job) {
   el('log').hidden = !job.id;
 }
 function showConversion(service) {
+  conversionAvailable = true;
   conversionActive = ['running','stopping'].includes(service.status);
   el('conversion-start').disabled = conversionActive;
   el('conversion-stop').disabled = !conversionActive || service.status === 'stopping';
@@ -140,9 +145,30 @@ function showConversion(service) {
 async function poll() {
   if (polling) return; polling = true;
   try {
-    const [job, service] = await Promise.all([api('/api/catalog'),api('/api/catalog/conversion')]);
-    showConversion(service); showJob(job);
-    if (reportKey(job.summary) !== lastReport) await loadList();
+    const [jobResult, serviceResult] = await Promise.allSettled([api('/api/catalog'),api('/api/catalog/conversion')]);
+    if (serviceResult.status === 'fulfilled') {
+      showConversion(serviceResult.value);
+      if (jobResult.status === 'fulfilled') el('notice').hidden = true;
+    } else {
+      conversionAvailable = false;
+      conversionActive = false;
+      el('conversion-start').disabled = true;
+      el('conversion-stop').disabled = true;
+      el('conversion-profile').disabled = true;
+      const error = serviceResult.reason;
+      const message = error.status === 404
+        ? 'Der laufende Webserver kennt die Hintergrundkonvertierung noch nicht. Bitte alle alten ImageConverter-Webserver beenden, den Webserver neu starten und diese Seite neu laden.'
+        : 'Der Status der Hintergrundkonvertierung konnte nicht geladen werden: ' + error.message;
+      el('conversion-status').textContent = message;
+      notice(new Error(message));
+    }
+    if (jobResult.status === 'fulfilled') {
+      const job = jobResult.value;
+      showJob(job);
+      if (reportKey(job.summary) !== lastReport) await loadList();
+    } else {
+      throw jobResult.reason;
+    }
   } catch (error) {notice(error);} finally {polling = false;}
 }
 for (const id of ['search','geometry-class','status','archive','sort','page-size']) el(id).addEventListener(id === 'search' ? 'input' : 'change', () => {page=0;render();});
