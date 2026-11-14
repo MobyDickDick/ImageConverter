@@ -12,6 +12,35 @@ from tools.run_plan_b_variations import render, measure_quality, make_original_c
 from tools.review_conversion_quality import normalized_mse
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_jpeg_tip_fragment_keeps_red_crossbar_and_opposite_heads():
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    description = (ROOT/'tests/fixtures/descriptions/arrow_pair_red_crossbar_user.txt').read_text(encoding='utf-8')
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0026.jpg'))
+    h, w = image.shape[:2]
+    fitted = fit_arrow_pair(w, h, description=description, image=image, render_fn=render,
+                            error_fn=lambda a, b: normalized_mse(a, b)[0])
+    assert fitted is not None
+    svg = fitted['svg']
+    validate_svg_assertions(svg, description_assertions(description))
+    assert measure_quality(image, svg)['satisfactory']
+    nodes = list(ET.fromstring(svg))
+    assert [e.tag.rsplit('}', 1)[-1] for e in nodes] == ['rect', 'polygon', 'rect', 'polygon', 'rect']
+    for index, down in ((0, False), (2, True)):
+        shaft, head = nodes[index:index+2]
+        points = np.array([float(v) for v in head.get('points').replace(',', ' ').split()]).reshape(3, 2)
+        assert bool(points[0, 1] > points[1, 1]) == down
+        assert abs(points[:, 0].mean()-(float(shaft.get('x'))+float(shaft.get('width'))/2)) < 1
+    assert nodes[-1].get('fill') == nodes[2].get('fill')
+    assert h*.5 < float(nodes[-1].get('y')) < h*.75
+    # A colored fragment away from the head is not JPEG ringing and cannot
+    # be silently omitted, even at the same rows as the tolerated tip fragment.
+    image[101:103, 15:20] = (170, 90, 30)
+    assert fit_arrow_pair(w, h, description=description, image=image, render_fn=render,
+                          error_fn=lambda a, b: normalized_mse(a, b)[0]) is None
+
+
 DESCRIPTION = ('Zwei vertikale Striche: links rot, rechts blau. Unten links ein rotes Dreieck '
                'mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. '
                'Im unteren Drittel verbindet eine rote horizontale Linie die Striche.')

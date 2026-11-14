@@ -12,6 +12,50 @@ import pytest
 from src import imageConverterGui as gui
 
 
+def test_red_crossbar_user_description_reaches_real_gui_converter(jobs):
+    from xml.etree import ElementTree as ET
+    description = (gui.ROOT/'tests/fixtures/descriptions/arrow_pair_red_crossbar_user.txt').read_text(encoding='utf-8').strip()
+    uploaded = jobs.upload('neutral-red-crossbar.jpg',
+                           (gui.ROOT/'artifacts/images_to_convert/AC0026.jpg').read_bytes())
+    started = jobs.start(uploaded['id'], description, 'quick')
+    jobs.threads[-1].join(timeout=75)
+    result = jobs.snapshot(started['id'])
+    assert result['status'] == 'done' and result['quality'] == 'passed', result
+    assert result['search_summary']['satisfactory']
+    root = ET.parse(jobs.folder(result['id'])/'result.svg').getroot()
+    assert [e.tag.rsplit('}', 1)[-1] for e in root] == ['rect', 'polygon', 'rect', 'polygon', 'rect']
+
+
+@pytest.mark.parametrize('location', ['converted_svgs/UPLOAD.svg', 'converted_svg_failed/UPLOAD.svg'])
+@pytest.mark.parametrize('prefix,mixed', [('', False), ('svg:', False), ('', True)])
+def test_raster_failure_diagnostics_never_become_gui_results(jobs, job, location, prefix, mixed, monkeypatch):
+    folder = jobs.folder(job['id'])
+    path = folder/'output'/location
+    path.parent.mkdir(parents=True)
+    content = (f'<{prefix}svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">'
+               + ('<rect width="20" height="20"/>' if mixed else '')
+               + f'<{prefix}image href="data:image/png;base64,AA=="/></{prefix}svg>')
+    path.write_text(content)
+    monkeypatch.setattr(gui, 'saved_svg_quality', lambda *args: pytest.fail('reject before pixel scoring'))
+    gui.collect_result(folder, job, 0)
+    assert job['status'] == 'error' and not job['result']
+    assert job['result_rejection'] == 'embedded_raster' and 'Rasterbild' in job['message']
+    assert not (folder/'result.svg').exists()
+    assert path.read_text() == content  # Diagnostic evidence remains available.
+
+
+@pytest.mark.parametrize('quality', ['passed', 'warning'])
+def test_restart_rejects_old_raster_results_even_with_cached_pixel_quality(jobs, job, quality):
+    folder = jobs.folder(job['id'])
+    (folder/'result.svg').write_text('<svg><image href="payload.png"/></svg>')
+    job.update(status='done', result=True, quality=quality, pixel_quality={'passed': True})
+    jobs.save(job)
+    restored = gui.Jobs(jobs.directory).snapshot(job['id'])
+    assert restored['status'] == 'error' and not restored['result']
+    assert restored['result_rejection'] == 'embedded_raster'
+    assert (folder/'result.svg').exists()
+
+
 def test_centered_arrow_user_description_reaches_real_gui_converter(jobs):
     from xml.etree import ElementTree as ET
     description = (gui.ROOT/'tests/fixtures/descriptions/arrow_pair_centered_user.txt').read_text(encoding='utf-8').strip()

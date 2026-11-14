@@ -1,0 +1,88 @@
+{
+  "source_sha256": "5ebbf0b0e692fda6f0dbe547d9a83602658364a8575151952faa7e56bebd641e",
+  "svg_sha256": "48547bf4c722acbb37a32f30cef8afe70e1196853f67486d8b5fd5985d6d3824",
+  "renderers": {
+    "mupdf": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0018683966482058167,
+        "foreground_mse": 0.005944172851741314,
+        "edge_alignment": 0.9888508915901184,
+        "foreground_iou": 0.9594405594405594,
+        "foreground_iou_binary": 0.9594405594405594
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 5,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    },
+    "librsvg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0020181697327643633,
+        "foreground_mse": 0.006662074476480484,
+        "edge_alignment": 0.9912493228912354,
+        "foreground_iou": 0.9594405594405594,
+        "foreground_iou_binary": 0.9594405594405594
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 5,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    }
+  },
+  "gui": {
+    "job_id": "eedb88d2c87a4d81a69ab83c4e4d635d",
+    "status": "done",
+    "quality": "passed",
+    "catalog_update": {
+      "status": "done",
+      "catalog_status": "pixel_pass",
+      "message": "Qualitätsliste aktualisiert: Rastergates erfüllt."
+    },
+    "old_raster_jobs_rejected": true,
+    "old_raster_downloads_http_status": 404
+  },
+  "targeted_tests": {
+    "passed": 114,
+    "http_tests_rechecked_outside_sandbox": 4
+  },
+  "unrelated_renderer_tests": {
+    "failed": 2,
+    "passed": 2,
+    "test": "test_narrow_rectangle_gradient_preserves_native_mask_and_pixel_center_colors",
+    "failure": "rounded rectangle alpha mask differs from native MuPDF mask",
+    "renderer_source_identical_to_HEAD": true
+  },
+  "full_suite": {
+    "collected": 6350,
+    "status": "stopped_before_completion",
+    "reason": "independently reproduced pre-existing rounded-gradient renderer failures; scoped tests and both actual output renderers pass"
+  }
+}

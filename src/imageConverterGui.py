@@ -186,6 +186,8 @@ class Jobs:
                 if job["status"] == "running":
                     job.update(status="interrupted", message="Der Server wurde während der Konvertierung beendet.")
                 self.jobs[job["id"]] = job
+                if job.get('result') and reject_raster_result(path.parent/'result.svg', job):
+                    self.save(job)
                 if job.get('quality') == 'passed' and job.get('result') and 'pixel_quality' not in job:
                     quality = saved_svg_quality(path.parent/'source.png', path.parent/'result.svg')
                     job['pixel_quality'] = quality
@@ -570,6 +572,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         job.update(status="error", result=False, quality="unknown", message="Sample konnte nicht verbessert werden. Details stehen im Protokoll.")
         return
     report = json.loads(report_path.read_text(encoding="utf-8"))
+    if reject_raster_result(result, job):
+        return
     shutil.copyfile(result, folder / "result.svg")
     message = "Sample am Original verbessert." if report["improved"] else "Keine messbare Verbesserung gefunden. Der Sample-Stand bleibt erhalten."
     if report.get('stop_reason') == 'quality_target_reached':
@@ -577,6 +581,21 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
                message=message, sample_report=report)
+
+
+def reject_raster_result(result: Path, job: dict) -> bool:
+    """Keep raster failure diagnostics out of previews, downloads and history."""
+    from xml.etree import ElementTree as ET
+    try:
+        root = ET.parse(result).getroot()
+    except (OSError, ET.ParseError):
+        return False  # Invalid/unrenderable output is handled by the quality check.
+    if not any(node.tag.rsplit('}', 1)[-1] == 'image' for node in root.iter()):
+        return False
+    job.update(status='error', result=False, quality='warning', result_rejection='embedded_raster',
+               message='Vektorisierung fehlgeschlagen. Die Ausgabe enthält ein eingebettetes Rasterbild '
+                       'und wird deshalb nicht als SVG-Ergebnis angeboten. Details stehen im Protokoll.')
+    return True
 
 
 def collect_result(folder: Path, job: dict, returncode: int) -> None:
@@ -593,6 +612,8 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         with failures.open(encoding="utf-8-sig", newline="") as stream:
             has_failures = bool(list(csv.DictReader(stream, delimiter=";")))
     if result:
+        if reject_raster_result(result, job):
+            return
         shutil.copyfile(result, folder / "result.svg")
         # A model can be shifted off-canvas and still receive a successful CLI
         # status. Re-render the saved vector against the actual uploaded image.

@@ -1,0 +1,240 @@
+{
+  "cases": [
+    {
+      "source": "artifacts\\images_to_convert\\AC0812_S.jpg",
+      "sha256": "c62fd731e1444dd586e73d990108163cd134823d24c4c3aa2375bdd94cfd8be3",
+      "checks": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00021903368178755045,
+            "foreground_mse": 0.0006280905217863619,
+            "edge_alignment": 0.9867701530456543,
+            "foreground_iou": 0.8910891089108911,
+            "foreground_iou_binary": 0.8910891089108911
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00018671792349778116,
+            "foreground_mse": 0.0005528404726646841,
+            "edge_alignment": 0.9867701530456543,
+            "foreground_iou": 0.9175257731958762,
+            "foreground_iou_binary": 0.9175257731958762
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      }
+    },
+    {
+      "source": "artifacts\\images_to_convert\\AC0812_M.jpg",
+      "sha256": "b2431de56a3921e09148140a95ef29dd9d888e14d023f83dbe92105518a6449f",
+      "checks": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00013838634185958654,
+            "foreground_mse": 0.0005592595553025603,
+            "edge_alignment": 0.9650663137435913,
+            "foreground_iou": 0.975609756097561,
+            "foreground_iou_binary": 0.975609756097561
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00019487011013552547,
+            "foreground_mse": 0.0008662911131978035,
+            "edge_alignment": 0.9549648761749268,
+            "foreground_iou": 0.9917355371900827,
+            "foreground_iou_binary": 0.9917355371900827
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      }
+    },
+    {
+      "source": "artifacts\\images_to_convert\\AC0812_L.jpg",
+      "sha256": "a42abd8d3484ca06c1b7910e71457c006df4529301031a5a4b99797b2598e5fa",
+      "checks": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00014602247392758727,
+            "foreground_mse": 0.0006647284026257694,
+            "edge_alignment": 0.9630797505378723,
+            "foreground_iou": 0.9739583333333334,
+            "foreground_iou_binary": 0.9739583333333334
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00023752916604280472,
+            "foreground_mse": 0.001143969246186316,
+            "edge_alignment": 0.9516174793243408,
+            "foreground_iou": 0.9536082474226805,
+            "foreground_iou_binary": 0.9536082474226805
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      }
+    }
+  ],
+  "web_job": {
+    "id": "c9d2204a943249899fbf7a2be57b7e57",
+    "name": "AC0812_L.jpg",
+    "width": 45,
+    "height": 25,
+    "description": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach links (dunkelgraue Liine). Der Griff liegt auf einer Symmetrieachse des Kreises.",
+    "status": "done",
+    "created": 1794674859.6207304,
+    "message": "SVG erstellt. Qualitätsprüfung bestanden.",
+    "result": true,
+    "quality": "passed",
+    "profile": "thorough",
+    "elapsed": 4.4,
+    "source_sha256": "a47062e942684183ea26baec4588ffe11920ba52896b38c144ffd5e86946353b",
+    "description_origin": "user",
+    "previous_job_id": "f93cc385355b4d1c85cadfdf5d6f4a53",
+    "catalog_background": false,
+    "search_seed": 17377537010937405944,
+    "started": 1794674859.6333728,
+    "pixel_quality": {
+      "normalized_mse": 0.00014602247392758727,
+      "foreground_mse": 0.0006647284026257694,
+      "foreground_iou": 0.9739583333333334,
+      "foreground_iou_binary": 0.9739583333333334,
+      "edge_alignment": 0.9630797505378723,
+      "passed": true,
+      "observed_foreground_pixels": 187,
+      "output_foreground_pixels": 192
+    },
+    "search_summary": {
+      "candidate_evaluations": 196,
+      "stop_reason": "satisfactory",
+      "satisfactory": true,
+      "elapsed_seconds": 2.953,
+      "minimum_seconds": 30.0,
+      "limit_seconds": 120.0
+    },
+    "same_as_previous": false,
+    "project_save": {
+      "status": "saved",
+      "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0812_L.svg",
+      "normalized_mse": 0.00014602247392758727,
+      "message": "Automatisch im Projekt gespeichert: C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0812_L.svg"
+    },
+    "catalog_update": {
+      "status": "done",
+      "catalog_status": "pixel_pass",
+      "message": "Qualitätsliste aktualisiert: Rastergates erfüllt."
+    }
+  },
+  "regression": {
+    "passed": 159,
+    "initial_suite_passed": 154,
+    "sandbox_limited_tests_rechecked_passed": 4,
+    "additional_topology_contract_passed": 1
+  }
+}

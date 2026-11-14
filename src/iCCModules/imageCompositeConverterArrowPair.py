@@ -85,6 +85,15 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
         for run in broad:
             if run is head:
                 continue
+            # JPEG ringing can split one or two widening tip rows from the
+            # main head. Accept only small, centered fragments immediately
+            # next to that observed triangle; a detached mark or bar remains
+            # unsupported and must not disappear from the reconstruction.
+            if (len(run) <= 2 and np.min(abs(run[:, None]-head[None, :])) <= 3
+                    and row_width[run].max() <= row_width[head].max()
+                    and all(abs(np.flatnonzero(mask[y]).mean()+.5-cx) <= max(2, sw*2)
+                            for y in run)):
+                continue
             if len(run) > max(3, sw*4) or row_width[run].max() < width*.4:
                 return None
             bar_profile = alpha[run].sum(axis=0)

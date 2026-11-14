@@ -1,0 +1,179 @@
+{
+  "source": "artifacts/images_to_convert/AC0024.jpg",
+  "source_sha256": "eccda5ed9a147d0bc76e6bc17e51da354f8f6e470465af3b97607a917eadcfd6",
+  "description": "Es sind zwei vertikale Linien und zwei Dreiecke.\nDie linke Linie und das linke Dreieck ist rot.\nDie rechte Linie und das rechte Dreick ist blau.\nDas linke Dreiek zeigt nach oben.\nDas rechte Dreieck zeigt nach unten.",
+  "original_job": "33a0436e1b6d47dea9657742847ebc89",
+  "replay_job": {
+    "id": "c411de58b31c4c3db61d489ddcbadca3",
+    "name": "AC0024.jpg",
+    "width": 35,
+    "height": 111,
+    "description": "Es sind zwei vertikale Linien und zwei Dreiecke.\nDie linke Linie und das linke Dreieck ist rot.\nDie rechte Linie und das rechte Dreick ist blau.\nDas linke Dreiek zeigt nach oben.\nDas rechte Dreieck zeigt nach unten.",
+    "status": "done",
+    "created": 1794675247.884455,
+    "message": "SVG erstellt. Qualitätsprüfung bestanden.",
+    "result": true,
+    "quality": "passed",
+    "profile": "thorough",
+    "elapsed": 32.1,
+    "source_sha256": "a6cc46119431e9c82cb732fe48d0116b2bdad8a018c2c50b13cea2c6e2b2c5fd",
+    "description_origin": "user",
+    "previous_job_id": "33a0436e1b6d47dea9657742847ebc89",
+    "catalog_background": false,
+    "search_seed": 17497133070981495911,
+    "started": 1794675247.8864546,
+    "pixel_quality": {
+      "normalized_mse": 0.0015848572365939617,
+      "foreground_mse": 0.005148985888808966,
+      "foreground_iou": 0.96996996996997,
+      "foreground_iou_binary": 0.96996996996997,
+      "edge_alignment": 0.9909390807151794,
+      "passed": true,
+      "observed_foreground_pixels": 664,
+      "output_foreground_pixels": 648
+    },
+    "search_summary": {
+      "candidate_evaluations": 2022,
+      "stop_reason": "satisfactory",
+      "satisfactory": true,
+      "elapsed_seconds": 30.188,
+      "minimum_seconds": 30.0,
+      "limit_seconds": 120.0
+    },
+    "same_as_previous": false,
+    "project_save": {
+      "status": "saved",
+      "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0024.svg",
+      "normalized_mse": 0.0015848572365939617,
+      "message": "Automatisch im Projekt gespeichert: C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0024.svg"
+    },
+    "catalog_update": {
+      "status": "done",
+      "catalog_status": "pixel_pass",
+      "message": "Qualitätsliste aktualisiert: Rastergates erfüllt."
+    },
+    "workbench_id": "64c3b57b418b45028460c185ad9a8f90"
+  },
+  "checks": {
+    "before": {
+      "mupdf": {
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.006425659172236919,
+          "foreground_mse": 0.028680190443992615,
+          "edge_alignment": 0.8247058987617493,
+          "foreground_iou": 0.7372262773722628,
+          "foreground_iou_binary": 0.7372262773722628
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 8,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "librsvg": {
+        "satisfactory": false,
+        "failures": [
+          "foreground_iou_outside_limit"
+        ],
+        "metrics": {
+          "normalized_mse": 0.006528596393764019,
+          "foreground_mse": 0.02642158977687359,
+          "edge_alignment": 0.8235852718353271,
+          "foreground_iou": 0.6594124047878128,
+          "foreground_iou_binary": 0.6594124047878128
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 8,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    "after": {
+      "mupdf": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0015848572365939617,
+          "foreground_mse": 0.005148985888808966,
+          "edge_alignment": 0.9909390807151794,
+          "foreground_iou": 0.96996996996997,
+          "foreground_iou_binary": 0.96996996996997
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      },
+      "librsvg": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0016779330326244235,
+          "foreground_mse": 0.005701764952391386,
+          "edge_alignment": 0.9903104305267334,
+          "foreground_iou": 0.9684684684684685,
+          "foreground_iou_binary": 0.9684684684684685
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    }
+  },
+  "source_hashes": {
+    "C:\\Users\\marku\\myCloud\\imageConverter\\src\\iCCModules\\imageCompositeConverterDescriptionLanguage.py": "446ae0589307b1e83c4de168a74331529a2a7cee8fd68b2c0253790267d08a04",
+    "C:\\Users\\marku\\myCloud\\imageConverter\\src\\iCCModules\\imageCompositeConverterArrowPair.py": "15f1106c1f049201cddc6fb74e15f5c050bf827507fab2beb83f78327b488c45"
+  }
+}
