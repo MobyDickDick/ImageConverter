@@ -37,6 +37,48 @@ def test_head_direction_typos_preserve_quoted_labels_and_polarity():
     assert normalize_description(normalized) == normalized
 
 
+def test_triangle_subject_directions_preserve_quotes_and_negation():
+    text = ('Das linke Dreiek zeigt nach oben. Das rechte Dreick zeigt nach unten. '
+            'Das Dreieck zeigt nicht nach oben. Beschriftung "Dreiek zeigt nach unten".')
+    normalized = normalize_description(text)
+    assert normalized == ('Das linke Dreieck mit Spitze nach oben. '
+                          'Das rechte Dreieck mit Spitze nach unten. '
+                          'Das Dreieck zeigt nicht nach oben. Beschriftung "Dreiek zeigt nach unten".')
+    assert normalize_description(normalized) == normalized
+
+
+def test_spitz_and_gegen_direction_wording_preserves_quotes_and_negation():
+    text = ('Links zeigt mit dem Spitz gegen oben, rechts mit der Spitze gegen unten. '
+            'Spitz nicht nach unten. Beschriftung "Spitz gegen oben".')
+    normalized = normalize_description(text)
+    assert normalized == ('Links zeigt mit dem Spitze nach oben, rechts mit der Spitze nach unten. '
+                          'Spitz nicht nach unten. Beschriftung "Spitz gegen oben".')
+    assert normalize_description(normalized) == normalized
+
+
+@pytest.mark.parametrize('phrase', ['blaue horizontale', 'horizontale blaue',
+                                   'blaue waagerechte', 'waagerechte blaue',
+                                   'blauer horizontaler', 'horizontaler blauer',
+                                   'blauen horizontalen', 'horizontalen blauen'])
+def test_blue_horizontal_bar_color_is_checked_in_both_word_orders(phrase):
+    description = ('Zwei vertikale Linien, rot und blau, zwei Dreiecke. '
+                   'Links Spitz gegen oben, rechts Spitz nach unten. '+phrase+' Linie.')
+    assertions = description_assertions(description)
+    heads = '<polygon points="0,0 4,0 2,4"/><polygon points="20,0 24,0 22,4"/>'
+    bar = '<rect x="4" y="68" width="26" height="1" fill="blue"/>'
+    validate_svg_assertions('<svg>'+heads+bar+'</svg>', assertions)
+    with pytest.raises(DescriptionRejected, match='missing_described_horizontal_bar'):
+        validate_svg_assertions('<svg>'+heads+bar.replace('blue', 'red')+'</svg>', assertions)
+
+
+def test_bar_color_quotes_are_ignored_and_conflicts_rejected():
+    description = ('Zwei vertikale Linien, rot und blau, zwei Dreiecke. '
+                   'Links Spitze nach oben, rechts Spitze nach unten. Blaue horizontale Linie.')
+    assert description_assertions(description+' Beschriftung "horizontale rote Linie".')['horizontal_bar'] == 'blue'
+    with pytest.raises(DescriptionRejected, match='conflicting_horizontal_bar_colors'):
+        description_assertions(description+' Eine horizontale rote Linie.')
+
+
 @pytest.mark.parametrize('word', ['Farbübergang', 'Farbenübergang', 'Farbuebergang',
                                  'Graustufenübergang', 'Graustufenuebergang', 'Graustufenverlauf'])
 def test_gradient_synonyms_preserve_label_bytes_and_absence(word):

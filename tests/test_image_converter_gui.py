@@ -12,6 +12,69 @@ import pytest
 from src import imageConverterGui as gui
 
 
+def test_centered_arrow_user_description_reaches_real_gui_converter(jobs):
+    from xml.etree import ElementTree as ET
+    description = (gui.ROOT/'tests/fixtures/descriptions/arrow_pair_centered_user.txt').read_text(encoding='utf-8').strip()
+    uploaded = jobs.upload('neutral-arrow-pair.jpg',
+                           (gui.ROOT/'artifacts/images_to_convert/AC0025.jpg').read_bytes())
+    started = jobs.start(uploaded['id'], description, 'quick')
+    jobs.threads[-1].join(timeout=75)
+    result = jobs.snapshot(started['id'])
+    assert result['status'] == 'done' and result['quality'] == 'passed', result
+    assert result['search_summary']['satisfactory']
+    folder = jobs.folder(result['id'])
+    from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingFromCsvImpl
+    assert loadDescriptionMappingFromCsvImpl(str(folder/'description.csv'))['UPLOAD'] == description
+    nodes = list(ET.parse(folder/'result.svg').getroot())
+    assert [e.tag.rsplit('}',1)[-1] for e in nodes] == ['rect','polygon','rect','polygon','rect']
+
+
+@pytest.mark.parametrize('changed', [False, True])
+@pytest.mark.parametrize('identical', [False, True])
+def test_unchanged_draft_is_reported_even_after_description_edit(jobs, monkeypatch, changed, identical):
+    previous = jobs.upload('image.png', image_bytes())
+    old = jobs.jobs[previous['id']]
+    old.update(status='done', result=True, description='Ein Kreis.')
+    (jobs.folder(old['id'])/'result.svg').write_text('<svg/>')
+    retry = jobs.editable(old['id'])
+    retry.update(status='running', started=0, search_seed=1,
+                 description='Ein Dreieck.' if changed else old['description'])
+    class Process:
+        returncode = 0
+        def wait(self, **kwargs):
+            return 0
+    monkeypatch.setattr(gui.subprocess, 'Popen', lambda *a, **kw: Process())
+    def collect(folder, job, returncode):
+        (folder/'result.svg').write_text('<svg/>' if identical else '<svg><circle/></svg>')
+        job.update(status='done', quality='warning', result=True, message='Entwurf.')
+    monkeypatch.setattr(gui, 'collect_result', collect)
+    monkeypatch.setattr(jobs, 'publish_best', lambda *args: None)
+    jobs.run(retry['id'])
+    assert retry['same_as_previous'] == identical
+    assert ('denselben' in retry['message']) == identical
+    assert ('Trotz geänderter Beschreibung' in retry['message']) == (identical and changed)
+
+
+def test_circle_with_left_handle_never_grows_a_residual_rim_line(jobs):
+    from tests.test_stem_disk_runtime import DESCRIPTION
+    from xml.etree import ElementTree as ET
+
+    uploaded = jobs.upload('neutrales-griffmotiv.jpg',
+        (gui.ROOT/'artifacts/images_to_convert/AC0812_L.jpg').read_bytes())
+    started = jobs.start(uploaded['id'], DESCRIPTION, 'quick')
+    jobs.threads[-1].join(timeout=75)
+    job = jobs.snapshot(started['id'])
+    assert job['status'] == 'done', job
+    assert job['quality'] == 'passed' and job['search_summary']['satisfactory'], job
+    root = ET.parse(jobs.folder(job['id'])/'result.svg').getroot()
+    tags = [node.tag.rsplit('}', 1)[-1] for node in root.iter()]
+    assert tags.count('circle') == 1 and tags.count('line') == 1
+    assert not any(tag in tags for tag in ('path', 'image', 'text', 'polygon'))
+    circle = next(node for node in root.iter() if node.tag.endswith('circle'))
+    line = next(node for node in root.iter() if node.tag.endswith('line'))
+    assert line.get('y1') == line.get('y2') == circle.get('cy')
+
+
 def test_plain_circle_converts_through_real_gui_worker_with_neutral_filename(jobs, monkeypatch):
     from xml.etree import ElementTree as ET
 

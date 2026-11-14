@@ -48,6 +48,11 @@ def emitIterationDescriptionHeaderImpl(
     ).strip()
     if description_text:
         print_fn(f"Bildbeschreibung: {description_text}")
+    for reference in params.get('similarity_references', []):
+        aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
+        print_fn(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}")
+    if params.get('effective_description'):
+        print_fn(f"Aufgelöste Bildbeschreibung: {params['effective_description']}")
     raw_elements = params.get("elements", [])
     elements = ", ".join(raw_elements) if raw_elements else None
     if elements:

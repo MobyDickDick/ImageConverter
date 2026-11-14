@@ -11,6 +11,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, description_assertions
+from src.iCCModules.imageCompositeConverterSimilarity import resolve_similarity_description
 
 
 def _get_base_name_from_file(filename: str) -> str:
@@ -116,6 +117,8 @@ class Reflection:
         _visited.add(canonical_base)
         description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
+        similarity = resolve_similarity_description(desc_raw, self.raw_desc, base_name=_get_base_name_from_file)
+        desc_raw = similarity.text
         assertions = description_assertions(desc_raw)
         desc_raw = normalize_description(desc_raw)
         desc = desc_raw.lower().strip()
@@ -131,6 +134,8 @@ class Reflection:
             "variant_name": os.path.splitext(str(img_filename))[0].upper(),
             "documented_alias_refs": sorted(Reflection._extractDocumentedAliasRefs(desc)),
             "description_fragments": description_fragments,
+            "similarity_references": list(similarity.references),
+            "effective_description": desc_raw if similarity.references else "",
             "language_assertions": assertions,
             "semantic_priority_order": ["family_rule", "layout_override", "description_heuristic"],
             "semantic_conflicts": [],
@@ -144,11 +149,11 @@ class Reflection:
         params["contract_status"] = contract_status
 
         compact_reference_badge = "AR" + "0100"
-        semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == compact_reference_badge
+        semantic_symbol = not similarity.references and (symbol_upper.startswith("AC08") or symbol_upper == compact_reference_badge)
         if semantic_symbol:
             params["mode"] = "semantic_badge"
 
-        if semantic_helpers.apply_semantic_badge_family_rules(
+        if not similarity.references and semantic_helpers.apply_semantic_badge_family_rules(
             base_upper=base_upper,
             symbol_upper=symbol_upper,
             desc=desc,

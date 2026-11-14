@@ -21,6 +21,103 @@ USER_DESCRIPTION = ('zwei vertikale Striche links rot, rechts, blau, unten links
                     'links Spitze nach oben, rechtes Dreieck rechts blau, Spitze nach untten, '
                     'unteres Drittel rote horizontale Linie.')
 
+SUBJECT_DESCRIPTION = ('Es sind zwei vertikale Linien und zwei Dreiecke.\n'
+                       'Die linke Linie und das linke Dreieck ist rot.\n'
+                       'Die rechte Linie und das rechte Dreick ist blau.\n'
+                       'Das linke Dreiek zeigt nach oben.\n'
+                       'Das rechte Dreieck zeigt nach unten.')
+
+
+def test_centered_user_description_selects_triangles_and_blue_crossbar():
+    from src.iCCModules.imageCompositeConverterPerceptionReflection import Reflection
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    description = (ROOT/'tests/fixtures/descriptions/arrow_pair_centered_user.txt').read_text(encoding='utf-8').strip()
+    _, params = Reflection({'neutral': description}).parse_description('neutral', 'neutral.png')
+    assert params['mode'] == 'dual_arrow_badge'
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0025.jpg'))
+    height, width = image.shape[:2]
+    result = fit_arrow_pair(width, height, description=description, image=image,
+                           render_fn=render, error_fn=lambda a,b: normalized_mse(a,b)[0])
+    assert result is not None
+    validate_svg_assertions(result['svg'], params['language_assertions'])
+    assert measure_quality(image, result['svg'])['satisfactory']
+    nodes = list(ET.fromstring(result['svg']))
+    assert [e.tag.rsplit('}',1)[-1] for e in nodes] == ['rect', 'polygon', 'rect', 'polygon', 'rect']
+    for index, down in enumerate((False, True)):
+        shaft, head = nodes[index*2:index*2+2]
+        points = np.array([float(v) for v in head.get('points').replace(',', ' ').split()]).reshape(3,2)
+        assert bool(points[0,1] > points[1,1]) == down
+        center = float(shaft.get('x'))+float(shaft.get('width'))/2
+        assert abs(center-points[:,0].mean()) < .5
+    assert nodes[-1].get('fill') == nodes[0].get('fill')
+
+
+@pytest.mark.parametrize('original,replacement', [
+    ('Spitz gegen oben', 'Spitz gegen unten'),
+    ('Spitz nach unten', 'Spitz nach oben'),
+    ('horizontale blaue Linie', 'horizontale rote Linie'),
+    ('linke Linie ist blau', 'linke Linie ist rot'),
+])
+def test_centered_user_description_does_not_ignore_contradictions(original, replacement):
+    description = (ROOT/'tests/fixtures/descriptions/arrow_pair_centered_user.txt').read_text(encoding='utf-8')
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0025.jpg'))
+    height, width = image.shape[:2]
+    assert fit_arrow_pair(width, height, description=description.replace(original, replacement),
+                          image=image, render_fn=render, error_fn=lambda a,b: normalized_mse(a,b)[0]) is None
+
+
+def test_triangle_subject_wording_dispatches_and_keeps_four_native_primitives():
+    from src.iCCModules.imageCompositeConverterPerceptionReflection import Reflection
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import (
+        DescriptionRejected, validate_svg_assertions,
+    )
+    _, params = Reflection({'neutral': SUBJECT_DESCRIPTION}).parse_description('neutral', 'neutral.png')
+    assert params['mode'] == 'dual_arrow_badge'
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0024.jpg'))
+    h, w = image.shape[:2]
+    outputs = []
+
+    def forbidden(*args, **kwargs):
+        pytest.fail('subject wording must reach the observed primitive fit')
+
+    result = runDualArrowBadgeIterationImpl(
+        perc_img=image, filename='neutral.png', base_name='neutral', description=SUBJECT_DESCRIPTION,
+        params=params, width=w, height=h,
+        detect_dual_arrow_badge_params_fn=forbidden, generate_dual_arrow_badge_svg_fn=forbidden,
+        render_embedded_raster_svg_fn=forbidden, write_validation_log_fn=lambda lines: None,
+        render_svg_to_numpy_fn=render, record_render_failure_fn=forbidden,
+        write_attempt_artifacts_fn=lambda svg, raster: outputs.append(svg),
+        calculate_error_fn=lambda a, b: normalized_mse(a, b)[0])
+    assert result and len(outputs) == 1
+    svg = outputs[0]
+    validate_svg_assertions(svg, params['language_assertions'])
+    assert measure_quality(image, svg)['satisfactory']
+    nodes = list(ET.fromstring(svg))
+    assert [e.tag.rsplit('}', 1)[-1] for e in nodes] == ['rect', 'polygon', 'rect', 'polygon']
+    for index, (color, down) in enumerate((('blue', True), ('red', False))):
+        shaft, head = nodes[index*2:index*2+2]
+        assert shaft.get('fill') == head.get('fill')
+        rgb = [int(head.get('fill')[i:i+2], 16) for i in (1, 3, 5)]
+        assert (rgb[2] > rgb[0]) == (color == 'blue')
+        points = np.array([float(v) for v in head.get('points').replace(',', ' ').split()]).reshape(3, 2)
+        assert bool(points[0, 1] > points[1, 1]) == down
+    assert float(nodes[2].get('x')) < float(nodes[0].get('x'))
+    root = ET.fromstring(svg)
+    root.remove(root[1])
+    with pytest.raises(DescriptionRejected, match='object_count:triangle:2:1'):
+        validate_svg_assertions(ET.tostring(root, encoding='unicode'), params['language_assertions'])
+
+
+@pytest.mark.parametrize('description', [
+    SUBJECT_DESCRIPTION.replace('ist rot', 'ist blau'),
+    SUBJECT_DESCRIPTION.replace('ist blau', 'ist rot'),
+    SUBJECT_DESCRIPTION.replace('zeigt nach oben', 'zeigt nach unten'),
+    SUBJECT_DESCRIPTION.replace('zeigt nach unten', 'zeigt nach oben'),
+    SUBJECT_DESCRIPTION + ' Das linke Dreieck zeigt nach unten.',
+])
+def test_triangle_subject_wording_rejects_color_and_direction_conflicts(description):
+    assert fit(drawing(bar=False), description) is None
+
 
 def drawing(*, red='#e62320', blue='#226ebc', dx=0, extra='', same_direction=False, bar=True):
     right = '80,128 73,144 87,144' if same_direction else '73,128 87,128 80,144'

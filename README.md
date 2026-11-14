@@ -1,5 +1,10 @@
 # ImageConverter
 
+[Form- und Farbreferenzen](docs/similarity_references.md) lassen sich direkt in
+der Bildbeschreibung kombinieren: `Form ähnlich wie …`, `Farben ähnlich wie …`
+oder `Farbverlauf ähnlich wie …`. Eigene Angaben und unterstützte Ausnahmen
+haben Vorrang; die genaue Anpassung und Qualitätsprüfung erfolgen am aktuellen Bild.
+
 Die [mehrstufige Freiform-Konvertierung](docs/piecewise_contour_conversion.md)
 rekonstruiert Verlaufskreise und davorliegende Konturformen mit lokal angepassten,
 glatt verbundenen Bézier-Abschnitten. Grössenvarianten können dafür gezoomt,

@@ -46,6 +46,7 @@ from src.iCCModules.imageCompositeConverterGradientJunction import fit_gradient_
 from src.iCCModules.imageCompositeConverterCircleLinework import fit_circle_linework
 from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_scene
 from src.iCCModules.imageCompositeConverterPlainDisk import fit_plain_disk
+from src.iCCModules.imageCompositeConverterStemDisk import fit_stem_disk
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
 from src.iCCModules.imageCompositeConverterInsetPanel import fit_inset_panel, inset_panel_contract
@@ -1447,7 +1448,7 @@ def runNonCompositeIterationImpl(
         # before the pale framed-panel fallback can discard their foreground.
         if len(square_ir) == 1 and square_ir[0].get('kind') == 'RightStemSquareKelleGlyph' and square_ir[0].get('label'):
             fragments = params.get('description_fragments') or []
-            original_description = ' '.join(str(part.get('text', '')) for part in fragments if isinstance(part, dict)) or description
+            original_description = params.get('effective_description') or ' '.join(str(part.get('text', '')) for part in fragments if isinstance(part, dict)) or description
             labeled_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(original_description)
             fitted = fit_labeled_square(labeled_ir, image=perc_img,
                 render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
@@ -1491,6 +1492,7 @@ def runNonCompositeIterationImpl(
             (fit_short_label_disk, "non_composite_raster_short_label_disk"),
             (fit_primitive_scene, "non_composite_raster_primitive_scene"),
             (fit_plain_disk, "non_composite_raster_plain_disk"),
+            (fit_stem_disk, "non_composite_raster_stem_disk"),
             (fit_circle_linework, "non_composite_raster_circle_linework"),
             (fit_arc_shaft, "non_composite_raster_arc_shaft"),
             (fit_gradient_junction, "non_composite_raster_gradient_junction"),
@@ -1519,7 +1521,7 @@ def runNonCompositeIterationImpl(
             if fit_fn is fit_short_label_disk:
                 # Dispatch is case-insensitive; labels are not. Recover the
                 # original spelling for auto-mode short labels as in badge mode.
-                fit_description = ' '.join(str(f.get('text', '')) for f in
+                fit_description = params.get('effective_description') or ' '.join(str(f.get('text', '')) for f in
                     params.get('description_fragments', []) if isinstance(f, dict)) or description
             fitted = fit_fn(
                 width, height, description=fit_description, image=perc_img,
@@ -1529,6 +1531,9 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if fit_fn is fit_stem_disk:
+                    params['stem_disk_registration'] = {key: value for key, value in fitted.items()
+                                                       if key not in {'svg', 'rendered'}}
                 if status == "non_composite_raster_piecewise_scene":
                     params['piecewise_scene_registration'] = {
                         key: value for key, value in fitted.items()
@@ -1848,7 +1853,7 @@ def runNonCompositeIterationImpl(
             width, height, description=description, perc_img=perc_img
         )
         # Reflection normalizes matching prose, but text glyphs must retain case.
-        glyph_description = " ".join(
+        glyph_description = params.get('effective_description') or " ".join(
             str(fragment.get("text", ""))
             for fragment in params.get("description_fragments", [])
             if isinstance(fragment, dict)

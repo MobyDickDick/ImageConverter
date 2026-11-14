@@ -27,6 +27,11 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
         part = re.sub(r'\brunde[nrms]?\s+((?:(?:(?:hell|dunkel)?(?:grau|blau|rot|grün|gelb|weiß|weiss|orange|violett)|einfarbig|gefüllt)[enrms]?\s+)+)scheibe\b',
                       r'\1Kreisscheibe', part, flags=re.IGNORECASE)
         replacements = (
+            # Common triangle spellings and a head-direction synonym. Keep
+            # quoted labels untouched, just like the rest of this vocabulary.
+            (r'\b(?:dreick|dreiek)\b', 'Dreieck'),
+            (r'\b(dreieck)\s+zeigt\s+nach\s+(oben|unten)\b', r'\1 mit Spitze nach \2'),
+            (r'\bspitze?\s+(?:gegen|nach)\s+(oben|unten)\b', r'Spitze nach \1'),
             # Bounded repeated-letter typos in head directions, never labels.
             (r'\b(spitze\s+nach\s+)u+n+t+e+n+\b', r'\1unten'),
             (r'\b(spitze\s+nach\s+)o+b+e+n+\b', r'\1oben'),
@@ -61,6 +66,16 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
     # Labels can contain words from the dictionary, punctuation and mixed case.
     parts = re.split(r'("[^"\n]*"|„[^“\n]*“)', str(description or ''))
     return ''.join(part if i % 2 else normalize(part) for i, part in enumerate(parts))
+
+
+def horizontal_bar_colors(description: str) -> set[str]:
+    """Read both adjective orders without interpreting quoted labels."""
+    words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalize_description(description)).casefold()
+    color = r'(rot|blau)(?:e[nrms]?)?'
+    axis = r'(?:horizontal|waagerecht)(?:e[nrms]?)?'
+    matches = re.findall(r'\b'+color+r'\s+'+axis+r'\s+linie\b', words)
+    matches += re.findall(r'\b'+axis+r'\s+'+color+r'\s+linie\b', words)
+    return {'red' if value.startswith('rot') else 'blue' for value in matches}
 
 
 def description_assertions(description: str) -> dict:
@@ -98,9 +113,11 @@ def description_assertions(description: str) -> dict:
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
     if arrow_pair:
-        bar = re.search(r'\b(rot\w*|blau\w*)\s+(?:horizontal\w*|waagerecht\w*)\s+linie\b', words)
-        if bar:
-            assertions['horizontal_bar'] = 'red' if bar[1].startswith('rot') else 'blue'
+        colors = horizontal_bar_colors(normalized)
+        if len(colors) > 1:
+            raise DescriptionRejected('conflicting_horizontal_bar_colors')
+        if colors:
+            assertions['horizontal_bar'] = colors.pop()
     return assertions
 
 

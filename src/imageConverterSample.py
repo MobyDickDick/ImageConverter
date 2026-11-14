@@ -177,6 +177,9 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     from PIL import Image
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
+
+    description = resolve_catalog_similarity_description(description, Path(__file__).resolve().parents[1]).text
 
     with Image.open(source) as image:
         target = np.asarray(image.convert("RGB"))

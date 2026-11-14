@@ -33,6 +33,7 @@ from src.imageConverterCatalog import CatalogError, CatalogQuality, atomic_json
 from src.imageConverterCatalogConversion import CatalogConversion
 from src.imageConverterCatalogUpdates import CatalogUpdates
 from src.imageConverterCollection import CategoryCollection
+from src.iCCModules.imageCompositeConverterSimilarity import resolve_similarity_description, SimilarityReferenceError
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
@@ -289,6 +290,11 @@ class Jobs:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
+        try:
+            from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+            resolve_similarity_description(description, catalog_descriptions(), base_name=getBaseNameFromFileImpl)
+        except SimilarityReferenceError as exc:
+            raise RequestError(str(exc)) from exc
         with self.lock:
             if self.closed or self.busy(background=background):
                 raise RequestError("Es läuft bereits eine Konvertierung. Bitte warten oder abbrechen.", 409)
@@ -338,7 +344,8 @@ class Jobs:
             input_dir.mkdir()
             shutil.copyfile(folder / "source.png", input_dir / "UPLOAD.png")
             descriptions = folder / "description.csv"
-            write_description_table(descriptions, job["description"], catalog_descriptions())
+            catalog = catalog_descriptions()
+            write_description_table(descriptions, job["description"], catalog)
             output = folder / "output"
             seconds, maximum = PROFILES[job["profile"]]
             command = [sys.executable, "-u", "-m", "src.imageCompositeConverter", str(input_dir),
@@ -349,7 +356,9 @@ class Jobs:
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
             if job.get("sample"):
                 description_file = folder / "description.txt"
-                description_file.write_text(job["description"], encoding="utf-8")
+                from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+                resolved = resolve_similarity_description(job["description"], catalog, base_name=getBaseNameFromFileImpl)
+                description_file.write_text(resolved.text, encoding="utf-8")
                 command = [sys.executable, "-u", "-m", "src.imageConverterSample",
                            "--source", str(folder / "source.png"), "--sample", str(folder / "sample.svg"),
                            "--output", str(output / "refined.svg"), "--description", str(description_file),
@@ -362,6 +371,12 @@ class Jobs:
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
+                if job.get('sample') and resolved.references:
+                    for reference in resolved.references:
+                        aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
+                        log.write(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}\n".encode('utf-8'))
+                    log.write(f"Aufgelöste Bildbeschreibung: {resolved.text}\n".encode('utf-8'))
+                    log.flush()
                 with self.lock:
                     if job["status"] != "running":
                         return
@@ -382,13 +397,14 @@ class Jobs:
                     collect = collect_sample_result if job.get("sample") else collect_result
                     collect(folder, job, process.returncode)
                     previous = self.jobs.get(job.get('previous_job_id'))
-                    if (job.get('result') and previous and previous.get('result')
-                            and previous['description'] == job['description']):
+                    if job.get('result') and previous and previous.get('result'):
                         same = ((folder / 'result.svg').read_bytes() ==
                                 (self.folder(previous['id']) / 'result.svg').read_bytes())
                         job['same_as_previous'] = same
                         if same and job['quality'] == 'warning':
-                            job['message'] += ' Die erneute Suche hat denselben besten Entwurf ergeben.'
+                            job['message'] += (' Trotz geänderter Beschreibung hat die Suche denselben Entwurf ergeben.'
+                                               if previous['description'] != job['description'] else
+                                               ' Die erneute Suche hat denselben besten Entwurf ergeben.')
                     try:
                         self.publish_best(job_id)
                     except (OSError, ValueError) as exc:

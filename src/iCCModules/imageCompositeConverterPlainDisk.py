@@ -20,7 +20,9 @@ _DESCRIPTION = re.compile(
     rf'(?:ein\s+)?(?:(?:einfacher|unbeschrifteter)\s+)?(?:{_COLOR}\s+)?kreis'
     rf'(?:\s+mit\s+(?:{_COLOR}\s+)?(?:rand|kontur|umrandung)'
     rf'(?:\s+und\s+{_COLOR}\s+(?:hintergrund|füllung|fuellung))?)?'
-    r'\.?\s*(?:(?:keine beschriftung|ohne text)\.?)?'
+    r'\.?'
+    rf'(?:\s*(?:(?:keine beschriftung|keine schriftzeichen|ohne text|keine anschlüsse|ohne anschluss)'
+    rf'\.?|hintergrund:\s*{_COLOR}\.?)){{0,3}}'
     # Whole-motif pose/scale wording adds no objects. Keep the full match so
     # labels or attachments before/after this sentence still reject the model.
     # Geometry continues to come from pixels, never from these relative words.

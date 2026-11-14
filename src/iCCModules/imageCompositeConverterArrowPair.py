@@ -12,7 +12,7 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterDualArrowBadge import looksLikeDualArrowDescriptionImpl
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register, _hex
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
-from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, horizontal_bar_colors
 
 
 def _runs(indices):
@@ -101,22 +101,31 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
     # anywhere in its clause. A whole-motif translation can append "nach links"
     # after "rechts Spitze nach oben" without an intervening full stop. Commas
     # may separate a side/color from its head direction; full clauses may not.
+    side_word = r'(?:links|rechts|linke[nrsm]?|rechte[nrsm]?)'
     head_directions = re.findall(
-        r'\b(links|rechts)\b(?:(?!\b(?:links|rechts)\b)[^.;!?])*?\bspitze nach (oben|unten)\b', text)
+        r'\b('+side_word+r')\b(?:(?!\b'+side_word+r'\b)[^.;!?])*?\bspitze nach (oben|unten)\b', text)
     order = np.argsort(centers)
     for side, index in zip(('links', 'rechts'), order):
         color = ('blau', 'rot')[index]
         if re.search(side+r'\s*[:,]?\s*(?:ist\s+)?'+('rot' if color == 'blau' else 'blau')+r'\b', text):
             return None
-        directions = [direction for stated_side, direction in head_directions if stated_side == side]
+        # Adjectival subjects can name both primitives before their color:
+        # "Die linke Linie und das linke Dreieck ist rot."
+        adjective = 'linke' if side == 'links' else 'rechte'
+        subject_colors = re.findall(
+            r'\b'+adjective+r'[nrsm]?\s+(?:linie|dreieck)\b[^.;!?]*?\b(?:ist|sind)\s+(rot|blau)\b', text)
+        if any(stated != color for stated in subject_colors):
+            return None
+        directions = [direction for stated_side, direction in head_directions
+                      if stated_side.startswith(side[:-1])]
         expected = 'unten' if geometries[index*8+5] > geometries[index*8+6] else 'oben'
         if directions != [expected]:
             return None
     wants_bar = 'horizontal' in text or 'waagerecht' in text
     if wants_bar != bool(bars):
         return None
-    bar_color = re.search(r'(rot\w*|blau\w*)\s+(?:horizontal\w*|waagerecht\w*)', text)
-    if bars and bar_color and bars[0][0] != int(bar_color[1].startswith('rot')):
+    bar_colors = horizontal_bar_colors(description)
+    if bars and bar_colors and bar_colors != {('blue', 'red')[bars[0][0]]}:
         return None
     foreground = np.min(pixels, axis=2) < 220
     supported = cv2.dilate((masks[0] | masks[1]).astype(np.uint8), np.ones((3, 3), np.uint8)) > 0

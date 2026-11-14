@@ -41,6 +41,10 @@
           <label for="description" class="sr-only">Bildbeschreibung</label>
           <textarea id="description" rows="5" maxlength="12000" placeholder="Zum Beispiel: Ein blauer Kreis mit schwarzer Kontur auf weissem Hintergrund."></textarea>
           <p id="description-hint" class="hint">Beschreibe Formen, Farben und ihre Anordnung. Bei bekannten Katalogbildern wird die Beschreibung ergänzt.</p>
+          <details class="hint"><summary>Ähnliche Bilder als Hilfe verwenden</summary>
+            <p>Du kannst auf hinterlegte Katalogbeschreibungen verweisen: <strong>Form ähnlich wie BILDNAME</strong>, <strong>Farben ähnlich wie BILDNAME</strong> oder <strong>Farbverlauf ähnlich wie BILDNAME</strong>. Ersetze BILDNAME durch die Kennung des Katalogbildes; auch eine genaue Grössenvariante ist möglich.</p>
+            <p>Form und Farben lassen sich aus verschiedenen Bildern kombinieren. Ergänze Unterschiede, zum Beispiel „aber ohne Anschluss“ oder „ohne Text“. Die Referenzen geben Hinweise aus den Beschreibungen; die genaue Anpassung und Qualitätsprüfung erfolgen am aktuellen Bild. Die aufgelöste Beschreibung steht im Konvertierungsprotokoll.</p>
+          </details>
           <label class="field-label" for="profile">Suchbudget</label>
           <select id="profile"><option value="quick">Schnell · bis zu 45 Sekunden</option><option value="normal" selected>Normal · bis zu 2 Minuten</option><option value="thorough">Gründlich · bis zu 4 Minuten</option></select>
           <p class="hint">Bei ungenügender Qualität sucht der Konverter mindestens 30 Sekunden nach besseren Kandidaten, sofern ein bearbeitbares Vektormodell vorliegt. Sehr genaue Ergebnisse können früher fertig sein. Bei spätem Fortschritt sucht er bis zur Obergrenze weiter. Start und Abschluss kommen hinzu.</p>

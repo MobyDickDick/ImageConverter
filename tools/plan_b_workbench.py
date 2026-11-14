@@ -95,8 +95,10 @@ def prepare(svg: str, description: str, folder: Path, *, seed: int | None = None
     # Validate resources before opening the SVG in a renderer. Retain the exact
     # uploaded bytes as evidence; prepare_sample is used only for validation.
     inspect_svg(svg)
-    cases = [battery.make_original_case(svg, description.strip()),
-             *battery.make_variations(svg, description.strip(), seed, expand_canvas=True)]
+    from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
+    resolved = resolve_catalog_similarity_description(description.strip(), battery.ROOT)
+    cases = [battery.make_original_case(svg, resolved.text),
+             *battery.make_variations(svg, resolved.text, seed, expand_canvas=True)]
     folder.mkdir(parents=True, exist_ok=False)
     (folder / 'source.svg').write_text(svg, encoding='utf-8')
     (folder / 'source_description.txt').write_text(description.strip(), encoding='utf-8')
@@ -113,6 +115,7 @@ def prepare(svg: str, description: str, folder: Path, *, seed: int | None = None
     report = dict(schema_version='plan_b_workbench_v1', name=Path(name.replace('\\', '/')).name[:180],
                   created=time.time(), seed=seed, source_svg_sha256=battery.sha256(svg.encode('utf-8')),
                   source_description=description.strip(), limits=dict(battery.LIMITS),
+                  effective_source_description=resolved.text, similarity_references=list(resolved.references),
                   revision=revision, working_tree_dirty=dirty, status='prepared', active_case=None,
                   provenance=provenance(),
                   cases=cases, attempts=[], notes={}, purpose='diagnostic',

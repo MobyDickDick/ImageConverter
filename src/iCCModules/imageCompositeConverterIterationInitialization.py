@@ -70,17 +70,23 @@ def prepareIterationRuntimeImpl(
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
             from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+            checked_assertions = assertions
+            if params.get('stem_disk_registration'):
+                # The raster-backed model proves one circle and one axial
+                # handle. Residual rim pixels cannot become extra objects.
+                checked_assertions = dict(assertions, counts=[*assertions.get('counts', []),
+                    dict(kind='circle', count=1), dict(kind='line', count=1)])
             # Failed drafts are displayed and downloadable in the GUI too.
             # Preserve incomplete geometry for diagnosis, but never add text
             # when the description explicitly excludes it.
             if kwargs.get('failed', False):
                 validate_svg_assertions(svg_content, dict(counts=[], no_text=assertions.get('no_text')))
             if not kwargs.get('failed', False):
-                validate_svg_assertions(svg_content, assertions)
+                validate_svg_assertions(svg_content, checked_assertions)
                 if session and session.minimum_pending:
                     from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg
                     fitted = polish_generated_svg(svg_content, target_img, render_svg_to_numpy_fn,
-                                                  assertions=assertions)
+                                                  assertions=checked_assertions)
                     if fitted is not None:
                         params['vector_continuation'] = {key: fitted[key] for key in
                             ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}

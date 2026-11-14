@@ -3,6 +3,8 @@ from __future__ import annotations
 from src.iCCModules.imageCompositeConverterLabeledDisk import fit_labeled_disk
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterMotorValve import fit_motor_valve
+from src.iCCModules.imageCompositeConverterStemDisk import fit_stem_disk
+from src.iCCModules.imageCompositeConverterPlainDisk import fit_plain_disk
 from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
 
 
@@ -149,7 +151,23 @@ def runSemanticBadgeIterationImpl(
     apply_redraw_variation_fn,
     print_fn,
 ):
-    original_description = ' '.join(str(f.get('text', '')) for f in params.get('description_fragments', []) if isinstance(f, dict)) or description
+    original_description = params.get('effective_description') or ' '.join(str(f.get('text', '')) for f in params.get('description_fragments', []) if isinstance(f, dict)) or description
+    if params.get('similarity_references'):
+        plain_disk = fit_plain_disk(width, height, description=description, image=perc_img,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+        if plain_disk is not None:
+            validated_result(plain_disk, perc_img)
+            write_attempt_artifacts_fn(plain_disk['svg'], plain_disk['rendered'])
+            write_validation_log_fn(['status=semantic_raster_plain_disk'])
+            return base, description, params, 1, plain_disk['error']
+    stem_disk = fit_stem_disk(width, height, description=original_description, image=perc_img,
+        render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+    if stem_disk is not None:
+        validated_result(stem_disk, perc_img)
+        params['stem_disk_registration'] = {k: v for k, v in stem_disk.items() if k not in {'svg', 'rendered'}}
+        write_attempt_artifacts_fn(stem_disk['svg'], stem_disk['rendered'])
+        write_validation_log_fn(['status=semantic_raster_stem_disk'])
+        return base, description, params, 1, stem_disk['error']
     fitted_disk = fit_motor_valve(width, height, description=original_description, image=perc_img,
         render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
     if fitted_disk is None:
