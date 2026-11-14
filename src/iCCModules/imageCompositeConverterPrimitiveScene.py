@@ -91,11 +91,13 @@ def _alternatives(mask, pixels):
 
 
 def _local_quality(reference, output):
-    a = np.max(255-reference.astype(float),axis=2) > 25
-    b = np.max(255-output.astype(float),axis=2) > 25
+    from src.iCCModules.imageCompositeConverterRasterQuality import foreground_overlap
+
+    reference_contrast = np.max(255-reference.astype(float),axis=2)
+    output_contrast = np.max(255-output.astype(float),axis=2)
+    a, b = reference_contrast > 25, output_contrast > 25
     union = a | b
     error = np.mean((reference.astype(float)-output.astype(float))**2,axis=2)/255**2
-    iou = np.count_nonzero(a & b)/max(1,np.count_nonzero(union))
     fg = float(error[union].mean()) if union.any() else 0.
     ae, be = cv2.Canny(reference,50,140)>0, cv2.Canny(output,50,140)>0
     if not ae.any() or not be.any():
@@ -103,8 +105,10 @@ def _local_quality(reference, output):
     da = cv2.distanceTransform((~ae).astype(np.uint8),cv2.DIST_L2,3)
     db = cv2.distanceTransform((~be).astype(np.uint8),cv2.DIST_L2,3)
     edge = float((np.exp(-db[ae]).mean()+np.exp(-da[be]).mean())/2)
+    iou, binary_iou = foreground_overlap(reference_contrast, output_contrast,
+        normalized_mse=float(error.mean()), foreground_mse=fg, edge_alignment=edge)
     return dict(normalized_mse=float(error.mean()), foreground_mse=fg,
-                foreground_iou=float(iou), edge_alignment=edge,
+                foreground_iou=float(iou), foreground_iou_binary=binary_iou, edge_alignment=edge,
                 passed=bool(error.mean() <= .01 and fg <= .04 and iou >= .85 and edge >= .72))
 
 

@@ -61,6 +61,28 @@ Eine vollständige neue Objekt-/Semantikabnahme ist damit nicht erbracht.
 Die reine Qualitätsprüfung startet keine Konvertierung. Der separat startbare
 Hintergrunddienst führt neue Versuche aus.
 
+### Toleranz für JPEG- und Kantengraustufen
+
+Der Vordergrundvergleich verwendet weiterhin mindestens 85 % IoU. Der bisherige
+binäre Wert bleibt als `foreground_iou_binary` im JSON-Bericht erhalten.
+Ein schmaler Übergangsbereich behandelt Helligkeitsabstände von 15 bis 35 zum
+beobachteten Quellhintergrund anteilig statt ausschließlich als Vorder- oder
+Hintergrund. So erzeugen etwa Abstände von 25 und 26 keinen künstlichen Sprung
+von keiner zu vollständiger Fläche. Starke Kontraste bleiben vollständig gewichtet.
+
+Dieser abgestufte Vergleich darf den binären Wert nur verbessern, wenn bereits
+alle drei engeren Kriterien erfüllt sind: globaler MSE höchstens 0,0005,
+Vordergrund-MSE höchstens 0,005 und Kantenübereinstimmung mindestens 90 %.
+Die Oberfläche zeigt den so bewerteten Wert als IoU. Die gewöhnlichen MSE-,
+Kanten-, Größen-, Vektor- und Beschreibungsprüfungen gelten weiterhin.
+Es erfolgt keine räumliche Verschiebung oder Vergrößerung der Vergleichsmasken.
+
+Die Suchprüfung, die GUI-Nachprüfung und beide Katalogrenderer verwenden dieselbe
+Überdeckungsregel. Alte Auftragsberichte behalten ihre historischen Werte.
+Nach Serverneustart aktualisiert **Qualitätsliste aktualisieren** die Bewertung
+gespeicherter SVGs; die geänderte Prüfsignatur verhindert die Wiederverwendung
+alter Paarmessungen. Dafür ist keine erneute Konvertierung erforderlich.
+
 ## Hintergrundkonvertierung
 
 In der Katalogansicht startet **Hintergrunddienst starten** einen Durchlauf.

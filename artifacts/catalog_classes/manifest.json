@@ -256,7 +256,7 @@
         "label": "Mehrere geometrische Formen / Überdeckung / Verschachtelung",
         "total": 42,
         "archived": 4,
-        "saved_pixel_pass": 4,
+        "saved_pixel_pass": 5,
         "description_issues": {
           "reference_or_vague": 1
         },
@@ -361,23 +361,27 @@
       "placeholder": 189
     },
     "fresh_conversion_performed": false,
-    "generated_at": "2026-11-13T18:54:34.389397+00:00",
-    "quality_snapshot_generated_at": "2026-11-07T12:17:37.986645+00:00",
+    "generated_at": "2026-11-14T12:30:48.607094+00:00",
+    "quality_snapshot_generated_at": "2026-11-14T12:30:47.960334+00:00",
     "quality_snapshot": "artifacts/catalog_inventory/manifest.json",
-    "descriptions_sha256": "49f1572989fa0125fc1bde08363070fd3f9fa5fb7b7437ca26310cb1a8ca1774",
-    "quality_snapshot_sha256": "971f6645b8b9971564a3f4283955038a0c1e5992bcf0280dc11f484539c0a91c",
+    "descriptions_sha256": "1d0211d1ae8c582bf21490b11208fdd4a66414e2af1e9a1c956f6d27a4401507",
+    "quality_snapshot_sha256": "8faad3fc137c8227f9dd8f565771ab2761ca0779772199459e5f4285acace4ee",
     "classification_source_sha256": "c5c87c3ad759a5eb4c463db7eda66012dc9125da1a9fa20dc8bcdc80cb02d1a3",
     "builder_source_sha256": "1aa6493f9194836dcdcd0c746ad2256f1893a02dd7c1bfa15e2e45e23a88d8c6",
     "visual_review_sha256": "5262079fbada02ba8a2e0b0c0c3c88100832988d18cdf3797bbf437d2b276921",
     "statuses": {
       "unmeasured": 1,
       "pixel_fail": 1306,
-      "pixel_pass": 348,
-      "no_svg": 124,
+      "pixel_pass": 349,
+      "no_svg": 123,
       "reserved": 6,
       "measurement_error": 2
     },
-    "interpretation": "Geometric assignment and existing partial model availability; not full model-contract or conversion acceptance."
+    "interpretation": "Geometric assignment and existing partial model availability; not full model-contract or conversion acceptance.",
+    "last_single_candidate_update": {
+      "filename": "DLG0016.JPG",
+      "scope": "Description and measured SVG; other rows unchanged"
+    }
   },
   "rows": [
     {
@@ -36696,12 +36700,12 @@
       "variant": "DLG0016",
       "image": "artifacts/images_to_convert/DLG0016.JPG",
       "image_sha256": "c8bdfe9b50d930d4176cd540fba507f6fa07862d82badf4ab33e0427ebb86ab5",
-      "description": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.",
+      "description": "Im Hintergrund liegt ein waagerechtes Rechteck mit abgerundeten Ecken und einem vertikalen Graustufenverlauf: oben leicht heller, unten etwas dunkler. Davor liegt ein etwas kleineres weisses Rechteck, dessen linke Ecken abgerundet sind. Das weisse Vordergrundrechteck ist rechts bei ungefähr 90 Prozent der Breite des Hintergrundrechtecks senkrecht abgeschnitten. Dadurch bleiben oben, unten und links schmale graue Ränder sowie rechts ein breiterer grauer Bereich sichtbar. Keine Beschriftung oder weiteren Zeichen.",
       "role": "catalog",
       "archived": false,
-      "status": "no_svg",
+      "status": "pixel_pass",
       "quality_evidence_matches_current_input": true,
-      "selected_svg": null,
+      "selected_svg": "artifacts/converted_images/catalog_background_svgs/DLG0016.svg",
       "classification": {
         "schema": "catalog_geometry_classes_v1",
         "class_id": "geometric_scene",

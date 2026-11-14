@@ -407,7 +407,8 @@ def test_quality_checks_saved_pixels_not_success_labels():
     reference = battery.render(SVG, 80, 80)
     good = battery.measure_quality(reference, SVG)
     assert good["satisfactory"]
-    assert good["metrics"] == {"normalized_mse": 0, "foreground_mse": 0, "edge_alignment": 1, "foreground_iou": 1}
+    assert good["metrics"] == {"normalized_mse": 0, "foreground_mse": 0, "edge_alignment": 1,
+                               "foreground_iou": 1, "foreground_iou_binary": 1}
     blank = '<svg width="80" height="80"><rect width="80" height="80" fill="white"/></svg>'
     bad = battery.measure_quality(reference, blank)
     assert not bad["satisfactory"]

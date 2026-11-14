@@ -290,6 +290,8 @@ def make_variations(svg: str, description: str, seed: int, *, expand_canvas=Fals
 
 def measure_quality(reference, svg: str, limits: dict | None = None, *, render_fn=None) -> dict:
     """Independent raster checks; foreground checks stop white backgrounds hiding errors."""
+    from src.iCCModules.imageCompositeConverterRasterQuality import foreground_overlap
+
     np = import_with_vendored_fallback("numpy")
     cv2 = import_with_vendored_fallback("cv2")
     limits = dict(LIMITS if limits is None else limits)
@@ -317,10 +319,10 @@ def measure_quality(reference, svg: str, limits: dict | None = None, *, render_f
     # Estimate background from border pixels, allowing non-white input SVGs.
     border = np.concatenate((reference[0], reference[-1], reference[:, 0], reference[:, -1]))
     background = np.median(border.astype(np.float32), axis=0)
-    ref_mask = np.max(np.abs(reference.astype(np.float32) - background), axis=2) > 25
-    out_mask = np.max(np.abs(output.astype(np.float32) - background), axis=2) > 25
+    ref_contrast = np.max(np.abs(reference.astype(np.float32) - background), axis=2)
+    out_contrast = np.max(np.abs(output.astype(np.float32) - background), axis=2)
+    ref_mask, out_mask = ref_contrast > 25, out_contrast > 25
     union = ref_mask | out_mask
-    iou = float(np.count_nonzero(ref_mask & out_mask) / np.count_nonzero(union)) if union.any() else 1.0
     foreground_mse = float(error[union].mean()) if union.any() else float(error.mean())
     a, b = cv2.Canny(reference, 50, 140) > 0, cv2.Canny(output, 50, 140) > 0
     if a.any() and b.any():
@@ -329,8 +331,10 @@ def measure_quality(reference, svg: str, limits: dict | None = None, *, render_f
         edge = float((np.exp(-forward[a]).mean() + np.exp(-backward[b]).mean()) / 2)
     else:
         edge = float(not a.any() and not b.any())
+    iou, binary_iou = foreground_overlap(ref_contrast, out_contrast,
+        normalized_mse=float(error.mean()), foreground_mse=foreground_mse, edge_alignment=edge)
     metrics = {"normalized_mse": float(error.mean()), "foreground_mse": foreground_mse,
-               "edge_alignment": edge, "foreground_iou": iou}
+               "edge_alignment": edge, "foreground_iou": iou, "foreground_iou_binary": binary_iou}
     checks = (("normalized_mse", "max_normalized_mse", False),
               ("foreground_mse", "max_foreground_mse", False),
               ("edge_alignment", "min_edge_alignment", True),

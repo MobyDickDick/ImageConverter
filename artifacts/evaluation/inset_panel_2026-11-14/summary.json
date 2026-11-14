@@ -1,0 +1,148 @@
+[
+  {
+    "stage": "description_only",
+    "renderer": "mupdf",
+    "satisfactory": false,
+    "failures": [
+      "edge_alignment_outside_limit"
+    ],
+    "metrics": {
+      "normalized_mse": 0.00022632662148680538,
+      "foreground_mse": 6.839168054284528e-05,
+      "edge_alignment": 0.6768662929534912,
+      "foreground_iou": 0.9803801348865726
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 0,
+      "path_command_count": 0,
+      "path_complexity_ratio": 0.0
+    }
+  },
+  {
+    "stage": "description_only",
+    "renderer": "librsvg",
+    "satisfactory": false,
+    "failures": [
+      "edge_alignment_outside_limit"
+    ],
+    "metrics": {
+      "normalized_mse": 0.00023979494289960712,
+      "foreground_mse": 6.75870687700808e-05,
+      "edge_alignment": 0.6786118149757385,
+      "foreground_iou": 0.9803801348865726
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 0,
+      "path_command_count": 0,
+      "path_complexity_ratio": 0.0
+    }
+  },
+  {
+    "stage": "after",
+    "renderer": "mupdf",
+    "satisfactory": true,
+    "failures": [],
+    "metrics": {
+      "normalized_mse": 5.534737283596769e-05,
+      "foreground_mse": 5.1456463552312925e-05,
+      "edge_alignment": 0.9500267505645752,
+      "foreground_iou": 0.9827586206896551
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 1,
+      "path_command_count": 8,
+      "path_complexity_ratio": 4.0
+    },
+    "details": {
+      "passed": true,
+      "regions": {
+        "outer_top_left": 6.0,
+        "outer_bottom_left": 9.0,
+        "outer_top_right": 5.549999999999997,
+        "outer_bottom_right": 11.549999999999997,
+        "inner_top_left": 7.0,
+        "inner_bottom_left": 8.0,
+        "square_cut": 8.0,
+        "exposed_gradient": 1.0
+      },
+      "white_error": 8.0,
+      "maximum_error": 17.0
+    }
+  },
+  {
+    "stage": "after",
+    "renderer": "librsvg",
+    "satisfactory": true,
+    "failures": [],
+    "metrics": {
+      "normalized_mse": 5.7523171562934294e-05,
+      "foreground_mse": 5.4308104154188186e-05,
+      "edge_alignment": 0.7277320623397827,
+      "foreground_iou": 0.9824615384615385
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 1,
+      "path_command_count": 8,
+      "path_complexity_ratio": 4.0
+    },
+    "details": {
+      "passed": true,
+      "regions": {
+        "outer_top_left": 6.0,
+        "outer_bottom_left": 8.0,
+        "outer_top_right": 6.0,
+        "outer_bottom_right": 10.0,
+        "inner_top_left": 7.0,
+        "inner_bottom_left": 8.0,
+        "square_cut": 8.0,
+        "exposed_gradient": 1.0
+      },
+      "white_error": 8.0,
+      "maximum_error": 17.0
+    }
+  }
+]

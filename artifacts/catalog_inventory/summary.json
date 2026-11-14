@@ -1,13 +1,13 @@
 {
   "schema": "catalog_inventory_v1",
-  "generated_at": "2026-11-07T12:17:37.986645+00:00",
+  "generated_at": "2026-11-14T12:30:47.960334+00:00",
   "catalog_bitmaps": 1787,
   "auxiliary_bitmaps": 0,
   "unique_catalog_variants": 1787,
   "catalog_statuses": {
     "pixel_fail": 1311,
-    "pixel_pass": 348,
-    "no_svg": 124,
+    "pixel_pass": 349,
+    "no_svg": 123,
     "measurement_error": 2,
     "reserved": 2
   },
@@ -21,8 +21,8 @@
   "archive_description_differences": 8,
   "archive_missing_evidence": 3,
   "archived_current_pixel_pass": 288,
-  "measurements_computed": 2,
-  "measurements_reused": 2393,
+  "measurements_computed": 1,
+  "measurements_reused": 0,
   "groups": {
     "AC": {
       "total": 930,
@@ -104,8 +104,8 @@
       "archived": 4,
       "statuses": {
         "pixel_fail": 16,
-        "pixel_pass": 6,
-        "no_svg": 3,
+        "pixel_pass": 7,
+        "no_svg": 2,
         "measurement_error": 2
       }
     },
@@ -346,5 +346,8 @@
       "measurement_signature": "1b697ecf831537bf4232f5d7a4f617dc71b824aceefe008a53e2d77e1d7dc20c",
       "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
     }
-  ]
+  ],
+  "full_generated_at": "2026-11-07T12:17:37.986645+00:00",
+  "measurement_scope": "single_candidate",
+  "updated_filename": "DLG0016.JPG"
 }

@@ -197,7 +197,7 @@ def raster_identity(image):
 
 
 def pixel_quality(reference, output):
-    """Unchanged strict pixel limits, with the source's observed background.
+    """Pixel limits with graded foreground overlap and observed background.
 
     Match the independent Plan-B measurement, including tightly cropped JPEG
     inputs whose border median is not pure white. Never infer success from a
@@ -205,17 +205,19 @@ def pixel_quality(reference, output):
     """
     import cv2
     import numpy as np
+    from src.iCCModules.imageCompositeConverterRasterQuality import foreground_overlap
     reference,output = np.asarray(reference,dtype=np.uint8),np.asarray(output,dtype=np.uint8)
     if reference.shape!=output.shape or reference.ndim!=3 or reference.shape[2]!=3:
         return None
     a,b = reference.astype(np.float32),output.astype(np.float32)
     border = np.concatenate((a[0],a[-1],a[:,0],a[:,-1]))
     background = np.median(border,axis=0)
-    observed = np.max(abs(a-background),axis=2)>25
-    predicted = np.max(abs(b-background),axis=2)>25
+    observed_contrast = np.max(abs(a-background),axis=2)
+    predicted_contrast = np.max(abs(b-background),axis=2)
+    observed = observed_contrast>25
+    predicted = predicted_contrast>25
     union = observed|predicted
     error = np.square(a-b).mean(axis=2)/255**2
-    iou = float((observed&predicted).sum()/union.sum()) if union.any() else 1.
     foreground = float(error[union].mean()) if union.any() else float(error.mean())
     ae,be = cv2.Canny(reference,50,140)>0,cv2.Canny(output,50,140)>0
     if ae.any() and be.any():
@@ -225,7 +227,10 @@ def pixel_quality(reference, output):
     else:
         edge = float(not ae.any() and not be.any())
     mse = float(error.mean())
-    return dict(normalized_mse=mse,foreground_mse=foreground,foreground_iou=iou,edge_alignment=edge,
+    iou, binary_iou = foreground_overlap(observed_contrast, predicted_contrast,
+        normalized_mse=mse, foreground_mse=foreground, edge_alignment=edge)
+    return dict(normalized_mse=mse,foreground_mse=foreground,foreground_iou=iou,
+                foreground_iou_binary=binary_iou,edge_alignment=edge,
                 passed=bool(mse<=.01 and foreground<=.04 and iou>=.85 and edge>=.72))
 
 

@@ -19,7 +19,7 @@
 | Panel/Röhre mit Kurven oder räumlichem Effekt | 84 | 0 | 0 |
 | Pfeile, Linien, Dreiecke und Verzweigungen | 248 | 164 | 168 |
 | Achsendiagramm / Stufen / Sinus | 20 | 4 | 3 |
-| Mehrere geometrische Formen / Überdeckung / Verschachtelung | 42 | 4 | 4 |
+| Mehrere geometrische Formen / Überdeckung / Verschachtelung | 42 | 5 | 4 |
 | Geometrisches Piktogramm / Button / Flagge / Haken | 107 | 13 | 13 |
 | Kurviges Piktogramm / Flamme / Glocke / Tropfen / Werkzeug | 120 | 4 | 4 |
 | Foto / dichtes oder organisches Motiv | 25 | 0 | 0 |
@@ -39,7 +39,7 @@ Die verbleibenden 0 beschreibungsbasierten Vorschläge
 sind noch nicht an den Originalbildern geprüft.
 
 Die Qualitätszahlen stammen aus dem vorhandenen Snapshot
-`2026-11-07T12:17:37.986645+00:00` und werden nur bei identischen
+`2026-11-14T12:30:47.960334+00:00` und werden nur bei identischen
 Bildbytes und Beschreibungen übernommen. Es wurde keine neue Konvertierung
 oder Rastermessung durchgeführt. Archiv und Rasterpass überlappen.
 Reservierte Bilder bleiben ohne neue geometrische Zuordnung.

@@ -1,5 +1,10 @@
 # ImageConverter
 
+Die [DLG0016-Korrektur](artifacts/evaluation/inset_panel_2026-11-14/README.md)
+ersetzt die falsche Pfeilbeschreibung durch das gerundete graue Verlaufspanel
+mit rechts abgeschnittenem weissem Innenfeld. Die native Rekonstruktion besteht
+die unveränderten Pixelprüfungen mit MuPDF und librsvg.
+
 Die [Kategorien-Kollektion](docs/category_collection.md) im lokalen Webserver
 stellt je ein Original aus allen 15 geometrischen Kategorien bereit:
 einzeln laden und konvertieren, Fortschritt erhalten und bestandene Ergebnisse

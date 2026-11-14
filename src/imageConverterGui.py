@@ -48,16 +48,9 @@ class RequestError(ValueError):
 
 
 def catalog_descriptions() -> dict[str, str]:
-    from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingImpl
-    from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+    from src.iCCModules.imageCompositeConverterDescriptions import loadCatalogDescriptionMappingImpl
 
-    descriptions = {}
-    for folder in ("images_to_convert", "descriptions"):
-        path = ROOT / "artifacts" / folder / "Finale_Wurzelformen_V3.xml"
-        if path.is_file():
-            descriptions.update(loadDescriptionMappingImpl(
-                str(path), get_base_name_from_file_fn=getBaseNameFromFileImpl))
-    return descriptions
+    return loadCatalogDescriptionMappingImpl(ROOT)
 
 
 def find_svg_description(name: str) -> dict:
@@ -213,6 +206,12 @@ class Jobs:
     def snapshot(self, job_id: str) -> dict:
         with self.lock:
             folder = self.folder(job_id)
+            stored = self.jobs[job_id]
+            if stored['status'] == 'ready' and stored.get('description_origin') != 'user':
+                description = self.catalog_description(stored['name'])
+                if description != stored['description']:
+                    stored.update(description=description, description_origin='catalog' if description else 'empty')
+                    self.save(stored)
             job = dict(self.jobs[job_id])
             if job["status"] == "running":
                 job["elapsed"] = round(time.time() - job["started"], 1)
@@ -225,9 +224,17 @@ class Jobs:
                 job["log"] = ""
             return job
 
+    def catalog_description(self, name: str) -> str:
+        from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+
+        # XML corrections take effect without restarting the long-lived server.
+        self.descriptions = catalog_descriptions()
+        keys = (name, Path(name).stem, getBaseNameFromFileImpl(name))
+        return next((self.descriptions[key.upper()] for key in keys
+                     if key.upper() in self.descriptions), '')
+
     def upload(self, name: str, data: bytes) -> dict:
         from PIL import Image, ImageOps, UnidentifiedImageError
-        from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 
         name = name.replace("\\", "/").rsplit("/", 1)[-1][:180] or "Bild"
         try:
@@ -244,9 +251,7 @@ class Jobs:
         except (UnidentifiedImageError, OSError, Image.DecompressionBombError,
                 Image.DecompressionBombWarning) as exc:
             raise RequestError("Das Bild ist beschädigt, zu gross oder wird nicht unterstützt.") from exc
-        keys = (name, Path(name).stem, getBaseNameFromFileImpl(name))
-        description = next((self.descriptions[key.upper()] for key in keys
-                            if key.upper() in self.descriptions), "")
+        description = self.catalog_description(name)
         with self.lock:
             source_sha256 = hashlib.sha256(
                 f'{background.width}x{background.height}:'.encode()+background.tobytes()).hexdigest()
@@ -277,10 +282,13 @@ class Jobs:
         with self.lock:
             if self.closed or any(job["status"] == "running" for job in self.jobs.values()):
                 raise RequestError("Es läuft bereits eine Konvertierung. Bitte warten oder abbrechen.", 409)
+            previous = self.jobs[job_id]
+            origin = ('user' if description.strip() != previous['description']
+                      else previous.get('description_origin', 'user'))
             job = self.editable(job_id)
             job_id = job["id"]
             job.update(description=description.strip(), profile=profile, status="running",
-                       description_origin='user',
+                       description_origin=origin,
                        search_seed=secrets.randbits(64),
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
             self.save(job)
@@ -296,7 +304,8 @@ class Jobs:
         if job["status"] != "ready":
             copied = self.upload(job["name"], (folder / "source.png").read_bytes())
             job = self.jobs[copied["id"]]
-            job.update(description=previous["description"], profile=previous["profile"])
+            job.update(description=previous["description"], profile=previous["profile"],
+                       description_origin=previous.get('description_origin', 'user'))
             if previous.get("sample"):
                 shutil.copyfile(folder / "sample.svg", self.folder(job["id"]) / "sample.svg")
                 job.update(sample=True, sample_name=previous["sample_name"])
@@ -315,7 +324,7 @@ class Jobs:
             input_dir.mkdir()
             shutil.copyfile(folder / "source.png", input_dir / "UPLOAD.png")
             descriptions = folder / "description.csv"
-            write_description_table(descriptions, job["description"], self.descriptions)
+            write_description_table(descriptions, job["description"], catalog_descriptions())
             output = folder / "output"
             seconds, maximum = PROFILES[job["profile"]]
             command = [sys.executable, "-u", "-m", "src.imageCompositeConverter", str(input_dir),
@@ -580,7 +589,7 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
                     job['message'] += f" Die Modellsuche hat {summary['candidate_evaluations']} Kandidaten geprüft."
                     if summary['stop_reason'] == 'supported_models_exhausted':
                         job['message'] += (' Die verfügbaren Modelle sind ausgeschöpft; ein weiterer Versuch '
-                                           'kann wieder beim gleichen fehlerhaften Aufbau landen.')
+                                           'kann wieder beim gleichen Ergebnis enden.')
     else:
         job.update(status="error", quality="unknown", result=False,
                    message="Kein verwendbares SVG erzeugt. Beschreibung prüfen; Details stehen im Protokoll.")

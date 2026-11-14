@@ -1,14 +1,14 @@
 {
   "summary": {
     "schema": "catalog_inventory_v1",
-    "generated_at": "2026-11-07T12:17:37.986645+00:00",
+    "generated_at": "2026-11-14T12:30:47.960334+00:00",
     "catalog_bitmaps": 1787,
     "auxiliary_bitmaps": 0,
     "unique_catalog_variants": 1787,
     "catalog_statuses": {
       "pixel_fail": 1311,
-      "pixel_pass": 348,
-      "no_svg": 124,
+      "pixel_pass": 349,
+      "no_svg": 123,
       "measurement_error": 2,
       "reserved": 2
     },
@@ -22,8 +22,8 @@
     "archive_description_differences": 8,
     "archive_missing_evidence": 3,
     "archived_current_pixel_pass": 288,
-    "measurements_computed": 2,
-    "measurements_reused": 2393,
+    "measurements_computed": 1,
+    "measurements_reused": 0,
     "groups": {
       "AC": {
         "total": 930,
@@ -105,8 +105,8 @@
         "archived": 4,
         "statuses": {
           "pixel_fail": 16,
-          "pixel_pass": 6,
-          "no_svg": 3,
+          "pixel_pass": 7,
+          "no_svg": 2,
           "measurement_error": 2
         }
       },
@@ -347,7 +347,10 @@
         "measurement_signature": "1b697ecf831537bf4232f5d7a4f617dc71b824aceefe008a53e2d77e1d7dc20c",
         "scope": "L saved output measured with both renderers. M/S descriptions corrected; other measurements remain historical."
       }
-    ]
+    ],
+    "full_generated_at": "2026-11-07T12:17:37.986645+00:00",
+    "measurement_scope": "single_candidate",
+    "updated_filename": "DLG0016.JPG"
   },
   "labels": {
     "pixel_pass": "Rastergates erfüllt",
@@ -199126,16 +199129,149 @@
         "artifacts/images_to_convert/DLG0016.JPG"
       ],
       "source_conflict": false,
-      "description": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.",
+      "description": "Im Hintergrund liegt ein waagerechtes Rechteck mit abgerundeten Ecken und einem vertikalen Graustufenverlauf: oben leicht heller, unten etwas dunkler. Davor liegt ein etwas kleineres weisses Rechteck, dessen linke Ecken abgerundet sind. Das weisse Vordergrundrechteck ist rechts bei ungefähr 90 Prozent der Breite des Hintergrundrechtecks senkrecht abgeschnitten. Dadurch bleiben oben, unten und links schmale graue Ränder sowie rechts ein breiterer grauer Bereich sichtbar. Keine Beschriftung oder weiteren Zeichen.",
       "description_key": "DLG0016.JPG",
       "description_source": "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
       "archived": false,
-      "candidates": [],
-      "selected": null,
+      "candidates": [
+        {
+          "svg": "artifacts/converted_images/catalog_background_svgs/DLG0016.svg",
+          "svg_sha256": "7d0aecf6371a7225fc5a6f7e5a226426dfeec511895252b81d5813713e5fbf96",
+          "all_paths": [
+            "artifacts/converted_images/catalog_background_svgs/DLG0016.svg"
+          ],
+          "measurement": {
+            "measured_at": "2026-11-14T12:30:47.819080+00:00",
+            "renderers": {
+              "mupdf": {
+                "satisfactory": true,
+                "failures": [],
+                "metrics": {
+                  "normalized_mse": 5.534737283596769e-05,
+                  "foreground_mse": 5.1456463552312925e-05,
+                  "edge_alignment": 0.9500267505645752,
+                  "foreground_iou": 0.9827586206896551
+                },
+                "limits": {
+                  "max_normalized_mse": 0.01,
+                  "max_foreground_mse": 0.04,
+                  "min_edge_alignment": 0.72,
+                  "min_foreground_iou": 0.85,
+                  "max_svg_elements": 80,
+                  "max_path_commands": 160
+                },
+                "complexity": {
+                  "parse_error": null,
+                  "embedded_raster_count": 0,
+                  "vector_element_count": 2,
+                  "path_count": 1,
+                  "path_command_count": 8,
+                  "path_complexity_ratio": 4.0
+                }
+              },
+              "librsvg": {
+                "satisfactory": true,
+                "failures": [],
+                "metrics": {
+                  "normalized_mse": 5.7523171562934294e-05,
+                  "foreground_mse": 5.4308104154188186e-05,
+                  "edge_alignment": 0.7277320623397827,
+                  "foreground_iou": 0.9824615384615385
+                },
+                "limits": {
+                  "max_normalized_mse": 0.01,
+                  "max_foreground_mse": 0.04,
+                  "min_edge_alignment": 0.72,
+                  "min_foreground_iou": 0.85,
+                  "max_svg_elements": 80,
+                  "max_path_commands": 160
+                },
+                "complexity": {
+                  "parse_error": null,
+                  "embedded_raster_count": 0,
+                  "vector_element_count": 2,
+                  "path_count": 1,
+                  "path_command_count": 8,
+                  "path_complexity_ratio": 4.0
+                }
+              }
+            },
+            "width": 180,
+            "height": 25
+          }
+        }
+      ],
+      "selected": {
+        "svg": "artifacts/converted_images/catalog_background_svgs/DLG0016.svg",
+        "svg_sha256": "7d0aecf6371a7225fc5a6f7e5a226426dfeec511895252b81d5813713e5fbf96",
+        "all_paths": [
+          "artifacts/converted_images/catalog_background_svgs/DLG0016.svg"
+        ],
+        "measurement": {
+          "measured_at": "2026-11-14T12:30:47.819080+00:00",
+          "renderers": {
+            "mupdf": {
+              "satisfactory": true,
+              "failures": [],
+              "metrics": {
+                "normalized_mse": 5.534737283596769e-05,
+                "foreground_mse": 5.1456463552312925e-05,
+                "edge_alignment": 0.9500267505645752,
+                "foreground_iou": 0.9827586206896551
+              },
+              "limits": {
+                "max_normalized_mse": 0.01,
+                "max_foreground_mse": 0.04,
+                "min_edge_alignment": 0.72,
+                "min_foreground_iou": 0.85,
+                "max_svg_elements": 80,
+                "max_path_commands": 160
+              },
+              "complexity": {
+                "parse_error": null,
+                "embedded_raster_count": 0,
+                "vector_element_count": 2,
+                "path_count": 1,
+                "path_command_count": 8,
+                "path_complexity_ratio": 4.0
+              }
+            },
+            "librsvg": {
+              "satisfactory": true,
+              "failures": [],
+              "metrics": {
+                "normalized_mse": 5.7523171562934294e-05,
+                "foreground_mse": 5.4308104154188186e-05,
+                "edge_alignment": 0.7277320623397827,
+                "foreground_iou": 0.9824615384615385
+              },
+              "limits": {
+                "max_normalized_mse": 0.01,
+                "max_foreground_mse": 0.04,
+                "min_edge_alignment": 0.72,
+                "min_foreground_iou": 0.85,
+                "max_svg_elements": 80,
+                "max_path_commands": 160
+              },
+              "complexity": {
+                "parse_error": null,
+                "embedded_raster_count": 0,
+                "vector_element_count": 2,
+                "path_count": 1,
+                "path_command_count": 8,
+                "path_complexity_ratio": 4.0
+              }
+            }
+          },
+          "width": 180,
+          "height": 25
+        }
+      },
       "semantic_revalidated": false,
       "manual_review": "not_systematically_recorded",
-      "status": "no_svg",
-      "image_url": "../images_to_convert/DLG0016.JPG"
+      "status": "pixel_pass",
+      "image_url": "../images_to_convert/DLG0016.JPG",
+      "svg_url": "../converted_images/catalog_background_svgs/DLG0016.svg"
     },
     {
       "filename": "DLG0017.JPG",
