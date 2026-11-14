@@ -17,11 +17,15 @@ class SimilarityReferenceError(ValueError):
 
 _QUOTED = re.compile(r'"[^"\n]*"|„[^“\n]*“')
 _NAME = r'[\w-]+(?:\.(?:svg|jpe?g|png|bmp|webp|tiff?))?'
+# Comparisons within an image ("Farbe wie der Quadratrand") are prose,
+# not catalog references. Keep suffixed names such as "der.png" valid.
+_PROSE_NAME = (r'(?:der|die|das|dem|den|des|ein(?:e[nrms]?)?|'
+               r'dies(?:e[nrms]?|er|es)|(?:mein|dein|sein|ihr|unser|euer)(?:e[nrms]?)?)')
 _REFERENCE = re.compile(
     r'\b(?P<aspect>form(?:en)?\s+und\s+farbe[n]?|form(?:en)?|geometrie|'
     r'farbverlauf|farbgebung|farbe[n]?)\s*(?::\s*)?(?:(?:ist|sind)\s+)?'
     r'(?:(?:ähnlich|aehnlich|gleich)\s+)?wie\s+(?:(?:in|bei|bild)\s+)?'
-    r'(?P<name>'+_NAME+r')(?![\w/\\-]|\.\w)', re.I)
+    r'(?P<name>(?!'+_PROSE_NAME+r'\b(?![.-]\w))'+_NAME+r')(?![\w/\\-]|\.\w)', re.I)
 _ALIAS = re.compile(r'^\s*wie\s+(?P<name>'+_NAME+r')\s*[,.:;]?\s*', re.I)
 _COLOR = re.compile(
     r'(?<!\w)(?:#[0-9a-f]{6}\b|(?:hell|dunkel)?(?:grau|blau|grün|gruen|rot|gelb|'

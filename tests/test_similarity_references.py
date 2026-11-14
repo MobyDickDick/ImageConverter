@@ -141,6 +141,41 @@ def test_quoted_reference_is_literal_and_legacy_user_alias_is_unchanged():
         assert not resolve(text).references
 
 
+@pytest.mark.parametrize('comparison', [
+    'Die Diagonalen haben dieselbe Farbe wie der Quadratrand.',
+    'Die Füllung hat dieselbe Farbe wie die Kontur.',
+    'Die Geometrie ist wie das obere Symbol.',
+    'Die Form ist ähnlich wie ein Kreis.',
+    'Die Form ist wie eine Ellipse.',
+    'Die Farbe ist wie diese Füllung.',
+    'Die Form ist wie mein Beispiel.',
+])
+def test_comparisons_within_an_image_are_ordinary_prose(comparison, monkeypatch):
+    from pathlib import Path
+    from src.iCCModules import imageCompositeConverterDescriptions as descriptions
+    from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
+
+    def unexpected_catalog_read(root):
+        pytest.fail('Ordinary prose must not require a catalog lookup')
+
+    monkeypatch.setattr(descriptions, 'loadCatalogDescriptionMappingImpl', unexpected_catalog_read)
+    for resolved in (resolve(comparison), resolve_catalog_similarity_description(comparison, Path('.'))):
+        assert resolved.text == comparison
+        assert not resolved.references
+
+
+def test_internal_comparison_is_preserved_alongside_an_explicit_reference():
+    comparison = 'Die Diagonalen haben dieselbe Farbe wie der Quadratrand.'
+    resolved = resolve(f'Form wie ROUND. {comparison}')
+    assert comparison in resolved.text
+    assert len(resolved.references) == 1
+    assert resolved.references[0]['key'] == 'ROUND'
+
+
+def test_reference_name_with_article_stem_and_extension_still_resolves():
+    assert resolve('Form wie der.png.', {'der': 'Ein Kreis.'}).text == 'Ein Kreis.'
+
+
 def test_exact_variant_is_preferred_and_family_is_a_fallback():
     catalog = {'SHAPE': 'Ein Kreis.', 'SHAPE_L': 'Ein Rechteck.'}
     assert resolve('Form ähnlich wie shape_l.svg.', catalog).text == 'Ein Rechteck.'

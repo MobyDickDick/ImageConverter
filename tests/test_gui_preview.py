@@ -28,6 +28,30 @@ def test_publishes_only_improving_native_candidates(tmp_path):
     publisher.consider(SVG, target, bgr=False)  # Duplicate candidates do not refresh.
     publisher.consider(SVG, target[:12], bgr=False)  # Ignore subregion renders.
     assert output.stat().st_mtime_ns == revision
+    journal = preview.AttemptJournal(tmp_path)
+    assert journal.count == 4  # Blank, best, worse, duplicate; no raster/subregion.
+    assert [item['number'] for item in journal.page(after=1, limit=2)['attempts']] == [2, 3]
+    assert journal.read(3)['mse'] > journal.read(2)['mse']
+    assert journal.read(3)['svg'] == SVG.replace('#225599', '#ff0000')
+    assert journal.read(4)['svg'] == SVG
+    assert all('svg' not in item for item in journal.page()['attempts'])
+
+
+def test_attempt_journal_continues_after_worker_restart_and_partial_write(tmp_path, monkeypatch):
+    journal = preview.AttemptJournal(tmp_path)
+    monkeypatch.setenv('ICC_GUI_PREVIEW_PHASE', 'Suche')
+    journal.append(SVG, 0)
+    with journal.records.open('ab') as stream:
+        stream.write(b'{"svg":"interrupted')
+    with journal.index.open('ab') as stream:
+        stream.write(b'\x01\x02')
+    assert journal.count == 1
+    journal = preview.AttemptJournal(tmp_path)
+    monkeypatch.setenv('ICC_GUI_PREVIEW_PHASE', 'Vektoraufbau')
+    journal.append(SVG, 255**2)
+    assert journal.count == 2
+    assert journal.read(1)['phase'] == 'Suche'
+    assert journal.read(2) == dict(number=2, svg=SVG, mse=1, phase='Vektoraufbau')
 
 
 def test_sample_renderer_publishes_without_a_second_render(tmp_path, monkeypatch):

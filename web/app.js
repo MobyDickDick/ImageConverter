@@ -9,11 +9,22 @@ let history = [];
 let syncingScroll = false;
 let pollTimer;
 let saving = false;
+let attemptWindow = null;
+function openAttemptWindow() {
+  if (!current) return;
+  attemptWindow = window.open(`/attempts?job=${current.id}`, 'imageconverter-attempts',
+    'popup=yes,width=840,height=760,resizable=yes,scrollbars=yes');
+  $("attempt-window-hint").hidden = Boolean(attemptWindow);
+}
+$("open-attempts").addEventListener("click", openAttemptWindow);
 // A display preference applies to every image and can change during a run.
 try { $("show-intermediate").checked = localStorage.getItem("imageconverter.showIntermediate") !== "false"; }
 catch (_) { $("show-intermediate").checked = true; }
 $("show-intermediate").addEventListener("change", () => {
   try { localStorage.setItem("imageconverter.showIntermediate", String($("show-intermediate").checked)); } catch (_) {}
+  if ($("show-intermediate").checked && current?.status === 'running') openAttemptWindow();
+  if (!$("show-intermediate").checked && attemptWindow && !attemptWindow.closed) attemptWindow.close();
+  if (!$("show-intermediate").checked) $("attempt-window-hint").hidden = true;
   if (current) renderJob(current);
 });
 
@@ -97,6 +108,9 @@ function draftQuality(job) {
   };
 }
 function renderJob(job, select = false) {
+  if (current?.id !== job.id && attemptWindow && !attemptWindow.closed) {
+    attemptWindow.location.replace(`/attempts?job=${job.id}`);
+  }
   if (current?.id !== job.id) { $("save-status").hidden = true; $("save-status").textContent = ""; }
   current = job;
   $("collection-context").hidden = !job.collection_case_id;
@@ -122,6 +136,7 @@ function renderJob(job, select = false) {
   const sampleUrl = `/api/jobs/${job.id}/sample`;
   if (job.sample && $("sample-image").getAttribute("src") !== sampleUrl) $("sample-image").src = sampleUrl;
   const running = job.status === "running";
+  $("open-attempts").hidden = !$("show-intermediate").checked;
   const showingPreview = Boolean($("show-intermediate").checked && job.preview && running);
   const showingResult = showingPreview || Boolean(job.result && !running);
   $("result-image").hidden = !showingResult;
@@ -236,6 +251,7 @@ window.addEventListener("dragover", (event) => event.preventDefault());
 window.addEventListener("drop", (event) => event.preventDefault());
 $("convert").addEventListener("click", () => {
   if (!current || busy || activeId) return;
+  if ($("show-intermediate").checked) openAttemptWindow();
   return update(() => post(`/api/jobs/${current.id}/start`, { description: $("description").value, profile: $("profile").value }));
 });
 $("cancel").addEventListener("click", () => {

@@ -18,15 +18,26 @@ function element() {
     querySelectorAll() {return this.children;}};
 }
 
+function popup() {
+  return {closed: false, location: {replace() {}}, close() {this.closed = true;}};
+}
+
 test('incremental native previews refresh while conversion remains active', () => {
   const elements = new Map();
+  const opened = [];
+  const redirects = [];
   const get = id => {
     if (!elements.has(id)) elements.set(id, element());
     return elements.get(id);
   };
   const context = vm.createContext({
     document: {getElementById: get, createElement: element, querySelector: element},
-    window: {location: {search: ''}, addEventListener() {}}, URLSearchParams,
+    window: {location: {search: ''}, addEventListener() {}, open() {
+      const child = popup();
+      child.location.replace = url => redirects.push(url);
+      opened.push(child);
+      return child;
+    }}, URLSearchParams,
     setTimeout() {}, clearTimeout() {}, fetch: () => new Promise(() => {}),
   });
   vm.runInContext(fs.readFileSync(path.join(__dirname, '../web/app.js'), 'utf8'), context);
@@ -52,9 +63,17 @@ test('incremental native previews refresh while conversion remains active', () =
   get('show-intermediate').checked = true;
   get('show-intermediate').listeners.change();
   assert.equal(get('result-image').hidden, false);
+  assert.equal(opened.length, 1);
   assert.match(get('result-meta').textContent, /Zwischenstand/);
+  // A retry gets a new job; the existing popup follows it without another open.
+  context.job = {...job, id: 'e'.repeat(32)};
+  vm.runInContext('renderJob(job)', context);
+  assert.deepEqual(redirects, ['/attempts?job=' + 'e'.repeat(32)]);
   get('show-intermediate').checked = false;
+  get('show-intermediate').listeners.change();
+  assert.equal(opened[0].closed, true);
   job.status = 'done'; job.result = true;
+  context.job = job;
   vm.runInContext('renderJob(job)', context);
   assert.match(get('result-image').src, /\/result$/);
   assert.equal(get('save-actions').hidden, false);
@@ -69,7 +88,7 @@ test('intermediate display preference survives a reload', () => {
   };
   const context = vm.createContext({
     document: {getElementById: get, createElement: element, querySelector: element},
-    window: {location: {search: ''}, addEventListener() {}}, URLSearchParams,
+    window: {location: {search: ''}, addEventListener() {}, open: popup}, URLSearchParams,
     localStorage: {getItem: key => storage.get(key), setItem: (key, value) => storage.set(key, value)},
     setTimeout() {}, clearTimeout() {}, fetch: () => new Promise(() => {}),
   });
@@ -91,10 +110,12 @@ for (const parallel of [false, true]) {
       description: 'Ein Kreis.', profile: 'quick', width: 32, height: 24};
     const background = {id: 'b'.repeat(32), status: 'running', catalog_background: true};
     const calls = [];
+    const opened = [];
     const timers = [];
     const context = vm.createContext({
       document: {getElementById: get, createElement: element, querySelector: element},
-      window: {location: {search: ''}, addEventListener() {}}, URLSearchParams,
+      window: {location: {search: ''}, addEventListener() {},
+        open(...args) {opened.push(args); return popup();}}, URLSearchParams,
       setTimeout(fn) {timers.push(fn); return timers.length;}, clearTimeout() {},
       fetch: async (url, options) => {
         calls.push([url, options]);
@@ -122,6 +143,9 @@ for (const parallel of [false, true]) {
       assert.match(get('server-version-warning').textContent, /stopWebServer.cmd/);
     }
     await get('convert').listeners.click();
+    assert.equal(opened.length, 1);
+    assert.equal(opened[0][0], `/attempts?job=${manual.id}`);
+    assert.match(opened[0][2], /popup=yes/);
     assert.equal(get('notice').textContent, '');
     assert.equal(calls.filter(([url]) => url.endsWith('/start')).length, 1);
     assert.equal(get('convert').disabled, true);

@@ -35,6 +35,16 @@ def test_workbench_minus_typo_preserves_negation_and_quoted_labels():
     assert normalize_description(text) == 'Kein Minuszeichen. Die Beschriftung lautet "Minzuszeichen".'
 
 
+def test_waagrecht_variant_preserves_endings_and_quoted_labels():
+    text = 'Eine blaue waagrechte Linie, ein waagrechter Verlauf. Beschriftung "waagrecht".'
+    assert normalize_description(text) == ('Eine blaue waagerechte Linie, ein waagerechter Verlauf. '
+                                           'Beschriftung "waagrecht".')
+    assertions = description_assertions('Zwei vertikale Striche rot blau, unten Dreiecke. '
+                                        'Links Spitze nach unten, rechts Spitze nach oben. '
+                                        'Eine blaue waagrechte Linie.')
+    assert assertions['horizontal_bar'] == 'blue'
+
+
 def test_head_direction_typos_preserve_quoted_labels_and_polarity():
     text = 'Links Spitze nach obben, rechts Spitze nach untten. Beschriftung "Spitze nach untten".'
     normalized = normalize_description(text)
@@ -162,8 +172,8 @@ def test_described_arrow_heads_cannot_be_replaced_by_other_primitives(replacemen
     head = '<polygon points="0,0 4,0 2,4"/>'
     with pytest.raises(DescriptionRejected, match='object_count:triangle:2:1'):
         validate_svg_assertions('<svg>'+head+replacement+'</svg>', assertions)
-    validate_svg_assertions('<svg><polygon points="2,0 0,4 4,4"/>'
-                            '<polygon points="20,0 24,0 22,4"/></svg>', assertions)
+    validate_svg_assertions('<svg><polygon points="2,0 0,4 4,4" fill="red"/>'
+                            '<polygon points="20,0 24,0 22,4" fill="blue"/></svg>', assertions)
 
 
 def test_triangle_count_is_enforced_before_a_pixel_perfect_checkpoint():

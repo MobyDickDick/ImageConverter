@@ -44,11 +44,12 @@ def validate_arrow_heads(root, expected):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import DescriptionRejected
 
     heads = []
-    def visit(node, parent=(1., 0., 0., 1., 0., 0.)):
+    def visit(node, parent=(1., 0., 0., 1., 0., 0.), fill='black'):
         kind = node.tag.rsplit('}', 1)[-1]
         if kind in {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}:
             return
         matrix = _compose(parent, _transform(node.get('transform', '')))
+        fill = node.get('fill', fill)
         if kind == 'polygon':
             values = [float(v) for v in re.split(r'[\s,]+', node.get('points', '').strip())]
             if len(values) != 6 or not all(math.isfinite(v) for v in values):
@@ -70,9 +71,9 @@ def validate_arrow_heads(root, expected):
                                        'down' if tip[1] > base_y else 'up'))
             if len(candidates) != 1:
                 raise ValueError('deformed triangle')
-            heads.extend(candidates)
+            heads.extend((x, direction, fill) for x, direction in candidates)
         for child in node:
-            visit(child, matrix)
+            visit(child, matrix, fill)
     try:
         visit(root)
     except (ValueError, OverflowError) as exc:
@@ -84,3 +85,13 @@ def validate_arrow_heads(root, expected):
         index = 0 if claim['side'] == 'left' else 1
         if heads[index][1] != claim['direction']:
             raise DescriptionRejected('wrong_described_arrow_direction:'+claim['side'])
+        if claim.get('color'):
+            from PIL import ImageColor
+            try:
+                r, g, b = ImageColor.getrgb(heads[index][2])
+                matches = (r > g+30 and r > b+30 if claim['color'] == 'red'
+                           else b > r+30 and b > g+15)
+            except (ValueError, TypeError):
+                matches = False
+            if not matches:
+                raise DescriptionRejected('wrong_described_arrow_color:'+claim['side'])

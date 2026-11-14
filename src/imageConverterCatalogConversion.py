@@ -9,6 +9,7 @@ import time
 import uuid
 
 from src.imageConverterCatalog import CatalogError, atomic_json, read_json
+from src.iCCModules.imageCompositeConverterSimilarity import SimilarityReferenceError
 
 MAX_FAILURES = 3
 
@@ -86,7 +87,9 @@ class CatalogConversion:
             self._quality_index = sorted(((order, row) for row in rows
                 if (order := failure_order(row)) is not None), key=lambda item:item[0])
             self._index_rows = rows
-        return self._quality_index
+        errors = self.state.get('description_errors', {})
+        return [(order, row) for order, row in self._quality_index
+                if row['filename'] not in errors]
 
     def snapshot(self):
         with self.lock:
@@ -142,6 +145,7 @@ class CatalogConversion:
             self.state = dict(id=uuid.uuid4().hex, status='running', phase='refresh', profile=profile,
                               started=time.time(), completed=0, passed=0, failed=0, history=[],
                               round=round_number, failure_counts=failure_counts, deferred=[],
+                              description_errors={},
                               last_attempt=last_attempt,
                               message='Gespeicherte Qualitätsrangliste wird geladen …')
             self._save()
@@ -200,7 +204,17 @@ class CatalogConversion:
             if stored.get('description_origin') != 'user':
                 stored.update(description=row['description'], description_origin='catalog')
             self.jobs.save(stored)
-            result = self.jobs.start(job['id'], stored['description'], self.state['profile'], background=True)
+            try:
+                result = self.jobs.start(job['id'], stored['description'], self.state['profile'], background=True)
+            except ValueError as exc:
+                # Invalid references cannot improve through retries. Preserve
+                # the failed job, then let the service process other images.
+                if not isinstance(exc.__cause__, SimilarityReferenceError):
+                    raise
+                stored.update(status='error', message=str(exc), reference_error=True)
+                (self.jobs.folder(job['id'])/'console.log').write_text(str(exc)+'\n', encoding='utf-8')
+                self.jobs.save(stored)
+                result = self.jobs.snapshot(job['id'])
             return result
 
     def _preserve(self, row, job):
@@ -231,9 +245,13 @@ class CatalogConversion:
             while not self.stop.is_set():
                 ranked = self._ranked()
                 if not ranked:
+                    errors = self.state.get('description_errors', {})
                     self._update(status='done', phase='idle',
                                  failure_counts={}, deferred=[],
-                                 message='Keine bewertbaren Bilder mit verfehlten Rastergates mehr vorhanden.')
+                                 message=(f'Bilder wegen ungültiger Bildreferenzen ausgelassen: {len(errors)}. '
+                                          'Beschreibungen korrigieren und den Hintergrunddienst erneut starten.'
+                                          if errors else
+                                          'Keine bewertbaren Bilder mit verfehlten Rastergates mehr vorhanden.'))
                     return
                 names = {r['filename'].casefold() for _, r in ranked}
                 counts = {name: count for name, count in self.state['failure_counts'].items() if name in names}
@@ -275,6 +293,9 @@ class CatalogConversion:
                 if self.stop.is_set():
                     return
                 job = self.jobs.snapshot(job['id'])
+                if job.get('reference_error'):
+                    self._update(description_errors={**self.state.get('description_errors', {}),
+                                 row['filename']:job['message']})
                 self._preserve(row, job)
                 last = dict(filename=row['filename'], job_id=job['id'], status=job['status'],
                     result=bool(job.get('result')), message=job['message'],

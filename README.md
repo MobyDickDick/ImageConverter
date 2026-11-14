@@ -6,14 +6,26 @@ Versuch die verbleibende Profilzeit für einen elementweisen Vektoraufbau
 während der Suche. Beim Zeitlimit oder Abbrechen bleibt der beste vorhandene
 Vektorentwurf erhalten. Widersprüche zwischen Bild und Beschreibung werden als
 Warnung angezeigt; ein eingebettetes Originalbild gilt weiterhin nicht als
-Vektorisierung. Siehe [Prüfnachweis](artifacts/evaluation/gui_element_recovery_2026-11-14/README.md).
+Vektorisierung. Ein eigenständiges SVG, das den Bildvergleich und die expliziten
+Beschreibungsprüfungen besteht, gilt auch aus diesem Suchpfad als erfolgreich.
+Die Suche endet dann vorzeitig; eine zusätzliche Modellfreigabe ist dafür nicht
+erforderlich. Bereits abgeschlossene Vektoraufbau-Ergebnisse werden beim
+Serverneustart erneut geprüft und entsprechend eingestuft.
+Siehe [Prüfnachweis](artifacts/evaluation/gui_element_recovery_2026-11-14/README.md).
 
 Unter **Direkt vergleichen** schaltet **Zwischenergebnisse anzeigen** die laufende
 SVG-Vorschau ein oder aus. Die Checkbox ist standardmässig aktiviert, lässt sich
 auch während der Konvertierung umschalten und merkt sich die Auswahl im Browser.
-Etwa jede Sekunde erscheint der beste verfügbare Zwischenstand aus der ersten
-Suche oder der Nachbesserung. Ohne Häkchen erscheint nur das Endergebnis.
-Zwischenstände sind noch nicht abschliessend qualitätsgeprüft.
+Beim Start öffnet sich zusätzlich ein separates **Suchversuche**-Fenster. Dort
+laufen alle gerenderten nativen SVG-Versuche schnell der Reihe nach durch,
+auch schlechtere, leere und verworfene Varianten aus Suche, Sample-Anpassung
+und Nachbesserung. Tempo und Pause lassen sich ändern; **Zum aktuellen Versuch**
+überspringt auf Wunsch den Rückstand. Die Versuche bleiben lokal beim Auftrag
+gespeichert und lassen sich über **Versuchsfenster öffnen** erneut abspielen.
+Falls der Browser das Fenster blockiert, lokale Pop-ups erlauben und diesen
+Knopf anklicken. Im Hauptfenster erscheint weiterhin etwa jede Sekunde der beste
+Zwischenstand. Ohne Häkchen erscheint nur das Endergebnis. Zwischenstände sind
+noch nicht abschliessend qualitätsgeprüft.
 
 [Form- und Farbreferenzen](docs/similarity_references.md) lassen sich direkt in
 der Bildbeschreibung kombinieren: `Form ähnlich wie …`, `Farben ähnlich wie …`

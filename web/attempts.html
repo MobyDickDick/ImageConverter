@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suchversuche · ImageConverter</title>
+  <link rel="stylesheet" href="/attempts.css">
+  <script src="/attempts.js" defer></script>
+</head>
+<body>
+  <header><div><h1>Suchversuche</h1><p id="name">Konvertierung wird verbunden …</p></div><span id="phase"></span></header>
+  <main>
+    <div class="stage"><img id="attempt" alt="Aktueller SVG-Suchversuch" hidden><p id="empty">Warte auf den ersten gerenderten Versuch …</p></div>
+    <div class="progress"><strong id="counter">Versuch 0 von 0</strong><span id="error"></span></div>
+    <div class="controls">
+      <button id="pause">Anhalten</button>
+      <button id="latest">Zum aktuellen Versuch</button>
+      <label>Tempo <select id="speed"><option value="40">Sehr schnell</option><option value="100">Schnell</option><option value="400">Langsam</option></select></label>
+    </div>
+    <p id="status" role="status">Jeder Versuch wird der Reihe nach angezeigt.</p>
+    <p class="hint">Auch schlechtere, leere und verworfene Varianten gehören zur Suche. Der beste Entwurf und das Endergebnis bleiben im Hauptfenster. Dieses Fenster kannst du jederzeit schliessen.</p>
+  </main>
+</body>
+</html>

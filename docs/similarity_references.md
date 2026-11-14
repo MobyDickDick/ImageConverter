@@ -59,6 +59,13 @@ mit einer erklärenden Meldung abgelehnt. Alte ungetrennte `Wie …`-Eingaben bl
 auf ihrem bisherigen Weg; innerhalb einer neuen Referenz werden solche
 Beschreibungsverkettungen mit aufgelöst.
 
+Vergleiche innerhalb eines Bildes wie `dieselbe Farbe wie der Quadratrand`
+bleiben normale Beschreibungssätze. Im Hintergrunddienst wird ein Bild mit
+einer tatsächlich ungültigen Referenz einmal als fehlerhaft protokolliert und
+für den restlichen Lauf ausgelassen; die übrigen Bilder werden weiterbearbeitet.
+Die Abschlussmeldung nennt die Anzahl ausgelassener Bilder. Nach einer
+Beschreibungskorrektur werden sie beim nächsten Start erneut berücksichtigt.
+
 Die Sample-Optimierung erhält ebenfalls die aufgelöste Beschreibung. Plan B
 speichert den ursprünglichen Text sowie die aufgelösten Quellen und erstellt
 seine 17 Fälle aus dem aufgelösten Text. Spätere Katalogänderungen verändern

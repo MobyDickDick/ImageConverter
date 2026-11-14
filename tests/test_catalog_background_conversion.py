@@ -121,6 +121,68 @@ def test_background_attempt_preserves_an_explicit_user_correction(service):
     assert result['description_origin']=='user'
 
 
+def test_internal_color_comparison_does_not_abort_background_service(service):
+    manager, rows, _ = service
+    rows[1]['description'] = (
+        'Ein Quadrat mit beiden Diagonalen. '
+        'Die Diagonalen haben dieselbe Farbe wie der Quadratrand.'
+    )
+    manager.start()
+    manager.thread.join(5)
+    result = manager.snapshot()
+    assert result['status'] == 'done', result
+    assert result['completed'] == 9
+    assert result['history'][0]['filename'] == rows[1]['filename']
+    assert result['history'][0]['status'] == 'done'
+
+
+def test_invalid_reference_is_recorded_once_and_other_images_continue(service):
+    manager, rows, _ = service
+    rows[1]['description'] = 'Form ähnlich wie MISSING.'
+    manager.start()
+    manager.thread.join(5)
+    result = manager.snapshot()
+    assert result['status'] == 'done', result
+    assert result['completed'] == 9
+    assert result['history'][0]['filename'] == rows[1]['filename']
+    assert result['history'][0]['status'] == 'error'
+    assert result['history'][0]['passed'] is False
+    log = manager.jobs.folder(result['history'][0]['job_id'])/'console.log'
+    assert 'MISSING' in log.read_text(encoding='utf-8')
+    assert sum(item['filename'] == rows[1]['filename'] for item in result['history']) == 1
+    assert result['description_errors'] == {rows[1]['filename']:
+        'Keine hinterlegte Bildbeschreibung für Referenz „MISSING“ gefunden.'}
+    assert 'ausgelassen: 1' in result['message']
+    assert all(item['status'] == 'pixel_pass' for item in (rows[0], rows[2]))
+    assert manager.catalog.conversion_owner is None
+    # A correction is retried on the next explicit start.
+    rows[1]['description'] = 'Ein Quadrat.'
+    manager.start()
+    manager.thread.join(5)
+    result = manager.snapshot()
+    assert result['status'] == 'done', result
+    assert result['completed'] == 1
+    assert result['description_errors'] == {}
+
+
+def test_worker_description_mismatch_remains_retryable(service, monkeypatch):
+    manager, _, _ = service
+    run = manager.jobs.run
+    def mismatch(job_id):
+        run(job_id)
+        with manager.jobs.lock:
+            job = manager.jobs.jobs[job_id]
+            job['description_error'] = 'object_count:circle:2:1'
+            manager.jobs.save(job)
+    monkeypatch.setattr(manager.jobs, 'run', mismatch)
+    manager.start()
+    manager.thread.join(5)
+    result = manager.snapshot()
+    assert result['status'] == 'done', result
+    assert result['completed'] == 9
+    assert result['description_errors'] == {}
+
+
 @pytest.mark.parametrize('status', ['pixel_pass','reserved','source_conflict','no_svg','measurement_error','auxiliary'])
 def test_unrankable_status_is_excluded(status):
     assert failure_order(row('AA0010.jpg', status=status)) is None

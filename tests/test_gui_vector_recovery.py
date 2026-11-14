@@ -19,6 +19,15 @@ ROOT = Path(__file__).resolve().parents[1]
 DESCRIPTION = ('Wie AC0020: zwei vertikale Striche links rot, rechts, blau, unten Dreiecke rot blau, '
                'links Spitze nach unten, rechts Spitze nach oben.\nBei ca. 33% eine rote horizontale Linie')
 SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"><circle cx="16" cy="12" r="7" fill="#225599"/></svg>'
+MATCHING_DESCRIPTION = ('zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, '
+                        'links Spitze nach unten, rechts Spitze nach oben. '
+                        'In ca 33% der Höhe eine blaue waagrechte Linie.')
+ARROWS = ('<svg xmlns="http://www.w3.org/2000/svg" width="30" height="80">'
+          '<g><rect x="4.5" y="0" width="1" height="76" fill="#2277bb"/>'
+          '<polygon points="5,80 1,72 9,72" fill="#2277bb"/>'
+          '<rect x="24.5" y="0" width="1" height="76" fill="#ee1111"/>'
+          '<polygon points="25,72 21,80 29,80" fill="#ee1111"/>'
+          '<rect x="5" y="50" width="20" height="1" fill="#2277bb"/></g></svg>')
 
 
 def test_conflicting_arrow_description_still_produces_incremental_native_draft(tmp_path):
@@ -107,7 +116,7 @@ def test_failed_first_attempt_spends_remaining_budget_and_keeps_killed_worker_dr
     jobs.run(job['id'])
     assert waits == [240., 238.]
     assert len(stopped) == 1 and len(commands) == 2
-    assert job['status'] == 'done' and job['result'] and job['quality'] == 'warning'
+    assert job['status'] == 'done' and job['result'] and job['quality'] == 'passed'
     assert job['pixel_quality']['passed']
     assert job['recovery_report']['stop_reason'] == 'time_limit'
     assert 'result_rejection' not in job and (folder/'result.svg').read_text() == SVG
@@ -158,7 +167,7 @@ def test_recovery_cannot_replace_better_existing_vector(case):
     job.update(status='done', result=True, quality='warning', pixel_quality={'normalized_mse': 0.})
     gui.collect_recovery_result(folder, job, stop_reason='time_limit')
     assert (folder/'result.svg').read_text() == SVG
-    assert job['result'] and job['quality'] == 'warning'
+    assert job['result'] and job['quality'] == 'passed'
 
 
 def test_raster_diagnostic_cannot_become_a_recovery_preview_result(case):
@@ -173,4 +182,87 @@ def test_deadline_between_svg_and_report_write_retains_independently_checked_dra
     _, job, folder = case
     (folder/'recovery.svg').write_text(SVG)
     gui.collect_recovery_result(folder, job, stop_reason='time_limit')
-    assert job['result'] and job['quality'] == 'warning' and job['pixel_quality']['passed']
+    assert job['result'] and job['quality'] == 'passed' and job['pixel_quality']['passed']
+
+
+def test_matching_recovery_finishes_early_with_native_heads_and_waagrechte_bar(tmp_path):
+    source, output = tmp_path/'neutral.png', tmp_path/'draft.svg'
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0060_S.jpg'))
+    cv2.imwrite(str(source), image)
+    description = MATCHING_DESCRIPTION
+    report = recovery.recover(source, output, description, 10., seed=7)
+    assert report['passed'] and report['stop_reason'] == 'quality_target_reached'
+    assert report['elapsed_seconds'] < 10.
+    assert report['pixel_quality']['passed'] and not report['description_error']
+    assert not report['model_confirmed']  # SVG acceptance does not invent a model verdict.
+    job = dict(width=image.shape[1], height=image.shape[0], description=description, result=False)
+    source.rename(tmp_path/'source.png')
+    output.rename(tmp_path/'recovery.svg')
+    output.with_suffix('.json').rename(tmp_path/'recovery.json')
+    gui.collect_recovery_result(tmp_path, job, stop_reason='worker_finished')
+    assert job['quality'] == 'passed'
+    assert job['recovery_report']['stop_reason'] == 'quality_target_reached'
+
+
+@pytest.mark.parametrize('fault', ['wrong_direction', 'missing_head', 'wrong_bar', 'wrong_color', 'invalid_description'])
+def test_pixel_pass_and_worker_claim_cannot_override_description_failure(tmp_path, fault):
+    svg, description = ARROWS, MATCHING_DESCRIPTION
+    if fault == 'wrong_direction':
+        description = description.replace('links Spitze nach unten', 'links Spitze nach oben')
+    elif fault == 'wrong_bar':
+        description = description.replace('blaue waagrechte Linie', 'rote waagrechte Linie')
+    elif fault == 'wrong_color':
+        description = description.replace('links blau', 'links rot')
+    elif fault == 'invalid_description':
+        description += ' Es gibt genau drei Dreiecke.'
+    else:
+        root = ET.fromstring(svg)
+        group = root[0]
+        group.remove(next(e for e in group if e.tag.endswith('polygon')))
+        svg = ET.tostring(root, encoding='unicode')
+    Image.fromarray(render_svg(svg,30,80)).save(tmp_path/'source.png')
+    (tmp_path/'recovery.svg').write_text(svg, encoding='utf-8')
+    (tmp_path/'recovery.json').write_text('{"passed": true, "model_confirmed": true}')
+    job = dict(width=30, height=80, description=description, result=False)
+    gui.collect_recovery_result(tmp_path, job, stop_reason='worker_finished')
+    assert job['pixel_quality']['passed'] and job['quality'] == 'warning'
+    assert job['description_error'] and not job['recovery_report']['passed']
+
+
+def test_completed_recovery_is_rechecked_on_server_reload(case):
+    jobs, job, folder = case
+    for name in ('result.svg', 'recovery.svg'):
+        (folder/name).write_text(SVG)
+    job.update(status='done', result=True, quality='warning', recovery=True,
+               description='Ein Kreis.', description_validation_version=2)
+    jobs.save(job)
+    restored = gui.Jobs(jobs.directory)
+    try:
+        result = restored.jobs[job['id']]
+        assert result['quality'] == 'passed' and result['pixel_quality']['passed']
+        assert json.loads((folder/'job.json').read_text(encoding='utf-8'))['quality'] == 'passed'
+    finally:
+        restored.close()
+
+
+def test_matching_candidate_is_accepted_without_further_search(case, monkeypatch):
+    _, _, folder = case
+    candidate = folder/'candidate.svg'
+    candidate.write_text(SVG)
+    def forbidden(*args, **kwargs):
+        pytest.fail('a verified candidate must finish without another search')
+    monkeypatch.setattr(recovery, 'fit_arrow_pair', forbidden)
+    monkeypatch.setattr(recovery, 'polish_generated_svg', forbidden)
+    report = recovery.recover(folder/'source.png', folder/'recovery.svg', 'Ein Kreis.',
+                              30., candidate=candidate)
+    assert report['passed'] and report['stop_reason'] == 'quality_target_reached'
+    assert report['evaluations'] == 1 and report['elapsed_seconds'] < 1.
+
+
+def test_worker_claim_cannot_override_failed_image_comparison(case):
+    _, job, folder = case
+    (folder/'recovery.svg').write_text(SVG.replace('cx="16"', 'cx="4"'))
+    (folder/'recovery.json').write_text('{"passed": true}')
+    job['description'] = 'Ein Kreis.'
+    gui.collect_recovery_result(folder, job, stop_reason='worker_finished')
+    assert job['quality'] == 'warning' and not job['pixel_quality']['passed']

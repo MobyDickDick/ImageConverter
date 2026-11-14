@@ -784,6 +784,21 @@ def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, requ
     recovery_svg = live_svg.replace(b'10', b'12')
     (folder/'recovery.svg').write_bytes(recovery_svg)
     assert send(preview_path) == (b'200', recovery_svg)
+    from src.imageConverterPreview import AttemptJournal
+    journal = AttemptJournal(folder)
+    journal.append(live_svg.decode(), 0)
+    journal.append(recovery_svg.decode(), 255**2)
+    attempts_path = '/api/jobs/' + uploaded['id'] + '/attempts'
+    assert json.loads(send('/api/jobs/' + uploaded['id'])[1])['attempt_count'] == 2
+    page = json.loads(send(attempts_path + '?after=1')[1])
+    assert page['total'] == 2 and page['attempts'][0]['number'] == 2
+    assert 'svg' not in page['attempts'][0]
+    assert send(attempts_path + '?number=1') == (b'200', live_svg)
+    assert send(attempts_path + '?number=2') == (b'200', recovery_svg)
+    for query in ('?number=0', '?number=3', '?number=invalid', '?after=-1', '?after=invalid'):
+        assert send(attempts_path + query)[0] == b'404'
+    for path in ('/attempts', '/attempts.js', '/attempts.css'):
+        assert send(path)[0] == b'200'
     assert 'native_file_dialogs' in json.loads(send('/api/config')[1])
     monkeypatch.setattr(gui, 'open_file_dialog', lambda *args: dict(selected=False))
     assert b'403' in send('/api/pick', 'POST', '', b'{"kind":"image"}')[0]

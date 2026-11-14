@@ -39,6 +39,7 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
             (r'\bminnus\b', 'Minus'),
             (r'\bminzuszeichen\b', 'Minuszeichen'),
             (r'\bhorizonal(e|er|en|em|es)?\b', r'horizontal\1'),
+            (r'\bwaagrecht(e|er|en|em|es)?\b', r'waagerecht\1'),
             (r'\bvertial(e|er|en|em|es)?\b', r'vertikal\1'),
             (r'\brunde[nrms]?\s+scheibe\b', 'Kreisscheibe'),
             (r'\bumriss\b', 'Randkontur'),
@@ -88,6 +89,15 @@ def horizontal_bar_colors(description: str) -> set[str]:
     return {'red' if value.startswith('rot') else 'blue' for value in matches}
 
 
+def arrow_side_colors(description: str, side: str) -> set[str]:
+    words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalize_description(description)).casefold()
+    adjective = 'linke' if side == 'links' else 'rechte'
+    colors = re.findall(r'\b'+side+r'\s*[:,]?\s*(?:ist\s+)?(rot|blau)(?:e[nrsm]?)?\b', words)
+    colors += re.findall(r'\b'+adjective+r'[nrsm]?\s+(?:linie|dreieck|pfeil|seite)\b'
+                         r'[^.;!?]*?\b(?:ist|sind)\s+(rot|blau)\b', words)
+    return {'red' if color == 'rot' else 'blue' for color in colors}
+
+
 def description_assertions(description: str) -> dict:
     normalized = normalize_description(description)
     labels = re.findall(r'["„]([^"“\n]+)["“]', normalized)
@@ -115,7 +125,12 @@ def description_assertions(description: str) -> dict:
             raise DescriptionRejected('conflicting_object_counts')
         counts.append(dict(kind=kind, count=count))
     from src.iCCModules.imageCompositeConverterDualArrowBadge import looksLikeDualArrowDescriptionImpl
-    arrow_pair = looksLikeDualArrowDescriptionImpl(words)
+    heads = arrow_head_directions(normalized)
+    # Assertions must survive contradictory directions too. Dispatch only
+    # recognizes opposite heads; using dispatch here would silently drop claims.
+    arrow_pair = (looksLikeDualArrowDescriptionImpl(words) or
+                  ({side for side, _ in heads} == {'links', 'rechts'}
+                   and bool(re.search(r'\b(?:pfeil|dreieck)', words))))
     if arrow_pair:
         if any(c['kind'] == 'triangle' and c['count'] != 2 for c in counts):
             raise DescriptionRejected('conflicting_object_counts')
@@ -123,9 +138,16 @@ def description_assertions(description: str) -> dict:
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
     if arrow_pair:
-        heads = arrow_head_directions(normalized)
-        assertions['arrow_heads'] = [dict(side='left' if s.startswith('link') else 'right',
-                                        direction='up' if d == 'oben' else 'down') for s, d in heads]
+        assertions['arrow_heads'] = []
+        for side, direction in heads:
+            colors = arrow_side_colors(normalized, side)
+            if len(colors) > 1:
+                raise DescriptionRejected('conflicting_arrow_colors:'+side)
+            claim = dict(side='left' if side == 'links' else 'right',
+                         direction='up' if direction == 'oben' else 'down')
+            if colors:
+                claim['color'] = colors.pop()
+            assertions['arrow_heads'].append(claim)
         colors = horizontal_bar_colors(normalized)
         if len(colors) > 1:
             raise DescriptionRejected('conflicting_horizontal_bar_colors')

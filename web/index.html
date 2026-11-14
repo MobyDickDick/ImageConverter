@@ -58,7 +58,9 @@
           <div class="preview-heading"><h2><span class="number">03</span> Direkt vergleichen</h2><div class="zoom-controls"><button id="zoom-out" class="icon-button" aria-label="Verkleinern" disabled>−</button><output id="zoom-label">100 %</output><button id="zoom-in" class="icon-button" aria-label="Vergrössern" disabled>+</button><button id="fit" class="secondary" disabled>Einpassen</button></div></div>
           <div class="preview-options">
             <label class="preview-toggle"><input id="show-intermediate" type="checkbox" checked aria-describedby="preview-hint">Zwischenergebnisse anzeigen</label>
-            <p id="preview-hint" class="hint">Zeigt während der Suche etwa jede Sekunde den besten verfügbaren SVG-Zwischenstand. Kann zusätzliche Rechenleistung benötigen. Ohne Häkchen erscheint nur das Endergebnis.</p>
+            <p id="preview-hint" class="hint">Öffnet beim Start ein separates Fenster, das jeden gerenderten SVG-Versuch schnell hintereinander zeigt, auch verworfene Varianten. Hier bleibt der beste Zwischenstand sichtbar. Kann zusätzliche Rechenleistung benötigen. Ohne Häkchen erscheint nur das Endergebnis.</p>
+            <button id="open-attempts" class="secondary" hidden>Versuchsfenster öffnen ↗</button>
+            <p id="attempt-window-hint" class="hint" hidden>Bitte Pop-ups für diese lokale Seite erlauben und «Versuchsfenster öffnen» anklicken.</p>
           </div>
           <div class="comparison">
             <figure><figcaption><span>Original</span><span id="source-meta" class="caption-meta">Rasterbild</span></figcaption><div class="image-stage" id="source-stage"><div class="placeholder" id="source-empty"><span aria-hidden="true">▧</span><strong>Hier beginnt dein Bild</strong><p>Wähle links ein Bild aus.</p></div><img id="source-image" alt="Originalbild" hidden></div></figure>

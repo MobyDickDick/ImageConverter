@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 2
+DESCRIPTION_VALIDATION_VERSION = 3
 
 
 class RequestError(ValueError):
@@ -196,6 +196,11 @@ class Jobs:
                 self.jobs[job["id"]] = job
                 if job.get('result') and reject_raster_result(path.parent/'result.svg', job):
                     self.save(job)
+                if (job.get('recovery') and job.get('status') == 'done' and job.get('result')
+                        and job.get('description_validation_version') != DESCRIPTION_VALIDATION_VERSION):
+                    collect_recovery_result(path.parent, job,
+                        stop_reason=(job.get('recovery_report') or {}).get('stop_reason', 'worker_finished'))
+                    self.save(job)
                 if job.get('quality') == 'passed' and job.get('result') and 'pixel_quality' not in job:
                     quality = saved_svg_quality(path.parent/'source.png', path.parent/'result.svg')
                     job['pixel_quality'] = quality
@@ -240,6 +245,8 @@ class Jobs:
             if preview.is_file():
                 job['preview_revision'] = preview.stat().st_mtime_ns
                 job['preview'] = True
+            from src.imageConverterPreview import AttemptJournal
+            job['attempt_count'] = AttemptJournal(folder).count
             log = folder / "console.log"
             if log.exists():
                 with log.open("rb") as stream:
@@ -398,7 +405,8 @@ class Jobs:
             environment.setdefault("IMAGE_CONVERTER_REUSE_RENDER_WORKER", "1")
             if not job.get('catalog_background'):
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
-                                   ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'))
+                                   ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'),
+                                   ICC_GUI_PREVIEW_PHASE='Sample-Anpassung' if job.get('sample') else 'Suche')
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
@@ -485,7 +493,7 @@ class Jobs:
                 job.update(message='Erster Versuch unvollständig. Verbleibende Zeit wird für den elementweisen Vektoraufbau genutzt.',
                            recovery=True, quality='warning')
                 self.save(job)
-                process = subprocess.Popen(command, cwd=ROOT, env=environment,
+                process = subprocess.Popen(command, cwd=ROOT, env=dict(environment, ICC_GUI_PREVIEW_PHASE='Vektoraufbau'),
                     stdout=log, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, **options)
                 self.processes[job_id] = process
             try:
@@ -648,7 +656,7 @@ class Jobs:
 
 
 def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> None:
-    """A completed native draft survives a killed recovery worker."""
+    """Recheck the delivered vector, even after worker termination or reload."""
     result = folder/'recovery.svg'
     try:
         from src.imageConverterSample import prepare_sample
@@ -669,24 +677,32 @@ def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> Non
     previous_quality = job.get('pixel_quality') or {}
     if (job.get('result') and previous_quality.get('normalized_mse', float('inf'))
             < quality['normalized_mse']):
-        job['message'] = 'Der beste bisherige Vektorentwurf bleibt erhalten; bitte prüfen.'
+        result = folder/'result.svg'
+        quality = saved_svg_quality(folder/'source.png', result)
+        if quality is None:
+            return
     else:
         shutil.copyfile(result, folder/'result.svg')
-        error = result_description_error(result, job.get('description', ''))
-        message = 'Vektorentwurf elementweise erstellt. Bitte prüfen; die vollständige Qualitätsprüfung ist noch offen.'
-        if error.startswith('wrong_described_arrow_direction:'):
-            side = 'links' if error.endswith(':left') else 'rechts'
-            message += f' Die beschriebene Pfeilrichtung {side} widerspricht dem Bild; der Entwurf folgt dem Original.'
-        elif error:
-            message += ' Bild und Beschreibung stimmen noch nicht vollständig überein.'
-        job.update(status='done', result=True, quality='warning', pixel_quality=quality,
-                   description_error=error, message=message,
-                   description_validation_version=DESCRIPTION_VALIDATION_VERSION)
-        job.pop('result_rejection', None)
-    report['stop_reason'] = stop_reason
+    error = result_description_error(result, job.get('description', ''))
+    passed = bool(quality['passed'] and not error)
+    message = ('SVG erstellt. Bildvergleich und Beschreibungsprüfung bestanden.' if passed else
+               'Vektorentwurf elementweise erstellt. Bitte prüfen; die Qualitätsprüfung wurde nicht bestanden.')
+    if error.startswith('wrong_described_arrow_direction:'):
+        side = 'links' if error.endswith(':left') else 'rechts'
+        message += f' Die beschriebene Pfeilrichtung {side} widerspricht dem Bild; der Entwurf folgt dem Original.'
+    elif error:
+        message += ' Bild und Beschreibung stimmen noch nicht vollständig überein.'
+    job.update(status='done', result=True, quality='passed' if passed else 'warning', pixel_quality=quality,
+               description_error=error, message=message,
+               description_validation_version=DESCRIPTION_VALIDATION_VERSION)
+    job.pop('result_rejection', None)
+    report.update(passed=passed, description_error=error, pixel_quality=quality)
+    if not (passed and report.get('stop_reason') == 'quality_target_reached'):
+        report['stop_reason'] = stop_reason
     job['recovery_report'] = report
-    job['message'] += (' Das Zeitbudget wurde ausgeschöpft.' if stop_reason == 'time_limit'
-                       else ' Die elementweise Suche ist beendet.')
+    if not passed:
+        job['message'] += (' Das Zeitbudget wurde ausgeschöpft.' if stop_reason == 'time_limit'
+                           else ' Die elementweise Suche ist beendet.')
 
 
 def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
@@ -1136,6 +1152,9 @@ class Handler(BaseHTTPRequestHandler):
                       "/workbench.js": ("workbench.js", "text/javascript; charset=utf-8"),
                       "/workbench.css": ("workbench.css", "text/css; charset=utf-8"),
                       "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+                      "/attempts": ("attempts.html", "text/html; charset=utf-8"),
+                      "/attempts.js": ("attempts.js", "text/javascript; charset=utf-8"),
+                      "/attempts.css": ("attempts.css", "text/css; charset=utf-8"),
                       "/style.css": ("style.css", "text/css; charset=utf-8")}
             if self.command == "GET":
                 if path == '/api/config':
@@ -1165,6 +1184,20 @@ class Handler(BaseHTTPRequestHandler):
                     job = jobs.snapshot(job_id)
                     if not asset:
                         return self.json(job)
+                    if asset == 'attempts':
+                        from src.imageConverterPreview import AttemptJournal
+                        journal = AttemptJournal(jobs.folder(job_id))
+                        query = parse_qs(url.query)
+                        try:
+                            if 'number' in query:
+                                record = journal.read(int(query['number'][0]))
+                                return self.respond(record['svg'].encode('utf-8'), 'image/svg+xml')
+                            after = int(query.get('after', ['0'])[0])
+                            if after < 0:
+                                raise ValueError
+                        except (ValueError, IndexError):
+                            raise RequestError('Dieser Suchversuch wurde nicht gefunden.', 404)
+                        return self.json(journal.page(after))
                     assets = {"source": ("source.png", "image/png"), "sample": ("sample.svg", "image/svg+xml"),
                               "preview": (jobs.preview_file(job_id).name, "image/svg+xml"),
                               "result": ("result.svg", "image/svg+xml"), "log": ("console.log", "text/plain; charset=utf-8")}

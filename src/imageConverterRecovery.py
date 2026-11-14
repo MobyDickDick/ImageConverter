@@ -1,7 +1,7 @@
-"""Spend the GUI's remaining budget on native, incrementally published drafts.
+"""Build native vectors, accepting pixel and explicit description checks.
 
-Recovery never certifies a model: even pixel-perfect drafts retain their warning
-until the normal converter proves the description and model contract.
+Like sample refinement, recovery can accept the delivered SVG independently of
+the normal converter's model search. This does not assert model confirmation.
 """
 from __future__ import annotations
 
@@ -40,7 +40,9 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
     output.parent.mkdir(parents=True, exist_ok=True)
     try:
         assertions = description_assertions(description)
-    except ValueError:
+        assertion_error = ''
+    except ValueError as exc:
+        assertion_error = str(exc)
         assertions = dict(counts=[], no_text=False)
     partial_assertions = dict(counts=[], no_text=assertions.get('no_text', False))
     # Rendering remains in this killable worker. Each completed improvement is
@@ -51,7 +53,7 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
 
     def publish(svg, raster, error):
         nonlocal best, revision
-        if best is not None and error >= best['error']-1e-10:
+        if report['passed'] or (best is not None and error >= best['error']-1e-10):
             return
         quality = pixel_quality(image, raster)
         # A blank canvas is useful as a search seed, never as a result for a
@@ -61,13 +63,14 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
         validate_svg_assertions(svg, partial_assertions)
         best = dict(svg=svg, rendered=raster, error=error)
         revision += 1
-        error_message = ''
+        error_message = assertion_error
         try:
             validate_svg_assertions(svg, assertions)
         except ValueError as exc:
             error_message = str(exc)
         report.update(evaluations=evaluations, revision=revision, pixel_quality=quality,
-                      description_error=error_message, normalized_mse=error)
+                      description_error=error_message, normalized_mse=error,
+                      passed=bool(quality['passed'] and not error_message))
         atomic_svg(output, svg)
         atomic_json(output.with_suffix('.json'), report)
         if on_preview:
@@ -96,7 +99,7 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
                     render(svg, w, h)
                 except (ValueError, SyntaxError):
                     pass
-            arrow = fit_arrow_pair(w, h, description=description, image=image,
+            arrow = None if report['passed'] else fit_arrow_pair(w, h, description=description, image=image,
                 render_fn=lambda svg, width, height: render(svg, width, height, preview=False),
                 error_fn=lambda a, b: float(np.square(a.astype(float)-b.astype(float)).mean()/255**2),
                 draft=True)
@@ -113,16 +116,17 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
             svg = best['svg'] if best else ET.tostring(canvas(image), encoding='unicode')
             # Structural composition inserts observed objects and residual
             # lines. Parameter searches then vary placement, widths and colors.
-            # A generic draft cannot buy an early exit from pixel quality alone.
-            while not session.time_reason():
+            # Only the actual published vector passing both checks can finish.
+            while not report['passed'] and not session.time_reason():
                 fitted = polish_generated_svg(svg, image, render, assertions=partial_assertions,
-                                               acceptance_fn=lambda _: False)
+                                               acceptance_fn=lambda candidate: bool(
+                                                   report['passed'] and best and candidate == best['svg']))
                 if fitted:
                     svg = best['svg'] if best else fitted['svg']
-                else:
+                elif not report['passed']:
                     # Native search cannot initialize (e.g. invalid renderer).
                     raise ValueError('Die elementweise Vektorsuche konnte nicht gestartet werden.')
-            report.update(stop_reason='time_limit', evaluations=evaluations,
+            report.update(stop_reason='quality_target_reached' if report['passed'] else 'time_limit', evaluations=evaluations,
                           elapsed_seconds=session.elapsed, candidate_evaluations=session.evaluations)
             atomic_json(output.with_suffix('.json'), report)
     return report
