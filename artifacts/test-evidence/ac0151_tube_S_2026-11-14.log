@@ -1,0 +1,15 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+[POWER] {'status': 'unavailable', 'platform': 'nt', 'error': '[WinError 5] Zugriff verweigert', 'cleanup_errors': []}
+[INFO] Schreibe Konsolen-Output nach: .tmp\ac0151-final\AC0151_S\reports\.image-worker-i6yn72pf\reports_out_dir\AC0151_S_worker.log
+[INFO] Konvertiere AC0151_S.jpg | Parameter: Iterationen=64, max. Validierungsrunden=8
+
+--- Verarbeite AC0151_S.jpg ---
+Bildbeschreibung: Eine senkrechte, schmale R�hre als langgezogenes Rechteck ohne Randkontur. Oben und unten schlie�t jeweils eine flache, graue rechteckige Kappe b�ndig mit dem R�hrenk�rper ab. Zwischen den Kappen verl�uft die Grundfarbe senkrecht von Gelbgr�n oben nach Dunkelgr�n unten. Ein zus�tzlicher waagerechter Helligkeitsverlauf erzeugt den R�hreneffekt: links dunkel, etwas rechts der Mitte ein heller Glanzbereich, zum rechten Rand wieder dunkler. Auch die grauen Kappen haben diesen seitlichen Glanzverlauf. Keine Schriftzeichen und keine weiteren Objekte.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[Search] {"source": "gradient_tube", "event": "candidate_satisfactory", "elapsed_seconds": 1.781, "limit_seconds": 60.0, "minimum_seconds": 30.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1}
+[Search] {"source": "AC0151_S", "event": "image_search_finished", "satisfactory": true, "elapsed_seconds": 1.828, "limit_seconds": 60.0, "minimum_seconds": 30.0, "max_seconds": 120.0, "time_extensions": 0, "candidate_evaluations": 1, "stop_reason": "satisfactory"}
+[INFO] Konvertiert AC0151_S.jpg | Parameter: mode=auto, label=M, variant_name=AC0151_S | Qualit�t: Optimierungsfehler/Pixel=0.000394, Mean-Delta�=9.490909, RGB-RMSE/Kanal=1.778661, Raumscore=19.312009, beste Composite-Iteration=n/a (direkte/semantische Pipeline), ausgef�hrt=64/64 | Dauer=1.0s
+[INFO] �bersichts-Kacheln erzeugt: diff=.tmp\ac0151-final\AC0151_S\reports\overview_diff_tiles.png, svg=.tmp\ac0151-final\AC0151_S\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: .tmp\ac0151-final\AC0151_S
+[ONE-IMAGE] converted=AC0151_S svg=.tmp\ac0151-final\AC0151_S\converted_svgs\AC0151_S.svg

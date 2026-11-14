@@ -81,7 +81,15 @@ def prepareIterationRuntimeImpl(
                             ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}
                         if fitted.get('structure_search') is not None:
                             params['vector_continuation']['structure_search'] = fitted['structure_search']
-                        if fitted['improved']:
+                        model_passed = True
+                        if fitted['improved'] and params.get('gradient_tube_registration'):
+                            from src.iCCModules.imageCompositeConverterGradientTube import validate_tube_refinement
+                            model_passed = validate_tube_refinement(fitted, target_img, params['gradient_tube_registration'])
+                            params['vector_continuation']['tube_model_passed'] = model_passed
+                            if model_passed:
+                                from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
+                                validated_result(fitted, target_img)
+                        if fitted['improved'] and model_passed:
                             svg_content = fitted['svg']
                             # Supplied render/diff belong to the previous vector.
                             args = ()

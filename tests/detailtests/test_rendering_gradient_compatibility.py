@@ -176,6 +176,36 @@ def test_frozen_paired_line_template_keeps_vertical_shading_in_all_workbench_cas
         assert np.ptp(np.median(interior, axis=1)) > 2*np.ptp(np.median(interior, axis=0))
 
 
+@pytest.mark.parametrize('user', [True, False])
+@pytest.mark.parametrize('axis', ['horizontal', 'vertical', 'diagonal'])
+def test_nonuniform_paint_transform_preserves_color_and_translucency(user, axis):
+    from tools.run_plan_b_variations import render
+    import numpy as np
+    bounds = [10, 10, 40, 50]
+    x2, y2 = {'horizontal': (1, 0), 'vertical': (0, 1), 'diagonal': (1, 1)}[axis]
+    extent = 20 if user else 1
+    shift = 10 if user else .1
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">'
+        '<defs><linearGradient id="paint" '+('gradientUnits="userSpaceOnUse" ' if user else '')+
+        f'x1="0" y1="0" x2="{x2*extent}" y2="{y2*extent}" '
+        f'gradientTransform="translate({shift} {shift}) scale(2 1.5)">'
+        '<stop offset="0" stop-color="#204060" stop-opacity="0.2"/>'
+        '<stop offset="1" stop-color="#a0c0e0" stop-opacity="0.8"/>'
+        '</linearGradient></defs><rect width="80" height="80" fill="#806040"/>'
+        '<rect x="10" y="10" width="40" height="50" fill="url(#paint)" stroke="none"/></svg>')
+    actual = render(svg, 80, 80)
+    locations = np.array([[15, 16], [27, 29], [41, 42]])
+    local = locations+.5
+    if not user:
+        local = (local-bounds[:2])/bounds[2:]
+    local = (local-shift)/[2, 1.5]
+    t = np.clip((local @ [x2, y2])/(extent*(x2*x2+y2*y2)), 0, 1)
+    rgb = (1-t[:, None])*[32, 64, 96]+t[:, None]*[160, 192, 224]
+    alpha = .2+.6*t[:, None]
+    expected = (rgb*alpha+np.array([128, 96, 64])*(1-alpha))[:, ::-1]
+    assert np.max(abs(actual[locations[:, 1], locations[:, 0]].astype(float)-expected)) <= 4
+
+
 def curved_gradient_svg(paint='#184888', end='#184888', data=None, extra=''):
     data = data or 'M 6 32 C 6 2 34 2 34 32 Q 20 38 6 32 Z'
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
@@ -227,7 +257,7 @@ def test_bezier_adapter_preserves_unsupported_paths(data,extra):
     assert rendering._expand_bezier_linear_gradients_for_fitz(svg)==svg
 
 
-@pytest.mark.parametrize('extra',['gradientTransform="scale(2)"','spreadMethod="repeat"','stop-opacity="0.5"'])
+@pytest.mark.parametrize('extra',['gradientTransform="rotate(20)"','spreadMethod="repeat"','stop-opacity="0.5"'])
 def test_bezier_adapter_preserves_unsupported_gradients(extra):
     svg = curved_gradient_svg()
     if extra.startswith('stop-opacity'):

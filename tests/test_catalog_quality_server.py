@@ -212,7 +212,7 @@ def test_http_catalog_routes_downloads_and_origin_protection(catalog,monkeypatch
         finally:
             connection.close()
     try:
-        for path in ('/catalog','/catalog.js','/catalog.css','/api/catalog','/api/catalog/list','/api/catalog/csv','/api/catalog/json'):
+        for path in ('/catalog','/catalog.js','/catalog.css','/api/catalog','/api/catalog/list','/api/catalog/csv','/api/catalog/json','/api/catalog/conversion'):
             assert request(path)[0] == 200
         assert b'AA0010.jpg' in request('/api/catalog/list')[1]
         assert request('/api/catalog/asset?path=tools/build_catalog_inventory.py')[0] == 403
@@ -223,5 +223,10 @@ def test_http_catalog_routes_downloads_and_origin_protection(catalog,monkeypatch
         assert request('/api/catalog/start','POST',{'X-ImageConverter':'1'},b'[]')[0] == 400
         assert request('/api/catalog/start','POST',{'X-ImageConverter':'1'},b'{"force":"false"}')[0] == 400
         assert request('/api/catalog/cancel','POST',{'X-ImageConverter':'1'},b'{}')[0] == 200
+        assert request('/api/catalog/conversion/start','POST',body=b'')[0] == 403
+        assert request('/api/catalog/conversion/stop','POST',{'X-ImageConverter':'1','Origin':'https://example.org'},b'')[0] == 403
+        assert request('/api/catalog/conversion/start','POST',{'X-ImageConverter':'1'},b'[]')[0] == 400
+        assert request('/api/catalog/conversion/start','POST',{'X-ImageConverter':'1'},b'{"profile":[]}')[0] == 400
+        assert request('/api/catalog/conversion/stop','POST',{'X-ImageConverter':'1'},b'{}')[0] == 200
     finally:
         server.shutdown();thread.join(timeout=5);server.server_close();jobs.close()

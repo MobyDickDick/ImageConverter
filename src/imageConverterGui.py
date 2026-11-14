@@ -28,6 +28,7 @@ import webbrowser
 import zipfile
 
 from src.imageConverterCatalog import CatalogError, CatalogQuality
+from src.imageConverterCatalogConversion import CatalogConversion
 from src.imageConverterCollection import CategoryCollection
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -478,6 +479,8 @@ class Jobs:
     def publish_best(self, job_id: str) -> None:
         """Re-measure both versions against this source; never replace with a draft."""
         job = self.jobs[job_id]
+        if job.get('catalog_background'):
+            return  # The background service keeps candidates for both catalog renderers.
         if job.get('status') != 'done' or not job.get('result') or job.get('quality') != 'passed':
             return
         folder = self.folder(job_id)
@@ -799,9 +802,11 @@ class GuiServer(ThreadingHTTPServer):
         self.workbench = Workbench(jobs)
         self.catalog = CatalogQuality(ROOT, jobs.directory/'catalog-quality', stop_process_tree)
         self.collection = CategoryCollection(ROOT, self.catalog, jobs)
+        self.catalog_conversion = CatalogConversion(self.catalog, jobs, self.workbench)
         super().__init__(address, Handler)
 
     def server_close(self):
+        self.catalog_conversion.close()
         self.catalog.close()
         self.workbench.close()
         super().server_close()
@@ -907,11 +912,19 @@ class Handler(BaseHTTPRequestHandler):
                     if not isinstance(payload, dict):
                         raise RequestError('Ungültige Anfrage.')
                     return self.json(self.server.collection.load(collection_case[1], fresh=payload.get('fresh',False)), 201)
+                if path in {'/api/catalog/conversion/start','/api/catalog/conversion/stop'}:
+                    payload = json.loads(data)
+                    if not isinstance(payload, dict):
+                        raise RequestError('Ungültige Anfrage.')
+                    operation = self.server.catalog_conversion
+                    return self.json(operation.start(payload.get('profile','normal')) if path.endswith('/start') else operation.cancel())
                 if path in {'/api/catalog/start','/api/catalog/cancel'}:
                     payload = json.loads(data)
                     if not isinstance(payload, dict):
                         raise RequestError('Ungültige Anfrage.')
                     operation = self.server.catalog
+                    if operation.conversion_owner is not None:
+                        raise RequestError('Bitte zuerst den Hintergrunddienst stoppen.', 409)
                     return self.json(operation.start(payload.get('force',False)) if path.endswith('/start') else operation.cancel())
                 if path.startswith('/api/workbench/'):
                     payload = json.loads(data)
@@ -955,6 +968,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def catalog_get(self, path, query):
         catalog = self.server.catalog
+        if path == '/api/catalog/conversion':
+            return self.json(self.server.catalog_conversion.snapshot())
         if path == '/api/catalog':
             return self.json(catalog.snapshot())
         if path == '/api/catalog/list':
@@ -1040,8 +1055,8 @@ def main(argv: list[str] | None = None) -> int:
     except KeyboardInterrupt:
         pass
     finally:
-        jobs.close()
         server.server_close()
+        jobs.close()
     return 0
 
 

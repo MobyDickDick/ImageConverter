@@ -317,6 +317,29 @@ def _uniform_svg_transform(value):
     return scale, tx, ty
 
 
+def _axis_svg_transform(value):
+    """Positive axis scales/translations for a paint server's coordinate system."""
+    sx, sy, tx, ty = 1., 1., 0., 0.
+    cursor = 0
+    for match in re.finditer(r'(translate|scale)\s*\(([^)]*)\)', value):
+        if value[cursor:match.start()].strip(' \t\r\n,'):
+            raise ValueError('unsupported paint transform')
+        numbers = [float(v) for v in re.split(r'[\s,]+', match[2].strip())]
+        if not 1 <= len(numbers) <= 2 or not all(math.isfinite(v) for v in numbers):
+            raise ValueError('invalid paint transform')
+        if match[1] == 'translate':
+            tx += sx*numbers[0]
+            ty += sy*(numbers[1] if len(numbers) == 2 else 0.)
+        else:
+            sx *= numbers[0]
+            sy *= numbers[1] if len(numbers) == 2 else numbers[0]
+        cursor = match.end()
+    if (value[cursor:].strip(' \t\r\n,') or min(sx, sy) <= 0
+            or not all(math.isfinite(v) for v in (sx, sy, tx, ty))):
+        raise ValueError('unsupported paint transform')
+    return sx, sy, tx, ty
+
+
 def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=None, size_w=None, size_h=None, shape_kinds=None) -> str:
     """Paint a closed curve or ellipse through its native antialiasing mask.
 
@@ -442,7 +465,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
             except (ValueError,IndexError):
                 continue
             gradient = gradients[match.group(1)]
-            if set(gradient.attrib)-{'id','x1','y1','x2','y2','gradientUnits'}:
+            if set(gradient.attrib)-{'id','x1','y1','x2','y2','gradientUnits','gradientTransform'}:
                 continue
             if any(e.get('opacity') or e.get('style') or e.get('clip-path') or e.get('mask') for e in root.iter()):
                 continue
@@ -461,11 +484,11 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 if len(viewport)!=4 or min(viewport[2:])<=0 or not all(math.isfinite(v) for v in viewport):
                     continue
                 user = gradient.get('gradientUnits')=='userSpaceOnUse'
+                paint_sx, paint_sy, paint_tx, paint_ty = _axis_svg_transform(gradient.get('gradientTransform', ''))
                 def coordinate(value,axis):
-                    origin,extent = (bx,bw) if axis==0 else (by,bh)
                     if user:
                         return float(value[:-1])*viewport[axis+2]/100 if value.endswith('%') else float(value)
-                    return origin+extent*(float(value[:-1])/100 if value.endswith('%') else float(value))
+                    return float(value[:-1])/100 if value.endswith('%') else float(value)
                 x1,x2 = coordinate(gradient.get('x1','0%'),0),coordinate(gradient.get('x2','100%'),0)
                 y1,y2 = coordinate(gradient.get('y1','0%'),1),coordinate(gradient.get('y2','0%'),1)
                 if x1==x2 and y1==y2:
@@ -519,14 +542,19 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                         # objectBoundingBox defines the gradient in a unit
                         # square before nonuniform scaling to the shape bounds.
                         px, py = (px-bx)/bw, (py-by)/bh
-                        gx1, gx2 = (x1-bx)/bw, (x2-bx)/bw
-                        gy1, gy2 = (y1-by)/bh, (y2-by)/bh
+                    # Inverse paint transform is applied before projection.
+                    # Transforming endpoints alone is wrong for a diagonal
+                    # gradient under nonuniform scaling.
+                    px, py = (px-paint_tx)/paint_sx, (py-paint_ty)/paint_sy
                     position = ((px[None,:]-gx1)*(gx2-gx1)+(py[:,None]-gy1)*(gy2-gy1))/((gx2-gx1)**2+(gy2-gy1)**2)
                     colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                 else:
                     axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
                     coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zoom
                     coordinates = (coordinates-(tx, ty)[axis])/scale
+                    if not user:
+                        coordinates = (coordinates-(bx, by)[axis])/(bw, bh)[axis]
+                    coordinates = (coordinates-(paint_tx, paint_ty)[axis])/(paint_sx, paint_sy)[axis]
                     position = (coordinates-low)/(high-low)
                     colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                     colors = np.broadcast_to(colors[:,None,:] if axis==1 else colors[None,:,:],(h,w,3))

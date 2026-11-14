@@ -28,6 +28,21 @@
       <p class="hint">Die Prüfung vergleicht vorhandene SVGs mit ihren Originalbildern mit zwei Renderern. Sie startet keine neue Konvertierung. Beim Abbruch bleibt die letzte vollständige Liste erhalten. Reservierte Prüfbilder bleiben ungeprüft.</p>
       <a id="log" href="/api/catalog/log" target="_blank" rel="noopener" hidden>Prüfprotokoll öffnen</a>
     </section>
+    <section class="card" aria-labelledby="conversion-title">
+      <h2 id="conversion-title">Hintergrundkonvertierung</h2>
+      <div class="catalog-actions">
+        <button id="conversion-start" class="primary">Hintergrunddienst starten</button>
+        <button id="conversion-stop" class="secondary" disabled>Hintergrunddienst stoppen</button>
+        <label>Suchprofil<select id="conversion-profile"><option value="quick">Schnell</option><option value="normal" selected>Normal</option><option value="thorough">Gründlich</option></select></label>
+      </div>
+      <p class="hint">Wählt unter „Rastergates verfehlt“ jeweils das Bild mit dem kleinsten MSE des schlechteren Renderers. Nach drei erfolglosen Versuchen wird es zurückgestellt. Sind alle offenen Bilder zurückgestellt, beginnt automatisch eine neue Runde. Neue Ergebnisse werden geprüft und die Liste aktualisiert. Läuft auch bei geschlossenem Browser bis zum Stopp, Serverende oder bis keine bewertbaren offenen Bilder mehr vorhanden sind.</p>
+      <p id="conversion-status" role="status" aria-live="polite">Dienststatus wird geladen …</p>
+      <p id="conversion-current"></p>
+      <details><summary id="conversion-deferred-title">Zurückgestellte Bilder</summary><ul id="conversion-deferred"></ul></details>
+      <div id="conversion-links" class="catalog-actions"></div>
+      <details><summary>Live-Konvertierungsprotokoll</summary><pre id="conversion-log"></pre></details>
+      <details><summary>Letzte 200 Versuchsergebnisse seit dem Start</summary><ul id="conversion-history"></ul></details>
+    </section>
     <section class="stats" id="stats" aria-label="Katalogbilanz"></section>
     <p class="hint" id="updated"></p>
     <p class="hint">„Rastergates erfüllt“ bestätigt den Bildvergleich, keine vollständige fachliche Prüfung. Historische Archivabnahme wird separat ausgewiesen; die Zahlen überlappen.</p>

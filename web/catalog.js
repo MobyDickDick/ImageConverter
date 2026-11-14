@@ -1,6 +1,6 @@
 'use strict';
 const el = id => document.getElementById(id);
-let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polling = false;
+let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polling = false, conversionActive = false;
 const reportKey = summary => JSON.stringify([summary.generated_at || '', summary.catalog_statuses || {}]);
 const asset = path => '/api/catalog/asset?path=' + encodeURIComponent(path);
 function node(tag, text, cls) {
@@ -105,8 +105,9 @@ async function loadList() {
 }
 function showJob(job) {
   const running = ['running','cancelling'].includes(job.status), p = job.progress || {};
-  el('refresh').disabled = running; el('force').disabled = running;
-  el('stop').hidden = !running; el('stop').disabled = job.status === 'cancelling';
+  el('refresh').disabled = running || conversionActive; el('force').disabled = running || conversionActive;
+  el('stop').hidden = !running || conversionActive; el('stop').disabled = job.status === 'cancelling';
+  el('conversion-start').disabled = running || conversionActive;
   el('progress').hidden = !running;
   if (p.total) {el('progress').max=p.total;el('progress').value=p.completed;} else el('progress').removeAttribute('value');
   const progress = running && p.total ? ` ${p.completed}/${p.total} Bilder; ${p.measured} neue Paarprüfungen, ${p.cached} wiederverwendet.` : '';
@@ -114,10 +115,33 @@ function showJob(job) {
   el('run-status').textContent = message + progress;
   el('log').hidden = !job.id;
 }
+function showConversion(service) {
+  conversionActive = ['running','stopping'].includes(service.status);
+  el('conversion-start').disabled = conversionActive;
+  el('conversion-stop').disabled = !conversionActive || service.status === 'stopping';
+  el('conversion-profile').disabled = conversionActive;
+  el('conversion-status').textContent = `${service.message || 'Hintergrunddienst ist gestoppt.'} Runde ${service.round || 1} · ${service.completed || 0} Versuche abgeschlossen · ${service.passed || 0} Rastergates erfüllt · ${service.failed || 0} erfolglose Versuche · ${(service.deferred || []).length} Bilder zurückgestellt.`;
+  const job = service.job;
+  el('conversion-current').textContent = service.filename ? `${service.filename} · Versuch ${service.attempt || 1}/3 in dieser Runde · bisheriger MSE: ${Number(service.mse).toFixed(6)}${job?.elapsed ? ` · Konvertierungszeit: ${job.elapsed} s` : ''}${service.phase === 'convert' && job?.message ? ' · ' + job.message : ''}` : '';
+  el('conversion-deferred-title').textContent = `Zurückgestellte Bilder (${(service.deferred || []).length})`;
+  el('conversion-deferred').replaceChildren(...(service.deferred || []).map(name => node('li', `${name} · 3 erfolglose Versuche`)));
+  el('conversion-log').textContent = job?.log || 'Noch keine Konvertierung gestartet.';
+  const links = [];
+  if (job) {
+    const a = node('a','Konvertierungsprotokoll öffnen'); a.href = `/api/jobs/${job.id}/log`; a.target = '_blank'; a.rel = 'noopener'; links.push(a);
+    if (job.result) {const result = node('a','Letztes SVG öffnen'); result.href = `/api/jobs/${job.id}/result`; result.target = '_blank'; result.rel = 'noopener'; links.push(result);}
+  }
+  el('conversion-links').replaceChildren(...links);
+  el('conversion-history').replaceChildren(...[...(service.history || [])].reverse().map(item => {
+    const li = node('li', `${item.filename}: ${item.passed ? 'Rastergates erfüllt' : item.deferred ? 'zurückgestellt' : 'weiterhin offen'} · Runde ${item.round || 1}, Versuch ${item.attempt || 1}/3 · `);
+    const a = node('a','Protokoll'); a.href = `/api/jobs/${item.job_id}/log`; a.target = '_blank'; a.rel = 'noopener'; li.append(a); return li;
+  }));
+}
 async function poll() {
   if (polling) return; polling = true;
   try {
-    const job = await api('/api/catalog'); showJob(job);
+    const [job, service] = await Promise.all([api('/api/catalog'),api('/api/catalog/conversion')]);
+    showConversion(service); showJob(job);
     if (reportKey(job.summary) !== lastReport) await loadList();
   } catch (error) {notice(error);} finally {polling = false;}
 }
@@ -125,5 +149,7 @@ for (const id of ['search','geometry-class','status','archive','sort','page-size
 el('previous').onclick = () => {page--;render();}; el('next').onclick = () => {page++;render();};
 el('refresh').onclick = async () => {el('notice').hidden=true;el('refresh').disabled=true;try {showJob(await api('/api/catalog/start',{force:el('force').checked}));} catch(error) {notice(error);await poll();}};
 el('stop').onclick = async () => {el('stop').disabled=true;try {showJob(await api('/api/catalog/cancel',{}));} catch(error) {notice(error);await poll();}};
+el('conversion-start').onclick = async () => {el('notice').hidden=true;el('conversion-start').disabled=true;try {showConversion(await api('/api/catalog/conversion/start',{profile:el('conversion-profile').value}));} catch(error) {notice(error);} await poll();};
+el('conversion-stop').onclick = async () => {el('conversion-stop').disabled=true;try {showConversion(await api('/api/catalog/conversion/stop',{}));} catch(error) {notice(error);} await poll();};
 loadList().then(poll).catch(notice);
 setInterval(poll,1500);

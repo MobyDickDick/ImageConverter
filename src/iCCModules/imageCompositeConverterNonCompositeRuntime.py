@@ -48,6 +48,7 @@ from src.iCCModules.imageCompositeConverterPrimitiveScene import fit_primitive_s
 from src.iCCModules.imageCompositeConverterPlainDisk import fit_plain_disk
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
+from src.iCCModules.imageCompositeConverterGradientTube import fit_gradient_tube, tube_contract
 from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, panel_contract
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
 from src.iCCModules.imageCompositeConverterHeatPanel import fit_heat_panel
@@ -1433,7 +1434,7 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"} or (
-        mode == "insufficient_description" and panel_contract(description) is not None
+        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description))
     ):
         # A complete raster-backed gradient contract can describe its frame
         # implicitly. A missing rectangle noun must not bypass its fitter.
@@ -1473,6 +1474,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_gradient_tube, "non_composite_raster_gradient_tube"),
             (fit_spray_panel, "non_composite_raster_spray_panel"),
             (fit_crossed_gradient_panel, "non_composite_raster_crossed_gradient_panel"),
             (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
@@ -1519,6 +1521,10 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if status == "non_composite_raster_gradient_tube":
+                    params['gradient_tube_registration'] = {
+                        key: value for key, value in fitted.items() if key not in {'svg', 'rendered'}
+                    }
                 if status == "non_composite_raster_spray_panel":
                     params[fitted['source']] = {key:value for key,value in fitted.items()
                                                 if key not in {'svg','rendered'}}

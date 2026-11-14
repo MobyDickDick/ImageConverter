@@ -25,6 +25,7 @@ from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 ROOT = Path(__file__).resolve().parents[1]
 BITMAPS = {'.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tif', '.tiff', '.webp'}
 SVG_DIRS = ('artifacts/converted_images/converted_svgs',
+            'artifacts/converted_images/catalog_background_svgs',
             'artifacts/converted_images/converted_svg_failed',
             'artifacts/converted_images/reports/conversion_bestlist_snapshots',
             'artifacts/regression_baseline/legacy_ac08/svgs',
@@ -192,7 +193,8 @@ def discover(root):
     for directory in SVG_DIRS:
         folder = root/directory
         if folder.is_dir():
-            for path in sorted(folder.iterdir()):
+            paths = folder.rglob('*.svg') if directory.endswith('/catalog_background_svgs') else folder.iterdir()
+            for path in sorted(paths):
                 if path.is_file() and path.suffix.lower() == '.svg':
                     inside(root, path)
                     candidates[path.stem.casefold()].append(path)

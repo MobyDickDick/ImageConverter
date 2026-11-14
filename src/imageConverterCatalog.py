@@ -38,6 +38,7 @@ class CatalogQuality:
         self.lock = threading.RLock()
         self.process = self.thread = None
         self.closed = False
+        self.conversion_owner = None
         self.job = read_json(self.directory/'job.json', dict(status='idle'))
         if self.job['status'] in {'running','cancelling'}:
             self.job.update(status='interrupted', message='Die Qualitätsprüfung wurde beim Serverende unterbrochen.')
@@ -108,10 +109,12 @@ class CatalogQuality:
             command.append('--force')
         return command
 
-    def start(self, force=False):
+    def start(self, force=False, *, owner=None):
         if type(force) is not bool:
             raise CatalogError('Ungültige Auswahl für die Neumessung.')
         with self.lock:
+            if self.conversion_owner is not None and owner is not self.conversion_owner:
+                raise CatalogError('Der Hintergrunddienst aktualisiert die Qualitätsliste automatisch.', 409)
             if self.closed:
                 raise CatalogError('Der Server wird beendet.', 409)
             if self.thread is not None and self.thread.is_alive():

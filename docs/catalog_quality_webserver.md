@@ -47,13 +47,66 @@ Ausgangsstand. Serverneustart markiert einen unterbrochenen Auftrag als
 
 Rasterpass und Archivmitgliedschaft überlappen und dürfen nicht addiert werden.
 Eine vollständige neue Objekt-/Semantikabnahme ist damit nicht erbracht.
-Das Werkzeug startet keine neue autonome Konvertierung aller Bilder.
+Die reine Qualitätsprüfung startet keine Konvertierung. Der separat startbare
+Hintergrunddienst führt neue Versuche aus.
+
+## Hintergrundkonvertierung
+
+In der Katalogansicht startet **Hintergrunddienst starten** einen Durchlauf.
+Zuerst wird die Qualitätsliste aktualisiert. Anschließend wird unter den
+Katalogbildern mit **Rastergates verfehlt** jeweils der kleinste MSE des
+schlechteren Renderers gewählt; bei Gleichstand entscheidet der Dateiname.
+Bestandene und reservierte Bilder, Quellkonflikte, fehlende oder ungültige
+Messwerte und Bilder ohne Beschreibung werden ausgeschlossen.
+
+Der Dienst verwendet den gewöhnlichen Konvertierungsweg mit dem ausgewählten
+Suchprofil und einem frischen Suchseed. Laufende manuelle Konvertierungen oder
+Workbench-Läufe werden abgewartet. Nach jedem Versuch wird die Rangliste neu
+ausgewertet. Nach drei erfolglosen Versuchen innerhalb einer Runde wird ein
+Bild zurückgestellt. Sobald alle verbleibenden bewertbaren offenen Bilder
+ebenfalls drei Fehlversuche haben, werden sämtliche Markierungen und
+Fehlversuchszähler aufgehoben; die nächste Runde beginnt automatisch.
+Bestandene Bilder scheiden sofort aus der Auswahl aus. Der Dienst wiederholt
+die Runden bis zum Stopp oder bis keine bewertbaren offenen Bilder übrig sind.
+Rundennummer und Fehlversuchszähler bleiben bei Stopp und Serverneustart
+erhalten; ein manueller Start setzt die aktuelle Runde fort. Ein abgebrochener
+Versuch zählt nicht als Fehlversuch.
+
+Jeder neue SVG-Kandidat bleibt unter
+`artifacts/converted_images/catalog_background_svgs/<job-id>/<bildname>.svg`
+erhalten, auch bei weiterhin ungenügender Qualität. Vorhandene Kandidaten
+bleiben erhalten. Nach jedem Versuch wird die vollständige Qualitätsliste
+mit Cachewiederverwendung aktualisiert. Nur die bestehende Prüfung mit beiden
+Renderern entscheidet über **Rastergates erfüllt**.
+
+Die Oberfläche fragt den Status alle 1,5 Sekunden ab und zeigt aktuelles Bild,
+MSE, Konvertierungsdauer, Live-Protokoll, Rundennummer, Versuch 1–3 und
+zurückgestellte Bilder. Die letzten 200 Versuchsergebnisse seit dem Start
+bleiben in der Anzeige; die vollständigen Auftragsprotokolle bleiben gespeichert. Die Zähler und
+Katalogzeilen aktualisieren sich nach jedem vollständigen Prüfbericht.
+**Hintergrunddienst stoppen** beendet auch die aktive Konvertierung bzw.
+Qualitätsprüfung samt Unterprozessen; es startet danach kein weiteres Bild.
+Bereits vollständige Berichte und gespeicherte Versuche bleiben erhalten.
+Der Dienst läuft unabhängig vom Browserfenster. Serverende stoppt den Dienst;
+nach einem Neustart wird er als unterbrochen angezeigt und startet erst manuell.
+
+Status: `GET /api/catalog/conversion`; Start und Stopp:
+`POST /api/catalog/conversion/start` mit optionalem `profile`
+(`quick`, `normal`, `thorough`) bzw. `POST /api/catalog/conversion/stop`.
+Es gelten dieselben lokalen Host-/Origin- und Headerprüfungen wie für die GUI.
 
 ## Prüfung
 
 ```powershell
-.venv/Scripts/python.exe -m pytest -q tests/test_catalog_quality_server.py tests/test_catalog_inventory.py tests/test_catalog_inventory_html.py tests/test_image_converter_gui.py
+.venv/Scripts/python.exe -m pytest -q tests/test_catalog_background_conversion.py tests/test_catalog_quality_server.py tests/test_catalog_inventory.py tests/test_catalog_inventory_html.py tests/test_image_converter_gui.py tests/test_category_collection.py
 ```
+
+Die Dienstregressionen prüfen Auswahlreihenfolge, Ausschluss bestandener und
+reservierter Bilder, drei Fehlversuche pro Runde, Zurückstellung, Rundenwechsel,
+Fortsetzung nach Stopp und Neustart, Live-Protokoll, unveränderte
+alte Kandidaten sowie Stopp während Wartezeit, Konvertierung und echter Prüfung.
+Ein vollständiger Berichtslauf erzeugt mit einem eingespeisten SVG-Kandidaten
+einen neuen Rasterpass durch die unveränderten MuPDF-/librsvg-Prüfprozesse.
 
 56 Regressionen bestehen: echter CLI-Prüfprozess mit anschließender
 Cachewiederverwendung, Prozessbaumabbruch, unveränderte frühere Liste,
