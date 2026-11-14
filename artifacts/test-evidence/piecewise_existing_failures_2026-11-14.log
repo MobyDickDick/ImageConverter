@@ -7,17 +7,17 @@ _________ test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns __________
         result_path = Path("artifacts/converted_images/converted_svgs/AC0VR2_ZL_M.svg")
         snapshot_path = Path("artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0VR2_ZL_M.svg")
         svg = result_path.read_text(encoding="utf-8")
-    
+
 >       assert svg == sample_path.read_text(encoding="utf-8")
 E       assert '<svg xmlns="...>\n</g></svg>' == '<?xml versio...)" /></svg>\n'
-E         
+E
 E         + <svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" viewBox="0 0 60 30">
 E         +   <defs>
 E         +     <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.500" y1="0.500" x2="0.500" y2="29.500">
 E         +       <stop offset="1.000000%" stop-color="#c9c9c9" />
 E         +       <stop offset="39.000000%" stop-color="#fcfcfc" />
 E         +       <stop offset="99.000000%" stop-color="#c9c9c9" />...
-E         
+E
 E         ...Full output truncated (46 lines hidden), use '-vv' to show
 
 tests\detailtests\test_gradient_stripe_strategy_helpers.py:102: AssertionError

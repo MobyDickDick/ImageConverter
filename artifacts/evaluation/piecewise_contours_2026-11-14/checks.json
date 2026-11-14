@@ -1,0 +1,29 @@
+{
+  "focused_tests": {
+    "passed": 169,
+    "log": "artifacts/test-evidence/piecewise_contours_focused_2026-11-14.log"
+  },
+  "contour_tests_after_final_changes": {
+    "passed": 10,
+    "log": "artifacts/test-evidence/piecewise_contours_unit_2026-11-14.log"
+  },
+  "repository_suite": {
+    "passed": 744,
+    "failed": 1,
+    "stopped_on_first_failure": true,
+    "full_suite_green": false,
+    "first_failure": "tests/detailtests/test_gradient_stripe_strategy_helpers.py::test_ac0vr2_zl_m_result_is_a_vertical_gradient_not_columns",
+    "cause": "Different unchanged archived SVG and fixture contents",
+    "log": "artifacts/test-evidence/piecewise_contours_completion_2026-11-14.log",
+    "prior_exhaustive_attempt": "Stopped at 31 percent after existing failures; remaining tests not completed"
+  },
+  "compileall": true,
+  "cli_help": true,
+  "image_id_hardcoding": "pass",
+  "catalog_inventory": {
+    "catalog_bitmaps": 1787,
+    "generated_at": "2026-11-14T14:55:03.034904+00:00",
+    "measurements_computed": 3095,
+    "measurements_reused": 6
+  }
+}

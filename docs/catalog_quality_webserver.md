@@ -12,6 +12,10 @@ werden. Die statischen Webseiten werden von der Festplatte geladen, während
 Python-Code bis zum Neustart im laufenden Prozess verbleibt. Eine fehlende
 Hintergrunddienst-API wird mit einem konkreten Neustarthinweis angezeigt;
 die vorhandene Katalog- und Fortschrittsanzeige aktualisiert sich weiter.
+Die Startseite und ein erneuter Aufruf von `startWebServer.cmd` erkennen auch
+Server, denen die getrennten Konvertierungsplätze noch fehlen, und zeigen den
+Neustart über `stopWebServer.cmd` und `startWebServer.cmd` an. Nach dem Neustart
+die Browserseite neu laden und den Hintergrunddienst erneut starten.
 Unter Windows bindet der Server seinen Port exklusiv. Läuft derselbe
 ImageConverter-Server bereits, öffnet ein erneuter Start dessen Oberfläche
 und endet erfolgreich. Mit `--no-browser` wird nur die Adresse ausgegeben.

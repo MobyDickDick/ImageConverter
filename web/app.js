@@ -270,7 +270,13 @@ for (const prefix of ["source", "sample", "result"]) {
 async function init() {
   try {
     try {
-      nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+      const config = await request("/api/config");
+      nativeFileDialogs = config.native_file_dialogs;
+      if (!config.parallel_background_conversion) {
+        serverNeedsRestart = true;
+        $("server-version-warning").textContent = "Der laufende Webserver verwendet noch eine ältere Version, die manuelle Konvertierungen während des Hintergrunddienstes blockieren kann. Bitte stopWebServer.cmd und danach startWebServer.cmd ausführen und diese Seite neu laden. Anschliessend den Hintergrunddienst bei Bedarf wieder starten.";
+        $("server-version-warning").hidden = false;
+      }
     } catch (error) {
       if (error.status !== 404) throw error;
       serverNeedsRestart = true;

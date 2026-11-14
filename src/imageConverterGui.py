@@ -911,6 +911,7 @@ class Handler(BaseHTTPRequestHandler):
                 if path == '/api/config':
                     return self.json(dict(native_file_dialogs=os.name == 'nt',
                         application='imageconverter_gui', api_version=1,
+                        parallel_background_conversion=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]
@@ -1093,7 +1094,7 @@ class Handler(BaseHTTPRequestHandler):
         return self.file(target, mime, 'result.svg' if 'download' in parse_qs(query) else None)
 
 
-def existing_gui(port: int, directory: Path) -> str | None:
+def existing_gui(port: int, directory: Path, *, warn_outdated: bool = False) -> str | None:
     """Reuse only this project's server with the requested data directory."""
     url = f'http://127.0.0.1:{port}'
     try:
@@ -1106,6 +1107,11 @@ def existing_gui(port: int, directory: Path) -> str | None:
                 and isinstance(config.get('data_directory'), str)
                 and Path(config['project_root']).resolve() == ROOT.resolve()
                 and Path(config['data_directory']).resolve() == directory.resolve()):
+            if warn_outdated and not config.get('parallel_background_conversion'):
+                print('Der laufende Webserver verwendet noch eine ältere Version, die '
+                      'manuelle Konvertierungen während des Hintergrunddienstes blockieren kann. '
+                      'Bitte stopWebServer.cmd und danach startWebServer.cmd ausführen; '
+                      'anschliessend die Browserseite neu laden.', flush=True)
             return url
     except (OSError, ValueError):
         pass
@@ -1158,7 +1164,7 @@ def main(argv: list[str] | None = None) -> int:
         server = GuiServer(("127.0.0.1", args.port), directory=args.data_dir)
         jobs = server.jobs
     except OSError as exc:
-        existing = existing_gui(args.port, args.data_dir)
+        existing = existing_gui(args.port, args.data_dir, warn_outdated=True)
         if existing:
             print(f'ImageConverter läuft bereits: {existing}\nDie vorhandene Instanz wird verwendet.', flush=True)
             if not args.no_browser:
