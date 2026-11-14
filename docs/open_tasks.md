@@ -6,6 +6,8 @@ focused on the actual project scope.
 
 ## Neue Ausführungsreihenfolge (2026-10-23)
 
+- [x] **SPRAY-PANEL-DASHES-02 (Nutzerpräzisierung 2026-11-14):** Jeden der 15 Sprühstrahlen als fein gestrichelte native Linie mit einzeln angepasster Länge, Lücke, Phase, Breite und Farbe rekonstruieren; Bildbeschreibung in beiden Katalogen präzisieren. Gehäuse, Balken, Rahmen, Düsen und Strahlkoordinaten bleiben bytegleich. Frische CLI besteht beide Renderer, unveränderte Bild-/Teilregionsgates und einen zusätzlichen separaten Strichelungsvertrag; 48 Gegenproben abgelehnt, v1-Prüfer und Belege unverändert erhalten. [Neue SVG, Vergleich und Grenzen](spray_panel_dashed_mist_2026-11-14.md).
+
 - [x] **SPRAY-PANEL-COMPOSITION-01 (Nutzerkorrektur 2026-11-14, begrenzter Abschluss am L-Original):** Mehrteiligen Luftbefeuchter mit separater Registrierung für Gehäuse, Balken, gestrichelten Innenrahmen, fünf Düsen und fünf dreistrahlige Sprühnebel rekonstruieren. Neue echte CLI besteht beide Renderer, 13 Teilregionen und den externen vollständigen Bauteilvertrag; 29 beschädigte Kontrollen werden abgelehnt. Native Strichelung in MuPDFs privater Renderübergabe korrigiert, Beschreibungen und Kategorienhinweis berichtigt. M-/S-Detektion und allgemeine Komposition bleiben offen; keine automatische Archivpromotion. [SVG, Nachweise und Grenzen](spray_panel_composition_2026-11-14.md).
 
 - [x] **CONVERSION-PERSISTENCE-01 (Folgepaket des Katalogaudits):** Neue Laufordner und unveränderliche, hashgebundene Revisionen für SVGs, aktuelle Messwerte, Freigabestatus und Fehler. Start, Fehler, Abschluss und Abbruch in beiden Bilddurchläufen unmittelbar persistieren; atomare CSVs und Checkpoint-Verweise. Nachoptimierte SVGs erhalten aktuelle Fehlerwerte, Entwürfe und bestätigte Ergebnisse getrennte Status-/Zählerwerte. Explizite Wiederaufnahme prüft archivierte Objekte, Originale und Beschreibungen. Lokale Regressionen und zwei echte CLI-Läufe mit bytegleichen früheren Laufbelegen bestanden; CI ergänzt, noch kein GitHub-Lauf. [Umsetzung, Abnahme und Grenzen](next_arbeitspaket_2026-11-12_conversion_persistence.md).
@@ -138,7 +140,7 @@ und unabhängige reale Abnahme bleiben offen; die übergeordnete Checkbox bleibt
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-11-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `539` · Erledigt `484` · Offen `55`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `540` · Erledigt `485` · Offen `55`
 
 > Zählregel: Gezählt werden alle Markdown-Aufgabenzeilen mit Checkbox in `docs/open_tasks.md`, einschließlich eingerückter Aufgaben. Inline-Beispiele zählen nicht.
 

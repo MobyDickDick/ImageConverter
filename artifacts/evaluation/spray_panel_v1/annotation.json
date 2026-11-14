@@ -1,0 +1,44 @@
+{
+  "schema": "spray_panel_visual_contract_v1",
+  "source": "AC0130_L.jpg",
+  "size": [
+    40,
+    80
+  ],
+  "provenance": "User decomposition and visual inspection of the original; development annotation, not an independent real holdout.",
+  "background": [
+    0.5,
+    0.5,
+    39,
+    79
+  ],
+  "rail": [
+    1,
+    5,
+    4,
+    74
+  ],
+  "frame": [
+    21.5,
+    3.5,
+    14,
+    72
+  ],
+  "nozzle_centers": [
+    6.5,
+    23,
+    39.5,
+    56.5,
+    72.5
+  ],
+  "spray_centers": [
+    8.5,
+    24.5,
+    40.5,
+    56.5,
+    71.5
+  ],
+  "line_position_tolerance": 1.5,
+  "local_mse_limit": 0.002,
+  "dash_correlation_min": 0.65
+}

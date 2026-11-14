@@ -1,0 +1,33 @@
+{
+  "source_sha256": {
+    "src/iCCModules/imageCompositeConverterSprayPanel.py": "eb9bb6bf612e592cd4341f997a2d7d6b2fb951d7d2f3388b67530f9b4e161739",
+    "src/iCCModules/imageCompositeConverterDashedRectangles.py": "e42528f4616ae683eea3e463b13888f27b16fdec518a6f15e0ae313a8b8d7383",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "8a16237f215414244f1dc731b7eddacdd094ad11a7d859557a80343e31452134",
+    "src/iCCModules/imageCompositeConverterRendering.py": "e8996ab78694a1520767a3c12ec16e527a64d828890cbde86aa168a3e5bcec5a",
+    "tools/check_spray_scene.py": "74e40a05f3832b31f2564a9aba09b402d5b35b944b0b5f995a8c1f303f53eb99",
+    "tools/evaluate_spray_panel.py": "c11a3a6b35b75c4c8af7b86cf7df0bc74d8247f4a163b8e410d29347577cf25d"
+  },
+  "files": {
+    "AC0130_L.png": "1378753087252d8e98ae9beb04d8eee9344c6abff6b43d6c5e5ceeeaf6ad18bb",
+    "AC0130_L.svg": "b46b1997e3b7149819498f234f914cdbb1690407d805f09ed3e5b6b8af988097",
+    "annotation.json": "599dc611285e3a6e79952e76f47395716a6ec832918bbcf394eea91150954b2d",
+    "baseline.json": "073c9e787000b022fef89c336e12b94c2af083770e4142a1b2a78ebae875a908",
+    "baseline.svg": "6e62c85a25fe7ec792aa9fe82bd82dc24e8c002c2f3514d57d48902a50dbd007",
+    "comparison.png": "37408a0e19afbedaadf5e2e8d29a7fdabf8eb987d0fa2082934c94b7b0ed3b16",
+    "description.txt": "f2d9bc6697446130f0d65cbfa04b0b134cb19d6df14cbbf5ff362a71405c32de",
+    "input_seal.json": "f34eef10640381697d0c22d09f8571218567c6f9cfc94acdec825c244ad07e35",
+    "registration.json": "6efc39465ea45d289c21cf1b47c938f17799d35c880d71981c445ed826418bcf",
+    "summary.json": "94dc7feae44904dac612c2c90322bf3750c2329c0e3e194bcee2e6f21f49afff",
+    "variants.json": "ded700023e3fbe35e1dd1ec463a45d410479902753123de6b1339e7e31db9216",
+    "components/background.svg": "e415039d9449cf448f30f05e5c1df1a2741f97e1faea7c3699d36a87553a9e59",
+    "components/dashed-frame.svg": "fd77f53e065b82f370fe850ac06a638bf5e968ec3759049f5921177937f9f5a3",
+    "components/left-rail.svg": "f93945c5e24ba1840feac7a8a130c5b1904969e53faeef1bc1b57920e276c1d5",
+    "components/nozzles.svg": "e3cf10f259bbdfd38e9df92f94871b7c55dec93d7ce3f007e8befeb6411ea7af",
+    "components/spray-mists.svg": "33bd1a6c6b86f81c680afc17eee2e96a13fd2a0ab94e9d2feae1fb1fc47e24e1",
+    "inputs/AC0130_L.jpg": "8315259c9c0367478e58f63550ae2c8d248c1e0b1bdb7b282077377e50384917",
+    "inputs/imageCompositeConverterNonCompositeRuntime.py": "5e1730f2708dc6d4444490d0023fe6fd3ba32474100514fbeac592717fbc6025",
+    "inputs/imageCompositeConverterZigzagPanel.py": "d6bd10bb91b7d8f98eb714845de4b4657939e9b25fb9412ad6ba5480260aaeb9",
+    "inputs/nozzle-reference.png": "1d91399d9ef2151999bae0b8e54049b92ad4bb90d9e1fb52d9fdd5ff38cbfe6f",
+    "inputs/spray-reference.png": "a2ea6cafa7927f82f18400f66075502f0fce1e371fb06a21b781c0d9da986f8f"
+  }
+}

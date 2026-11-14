@@ -1,0 +1,630 @@
+{
+  "details": [
+    {
+      "component": "background",
+      "normalized_mse": 0.00010240782423220909,
+      "passed": true
+    },
+    {
+      "component": "left_rail",
+      "normalized_mse": 0.000501657835476812,
+      "passed": true
+    },
+    {
+      "component": "dashed_frame",
+      "normalized_mse": 0.0007127891758802946,
+      "passed": true
+    },
+    {
+      "component": "nozzle_1",
+      "normalized_mse": 0.00024947669699688154,
+      "passed": true
+    },
+    {
+      "component": "nozzle_2",
+      "normalized_mse": 0.00030529568399618377,
+      "passed": true
+    },
+    {
+      "component": "nozzle_3",
+      "normalized_mse": 0.00020191664174747602,
+      "passed": true
+    },
+    {
+      "component": "nozzle_4",
+      "normalized_mse": 0.00028222763324647215,
+      "passed": true
+    },
+    {
+      "component": "nozzle_5",
+      "normalized_mse": 0.00015891323849801358,
+      "passed": true
+    },
+    {
+      "component": "spray_1",
+      "normalized_mse": 0.00026452872575404636,
+      "passed": true
+    },
+    {
+      "component": "spray_2",
+      "normalized_mse": 0.0002360328983573437,
+      "passed": true
+    },
+    {
+      "component": "spray_3",
+      "normalized_mse": 0.00016916570549788546,
+      "passed": true
+    },
+    {
+      "component": "spray_4",
+      "normalized_mse": 0.00018944448213733785,
+      "passed": true
+    },
+    {
+      "component": "spray_5",
+      "normalized_mse": 0.0002058785836518383,
+      "passed": true
+    },
+    {
+      "component": "spray_1_ray_1_dashes",
+      "normalized_mse": 0.0005725608493774585,
+      "passed": true
+    },
+    {
+      "component": "spray_1_ray_2_dashes",
+      "normalized_mse": 0.00012251698064846857,
+      "passed": true
+    },
+    {
+      "component": "spray_1_ray_3_dashes",
+      "normalized_mse": 0.0008113802383698577,
+      "passed": true
+    },
+    {
+      "component": "spray_2_ray_1_dashes",
+      "normalized_mse": 0.0005523516596180957,
+      "passed": true
+    },
+    {
+      "component": "spray_2_ray_2_dashes",
+      "normalized_mse": 0.0003083429450211457,
+      "passed": true
+    },
+    {
+      "component": "spray_2_ray_3_dashes",
+      "normalized_mse": 0.000522875816993464,
+      "passed": true
+    },
+    {
+      "component": "spray_3_ray_1_dashes",
+      "normalized_mse": 0.00030875698695767903,
+      "passed": true
+    },
+    {
+      "component": "spray_3_ray_2_dashes",
+      "normalized_mse": 0.00016762783544790465,
+      "passed": true
+    },
+    {
+      "component": "spray_3_ray_3_dashes",
+      "normalized_mse": 0.00017567207878626563,
+      "passed": true
+    },
+    {
+      "component": "spray_4_ray_1_dashes",
+      "normalized_mse": 0.0003567858515955402,
+      "passed": true
+    },
+    {
+      "component": "spray_4_ray_2_dashes",
+      "normalized_mse": 0.00026374471357170314,
+      "passed": true
+    },
+    {
+      "component": "spray_4_ray_3_dashes",
+      "normalized_mse": 0.0002779995859580635,
+      "passed": true
+    },
+    {
+      "component": "spray_5_ray_1_dashes",
+      "normalized_mse": 0.0004363706266820454,
+      "passed": true
+    },
+    {
+      "component": "spray_5_ray_2_dashes",
+      "normalized_mse": 0.00014866077149814171,
+      "passed": true
+    },
+    {
+      "component": "spray_5_ray_3_dashes",
+      "normalized_mse": 0.00044167627835447906,
+      "passed": true
+    }
+  ],
+  "error": 3.04125,
+  "evaluations": 8118,
+  "initial_error": 7.593958333333333,
+  "parameters": {
+    "background": [
+      0.5,
+      0.4375,
+      39.0,
+      79.125,
+      1.0,
+      142.0,
+      197.45999999999998,
+      255.0,
+      195.12666666666667,
+      14.375,
+      0.25
+    ],
+    "frame": [
+      21.40625,
+      3.25,
+      14.0,
+      71.96875,
+      0.7,
+      131.0,
+      1.92360450563204,
+      0.48090112640800986,
+      2.291442428035044
+    ],
+    "nozzles": [
+      [
+        6.499999999999999,
+        2.0,
+        1.0,
+        1.0,
+        139.4
+      ],
+      [
+        23.3125,
+        2.0,
+        1.5,
+        1.5,
+        164.2
+      ],
+      [
+        39.5,
+        2.0625,
+        0.9375,
+        1.0,
+        135.2
+      ],
+      [
+        56.5,
+        2.0,
+        1.0,
+        1.0,
+        138.4
+      ],
+      [
+        72.875,
+        2.1875,
+        1.0,
+        1.8125,
+        150.8
+      ]
+    ],
+    "rail": [
+      0.875,
+      5.125,
+      4.0,
+      74.5,
+      133.5
+    ],
+    "ray_dashes": [
+      [
+        [
+          0.9375,
+          0.3125,
+          1.0416666666666667,
+          0.7125,
+          163.19
+        ],
+        [
+          1.875,
+          0.59375,
+          0.38541666666666663,
+          0.8375,
+          166.19
+        ],
+        [
+          1.84375,
+          0.65625,
+          0.38541666666666663,
+          0.7125,
+          162.19
+        ]
+      ],
+      [
+        [
+          0.75,
+          0.5,
+          0.0,
+          1.15,
+          169.7133333333333
+        ],
+        [
+          1.8125,
+          0.59375,
+          0.3958333333333333,
+          1.15,
+          183.85666666666665
+        ],
+        [
+          1.78125,
+          0.59375,
+          0.3333333333333333,
+          1.025,
+          185.35666666666665
+        ]
+      ],
+      [
+        [
+          1.78125,
+          0.59375,
+          -0.0625,
+          0.9937499999999999,
+          186.69
+        ],
+        [
+          1.8125,
+          0.5625,
+          0.0,
+          1.0875,
+          189.19
+        ],
+        [
+          1.78125,
+          0.59375,
+          0.03125,
+          1.15,
+          190.69
+        ]
+      ],
+      [
+        [
+          1.875,
+          0.625,
+          0.47916666666666663,
+          1.2125,
+          190.69
+        ],
+        [
+          1.21875,
+          0.40625,
+          0.41666666666666663,
+          1.15,
+          185.19
+        ],
+        [
+          1.96875,
+          0.59375,
+          0.75,
+          1.11875,
+          190.69
+        ]
+      ],
+      [
+        [
+          1.425,
+          0.9500000000000001,
+          0.0,
+          0.9,
+          160.04666666666665
+        ],
+        [
+          1.875,
+          0.59375,
+          0.44791666666666663,
+          0.9,
+          176.5233333333333
+        ],
+        [
+          1.875,
+          0.625,
+          0.35416666666666663,
+          0.9625,
+          177.0233333333333
+        ]
+      ]
+    ],
+    "sprays": [
+      [
+        8.25,
+        8.25,
+        17.1875,
+        7.75,
+        6.6000000000000005,
+        7.625,
+        6.7250000000000005,
+        2.0425,
+        0.7125,
+        184.0
+      ],
+      [
+        8.5,
+        24.125,
+        17.125,
+        7.25,
+        6.6000000000000005,
+        7.3125,
+        6.6625000000000005,
+        2.105,
+        1.15,
+        201.0
+      ],
+      [
+        8.0625,
+        40.0625,
+        17.0625,
+        7.875,
+        6.6000000000000005,
+        7.8125,
+        6.5375000000000005,
+        2.0425,
+        1.0875,
+        202.0
+      ],
+      [
+        8.375,
+        55.9375,
+        17.1875,
+        7.4375,
+        6.7250000000000005,
+        7.5,
+        6.5375000000000005,
+        2.0425,
+        1.15,
+        202.0
+      ],
+      [
+        8.3125,
+        71.75,
+        17.25,
+        7.5625,
+        6.7250000000000005,
+        7.5,
+        6.4750000000000005,
+        2.0425,
+        0.9,
+        194.0
+      ]
+    ]
+  },
+  "quality": {
+    "edge_alignment": 0.9291701316833496,
+    "foreground_iou": 0.992289899768697,
+    "foreground_mse": 0.00025320312124677,
+    "normalized_mse": 0.00030188390519469976,
+    "passed": true
+  },
+  "source": "raster_spray_panel_v1",
+  "stages": [
+    {
+      "completed": true,
+      "component": "background",
+      "evaluations": 223,
+      "initial_local_mse": 31.28501850769531,
+      "local_mse": 13.824079485680889,
+      "seconds": 1.047
+    },
+    {
+      "completed": true,
+      "component": "left_rail",
+      "evaluations": 89,
+      "initial_local_mse": 63.71052631578947,
+      "local_mse": 38.973684210526315,
+      "seconds": 0.313
+    },
+    {
+      "completed": true,
+      "component": "dashed_frame",
+      "evaluations": 120,
+      "initial_local_mse": 86.25378787878788,
+      "local_mse": 46.34911616161616,
+      "seconds": 1.046
+    },
+    {
+      "completed": true,
+      "component": "nozzle_1",
+      "evaluations": 53,
+      "initial_local_mse": 167.57407407407408,
+      "local_mse": 89.31481481481481,
+      "seconds": 0.5
+    },
+    {
+      "completed": true,
+      "component": "nozzle_2",
+      "evaluations": 48,
+      "initial_local_mse": 150.0,
+      "local_mse": 91.5925925925926,
+      "seconds": 0.454
+    },
+    {
+      "completed": true,
+      "component": "nozzle_3",
+      "evaluations": 55,
+      "initial_local_mse": 192.90740740740742,
+      "local_mse": 103.20370370370371,
+      "seconds": 0.593
+    },
+    {
+      "completed": true,
+      "component": "nozzle_4",
+      "evaluations": 55,
+      "initial_local_mse": 187.85185185185185,
+      "local_mse": 97.9074074074074,
+      "seconds": 0.625
+    },
+    {
+      "completed": true,
+      "component": "nozzle_5",
+      "evaluations": 96,
+      "initial_local_mse": 135.8148148148148,
+      "local_mse": 84.25925925925925,
+      "seconds": 0.969
+    },
+    {
+      "completed": true,
+      "component": "spray_1",
+      "evaluations": 255,
+      "initial_local_mse": 78.41176470588235,
+      "local_mse": 28.69607843137255,
+      "seconds": 2.687
+    },
+    {
+      "completed": true,
+      "component": "spray_2",
+      "evaluations": 252,
+      "initial_local_mse": 103.0,
+      "local_mse": 22.862745098039216,
+      "seconds": 2.515
+    },
+    {
+      "completed": true,
+      "component": "spray_3",
+      "evaluations": 244,
+      "initial_local_mse": 131.30392156862746,
+      "local_mse": 21.529411764705884,
+      "seconds": 2.344
+    },
+    {
+      "completed": true,
+      "component": "spray_4",
+      "evaluations": 267,
+      "initial_local_mse": 108.22549019607843,
+      "local_mse": 21.754901960784313,
+      "seconds": 2.562
+    },
+    {
+      "completed": true,
+      "component": "spray_5",
+      "evaluations": 261,
+      "initial_local_mse": 81.45588235294117,
+      "local_mse": 26.147058823529413,
+      "seconds": 2.578
+    },
+    {
+      "completed": true,
+      "component": "spray_1_ray_1_dashes",
+      "evaluations": 23,
+      "initial_local_mse": 38.19230769230769,
+      "local_mse": 38.19230769230769,
+      "seconds": 0.203
+    },
+    {
+      "completed": true,
+      "component": "spray_1_ray_2_dashes",
+      "evaluations": 49,
+      "initial_local_mse": 13.766666666666667,
+      "local_mse": 7.966666666666667,
+      "seconds": 0.609
+    },
+    {
+      "completed": true,
+      "component": "spray_1_ray_3_dashes",
+      "evaluations": 44,
+      "initial_local_mse": 57.68,
+      "local_mse": 52.76,
+      "seconds": 0.516
+    },
+    {
+      "completed": true,
+      "component": "spray_2_ray_1_dashes",
+      "evaluations": 29,
+      "initial_local_mse": 35.958333333333336,
+      "local_mse": 35.916666666666664,
+      "seconds": 0.313
+    },
+    {
+      "completed": true,
+      "component": "spray_2_ray_2_dashes",
+      "evaluations": 44,
+      "initial_local_mse": 21.45,
+      "local_mse": 20.05,
+      "seconds": 0.453
+    },
+    {
+      "completed": true,
+      "component": "spray_2_ray_3_dashes",
+      "evaluations": 40,
+      "initial_local_mse": 40.08,
+      "local_mse": 34.0,
+      "seconds": 0.437
+    },
+    {
+      "completed": true,
+      "component": "spray_3_ray_1_dashes",
+      "evaluations": 48,
+      "initial_local_mse": 23.73076923076923,
+      "local_mse": 20.076923076923077,
+      "seconds": 0.234
+    },
+    {
+      "completed": true,
+      "component": "spray_3_ray_2_dashes",
+      "evaluations": 47,
+      "initial_local_mse": 12.7,
+      "local_mse": 10.9,
+      "seconds": 0.234
+    },
+    {
+      "completed": true,
+      "component": "spray_3_ray_3_dashes",
+      "evaluations": 66,
+      "initial_local_mse": 16.53846153846154,
+      "local_mse": 11.423076923076923,
+      "seconds": 0.312
+    },
+    {
+      "completed": true,
+      "component": "spray_4_ray_1_dashes",
+      "evaluations": 61,
+      "initial_local_mse": 34.64,
+      "local_mse": 23.2,
+      "seconds": 0.266
+    },
+    {
+      "completed": true,
+      "component": "spray_4_ray_2_dashes",
+      "evaluations": 40,
+      "initial_local_mse": 22.65,
+      "local_mse": 17.15,
+      "seconds": 0.204
+    },
+    {
+      "completed": true,
+      "component": "spray_4_ray_3_dashes",
+      "evaluations": 69,
+      "initial_local_mse": 30.153846153846153,
+      "local_mse": 18.076923076923077,
+      "seconds": 0.296
+    },
+    {
+      "completed": true,
+      "component": "spray_5_ray_1_dashes",
+      "evaluations": 36,
+      "initial_local_mse": 31.583333333333332,
+      "local_mse": 28.375,
+      "seconds": 0.219
+    },
+    {
+      "completed": true,
+      "component": "spray_5_ray_2_dashes",
+      "evaluations": 40,
+      "initial_local_mse": 15.566666666666666,
+      "local_mse": 9.666666666666666,
+      "seconds": 0.203
+    },
+    {
+      "completed": true,
+      "component": "spray_5_ray_3_dashes",
+      "evaluations": 44,
+      "initial_local_mse": 32.44,
+      "local_mse": 28.72,
+      "seconds": 0.203
+    }
+  ]
+}

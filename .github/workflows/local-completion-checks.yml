@@ -12,7 +12,7 @@ on:
 jobs:
   fallback-structure:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,8 +28,9 @@ jobs:
         run: python -m tools.evaluate_segment_checker --output .tmp/segment-checker-ci
       - name: Require decomposed humidifier parts and true dashed rectangle rendering
         run: |
-          python -m pytest -q tests/test_dashed_rectangles.py tests/test_spray_panel.py tests/test_zigzag_panel_runtime.py
+          python -m pytest -q tests/test_dashed_rectangles.py tests/test_dashed_spray.py tests/test_spray_panel.py tests/test_zigzag_panel_runtime.py
           python -m tools.evaluate_spray_panel --output .tmp/spray-panel-ci
+          python -m tools.evaluate_dashed_spray --output .tmp/spray-dashed-ci
       - name: Require cancellable catalog quality reports and local HTTP routes
         run: python -m pytest -q tests/test_catalog_quality_server.py tests/test_catalog_inventory_html.py
       - name: Check mixed groups and retained objects through both renderers and the CLI
@@ -49,6 +50,7 @@ jobs:
             .tmp/fallback-checker-ci/
             .tmp/segment-checker-ci/
             .tmp/spray-panel-ci/
+            .tmp/spray-dashed-ci/
           retention-days: 7
 
   svg-text-baseline:

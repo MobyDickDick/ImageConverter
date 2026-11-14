@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Luftbefeuchter: alle 15 Sprühstrahlen gestrichelt, unveränderte Geometrie und neue CLI-Abnahme (2026-11-14)](spray_panel_dashed_mist_2026-11-14.md)
+
 - [Luftbefeuchter: fünf getrennte Bauteilgruppen, echte Strichelung und neue CLI-Konvertierung des L-Originals (2026-11-14)](spray_panel_composition_2026-11-14.md)
 
 - [Kategorien-Kollektion: 15 Originale einzeln konvertieren und erweiterte Plan-B-Aufgaben erstellen](category_collection.md)

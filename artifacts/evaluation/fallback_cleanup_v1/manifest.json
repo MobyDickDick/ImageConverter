@@ -1,0 +1,2188 @@
+{
+  "schema": "fallback_cleanup_development_v1",
+  "cases": [
+    {
+      "case_id": "composition_00",
+      "width": 144,
+      "height": 144,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\" stroke=\"#888888\" stroke-width=\"1\"/><line x1=\"11\" y1=\"25\" x2=\"33\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"33\" y1=\"25\" x2=\"11\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"34\" y1=\"36\" x2=\"50\" y2=\"36\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"42\" y1=\"46\" x2=\"62\" y2=\"26\" stroke=\"#888888\" stroke-width=\"1.5\"/><circle cx=\"52\" cy=\"36\" r=\"3\" fill=\"white\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"105\" y1=\"8\" x2=\"105\" y2=\"60\" stroke=\"#cc2255\" stroke-width=\"2\"/><polygon points=\"99,60 111,60 105,73\" fill=\"#cc2255\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/></svg>",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            8,
+            22,
+            28,
+            28
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            12,
+            26,
+            20,
+            20
+          ]
+        },
+        {
+          "name": "connector_joint",
+          "box": [
+            34,
+            30,
+            24,
+            13
+          ]
+        },
+        {
+          "name": "linkage",
+          "box": [
+            40,
+            24,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "shaft",
+          "box": [
+            101,
+            6,
+            8,
+            53
+          ]
+        },
+        {
+          "name": "head",
+          "box": [
+            97,
+            58,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "existing_circle",
+          "box": [
+            108,
+            100,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "existing_line",
+          "box": [
+            14,
+            109,
+            30,
+            6
+          ]
+        },
+        {
+          "name": "no_extra_object",
+          "box": [
+            51,
+            99,
+            23,
+            25
+          ]
+        }
+      ],
+      "description": "Ein blaues Quadrat mit hellen Diagonalen, Anschluss und Gelenkgestänge; daneben ein farbiger Pfeil mit langem Schaft und dreieckigem Kopf. Unten ein violetter Kreis und eine kurze graue Linie.",
+      "annotation": {
+        "schema": "independent_segment_scene_v1",
+        "size": [
+          144,
+          144
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.75,
+          "color": 0,
+          "stroke_width": 0.05
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                144,
+                0
+              ],
+              [
+                144,
+                144
+              ],
+              [
+                0,
+                144
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "context_circle",
+            "kind": "circle",
+            "points": [
+              [
+                120,
+                112
+              ]
+            ],
+            "radius": 10,
+            "fill": "#9944cc"
+          },
+          {
+            "id": "context_line",
+            "kind": "line",
+            "points": [
+              [
+                16,
+                112
+              ],
+              [
+                42,
+                112
+              ]
+            ],
+            "stroke": "#666666",
+            "stroke_width": 2,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "panel",
+            "kind": "rect",
+            "points": [
+              [
+                10,
+                24
+              ],
+              [
+                34,
+                24
+              ],
+              [
+                34,
+                48
+              ],
+              [
+                10,
+                48
+              ]
+            ],
+            "fill": "#2288bb",
+            "stroke": "#888888",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_a",
+            "kind": "line",
+            "points": [
+              [
+                11,
+                25
+              ],
+              [
+                33,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_b",
+            "kind": "line",
+            "points": [
+              [
+                33,
+                25
+              ],
+              [
+                11,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "connector",
+            "kind": "line",
+            "points": [
+              [
+                34,
+                36
+              ],
+              [
+                50,
+                36
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "linkage",
+            "kind": "line",
+            "points": [
+              [
+                42,
+                46
+              ],
+              [
+                62,
+                26
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [
+                "joint"
+              ],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "joint",
+            "kind": "circle",
+            "points": [
+              [
+                52,
+                36
+              ]
+            ],
+            "radius": 3,
+            "fill": "white",
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "shaft",
+            "kind": "line",
+            "points": [
+              [
+                105,
+                8
+              ],
+              [
+                105,
+                60
+              ]
+            ],
+            "stroke": "#cc2255",
+            "stroke_width": 2
+          },
+          {
+            "id": "head",
+            "kind": "polygon",
+            "points": [
+              [
+                99,
+                60
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                105,
+                73
+              ]
+            ],
+            "fill": "#cc2255"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "composition_01",
+      "width": 144,
+      "height": 144,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\" stroke=\"#888888\" stroke-width=\"1\"/><line x1=\"11\" y1=\"25\" x2=\"33\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"33\" y1=\"25\" x2=\"11\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"34\" y1=\"36\" x2=\"50\" y2=\"36\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"42\" y1=\"46\" x2=\"62\" y2=\"26\" stroke=\"#888888\" stroke-width=\"1.5\"/><circle cx=\"52\" cy=\"36\" r=\"3\" fill=\"white\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"105\" y1=\"8\" x2=\"105\" y2=\"60\" stroke=\"#55aa33\" stroke-width=\"2\"/><polygon points=\"99,60 111,60 105,73\" fill=\"#55aa33\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect id=\"wrong-arrow\" x=\"103\" y=\"8\" width=\"4\" height=\"65\" fill=\"#55aa33\"/></svg>",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            8,
+            22,
+            28,
+            28
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            12,
+            26,
+            20,
+            20
+          ]
+        },
+        {
+          "name": "connector_joint",
+          "box": [
+            34,
+            30,
+            24,
+            13
+          ]
+        },
+        {
+          "name": "linkage",
+          "box": [
+            40,
+            24,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "shaft",
+          "box": [
+            101,
+            6,
+            8,
+            53
+          ]
+        },
+        {
+          "name": "head",
+          "box": [
+            97,
+            58,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "existing_circle",
+          "box": [
+            108,
+            100,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "existing_line",
+          "box": [
+            14,
+            109,
+            30,
+            6
+          ]
+        },
+        {
+          "name": "no_extra_object",
+          "box": [
+            51,
+            99,
+            23,
+            25
+          ]
+        }
+      ],
+      "description": "Ein blaues Quadrat mit hellen Diagonalen, Anschluss und Gelenkgestänge; daneben ein farbiger Pfeil mit langem Schaft und dreieckigem Kopf. Unten ein violetter Kreis und eine kurze graue Linie.",
+      "annotation": {
+        "schema": "independent_segment_scene_v1",
+        "size": [
+          144,
+          144
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.75,
+          "color": 0,
+          "stroke_width": 0.05
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                144,
+                0
+              ],
+              [
+                144,
+                144
+              ],
+              [
+                0,
+                144
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "context_circle",
+            "kind": "circle",
+            "points": [
+              [
+                120,
+                112
+              ]
+            ],
+            "radius": 10,
+            "fill": "#9944cc"
+          },
+          {
+            "id": "context_line",
+            "kind": "line",
+            "points": [
+              [
+                16,
+                112
+              ],
+              [
+                42,
+                112
+              ]
+            ],
+            "stroke": "#666666",
+            "stroke_width": 2,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "panel",
+            "kind": "rect",
+            "points": [
+              [
+                10,
+                24
+              ],
+              [
+                34,
+                24
+              ],
+              [
+                34,
+                48
+              ],
+              [
+                10,
+                48
+              ]
+            ],
+            "fill": "#2288bb",
+            "stroke": "#888888",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_a",
+            "kind": "line",
+            "points": [
+              [
+                11,
+                25
+              ],
+              [
+                33,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_b",
+            "kind": "line",
+            "points": [
+              [
+                33,
+                25
+              ],
+              [
+                11,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "connector",
+            "kind": "line",
+            "points": [
+              [
+                34,
+                36
+              ],
+              [
+                50,
+                36
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "linkage",
+            "kind": "line",
+            "points": [
+              [
+                42,
+                46
+              ],
+              [
+                62,
+                26
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [
+                "joint"
+              ],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "joint",
+            "kind": "circle",
+            "points": [
+              [
+                52,
+                36
+              ]
+            ],
+            "radius": 3,
+            "fill": "white",
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "shaft",
+            "kind": "line",
+            "points": [
+              [
+                105,
+                8
+              ],
+              [
+                105,
+                60
+              ]
+            ],
+            "stroke": "#55aa33",
+            "stroke_width": 2
+          },
+          {
+            "id": "head",
+            "kind": "polygon",
+            "points": [
+              [
+                99,
+                60
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                105,
+                73
+              ]
+            ],
+            "fill": "#55aa33"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "composition_02",
+      "width": 144,
+      "height": 144,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\" stroke=\"#888888\" stroke-width=\"1\"/><line x1=\"11\" y1=\"25\" x2=\"33\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"33\" y1=\"25\" x2=\"11\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"34\" y1=\"36\" x2=\"50\" y2=\"36\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"42\" y1=\"46\" x2=\"62\" y2=\"26\" stroke=\"#888888\" stroke-width=\"1.5\"/><circle cx=\"52\" cy=\"36\" r=\"3\" fill=\"white\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"105\" y1=\"8\" x2=\"105\" y2=\"60\" stroke=\"#aa6611\" stroke-width=\"2\"/><polygon points=\"99,60 111,60 105,73\" fill=\"#aa6611\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect id=\"incomplete-panel\" x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\"/></svg>",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            8,
+            22,
+            28,
+            28
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            12,
+            26,
+            20,
+            20
+          ]
+        },
+        {
+          "name": "connector_joint",
+          "box": [
+            34,
+            30,
+            24,
+            13
+          ]
+        },
+        {
+          "name": "linkage",
+          "box": [
+            40,
+            24,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "shaft",
+          "box": [
+            101,
+            6,
+            8,
+            53
+          ]
+        },
+        {
+          "name": "head",
+          "box": [
+            97,
+            58,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "existing_circle",
+          "box": [
+            108,
+            100,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "existing_line",
+          "box": [
+            14,
+            109,
+            30,
+            6
+          ]
+        },
+        {
+          "name": "no_extra_object",
+          "box": [
+            51,
+            99,
+            23,
+            25
+          ]
+        }
+      ],
+      "description": "Ein blaues Quadrat mit hellen Diagonalen, Anschluss und Gelenkgestänge; daneben ein farbiger Pfeil mit langem Schaft und dreieckigem Kopf. Unten ein violetter Kreis und eine kurze graue Linie.",
+      "annotation": {
+        "schema": "independent_segment_scene_v1",
+        "size": [
+          144,
+          144
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.75,
+          "color": 0,
+          "stroke_width": 0.05
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                144,
+                0
+              ],
+              [
+                144,
+                144
+              ],
+              [
+                0,
+                144
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "context_circle",
+            "kind": "circle",
+            "points": [
+              [
+                120,
+                112
+              ]
+            ],
+            "radius": 10,
+            "fill": "#9944cc"
+          },
+          {
+            "id": "context_line",
+            "kind": "line",
+            "points": [
+              [
+                16,
+                112
+              ],
+              [
+                42,
+                112
+              ]
+            ],
+            "stroke": "#666666",
+            "stroke_width": 2,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "panel",
+            "kind": "rect",
+            "points": [
+              [
+                10,
+                24
+              ],
+              [
+                34,
+                24
+              ],
+              [
+                34,
+                48
+              ],
+              [
+                10,
+                48
+              ]
+            ],
+            "fill": "#2288bb",
+            "stroke": "#888888",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_a",
+            "kind": "line",
+            "points": [
+              [
+                11,
+                25
+              ],
+              [
+                33,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_b",
+            "kind": "line",
+            "points": [
+              [
+                33,
+                25
+              ],
+              [
+                11,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "connector",
+            "kind": "line",
+            "points": [
+              [
+                34,
+                36
+              ],
+              [
+                50,
+                36
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "linkage",
+            "kind": "line",
+            "points": [
+              [
+                42,
+                46
+              ],
+              [
+                62,
+                26
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [
+                "joint"
+              ],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "joint",
+            "kind": "circle",
+            "points": [
+              [
+                52,
+                36
+              ]
+            ],
+            "radius": 3,
+            "fill": "white",
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "shaft",
+            "kind": "line",
+            "points": [
+              [
+                105,
+                8
+              ],
+              [
+                105,
+                60
+              ]
+            ],
+            "stroke": "#aa6611",
+            "stroke_width": 2
+          },
+          {
+            "id": "head",
+            "kind": "polygon",
+            "points": [
+              [
+                99,
+                60
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                105,
+                73
+              ]
+            ],
+            "fill": "#aa6611"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "composition_03",
+      "width": 144,
+      "height": 144,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\" stroke=\"#888888\" stroke-width=\"1\"/><line x1=\"11\" y1=\"25\" x2=\"33\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"33\" y1=\"25\" x2=\"11\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"34\" y1=\"36\" x2=\"50\" y2=\"36\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"42\" y1=\"46\" x2=\"62\" y2=\"26\" stroke=\"#888888\" stroke-width=\"1.5\"/><circle cx=\"52\" cy=\"36\" r=\"3\" fill=\"white\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"105\" y1=\"8\" x2=\"105\" y2=\"60\" stroke=\"#cc2255\" stroke-width=\"2\"/><polygon points=\"99,60 111,60 105,73\" fill=\"#cc2255\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect id=\"extra\" x=\"55\" y=\"103\" width=\"16\" height=\"18\" fill=\"#444444\"/></svg>",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            8,
+            22,
+            28,
+            28
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            12,
+            26,
+            20,
+            20
+          ]
+        },
+        {
+          "name": "connector_joint",
+          "box": [
+            34,
+            30,
+            24,
+            13
+          ]
+        },
+        {
+          "name": "linkage",
+          "box": [
+            40,
+            24,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "shaft",
+          "box": [
+            101,
+            6,
+            8,
+            53
+          ]
+        },
+        {
+          "name": "head",
+          "box": [
+            97,
+            58,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "existing_circle",
+          "box": [
+            108,
+            100,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "existing_line",
+          "box": [
+            14,
+            109,
+            30,
+            6
+          ]
+        },
+        {
+          "name": "no_extra_object",
+          "box": [
+            51,
+            99,
+            23,
+            25
+          ]
+        }
+      ],
+      "description": "Ein blaues Quadrat mit hellen Diagonalen, Anschluss und Gelenkgestänge; daneben ein farbiger Pfeil mit langem Schaft und dreieckigem Kopf. Unten ein violetter Kreis und eine kurze graue Linie.",
+      "annotation": {
+        "schema": "independent_segment_scene_v1",
+        "size": [
+          144,
+          144
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.75,
+          "color": 0,
+          "stroke_width": 0.05
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                144,
+                0
+              ],
+              [
+                144,
+                144
+              ],
+              [
+                0,
+                144
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "context_circle",
+            "kind": "circle",
+            "points": [
+              [
+                120,
+                112
+              ]
+            ],
+            "radius": 10,
+            "fill": "#9944cc"
+          },
+          {
+            "id": "context_line",
+            "kind": "line",
+            "points": [
+              [
+                16,
+                112
+              ],
+              [
+                42,
+                112
+              ]
+            ],
+            "stroke": "#666666",
+            "stroke_width": 2,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "panel",
+            "kind": "rect",
+            "points": [
+              [
+                10,
+                24
+              ],
+              [
+                34,
+                24
+              ],
+              [
+                34,
+                48
+              ],
+              [
+                10,
+                48
+              ]
+            ],
+            "fill": "#2288bb",
+            "stroke": "#888888",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_a",
+            "kind": "line",
+            "points": [
+              [
+                11,
+                25
+              ],
+              [
+                33,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_b",
+            "kind": "line",
+            "points": [
+              [
+                33,
+                25
+              ],
+              [
+                11,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "connector",
+            "kind": "line",
+            "points": [
+              [
+                34,
+                36
+              ],
+              [
+                50,
+                36
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "linkage",
+            "kind": "line",
+            "points": [
+              [
+                42,
+                46
+              ],
+              [
+                62,
+                26
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [
+                "joint"
+              ],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "joint",
+            "kind": "circle",
+            "points": [
+              [
+                52,
+                36
+              ]
+            ],
+            "radius": 3,
+            "fill": "white",
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "shaft",
+            "kind": "line",
+            "points": [
+              [
+                105,
+                8
+              ],
+              [
+                105,
+                60
+              ]
+            ],
+            "stroke": "#cc2255",
+            "stroke_width": 2
+          },
+          {
+            "id": "head",
+            "kind": "polygon",
+            "points": [
+              [
+                99,
+                60
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                105,
+                73
+              ]
+            ],
+            "fill": "#cc2255"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "composition_04",
+      "width": 144,
+      "height": 144,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\" stroke=\"#888888\" stroke-width=\"1\"/><line x1=\"11\" y1=\"25\" x2=\"33\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"33\" y1=\"25\" x2=\"11\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"34\" y1=\"36\" x2=\"50\" y2=\"36\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"42\" y1=\"46\" x2=\"62\" y2=\"26\" stroke=\"#888888\" stroke-width=\"1.5\"/><circle cx=\"52\" cy=\"36\" r=\"3\" fill=\"white\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"105\" y1=\"8\" x2=\"105\" y2=\"60\" stroke=\"#55aa33\" stroke-width=\"2\"/><polygon points=\"99,60 111,60 105,73\" fill=\"#55aa33\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect id=\"wrong-arrow\" x=\"103\" y=\"8\" width=\"4\" height=\"65\" fill=\"#55aa33\"/><rect id=\"incomplete-panel\" x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\"/><rect id=\"extra\" x=\"55\" y=\"103\" width=\"16\" height=\"18\" fill=\"#444444\"/></svg>",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            8,
+            22,
+            28,
+            28
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            12,
+            26,
+            20,
+            20
+          ]
+        },
+        {
+          "name": "connector_joint",
+          "box": [
+            34,
+            30,
+            24,
+            13
+          ]
+        },
+        {
+          "name": "linkage",
+          "box": [
+            40,
+            24,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "shaft",
+          "box": [
+            101,
+            6,
+            8,
+            53
+          ]
+        },
+        {
+          "name": "head",
+          "box": [
+            97,
+            58,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "existing_circle",
+          "box": [
+            108,
+            100,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "existing_line",
+          "box": [
+            14,
+            109,
+            30,
+            6
+          ]
+        },
+        {
+          "name": "no_extra_object",
+          "box": [
+            51,
+            99,
+            23,
+            25
+          ]
+        }
+      ],
+      "description": "Ein blaues Quadrat mit hellen Diagonalen, Anschluss und Gelenkgestänge; daneben ein farbiger Pfeil mit langem Schaft und dreieckigem Kopf. Unten ein violetter Kreis und eine kurze graue Linie.",
+      "annotation": {
+        "schema": "independent_segment_scene_v1",
+        "size": [
+          144,
+          144
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.75,
+          "color": 0,
+          "stroke_width": 0.05
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                144,
+                0
+              ],
+              [
+                144,
+                144
+              ],
+              [
+                0,
+                144
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "context_circle",
+            "kind": "circle",
+            "points": [
+              [
+                120,
+                112
+              ]
+            ],
+            "radius": 10,
+            "fill": "#9944cc"
+          },
+          {
+            "id": "context_line",
+            "kind": "line",
+            "points": [
+              [
+                16,
+                112
+              ],
+              [
+                42,
+                112
+              ]
+            ],
+            "stroke": "#666666",
+            "stroke_width": 2,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "panel",
+            "kind": "rect",
+            "points": [
+              [
+                10,
+                24
+              ],
+              [
+                34,
+                24
+              ],
+              [
+                34,
+                48
+              ],
+              [
+                10,
+                48
+              ]
+            ],
+            "fill": "#2288bb",
+            "stroke": "#888888",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_a",
+            "kind": "line",
+            "points": [
+              [
+                11,
+                25
+              ],
+              [
+                33,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_b",
+            "kind": "line",
+            "points": [
+              [
+                33,
+                25
+              ],
+              [
+                11,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "connector",
+            "kind": "line",
+            "points": [
+              [
+                34,
+                36
+              ],
+              [
+                50,
+                36
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "linkage",
+            "kind": "line",
+            "points": [
+              [
+                42,
+                46
+              ],
+              [
+                62,
+                26
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [
+                "joint"
+              ],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "joint",
+            "kind": "circle",
+            "points": [
+              [
+                52,
+                36
+              ]
+            ],
+            "radius": 3,
+            "fill": "white",
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "shaft",
+            "kind": "line",
+            "points": [
+              [
+                105,
+                8
+              ],
+              [
+                105,
+                60
+              ]
+            ],
+            "stroke": "#55aa33",
+            "stroke_width": 2
+          },
+          {
+            "id": "head",
+            "kind": "polygon",
+            "points": [
+              [
+                99,
+                60
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                105,
+                73
+              ]
+            ],
+            "fill": "#55aa33"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "composition_05",
+      "width": 144,
+      "height": 144,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect x=\"10\" y=\"24\" width=\"24\" height=\"24\" fill=\"#2288bb\" stroke=\"#888888\" stroke-width=\"1\"/><line x1=\"11\" y1=\"25\" x2=\"33\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"33\" y1=\"25\" x2=\"11\" y2=\"47\" stroke=\"#eeeeee\" stroke-width=\"1\"/><line x1=\"34\" y1=\"36\" x2=\"50\" y2=\"36\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"42\" y1=\"46\" x2=\"62\" y2=\"26\" stroke=\"#888888\" stroke-width=\"1.5\"/><circle cx=\"52\" cy=\"36\" r=\"3\" fill=\"white\" stroke=\"#888888\" stroke-width=\"1.5\"/><line x1=\"105\" y1=\"8\" x2=\"105\" y2=\"60\" stroke=\"#aa6611\" stroke-width=\"2\"/><polygon points=\"99,60 111,60 105,73\" fill=\"#aa6611\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"144\" height=\"144\" viewBox=\"0 0 144 144\"><rect width=\"144\" height=\"144\" fill=\"white\"/><circle id=\"keep-circle\" cx=\"120\" cy=\"112\" r=\"10\" fill=\"#9944cc\"/><line id=\"keep-line\" x1=\"16\" y1=\"112\" x2=\"42\" y2=\"112\" stroke=\"#666666\" stroke-width=\"2\"/><rect id=\"extra\" x=\"55\" y=\"103\" width=\"16\" height=\"18\" fill=\"#444444\"/></svg>",
+      "regions": [
+        {
+          "name": "panel",
+          "box": [
+            8,
+            22,
+            28,
+            28
+          ]
+        },
+        {
+          "name": "cross",
+          "box": [
+            12,
+            26,
+            20,
+            20
+          ]
+        },
+        {
+          "name": "connector_joint",
+          "box": [
+            34,
+            30,
+            24,
+            13
+          ]
+        },
+        {
+          "name": "linkage",
+          "box": [
+            40,
+            24,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "shaft",
+          "box": [
+            101,
+            6,
+            8,
+            53
+          ]
+        },
+        {
+          "name": "head",
+          "box": [
+            97,
+            58,
+            16,
+            17
+          ]
+        },
+        {
+          "name": "existing_circle",
+          "box": [
+            108,
+            100,
+            24,
+            24
+          ]
+        },
+        {
+          "name": "existing_line",
+          "box": [
+            14,
+            109,
+            30,
+            6
+          ]
+        },
+        {
+          "name": "no_extra_object",
+          "box": [
+            51,
+            99,
+            23,
+            25
+          ]
+        }
+      ],
+      "description": "Ein blaues Quadrat mit hellen Diagonalen, Anschluss und Gelenkgestänge; daneben ein farbiger Pfeil mit langem Schaft und dreieckigem Kopf. Unten ein violetter Kreis und eine kurze graue Linie.",
+      "annotation": {
+        "schema": "independent_segment_scene_v1",
+        "size": [
+          144,
+          144
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.75,
+          "color": 0,
+          "stroke_width": 0.05
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                144,
+                0
+              ],
+              [
+                144,
+                144
+              ],
+              [
+                0,
+                144
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "context_circle",
+            "kind": "circle",
+            "points": [
+              [
+                120,
+                112
+              ]
+            ],
+            "radius": 10,
+            "fill": "#9944cc"
+          },
+          {
+            "id": "context_line",
+            "kind": "line",
+            "points": [
+              [
+                16,
+                112
+              ],
+              [
+                42,
+                112
+              ]
+            ],
+            "stroke": "#666666",
+            "stroke_width": 2,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "panel",
+            "kind": "rect",
+            "points": [
+              [
+                10,
+                24
+              ],
+              [
+                34,
+                24
+              ],
+              [
+                34,
+                48
+              ],
+              [
+                10,
+                48
+              ]
+            ],
+            "fill": "#2288bb",
+            "stroke": "#888888",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_a",
+            "kind": "line",
+            "points": [
+              [
+                11,
+                25
+              ],
+              [
+                33,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "diagonal_b",
+            "kind": "line",
+            "points": [
+              [
+                33,
+                25
+              ],
+              [
+                11,
+                47
+              ]
+            ],
+            "stroke": "#eeeeee",
+            "stroke_width": 1
+          },
+          {
+            "id": "connector",
+            "kind": "line",
+            "points": [
+              [
+                34,
+                36
+              ],
+              [
+                50,
+                36
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "linkage",
+            "kind": "line",
+            "points": [
+              [
+                42,
+                46
+              ],
+              [
+                62,
+                26
+              ]
+            ],
+            "stroke": "#888888",
+            "stroke_width": 1.5,
+            "representation": {
+              "mode": "collinear_segments",
+              "occluders": [
+                "joint"
+              ],
+              "max_segments": 8,
+              "join_tolerance": 0.05,
+              "collinearity": 0.1,
+              "hidden_geometry": "unverified_if_omitted"
+            }
+          },
+          {
+            "id": "joint",
+            "kind": "circle",
+            "points": [
+              [
+                52,
+                36
+              ]
+            ],
+            "radius": 3,
+            "fill": "white",
+            "stroke": "#888888",
+            "stroke_width": 1.5
+          },
+          {
+            "id": "shaft",
+            "kind": "line",
+            "points": [
+              [
+                105,
+                8
+              ],
+              [
+                105,
+                60
+              ]
+            ],
+            "stroke": "#aa6611",
+            "stroke_width": 2
+          },
+          {
+            "id": "head",
+            "kind": "polygon",
+            "points": [
+              [
+                99,
+                60
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                105,
+                73
+              ]
+            ],
+            "fill": "#aa6611"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoint_on_boundary",
+            "objects": [
+              "shaft",
+              "head"
+            ],
+            "tolerance": 0.3
+          },
+          {
+            "kind": "endpoints_on_boundaries",
+            "objects": [
+              "connector",
+              "panel"
+            ],
+            "other": "joint",
+            "tolerance": 1
+          },
+          {
+            "kind": "crosses",
+            "objects": [
+              "diagonal_a",
+              "diagonal_b"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_a",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "diagonal_b",
+              "panel"
+            ]
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "joint",
+              "linkage"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "seconds": 5,
+  "max_probes": 32,
+  "files": {
+    "inputs/imageCompositeConverterFallbackStructure.py": "e8f3c74e2ff21b735d124abb5a02fcc96fa5eda0aeacd2c824995f4df840b952",
+    "inputs/imageCompositeConverterFallbackGroups.py": "d6b75dc5f886e4dbeb2ed270f7de013003e9266f227914398ba0f84717afdad5",
+    "inputs/imageCompositeConverterVectorPolish.py": "bb2a78eebd2ad2f0aeedf9a590dd9a31012959cf784e764c1b0dcff8a392950b",
+    "inputs/imageCompositeConverterFallbackComposition.py": "58b41a503b7094fe123800d42c9ed611fb5f9befa22a44a92b7adc94bbc58b03",
+    "inputs/composition_00.png": "1cc0e9576c2c44a6ce638a8129ddbc24be788fdb3d3587d49860a5c9ca8011a9",
+    "inputs/composition_01.png": "7863bd0870f269111cde72c8236a8b58cde6737c0c4c7bb81a6e2046bc7e3392",
+    "inputs/composition_02.png": "f602095ee484d6968799b2abb30b3e5499da04ee1ae49000a2bdc1c4a111373e",
+    "inputs/composition_03.png": "1cc0e9576c2c44a6ce638a8129ddbc24be788fdb3d3587d49860a5c9ca8011a9",
+    "inputs/composition_04.png": "7863bd0870f269111cde72c8236a8b58cde6737c0c4c7bb81a6e2046bc7e3392",
+    "inputs/composition_05.png": "f602095ee484d6968799b2abb30b3e5499da04ee1ae49000a2bdc1c4a111373e"
+  },
+  "checker_seal_sha256": "63aa6ac4b4351cc0689c92ebc829289a94272ec7b077a2b5be67dd6fd2e3411c",
+  "composition_sha256": "9a15455ccc782d58789dd2a5f93c3ce201b4d1d0f710a09ae1000b5111be0fa2",
+  "real_reserves_executed": false,
+  "model_promotions": 0
+}

@@ -15,7 +15,7 @@ import time
 import xml.etree.ElementTree as ET
 
 from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
-from src.iCCModules.imageCompositeConverterDashedRectangles import normalize_dashed_rectangles
+from src.iCCModules.imageCompositeConverterDashedRectangles import normalize_dashed_rectangles, normalize_dashed_lines
 
 _INPROCESS_RENDER_COUNT = 0
 _INPROCESS_GC_PERIOD = 25
@@ -799,6 +799,7 @@ def render_svg_to_numpy_inprocess(
 
     renderer_svg = inline_simple_svg_styles(svg_string)
     renderer_svg = normalize_dashed_rectangles(renderer_svg)
+    renderer_svg = normalize_dashed_lines(renderer_svg)
     renderer_svg = _resolve_local_gradient_references(renderer_svg)
     renderer_svg = _expand_rect_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(renderer_svg)

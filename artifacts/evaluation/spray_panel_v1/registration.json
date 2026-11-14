@@ -1,0 +1,318 @@
+{
+  "details": [
+    {
+      "component": "background",
+      "normalized_mse": 0.0001036212225767293,
+      "passed": true
+    },
+    {
+      "component": "left_rail",
+      "normalized_mse": 0.000501657835476812,
+      "passed": true
+    },
+    {
+      "component": "dashed_frame",
+      "normalized_mse": 0.0007127891758802946,
+      "passed": true
+    },
+    {
+      "component": "nozzle_1",
+      "normalized_mse": 0.0003762085807452974,
+      "passed": true
+    },
+    {
+      "component": "nozzle_2",
+      "normalized_mse": 0.0004966750679937916,
+      "passed": true
+    },
+    {
+      "component": "nozzle_3",
+      "normalized_mse": 0.0003602602987454967,
+      "passed": true
+    },
+    {
+      "component": "nozzle_4",
+      "normalized_mse": 0.0004992381847437595,
+      "passed": true
+    },
+    {
+      "component": "nozzle_5",
+      "normalized_mse": 0.0003659561137454256,
+      "passed": true
+    },
+    {
+      "component": "spray_1",
+      "normalized_mse": 0.0004413083957150719,
+      "passed": true
+    },
+    {
+      "component": "spray_2",
+      "normalized_mse": 0.00035159930946619325,
+      "passed": true
+    },
+    {
+      "component": "spray_3",
+      "normalized_mse": 0.0003218219236945067,
+      "passed": true
+    },
+    {
+      "component": "spray_4",
+      "normalized_mse": 0.00033456212165758266,
+      "passed": true
+    },
+    {
+      "component": "spray_5",
+      "normalized_mse": 0.0004021077865979148,
+      "passed": true
+    }
+  ],
+  "error": 3.2659375,
+  "evaluations": 2307,
+  "initial_error": 7.593958333333333,
+  "parameters": {
+    "background": [
+      0.5,
+      0.4375,
+      39.0,
+      79.125,
+      1.0,
+      142.0,
+      197.45999999999998,
+      255.0,
+      195.12666666666667,
+      14.375,
+      0.25
+    ],
+    "frame": [
+      21.40625,
+      3.25,
+      14.0,
+      71.96875,
+      0.7,
+      131.0,
+      1.92360450563204,
+      0.48090112640800986,
+      2.291442428035044
+    ],
+    "nozzles": [
+      [
+        6.499999999999999,
+        2.0,
+        1.0,
+        1.0,
+        139.4
+      ],
+      [
+        23.3125,
+        2.0,
+        1.5,
+        1.5,
+        164.2
+      ],
+      [
+        39.5,
+        2.0625,
+        0.9375,
+        1.0,
+        135.2
+      ],
+      [
+        56.5,
+        2.0,
+        1.0,
+        1.0,
+        138.4
+      ],
+      [
+        72.875,
+        2.1875,
+        1.0,
+        1.8125,
+        150.8
+      ]
+    ],
+    "rail": [
+      0.875,
+      5.125,
+      4.0,
+      74.5,
+      133.5
+    ],
+    "sprays": [
+      [
+        8.25,
+        8.25,
+        17.1875,
+        7.75,
+        6.6000000000000005,
+        7.625,
+        6.7250000000000005,
+        2.0425,
+        0.7125,
+        184.0
+      ],
+      [
+        8.5,
+        24.125,
+        17.125,
+        7.25,
+        6.6000000000000005,
+        7.3125,
+        6.6625000000000005,
+        2.105,
+        1.15,
+        201.0
+      ],
+      [
+        8.0625,
+        40.0625,
+        17.0625,
+        7.875,
+        6.6000000000000005,
+        7.8125,
+        6.5375000000000005,
+        2.0425,
+        1.0875,
+        202.0
+      ],
+      [
+        8.375,
+        55.9375,
+        17.1875,
+        7.4375,
+        6.7250000000000005,
+        7.5,
+        6.5375000000000005,
+        2.0425,
+        1.15,
+        202.0
+      ],
+      [
+        8.3125,
+        71.75,
+        17.25,
+        7.5625,
+        6.7250000000000005,
+        7.5,
+        6.4750000000000005,
+        2.0425,
+        0.9,
+        194.0
+      ]
+    ]
+  },
+  "quality": {
+    "edge_alignment": 0.9273174405097961,
+    "foreground_iou": 0.992289899768697,
+    "foreground_mse": 0.0003151388664264232,
+    "normalized_mse": 0.0003520905156619847,
+    "passed": true
+  },
+  "source": "raster_spray_panel_v1",
+  "stages": [
+    {
+      "completed": true,
+      "component": "background",
+      "evaluations": 223,
+      "initial_local_mse": 31.28501850769531,
+      "local_mse": 13.824079485680889,
+      "seconds": 0.812
+    },
+    {
+      "completed": true,
+      "component": "left_rail",
+      "evaluations": 89,
+      "initial_local_mse": 63.71052631578947,
+      "local_mse": 38.973684210526315,
+      "seconds": 0.359
+    },
+    {
+      "completed": true,
+      "component": "dashed_frame",
+      "evaluations": 120,
+      "initial_local_mse": 86.25378787878788,
+      "local_mse": 46.34911616161616,
+      "seconds": 0.797
+    },
+    {
+      "completed": true,
+      "component": "nozzle_1",
+      "evaluations": 53,
+      "initial_local_mse": 167.57407407407408,
+      "local_mse": 89.31481481481481,
+      "seconds": 0.484
+    },
+    {
+      "completed": true,
+      "component": "nozzle_2",
+      "evaluations": 48,
+      "initial_local_mse": 150.0,
+      "local_mse": 91.5925925925926,
+      "seconds": 0.453
+    },
+    {
+      "completed": true,
+      "component": "nozzle_3",
+      "evaluations": 55,
+      "initial_local_mse": 192.90740740740742,
+      "local_mse": 103.20370370370371,
+      "seconds": 0.563
+    },
+    {
+      "completed": true,
+      "component": "nozzle_4",
+      "evaluations": 55,
+      "initial_local_mse": 187.85185185185185,
+      "local_mse": 97.9074074074074,
+      "seconds": 0.593
+    },
+    {
+      "completed": true,
+      "component": "nozzle_5",
+      "evaluations": 96,
+      "initial_local_mse": 135.8148148148148,
+      "local_mse": 84.25925925925925,
+      "seconds": 0.906
+    },
+    {
+      "completed": true,
+      "component": "spray_1",
+      "evaluations": 255,
+      "initial_local_mse": 78.41176470588235,
+      "local_mse": 28.69607843137255,
+      "seconds": 2.453
+    },
+    {
+      "completed": true,
+      "component": "spray_2",
+      "evaluations": 252,
+      "initial_local_mse": 103.0,
+      "local_mse": 22.862745098039216,
+      "seconds": 2.25
+    },
+    {
+      "completed": true,
+      "component": "spray_3",
+      "evaluations": 244,
+      "initial_local_mse": 131.30392156862746,
+      "local_mse": 21.529411764705884,
+      "seconds": 2.156
+    },
+    {
+      "completed": true,
+      "component": "spray_4",
+      "evaluations": 267,
+      "initial_local_mse": 108.22549019607843,
+      "local_mse": 21.754901960784313,
+      "seconds": 2.172
+    },
+    {
+      "completed": true,
+      "component": "spray_5",
+      "evaluations": 261,
+      "initial_local_mse": 81.45588235294117,
+      "local_mse": 26.147058823529413,
+      "seconds": 1.968
+    }
+  ]
+}
