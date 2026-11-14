@@ -1,5 +1,13 @@
 # ImageConverter
 
+Die Weboberfläche nutzt nach einem fehlgeschlagenen oder unvollständigen ersten
+Versuch die verbleibende Profilzeit für einen elementweisen Vektoraufbau
+(45/120/240 Sekunden insgesamt). Verbesserte Zwischenstände erscheinen bereits
+während der Suche. Beim Zeitlimit oder Abbrechen bleibt der beste vorhandene
+Vektorentwurf erhalten. Widersprüche zwischen Bild und Beschreibung werden als
+Warnung angezeigt; ein eingebettetes Originalbild gilt weiterhin nicht als
+Vektorisierung. Siehe [Prüfnachweis](artifacts/evaluation/gui_element_recovery_2026-11-14/README.md).
+
 [Form- und Farbreferenzen](docs/similarity_references.md) lassen sich direkt in
 der Bildbeschreibung kombinieren: `Form ähnlich wie …`, `Farben ähnlich wie …`
 oder `Farbverlauf ähnlich wie …`. Eigene Angaben und unterstützte Ausnahmen

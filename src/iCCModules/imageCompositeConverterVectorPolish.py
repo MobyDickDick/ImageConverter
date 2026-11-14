@@ -10,7 +10,8 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality, preferred_quality
 
 
-def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mode=None, color_order='BGR'):
+def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mode=None, color_order='BGR',
+                         acceptance_fn=None):
     structure_mode = structure_mode or os.environ.get('ICC_FALLBACK_STRUCTURE_MODE', 'combined')
     if structure_mode not in {'off', 'primitives', 'lines', 'combined', 'legacy_combined', 'groups'}:
         raise ValueError('Unknown fallback structure mode')
@@ -39,7 +40,9 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     structure = None
     # Even a tiny globally cheap missing line needs exploration. Exact/near-exact
     # incumbents retain their bytes and the established inexpensive early exit.
-    if preferred_quality(pixel_quality(image, initial)) and (structure_mode == 'off' or np.max(abs(image.astype(float)-initial)) < 35):
+    if (preferred_quality(pixel_quality(image, initial))
+            and (acceptance_fn is None or acceptance_fn(svg))
+            and (structure_mode == 'off' or np.max(abs(image.astype(float)-initial)) < 35)):
         return None
     if structure_mode != 'off':
         from src.iCCModules.imageCompositeConverterFallbackStructure import explore_structures
@@ -129,7 +132,7 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     def satisfactory(p, measured):
         try:
             validate_svg_assertions(measured[2], assertions)
-            return True
+            return acceptance_fn is None or acceptance_fn(measured[2])
         except ValueError:
             return False
 

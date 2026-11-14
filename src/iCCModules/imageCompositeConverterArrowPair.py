@@ -19,16 +19,17 @@ def _runs(indices):
     return [part for part in np.split(indices, np.flatnonzero(np.diff(indices) > 1)+1) if len(part)]
 
 
-def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
+def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, draft=False):
+    """Fit observed primitives; draft mode cannot certify description/quality."""
     result = _fit_arrow_pair(width, height, description=description, image=image,
-                             render_fn=render_fn, error_fn=error_fn, recover_weak=False)
+                             render_fn=render_fn, error_fn=error_fn, recover_weak=False, draft=draft)
     if result is not None:
         return result
     return _fit_arrow_pair(width, height, description=description, image=image,
-                           render_fn=render_fn, error_fn=error_fn, recover_weak=True)
+                           render_fn=render_fn, error_fn=error_fn, recover_weak=True, draft=draft)
 
 
-def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, recover_weak):
+def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, recover_weak, draft=False):
     text = ' '.join(normalize_description(description).casefold().split())
     if not looksLikeDualArrowDescriptionImpl(text):
         return None
@@ -134,25 +135,25 @@ def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, r
     order = np.argsort(centers)
     for side, index in zip(('links', 'rechts'), order):
         color = ('blau', 'rot')[index]
-        if re.search(side+r'\s*[:,]?\s*(?:ist\s+)?'+('rot' if color == 'blau' else 'blau')+r'(?:e[nrsm]?)?\b', text):
+        if not draft and re.search(side+r'\s*[:,]?\s*(?:ist\s+)?'+('rot' if color == 'blau' else 'blau')+r'(?:e[nrsm]?)?\b', text):
             return None
         # Adjectival subjects can name both primitives before their color:
         # "Die linke Linie und das linke Dreieck ist rot."
         adjective = 'linke' if side == 'links' else 'rechte'
         subject_colors = re.findall(
             r'\b'+adjective+r'[nrsm]?\s+(?:linie|dreieck)\b[^.;!?]*?\b(?:ist|sind)\s+(rot|blau)\b', text)
-        if any(stated != color for stated in subject_colors):
+        if not draft and any(stated != color for stated in subject_colors):
             return None
         directions = [direction for stated_side, direction in head_directions
                       if stated_side.startswith(side[:-1])]
         expected = 'unten' if geometries[index*8+5] > geometries[index*8+6] else 'oben'
-        if directions != [expected]:
+        if not draft and directions != [expected]:
             return None
     wants_bar = 'horizontal' in text or 'waagerecht' in text
-    if wants_bar != bool(bars):
+    if not draft and wants_bar != bool(bars):
         return None
     bar_colors = horizontal_bar_colors(description)
-    if bars and bar_colors and bar_colors != {('blue', 'red')[bars[0][0]]}:
+    if not draft and bars and bar_colors and bar_colors != {('blue', 'red')[bars[0][0]]}:
         return None
     foreground = np.min(pixels, axis=2) < 220
     supported = cv2.dilate((masks[0] | masks[1]).astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
@@ -200,11 +201,12 @@ def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, r
 
     result = _register(parameters, geometry_count, build, valid, arr, render_fn, error_fn,
                        'raster_arrow_pair_v1', loss_fn=loss,
+                       allow_portfolio=not draft,
                        refinement_steps=(1., .5, .25, .125, .0625, .03125))
     if result is None:
         return None
     quality = pixel_quality(arr, result['rendered'])
-    if not quality or not quality['passed']:
+    if not draft and (not quality or not quality['passed']):
         return None
     result['quality'] = quality
     return result

@@ -79,10 +79,13 @@ function renderJob(job, select = false) {
   document.querySelector(".comparison").classList.toggle("with-sample", Boolean(job.sample));
   const sampleUrl = `/api/jobs/${job.id}/sample`;
   if (job.sample && $("sample-image").getAttribute("src") !== sampleUrl) $("sample-image").src = sampleUrl;
-  $("result-image").hidden = !job.result;
-  $("result-empty").hidden = job.result;
+  const showingPreview = Boolean(job.preview && job.status === "running");
+  const showingResult = Boolean(job.result || showingPreview);
+  $("result-image").hidden = !showingResult;
+  $("result-empty").hidden = showingResult;
   const resultUrl = `/api/jobs/${job.id}/result`;
-  if (job.result && $("result-image").getAttribute("src") !== resultUrl) $("result-image").src = resultUrl;
+  const displayUrl = showingPreview ? `/api/jobs/${job.id}/preview?v=${job.preview_revision}` : resultUrl;
+  if (showingResult && $("result-image").getAttribute("src") !== displayUrl) $("result-image").src = displayUrl;
   $("result-empty").querySelector("strong").textContent = job.status === "running" ? (job.sample ? "Dein Sample wird verbessert …" : "Dein SVG entsteht …") : "Platz für dein SVG";
   $("result-empty").querySelector("p").textContent = job.status === "running" ? "Die Suche läuft. Du kannst den Fortschritt im Protokoll verfolgen." : "Nach der Konvertierung siehst du hier das Ergebnis.";
   $("status").textContent = job.message;
@@ -103,7 +106,7 @@ function renderJob(job, select = false) {
     const percent = report.initial_mse > 0 ? Math.max(0, (1 - report.final_mse / report.initial_mse) * 100) : 0;
     $("sample-metrics").textContent = `Sample-Vergleich: ${percent.toFixed(1)} % weniger mittlerer Pixelfehler · ${report.evaluations} geprüfte Anpassungen. Vorhandene Formen werden optimiert.`;
   }
-  $("result-meta").textContent = job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
+  $("result-meta").textContent = showingPreview ? "SVG · Elementweiser Aufbau läuft" : job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
   controls();
   zoom();
 }

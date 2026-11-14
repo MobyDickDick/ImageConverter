@@ -18,6 +18,35 @@ function element() {
     querySelectorAll() {return this.children;}};
 }
 
+test('incremental native previews refresh while conversion remains active', () => {
+  const elements = new Map();
+  const get = id => {
+    if (!elements.has(id)) elements.set(id, element());
+    return elements.get(id);
+  };
+  const context = vm.createContext({
+    document: {getElementById: get, createElement: element, querySelector: element},
+    window: {location: {search: ''}, addEventListener() {}}, URLSearchParams,
+    setTimeout() {}, clearTimeout() {}, fetch: () => new Promise(() => {}),
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '../web/app.js'), 'utf8'), context);
+  const job = {id: 'c'.repeat(32), name: 'draft.png', status: 'running', description: 'Zwei Pfeile.',
+    width: 40, height: 140, quality: 'warning', preview: true, preview_revision: 1, result: false};
+  context.job = job;
+  vm.runInContext('renderJob(job)', context);
+  assert.equal(get('result-image').hidden, false);
+  assert.equal(get('result-empty').hidden, true);
+  assert.equal(get('save-actions').hidden, true);
+  assert.match(get('result-image').src, /\/preview\?v=1$/);
+  job.preview_revision = 2;
+  vm.runInContext('renderJob(job)', context);
+  assert.match(get('result-image').src, /\/preview\?v=2$/);
+  job.status = 'done'; job.result = true;
+  vm.runInContext('renderJob(job)', context);
+  assert.match(get('result-image').src, /\/result$/);
+  assert.equal(get('save-actions').hidden, false);
+});
+
 for (const parallel of [false, true]) {
   test(`manual conversion stays usable with background jobs (parallel server: ${parallel})`, async () => {
     const elements = new Map();

@@ -1,0 +1,49 @@
+{
+  "id": "d6dab0d0b8744222a88809bfa7ed2a03",
+  "name": "neutral-arrow-recovery.png",
+  "width": 40,
+  "height": 140,
+  "description": "Wie AC0020: zwei vertikale Striche links rot, rechts, blau, unten Dreiecke rot blau, links Spitze nach unten, rechts Spitze nach oben.\nBei ca. 33% eine rote horizontale Linie",
+  "status": "done",
+  "message": "Vektorentwurf elementweise erstellt. Bitte prüfen; die vollständige Qualitätsprüfung ist noch offen. Die beschriebene Pfeilrichtung links widerspricht dem Bild; der Entwurf folgt dem Original. Das Zeitbudget wurde ausgeschöpft.",
+  "result": true,
+  "quality": "warning",
+  "profile": "thorough",
+  "elapsed": 240.8,
+  "search_seed": 16582598073606978747,
+  "recovery": true,
+  "pixel_quality": {
+    "normalized_mse": 0.000152324209921062,
+    "foreground_mse": 0.001062558265402913,
+    "foreground_iou": 0.998641304347826,
+    "foreground_iou_binary": 0.998641304347826,
+    "edge_alignment": 0.8930338621139526,
+    "passed": true,
+    "observed_foreground_pixels": 735,
+    "output_foreground_pixels": 736
+  },
+  "description_error": "wrong_described_arrow_direction:left",
+  "description_validation_version": 2,
+  "recovery_report": {
+    "passed": false,
+    "model_confirmed": false,
+    "stop_reason": "time_limit",
+    "evaluations": 77320,
+    "revision": 27,
+    "pixel_quality": {
+      "normalized_mse": 0.000152324209921062,
+      "foreground_mse": 0.001062558265402913,
+      "foreground_iou": 0.998641304347826,
+      "foreground_iou_binary": 0.998641304347826,
+      "edge_alignment": 0.8930338621139526,
+      "passed": true
+    },
+    "description_error": "wrong_described_arrow_direction:left",
+    "normalized_mse": 0.00015232419765291738,
+    "elapsed_seconds": 237.36000000004424,
+    "candidate_evaluations": 77314
+  },
+  "evidence_scope": "GUI recovery draft; pixel pass with unresolved source-description direction conflict; no model approval",
+  "source_fixture": "artifacts/images_to_convert/AC0070_L.jpg",
+  "raw_run_directory": "jobs/d6dab0d0b8744222a88809bfa7ed2a03"
+}

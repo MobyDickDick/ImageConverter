@@ -229,6 +229,10 @@ class Jobs:
             job = dict(self.jobs[job_id])
             if job["status"] == "running":
                 job["elapsed"] = round(time.time() - job["started"], 1)
+            preview = folder / 'recovery.svg'
+            if preview.is_file():
+                job['preview_revision'] = preview.stat().st_mtime_ns
+                job['preview'] = True
             log = folder / "console.log"
             if log.exists():
                 with log.open("rb") as stream:
@@ -350,6 +354,7 @@ class Jobs:
         folder = self.folder(job_id)
         job = self.jobs[job_id]
         process = None
+        deadline = time.monotonic() + PROFILES[job['profile']][1]
         try:
             input_dir = folder / "input"
             input_dir.mkdir()
@@ -397,16 +402,26 @@ class Jobs:
                     self.processes[job_id] = process
                 try:
                     # Cancellation terminates the process tree and releases this wait.
-                    process.wait(timeout=maximum + 30)
+                    process.wait(timeout=max(.01, deadline-time.monotonic()))
                 except subprocess.TimeoutExpired:
                     with self.lock:
                         stop_process_tree(process)
-                        if job["status"] == "running":
-                            job.update(status="timeout", message="Zeitlimit erreicht. Ein neues Suchprofil kann helfen.")
+                        log.write('Zeitlimit erreicht; besten vorhandenen Vektorentwurf sichern.\n'.encode('utf-8'))
+                        log.flush()
+            with self.lock:
+                if job['status'] != 'running':
+                    return
+                # Collect into a temporary snapshot: a failed first attempt
+                # must not appear terminal while Plan B still has search time.
+                collected = dict(job)
+                collect = collect_sample_result if job.get('sample') else collect_result
+                collect(folder, collected, process.returncode)
+                needs_recovery = collected.get('quality') != 'passed' or not collected.get('result')
+            if needs_recovery and deadline-time.monotonic() > .1:
+                self.recover_result(job_id, collected, deadline, environment, options)
             with self.lock:
                 if job["status"] == "running":
-                    collect = collect_sample_result if job.get("sample") else collect_result
-                    collect(folder, job, process.returncode)
+                    job.update(collected)
                     previous = self.jobs.get(job.get('previous_job_id'))
                     if job.get('result') and previous and previous.get('result'):
                         same = ((folder / 'result.svg').read_bytes() ==
@@ -434,6 +449,46 @@ class Jobs:
 
             if self.on_result is not None:
                 self.on_result(job_id)
+
+    def recover_result(self, job_id: str, collected: dict, deadline: float, environment: dict, options: dict) -> None:
+        folder = self.folder(job_id)
+        job = self.jobs[job_id]
+        description = folder / 'recovery-description.txt'
+        from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+        resolved = resolve_similarity_description(job['description'], catalog_descriptions(), base_name=getBaseNameFromFileImpl)
+        description.write_text(resolved.text, encoding='utf-8')
+        command = [sys.executable, '-u', '-m', 'src.imageConverterRecovery',
+                   '--source', str(folder/'source.png'), '--output', str(folder/'recovery.svg'),
+                   '--description', str(description), '--seed', str(job['search_seed']),
+                   '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
+        if collected.get('result'):
+            command += ['--candidate', str(folder/'result.svg')]
+        with (folder/'console.log').open('ab') as log:
+            with self.lock:
+                if job['status'] != 'running':
+                    return
+                job.update(message='Erster Versuch unvollständig. Verbleibende Zeit wird für den elementweisen Vektoraufbau genutzt.',
+                           recovery=True, quality='warning')
+                self.save(job)
+                process = subprocess.Popen(command, cwd=ROOT, env=environment,
+                    stdout=log, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, **options)
+                self.processes[job_id] = process
+            try:
+                process.wait(timeout=max(.01, deadline-time.monotonic()))
+            except subprocess.TimeoutExpired:
+                stop_process_tree(process)
+            except Exception:
+                stop_process_tree(process)
+                raise
+            finally:
+                # The worker atomically publishes improvements before the
+                # deadline. Keep them even after cancellation or termination.
+                collect_recovery_result(folder, collected,
+                    stop_reason='time_limit' if time.monotonic() >= deadline else 'worker_finished')
+                with self.lock:
+                    if job['status'] == 'cancelled' and collected.get('result'):
+                        job.update(collected)
+                        job.update(status='cancelled', message='Konvertierung abgebrochen. Der beste vorhandene Vektorentwurf bleibt erhalten.')
 
     def cancel(self, job_id: str) -> dict:
         with self.lock:
@@ -575,6 +630,48 @@ class Jobs:
                     self.cancel(job_id)
         for thread in self.threads:
             thread.join(timeout=20)
+
+
+def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> None:
+    """A completed native draft survives a killed recovery worker."""
+    result = folder/'recovery.svg'
+    try:
+        from src.imageConverterSample import prepare_sample
+        prepare_sample(result.read_bytes(), job['width'], job['height'])
+    except (OSError, ValueError, SyntaxError):
+        return
+    try:
+        report = json.loads(result.with_suffix('.json').read_text(encoding='utf-8'))
+        if not isinstance(report, dict):
+            report = {}
+    except (OSError, ValueError):
+        # Termination can fall between the atomic SVG and report writes. The
+        # actual saved vector is independently checked below and stays usable.
+        report = {}
+    quality = saved_svg_quality(folder/'source.png', result)
+    if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
+        return
+    previous_quality = job.get('pixel_quality') or {}
+    if (job.get('result') and previous_quality.get('normalized_mse', float('inf'))
+            < quality['normalized_mse']):
+        job['message'] = 'Der beste bisherige Vektorentwurf bleibt erhalten; bitte prüfen.'
+    else:
+        shutil.copyfile(result, folder/'result.svg')
+        error = result_description_error(result, job.get('description', ''))
+        message = 'Vektorentwurf elementweise erstellt. Bitte prüfen; die vollständige Qualitätsprüfung ist noch offen.'
+        if error.startswith('wrong_described_arrow_direction:'):
+            side = 'links' if error.endswith(':left') else 'rechts'
+            message += f' Die beschriebene Pfeilrichtung {side} widerspricht dem Bild; der Entwurf folgt dem Original.'
+        elif error:
+            message += ' Bild und Beschreibung stimmen noch nicht vollständig überein.'
+        job.update(status='done', result=True, quality='warning', pixel_quality=quality,
+                   description_error=error, message=message,
+                   description_validation_version=DESCRIPTION_VALIDATION_VERSION)
+        job.pop('result_rejection', None)
+    report['stop_reason'] = stop_reason
+    job['recovery_report'] = report
+    job['message'] += (' Das Zeitbudget wurde ausgeschöpft.' if stop_reason == 'time_limit'
+                       else ' Die elementweise Suche ist beendet.')
 
 
 def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
@@ -1009,8 +1106,9 @@ class Handler(BaseHTTPRequestHandler):
                     if not asset:
                         return self.json(job)
                     assets = {"source": ("source.png", "image/png"), "sample": ("sample.svg", "image/svg+xml"),
+                              "preview": ("recovery.svg", "image/svg+xml"),
                               "result": ("result.svg", "image/svg+xml"), "log": ("console.log", "text/plain; charset=utf-8")}
-                    if asset in assets and (asset not in {"result", "sample"} or job.get(asset)):
+                    if asset in assets and (asset not in {"result", "sample", "preview"} or job.get(asset)):
                         filename, mime = assets[asset]
                         download = "result.svg" if "download" in parse_qs(url.query) else None
                         return self.file(jobs.folder(job_id) / filename, mime, download)

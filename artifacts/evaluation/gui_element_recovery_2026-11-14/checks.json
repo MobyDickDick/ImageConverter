@@ -1,0 +1,22 @@
+{
+  "python": {
+    "arrow_pair_search_minimum_iteration_initialization": 76,
+    "fallback_structure_composition_groups_deadline": 82,
+    "gui": 63,
+    "gui_vector_recovery": 8,
+    "passed_total": 229,
+    "gui_environment_retry": "Four HTTP/process checks passed with local socket and process permissions; initial sandbox run had 59 passed and 4 environment failures."
+  },
+  "javascript": {
+    "app_background_and_incremental_preview": 3
+  },
+  "full_profile_replay": {
+    "profile": "thorough",
+    "search_budget_seconds": 240,
+    "elapsed_including_finalization_seconds": 240.8,
+    "result": "native_vector_draft",
+    "pixel_quality_passed": true,
+    "model_confirmed": false,
+    "description_error": "wrong_described_arrow_direction:left"
+  }
+}
