@@ -110,28 +110,41 @@ class CatalogQuality:
     def command(self, folder, force, cache):
         command = [sys.executable, '-m', 'tools.build_catalog_inventory', '--root', str(self.root),
                    '--output', str(folder/'report'), '--progress-file', str(folder/'progress.json')]
-        if cache.is_file():
+        if self.job.get('candidate'):
+            command += ['--update-manifest', str(self.report_folder()/'manifest.json'),
+                        '--filename', self.job['filename'], '--candidate', self.job['candidate']]
+        elif cache.is_file():
             command += ['--cache', str(cache)]
         if force:
             command.append('--force')
         return command
 
-    def start(self, force=False, *, owner=None):
+    def start(self, force=False, *, owner=None, filename=None, candidate=None):
         if type(force) is not bool:
             raise CatalogError('Ungültige Auswahl für die Neumessung.')
         with self.lock:
             if self.conversion_owner is not None and owner is not self.conversion_owner:
                 raise CatalogError('Der Hintergrunddienst aktualisiert die Qualitätsliste automatisch.', 409)
+            if candidate is not None and (owner is None or owner is not self.conversion_owner or not filename or force):
+                raise CatalogError('Ungültige Einzelprüfung.', 409)
             if self.closed:
                 raise CatalogError('Der Server wird beendet.', 409)
             if self.thread is not None and self.thread.is_alive():
                 raise CatalogError('Es läuft bereits eine Qualitätsprüfung.', 409)
             cache = self.report_folder()/'measurements.json'
+            if not cache.is_file():
+                metadata = read_json(self.report_folder()/'sources.json', {})
+                previous_cache = Path(metadata.get('measurement_cache', str(cache))).resolve()
+                if previous_cache.is_relative_to(self.root) or previous_cache.is_relative_to(self.directory):
+                    cache = previous_cache
             run_id = uuid.uuid4().hex
             folder = self.directory/run_id
             folder.mkdir()
             self.job = dict(id=run_id, status='running', started=time.time(), force=force,
                             message='Qualitätsprüfung wird vorbereitet. Die bisherige Liste bleibt verfügbar.')
+            if candidate is not None:
+                self.job.update(filename=filename, candidate=str(candidate),
+                                message=f'Prüfe nur das neue SVG für {filename} …')
             atomic_json(self.directory/'job.json', self.job)
             self.thread = threading.Thread(target=self._run, args=(folder, force, cache), daemon=True)
             self.thread.start()

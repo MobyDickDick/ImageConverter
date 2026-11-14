@@ -95,6 +95,9 @@ test('overview shows next image, live inspection and actual last SVG outcome', a
   assert.match(get('conversion-last-status').textContent,/Erfolgreich/);
   assert.match(get('conversion-last-metrics').textContent,/0.001000/);
   assert.equal(get('conversion-next-preview').children[0],nextImage);
+  service.inspection.progress = {completed:0,total:1,measured:0,cached:0};
+  await vm.runInContext('poll()',context);
+  assert.match(get('conversion-inspection-status').textContent,/Nur das neue SVG wird geprüft: 0\/1/);
   service.last_attempt.passed = false; service.last_attempt.result = false;
   await vm.runInContext('poll()',context);
   assert.match(get('conversion-last-status').textContent,/Nicht erfolgreich/);

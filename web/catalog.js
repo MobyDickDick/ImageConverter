@@ -105,7 +105,7 @@ async function loadList() {
   el('geometry-class').value = oldClass;
   const s = data.summary, counts = s.catalog_statuses || {};
   el('stats').replaceChildren(...[[s.catalog_bitmaps || 0,'Katalogbilder'],[counts.pixel_pass || 0,'Rastergates erfüllt'],[s.archived || 0,'Historisch archiviert'],[counts.pixel_fail || 0,'Rastergates verfehlt'],[(counts.no_svg || 0) + (counts.measurement_error || 0),'Ohne SVG / Messfehler']].map(([value,label]) => {const n=node('div',undefined,'stat');n.append(node('strong',value.toLocaleString('de-CH')),node('span',label));return n;}));
-  el('updated').textContent = s.generated_at ? 'Letzte vollständige Prüfung: ' + new Date(s.generated_at).toLocaleString('de-CH') : 'Noch keine vollständige Qualitätsliste vorhanden.';
+  el('updated').textContent = s.generated_at ? 'Letzte vollständige Prüfung: ' + new Date(s.full_generated_at || s.generated_at).toLocaleString('de-CH') + (s.measurement_scope === 'single_candidate' ? ` · Einzelprüfung ${s.updated_filename}: ${new Date(s.generated_at).toLocaleString('de-CH')}` : '') : 'Noch keine vollständige Qualitätsliste vorhanden.';
   lastReport = reportKey(s); render();
 }
 function showJob(job) {
@@ -150,7 +150,7 @@ function showConversionOverview(service) {
   el('conversion-last-metrics').textContent = last && m.mse !== null ? `MSE: ${m.mse.toFixed(6)} · Kanten: ${m.edge?.toFixed(4) ?? '—'} · IoU: ${m.iou?.toFixed(4) ?? '—'}` : '';
   const inspection = service.inspection, p = inspection?.progress || {};
   el('conversion-inspection-status').hidden = !inspection;
-  el('conversion-inspection-status').textContent = inspection ? `Vorhandene SVGs werden geprüft: ${p.completed ?? 0}/${p.total || '?'} Bilder · ${p.measured ?? 0} neue Paarprüfungen · ${p.cached ?? 0} wiederverwendet · seit ${Math.round(inspection.elapsed || 0)} s. Danach wird die Konvertierung fortgesetzt.` : '';
+  el('conversion-inspection-status').textContent = inspection ? `${p.total === 1 ? 'Nur das neue SVG wird geprüft' : 'Einmalige Bestandsaufnahme'}: ${p.completed ?? 0}/${p.total || '?'} Bilder · ${p.measured ?? 0} neue Paarprüfungen · ${p.cached ?? 0} wiederverwendet · seit ${Math.round(inspection.elapsed || 0)} s. Danach wird die Konvertierung fortgesetzt.` : '';
   const progress = el('conversion-inspection-progress'); progress.hidden = !inspection;
   if (p.total) {progress.max=p.total;progress.value=p.completed;} else progress.removeAttribute('value');
 }

@@ -35,7 +35,7 @@
         <button id="conversion-stop" class="secondary" disabled>Hintergrunddienst stoppen</button>
         <label>Suchprofil<select id="conversion-profile"><option value="quick">Schnell</option><option value="normal" selected>Normal</option><option value="thorough">Gründlich</option></select></label>
       </div>
-      <p class="hint">Wählt unter „Rastergates verfehlt“ jeweils das Bild mit dem kleinsten MSE des schlechteren Renderers. Nach drei erfolglosen Versuchen wird es zurückgestellt. Sind alle offenen Bilder zurückgestellt, beginnt automatisch eine neue Runde. Neue Ergebnisse werden geprüft und die Liste aktualisiert. Läuft auch bei geschlossenem Browser bis zum Stopp, Serverende oder bis keine bewertbaren offenen Bilder mehr vorhanden sind.</p>
+      <p class="hint">Arbeitet die gespeicherte, durchsuchbare Qualitätsliste ab: Unter „Rastergates verfehlt“ wird jeweils das Bild mit dem kleinsten MSE des schlechteren Renderers gewählt. Nach jedem Versuch wird nur das neue SVG geprüft und dessen Listeneintrag aktualisiert. Bestandene Bilder werden abgehakt. Nach drei erfolglosen Versuchen wird ein Bild bis zur nächsten Runde zurückgestellt. Eine vollständige Bestandsaufnahme ist nur nötig, wenn noch keine Liste vorliegt; für externe Änderungen die Qualitätsprüfung manuell starten. Läuft auch bei geschlossenem Browser bis zum Stopp, Serverende oder bis keine bewertbaren offenen Bilder mehr vorhanden sind.</p>
       <p id="conversion-status" role="status" aria-live="polite">Dienststatus wird geladen …</p>
       <p id="conversion-current"></p>
       <p id="conversion-inspection-status" role="status" hidden></p>

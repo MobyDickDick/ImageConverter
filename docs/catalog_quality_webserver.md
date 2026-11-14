@@ -64,7 +64,9 @@ Hintergrunddienst führt neue Versuche aus.
 ## Hintergrundkonvertierung
 
 In der Katalogansicht startet **Hintergrunddienst starten** einen Durchlauf.
-Zuerst wird die Qualitätsliste aktualisiert. Anschließend wird unter den
+Der Dienst lädt die gespeicherte, durchsuchbare Qualitätsliste und baut daraus
+einen nach Qualität sortierten Index im Speicher. Eine vollständige
+Bestandsaufnahme läuft nur, wenn noch keine Liste vorhanden ist. Unter den
 Katalogbildern mit **Rastergates verfehlt** jeweils der kleinste MSE des
 schlechteren Renderers gewählt; bei Gleichstand entscheidet der Dateiname.
 Bestandene und reservierte Bilder, Quellkonflikte, fehlende oder ungültige
@@ -86,16 +88,36 @@ Versuch zählt nicht als Fehlversuch.
 Jeder neue SVG-Kandidat bleibt unter
 `artifacts/converted_images/catalog_background_svgs/<job-id>/<bildname>.svg`
 erhalten, auch bei weiterhin ungenügender Qualität. Vorhandene Kandidaten
-bleiben erhalten. Nach jedem Versuch wird die vollständige Qualitätsliste
-mit Cachewiederverwendung aktualisiert. Nur die bestehende Prüfung mit beiden
+bleiben erhalten. Nach jedem Versuch wird ausschließlich der neue SVG-Kandidat
+gegen sein Original mit beiden Renderern gemessen. Andere Bilder und SVGs
+werden dabei weder eingelesen noch neu gemessen. Der gespeicherte Listeneintrag,
+die Gesamtzähler und der Qualitätsindex werden aktualisiert; bestandene Bilder
+sind damit abgehakt. Ohne erzeugtes SVG entfällt die Messung ganz. Die Oberfläche
+bleibt über Dateiname, Beschreibung, Qualitätsfilter und MSE-Sortierung durchsuchbar.
+Nur die bestehende Prüfung mit beiden
 Renderern entscheidet über **Rastergates erfüllt**.
+
+Für neue Dateien oder extern geänderte SVGs/Beschreibungen dient weiterhin
+**Qualitätsliste aktualisieren** als ausdrückliche Bestandsaufnahme. Die Liste
+zeigt das Datum der letzten vollständigen Prüfung getrennt von der letzten
+Einzelprüfung; unveränderte Kandidaten behalten ihr tatsächliches Messdatum.
+Der Cache der letzten vollständigen Prüfung bleibt für manuelle Bestandsaufnahmen
+verfügbar. Eine unterbrochene Einzelprüfung wird nach dem Neustart nachgeholt
+und ihr Versuch genau einmal in den Fehlversuchszähler übernommen.
+
+Die lokale Messung vom 14.11.2026 mit einer gespeicherten Liste von 1.787 Bildern
+benötigte für eine Einzelprüfung einschließlich Prozessstart und Berichtsausgabe
+1,77 Sekunden (ein SVG, beide Renderer). Das ist eine Einzelmessung; komplexe
+SVGs können mehr Zeit benötigen. Die frühere vollständige Katalogrunde vor
+jedem nächsten Bild entfällt.
 
 Die Oberfläche fragt den Status alle 1,5 Sekunden ab und zeigt aktuelles Bild,
 MSE, Konvertierungsdauer, Live-Protokoll, Rundennummer, Versuch 1–3 und
 zurückgestellte Bilder. Die letzten 200 Versuchsergebnisse seit dem Start
 bleiben in der Anzeige; die vollständigen Auftragsprotokolle bleiben gespeichert. Die Zähler und
-Katalogzeilen aktualisieren sich nach jedem vollständigen Prüfbericht.
-Die Dienstkarte zeigt auch während der vorbereitenden Qualitätsprüfung die
+Katalogzeilen aktualisieren sich nach jeder abgeschlossenen Einzelprüfung.
+Die Dienstkarte zeigt während der Einzelprüfung „Nur das neue SVG“ mit 0/1
+beziehungsweise 1/1. Bei einer erstmaligen Bestandsaufnahme zeigt sie die
 Anzahl geprüfter Bilder, Gesamtzahl, neue und wiederverwendete Paarprüfungen,
 Laufzeit, Fortschrittsbalken und das zugehörige Live-Prüfprotokoll.
 
@@ -139,6 +161,11 @@ Fortsetzung nach Stopp und Neustart, Live-Protokoll, unveränderte
 alte Kandidaten sowie Stopp während Wartezeit, Konvertierung und echter Prüfung.
 Ein vollständiger Berichtslauf erzeugt mit einem eingespeisten SVG-Kandidaten
 einen neuen Rasterpass durch die unveränderten MuPDF-/librsvg-Prüfprozesse.
+Zusätzliche Regressionen sichern den Start ohne Gesamtprüfung, die Wiederverwendung
+des Qualitätsindex, Versuche ohne SVG, genau eine Messung des neuen Kandidaten,
+unveränderte andere Katalogzeilen und das einmalige Nachtragen unterbrochener
+Versuche ab. Geänderte Quellen und neue Reservierungen werden vor der Einzelmessung
+zurückgewiesen.
 
 56 Regressionen bestehen: echter CLI-Prüfprozess mit anschließender
 Cachewiederverwendung, Prozessbaumabbruch, unveränderte frühere Liste,

@@ -96,14 +96,17 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
             bars.append((len(geometries)//8-1, [float(occupied[0]), by, float(occupied[-1]+1), bar_height]))
     if len(bars) > 1 or (geometries[5] > geometries[6]) == (geometries[13] > geometries[14]):
         return None
+    # Bind each head direction to the preceding side, not to every side word
+    # anywhere in its clause. A whole-motif translation can append "nach links"
+    # after "rechts Spitze nach oben" without an intervening full stop.
+    head_directions = re.findall(
+        r'\b(links|rechts)\b(?:(?!\b(?:links|rechts)\b)[^.,;])*?\bspitze nach (oben|unten)\b', text)
     order = np.argsort(centers)
     for side, index in zip(('links', 'rechts'), order):
         color = ('blau', 'rot')[index]
         if re.search(side+r'\s+(?:ist\s+)?'+('rot' if color == 'blau' else 'blau'), text):
             return None
-        directions = [match[1] for clause in re.split(r'[.,;]', text)
-                      if side in clause
-                      for match in [re.search(r'spitze nach (oben|unten)', clause)] if match]
+        directions = [direction for stated_side, direction in head_directions if stated_side == side]
         expected = 'unten' if geometries[index*8+5] > geometries[index*8+6] else 'oben'
         if directions != [expected]:
             return None

@@ -8,7 +8,7 @@ import pytest
 from src.iCCModules.imageCompositeConverterArrowPair import fit_arrow_pair
 from src.iCCModules.imageCompositeConverterDualArrowRuntime import runDualArrowBadgeIterationImpl
 from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
-from tools.run_plan_b_variations import render, measure_quality
+from tools.run_plan_b_variations import render, measure_quality, make_original_case, make_variations
 from tools.review_conversion_quality import normalized_mse
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -169,3 +169,51 @@ def test_thin_jpeg_shafts_keep_native_fit_instead_of_legacy_fallback(size):
     assert quality['satisfactory'], quality
     assert quality['complexity']['vector_element_count'] == 4
     assert quality['complexity']['embedded_raster_count'] == 0
+
+
+WORKBENCH_DESCRIPTION = ('zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, '
+                         'links Spitze nach unten, rechts Spitze nach oben')
+WORKBENCH_SOURCE = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="110" viewBox="0 0 30 110">'
+    '<rect x="4.495054" y="0.000000" width="1.035315" height="108.963981" fill="#2477b4"/>'
+    '<polygon points="5.000000,110.515152 1.161310,102.562500 8.838690,102.562500" fill="#2477b4"/>'
+    '<rect x="24.635673" y="0.000000" width="0.862745" height="102.127247" fill="#ea0707"/>'
+    '<polygon points="24.968750,102.112391 20.623682,110.875000 29.313818,110.875000" fill="#ea0707"/>'
+    '</svg>'
+)
+
+
+@pytest.mark.parametrize('case', [make_original_case(WORKBENCH_SOURCE, WORKBENCH_DESCRIPTION),
+    *make_variations(WORKBENCH_SOURCE, WORKBENCH_DESCRIPTION, 3309169791913111074, expand_canvas=True)],
+    ids=lambda case: case['case_id'])
+def test_workbench_translations_keep_native_thin_arrow_pair(case):
+    image = render(case['svg'], case['width'], case['height'])
+    outputs, params = [], {}
+
+    def forbidden(*args, **kwargs):
+        pytest.fail('whole-motif translation must not force the legacy arrow fallback')
+
+    result = runDualArrowBadgeIterationImpl(
+        perc_img=image, filename='unrelated.png', base_name='unrelated', description=case['description'],
+        params=params, width=case['width'], height=case['height'],
+        detect_dual_arrow_badge_params_fn=forbidden, generate_dual_arrow_badge_svg_fn=forbidden,
+        render_embedded_raster_svg_fn=forbidden, write_validation_log_fn=lambda lines: None,
+        render_svg_to_numpy_fn=render, record_render_failure_fn=forbidden,
+        write_attempt_artifacts_fn=lambda svg, raster: outputs.append(svg),
+        calculate_error_fn=lambda a, b: normalized_mse(a, b)[0])
+
+    assert result and 'raster_arrow_pair_v1' in params
+    quality = measure_quality(image, outputs[0])
+    assert quality['satisfactory'], quality
+    assert quality['complexity']['vector_element_count'] == 4
+    assert quality['complexity']['embedded_raster_count'] == 0
+
+
+@pytest.mark.parametrize('side,direction', [('links', 'oben'), ('rechts', 'unten')])
+@pytest.mark.parametrize('before_pose', [False, True])
+def test_translation_does_not_hide_contradictory_head_directions(side, direction, before_pose):
+    pose = ' Das Motiv ist etwas kleiner dargestellt und leicht nach links und unten verschoben.'
+    contradiction = f'; {side} Spitze nach {direction}'
+    description = WORKBENCH_DESCRIPTION + (contradiction + pose if before_pose else pose + contradiction)
+    assert fit_arrow_pair(30, 110, description=description, image=render(WORKBENCH_SOURCE, 30, 110),
+                          render_fn=render, error_fn=lambda a, b: normalized_mse(a, b)[0]) is None

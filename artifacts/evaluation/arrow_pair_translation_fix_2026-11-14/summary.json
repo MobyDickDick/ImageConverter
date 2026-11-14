@@ -1,0 +1,560 @@
+{
+  "source_bundle": "C:\\Users\\marku\\Downloads\\plan-b-workbench.zip",
+  "seed": 3309169791913111074,
+  "identical_inputs": false,
+  "before": {
+    "total": 17,
+    "completed": 17,
+    "passed": 14,
+    "quality_failed": 3,
+    "execution_failed": 0,
+    "failure_counts": {
+      "foreground_iou_outside_limit": 3
+    },
+    "satisfactory": false
+  },
+  "after": {
+    "total": 17,
+    "completed": 17,
+    "passed": 17,
+    "quality_failed": 0,
+    "execution_failed": 0,
+    "failure_counts": {},
+    "satisfactory": true
+  },
+  "limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "input_sha256": "7cb252a9ab59d8e71af8a4a6ef9a609175395866b3f69c9e48ceaa576c03f78c",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.963436731486581e-05,
+          "foreground_mse": 0.0003348544123582542,
+          "edge_alignment": 0.995610773563385,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.963436731486581e-05,
+          "foreground_mse": 0.0003348544123582542,
+          "edge_alignment": 0.995610773563385,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_01",
+      "input_sha256": "6d5736af94e641163a852b19dbbf57cd1637a2d1abe6b2e15a547738a70e8a6b",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 2.7557402063393965e-05,
+          "foreground_mse": 0.00020916448556818068,
+          "edge_alignment": 0.9973710179328918,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 2.7557402063393965e-05,
+          "foreground_mse": 0.00020916448556818068,
+          "edge_alignment": 0.9973710179328918,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_02",
+      "input_sha256": "12c3180b8c62acb0a4758625fd7a271fcf512e795d074bb7e0983b2d41ebb1ef",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 0.0004659883852582425,
+          "foreground_mse": 0.003428322495892644,
+          "edge_alignment": 0.9823707342147827,
+          "foreground_iou": 0.9837067209775967
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 2.4240001948783174e-05,
+          "foreground_mse": 0.00017873814795166254,
+          "edge_alignment": 0.99863600730896,
+          "foreground_iou": 0.9979591836734694
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_03",
+      "input_sha256": "18b117a4d05fca845cd2fbe63cac477fb93e1ab4e9a0f583991d5c3d16d117fa",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 5.630001760437153e-05,
+          "foreground_mse": 0.00039329417631961405,
+          "edge_alignment": 0.9971877336502075,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 5.630001760437153e-05,
+          "foreground_mse": 0.00039329417631961405,
+          "edge_alignment": 0.9971877336502075,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_04",
+      "input_sha256": "fcfce5789dac093b2229ec5a2419b4fe23da18745441d7bd46726c6adf42c357",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 9.531299292575568e-05,
+          "foreground_mse": 0.0008864146075211465,
+          "edge_alignment": 0.9986175298690796,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 9.531299292575568e-05,
+          "foreground_mse": 0.0008864146075211465,
+          "edge_alignment": 0.9986175298690796,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_05",
+      "input_sha256": "c329bb118ce45cd3117ba7bf71677b3ae0c06f271b2edf226ded31700d645c92",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.426295345183462e-05,
+          "foreground_mse": 0.00032739125890657306,
+          "edge_alignment": 0.9979614615440369,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.426295345183462e-05,
+          "foreground_mse": 0.00032739125890657306,
+          "edge_alignment": 0.9979614615440369,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_06",
+      "input_sha256": "70f55c0ec5677aac4b40bfb9dcfcf11f3e7e12368cfc5f8dfef062f9ecb33048",
+      "before": {
+        "satisfactory": false,
+        "metrics": {
+          "normalized_mse": 0.0013512518489733338,
+          "foreground_mse": 0.006695462856441736,
+          "edge_alignment": 0.9721553325653076,
+          "foreground_iou": 0.6927710843373494
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 2.9247494239825755e-05,
+          "foreground_mse": 0.00020276859868317842,
+          "edge_alignment": 0.9957669973373413,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_07",
+      "input_sha256": "b9e16a3efe763096568685ebda84652990b59798f1edfcf5bb90822c2de439d9",
+      "before": {
+        "satisfactory": false,
+        "metrics": {
+          "normalized_mse": 0.0009364958386868238,
+          "foreground_mse": 0.005989267025142908,
+          "edge_alignment": 0.9782593250274658,
+          "foreground_iou": 0.8130990415335463
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.3369829654693604e-05,
+          "foreground_mse": 0.00033584749326109886,
+          "edge_alignment": 0.9980559349060059,
+          "foreground_iou": 0.9980694980694981
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_08",
+      "input_sha256": "f6c422e498dedb2f6ac9aef28a0e543bcfb066d132f38d9feb35e6525042b1df",
+      "before": {
+        "satisfactory": false,
+        "metrics": {
+          "normalized_mse": 0.0007145115523599088,
+          "foreground_mse": 0.006654289551079273,
+          "edge_alignment": 0.9874625205993652,
+          "foreground_iou": 0.7355163727959698
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.295706094126217e-05,
+          "foreground_mse": 0.0003983704373240471,
+          "edge_alignment": 0.9960508346557617,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_09",
+      "input_sha256": "4606e64842cfae2c45937ef541d2c3f46272465fdd4b949204b6b453c042f46b",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 0.0007388211670331657,
+          "foreground_mse": 0.0039254892617464066,
+          "edge_alignment": 0.9782651662826538,
+          "foreground_iou": 0.9920318725099602
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 3.245302286813967e-05,
+          "foreground_mse": 0.00024409077013842762,
+          "edge_alignment": 0.9973483085632324,
+          "foreground_iou": 0.998
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_10",
+      "input_sha256": "539e8270f4082b57c9092ff8abfd93a5a8b91de961f9181ecf867647b5bdf922",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.5017452066531405e-05,
+          "foreground_mse": 0.00033827993320301175,
+          "edge_alignment": 0.9973281621932983,
+          "foreground_iou": 0.9979919678714859
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.5017452066531405e-05,
+          "foreground_mse": 0.00033827993320301175,
+          "edge_alignment": 0.9973281621932983,
+          "foreground_iou": 0.9979919678714859
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_11",
+      "input_sha256": "62700477352c1ee02bfe013e45c5ac96a8117973eba22b13556cbbf3267bc09c",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 0.0010314059909433126,
+          "foreground_mse": 0.00572471646592021,
+          "edge_alignment": 0.9828816652297974,
+          "foreground_iou": 0.9686192468619247
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 6.468685751315206e-05,
+          "foreground_mse": 0.00044870260171592236,
+          "edge_alignment": 0.9971908926963806,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_12",
+      "input_sha256": "5f063a23eb4d7960c7c2612cf8c882edc216b18112fa6b66273f900e75d50873",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 0.0004826535878237337,
+          "foreground_mse": 0.003653727937489748,
+          "edge_alignment": 0.9843829870223999,
+          "foreground_iou": 0.9864864864864865
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 4.264755989424884e-05,
+          "foreground_mse": 0.0003238252829760313,
+          "edge_alignment": 0.9954724311828613,
+          "foreground_iou": 0.9980657640232108
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_13",
+      "input_sha256": "8e7cf6074dd5f1fd7f7aeefe3c33584b45193b708473cdfc4527ec60c9216266",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 5.726229937863536e-05,
+          "foreground_mse": 0.0004502622759900987,
+          "edge_alignment": 0.9955381155014038,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 5.726229937863536e-05,
+          "foreground_mse": 0.0004502622759900987,
+          "edge_alignment": 0.9955381155014038,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_14",
+      "input_sha256": "1bced19993c8538215ae81bfc80adaddb0aaa2d605321310244a79497149871b",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 0.0008331449935212731,
+          "foreground_mse": 0.006078725215047598,
+          "edge_alignment": 0.9897589683532715,
+          "foreground_iou": 0.9841688654353562
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 5.904955469304696e-05,
+          "foreground_mse": 0.0005093501531518996,
+          "edge_alignment": 0.99863600730896,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_15",
+      "input_sha256": "6972961a9e497f2091ce76b0726a66a089227544da1fc66444213e6833a4806c",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 3.1447692890651524e-05,
+          "foreground_mse": 0.00038180474075488746,
+          "edge_alignment": 0.9979836940765381,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 3.1447692890651524e-05,
+          "foreground_mse": 0.00038180474075488746,
+          "edge_alignment": 0.9979836940765381,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "probe_16",
+      "input_sha256": "19ace08826c35efab570d8d84ea184ecb7d30ecb9d68521dd37ddda9e67826a6",
+      "before": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 3.955687134293839e-05,
+          "foreground_mse": 0.00029252361855469644,
+          "edge_alignment": 0.9979584217071533,
+          "foreground_iou": 1.0
+        }
+      },
+      "after": {
+        "satisfactory": true,
+        "metrics": {
+          "normalized_mse": 3.955687134293839e-05,
+          "foreground_mse": 0.00029252361855469644,
+          "edge_alignment": 0.9979584217071533,
+          "foreground_iou": 1.0
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        }
+      }
+    }
+  ],
+  "cause": "Clause-wide side matching assigned the right head direction to the left head when a whole-motif translation appended nach links without a separating full stop. Native reconstruction was rejected and a less accurate legacy fallback was used.",
+  "fix": "Associate each head direction with its preceding side mention; preserve contradiction rejection and unchanged raster quality gates.",
+  "validation": {
+    "arrow_pair_and_dual_arrow_runtime_tests_passed": 45,
+    "workbench_tests_passed": 22,
+    "workbench_tests_environment": "Re-run outside sandbox because localhost connections and test process termination were restricted. All 22 passed.",
+    "full_workbench_replay": ".tmp/plan-b-investigation/verified/report.json",
+    "full_workbench_replay_iterations": 64,
+    "full_workbench_replay_timeout_seconds": 60,
+    "regression_confirmed_before_fix": [
+      "probe_06",
+      "probe_07",
+      "probe_08"
+    ]
+  }
+}

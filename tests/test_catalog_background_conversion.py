@@ -14,7 +14,7 @@ from src.imageConverterCatalog import CatalogError, atomic_json
 from src.imageConverterCatalogConversion import CatalogConversion, failure_order, checked_attempt
 from test_catalog_inventory import SVG, prepare, quality
 from test_catalog_quality_server import catalog, wait_for
-from tools.build_catalog_inventory import build
+from tools.build_catalog_inventory import build, write_report
 
 
 def row(name, mse=.01, status='pixel_fail', role='catalog'):
@@ -145,6 +145,90 @@ def test_next_preview_explains_conditional_retry_while_current_attempt_runs(serv
     assert preview['conditional']
     manager._update(attempt=3)
     assert manager.snapshot()['next']['filename'] == 'AA0012.jpg'
+
+
+def test_existing_worklist_starts_without_any_catalog_measurement(service, monkeypatch):
+    manager, rows, _ = service
+    monkeypatch.setattr(manager.catalog, 'payload', lambda:dict(rows=rows, summary={'schema':'catalog_inventory_v1'}))
+    monkeypatch.setattr(manager.catalog, 'start', lambda **kwargs:pytest.fail('Unexpected inventory measurement'), raising=False)
+    assert CatalogConversion._refresh(manager)
+    assert manager.catalog.thread is None
+
+
+def test_quality_index_is_reused_until_a_new_list_is_published(service, monkeypatch):
+    from src import imageConverterCatalogConversion as module
+    manager, rows, _ = service
+    payload = dict(rows=rows, summary={'schema':'catalog_inventory_v1'})
+    monkeypatch.setattr(manager.catalog, 'payload', lambda:payload)
+    calls = []
+    order = module.failure_order
+    def record(row):
+        calls.append(row['filename'])
+        return order(row)
+    monkeypatch.setattr(module, 'failure_order', record)
+    assert manager.snapshot()['next']['filename'] == 'AA0011.jpg'
+    manager.snapshot()
+    assert len(calls) == len(rows)
+    payload['rows'] = copy.deepcopy(rows)
+    payload['rows'][1]['status'] = 'pixel_pass'
+    assert manager.snapshot()['next']['filename'] == 'AA0012.jpg'
+    assert len(calls) == 2*len(rows)
+
+
+def test_resuming_validation_records_failure_once_before_selecting_next_image(service, monkeypatch):
+    manager, _, _ = service
+    refresh = manager._refresh
+    def interrupt():
+        if manager.state.get('last_attempt') and not manager.state['completed']:
+            manager.stop.set()
+            return False
+        return refresh()
+    monkeypatch.setattr(manager, '_refresh', interrupt)
+    manager.start(); manager.thread.join(5)
+    assert manager.snapshot()['last_attempt']['accounted'] is False
+    restored = CatalogConversion(manager.catalog, manager.jobs, manager.workbench)
+    attempts = []
+    def select(row):
+        attempts.append((row['filename'], restored.state['attempt']))
+        restored.stop.set()
+        return None
+    # Keep the interrupted attempt failing when its validation resumes.
+    original = manager.catalog.payload()['rows'][1]
+    original['candidates'] = [dict(svg_sha256=manager.state['last_attempt']['svg_sha256'], measurement=quality(False))]
+    monkeypatch.setattr(restored, '_refresh', lambda:True)
+    monkeypatch.setattr(restored, '_launch', select)
+    try:
+        restored.start(); restored.thread.join(5)
+        snapshot = restored.snapshot()
+        assert attempts == [('AA0011.jpg', 2)]
+        assert snapshot['completed'] == snapshot['failed'] == 1
+        assert snapshot['failure_counts'] == {'aa0011.jpg':1}
+        assert snapshot['last_attempt']['accounted'] is True
+        restored.start(); restored.thread.join(5)
+        assert restored.snapshot()['completed'] == 0
+        assert restored.snapshot()['failure_counts'] == {'aa0011.jpg':1}
+    finally:
+        restored.close()
+
+
+def test_attempt_without_svg_never_triggers_catalog_measurement(service, monkeypatch):
+    manager, rows, refreshes = service
+    def run(job_id):
+        with manager.jobs.lock:
+            manager.jobs.jobs[job_id].update(status='error', result=False, message='No SVG')
+    monkeypatch.setattr(manager.jobs, 'run', run)
+    launch = manager._launch
+    def stop_after_three(item):
+        if manager.state['completed'] == 3:
+            manager.stop.set()
+            return None
+        return launch(item)
+    monkeypatch.setattr(manager, '_launch', stop_after_three)
+    manager.start(); manager.thread.join(5)
+    assert manager.snapshot()['status'] == 'stopped'
+    assert manager.snapshot()['completed'] == manager.snapshot()['failed'] == 3
+    assert len(refreshes) == 1  # Initial worklist load only.
+    assert manager.snapshot()['failure_counts']['aa0011.jpg'] == 3
 
 
 def test_inspection_progress_and_log_are_visible_in_service_snapshot(service, monkeypatch):
@@ -362,8 +446,10 @@ def test_real_reports_publish_fresh_background_candidate_and_new_pass(catalog, t
     monkeypatch.setattr(jobs, 'run', run)
     manager = CatalogConversion(catalog, jobs, SimpleNamespace(busy=lambda:False))
     try:
-        # Remove the archived passing SVG so the first refreshed report fails.
+        # Prepare a failing saved list. Starting the service must reuse it.
         (catalog.root/'artifacts/satisfactory_conversions/svgs/AA0010.svg').write_text(old.read_text())
+        rows, summary, _ = build(catalog.root, measure=lambda *args:quality(False, .05))
+        write_report(catalog.root, catalog.report_folder(), rows, summary, {})
         manager.start()
         manager.thread.join(45)
         snapshot = manager.snapshot()
@@ -371,6 +457,8 @@ def test_real_reports_publish_fresh_background_candidate_and_new_pass(catalog, t
         assert snapshot['completed'] == snapshot['passed'] == 1
         assert catalog.payload()['rows'][0]['status'] == 'pixel_pass'
         assert catalog.payload()['summary']['catalog_statuses'] == {'pixel_pass':1}
+        assert catalog.snapshot()['progress']['total'] == 1
+        assert catalog.payload()['summary']['measurement_scope'] == 'single_candidate'
         assert 'catalog_background_svgs' in catalog.payload()['rows'][0]['selected']['svg']
         assert 'fill="white"' in old.read_text()  # Earlier candidate remains intact.
     finally:
@@ -381,6 +469,12 @@ def test_stop_during_real_refresh_kills_child_and_preserves_last_report(catalog,
     monkeypatch.setattr(gui, 'catalog_descriptions', lambda:{})
     jobs = gui.Jobs(tmp_path/'gui')
     manager = CatalogConversion(catalog, jobs, SimpleNamespace(busy=lambda:False))
+    # Resume the validation of one saved attempt, without a full inventory scan.
+    job = jobs.upload('AA0010.jpg', (catalog.root/catalog.payload()['rows'][0]['image']).read_bytes())
+    (jobs.folder(job['id'])/'result.svg').write_text(SVG, encoding='utf-8')
+    jobs.jobs[job['id']].update(status='done', result=True)
+    manager._update(last_attempt=dict(filename='AA0010.jpg', job_id=job['id'], result=True,
+        passed=None, checking=False, message='Candidate ready'))
     import sys
     worker = tmp_path/'slow.py'
     worker.write_text('''import pathlib, subprocess, sys, time
@@ -402,7 +496,7 @@ time.sleep(60)
         assert manager.snapshot()['status'] == 'stopped'
         assert catalog.snapshot()['status'] == 'cancelled'
         assert catalog.report_folder() == previous
-        assert not jobs.jobs
+        assert len(jobs.jobs) == 1
         time.sleep(1.7)
         assert not (folder/'finished').exists()
     finally:

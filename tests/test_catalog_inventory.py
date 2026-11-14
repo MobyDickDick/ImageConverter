@@ -6,7 +6,7 @@ from xml.etree import ElementTree as ET
 import pytest
 
 from tools.build_catalog_inventory import (QualityWorker, build, classify, digest,
-                                          inside, write_report)
+                                          inside, write_report, update_candidate)
 
 
 SVG = ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'
@@ -176,3 +176,80 @@ def test_real_isolated_measurement_uses_two_renderers_and_closes_its_worker(tmp_
     assert classify(result) == 'pixel_pass'
     assert set(result['renderers']) == {'mupdf', 'librsvg'}
     assert worker.process is None
+
+
+def background_svg(root, name='AA0010.svg', suffix=''):
+    path = root/'artifacts/converted_images/catalog_background_svgs'/('b'*32)/name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(SVG+suffix, encoding='utf-8')
+    return path
+
+
+def test_single_candidate_update_never_discovers_or_opens_other_images(tmp_path, monkeypatch):
+    import copy
+    from tools import build_catalog_inventory as inventory
+    prepare(tmp_path, archived=True)
+    rows, summary, _ = build(tmp_path, measure=lambda *args:quality(False, .05))
+    untouched = copy.deepcopy(rows[0])
+    untouched.update(filename='BB0010.jpg', group='BB', image='missing-other-image.jpg', variant='BB0010')
+    untouched['candidates'][0]['svg'] = 'missing-other.svg'
+    rows.append(untouched)
+    summary['catalog_bitmaps'] += 1
+    summary['catalog_statuses']['pixel_fail'] += 1
+    summary['groups']['BB'] = dict(total=1, archived=1, statuses=dict(pixel_fail=1))
+    payload = copy.deepcopy(dict(rows=rows, summary=summary))
+    original = copy.deepcopy(payload)
+    monkeypatch.setattr(inventory, 'discover', lambda *args:pytest.fail('Full catalog scan'))
+    monkeypatch.setattr(inventory, 'runtime_signature', lambda *args:pytest.fail('Full runtime scan'))
+    candidate = background_svg(tmp_path, suffix='\n')
+    calls = []
+    def measure(image, svg):
+        calls.append((image, svg))
+        return quality(True)
+    updated, result = update_candidate(tmp_path, payload, 'AA0010.jpg', candidate, measure=measure)
+    assert calls == [(tmp_path/rows[0]['image'], candidate)]
+    assert payload == original
+    assert updated[1] == original['rows'][1]
+    assert updated[0]['status'] == 'pixel_pass'
+    assert updated[0]['candidates'][0]['measurement'] == original['rows'][0]['candidates'][0]['measurement']
+    assert result['catalog_statuses'] == {'pixel_fail':1, 'pixel_pass':1}
+    assert result['groups']['AA']['statuses'] == {'pixel_pass':1}
+    assert result['groups']['BB'] == summary['groups']['BB']
+    assert result['archived_current_pixel_pass'] == 1
+    assert sum(c['saved_pixel_pass'] for c in result['geometry_classes']['classes'].values()) == 1
+    assert result['full_generated_at'] == summary['generated_at']
+    assert result['measurement_scope'] == 'single_candidate'
+
+
+@pytest.mark.parametrize('error', ['source', 'copy', 'reserved', 'outside'])
+def test_single_candidate_refuses_changed_sources_reservations_and_wrong_paths(tmp_path, error):
+    prepare(tmp_path)
+    rows, summary, _ = build(tmp_path, measure=lambda *args:quality(False))
+    candidate = background_svg(tmp_path)
+    if error == 'source':
+        (tmp_path/rows[0]['image']).write_bytes(b'changed')
+    elif error == 'copy':
+        copy = tmp_path/'copy.jpg'
+        copy.write_bytes(b'changed')
+        rows[0]['all_source_paths'].append('copy.jpg')
+    elif error == 'reserved':
+        folder = tmp_path/'config'
+        folder.mkdir()
+        (folder/'real_composition_holdout_new.json').write_text(json.dumps(dict(
+            evaluation_policy=dict(status='sealed_unrun'), cases=[dict(file='AA0010.jpg')])))
+    else:
+        candidate = tmp_path/'artifacts/converted_images/converted_svgs/aa0010.svg'
+    with pytest.raises(ValueError):
+        update_candidate(tmp_path, dict(rows=rows,summary=summary), 'AA0010.jpg', candidate,
+                         measure=lambda *args:pytest.fail('Must refuse before measuring'))
+
+
+def test_identical_attempts_keep_provenance_without_duplicate_candidates(tmp_path):
+    prepare(tmp_path)
+    rows, summary, _ = build(tmp_path, measure=lambda *args:quality(False))
+    candidate = background_svg(tmp_path)
+    updated, _ = update_candidate(tmp_path, dict(rows=rows,summary=summary), 'AA0010.jpg', candidate,
+                                  measure=lambda *args:quality(True))
+    assert len(updated[0]['candidates']) == 1
+    assert len(updated[0]['selected']['all_paths']) == 2
+    assert updated[0]['status'] == 'pixel_pass'

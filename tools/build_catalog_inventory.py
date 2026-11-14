@@ -322,6 +322,60 @@ def runtime_signature(root):
     return digest(json.dumps(metadata, sort_keys=True).encode()), metadata
 
 
+def update_candidate(root, payload, filename, svg, *, measure):
+    """Update one saved catalog row without discovering or measuring other files."""
+    import copy
+
+    payload = copy.deepcopy(payload)
+    row = next((r for r in payload['rows'] if r['filename'] == filename), None)
+    if row is None or row['role'] != 'catalog' or row['status'] in {'reserved', 'source_conflict'}:
+        raise ValueError('No eligible catalog row: '+filename)
+    for path in sorted((root/'config').glob('real_composition_holdout*.json')):
+        policy = read_json(path, {})
+        if policy.get('evaluation_policy', {}).get('status') == 'sealed_unrun':
+            if any(filename.casefold() in {n.casefold() for n in [case['file'], *case.get('family_members', [])]}
+                   for case in policy.get('cases', [])):
+                raise ValueError('Reserved catalog row: '+filename)
+    source = inside(root, row['image'])
+    for path in row.get('all_source_paths', [row['image']]):
+        if digest(inside(root, path).read_bytes()) != row['image_sha256']:
+            raise ValueError('Source bitmap changed since catalog measurement: '+filename)
+    svg = inside(root, svg)
+    expected = root/'artifacts/converted_images/catalog_background_svgs'
+    if not svg.is_relative_to(expected.resolve()) or svg.stem.casefold() != Path(filename).stem.casefold():
+        raise ValueError('Invalid background candidate path')
+    svg_hash, svg_path = digest(svg.read_bytes()), relative(root, svg)
+    old_status = row['status']
+    candidate = next((c for c in row['candidates'] if c['svg_sha256'] == svg_hash), None)
+    if candidate is None:
+        candidate = dict(svg=svg_path, svg_sha256=svg_hash, all_paths=[svg_path])
+        row['candidates'].append(candidate)
+    elif svg_path not in candidate['all_paths']:
+        candidate['all_paths'].append(svg_path)
+    # Only this newly produced candidate is checked, even if its bytes match
+    # an old attempt. Other saved measurements and their dates stay intact.
+    candidate['measurement'] = measure(source, svg)
+    row['selected'] = min(row['candidates'], key=quality_order)
+    row['status'] = classify(row['selected']['measurement'])
+    summary = payload['summary']
+    def change_counts(counts):
+        counts = Counter(counts)
+        counts[old_status] -= 1
+        counts[row['status']] += 1
+        return {key: value for key, value in counts.items() if value}
+    summary['catalog_statuses'] = change_counts(summary['catalog_statuses'])
+    group = summary['groups'][row['group']]
+    group['statuses'] = change_counts(group['statuses'])
+    if row['archived']:
+        summary['archived_current_pixel_pass'] += int(row['status'] == 'pixel_pass') - int(old_status == 'pixel_pass')
+    from src.imageConverterClasses import summarize
+    summary['geometry_classes'] = summarize(payload['rows'])
+    summary.setdefault('full_generated_at', summary['generated_at'])
+    summary.update(generated_at=utcnow(), measurement_scope='single_candidate',
+                   updated_filename=filename, measurements_computed=1, measurements_reused=0)
+    return payload['rows'], summary
+
+
 def write_report(root, output, rows, summary, metadata):
     from tools.catalog_inventory_html import render_catalog_html
     output.mkdir(parents=True, exist_ok=True)
@@ -351,6 +405,9 @@ def main():
     parser.add_argument('--cache', type=Path, help='Read a previous measurement cache; writes stay in --output')
     parser.add_argument('--progress-file', type=Path, help='Atomically publish current measurement counts')
     parser.add_argument('--render-only', action='store_true', help='Rebuild the HTML from the saved manifest without new measurements')
+    parser.add_argument('--update-manifest', type=Path, help='Update only one candidate in this saved catalog')
+    parser.add_argument('--filename', help='Catalog filename for --update-manifest')
+    parser.add_argument('--candidate', type=Path, help='New background SVG for --update-manifest')
     args = parser.parse_args()
     root, output = args.root.resolve(), args.output.resolve()
     if output.exists() and any(output.iterdir()):
@@ -365,6 +422,30 @@ def main():
         template = (Path(__file__).parent/'templates/catalog_inventory.html').read_text(encoding='utf-8')
         (output/'index.html').write_text(render_catalog_html(template, payload), encoding='utf-8')
         print(f'HTML rebuilt: {len(payload["rows"])} entries; no new measurements')
+        return 0
+    if args.update_manifest:
+        if not args.filename or not args.candidate or args.force:
+            parser.error('--update-manifest requires --filename and --candidate, without --force')
+        payload = read_json(args.update_manifest)
+        if payload.get('summary', {}).get('schema') != 'catalog_inventory_v1':
+            raise ValueError('A saved catalog manifest is required')
+        worker = QualityWorker()
+        started = time.monotonic()
+        try:
+            with conversion_awake():
+                if args.progress_file:
+                    publish_progress(args.progress_file, dict(completed=0, total=1, measured=0, cached=0))
+                rows, summary = update_candidate(root, payload, args.filename, args.candidate, measure=worker.measure)
+        finally:
+            worker.close()
+        metadata = read_json(args.update_manifest.parent/'sources.json', {})
+        metadata.setdefault('measurement_cache', str((args.update_manifest.parent/'measurements.json').resolve()))
+        summary['elapsed_seconds'] = round(time.monotonic()-started, 3)
+        write_report(root, output, rows, summary, metadata)
+        if args.progress_file:
+            publish_progress(args.progress_file, dict(completed=1, total=1, measured=1, cached=0,
+                elapsed_seconds=round(time.monotonic()-started, 3)))
+        print(f'Einzelprüfung {args.filename}: 1 SVG; übrige Katalogmessungen unverändert.', flush=True)
         return 0
     signature, metadata = runtime_signature(root)
     cache = read_json(args.cache or output/'measurements.json', {})

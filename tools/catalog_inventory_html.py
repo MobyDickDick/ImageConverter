@@ -83,7 +83,7 @@ def render_catalog_html(template, payload):
         (summary['catalog_statuses'].get('no_svg', 0), 'Ohne gespeichertes SVG', 'Konvertierbarkeit noch offen'),
         (summary['descriptions_present'], 'Mit Katalogbeschreibung', f'{len(summary["missing_descriptions"])} Beschreibung(en) fehlen'),
     ]
-    stamp = datetime.fromisoformat(summary['generated_at'])
+    stamp = datetime.fromisoformat(summary.get('full_generated_at', summary['generated_at']))
     try:
         stamp = stamp.astimezone(ZoneInfo('Europe/Zurich'))
     except ZoneInfoNotFoundError:
