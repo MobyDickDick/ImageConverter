@@ -36,9 +36,9 @@ function controls() {
   $("bundle").hidden = running;
 }
 async function refreshActivity() {
-  const [runs, jobs] = await Promise.all([request("/api/workbench"), request("/api/jobs")]);
+  const [runs, jobs] = await Promise.all([request("/api/workbench"), request("/api/jobs?scope=foreground")]);
   const run = runs.find(item => item.status === "running");
-  const job = jobs.find(item => item.status === "running");
+  const job = jobs.find(item => item.status === "running" && !item.catalog_background);
   activity = run ? {kind: "workbench", ...run} : job ? {kind: "jobs", ...job} : null;
   $("activity").hidden = !activity;
   $("activity-name").textContent = activity

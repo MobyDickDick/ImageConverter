@@ -200,3 +200,18 @@ def loadDescriptionMappingImpl(path: str, *, get_base_name_from_file_fn) -> dict
     if ext == ".xml":
         return loadDescriptionMappingFromXmlImpl(path, get_base_name_from_file_fn=get_base_name_from_file_fn)
     return loadDescriptionMappingFromCsvImpl(path)
+
+
+def loadCatalogDescriptionMappingImpl(root: Path) -> dict[str, str]:
+    """Use the CLI's primary table; the maintained copy is a file fallback.
+
+    Merging aliases from two tables can let a stale image-specific alias beat
+    the corrected family description. Keep one authoritative table per read.
+    """
+    from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+
+    for folder in ('images_to_convert', 'descriptions'):
+        path = Path(root)/'artifacts'/folder/'Finale_Wurzelformen_V3.xml'
+        if path.is_file():
+            return loadDescriptionMappingImpl(str(path), get_base_name_from_file_fn=getBaseNameFromFileImpl)
+    return {}

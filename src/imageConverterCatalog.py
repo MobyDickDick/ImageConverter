@@ -68,10 +68,11 @@ class CatalogQuality:
                 return dict(rows=[], summary={}, labels={})
             reservations = sorted((self.root/'config').glob('real_composition_holdout*.json'))
             reviews = self.root/'config/catalog_class_visual_review.json'
-            descriptions = self.root/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
+            descriptions = [self.root/'artifacts'/folder/'Finale_Wurzelformen_V3.xml'
+                            for folder in ('images_to_convert', 'descriptions')]
             stamp = (str(path), path.stat().st_mtime_ns, path.stat().st_size,
                      tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size)
-                           for p in [*reservations, reviews, descriptions] if p.is_file()))
+                           for p in [*reservations, reviews, *descriptions] if p.is_file()))
             if stamp != self._manifest_stamp:
                 value = read_json(path)
                 if value.get('summary', {}).get('schema') != 'catalog_inventory_v1':
@@ -87,6 +88,23 @@ class CatalogQuality:
                 for row in value['rows']:
                     if row['filename'].casefold() in reserved:
                         row.update(status='reserved', candidates=[], selected=None)
+                # A stored raster measurement is still useful after a prose
+                # correction, but its old description must never seed new runs.
+                if any(p.is_file() for p in descriptions):
+                    from src.iCCModules.imageCompositeConverterDescriptions import loadCatalogDescriptionMappingImpl
+                    from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
+                    mapping = {key.casefold(): text for key, text in loadCatalogDescriptionMappingImpl(self.root).items()}
+                    for row in value['rows']:
+                        if row.get('status') == 'reserved':
+                            continue
+                        keys = (row['filename'], Path(row['filename']).stem, getBaseNameFromFileImpl(row['filename']))
+                        row['description'] = next((mapping[k.casefold()] for k in keys if k.casefold() in mapping), '')
+                        if row.get('archive'):
+                            row['archive']['description_matches_catalog'] = row['archive'].get('description', '') == row['description']
+                    value['summary']['current_descriptions_applied'] = True
+                    value['summary']['archive_description_differences'] = sum(
+                        bool(r.get('archive')) and not r['archive'].get('description_matches_catalog', False)
+                        for r in value['rows'])
                 catalog = [r for r in value['rows'] if r['role'] == 'catalog']
                 value['summary']['catalog_statuses'] = dict(Counter(r['status'] for r in catalog))
                 value['summary']['archived_current_pixel_pass'] = sum(r['archived'] and r['status']=='pixel_pass' for r in catalog)

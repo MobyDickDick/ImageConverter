@@ -2,6 +2,11 @@
 
 Aufruf: `startWebServer.cmd`, dann **Konvertierungsqualität** oder
 [direkt die Qualitätsliste](http://127.0.0.1:8766/catalog).
+Beenden: `stopWebServer.cmd`. Dabei werden auch laufende Hintergrund-,
+Konvertierungs-, Prüf- und Plan-B-Aufgaben abgebrochen. Gespeicherte Ergebnisse
+bleiben erhalten. Für andere Startparameter dieselben Werte übergeben, zum
+Beispiel `stopWebServer.cmd --port 8767 --data-dir artifacts/gui-test`.
+Das Stoppskript prüft Projekt und Datenverzeichnis, bevor es den Server beendet.
 Nach einer Codeänderung muss der bisherige Server beendet und neu gestartet
 werden. Die statischen Webseiten werden von der Festplatte geladen, während
 Python-Code bis zum Neustart im laufenden Prozess verbleibt. Eine fehlende
@@ -19,6 +24,29 @@ MSE-Sortierung, Seitenauswahl und „Alle“ wirken auf den gesamten Bestand.
 Original und ausgewähltes SVG sind unmittelbar vergleichbar; jeder gespeicherte
 Kandidat zeigt die Befunde beider Renderer. CSV und JSON enthalten alle Zeilen,
 unabhängig vom aktuellen Ansichtsfilter.
+
+Der Hintergrunddienst hat einen eigenen Konvertierungsplatz. Parallel dazu
+kann eine normale Bild-/Sample-Konvertierung oder eine Plan-B-Aufgabe laufen,
+unabhängig davon, welcher Lauf zuerst gestartet wurde. Normale Konvertierungen
+und Plan-B-Aufgaben teilen sich weiterhin einen Platz. Jeder Lauf lässt sich
+einzeln abbrechen. Hintergrundversuche erscheinen in der Katalogansicht und
+verdrängen keine manuellen Aufträge im Konverterverlauf.
+
+Beschreibungskorrekturen in
+`artifacts/images_to_convert/Finale_Wurzelformen_V3.xml` werden beim Laden eines
+Bildes und beim Abruf der Katalogansicht erneut gelesen. Ein Serverneustart oder
+eine vollständige Raster-Neumessung ist dafür nicht nötig. Diese XML ist wie in
+der CLI die massgebliche Quelle; nur wenn die Datei fehlt, dient
+`artifacts/descriptions/Finale_Wurzelformen_V3.xml` als Ersatz. Zwei abweichende
+Tabellen werden nicht mehr übereinandergelegt.
+
+Ein vor dem Start bearbeiteter Text im Konverter hat Vorrang und bleibt für
+weitere Versuche mit demselben Bild erhalten, auch im Hintergrunddienst.
+Unverändert gestartete Katalogtexte gelten hingegen nicht als eigene Korrektur;
+spätere XML-Änderungen werden dadurch nicht dauerhaft verdeckt. Bereits laufende
+und abgeschlossene Aufträge behalten ihren verwendeten Text als Laufbeleg.
+Änderungen werden bei einer neuen Konvertierung wirksam; die gespeicherten SVGs
+und ihre Rastermessungen werden dadurch nicht automatisch neu erstellt.
 
 **Qualitätsliste aktualisieren** startet einen eigenen Prüfprozess.
 Er misst bereits gespeicherte SVGs gegen die Originalbitmap mit MuPDF und
@@ -119,7 +147,7 @@ bleibt über Dateiname, Beschreibung, Qualitätsfilter und MSE-Sortierung durchs
 Nur die bestehende Prüfung mit beiden
 Renderern entscheidet über **Rastergates erfüllt**.
 
-Für neue Dateien oder extern geänderte SVGs/Beschreibungen dient weiterhin
+Für neue Dateien oder extern geänderte SVGs dient weiterhin
 **Qualitätsliste aktualisieren** als ausdrückliche Bestandsaufnahme. Die Liste
 zeigt das Datum der letzten vollständigen Prüfung getrennt von der letzten
 Einzelprüfung; unveränderte Kandidaten behalten ihr tatsächliches Messdatum.

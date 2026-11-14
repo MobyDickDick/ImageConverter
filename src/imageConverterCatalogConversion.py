@@ -189,19 +189,18 @@ class CatalogConversion:
         return data
 
     def _launch(self, row):
-        # This lock is shared with the manual GUI and Workbench start paths.
-        # Let an existing foreground conversion finish before taking its slot.
+        # Background retries own a separate slot from the GUI and Workbench.
         with self.jobs.lock:
-            if self.workbench.busy() or any(j['status'] == 'running' for j in self.jobs.jobs.values()):
+            if self.jobs.busy(background=True):
                 return None
             data = self._source(row)
             job = self.jobs.upload(row['filename'], data)
             stored = self.jobs.jobs[job['id']]
-            stored.update(catalog_background=True, description=row['description'], description_origin='catalog')
+            stored['catalog_background'] = True
+            if stored.get('description_origin') != 'user':
+                stored.update(description=row['description'], description_origin='catalog')
             self.jobs.save(stored)
-            result = self.jobs.start(job['id'], row['description'], self.state['profile'])
-            stored['description_origin'] = 'catalog'
-            self.jobs.save(stored)
+            result = self.jobs.start(job['id'], stored['description'], self.state['profile'], background=True)
             return result
 
     def _preserve(self, row, job):

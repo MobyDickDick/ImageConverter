@@ -2,8 +2,10 @@
 from http.client import HTTPConnection
 from contextlib import contextmanager
 import json
+import os
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import threading
 import time
@@ -55,6 +57,41 @@ def test_real_cli_worker_publishes_new_complete_report_and_retains_previous(cata
     assert catalog.snapshot()['status'] == 'done'
     assert catalog.snapshot()['summary']['measurements_reused'] >= 1
     assert previous.is_dir()
+
+
+def test_xml_correction_replaces_cached_manifest_description_without_measurement(catalog):
+    from xml.etree import ElementTree as ET
+    first = catalog.payload()
+    original_candidates = json.loads(json.dumps(first['rows'][0]['candidates']))
+    manifest = (catalog.report_folder()/'manifest.json').read_bytes()
+    path = catalog.root/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
+    tree = ET.parse(path)
+    tree.find('.//beschreibung').text = 'Ein blaues Rechteck ohne Text.'
+    tree.write(path,encoding='utf-8')
+    updated = catalog.payload()
+    row = updated['rows'][0]
+    assert row['description']=='Ein blaues Rechteck ohne Text.'
+    assert updated['summary']['current_descriptions_applied']
+    assert row['candidates']==original_candidates
+    assert row['archive']['description_matches_catalog'] is False
+    assert updated['summary']['archive_description_differences']==1
+    assert (catalog.report_folder()/'manifest.json').read_bytes()==manifest
+    tree.find('.//entry').remove(tree.find('.//beschreibung'))
+    tree.write(path,encoding='utf-8')
+    assert catalog.payload()['rows'][0]['description']==''
+
+
+def test_secondary_fallback_correction_invalidates_catalog_cache(catalog):
+    from xml.etree import ElementTree as ET
+    primary = catalog.root/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
+    secondary = catalog.root/'artifacts/descriptions/Finale_Wurzelformen_V3.xml'
+    secondary.parent.mkdir()
+    primary.replace(secondary)
+    assert catalog.payload()['rows'][0]['description']=='Graues Rechteck.'
+    tree = ET.parse(secondary)
+    tree.find('.//beschreibung').text = 'Neue Beschreibung aus der Ersatztabelle.'
+    tree.write(secondary,encoding='utf-8')
+    assert catalog.payload()['rows'][0]['description']=='Neue Beschreibung aus der Ersatztabelle.'
 
 
 def wait_for(path, timeout=8):
@@ -242,6 +279,9 @@ def test_second_server_cannot_share_port_or_read_the_running_servers_jobs(monkey
     try:
         with pytest.raises(OSError):
             gui.GuiServer(server.server_address,directory=tmp_path/'second')
+        with pytest.raises(OSError):
+            gui.GuiServer(server.server_address,jobs)
+        assert not jobs.closed
         assert not (tmp_path/'second').exists()
         if sys.platform == 'win32':
             import socket
@@ -289,6 +329,85 @@ def test_start_rejects_server_with_different_data_directory(monkeypatch,tmp_path
         assert 'GUI konnte nicht gestartet werden' in capsys.readouterr().err
     finally:
         server.shutdown();thread.join(timeout=5);server.server_close();jobs.close()
+
+
+def test_stop_command_closes_server_and_both_conversion_processes(monkeypatch,tmp_path,capsys):
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
+    jobs = gui.Jobs(tmp_path/'gui')
+    server = gui.GuiServer(('127.0.0.1',0),jobs)
+    data = tmp_path/'source.png'
+    Image.new('RGB',(40,40),'white').save(data)
+    options = ({'creationflags':subprocess.CREATE_NO_WINDOW} if sys.platform == 'win32'
+               else {'start_new_session':True})
+    processes = []
+    for background in (False,True):
+        uploaded = jobs.upload('test.png',data.read_bytes())
+        jobs.jobs[uploaded['id']].update(status='running',started=time.time(),catalog_background=background)
+        process = subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)'],**options)
+        jobs.processes[uploaded['id']] = process
+        processes.append(process)
+    def serve():
+        try:
+            server.serve_forever(poll_interval=.05)
+        finally:
+            server.server_close()
+    thread = threading.Thread(target=serve,daemon=True)
+    thread.start()
+    try:
+        args = ['--stop','--port',str(server.server_port),'--data-dir',str(jobs.directory)]
+        assert gui.main(args) == 0
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        assert jobs.closed
+        assert all(process.poll() is not None for process in processes)
+        assert all(job['status'] == 'cancelled' for job in jobs.jobs.values())
+        assert 'Webserver gestoppt' in capsys.readouterr().out
+        # Repeating the stop command is harmless and does not launch a server.
+        assert gui.main(args) == 0
+        assert 'bereits gestoppt' in capsys.readouterr().out
+    finally:
+        server.shutdown();thread.join(timeout=5);server.server_close()
+
+
+def test_stop_command_rejects_another_data_directory(monkeypatch,tmp_path,capsys):
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
+    jobs = gui.Jobs(tmp_path/'first')
+    server = gui.GuiServer(('127.0.0.1',0),jobs)
+    thread = threading.Thread(target=server.serve_forever,daemon=True)
+    thread.start()
+    try:
+        assert gui.main(['--stop','--port',str(server.server_port),'--data-dir',str(tmp_path/'other')]) == 1
+        assert gui.existing_gui(server.server_port,jobs.directory)
+        assert not jobs.closed and thread.is_alive()
+        assert 'kein passender' in capsys.readouterr().err
+    finally:
+        server.shutdown();thread.join(timeout=5);server.server_close()
+
+
+@pytest.mark.skipif(sys.platform != 'win32',reason='Windows CMD launchers')
+def test_cmd_launchers_start_and_stop_a_real_server(tmp_path):
+    environment = dict(os.environ,PYTHONIOENCODING='utf-8')
+    process = subprocess.Popen(
+        ['cmd.exe','/c',str(gui.ROOT/'startWebServer.cmd'),'--no-browser','--port','0',
+         '--data-dir',str(tmp_path/'gui')],cwd=gui.ROOT,env=environment,
+        stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf-8',
+        creationflags=subprocess.CREATE_NO_WINDOW)
+    try:
+        first_line = process.stdout.readline().strip()
+        assert first_line.startswith('ImageConverter: http://127.0.0.1:'), first_line
+        port = first_line.rsplit(':',1)[1]
+        stopped = subprocess.run(
+            ['cmd.exe','/c',str(gui.ROOT/'stopWebServer.cmd'),'--port',port,
+             '--data-dir',str(tmp_path/'gui')],cwd=gui.ROOT,env=environment,
+            stdin=subprocess.DEVNULL,capture_output=True,text=True,encoding='utf-8',
+            creationflags=subprocess.CREATE_NO_WINDOW,timeout=30)
+        assert stopped.returncode == 0, stopped.stdout+stopped.stderr
+        assert 'Webserver gestoppt' in stopped.stdout
+        assert process.wait(timeout=10) == 0
+    finally:
+        if process.poll() is None:
+            gui.stop_process_tree(process)
+        process.communicate(timeout=10)
 
 
 @pytest.mark.parametrize('config', [dict(application='other'), [],

@@ -12,12 +12,14 @@ import pytest
 from src import imageConverterGui as gui
 
 
-def test_plain_circle_converts_through_real_gui_worker_with_neutral_filename(jobs):
+def test_plain_circle_converts_through_real_gui_worker_with_neutral_filename(jobs, monkeypatch):
     from xml.etree import ElementTree as ET
 
     source = gui.ROOT/'artifacts/images_to_convert/AC0800_M.jpg'
     description = 'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund'
+    monkeypatch.setattr(gui, 'catalog_descriptions', lambda: {'NEUTRALER-KREIS': 'Zwei rote Pfeile.'})
     uploaded = jobs.upload('neutraler-kreis.jpg', source.read_bytes())
+    assert uploaded['description'] == 'Zwei rote Pfeile.'
     started = jobs.start(uploaded['id'], description, 'quick')
     jobs.threads[-1].join(timeout=75)
     job = jobs.snapshot(started['id'])
@@ -25,6 +27,8 @@ def test_plain_circle_converts_through_real_gui_worker_with_neutral_filename(job
     assert job['quality'] == 'passed' and job['search_summary']['satisfactory'], job
     assert job['description'] == description
     folder = jobs.folder(job['id'])
+    from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingFromCsvImpl
+    assert loadDescriptionMappingFromCsvImpl(str(folder/'description.csv'))['UPLOAD'] == description
     assert 'status=non_composite_raster_plain_disk' in '\n'.join(
         path.read_text(encoding='utf-8') for path in (folder/'output').rglob('*validation*.log'))
     root = ET.parse(folder/'result.svg').getroot()
@@ -121,6 +125,32 @@ def test_description_required_and_only_one_conversion_at_a_time(jobs):
     jobs.jobs[first["id"]]["status"] = "ready"
 
 
+def test_completed_background_retry_uses_foreground_slot(jobs, monkeypatch):
+    previous = jobs.upload('background.png', image_bytes())
+    jobs.jobs[previous['id']].update(status='done', catalog_background=True)
+    monkeypatch.setattr(jobs, 'run', lambda job_id:None)
+    retry = jobs.start(previous['id'], 'Ein Kreis.', 'quick')
+    assert retry['id'] != previous['id']
+    assert not retry['catalog_background']
+    assert jobs.jobs[previous['id']]['catalog_background']
+    assert jobs.busy() and not jobs.busy(background=True)
+
+
+@pytest.mark.parametrize('background', [False, True])
+def test_slot_stays_reserved_until_process_cleanup(jobs, monkeypatch, background):
+    previous = jobs.upload('previous.png', image_bytes())
+    jobs.jobs[previous['id']].update(status='cancelled', catalog_background=background)
+    jobs.processes[previous['id']] = object()
+    next_job = jobs.upload('next.png', image_bytes())
+    try:
+        with pytest.raises(gui.RequestError) as exc:
+            jobs.start(next_job['id'], 'Ein Kreis.', 'quick', background=background)
+        assert exc.value.status == 409
+        assert jobs.jobs[next_job['id']]['status'] == 'ready'
+    finally:
+        jobs.processes.pop(previous['id'])
+
+
 @pytest.mark.parametrize("filename,returncode,failures,quality", [
     ("converted_svgs/UPLOAD.svg", 0, False, "passed"),
     ("converted_svgs/Failed_UPLOAD.svg", 0, False, "warning"),
@@ -193,6 +223,62 @@ def test_last_submitted_description_is_reused_by_image_content(jobs, monkeypatch
     assert repeated['description_origin'] == 'user'
     other = jobs.upload('catalog-name.png', image_bytes(color='#304050'))
     assert other['description'] == ''
+
+
+def test_primary_catalog_table_beats_stale_secondary_image_alias(tmp_path, monkeypatch):
+    from xml.etree import ElementTree as ET
+    monkeypatch.setattr(gui, 'ROOT', tmp_path)
+    for folder, text, image in [('images_to_convert','Korrigierte Beschreibung.',False),
+                                ('descriptions','Veraltete Beschreibung.',True)]:
+        path = tmp_path/'artifacts'/folder/'Finale_Wurzelformen_V3.xml'
+        path.parent.mkdir(parents=True)
+        root = ET.Element('root')
+        entry = ET.SubElement(root,'entry',key='AA0010')
+        ET.SubElement(entry,'beschreibung').text = text
+        if image:
+            ET.SubElement(ET.SubElement(entry,'bilder'),'bild').text = 'AA0010.jpg'
+        ET.ElementTree(root).write(path,encoding='utf-8')
+    manager = gui.Jobs(tmp_path/'jobs')
+    try:
+        assert manager.upload('AA0010.jpg',image_bytes())['description']=='Korrigierte Beschreibung.'
+        primary = tmp_path/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml'
+        primary.write_text(primary.read_text().replace('Korrigierte','Neu korrigierte'),encoding='utf-8')
+        assert manager.upload('AA0010.jpg',image_bytes())['description']=='Neu korrigierte Beschreibung.'
+        primary.unlink()
+        assert manager.upload('AA0010.jpg',image_bytes())['description']=='Veraltete Beschreibung.'
+    finally:
+        manager.close()
+
+
+def test_unchanged_catalog_submission_does_not_pin_old_text_as_user_correction(jobs,monkeypatch):
+    mapping = {'AC1234':'Alter Katalogtext.'}
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:dict(mapping))
+    monkeypatch.setattr(jobs,'run',lambda job_id:None)
+    uploaded = jobs.upload('AC1234.jpg',image_bytes())
+    started = jobs.start(uploaded['id'],uploaded['description'],'quick')
+    assert started['description_origin']=='catalog'
+    jobs.cancel(started['id'])
+    mapping['AC1234']='Korrigierter Katalogtext.'
+    reloaded = jobs.upload('AC1234.jpg',image_bytes())
+    assert reloaded['description']=='Korrigierter Katalogtext.'
+    mapping['AC1234']='Nochmals korrigierter Text.'
+    assert jobs.snapshot(reloaded['id'])['description']=='Nochmals korrigierter Text.'
+    assert jobs.snapshot(started['id'])['description']=='Alter Katalogtext.'
+
+
+def test_reference_descriptions_reload_at_worker_start(jobs,job,monkeypatch):
+    from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingFromCsvImpl
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{'AC1234':'Korrigierte Referenz.'})
+    job.update(description='Wie AC1234, jedoch rot.',profile='quick',status='running',
+               started=0,search_seed=1)
+    def capture(command,**kwargs):
+        descriptions = loadDescriptionMappingFromCsvImpl(command[command.index('--descriptions-path')+1])
+        assert descriptions['AC1234']=='Korrigierte Referenz.'
+        assert descriptions['UPLOAD']=='Wie AC1234, jedoch rot.'
+        raise OSError('Captured converter input')
+    monkeypatch.setattr(gui.subprocess,'Popen',capture)
+    jobs.run(job['id'])
+    assert 'Captured converter input' in jobs.snapshot(job['id'])['message']
 
 
 def test_no_svg_is_an_error_even_with_zero_cli_exit(jobs, job):
@@ -463,6 +549,8 @@ def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, requ
     assert b"404" in send("/../../README.md")[0]
     assert b"403" in send("/api/upload", "POST", "Origin: https://example.org\r\nX-ImageConverter: 1\r\n", image_bytes())[0]
     assert b"403" in send("/api/upload", "POST", "", image_bytes())[0]
+    assert b'403' in send('/api/shutdown', 'POST', '', b'{}')[0]
+    assert b'403' in send('/api/shutdown', 'POST', 'Origin: https://example.org\r\nX-ImageConverter: 1\r\n', b'{}')[0]
     assert b"400" in send("/api/jobs/" + "a" * 32 + "/start", "POST", "X-ImageConverter: 1\r\n", b"[]")[0]
     head, body = send("/api/upload?name=test.png", "POST", "X-ImageConverter: 1\r\n", image_bytes())
     assert b"201" in head

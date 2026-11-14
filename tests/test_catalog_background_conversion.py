@@ -106,6 +106,21 @@ def test_defers_after_three_failures_then_resets_all_marks_and_repeats(service, 
     assert manager.snapshot()['history'] == []
 
 
+def test_background_attempt_preserves_an_explicit_user_correction(service):
+    manager, rows, _ = service
+    manager.state['profile'] = 'quick'
+    row = rows[1]
+    uploaded = manager.jobs.upload(row['filename'],manager._source(row))
+    stored = manager.jobs.jobs[uploaded['id']]
+    stored.update(description='Meine korrigierte Bildbeschreibung.',description_origin='user')
+    manager.jobs.save(stored)
+    launched = manager._launch(row)
+    manager.jobs.threads[-1].join(timeout=5)
+    result = manager.jobs.snapshot(launched['id'])
+    assert result['description']=='Meine korrigierte Bildbeschreibung.'
+    assert result['description_origin']=='user'
+
+
 @pytest.mark.parametrize('status', ['pixel_pass','reserved','source_conflict','no_svg','measurement_error','auxiliary'])
 def test_unrankable_status_is_excluded(status):
     assert failure_order(row('AA0010.jpg', status=status)) is None
@@ -299,6 +314,8 @@ def test_stop_while_waiting_leaves_foreground_job_alone_and_allows_restart(servi
     manager, rows, _ = service
     foreground = manager.jobs.upload('manual.png', (manager.catalog.root/rows[0]['image']).read_bytes())
     manager.jobs.jobs[foreground['id']]['status'] = 'running'
+    background = manager.jobs.upload('background.png', manager._source(rows[0]))
+    manager.jobs.jobs[background['id']].update(status='running', catalog_background=True)
     manager.start()
     wait_until(lambda: manager.snapshot().get('phase') == 'waiting')
     with pytest.raises(CatalogError, match='bereits'):
@@ -306,8 +323,17 @@ def test_stop_while_waiting_leaves_foreground_job_alone_and_allows_restart(servi
     manager.cancel(); manager.thread.join(5)
     assert manager.snapshot()['status'] == 'stopped'
     assert manager.jobs.jobs[foreground['id']]['status'] == 'running'
+    assert manager.jobs.jobs[background['id']]['status'] == 'running'
     assert manager.snapshot()['completed'] == 0
-    manager.jobs.jobs[foreground['id']]['status'] = 'ready'
+    manager.jobs.jobs[background['id']]['status'] = 'ready'
+    manager.start(); manager.thread.join(5)
+    assert manager.snapshot()['completed'] == 9, manager.snapshot().get('message')
+    assert manager.jobs.jobs[foreground['id']]['status'] == 'running'
+
+
+def test_background_launches_while_workbench_is_busy(service, monkeypatch):
+    manager, _, _ = service
+    monkeypatch.setattr(manager.workbench, 'busy', lambda:True)
     manager.start(); manager.thread.join(5)
     assert manager.snapshot()['completed'] == 9, manager.snapshot().get('message')
 

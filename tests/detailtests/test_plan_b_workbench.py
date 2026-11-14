@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import sys
 import threading
+import time
 import zipfile
 
 import pytest
@@ -250,6 +251,86 @@ def test_workbench_respects_active_gui_conversion(server):
         assert error.value.status == 409
     finally:
         server.jobs.jobs.pop('other')
+
+
+@pytest.mark.parametrize('foreground_kind', ['conversion', 'workbench'])
+@pytest.mark.parametrize('background_first', [False, True])
+@pytest.mark.parametrize('cancel_background', [False, True])
+def test_background_and_foreground_processes_overlap_and_cancel_independently(
+        server, monkeypatch, foreground_kind, background_first, cancel_background):
+    from PIL import Image
+
+    # Keep real process launch, worker tracking, HTTP guards and cancellation;
+    # substitute only the expensive conversion/search command.
+    popen = subprocess.Popen
+    def sleeper(command, **options):
+        if command[0] == sys.executable and '-m' in command:
+            command = [sys.executable, '-c', 'import time; time.sleep(60)']
+        return popen(command, **options)
+    monkeypatch.setattr(gui.subprocess, 'Popen', sleeper)
+    data = io.BytesIO()
+    Image.new('RGB', (40, 40), 'white').save(data, format='PNG')
+    jobs = server.jobs
+    background = jobs.upload('background.png', data.getvalue())
+    manual = jobs.upload('manual.png', data.getvalue())
+    report = server.workbench.prepare(dict(svg=SVG, description=DESCRIPTION, seed=42))
+    base = '/api/workbench/' + report['id']
+
+    def start_foreground():
+        path, payload = ((base + '/start', dict(cases=['original'])) if foreground_kind == 'workbench'
+                         else ('/api/jobs/' + manual['id'] + '/start', dict(description=DESCRIPTION)))
+        status, response = send(server, path, payload)
+        assert status == 200, response
+
+    if not background_first:
+        start_foreground()
+    jobs.start(background['id'], DESCRIPTION, 'quick', background=True)
+    if background_first:
+        start_foreground()
+
+    deadline = time.monotonic() + 5
+    expected = {background['id']} | ({manual['id']} if foreground_kind == 'conversion' else set())
+    while not expected.issubset(jobs.processes) and time.monotonic() < deadline:
+        time.sleep(.01)
+    assert expected.issubset(jobs.processes)
+    background_process = jobs.processes[background['id']]
+    foreground_process = (server.workbench.process if foreground_kind == 'workbench'
+                          else jobs.processes[manual['id']])
+    assert background_process.poll() is foreground_process.poll() is None
+    assert background_process.pid != foreground_process.pid
+
+    # Both foreground entry points remain mutually exclusive.
+    assert send(server, base + '/start', dict(cases=['original']))[0] == 409
+    assert send(server, '/api/jobs/' + manual['id'] + '/start', dict(description=DESCRIPTION))[0] == 409
+    with pytest.raises(gui.RequestError) as exc:
+        jobs.start(background['id'], DESCRIPTION, 'quick', background=True)
+    assert exc.value.status == 409
+
+    foreground_cancel = (base + '/cancel' if foreground_kind == 'workbench'
+                         else '/api/jobs/' + manual['id'] + '/cancel')
+    cancel = '/api/jobs/' + background['id'] + '/cancel' if cancel_background else foreground_cancel
+    assert send(server, cancel, {})[0] == 200
+    stopped, remaining = ((background_process, foreground_process) if cancel_background
+                           else (foreground_process, background_process))
+    assert stopped.poll() is not None
+    assert remaining.poll() is None
+
+
+def test_foreground_history_is_not_displaced_by_background_attempts(server):
+    from PIL import Image
+
+    data = io.BytesIO()
+    Image.new('RGB', (40, 40), 'white').save(data, format='PNG')
+    jobs = server.jobs
+    manual = jobs.upload('manual.png', data.getvalue())
+    for _ in range(21):
+        background = jobs.upload('background.png', data.getvalue())
+        jobs.jobs[background['id']]['catalog_background'] = True
+    status, response = send(server, '/api/jobs?scope=foreground')
+    assert status == 200
+    assert [job['id'] for job in json.loads(response)] == [manual['id']]
+    assert len(json.loads(send(server, '/api/jobs')[1])) == 20
+    assert send(server, '/api/jobs/' + background['id'])[0] == 200
 
 
 def description_table(root, directory, entries):

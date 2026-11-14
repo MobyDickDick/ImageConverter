@@ -23,7 +23,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
-from urllib.request import ProxyHandler, build_opener
+from urllib.request import ProxyHandler, Request, build_opener
 import uuid
 import warnings
 import webbrowser
@@ -228,10 +228,11 @@ class Jobs:
         from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 
         # XML corrections take effect without restarting the long-lived server.
-        self.descriptions = catalog_descriptions()
+        descriptions = catalog_descriptions()
+        self.descriptions = descriptions
         keys = (name, Path(name).stem, getBaseNameFromFileImpl(name))
-        return next((self.descriptions[key.upper()] for key in keys
-                     if key.upper() in self.descriptions), '')
+        return next((descriptions[key.upper()] for key in keys
+                     if key.upper() in descriptions), '')
 
     def upload(self, name: str, data: bytes) -> dict:
         from PIL import Image, ImageOps, UnidentifiedImageError
@@ -274,20 +275,31 @@ class Jobs:
             self.save(job)
             return self.snapshot(job_id)
 
-    def start(self, job_id: str, description: str, profile: str) -> dict:
+    def busy(self, *, background: bool = False) -> bool:
+        """Reserve one slot per lane, including workers still cleaning up."""
+        with self.lock:
+            return any((job['status'] == 'running' or job_id in self.processes)
+                       and bool(job.get('catalog_background')) == background
+                       for job_id, job in self.jobs.items())
+
+    def start(self, job_id: str, description: str, profile: str, *, background: bool = False) -> dict:
         if not isinstance(description, str) or not description.strip() or len(description) > 12000:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
         with self.lock:
-            if self.closed or any(job["status"] == "running" for job in self.jobs.values()):
+            if self.closed or self.busy(background=background):
                 raise RequestError("Es läuft bereits eine Konvertierung. Bitte warten oder abbrechen.", 409)
+            self.folder(job_id)
             previous = self.jobs[job_id]
+            if previous['status'] == 'running' or job_id in self.processes:
+                raise RequestError('Bitte zuerst die laufende Konvertierung beenden.', 409)
             origin = ('user' if description.strip() != previous['description']
                       else previous.get('description_origin', 'user'))
             job = self.editable(job_id)
             job_id = job["id"]
             job.update(description=description.strip(), profile=profile, status="running",
+                       catalog_background=background,
                        description_origin=origin,
                        search_seed=secrets.randbits(64),
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
@@ -748,7 +760,7 @@ class Workbench:
     def start(self, run_id, payload):
         from tools.plan_b_workbench import read_report, save_report
         with self.jobs.lock:
-            if self.jobs.closed or self.busy() or any(j['status'] == 'running' for j in self.jobs.jobs.values()):
+            if self.jobs.closed or self.busy() or self.jobs.busy():
                 raise RequestError('Es läuft bereits eine Konvertierung. Bitte warten oder abbrechen.', 409)
             folder = self.folder(run_id)
             report = read_report(folder)
@@ -810,9 +822,14 @@ class GuiServer(ThreadingHTTPServer):
     def __init__(self, address: tuple[str, int], jobs: Jobs | None = None, *, directory: Path | None = None):
         self.jobs = jobs
         self.workbench = self.catalog = self.catalog_conversion = None
+        self.shutdown_requested = threading.Event()
+        self.shutdown_complete = threading.Event()
+        self.shutdown_response_sent = threading.Event()
+        self._bound = False
         # Bind before reading persisted jobs: a second launch must not mark
         # the running server's conversions as interrupted.
         super().__init__(address, Handler)
+        self._bound = True
         try:
             if self.jobs is None:
                 self.jobs = Jobs(directory if directory is not None else ROOT/'artifacts/gui')
@@ -822,8 +839,6 @@ class GuiServer(ThreadingHTTPServer):
             self.catalog_conversion = CatalogConversion(self.catalog, self.jobs, self.workbench)
         except Exception:
             self.server_close()
-            if jobs is None and self.jobs is not None:
-                self.jobs.close()
             raise
 
     def server_bind(self):
@@ -837,7 +852,10 @@ class GuiServer(ThreadingHTTPServer):
         for manager in (self.catalog_conversion, self.catalog, self.workbench):
             if manager is not None:
                 manager.close()
+        if self._bound and self.jobs is not None:
+            self.jobs.close()
         super().server_close()
+        self.shutdown_complete.set()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -905,7 +923,10 @@ class Handler(BaseHTTPRequestHandler):
                     return self.catalog_get(path, url.query)
                 if path == "/api/jobs":
                     with jobs.lock:
-                        ids = sorted(jobs.jobs, key=lambda key: jobs.jobs[key]["created"], reverse=True)[:20]
+                        foreground = parse_qs(url.query).get('scope') == ['foreground']
+                        ids = sorted((key for key, job in jobs.jobs.items()
+                                      if not foreground or not job.get('catalog_background')),
+                                     key=lambda key: jobs.jobs[key]["created"], reverse=True)[:20]
                         return self.json([jobs.snapshot(key) for key in ids])
                 if match and not match[3]:
                     job_id, asset, _ = match.groups()
@@ -929,6 +950,16 @@ class Handler(BaseHTTPRequestHandler):
                 data = self.rfile.read(length)
                 if len(data) != length:
                     raise RequestError("Upload unvollständig.")
+                if path == '/api/shutdown':
+                    self.server.shutdown_requested.set()
+                    threading.Thread(target=self.server.shutdown, daemon=True).start()
+                    try:
+                        if not self.server.shutdown_complete.wait(timeout=90):
+                            raise RequestError('Der Webserver hat das Beenden noch nicht abgeschlossen.', 503)
+                        self.json(dict(status='stopped', message='Der Webserver ist gestoppt.'))
+                    finally:
+                        self.server.shutdown_response_sent.set()
+                    return
                 if path == "/api/upload":
                     return self.json(jobs.upload(name, data), 201)
                 if path == '/api/pick':
@@ -1081,12 +1112,46 @@ def existing_gui(port: int, directory: Path) -> str | None:
     return None
 
 
+def stop_gui(port: int, directory: Path) -> int:
+    """Stop only the local server belonging to this project and data directory."""
+    url = existing_gui(port, directory)
+    if url is None:
+        try:
+            with socket.create_connection(('127.0.0.1', port), timeout=1):
+                pass
+        except (ConnectionRefusedError, TimeoutError):
+            print('Der ImageConverter-Webserver ist bereits gestoppt.', flush=True)
+            return 0
+        except OSError as exc:
+            print(f'Der Webserver konnte nicht erreicht werden: {exc}', file=sys.stderr)
+            return 1
+        print('Auf diesem Port läuft kein passender ImageConverter-Webserver. '
+              'Bitte Port und --data-dir prüfen.', file=sys.stderr)
+        return 1
+    request = Request(url+'/api/shutdown', data=b'{}', headers={'X-ImageConverter': '1',
+                      'Content-Type': 'application/json'})
+    try:
+        print('Webserver wird beendet; laufende Aufgaben werden abgebrochen …', flush=True)
+        with build_opener(ProxyHandler({})).open(request, timeout=95) as response:
+            result = json.loads(response.read(65536))
+        if not isinstance(result, dict) or result.get('status') != 'stopped':
+            raise ValueError('Der Webserver hat das Beenden nicht bestätigt.')
+        print('ImageConverter-Webserver gestoppt.', flush=True)
+        return 0
+    except (OSError, ValueError) as exc:
+        print(f'Webserver konnte nicht gestoppt werden: {exc}', file=sys.stderr)
+        return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8766)
     parser.add_argument("--no-browser", action="store_true")
+    parser.add_argument('--stop', action='store_true', help='Passenden lokalen Webserver samt Aufgaben beenden.')
     parser.add_argument("--data-dir", type=Path, default=ROOT / "artifacts" / "gui")
     args = parser.parse_args(argv)
+    if args.stop:
+        return stop_gui(args.port, args.data_dir)
     from src.iCCModules.imageCompositeConverterDependencies import activate_vendored_site_packages
     activate_vendored_site_packages()
     try:
@@ -1113,7 +1178,8 @@ def main(argv: list[str] | None = None) -> int:
         pass
     finally:
         server.server_close()
-        jobs.close()
+        if server.shutdown_requested.is_set():
+            server.shutdown_response_sent.wait(timeout=5)
     return 0
 
 

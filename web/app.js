@@ -128,7 +128,7 @@ function renderHistory() {
   controls();
 }
 async function refreshHistory() {
-  history = await request("/api/jobs");
+  history = (await request("/api/jobs?scope=foreground")).filter(job => !job.catalog_background);
   renderHistory();
 }
 async function update(operation, select = false, input = null) {
