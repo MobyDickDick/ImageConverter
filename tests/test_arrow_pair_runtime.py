@@ -14,6 +14,23 @@ from tools.review_conversion_quality import normalized_mse
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.parametrize('size', ['L', 'M', 'S'])
+def test_bottom_arrow_user_wording_reaches_native_fit(size):
+    from src.iCCModules.imageCompositeConverterPerceptionReflection import Reflection
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    description = (ROOT/'tests/fixtures/descriptions/arrow_pair_bottom_user.txt').read_text(encoding='utf-8-sig')
+    _, params = Reflection({'neutral': description}).parse_description('neutral', 'neutral.png')
+    assert params['mode'] == 'dual_arrow_badge'
+    image = cv2.imread(str(ROOT/f'artifacts/images_to_convert/AC0030_{size}.jpg'))
+    h, w = image.shape[:2]
+    result = fit_arrow_pair(w, h, description=description, image=image, render_fn=render,
+                            error_fn=lambda a,b: normalized_mse(a,b)[0])
+    assert result is not None
+    validate_svg_assertions(result['svg'], params['language_assertions'])
+    assert measure_quality(image, result['svg'])['satisfactory']
+    assert len(list(ET.fromstring(result['svg']))) == 4
+
+
 def test_jpeg_tip_fragment_keeps_red_crossbar_and_opposite_heads():
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     description = (ROOT/'tests/fixtures/descriptions/arrow_pair_red_crossbar_user.txt').read_text(encoding='utf-8')

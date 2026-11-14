@@ -47,6 +47,43 @@ def test_triangle_subject_directions_preserve_quotes_and_negation():
     assert normalize_description(normalized) == normalized
 
 
+def test_arrow_subject_and_plural_typo_preserve_quotes_and_negation():
+    text = ('Zwei Dreicke. Der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten. '
+            'Der Pfeil zeigt nicht nach unten. Beschriftung "Dreicke Pfeil nach unten".')
+    normalized = normalize_description(text)
+    assert 'Zwei Dreiecke. Der linke Pfeil mit Spitze nach oben, der rechte Pfeil mit Spitze nach unten.' in normalized
+    assert 'Der Pfeil zeigt nicht nach unten.' in normalized
+    assert '"Dreicke Pfeil nach unten"' in normalized
+    assert normalize_description(normalized) == normalized
+
+
+@pytest.mark.parametrize('fault', ['deformed', 'wrong_direction', 'same_position', 'reflected'])
+def test_described_heads_require_shape_separation_and_displayed_direction(fault):
+    assertions = description_assertions('Zwei vertikale Linien, rot blau, Dreiecke. '
+                                        'Links Spitze nach oben, rechts Spitze nach unten.')
+    left = '<polygon points="2,0 0,4 4,4"/>'
+    right = '<polygon points="20,0 24,0 22,4"/>'
+    if fault == 'deformed':
+        right = '<polygon points="20,0 24,40 22,4"/>'
+    elif fault == 'wrong_direction':
+        right = '<polygon points="22,0 20,4 24,4"/>'
+    elif fault == 'same_position':
+        right = left
+    else:
+        right = '<g transform="matrix(1,0,0,-1,0,4)">'+right+'</g>'
+    with pytest.raises(DescriptionRejected):
+        validate_svg_assertions('<svg>'+left+right+'</svg>', assertions)
+
+
+def test_nested_reflected_sample_heads_are_checked_after_their_transforms():
+    assertions = description_assertions('Zwei vertikale Linien, rot blau, Dreiecke. '
+                                        'Links Spitze nach oben, rechts Spitze nach unten.')
+    svg = ('<svg><g transform="translate(1 2) scale(2)">'
+           '<g transform="matrix(-1,0,0,-1,4,4)"><polygon points="0,0 4,0 2,4"/></g>'
+           '<polygon points="20,0 24,0 22,4"/></g></svg>')
+    validate_svg_assertions(svg, assertions)
+
+
 def test_spitz_and_gegen_direction_wording_preserves_quotes_and_negation():
     text = ('Links zeigt mit dem Spitz gegen oben, rechts mit der Spitze gegen unten. '
             'Spitz nicht nach unten. Beschriftung "Spitz gegen oben".')
@@ -64,7 +101,7 @@ def test_blue_horizontal_bar_color_is_checked_in_both_word_orders(phrase):
     description = ('Zwei vertikale Linien, rot und blau, zwei Dreiecke. '
                    'Links Spitz gegen oben, rechts Spitz nach unten. '+phrase+' Linie.')
     assertions = description_assertions(description)
-    heads = '<polygon points="0,0 4,0 2,4"/><polygon points="20,0 24,0 22,4"/>'
+    heads = '<polygon points="2,0 0,4 4,4"/><polygon points="20,0 24,0 22,4"/>'
     bar = '<rect x="4" y="68" width="26" height="1" fill="blue"/>'
     validate_svg_assertions('<svg>'+heads+bar+'</svg>', assertions)
     with pytest.raises(DescriptionRejected, match='missing_described_horizontal_bar'):
@@ -120,7 +157,8 @@ def test_described_arrow_heads_cannot_be_replaced_by_other_primitives(replacemen
     head = '<polygon points="0,0 4,0 2,4"/>'
     with pytest.raises(DescriptionRejected, match='object_count:triangle:2:1'):
         validate_svg_assertions('<svg>'+head+replacement+'</svg>', assertions)
-    validate_svg_assertions('<svg>'+head+head+'</svg>', assertions)
+    validate_svg_assertions('<svg><polygon points="2,0 0,4 4,4"/>'
+                            '<polygon points="20,0 24,0 22,4"/></svg>', assertions)
 
 
 def test_triangle_count_is_enforced_before_a_pixel_perfect_checkpoint():
@@ -148,7 +186,7 @@ def test_triangle_count_is_enforced_before_a_pixel_perfect_checkpoint():
 def test_described_red_horizontal_bar_requires_color_and_exact_direction(bar, accepted):
     assertions = description_assertions('Zwei vertikale Striche rot blau, Dreiecke, '
         'links Spitze nach oben, rechts Spitze nach unten. Unteres Drittel rote horizontale Linie.')
-    heads = '<polygon points="0,0 4,0 2,4"/><polygon points="20,0 24,0 22,4"/>'
+    heads = '<polygon points="2,0 0,4 4,4"/><polygon points="20,0 24,0 22,4"/>'
     svg = '<svg>'+heads+bar+'</svg>'
     if accepted:
         validate_svg_assertions(svg, assertions)

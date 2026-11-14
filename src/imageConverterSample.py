@@ -188,6 +188,8 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     params = parameters(root)
     svg = lambda: ET.tostring(root, encoding="unicode")
     reference = target.astype(np.float32)
+    assertions = description_assertions(description)
+    guard_assertions = False
     border = np.concatenate((reference[0], reference[-1], reference[:, 0], reference[:, -1]))
     foreground = np.max(abs(reference - np.median(border, axis=0)), axis=2) > 25
     weights = 1 + 4 * foreground.astype(np.float32)
@@ -195,12 +197,19 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
 
     def measure():
         nonlocal evaluations
+        if guard_assertions:
+            validate_svg_assertions(svg(), assertions)
         pixels = render_svg(svg(), width, height)
         squared = np.square(reference - pixels.astype(np.float32)).mean(axis=2) / 255 ** 2
         evaluations += 1
         return float((squared * weights).mean()), float(squared.mean()), pixels
 
     best, best_mse, rendered = measure()
+    try:
+        validate_svg_assertions(svg(), assertions)
+        guard_assertions = True
+    except ValueError:
+        pass  # A conflicting input may improve, but cannot earn final acceptance.
     initial_mse = best_mse
     initial_quality = pixel_quality(target, rendered)
     started = time.monotonic()
@@ -254,7 +263,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
             with configured_image_search(str(source.resolve())) as session:
                 session.spent = time.monotonic()-started
                 fitted = polish_generated_svg(final_svg, target, render_svg,
-                                               assertions=description_assertions(description),
+                                               assertions=assertions,
                                                structure_mode='off', color_order='RGB')
                 if fitted is not None:
                     evaluations += fitted['evaluations']
@@ -265,7 +274,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     quality = pixel_quality(target, rendered)
     description_error = ""
     try:
-        validate_svg_assertions(final_svg, description_assertions(description))
+        validate_svg_assertions(final_svg, assertions)
     except ValueError as exc:
         description_error = str(exc)
     report = dict(initial_mse=initial_mse, final_mse=best_mse,

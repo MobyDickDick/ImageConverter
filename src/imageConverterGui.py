@@ -196,6 +196,14 @@ class Jobs:
                         if quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']:
                             job.update(status='error', result=False)
                     self.save(job)
+                if (job.get('quality') == 'passed' and job.get('result')
+                        and job.get('description_validation_version') != 1):
+                    error = result_description_error(path.parent/'result.svg', job.get('description', ''))
+                    job['description_validation_version'] = 1
+                    if error:
+                        job.update(quality='warning', description_error=error,
+                                   message='Das gespeicherte SVG besteht die erneute Beschreibungsprüfung nicht. Bitte den Entwurf prüfen.')
+                    self.save(job)
             except (OSError, ValueError, KeyError):
                 continue
 
@@ -528,6 +536,9 @@ class Jobs:
         if job.get('status') != 'done' or not job.get('result') or job.get('quality') != 'passed':
             return
         folder = self.folder(job_id)
+        if result_description_error(folder/'result.svg', job.get('description', '')):
+            job['project_save'] = dict(status='skipped', message='Keine Projektablage: Beschreibungsprüfung nicht bestanden.')
+            return
         quality = saved_svg_quality(folder / 'source.png', folder / 'result.svg')
         if not quality or not quality['passed']:
             job['project_save'] = dict(status='skipped', message='Keine Projektablage: erneute Pixelprüfung nicht bestanden.')
@@ -574,13 +585,30 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     report = json.loads(report_path.read_text(encoding="utf-8"))
     if reject_raster_result(result, job):
         return
+    # Recheck the actual deliverable, including old worker reports. A low
+    # global pixel error cannot certify a described but collapsed arrow head.
+    quality = saved_svg_quality(folder/'source.png', result)
+    error = result_description_error(result, job.get('description', ''))
+    report.update(passed=bool(report['passed'] and quality and quality['passed'] and not error),
+                  description_error=error or report.get('description_error', ''))
     shutil.copyfile(result, folder / "result.svg")
     message = "Sample am Original verbessert." if report["improved"] else "Keine messbare Verbesserung gefunden. Der Sample-Stand bleibt erhalten."
     if report.get('stop_reason') == 'quality_target_reached':
         message = 'Das Sample erfüllt die Pixelprüfung bereits; seine Formen bleiben erhalten.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
-               message=message, sample_report=report)
+               message=message, sample_report=report, pixel_quality=quality,
+               description_validation_version=1)
+
+
+def result_description_error(svg: Path, description: str) -> str:
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    try:
+        resolved = resolve_similarity_description(description, catalog_descriptions())
+        validate_svg_assertions(svg.read_text(encoding='utf-8'), description_assertions(resolved.text))
+    except (OSError, ValueError, SyntaxError) as exc:
+        return str(exc)
+    return ''
 
 
 def reject_raster_result(result: Path, job: dict) -> bool:

@@ -12,6 +12,49 @@ import pytest
 from src import imageConverterGui as gui
 
 
+def test_bottom_arrow_user_description_reaches_real_gui_converter(jobs):
+    from xml.etree import ElementTree as ET
+    description = (gui.ROOT/'tests/fixtures/descriptions/arrow_pair_bottom_user.txt').read_text(encoding='utf-8-sig')
+    uploaded = jobs.upload('neutral-bottom-arrows.jpg',
+                           (gui.ROOT/'artifacts/images_to_convert/AC0030_L.jpg').read_bytes())
+    started = jobs.start(uploaded['id'], description, 'quick')
+    jobs.threads[-1].join(timeout=75)
+    result = jobs.snapshot(started['id'])
+    assert result['status'] == 'done' and result['quality'] == 'passed', result
+    assert result['pixel_quality']['foreground_iou'] > .97
+    assert result['project_save']['status'] == 'saved'
+    assert len(list(ET.parse(jobs.folder(result['id'])/'result.svg').getroot())) == 4
+
+
+def test_gui_rechecks_old_sample_report_and_cached_pass_on_restart(jobs):
+    description = (gui.ROOT/'tests/fixtures/descriptions/arrow_pair_bottom_user.txt').read_text(encoding='utf-8-sig')
+    uploaded = jobs.upload('neutral-bottom-arrows.jpg',
+                           (gui.ROOT/'artifacts/images_to_convert/AC0030_L.jpg').read_bytes())
+    job = jobs.jobs[uploaded['id']]
+    job['description'] = description
+    folder = jobs.folder(job['id'])
+    output = folder/'output'
+    output.mkdir()
+    damaged = (gui.ROOT/'tests/fixtures/arrow_pair_deformed_sample.svg').read_bytes()
+    (output/'refined.svg').write_bytes(damaged)
+    (output/'refined.json').write_text(json.dumps(dict(passed=True, improved=True)))
+    gui.collect_sample_result(folder, job, 0)
+    assert job['pixel_quality']['passed']  # Same globally accepted pixels as the report.
+    assert job['quality'] == 'warning' and not job['sample_report']['passed']
+    assert job['sample_report']['description_error'] == 'invalid_described_arrow_head'
+    job.update(quality='passed')
+    job.pop('description_validation_version')
+    jobs.save(job)
+    restored = gui.Jobs(jobs.directory)
+    try:
+        result = restored.snapshot(job['id'])
+        assert result['quality'] == 'warning'
+        assert result['description_error'] == 'invalid_described_arrow_head'
+        assert (folder/'result.svg').read_bytes() == damaged
+    finally:
+        restored.close()
+
+
 def test_red_crossbar_user_description_reaches_real_gui_converter(jobs):
     from xml.etree import ElementTree as ET
     description = (gui.ROOT/'tests/fixtures/descriptions/arrow_pair_red_crossbar_user.txt').read_text(encoding='utf-8').strip()

@@ -119,6 +119,20 @@ def test_sample_refinement_measurably_improves_pixels_and_preserves_input(tmp_pa
     assert "circle" in output.read_text()
 
 
+def test_pixel_passing_deformed_sample_is_rejected_by_its_head_contract(tmp_path):
+    from pathlib import Path
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    root = Path(__file__).resolve().parents[1]
+    sample = root/'tests/fixtures/arrow_pair_deformed_sample.svg'
+    description = (root/'tests/fixtures/descriptions/arrow_pair_bottom_user.txt').read_text(encoding='utf-8-sig')
+    source = root/'artifacts/images_to_convert/AC0030_L.jpg'
+    report = refine(source, sample, tmp_path/'result.svg', description, .01)
+    assert report['initial_quality']['passed']  # The old global score missed the lost head.
+    assert not report['passed'] and report['description_error'] == 'invalid_described_arrow_head'
+    with pytest.raises(ValueError, match='invalid_described_arrow_head'):
+        validate_svg_assertions(sample.read_text(encoding='utf-8'), description_assertions(description))
+
+
 def test_matching_sample_never_gets_worse_and_reports_description_conflict(tmp_path):
     source, sample, output = (tmp_path / name for name in ("source.png", "sample.svg", "result.svg"))
     sample.write_bytes(SAMPLE)
