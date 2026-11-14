@@ -1,5 +1,6 @@
 """Diagnostic evidence must survive failures, retries, cancellation and restart."""
 import io
+import csv
 import json
 from http.client import HTTPConnection
 from pathlib import Path
@@ -128,6 +129,18 @@ def test_failed_original_does_not_skip_variations_and_retries_keep_old_evidence(
     assert 'attempt_0001' in csv and 'attempt_0002' in csv
 
 
+def test_csv_preserves_populated_binary_iou_and_future_metrics(prepared):
+    _, report = prepared
+    metrics = dict(normalized_mse=.001, foreground_iou=.93, foreground_iou_binary=.91,
+                   future_metric=.123)
+    report['attempts'] = [dict(id='attempt_0001', iterations=64, timeout_seconds=60,
+        results=[dict(case_id='original', satisfactory=False, failures=['edge_alignment_outside_limit'],
+                      elapsed_seconds=2., description='Minus oben.', metrics=metrics)])]
+    row, = csv.DictReader(io.StringIO(wb.export_csv(report).decode('utf-8-sig')))
+    assert row['foreground_iou_binary'] == '0.91' and row['future_metric'] == '0.123'
+    assert row['satisfactory'] == 'False' and row['failures'] == 'edge_alignment_outside_limit'
+
+
 def test_exception_preserves_partial_results_and_marks_batch_error(prepared, monkeypatch):
     folder, _ = prepared
     def convert(case, output, **kwargs):
@@ -190,6 +203,48 @@ def test_http_prepare_notes_exports_seed_precision_and_path_isolation(server):
         assert 'workbench.csv' in bundle.namelist()
     assert send(server, base + '/report')[0] == 200
     assert send(server, base + '/csv')[0] == 200
+
+
+def test_populated_report_csv_zip_and_native_save_export_share_the_same_data(server, monkeypatch):
+    workbench = server.workbench
+    report = workbench.prepare(dict(svg=SVG, description=DESCRIPTION, seed=42))
+    folder = workbench.folder(report['id'])
+    saved = wb.read_report(folder)
+    result = dict(case_id='original', satisfactory=False, failures=['edge_alignment_outside_limit'],
+        elapsed_seconds=2., description='Ein Kreis.', metrics=dict(normalized_mse=.02, foreground_iou_binary=.7))
+    saved['attempts'] = [dict(id='attempt_0001', iterations=64, timeout_seconds=60, results=[result])]
+    saved['cases'][0]['result'] = result
+    wb.save_report(folder, saved)
+    base = '/api/workbench/'+report['id']
+    json_status, json_data = send(server, base+'/report')
+    csv_status, csv_data = send(server, base+'/csv')
+    zip_status, zip_data = send(server, base+'/bundle')
+    assert (json_status, csv_status, zip_status) == (200,200,200)
+    assert json.loads(json_data)['summary']['quality_failed'] == 1
+    assert 'foreground_iou_binary' in csv_data.decode('utf-8-sig')
+    with zipfile.ZipFile(io.BytesIO(zip_data)) as archive:
+        assert archive.read('workbench.csv') == csv_data
+    exported = []
+    def dialog(source, filename, directory, **kwargs):
+        exported.append((filename, source.read_bytes(), kwargs))
+        return dict(saved=True, path=str(folder/filename))
+    monkeypatch.setattr(gui, 'save_file_dialog', dialog)
+    for kind, extension in [('report','json'),('csv','csv'),('bundle','zip')]:
+        assert send(server, base+'/export', dict(format=kind), headers={})[0] == 403
+        status, data = send(server, base+'/export', dict(format=kind))
+        assert status == 200 and json.loads(data)['saved']
+        assert exported[-1][2]['default_extension'] == extension
+    assert exported[0][1] == json_data and exported[1][1] == csv_data
+    assert not workbench.jobs.save_lock.locked()
+    monkeypatch.setattr(gui, 'save_file_dialog', lambda *a,**kw: dict(saved=False))
+    assert send(server, base+'/export', dict(format='report')) == (200,b'{"saved": false}')
+    assert send(server, base+'/export', dict(format='invalid'))[0] == 400
+    assert send(server, base+'/export', dict(format=['bundle']))[0] == 400
+    def failed_dialog(*args, **kwargs):
+        raise gui.RequestError('Testdialog nicht verfügbar.')
+    monkeypatch.setattr(gui, 'save_file_dialog', failed_dialog)
+    assert send(server, base+'/export', dict(format='report'))[0] == 400
+    assert not workbench.jobs.save_lock.locked()
 
 
 def test_cancellation_kills_process_and_restart_preserves_completed_results(server):

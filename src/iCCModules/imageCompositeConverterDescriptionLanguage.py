@@ -37,6 +37,7 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
             (r'\b(spitze\s+nach\s+)u+n+t+e+n+\b', r'\1unten'),
             (r'\b(spitze\s+nach\s+)o+b+e+n+\b', r'\1oben'),
             (r'\bminnus\b', 'Minus'),
+            (r'\bminzuszeichen\b', 'Minuszeichen'),
             (r'\bhorizonal(e|er|en|em|es)?\b', r'horizontal\1'),
             (r'\bvertial(e|er|en|em|es)?\b', r'vertikal\1'),
             (r'\brunde[nrms]?\s+scheibe\b', 'Kreisscheibe'),

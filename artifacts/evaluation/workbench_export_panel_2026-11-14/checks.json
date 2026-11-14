@@ -1,0 +1,54 @@
+{
+  "tests": {
+    "crossed_gradient_panel": 37,
+    "description_language": 56,
+    "plan_b_workbench": 33,
+    "save_gui_recovery_regressions": 15,
+    "python_total": 141,
+    "javascript_exports_activity_background": 10,
+    "powershell_syntax": "passed",
+    "local_http_retry": "One unchanged retry after a Windows host socket abort passed."
+  },
+  "diagnostic_replay": {
+    "before_passed": 5,
+    "before_quality_failed": 12,
+    "after_passed": 17,
+    "after_quality_failed": 0,
+    "independent_librsvg_passed": 17,
+    "scope": "Latest results across the interrupted 14-case attempt and three completed isolated cases; original attempt preserved."
+  },
+  "live_activation": {
+    "workbench_native_exports": true,
+    "downloads": {
+      "report": {
+        "status": 200,
+        "bytes": 296528,
+        "disposition": "attachment; filename=\"report.json\""
+      },
+      "csv": {
+        "status": 200,
+        "bytes": 30882,
+        "disposition": "attachment; filename=\"workbench.csv\""
+      },
+      "bundle": {
+        "status": 200,
+        "bytes": 9945792,
+        "disposition": "attachment; filename=\"plan-b-workbench.zip\""
+      }
+    },
+    "no_running_workbench": true,
+    "fresh_single_attempt": {
+      "id": "fd9cf9a209cf4de4af6a4031eae7a315",
+      "seed": "506391347870035632",
+      "summary": {
+        "total": 17,
+        "completed": 17,
+        "passed": 17,
+        "quality_failed": 0,
+        "execution_failed": 0,
+        "failure_counts": {},
+        "satisfactory": true
+      }
+    }
+  }
+}

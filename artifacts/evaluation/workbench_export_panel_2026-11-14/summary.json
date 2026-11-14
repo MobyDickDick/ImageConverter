@@ -1,0 +1,514 @@
+{
+  "before": {
+    "total": 17,
+    "completed": 17,
+    "passed": 5,
+    "quality_failed": 12,
+    "execution_failed": 0,
+    "failure_counts": {
+      "edge_alignment_outside_limit": 6,
+      "foreground_iou_outside_limit": 10
+    },
+    "satisfactory": false
+  },
+  "after": {
+    "total": 17,
+    "completed": 17,
+    "passed": 17,
+    "quality_failed": 0,
+    "execution_failed": 0,
+    "failure_counts": {},
+    "satisfactory": true
+  },
+  "seed": "8573113800155691639",
+  "original_attempt_preserved": true,
+  "same_source_and_description": true,
+  "fixed_limits": {
+    "max_normalized_mse": 0.01,
+    "max_foreground_mse": 0.04,
+    "min_edge_alignment": 0.72,
+    "min_foreground_iou": 0.85,
+    "max_svg_elements": 80,
+    "max_path_commands": 160
+  },
+  "results": [
+    {
+      "case_id": "original",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0026755237486213446,
+        "foreground_mse": 0.004419374745339155,
+        "edge_alignment": 0.9381580948829651,
+        "foreground_iou": 0.9181011997913406,
+        "foreground_iou_binary": 0.9181011997913406
+      },
+      "input_sha256": "bf4ca6956ea4b4693496d1f1aa47f7d8d7f4724458095ab5d27d24fee9a07ad1",
+      "output_sha256": "c2327889675ed3bc189aedfe2a28d54fba371c34556a0ce96c3898e568062789",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_01",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0033118475694209337,
+        "foreground_mse": 0.005696434993296862,
+        "edge_alignment": 0.8938319683074951,
+        "foreground_iou": 0.9355632070831283,
+        "foreground_iou_binary": 0.9355632070831283
+      },
+      "input_sha256": "62a64a819c051a045b82ab133e73f8d5219c08999c6be16eaf85a6c75aaa1997",
+      "output_sha256": "3b7271c7fc8a051cbdee5898adf3c869671d9619904258c3135f88fa6be09bd5",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_02",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.003590573323890567,
+        "foreground_mse": 0.0063370331190526485,
+        "edge_alignment": 0.921110987663269,
+        "foreground_iou": 0.9045433685176687,
+        "foreground_iou_binary": 0.9045433685176687
+      },
+      "input_sha256": "220fc66bc56df45dd582ac369ac908d0e7ad1288134b1c440245961a65c92448",
+      "output_sha256": "93c7ff9b4bdff0aceb1b8f06a9c2594fd4809d08c3cedd4b53823b7486545017",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_03",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.003077200148254633,
+        "foreground_mse": 0.005249884910881519,
+        "edge_alignment": 0.9396805763244629,
+        "foreground_iou": 0.9376218323586745,
+        "foreground_iou_binary": 0.9376218323586745
+      },
+      "input_sha256": "527b80043a261352d8efec10c1f442deea95c527c8269e260463e56606692b38",
+      "output_sha256": "39342be615479df917bae1a7f8a807ecb76e605a1d118097a3d8b7be936d9390",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_04",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0028554724995046854,
+        "foreground_mse": 0.004825356416404247,
+        "edge_alignment": 0.9227705001831055,
+        "foreground_iou": 0.94009900990099,
+        "foreground_iou_binary": 0.94009900990099
+      },
+      "input_sha256": "d480bd05e65feda69ec7d16c1a22f305a838559a422395912817b2843bc4a6cd",
+      "output_sha256": "5b67465232591c01737ddc9c8f0adc42a25ec52946244a08f4fce114525aaa4c",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_05",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0033922577276825905,
+        "foreground_mse": 0.0058445921167731285,
+        "edge_alignment": 0.9344589710235596,
+        "foreground_iou": 0.9097826086956522,
+        "foreground_iou_binary": 0.9097826086956522
+      },
+      "input_sha256": "15d880121952976e0b1fcd3ea35fbe76d18128403a338234f0f7c6759f4b65f1",
+      "output_sha256": "4642fec8d469ef3aaf39b99e19bf2ad76ab4bd6f0a01fb43a76df566079fd0c2",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_06",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0035975631326436996,
+        "foreground_mse": 0.0063621061854064465,
+        "edge_alignment": 0.9309090375900269,
+        "foreground_iou": 0.9052437902483901,
+        "foreground_iou_binary": 0.9052437902483901
+      },
+      "input_sha256": "6647bf8835f5b65d6f1e9b287342c82399b60ce75347fd1695c59d16582c30d2",
+      "output_sha256": "55d62a5a6779ce952448ed8b9dbcfd154d3263e7fcc21cad8c62697368559cb0",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_07",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0032505339477211237,
+        "foreground_mse": 0.005549871828407049,
+        "edge_alignment": 0.9199881553649902,
+        "foreground_iou": 0.9410977242302544,
+        "foreground_iou_binary": 0.9410977242302544
+      },
+      "input_sha256": "aec7476301e1508652f3a8ee84effe196e8cb1f6c987706698c0d50391ec6e2f",
+      "output_sha256": "ebcfa83d0932929e57518f93e1825a52535f9dc647be4d66d7ede8cf91da890f",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_08",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0028405371122062206,
+        "foreground_mse": 0.004748317878693342,
+        "edge_alignment": 0.9393904209136963,
+        "foreground_iou": 0.9408970976253298,
+        "foreground_iou_binary": 0.9408970976253298
+      },
+      "input_sha256": "41d4e9577220c15f2141b37526bf2b7f98891187d266b5e28430171518a3b6de",
+      "output_sha256": "fcd42ff7fe318c735f036953b07b2c4904fefd9090273dfb60875ad7b7b94325",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_09",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.00299103744328022,
+        "foreground_mse": 0.004867808893322945,
+        "edge_alignment": 0.944077730178833,
+        "foreground_iou": 0.912217659137577,
+        "foreground_iou_binary": 0.912217659137577
+      },
+      "input_sha256": "0fa963ac7329ca88e06a4b020a404ea1d8f8b345d683c90c0f91f4577ac0a6e9",
+      "output_sha256": "78d77a8494bc45868463438bda677d6a50d285a09dfca40faba0c5a6c31b81ba",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_10",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0028844764456152916,
+        "foreground_mse": 0.005090749356895685,
+        "edge_alignment": 0.9482268691062927,
+        "foreground_iou": 0.9104398516163222,
+        "foreground_iou_binary": 0.9104398516163222
+      },
+      "input_sha256": "a2f467c57e331c1aebc82088b1ac8e3dc06f15bf0b4debb442cc93770fe1e259",
+      "output_sha256": "f98204c8063810c9f5c53a53384bc2df4e566e77c31b9fdbf9be97a12360214b",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_11",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0032568287570029497,
+        "foreground_mse": 0.005564009305089712,
+        "edge_alignment": 0.9309651851654053,
+        "foreground_iou": 0.9111470113085622,
+        "foreground_iou_binary": 0.9111470113085622
+      },
+      "input_sha256": "276675588ebd2e02bd0927b7ba504d60a3d3cf39b2b500e3704424f5a6f25ebe",
+      "output_sha256": "c84f5d6b52bcf1a41605013739dcd96955a437c6c9ce69199439edbca928317f",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_12",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0032847949769347906,
+        "foreground_mse": 0.00586790731176734,
+        "edge_alignment": 0.9232796430587769,
+        "foreground_iou": 0.9335774058577406,
+        "foreground_iou_binary": 0.9335774058577406
+      },
+      "input_sha256": "a920fa618f94ca51f74085b83e505d8820c1f8a9f604888ea1c5a9184dbe092b",
+      "output_sha256": "fa507dfadf96936606f184ca4b937485726a22ec8b4cf2ce56f13b5524bf1bd5",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_13",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.003405327210202813,
+        "foreground_mse": 0.006145060062408447,
+        "edge_alignment": 0.9355889558792114,
+        "foreground_iou": 0.9050567595459237,
+        "foreground_iou_binary": 0.9050567595459237
+      },
+      "input_sha256": "5a4d3977edef45be44ecdbea1d82b2ed2aa7e2cb650987549316cd7a3ad85161",
+      "output_sha256": "a1bb319c7723985af37314e743b10aba51fec2ee4de74ee50ee5005ce24454f1",
+      "artifact_root": "attempts/attempt_0002",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_14",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.003546061459928751,
+        "foreground_mse": 0.006268485449254513,
+        "edge_alignment": 0.9307090044021606,
+        "foreground_iou": 0.9119815668202765,
+        "foreground_iou_binary": 0.9119815668202765
+      },
+      "input_sha256": "5ae0e79b4c6a0bfa81baa90a76df209482e07a979cd618a3c26346785d4a23bf",
+      "output_sha256": "edbb7b4aad171e478a145d93bc24b16f3fceaabb55a160c5ff127c34ee1d2f40",
+      "artifact_root": "attempts/attempt_0003",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_15",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0030578740406781435,
+        "foreground_mse": 0.0051939720287919044,
+        "edge_alignment": 0.944139301776886,
+        "foreground_iou": 0.9425339366515837,
+        "foreground_iou_binary": 0.9425339366515837
+      },
+      "input_sha256": "2bbe115b822856fbc2ae71f2d8f7b1e993f5a8ddc54a18ee8fdec48e8dce87a9",
+      "output_sha256": "1763973759fcf2f668a4ecd7ff02157537eec923d7441e47ee0d0dae65ec9c24",
+      "artifact_root": "attempts/attempt_0003",
+      "blocked_svg_reads": []
+    },
+    {
+      "case_id": "probe_16",
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.002866538241505623,
+        "foreground_mse": 0.004830643534660339,
+        "edge_alignment": 0.9377448558807373,
+        "foreground_iou": 0.942716049382716,
+        "foreground_iou_binary": 0.942716049382716
+      },
+      "input_sha256": "77f106b44c59d94eed811a0ca62bc1aa86f298dc79d713b810289716b6872c73",
+      "output_sha256": "e8de3791b1e3657de172e2c86656d7aa083eecf93b0c167288e035e606d3463b",
+      "artifact_root": "attempts/attempt_0003",
+      "blocked_svg_reads": []
+    }
+  ],
+  "independent_renderer": [
+    {
+      "case_id": "original",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0004881007189396769,
+        "foreground_mse": 0.0007677680114284158,
+        "edge_alignment": 0.9038351774215698,
+        "foreground_iou": 0.9676466584205627,
+        "foreground_iou_binary": 0.9429494079655544
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_01",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0006351385964080691,
+        "foreground_mse": 0.0010983400279656053,
+        "edge_alignment": 0.9236048460006714,
+        "foreground_iou": 0.9663951120162932,
+        "foreground_iou_binary": 0.9663951120162932
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_02",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0006463422905653715,
+        "foreground_mse": 0.0011582362931221724,
+        "edge_alignment": 0.9611449837684631,
+        "foreground_iou": 0.9665518937530743,
+        "foreground_iou_binary": 0.9665518937530743
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_03",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005246151122264564,
+        "foreground_mse": 0.0008987704641185701,
+        "edge_alignment": 0.9316509962081909,
+        "foreground_iou": 0.974120082815735,
+        "foreground_iou_binary": 0.974120082815735
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_04",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0004837369197048247,
+        "foreground_mse": 0.0007872281712479889,
+        "edge_alignment": 0.9528065919876099,
+        "foreground_iou": 0.9658685685175752,
+        "foreground_iou_binary": 0.9658685685175752
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_05",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005830209702253342,
+        "foreground_mse": 0.0010026635136455297,
+        "edge_alignment": 0.9686399698257446,
+        "foreground_iou": 0.9440993788819876,
+        "foreground_iou_binary": 0.9440993788819876
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_06",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0007170835160650313,
+        "foreground_mse": 0.00128672004211694,
+        "edge_alignment": 0.9603415727615356,
+        "foreground_iou": 0.9650246305418719,
+        "foreground_iou_binary": 0.9650246305418719
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_07",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0006245928816497326,
+        "foreground_mse": 0.0010864799842238426,
+        "edge_alignment": 0.9584069848060608,
+        "foreground_iou": 0.968158744808491,
+        "foreground_iou_binary": 0.968158744808491
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_08",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005781237850897014,
+        "foreground_mse": 0.0009581298218108714,
+        "edge_alignment": 0.8986819982528687,
+        "foreground_iou": 0.9603691639522258,
+        "foreground_iou_binary": 0.9603691639522258
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_09",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005502643180079758,
+        "foreground_mse": 0.0009012504015117884,
+        "edge_alignment": 0.9355785846710205,
+        "foreground_iou": 0.9614130434782608,
+        "foreground_iou_binary": 0.9614130434782608
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_10",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005201708409003913,
+        "foreground_mse": 0.0008896937360987067,
+        "edge_alignment": 0.970012366771698,
+        "foreground_iou": 0.9310532030401737,
+        "foreground_iou_binary": 0.9310532030401737
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_11",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005881104152649641,
+        "foreground_mse": 0.0010358369909226894,
+        "edge_alignment": 0.9792220592498779,
+        "foreground_iou": 0.9638968481375358,
+        "foreground_iou_binary": 0.9638968481375358
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_12",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0006464903708547354,
+        "foreground_mse": 0.0011288862442597747,
+        "edge_alignment": 0.9495645761489868,
+        "foreground_iou": 0.9453580901856764,
+        "foreground_iou_binary": 0.9453580901856764
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_13",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0006574307335540652,
+        "foreground_mse": 0.0012309985468164086,
+        "edge_alignment": 0.9629220962524414,
+        "foreground_iou": 0.9570720968629609,
+        "foreground_iou_binary": 0.9570720968629609
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_14",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0006371397757902741,
+        "foreground_mse": 0.001168214250355959,
+        "edge_alignment": 0.9676238298416138,
+        "foreground_iou": 0.9670599803343166,
+        "foreground_iou_binary": 0.9670599803343166
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_15",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.0005298133473843336,
+        "foreground_mse": 0.0009238416096195579,
+        "edge_alignment": 0.9777565002441406,
+        "foreground_iou": 0.9961685823754789,
+        "foreground_iou_binary": 0.9961685823754789
+      },
+      "failures": []
+    },
+    {
+      "case_id": "probe_16",
+      "satisfactory": true,
+      "metrics": {
+        "normalized_mse": 0.00054804707178846,
+        "foreground_mse": 0.0009432109072804451,
+        "edge_alignment": 0.9699611663818359,
+        "foreground_iou": 0.9947753396029259,
+        "foreground_iou_binary": 0.9947753396029259
+      },
+      "failures": []
+    }
+  ]
+}

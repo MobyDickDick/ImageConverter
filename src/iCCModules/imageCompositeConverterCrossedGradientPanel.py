@@ -16,7 +16,8 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _register
 
 def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, error_fn):
     text = ' '.join(normalize_description(description).casefold().split())
-    if not (all(t in text for t in ('grau', 'rechteck', 'kreuz', 'diagonal', 'minus', 'horizontal', 'verlauf'))
+    crossed = 'kreuz' in text or bool(re.search(r'\b(?:zwei|beide[nr]?|2)\s+(?:\w+\s+){0,3}diagonalen\b', text))
+    if not (crossed and all(t in text for t in ('grau', 'rechteck', 'diagonal', 'minus', 'horizontal', 'verlauf'))
             and any(t in text for t in ('rand', 'umrandung', 'rahmen'))
             and any(t in text for t in ('abgeschnitten', 'begrenzt'))):
         return None
@@ -89,7 +90,10 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
         return None
     i = 1+int(np.argmax(mark_stats[1:, cv2.CC_STAT_AREA]))
     mx,my,mw,mh,mark_area = mark_stats[i]
-    if not (mw >= mh*2.5 and mw >= w*.12 and mark_area >= mw*mh*.7):
+    # Subpixel placement spreads a short antialiased minus over three rows;
+    # its thresholded outer rows need not fill 70% of the bounding rectangle.
+    # The horizontal aspect, connected support and local render check remain.
+    if not (mw >= mh*2.5 and mw >= w*.12 and mark_area >= mw*mh*.6):
         return None
     minus_shade = float(np.percentile(gray[marks==i],10))
     rim = float(np.percentile(np.concatenate((gray[y:y+h,x+1],gray[y:y+h,x+w-2],

@@ -9,6 +9,7 @@ from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMa
 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
 from tools.review_conversion_quality import normalized_mse
 from tools.run_plan_b_variations import measure_quality, render
+from tools.run_plan_b_variations import make_original_case, make_variations
 
 ROOT = Path(__file__).resolve().parents[1]
 NS = {'s':'http://www.w3.org/2000/svg'}
@@ -111,3 +112,26 @@ def test_original_gui_description_selects_the_same_model_without_rewriting_user_
     assert description == original and 'Minnus-Zeichen' in description and 'horizonalen' in description
     assert measure_quality(image,result['svg'])['satisfactory']
     assert_structure(result['svg'])
+
+
+WORKBENCH_SVG = (ROOT/'tests/fixtures/crossed_panel_workbench.svg').read_text(encoding='utf-8')
+WORKBENCH_DESCRIPTION = (ROOT/'tests/fixtures/descriptions/crossed_panel_workbench_user.txt').read_text(encoding='utf-8').strip()
+
+
+@pytest.mark.parametrize('case', [make_original_case(WORKBENCH_SVG, WORKBENCH_DESCRIPTION),
+    *make_variations(WORKBENCH_SVG, WORKBENCH_DESCRIPTION, 8573113800155691639, expand_canvas=True)],
+    ids=lambda case: case['case_id'])
+def test_user_workbench_all_seventeen_transformed_panels_keep_the_minus(case):
+    image = render(case['svg'],case['width'],case['height'])
+    fitted = fit(image,case['description'])
+    assert fitted is not None
+    assert measure_quality(image,fitted['svg'])['satisfactory']
+    assert_structure(fitted['svg'])
+    assert fitted['details']['passed'] and fitted['details']['minus_mse'] < .02
+
+
+@pytest.mark.parametrize('description', [WORKBENCH_DESCRIPTION.replace('zwei dunkelgraue Diagonalen', 'eine dunkelgraue Diagonale'),
+    WORKBENCH_DESCRIPTION.replace('Minzuszeichen', 'Pluszeichen'),
+    WORKBENCH_DESCRIPTION+' ohne Kreuz'])
+def test_workbench_wording_keeps_conflicting_structures_rejected(description):
+    assert fit(render(WORKBENCH_SVG,40,80),description) is None

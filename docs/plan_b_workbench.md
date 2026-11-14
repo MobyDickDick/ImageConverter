@@ -56,9 +56,16 @@ CLI-Abnahme behält ihre festen Zeichenflächen für historische Wiederholungen.
    Oberhalb der Aufgaben zeigt **Ein Vorgang läuft** den aktiven Vorgang mit
    **Diesen Vorgang abbrechen** an. Das funktioniert auch, wenn eine andere
    Plan-B-Aufgabe geöffnet ist oder die normale Bildkonvertierung läuft.
+   Bei einer Plan-B-Aufgabe zeigt die Leiste den aktuellen Fall und den
+   Fortschritt. **Laufende Aufgabe öffnen** führt direkt zu deren Ergebnissen,
+   auch wenn gerade eine andere, lediglich vorbereitete Aufgabe angezeigt wird.
 5. Einen Fallnamen anklicken, Vergleich und Messwerte prüfen und Beobachtungen
    beziehungsweise unterschiedliche Lösungshypothesen als Notiz speichern.
 6. JSON-Bericht, CSV-Messdaten oder das gesamte Datenpaket als ZIP herunterladen.
+   Unter Windows öffnen diese Links den Systemdialog **Datei speichern unter**;
+   der Exportordner wird unabhängig vom SVG-Speicherziel gemerkt. Abbrechen
+   verändert den gespeicherten Bericht nicht. Andere Browser verwenden den
+   normalen Dateidownload. Fehlermeldungen bleiben in der Workbench sichtbar.
    Gespeicherte Aufgaben lassen sich nach einem Serverneustart wieder öffnen.
 
 Eigenständige SVGs bis 2 MB, 4096 Pixel pro Seite und insgesamt 4 Megapixel
@@ -114,6 +121,9 @@ Seeds verlustfrei. Quellen und ältere Versuche werden nicht automatisch gelösc
 das ZIP kann deshalb mit vielen Wiederholungen deutlich wachsen.
 
 Der JSON-Bericht verwendet das eigenständige Schema `plan_b_workbench_v1`.
+CSV und ZIP enthalten auch die binäre Vordergrund-IoU. Zusätzliche Messwerte
+älterer oder neuerer Berichte werden als weitere CSV-Spalten übernommen und
+blockieren den Export nicht.
 Er ist kein Ersatz für die Abnahmeberichte des bestehenden CI-Workflows und
 erstellt keine GitHub-Issues oder automatischen Algorithmusänderungen.
 Die fachliche Nachbearbeitung folgt dem

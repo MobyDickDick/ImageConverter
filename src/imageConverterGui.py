@@ -19,6 +19,7 @@ import signal
 import socket
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -119,12 +120,14 @@ def write_description_table(path: Path, description: str, catalog: dict[str, str
         writer.writerow(["UPLOAD", description])
 
 
-def save_svg_dialog(source: Path, suggested_name: str, initial_directory: str = '') -> dict:
+def save_file_dialog(source: Path, suggested_name: str, initial_directory: str = '', *,
+                     file_filter: str = 'SVG-Vektorgrafik (*.svg)|*.svg', default_extension: str = 'svg') -> dict:
     if os.name != "nt":
         raise RequestError("Der System-Speicherdialog ist unter Windows verfügbar. Bitte den Browser-Download verwenden.")
     environment = os.environ.copy()
     environment.update(ICC_GUI_SOURCE=str(source), ICC_GUI_FILENAME=suggested_name,
-                       ICC_GUI_INITIAL_DIRECTORY=initial_directory)
+                       ICC_GUI_INITIAL_DIRECTORY=initial_directory,
+                       ICC_GUI_FILE_FILTER=file_filter, ICC_GUI_DEFAULT_EXTENSION=default_extension)
     script = (ROOT / "tools" / "save_svg_dialog.ps1").read_text(encoding="utf-8")
     try:
         completed = subprocess.run(
@@ -138,6 +141,10 @@ def save_svg_dialog(source: Path, suggested_name: str, initial_directory: str = 
         return result
     except (OSError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
         raise RequestError("Der Speicherdialog konnte nicht geöffnet werden. Bitte den Browser-Download verwenden.") from exc
+
+
+def save_svg_dialog(source: Path, suggested_name: str, initial_directory: str = '') -> dict:
+    return save_file_dialog(source, suggested_name, initial_directory)
 
 
 def open_file_dialog(kind: str, initial_directory: str) -> dict:
@@ -980,6 +987,50 @@ class Workbench:
             save_report(folder, report)
             return self.snapshot(run_id)
 
+    def export_data(self, run_id, kind):
+        from tools.plan_b_workbench import export_csv
+        if not isinstance(kind, str) or kind not in {'report', 'csv', 'bundle'}:
+            raise RequestError('Unbekanntes Exportformat.')
+        with self.jobs.lock:
+            report = self.snapshot(run_id)
+            if kind == 'report':
+                return (json.dumps(report, ensure_ascii=False, indent=2).encode('utf-8'),
+                        'application/json; charset=utf-8', 'report.json')
+            if kind == 'csv':
+                return export_csv(report), 'text/csv; charset=utf-8', 'workbench.csv'
+            if report['status'] == 'running':
+                raise RequestError('Bitte den Lauf vor dem Export beenden.', 409)
+            folder = self.folder(run_id)
+            buffer = io.BytesIO()
+            with zipfile.ZipFile(buffer, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+                for entry in folder.rglob('*'):
+                    if entry.is_file():
+                        archive.write(entry, entry.relative_to(folder).as_posix())
+                archive.writestr('workbench.csv', export_csv(report))
+            return buffer.getvalue(), 'application/zip', 'plan-b-workbench.zip'
+
+    def save_export(self, run_id, payload):
+        kind = payload.get('format')
+        data, _, filename = self.export_data(run_id, kind)
+        if not self.jobs.save_lock.acquire(blocking=False):
+            raise RequestError('Ein Speicherdialog ist bereits geöffnet.', 409)
+        try:
+            extension = filename.rsplit('.', 1)[-1]
+            file_filter = {'report': 'JSON-Bericht (*.json)|*.json',
+                           'csv': 'CSV-Messdaten (*.csv)|*.csv',
+                           'bundle': 'ZIP-Archiv (*.zip)|*.zip'}[kind]
+            with tempfile.TemporaryDirectory(prefix='imageconverter-export-') as directory:
+                source = Path(directory)/filename
+                source.write_bytes(data)
+                result = save_file_dialog(source, filename,
+                    self.jobs.dialog_locations.get('workbench_export', ''),
+                    file_filter=file_filter, default_extension=extension)
+            if result.get('saved'):
+                self.jobs.remember_location('workbench_export', Path(result['path']).parent)
+            return result
+        finally:
+            self.jobs.save_lock.release()
+
     def close(self):
         if self.busy():
             self.cancel(self.active_id)
@@ -1082,6 +1133,7 @@ class Handler(BaseHTTPRequestHandler):
                 if path == '/api/config':
                     return self.json(dict(native_file_dialogs=os.name == 'nt',
                         application='imageconverter_gui', api_version=1,
+                        workbench_native_exports=True,
                         parallel_background_conversion=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
@@ -1169,9 +1221,11 @@ class Handler(BaseHTTPRequestHandler):
                         return self.json(workbench.inspect(payload))
                     if path == '/api/workbench/prepare':
                         return self.json(workbench.prepare(payload), 201)
-                    wb = re.fullmatch(r'/api/workbench/([0-9a-f]{32})/(start|cancel|note|reprepare)', path)
+                    wb = re.fullmatch(r'/api/workbench/([0-9a-f]{32})/(start|cancel|note|reprepare|export)', path)
                     if wb:
                         run_id, action = wb.groups()
+                        if action == 'export':
+                            return self.json(workbench.save_export(run_id, payload))
                         return self.json(workbench.cancel(run_id) if action == 'cancel' else getattr(workbench, action)(run_id, payload))
                 if match:
                     job_id, action, remove = match.groups()
@@ -1233,31 +1287,19 @@ class Handler(BaseHTTPRequestHandler):
             runs = []
             for report_path in sorted(workbench.directory.glob('*/report.json'), key=lambda p: p.stat().st_mtime, reverse=True)[:30]:
                 report = workbench.snapshot(report_path.parent.name)
-                runs.append({k: report[k] for k in ('id', 'name', 'created', 'seed', 'status', 'summary')})
+                runs.append({k: report[k] for k in ('id', 'name', 'created', 'seed', 'status', 'summary', 'active_case')})
             return self.json(runs)
         match = re.fullmatch(r'/api/workbench/([0-9a-f]{32})(?:/(report|csv|bundle|asset))?', path)
         if not match:
             raise RequestError('Nicht gefunden.', 404)
         run_id, asset = match.groups()
+        if asset in {'report', 'csv', 'bundle'}:
+            data, mime, filename = workbench.export_data(run_id, asset)
+            return self.respond(data, mime, download=filename)
         report = workbench.snapshot(run_id)
         folder = workbench.folder(run_id)
-        if asset in (None, 'report'):
-            return self.respond(json.dumps(report, ensure_ascii=False, indent=2).encode('utf-8'),
-                                'application/json; charset=utf-8', download='report.json' if asset else None)
-        if asset == 'csv':
-            from tools.plan_b_workbench import export_csv
-            return self.respond(export_csv(report), 'text/csv; charset=utf-8', download='workbench.csv')
-        if asset == 'bundle':
-            if workbench.busy() and workbench.active_id == run_id:
-                raise RequestError('Bitte den Lauf vor dem Export beenden.', 409)
-            buffer = io.BytesIO()
-            with zipfile.ZipFile(buffer, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
-                for entry in folder.rglob('*'):
-                    if entry.is_file():
-                        archive.write(entry, entry.relative_to(folder).as_posix())
-                from tools.plan_b_workbench import export_csv
-                archive.writestr('workbench.csv', export_csv(report))
-            return self.respond(buffer.getvalue(), 'application/zip', download='plan-b-workbench.zip')
+        if asset is None:
+            return self.json(report)
         relative = parse_qs(query).get('path', [''])[0]
         target = (folder / relative).resolve()
         if not target.is_relative_to(folder.resolve()) or target.suffix.lower() not in {'.png', '.svg', '.log', '.json', '.jsonl', '.txt'}:

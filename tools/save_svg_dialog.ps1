@@ -5,9 +5,9 @@ Add-Type -AssemblyName System.Windows.Forms
 $dialog = New-Object System.Windows.Forms.SaveFileDialog
 $owner = New-Object System.Windows.Forms.Form
 try {
-    $dialog.Title = 'SVG speichern unter'
-    $dialog.Filter = 'SVG-Vektorgrafik (*.svg)|*.svg'
-    $dialog.DefaultExt = 'svg'
+    $dialog.Title = 'Datei speichern unter'
+    $dialog.Filter = if ($env:ICC_GUI_FILE_FILTER) { $env:ICC_GUI_FILE_FILTER } else { 'SVG-Vektorgrafik (*.svg)|*.svg' }
+    $dialog.DefaultExt = if ($env:ICC_GUI_DEFAULT_EXTENSION) { $env:ICC_GUI_DEFAULT_EXTENSION } else { 'svg' }
     $dialog.AddExtension = $true
     $dialog.OverwritePrompt = $true
     $dialog.FileName = $env:ICC_GUI_FILENAME

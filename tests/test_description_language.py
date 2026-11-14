@@ -30,6 +30,11 @@ def test_common_minus_and_axis_spellings_preserve_labels_and_negation():
     assert normalize_description(normalized) == normalized
 
 
+def test_workbench_minus_typo_preserves_negation_and_quoted_labels():
+    text = 'Kein Minzuszeichen. Die Beschriftung lautet "Minzuszeichen".'
+    assert normalize_description(text) == 'Kein Minuszeichen. Die Beschriftung lautet "Minzuszeichen".'
+
+
 def test_head_direction_typos_preserve_quoted_labels_and_polarity():
     text = 'Links Spitze nach obben, rechts Spitze nach untten. Beschriftung "Spitze nach untten".'
     normalized = normalize_description(text)

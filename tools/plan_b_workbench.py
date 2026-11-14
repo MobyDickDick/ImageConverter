@@ -191,7 +191,12 @@ def export_csv(report: dict) -> bytes:
     stream = io.StringIO(newline='')
     fields = ['case_id', 'attempt', 'seed', 'iterations', 'timeout_seconds', 'satisfactory',
               'failures', 'elapsed_seconds', 'normalized_mse', 'foreground_mse', 'edge_alignment',
-              'foreground_iou', 'input_sha256', 'output_sha256', 'description', 'note']
+              'foreground_iou', 'foreground_iou_binary', 'input_sha256', 'output_sha256', 'description', 'note']
+    # Reports outlive the metric schema. Preserve new metrics instead of
+    # letting DictWriter abort both CSV and ZIP exports of completed runs.
+    extra_metrics = {key for attempt in report['attempts'] for result in attempt['results']
+                     for key in result.get('metrics', {})} - set(fields)
+    fields.extend(sorted(extra_metrics))
     writer = csv.DictWriter(stream, fieldnames=fields)
     writer.writeheader()
     for attempt in report['attempts']:

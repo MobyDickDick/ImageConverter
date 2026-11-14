@@ -5,6 +5,7 @@ let logUrl = null;
 let loadedSource = null, previewUrl = null;
 let activity = null;
 let nativeFileDialogs = false;
+let nativeExportDialogs = false;
 const labels = {prepared: "Vorbereitet", running: "Läuft", completed: "Abgeschlossen", cancelled: "Abgebrochen", interrupted: "Unterbrochen", error: "Ausführungsfehler"};
 async function request(path, body) {
   const response = await fetch(path, body === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json", "X-ImageConverter": "1"}, body: JSON.stringify(body)});
@@ -41,8 +42,12 @@ async function refreshActivity() {
   const job = jobs.find(item => item.status === "running" && !item.catalog_background);
   activity = run ? {kind: "workbench", ...run} : job ? {kind: "jobs", ...job} : null;
   $("activity").hidden = !activity;
+  const progress = activity?.kind === "workbench" && activity.summary
+    ? ` · ${activity.summary.completed}/${activity.summary.total} geprüft` : "";
   $("activity-name").textContent = activity
-    ? `${activity.kind === "workbench" ? "Plan B" : "Bildkonvertierung"} · ${activity.name}${activity.active_case ? " · " + activity.active_case : ""}` : "";
+    ? `${activity.kind === "workbench" ? "Plan B" : "Bildkonvertierung"} · ${activity.name}${activity.active_case ? " · " + activity.active_case : ""}${progress}` : "";
+  $("activity-open").hidden = activity?.kind !== "workbench";
+  if (activity?.kind === "workbench") $("activity-open").href = `/workbench?run=${encodeURIComponent(activity.id)}`;
   controls();
 }
 async function pollActivity() {
@@ -243,9 +248,23 @@ $("activity-cancel").addEventListener("click", () => {
   });
 });
 $("save-note").addEventListener("click", () => operation(async () => { render(await request(`/api/workbench/${current.id}/note`, {case_id: activeCase, note: $("note").value})); $("note-status").textContent = "Gespeichert."; }));
+for (const format of ["report", "csv", "bundle"]) {
+  $(format).download = {report: "report.json", csv: "workbench.csv", bundle: "plan-b-workbench.zip"}[format];
+  $(format).addEventListener("click", event => {
+    if (!nativeExportDialogs || !current) return;
+    event.preventDefault();
+    const runId = current.id;
+    return operation(async () => {
+      const result = await request(`/api/workbench/${runId}/export`, {format});
+      notice(result.saved ? `Gespeichert: ${result.path}` : "Speichern abgebrochen. Der Bericht bleibt erhalten.");
+    });
+  });
+}
 async function init() {
   try {
-    nativeFileDialogs = (await request("/api/config")).native_file_dialogs;
+    const config = await request("/api/config");
+    nativeFileDialogs = config.native_file_dialogs;
+    nativeExportDialogs = Boolean(nativeFileDialogs && config.workbench_native_exports);
   } catch (error) {
     if (error.status !== 404) throw error;
     $("server-version-warning").textContent = "Der Webserver läuft noch mit einer älteren Version. Lass laufende Konvertierungen fertig werden und starte ihn danach über startWebServer.cmd neu. Lade anschliessend diese Seite neu, um die neuen Funktionen zu verwenden.";
