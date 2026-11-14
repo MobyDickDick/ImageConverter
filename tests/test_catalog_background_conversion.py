@@ -11,7 +11,7 @@ import pytest
 
 from src import imageConverterGui as gui
 from src.imageConverterCatalog import CatalogError, atomic_json
-from src.imageConverterCatalogConversion import CatalogConversion, failure_order
+from src.imageConverterCatalogConversion import CatalogConversion, failure_order, checked_attempt
 from test_catalog_inventory import SVG, prepare, quality
 from test_catalog_quality_server import catalog, wait_for
 from tools.build_catalog_inventory import build
@@ -45,7 +45,8 @@ def service(tmp_path, monkeypatch):
         Image.new('RGB', (40,40), 'white').save(path)
         item.update(image=path.relative_to(root).as_posix(), image_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
     catalog = SimpleNamespace(root=root, directory=tmp_path/'catalog', lock=threading.RLock(),
-                              thread=None, conversion_owner=None, payload=lambda:dict(rows=rows))
+                              thread=None, conversion_owner=None, payload=lambda:dict(rows=rows),
+                              snapshot=lambda:dict(status='done', progress={}))
     manager = CatalogConversion(catalog, jobs, SimpleNamespace(busy=lambda:False))
     refreshes = []
     def refresh():
@@ -55,6 +56,10 @@ def service(tmp_path, monkeypatch):
             candidates = list((root/'artifacts/converted_images/catalog_background_svgs').rglob(stem+'.svg'))
             if len(candidates) >= required:
                 next(r for r in rows if Path(r['filename']).stem == stem)['status'] = 'pixel_pass'
+            if candidates:
+                item = next(r for r in rows if Path(r['filename']).stem == stem)
+                item['candidates'] = [dict(svg_sha256=hashlib.sha256(SVG.encode()).hexdigest(),
+                                          measurement=quality(item['status'] == 'pixel_pass'))]
         return not manager.stop.is_set()
     monkeypatch.setattr(manager, '_refresh', refresh)
     def run(job_id):
@@ -119,6 +124,93 @@ def test_ranking_uses_worse_renderer_and_rejects_missing_or_nonfinite_metrics():
     assert failure_order(row('AA0010.jpg', role='auxiliary')) is None
 
 
+def test_next_preview_obeys_deferrals_and_round_reset(service):
+    manager, _, _ = service
+    preview = manager.snapshot()['next']
+    assert (preview['filename'],preview['attempt'],preview['round']) == ('AA0011.jpg',1,1)
+    assert preview['image'].endswith('AA0011.jpg')
+    manager._update(failure_counts={'aa0011.jpg':3})
+    assert manager.snapshot()['next']['filename'] == 'AA0012.jpg'
+    manager._update(failure_counts={f'aa001{i}.jpg':3 for i in range(3)})
+    assert manager.snapshot()['next']['filename'] == 'AA0011.jpg'
+    assert manager.snapshot()['next']['round'] == 2
+    assert manager.state.get('round',1) == 1  # Preview must not advance the real round.
+
+
+def test_next_preview_explains_conditional_retry_while_current_attempt_runs(service):
+    manager, _, _ = service
+    manager._update(status='running',phase='convert',filename='AA0011.jpg',attempt=2)
+    preview = manager.snapshot()['next']
+    assert preview['filename'] == 'AA0011.jpg' and preview['attempt'] == 3
+    assert preview['conditional']
+    manager._update(attempt=3)
+    assert manager.snapshot()['next']['filename'] == 'AA0012.jpg'
+
+
+def test_inspection_progress_and_log_are_visible_in_service_snapshot(service, monkeypatch):
+    manager, _, _ = service
+    folder = manager.catalog.directory/('a'*32)
+    folder.mkdir(parents=True)
+    (folder/'console.log').write_text('Inventar 762/1787; neue Paarprüfungen 1284',encoding='utf-8')
+    monkeypatch.setattr(manager.catalog,'snapshot',lambda:dict(id='a'*32,status='running',
+        started=time.time()-30,progress=dict(completed=762,total=1787,measured=1284,cached=4)))
+    manager._update(status='running',phase='refresh')
+    snapshot = manager.snapshot()
+    assert snapshot['inspection']['progress']['completed'] == 762
+    assert snapshot['inspection']['elapsed'] >= 30
+    assert '762/1787' in snapshot['log']
+    assert snapshot['next']['provisional']
+
+
+@pytest.mark.parametrize('passed',[False,True])
+def test_result_judges_the_new_svg_instead_of_an_older_passing_candidate(passed):
+    attempt = dict(filename='AA0010.jpg',result=True,svg_sha256='new',checking=True)
+    current = dict(status='pixel_pass',candidates=[dict(svg_sha256='old',measurement=quality(True)),
+        dict(svg_sha256='new',measurement=quality(passed))])
+    checked = checked_attempt(attempt,current)
+    assert checked['passed'] is passed
+    assert checked['catalog_passed'] is True
+    assert checked['checking'] is False
+    assert checked_attempt(dict(attempt,result=False),current)['passed'] is False
+    assert checked_attempt(dict(attempt,svg_sha256='not-measured'),current)['passed'] is None
+
+
+def test_last_result_is_visible_before_validation_and_survives_restart(service, monkeypatch):
+    manager, _, _ = service
+    captured = []
+    refresh = manager._refresh
+    def inspect():
+        if manager.state.get('last_attempt'):
+            captured.append(manager.snapshot()['last_attempt'])
+        return refresh()
+    monkeypatch.setattr(manager,'_refresh',inspect)
+    manager.start();manager.thread.join(5)
+    assert captured[0]['result'] is True
+    assert captured[0]['passed'] is None and captured[0]['checking']
+    last = manager.snapshot()['last_attempt']
+    assert last['passed'] is True and last['result']
+    assert last['filename'] == 'AA0010.jpg'
+    restored = CatalogConversion(manager.catalog,manager.jobs,manager.workbench)
+    assert restored.snapshot()['last_attempt'] == last
+    manager.start();manager.thread.join(5)
+    assert manager.snapshot()['last_attempt'] == last
+
+
+def test_interrupted_validation_keeps_svg_without_claiming_success_or_failure(service, monkeypatch):
+    manager, _, _ = service
+    refresh = manager._refresh
+    def interrupt():
+        if manager.state.get('last_attempt'):
+            manager.stop.set()
+            return False
+        return refresh()
+    monkeypatch.setattr(manager,'_refresh',interrupt)
+    manager.start();manager.thread.join(5)
+    last = manager.snapshot()['last_attempt']
+    assert last['result'] and last['passed'] is None and not last['checking']
+    assert 'unterbrochen' in last['message']
+
+
 def test_stop_while_waiting_leaves_foreground_job_alone_and_allows_restart(service):
     manager, rows, _ = service
     foreground = manager.jobs.upload('manual.png', (manager.catalog.root/rows[0]['image']).read_bytes())
@@ -133,7 +225,7 @@ def test_stop_while_waiting_leaves_foreground_job_alone_and_allows_restart(servi
     assert manager.snapshot()['completed'] == 0
     manager.jobs.jobs[foreground['id']]['status'] = 'ready'
     manager.start(); manager.thread.join(5)
-    assert manager.snapshot()['completed'] == 9
+    assert manager.snapshot()['completed'] == 9, manager.snapshot().get('message')
 
 
 def test_stop_cancels_active_conversion_and_starts_no_next_image(service, monkeypatch):
@@ -232,7 +324,7 @@ def test_recomputes_best_failing_image_after_each_attempt(service, monkeypatch):
     monkeypatch.setattr(manager, '_refresh', rerank)
     manager.start(); manager.thread.join(5)
     snapshot = manager.snapshot()
-    assert snapshot['status'] == 'done'
+    assert snapshot['status'] == 'done', snapshot.get('message')
     assert [item['filename'] for item in snapshot['history'][:5]] == ['AA0011.jpg','AA0012.jpg',*['AA0010.jpg']*3]
 
 

@@ -27,7 +27,14 @@ def read_json(path, default=None):
 def atomic_json(path, value):
     temporary = path.with_suffix('.tmp')
     temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding='utf-8')
-    temporary.replace(path)
+    for attempt in range(6):
+        try:
+            temporary.replace(path)
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(.02 * 2**attempt)
 
 
 class CatalogQuality:

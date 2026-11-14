@@ -95,6 +95,26 @@ MSE, Konvertierungsdauer, Live-Protokoll, Rundennummer, Versuch 1–3 und
 zurückgestellte Bilder. Die letzten 200 Versuchsergebnisse seit dem Start
 bleiben in der Anzeige; die vollständigen Auftragsprotokolle bleiben gespeichert. Die Zähler und
 Katalogzeilen aktualisieren sich nach jedem vollständigen Prüfbericht.
+Die Dienstkarte zeigt auch während der vorbereitenden Qualitätsprüfung die
+Anzahl geprüfter Bilder, Gesamtzahl, neue und wiederverwendete Paarprüfungen,
+Laufzeit, Fortschrittsbalken und das zugehörige Live-Prüfprotokoll.
+
+**Nächstes Bild** zeigt Dateiname, Originalbild, MSE, Runde und Versuchsnummer.
+Während einer Qualitätsprüfung ist die Auswahl vorläufig. Während einer
+Konvertierung wird die voraussichtliche Auswahl unter der Annahme angezeigt,
+dass das aktuelle Bild weiter offen bleibt; ein Erfolg kann sie ändern.
+**Letzter Konvertierungsversuch** bleibt unabhängig davon sichtbar und zeigt
+Original und erzeugtes SVG nebeneinander. Das SVG erscheint bereits vor
+Abschluss der Nachprüfung mit der Kennzeichnung **SVG-Prüfung läuft**.
+Erfolg wird ausschließlich anhand der Messung dieses Kandidaten mit beiden
+Renderern bestätigt. Ein älteres bestandenes SVG desselben Bildes genügt
+dafür nicht. Fehlendes SVG, offene bzw. unterbrochene Prüfung und fehlgeschlagene
+Rasterprüfung bleiben unterscheidbar. Das letzte Ergebnis bleibt auch nach
+einem Dienst- oder Serverneustart sichtbar.
+Eine bereits laufende ältere Serverinstanz kann die neue Webseite anhand
+der vorhandenen Katalog- und Auftrags-APIs mit denselben Vorschauen versorgen.
+Damit muss eine parallel laufende Konvertierung oder Workbench-Prüfung für
+die Anzeige nicht unterbrochen werden.
 **Hintergrunddienst stoppen** beendet auch die aktive Konvertierung bzw.
 Qualitätsprüfung samt Unterprozessen; es startet danach kein weiteres Bild.
 Bereits vollständige Berichte und gespeicherte Versuche bleiben erhalten.

@@ -13,6 +13,17 @@ from src.imageConverterCatalog import CatalogError, atomic_json, read_json
 MAX_FAILURES = 3
 
 
+def checked_attempt(attempt, row):
+    """Judge this attempt's SVG, independently of an older passing candidate."""
+    from tools.build_catalog_inventory import classify
+    candidate = next((c for c in row.get('candidates', [])
+                      if c.get('svg_sha256') == attempt.get('svg_sha256')), None) if attempt.get('result') else None
+    measurement = candidate.get('measurement', {}) if candidate else {}
+    passed = bool(candidate and classify(measurement) == 'pixel_pass') if candidate or not attempt.get('result') else None
+    return dict(attempt, passed=passed, checking=False, measurement=measurement,
+                catalog_passed=row.get('status') == 'pixel_pass')
+
+
 def failure_order(row):
     """Use the same worst-renderer MSE as the catalog's candidate selection."""
     if row.get('role') != 'catalog' or row.get('status') != 'pixel_fail':
@@ -41,6 +52,22 @@ class CatalogConversion:
             self.state.update(status='interrupted', phase='idle',
                               message='Hintergrunddienst beim Serverende unterbrochen. Er kann erneut gestartet werden.')
             self._save()
+        if not self.state.get('last_attempt') and (self.state.get('job_id') or self.state.get('history')):
+            try:
+                previous = (self.state.get('history') or [{}])[-1]
+                job = self.jobs.snapshot(self.state.get('job_id') or previous['job_id'])
+                if not job.get('result') and previous.get('job_id'):
+                    job = self.jobs.snapshot(previous['job_id'])
+                last = dict(filename=job['name'],job_id=job['id'],status=job['status'],message=job['message'],
+                            round=self.state.get('round',1),attempt=self.state.get('attempt',1),
+                            result=bool(job.get('result')),checking=False)
+                if last['result']:
+                    last['svg_sha256'] = hashlib.sha256((self.jobs.folder(job['id'])/'result.svg').read_bytes()).hexdigest()
+                row = next((r for r in self.catalog.payload()['rows'] if r['filename'] == last['filename']), {})
+                self.state['last_attempt'] = checked_attempt(last, row)
+                self._save()
+            except (OSError, ValueError, KeyError):
+                pass
 
     def _save(self):
         atomic_json(self.directory/'state.json', self.state)
@@ -56,6 +83,34 @@ class CatalogConversion:
         job_id = result.get('job_id')
         if job_id:
             result['job'] = self.jobs.snapshot(job_id)
+        rows = self.catalog.payload()['rows']
+        counts = dict(result.get('failure_counts', {}))
+        pending = result.get('last_attempt') or {}
+        conditional = result.get('status') == 'running' and (result.get('phase') == 'convert' or pending.get('checking'))
+        if conditional and result.get('filename'):
+            counts[result['filename'].casefold()] = result.get('attempt', 1)
+        ranked = [(order, row) for row in rows if (order := failure_order(row)) is not None]
+        candidates = [(order, row) for order, row in ranked if counts.get(row['filename'].casefold(), 0) < MAX_FAILURES]
+        round_number = result.get('round', 1)
+        if ranked and not candidates:
+            candidates, counts, round_number = ranked, {}, round_number+1
+        result['next'] = None
+        if candidates:
+            order, row = min(candidates, key=lambda item:item[0])
+            result['next'] = dict(filename=row['filename'], image=row['image'], mse=order[0],
+                round=round_number, attempt=counts.get(row['filename'].casefold(), 0)+1,
+                provisional=result.get('phase') == 'refresh', conditional=conditional)
+        result['inspection'] = None
+        result['log'] = (result.get('job') or {}).get('log', '')
+        if result.get('phase') == 'refresh':
+            inspection = self.catalog.snapshot()
+            result['inspection'] = {key:inspection.get(key) for key in ('id','status','message','progress')}
+            result['inspection']['elapsed'] = round(time.time()-inspection.get('started',time.time()),1)
+            log = self.catalog.directory/inspection.get('id','')/'console.log'
+            if log.is_file():
+                with log.open('rb') as stream:
+                    stream.seek(max(0, log.stat().st_size-16000))
+                    result['log'] = stream.read().decode('utf-8',errors='replace')
         return result
 
     def start(self, profile='normal'):
@@ -73,9 +128,11 @@ class CatalogConversion:
             self.stop.clear()
             round_number = self.state.get('round', 1)
             failure_counts = dict(self.state.get('failure_counts', {}))
+            last_attempt = self.state.get('last_attempt')
             self.state = dict(id=uuid.uuid4().hex, status='running', phase='refresh', profile=profile,
                               started=time.time(), completed=0, passed=0, failed=0, history=[],
                               round=round_number, failure_counts=failure_counts, deferred=[],
+                              last_attempt=last_attempt,
                               message='Aktuelle Qualitätsliste wird vor der Auswahl geprüft …')
             self._save()
             self.thread = threading.Thread(target=self._run, daemon=True)
@@ -138,6 +195,10 @@ class CatalogConversion:
         try:
             if not self._refresh():
                 return
+            last = self.state.get('last_attempt')
+            if last and last.get('passed') is None:
+                row = next((r for r in self.catalog.payload()['rows'] if r['filename'] == last['filename']), {})
+                self._update(last_attempt=checked_attempt(last,row))
             while not self.stop.is_set():
                 rows = self.catalog.payload()['rows']
                 ranked = [(order, r) for r in rows if (order := failure_order(r)) is not None]
@@ -187,12 +248,20 @@ class CatalogConversion:
                     return
                 job = self.jobs.snapshot(job['id'])
                 self._preserve(row, job)
+                last = dict(filename=row['filename'], job_id=job['id'], status=job['status'],
+                    result=bool(job.get('result')), message=job['message'],
+                    round=self.state['round'], attempt=attempt, finished=time.time(),
+                    passed=None, checking=True)
+                if last['result']:
+                    last['svg_sha256'] = hashlib.sha256((self.jobs.folder(job['id'])/'result.svg').read_bytes()).hexdigest()
+                self._update(last_attempt=last)
                 if not self._refresh():
                     return
                 current = next((r for r in self.catalog.payload()['rows'] if r['filename'] == row['filename']), {})
-                passed = current.get('status') == 'pixel_pass'
+                last = checked_attempt(last, current)
+                passed = last['passed']
                 with self.lock:
-                    if passed:
+                    if last['catalog_passed']:
                         counts.pop(name, None)
                     else:
                         counts[name] = attempt
@@ -201,9 +270,9 @@ class CatalogConversion:
                     history = [*self.state['history'], dict(filename=row['filename'], job_id=job['id'],
                         passed=passed, status=job['status'], message=job['message'], finished=time.time(),
                         round=self.state['round'], attempt=attempt, deferred=not passed and attempt >= MAX_FAILURES)]
-                    self._update(completed=self.state['completed']+1, passed=self.state['passed']+int(passed),
+                    self._update(completed=self.state['completed']+1, passed=self.state['passed']+int(bool(passed)),
                                  failed=self.state['failed']+int(not passed), history=history[-200:],
-                                 failure_counts=counts, deferred=deferred)
+                                 failure_counts=counts, deferred=deferred, last_attempt=last)
         except Exception as exc:
             if not self.stop.is_set():
                 self._update(status='error', phase='idle', message=f'Hintergrunddienst fehlgeschlagen: {exc}')
@@ -211,6 +280,10 @@ class CatalogConversion:
             with self.lock:
                 if self.stop.is_set():
                     self.state.update(status='stopped', phase='idle', message='Hintergrunddienst gestoppt.')
+                last = self.state.get('last_attempt')
+                if last and last.get('checking'):
+                    self.state['last_attempt'] = dict(last, checking=False, passed=None,
+                        message=last['message']+' Die anschließende Qualitätsprüfung wurde unterbrochen.')
                 self.state['finished'] = time.time()
                 self._save()
             with self.catalog.lock:

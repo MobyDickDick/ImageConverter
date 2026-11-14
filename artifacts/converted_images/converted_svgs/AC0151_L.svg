@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="80" height="400" viewBox="0 0 80 400">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.500" y1="16.460" x2="79.500" y2="16.460">
-      <stop offset="16.156109%" stop-color="#6c863d" />
-      <stop offset="73.608608%" stop-color="#aac756" />
-      <stop offset="100.000000%" stop-color="#6c863d" />
-    </linearGradient>
-  <clipPath id="innerRect"><rect x="0.5" y="16.46" width="79.0" height="367.08000000000004" /></clipPath>
-  </defs>
-  <g transform="translate(0.038742 -0.215828) scale(0.998750)"><rect x="0" y="0" width="80" height="400" fill="#ffffff" stroke="none" />
-  <rect x="0.500" y="16.460" width="79.000" height="367.080" fill="url(#panelGradient)" stroke="none" />
-  <rect x="0.5" y="16.46" width="79.0" height="367.08000000000004" fill="none" stroke="#819757" stroke-width="1.127692" />
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="400" viewBox="0 0 80 400"><defs><linearGradient id="tubeColor" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="18.025" y2="382"><stop offset="0.431707%" stop-color="#ebdb34" /><stop offset="100.000000%" stop-color="#5baa76" /></linearGradient><linearGradient id="tubeShade" gradientUnits="userSpaceOnUse" x1="0" x2="80" y1="0" y2="0"><stop offset="2.872792%" stop-color="#000203" stop-opacity="0.34613329" /><stop offset="22.775000%" stop-color="#000203" stop-opacity="0.28994242" /><stop offset="65.531633%" stop-color="#000203" stop-opacity="0" /><stop offset="99.625000%" stop-color="#000203" stop-opacity="0.19165762" /></linearGradient><linearGradient id="cap0" gradientUnits="userSpaceOnUse" x1="0" x2="80" y1="0" y2="0"><stop offset="1.269505%" stop-color="#9b9c9e" /><stop offset="21.550000%" stop-color="#a5a6a8" /><stop offset="65.380712%" stop-color="#ebecec" /><stop offset="100.000000%" stop-color="#bebfbe" /></linearGradient><linearGradient id="cap1" gradientUnits="userSpaceOnUse" x1="0" x2="80" y1="0" y2="0"><stop offset="1.330015%" stop-color="#9b9c9e" /><stop offset="21.550000%" stop-color="#a5a6a8" /><stop offset="65.350000%" stop-color="#ebecec" /><stop offset="100.000000%" stop-color="#bebfbe" /></linearGradient></defs><g transform="translate(0.000000 0.000000) scale(1.000000)"><rect x="0" y="0" width="80" height="400" fill="url(#tubeColor)" stroke="none" /><rect x="0" y="0" width="80" height="400" fill="url(#tubeShade)" stroke="none" /><rect x="0" y="0" width="80" height="18.025" fill="url(#cap0)" stroke="none" /><rect x="0" y="382.0" width="80" height="18.0" fill="url(#cap1)" stroke="none" /></g></svg>

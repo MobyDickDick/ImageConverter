@@ -29,7 +29,7 @@ import warnings
 import webbrowser
 import zipfile
 
-from src.imageConverterCatalog import CatalogError, CatalogQuality
+from src.imageConverterCatalog import CatalogError, CatalogQuality, atomic_json
 from src.imageConverterCatalogConversion import CatalogConversion
 from src.imageConverterCollection import CategoryCollection
 
@@ -208,9 +208,7 @@ class Jobs:
 
     def save(self, job: dict) -> None:
         folder = self.folder(job["id"])
-        temporary = folder / "job.json.tmp"
-        temporary.write_text(json.dumps(job, ensure_ascii=False, indent=2), encoding="utf-8")
-        temporary.replace(folder / "job.json")
+        atomic_json(folder/'job.json',job)
 
     def snapshot(self, job_id: str) -> dict:
         with self.lock:

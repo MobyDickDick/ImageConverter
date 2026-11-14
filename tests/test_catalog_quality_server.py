@@ -300,3 +300,20 @@ def test_existing_gui_rejects_unrelated_server_metadata(monkeypatch,tmp_path,con
             return io.BytesIO(json.dumps(config).encode())
     monkeypatch.setattr(gui,'build_opener',lambda *args:Opener())
     assert gui.existing_gui(8766,tmp_path) is None
+
+
+def test_service_state_publication_retries_short_windows_file_locks(tmp_path,monkeypatch):
+    from src import imageConverterCatalog as module
+    destination = tmp_path/'state.json'
+    original = Path.replace
+    attempts = []
+    def replace(source,target):
+        attempts.append(1)
+        if len(attempts) < 3:
+            raise PermissionError('Temporary Windows file lock')
+        return original(source,target)
+    monkeypatch.setattr(Path,'replace',replace)
+    monkeypatch.setattr(module.time,'sleep',lambda seconds:None)
+    atomic_json(destination,dict(status='running',completed=1))
+    assert json.loads(destination.read_text())['completed'] == 1
+    assert len(attempts) == 3

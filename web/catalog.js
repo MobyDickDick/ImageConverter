@@ -1,6 +1,7 @@
 'use strict';
 const el = id => document.getElementById(id);
 let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polling = false, conversionActive = false, conversionAvailable = true;
+let legacyLastJob = null;
 const reportKey = summary => JSON.stringify([summary.generated_at || '', summary.catalog_statuses || {}]);
 const asset = path => '/api/catalog/asset?path=' + encodeURIComponent(path);
 function node(tag, text, cls) {
@@ -119,7 +120,42 @@ function showJob(job) {
   el('run-status').textContent = message + progress;
   el('log').hidden = !job.id;
 }
+function showPreview(id, items) {
+  const target = el(id), key = JSON.stringify(items);
+  if (target.previewKey === key) return;
+  target.previewKey = key;
+  target.replaceChildren(...items.map(([title,url]) => {
+    const figure = node('figure'); figure.append(node('figcaption',title));
+    if (url) {
+      const a = node('a'), img = node('img'); a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      img.src = url; img.alt = title; a.append(img); figure.append(a);
+    } else figure.append(node('p','Kein SVG erzeugt.','hint'));
+    return figure;
+  }));
+}
+function showConversionOverview(service) {
+  const next = service.next, last = service.last_attempt;
+  el('conversion-next-name').textContent = next ? `${next.filename} · Runde ${next.round}, Versuch ${next.attempt}/3` : 'Kein bewertbares offenes Bild in der aktuellen Liste.';
+  el('conversion-next-note').textContent = next
+    ? `Bisheriger MSE: ${next.mse.toFixed(6)}. ${next.conditional ? 'Voraussichtliche Auswahl, falls das aktuelle Bild weiterhin offen bleibt. ' : ''}${next.provisional ? 'Vorläufig bis zum Abschluss der Qualitätsprüfung.' : 'Auswahl wird nach jedem Prüfergebnis neu berechnet.'}` : '';
+  showPreview('conversion-next-preview',next ? [['Original '+next.filename,asset(next.image)]] : []);
+  el('conversion-last-name').textContent = last ? `${last.filename} · Runde ${last.round}, Versuch ${last.attempt}/3` : 'Noch kein Hintergrundversuch abgeschlossen.';
+  const badge = el('conversion-last-status');
+  badge.textContent = !last ? 'Noch kein Ergebnis' : last.checking ? 'SVG-Prüfung läuft …' : last.passed === null ? 'Prüfergebnis noch offen' : last.passed ? 'Erfolgreich · beide Rasterprüfungen erfüllt' : 'Nicht erfolgreich · Rasterprüfung nicht bestanden';
+  badge.className = 'badge '+(!last || last.checking || last.passed === null ? '' : last.passed ? 'pixel_pass' : 'pixel_fail');
+  showPreview('conversion-last-preview',last ? [['Original',`/api/jobs/${last.job_id}/source`],['Erzeugtes SVG',last.result ? `/api/jobs/${last.job_id}/result` : null]] : []);
+  const failures = Object.entries(last?.measurement?.renderers || {}).map(([name,r]) => `${name}: ${r.error || (r.satisfactory ? 'erfüllt' : (r.failures || []).join(', ') || 'verfehlt')}`);
+  el('conversion-last-detail').textContent = last ? [last.message,...failures].filter(Boolean).join(' · ') : '';
+  const m = metrics({selected:{measurement:last?.measurement}});
+  el('conversion-last-metrics').textContent = last && m.mse !== null ? `MSE: ${m.mse.toFixed(6)} · Kanten: ${m.edge?.toFixed(4) ?? '—'} · IoU: ${m.iou?.toFixed(4) ?? '—'}` : '';
+  const inspection = service.inspection, p = inspection?.progress || {};
+  el('conversion-inspection-status').hidden = !inspection;
+  el('conversion-inspection-status').textContent = inspection ? `Vorhandene SVGs werden geprüft: ${p.completed ?? 0}/${p.total || '?'} Bilder · ${p.measured ?? 0} neue Paarprüfungen · ${p.cached ?? 0} wiederverwendet · seit ${Math.round(inspection.elapsed || 0)} s. Danach wird die Konvertierung fortgesetzt.` : '';
+  const progress = el('conversion-inspection-progress'); progress.hidden = !inspection;
+  if (p.total) {progress.max=p.total;progress.value=p.completed;} else progress.removeAttribute('value');
+}
 function showConversion(service) {
+  showConversionOverview(service);
   conversionAvailable = true;
   conversionActive = ['running','stopping'].includes(service.status);
   el('conversion-start').disabled = conversionActive;
@@ -130,7 +166,7 @@ function showConversion(service) {
   el('conversion-current').textContent = service.filename ? `${service.filename} · Versuch ${service.attempt || 1}/3 in dieser Runde · bisheriger MSE: ${Number(service.mse).toFixed(6)}${job?.elapsed ? ` · Konvertierungszeit: ${job.elapsed} s` : ''}${service.phase === 'convert' && job?.message ? ' · ' + job.message : ''}` : '';
   el('conversion-deferred-title').textContent = `Zurückgestellte Bilder (${(service.deferred || []).length})`;
   el('conversion-deferred').replaceChildren(...(service.deferred || []).map(name => node('li', `${name} · 3 erfolglose Versuche`)));
-  el('conversion-log').textContent = job?.log || 'Noch keine Konvertierung gestartet.';
+  el('conversion-log').textContent = service.log || job?.log || (service.phase === 'refresh' ? 'Die Qualitätsprüfung wird vorbereitet …' : 'Noch keine Konvertierung gestartet.');
   const links = [];
   if (job) {
     const a = node('a','Konvertierungsprotokoll öffnen'); a.href = `/api/jobs/${job.id}/log`; a.target = '_blank'; a.rel = 'noopener'; links.push(a);
@@ -142,12 +178,51 @@ function showConversion(service) {
     const a = node('a','Protokoll'); a.href = `/api/jobs/${item.job_id}/log`; a.target = '_blank'; a.rel = 'noopener'; li.append(a); return li;
   }));
 }
+async function completeServiceOverview(service, catalogJob) {
+  // Static pages are updated immediately; a running Python server keeps its
+  // code until restart. Existing API data can provide these previews meanwhile.
+  if ('next' in service && 'inspection' in service) return service;
+  const result = {...service}, history = service.history || [];
+  let lastJob = service.job?.status !== 'running' ? service.job : null;
+  const previous = history[history.length-1];
+  if (!lastJob && previous) {
+    if (legacyLastJob?.id !== previous.job_id) legacyLastJob = await api(`/api/jobs/${previous.job_id}`);
+    lastJob = legacyLastJob;
+  }
+  if (lastJob) {
+    const row = data.rows.find(r => r.filename === lastJob.name);
+    const candidate = row?.candidates.find(c => [c.svg,...(c.all_paths || [])].some(p => p?.includes('/'+lastJob.id+'/')));
+    const measurement = candidate?.measurement || {};
+    const passed = !lastJob.result ? false : candidate ? !measurement.error && ['mupdf','librsvg'].every(name => measurement.renderers?.[name]?.satisfactory === true && !measurement.renderers[name].error) : null;
+    result.last_attempt = {filename:lastJob.name,job_id:lastJob.id,result:!!lastJob.result,
+      passed,checking:passed === null && service.phase === 'refresh',message:lastJob.message,
+      measurement,round:previous?.job_id === lastJob.id ? previous.round : service.round || 1,
+      attempt:previous?.job_id === lastJob.id ? previous.attempt : service.attempt || 1};
+  }
+  const counts = {...(service.failure_counts || {})};
+  const conditional = service.status === 'running' && (service.phase === 'convert' || result.last_attempt?.checking);
+  if (conditional && service.filename) counts[service.filename.toLowerCase()] = service.attempt || 1;
+  const ranked = data.rows.filter(r => r.role === 'catalog' && r.status === 'pixel_fail' && r.description?.trim() &&
+    ['mupdf','librsvg'].every(name => Number.isFinite(r.selected?.measurement?.renderers?.[name]?.metrics?.normalized_mse)));
+  let candidates = ranked.filter(r => (counts[r.filename.toLowerCase()] || 0) < 3), round = service.round || 1;
+  if (ranked.length && !candidates.length) {candidates = ranked; round++; for (const name of Object.keys(counts)) delete counts[name];}
+  candidates.sort((a,b) => metrics(a).mse-metrics(b).mse || a.filename.toLowerCase().localeCompare(b.filename.toLowerCase()));
+  const next = candidates[0];
+  result.next = next ? {filename:next.filename,image:next.image,mse:metrics(next).mse,
+    round,attempt:(counts[next.filename.toLowerCase()] || 0)+1,provisional:service.phase === 'refresh',conditional} : null;
+  result.inspection = service.phase === 'refresh' && catalogJob ? {...catalogJob,elapsed:catalogJob.progress?.elapsed_seconds || 0} : null;
+  if (result.inspection) {
+    const p = result.inspection.progress || {};
+    result.log = `Qualitätsprüfung: ${p.completed || 0}/${p.total || '?'} Bilder; ${p.measured || 0} neue Paarprüfungen, ${p.cached || 0} wiederverwendet.`;
+  }
+  return result;
+}
 async function poll() {
   if (polling) return; polling = true;
   try {
     const [jobResult, serviceResult] = await Promise.allSettled([api('/api/catalog'),api('/api/catalog/conversion')]);
     if (serviceResult.status === 'fulfilled') {
-      showConversion(serviceResult.value);
+      showConversion(await completeServiceOverview(serviceResult.value,jobResult.status === 'fulfilled' ? jobResult.value : null));
       if (jobResult.status === 'fulfilled') el('notice').hidden = true;
     } else {
       conversionAvailable = false;

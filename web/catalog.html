@@ -38,6 +38,24 @@
       <p class="hint">Wählt unter „Rastergates verfehlt“ jeweils das Bild mit dem kleinsten MSE des schlechteren Renderers. Nach drei erfolglosen Versuchen wird es zurückgestellt. Sind alle offenen Bilder zurückgestellt, beginnt automatisch eine neue Runde. Neue Ergebnisse werden geprüft und die Liste aktualisiert. Läuft auch bei geschlossenem Browser bis zum Stopp, Serverende oder bis keine bewertbaren offenen Bilder mehr vorhanden sind.</p>
       <p id="conversion-status" role="status" aria-live="polite">Dienststatus wird geladen …</p>
       <p id="conversion-current"></p>
+      <p id="conversion-inspection-status" role="status" hidden></p>
+      <progress id="conversion-inspection-progress" aria-label="Fortschritt der Prüfung vor der nächsten Konvertierung" hidden></progress>
+      <div class="conversion-overview">
+        <section class="conversion-preview" aria-labelledby="conversion-next-title">
+          <h3 id="conversion-next-title">Nächstes Bild</h3>
+          <p id="conversion-next-name">Auswahl wird geladen …</p>
+          <p id="conversion-next-note" class="hint"></p>
+          <div id="conversion-next-preview" class="conversion-images"></div>
+        </section>
+        <section class="conversion-preview" aria-labelledby="conversion-last-title">
+          <h3 id="conversion-last-title">Letzter Konvertierungsversuch</h3>
+          <p id="conversion-last-name">Noch kein Versuch abgeschlossen.</p>
+          <p><span id="conversion-last-status" class="badge"></span></p>
+          <div id="conversion-last-preview" class="conversion-images"></div>
+          <p id="conversion-last-detail" class="hint"></p>
+          <p id="conversion-last-metrics" class="metric"></p>
+        </section>
+      </div>
       <details><summary id="conversion-deferred-title">Zurückgestellte Bilder</summary><ul id="conversion-deferred"></ul></details>
       <div id="conversion-links" class="catalog-actions"></div>
       <details><summary>Live-Konvertierungsprotokoll</summary><pre id="conversion-log"></pre></details>
