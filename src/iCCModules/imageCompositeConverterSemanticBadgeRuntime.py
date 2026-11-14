@@ -190,6 +190,11 @@ def runSemanticBadgeIterationImpl(
     if isinstance(badge_overrides, dict):
         badge_params.update(badge_overrides)
 
+    # Description exclusions outrank text defaults from a family or reference,
+    # including the params used to render a failed draft.
+    if (params.get('language_assertions') or {}).get('no_text') or params.get('label') == '':
+        badge_params.update(draw_text=False, label='', text_mode='none')
+
     semantic_issues = validate_semantic_description_alignment_fn(
         perc_img,
         list(params.get("elements", [])),

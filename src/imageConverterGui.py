@@ -31,6 +31,7 @@ import zipfile
 
 from src.imageConverterCatalog import CatalogError, CatalogQuality, atomic_json
 from src.imageConverterCatalogConversion import CatalogConversion
+from src.imageConverterCatalogUpdates import CatalogUpdates
 from src.imageConverterCollection import CategoryCollection
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -173,6 +174,7 @@ class Jobs:
         self.processes: dict[str, subprocess.Popen] = {}
         self.threads: list[threading.Thread] = []
         self.closed = False
+        self.on_result = None
         self.descriptions = catalog_descriptions()
         # Keep recent results usable after a server restart.
         for path in self.directory.glob("*/job.json"):
@@ -402,6 +404,9 @@ class Jobs:
                 self.processes.pop(job_id, None)
                 job["elapsed"] = round(time.time() - job["started"], 1)
                 self.save(job)
+
+            if self.on_result is not None:
+                self.on_result(job_id)
 
     def cancel(self, job_id: str) -> dict:
         with self.lock:
@@ -821,7 +826,7 @@ class GuiServer(ThreadingHTTPServer):
 
     def __init__(self, address: tuple[str, int], jobs: Jobs | None = None, *, directory: Path | None = None):
         self.jobs = jobs
-        self.workbench = self.catalog = self.catalog_conversion = None
+        self.workbench = self.catalog = self.catalog_conversion = self.catalog_updates = None
         self.shutdown_requested = threading.Event()
         self.shutdown_complete = threading.Event()
         self.shutdown_response_sent = threading.Event()
@@ -837,6 +842,7 @@ class GuiServer(ThreadingHTTPServer):
             self.catalog = CatalogQuality(ROOT, self.jobs.directory/'catalog-quality', stop_process_tree)
             self.collection = CategoryCollection(ROOT, self.catalog, self.jobs)
             self.catalog_conversion = CatalogConversion(self.catalog, self.jobs, self.workbench)
+            self.catalog_updates = CatalogUpdates(self.catalog, self.jobs)
         except Exception:
             self.server_close()
             raise
@@ -849,7 +855,7 @@ class GuiServer(ThreadingHTTPServer):
         super().server_bind()
 
     def server_close(self):
-        for manager in (self.catalog_conversion, self.catalog, self.workbench):
+        for manager in (self.catalog_conversion, self.catalog_updates, self.catalog, self.workbench):
             if manager is not None:
                 manager.close()
         if self._bound and self.jobs is not None:

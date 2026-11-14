@@ -36,6 +36,20 @@ und Plan-B-Aufgaben teilen sich weiterhin einen Platz. Jeder Lauf lässt sich
 einzeln abbrechen. Hintergrundversuche erscheinen in der Katalogansicht und
 verdrängen keine manuellen Aufträge im Konverterverlauf.
 
+Erfolgreiche manuelle Bild- und Sample-Konvertierungen werden automatisch in
+die Qualitätsliste übernommen. Dazu wird das neue SVG unveränderlich unter
+`artifacts/converted_images/catalog_manual_svgs/<Auftrag>/` abgelegt und am
+zugehörigen Katalogoriginal mit MuPDF und librsvg geprüft. Die Liste und ihre
+Zähler aktualisieren sich nach der Prüfung; nur ein Pass beider Renderer gilt
+als erfülltes Rastergate. Ein gleicher Dateiname bei abweichenden Bildpixeln
+reicht nicht für die Zuordnung. Reservierte Bilder bleiben ausgeschlossen.
+
+Der Nachtrag läuft auch bei aktivem Hintergrunddienst. Beim Veröffentlichen
+einer gleichzeitig gestarteten älteren Qualitätsprüfung bleiben neue manuelle
+Nachträge erhalten. Beim Serverstart werden frühere erfolgreiche GUI-Aufträge
+und unterbrochene Nachträge nachgeholt. Dafür ist keine vollständige
+Bestands-Neumessung nötig.
+
 Beschreibungskorrekturen in
 `artifacts/images_to_convert/Finale_Wurzelformen_V3.xml` werden beim Laden eines
 Bildes und beim Abruf der Katalogansicht erneut gelesen. Ein Serverneustart oder

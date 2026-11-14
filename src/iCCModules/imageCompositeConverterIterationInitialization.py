@@ -69,8 +69,13 @@ def prepareIterationRuntimeImpl(
         write_artifacts = artifact_callbacks['write_attempt_artifacts']
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
+            from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+            # Failed drafts are displayed and downloadable in the GUI too.
+            # Preserve incomplete geometry for diagnosis, but never add text
+            # when the description explicitly excludes it.
+            if kwargs.get('failed', False):
+                validate_svg_assertions(svg_content, dict(counts=[], no_text=assertions.get('no_text')))
             if not kwargs.get('failed', False):
-                from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
                 validate_svg_assertions(svg_content, assertions)
                 if session and session.minimum_pending:
                     from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg

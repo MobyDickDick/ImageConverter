@@ -5,6 +5,8 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions
+
 
 _SEMANTIC_BADGE_FAMILY_METADATA_PATH = (
     Path(__file__).resolve().parents[2] / "config" / "regression_metadata" / "semantic_badge_families_v1.json"
@@ -315,7 +317,8 @@ def apply_semantic_badge_family_rules(
     family_elements: list[str] = []
     heuristic_elements: list[str] = []
 
-    if base_upper in {_legacy_ac_key("0800"), _legacy_ac_key("0810"), _legacy_ac_key("0811"), _legacy_ac_key("0812"), _legacy_ac_key("0813"), _legacy_ac_key("0814"), _legacy_ac_key("0223")}:
+    if (description_assertions(desc)['no_text'] or "ohne buchstabe" in desc
+            or base_upper in {_legacy_ac_key("0800"), _legacy_ac_key("0810"), _legacy_ac_key("0811"), _legacy_ac_key("0812"), _legacy_ac_key("0813"), _legacy_ac_key("0814"), _legacy_ac_key("0223")}):
         family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
     elif base_upper in {_legacy_ac_key("0820")}:
@@ -483,7 +486,7 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
         return False
 
     elements: list[str] = []
-    if "ohne buchstabe" in normalized:
+    if description_assertions(desc)['no_text'] or "ohne buchstabe" in normalized:
         elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
     else:

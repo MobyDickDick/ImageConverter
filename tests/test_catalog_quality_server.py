@@ -421,6 +421,22 @@ def test_existing_gui_rejects_unrelated_server_metadata(monkeypatch,tmp_path,con
     assert gui.existing_gui(8766,tmp_path) is None
 
 
+@pytest.mark.parametrize('parallel', [False, True])
+def test_existing_gui_warns_when_reusing_server_without_parallel_slots(monkeypatch,tmp_path,capsys,parallel):
+    import io
+    config = dict(application='imageconverter_gui', api_version=1,
+                  project_root=str(gui.ROOT), data_directory=str(tmp_path))
+    if parallel:
+        config['parallel_background_conversion'] = True
+    class Opener:
+        def open(self,*args,**kwargs):
+            return io.BytesIO(json.dumps(config).encode())
+    monkeypatch.setattr(gui,'build_opener',lambda *args:Opener())
+    assert gui.existing_gui(8766,tmp_path,warn_outdated=True) == 'http://127.0.0.1:8766'
+    output = capsys.readouterr().out
+    assert ('stopWebServer.cmd' in output) is (not parallel)
+
+
 def test_service_state_publication_retries_short_windows_file_locks(tmp_path,monkeypatch):
     from src import imageConverterCatalog as module
     destination = tmp_path/'state.json'

@@ -136,6 +136,67 @@ def test_completed_background_retry_uses_foreground_slot(jobs, monkeypatch):
     assert jobs.busy() and not jobs.busy(background=True)
 
 
+@pytest.mark.parametrize('background_first', [False, True])
+def test_http_manual_conversion_runs_alongside_background(jobs, monkeypatch, background_first):
+    from http.client import HTTPConnection
+    import threading
+
+    release = threading.Event()
+    entered = {lane: threading.Event() for lane in (False, True)}
+
+    def run(job_id):
+        entered[jobs.jobs[job_id]['catalog_background']].set()
+        release.wait(10)
+
+    monkeypatch.setattr(jobs, 'run', run)
+    manual = jobs.upload('manual.png', image_bytes())
+    background = jobs.upload('background.png', image_bytes())
+    server = gui.GuiServer(('127.0.0.1', 0), jobs)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+
+    def request(path, payload=None):
+        connection = HTTPConnection(*server.server_address, timeout=5)
+        try:
+            connection.request('POST' if payload is not None else 'GET', path,
+                               body=json.dumps(payload) if payload is not None else None,
+                               headers={'X-ImageConverter': '1'})
+            response = connection.getresponse()
+            return response.status, json.loads(response.read())
+        finally:
+            connection.close()
+
+    try:
+        assert request('/api/config')[1]['parallel_background_conversion']
+        for lane in (background_first, not background_first):
+            if lane:
+                jobs.start(background['id'], 'Ein Kreis.', 'quick', background=True)
+            else:
+                status, result = request(f"/api/jobs/{manual['id']}/start",
+                                         dict(description='Ein Kreis.', profile='quick'))
+                assert status == 200, result
+            assert entered[lane].wait(5)
+        assert jobs.busy() and jobs.busy(background=True)
+        # Background history must not push manual jobs out of the 20-item window.
+        for _ in range(22):
+            archived = jobs.upload('old-background.png', image_bytes())
+            jobs.jobs[archived['id']].update(status='done', catalog_background=True)
+        status, history = request('/api/jobs?scope=foreground')
+        assert status == 200 and [job['id'] for job in history] == [manual['id']]
+        next_job = jobs.upload('second.png', image_bytes())
+        assert request(f"/api/jobs/{next_job['id']}/start",
+                       dict(description='Ein Kreis.', profile='quick'))[0] == 409
+        assert request(f"/api/jobs/{manual['id']}/cancel", {})[0] == 200
+        assert jobs.snapshot(background['id'])['status'] == 'running'
+    finally:
+        release.set()
+        for worker in jobs.threads:
+            worker.join(5)
+        server.shutdown()
+        thread.join(5)
+        server.server_close()
+
+
 @pytest.mark.parametrize('background', [False, True])
 def test_slot_stays_reserved_until_process_cleanup(jobs, monkeypatch, background):
     previous = jobs.upload('previous.png', image_bytes())

@@ -1,7 +1,10 @@
+import pytest
+
 from src.iCCModules import imageCompositeConverterSemanticBadgeRuntime as semantic_badge_runtime_helpers
 
 
-def test_run_semantic_badge_iteration_impl_returns_none_for_semantic_mismatch() -> None:
+@pytest.mark.parametrize('exclude_text', [False, True])
+def test_run_semantic_badge_iteration_impl_returns_none_for_semantic_mismatch(exclude_text) -> None:
     captured = {"printed": [], "logged": []}
 
     result = semantic_badge_runtime_helpers.runSemanticBadgeIterationImpl(
@@ -12,16 +15,18 @@ def test_run_semantic_badge_iteration_impl_returns_none_for_semantic_mismatch() 
         filename="AC0800_S.jpg",
         base="AC0800_S",
         description="desc",
-        params={"elements": ["SEMANTIC: Kreis ohne Buchstabe"]},
+        params={"elements": ["SEMANTIC: Kreis ohne Buchstabe"],
+                "language_assertions": {"no_text": exclude_text},
+                "badge_overrides": {"draw_text": True, "label": "M"}},
         semantic_audit_row=None,
         badge_validation_rounds=2,
         debug_element_diff_dir=None,
         debug_ac0811_dir=None,
-        write_attempt_artifacts_fn=lambda *_args, **_kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, **kw: captured.update(svg=svg, failed=kw['failed']),
         write_validation_log_fn=lambda lines: captured["logged"].extend(lines),
         record_render_failure_fn=lambda *_args, **_kwargs: None,
-        make_badge_params_fn=lambda *_args, **_kwargs: {"mode": "semantic_badge"},
-        generate_badge_svg_fn=lambda *_args, **_kwargs: "<svg/>",
+        make_badge_params_fn=lambda *_args, **_kwargs: {"mode": "semantic_badge", "draw_text": True, "label": "M"},
+        generate_badge_svg_fn=lambda w, h, p: '<svg><text>M</text></svg>' if p['draw_text'] else '<svg/>',
         validate_semantic_description_alignment_fn=lambda *_args, **_kwargs: ["issue"],
         detect_semantic_primitives_fn=lambda *_args, **_kwargs: {},
         build_semantic_connector_debug_line_fn=lambda *_args, **_kwargs: "debug",
@@ -50,6 +55,8 @@ def test_run_semantic_badge_iteration_impl_returns_none_for_semantic_mismatch() 
     assert result is None
     assert captured["printed"] == ["console mismatch"]
     assert captured["logged"] == ["validation mismatch"]
+    assert captured['failed']
+    assert ('<text>' in captured['svg']) is not exclude_text
 
 
 def test_run_semantic_badge_iteration_impl_finalizes_semantic_ok() -> None:

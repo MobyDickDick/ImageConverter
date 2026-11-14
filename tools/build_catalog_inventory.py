@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BITMAPS = {'.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tif', '.tiff', '.webp'}
 SVG_DIRS = ('artifacts/converted_images/converted_svgs',
             'artifacts/converted_images/catalog_background_svgs',
+            'artifacts/converted_images/catalog_manual_svgs',
             'artifacts/converted_images/converted_svg_failed',
             'artifacts/converted_images/reports/conversion_bestlist_snapshots',
             'artifacts/regression_baseline/legacy_ac08/svgs',
@@ -341,9 +342,10 @@ def update_candidate(root, payload, filename, svg, *, measure):
         if digest(inside(root, path).read_bytes()) != row['image_sha256']:
             raise ValueError('Source bitmap changed since catalog measurement: '+filename)
     svg = inside(root, svg)
-    expected = root/'artifacts/converted_images/catalog_background_svgs'
-    if not svg.is_relative_to(expected.resolve()) or svg.stem.casefold() != Path(filename).stem.casefold():
-        raise ValueError('Invalid background candidate path')
+    expected = [root/'artifacts/converted_images'/folder
+                for folder in ('catalog_background_svgs', 'catalog_manual_svgs')]
+    if not any(svg.is_relative_to(folder.resolve()) for folder in expected) or svg.stem.casefold() != Path(filename).stem.casefold():
+        raise ValueError('Invalid catalog candidate path')
     svg_hash, svg_path = digest(svg.read_bytes()), relative(root, svg)
     old_status = row['status']
     candidate = next((c for c in row['candidates'] if c['svg_sha256'] == svg_hash), None)

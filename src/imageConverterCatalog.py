@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 from collections import Counter
 import io
 import json
@@ -51,6 +52,57 @@ class CatalogQuality:
             self.job.update(status='interrupted', message='Die Qualitätsprüfung wurde beim Serverende unterbrochen.')
             atomic_json(self.directory/'job.json', self.job)
         self._manifest_stamp = self._payload = None
+        self.manual_candidates = read_json(self.directory/'manual_candidates.json', {})
+
+    def _merge_manual_candidates(self, payload):
+        """Keep concurrent manual admissions when a slower catalog run publishes."""
+        from tools.build_catalog_inventory import update_candidate
+
+        changed = False
+        for record in self.manual_candidates.values():
+            row = next((row for row in payload['rows'] if row['filename'] == record['filename']), None)
+            if not row or row['image_sha256'] != record['image_sha256']:
+                continue
+            existing = next((c for c in row['candidates'] if c['svg_sha256'] == record['svg_sha256']), None)
+            if existing and existing['measurement'].get('measured_at', '') >= record['measurement'].get('measured_at', ''):
+                continue
+            candidate = self.root/record['candidate']
+            try:
+                if hashlib.sha256(candidate.read_bytes()).hexdigest() != record['svg_sha256']:
+                    continue
+                rows, summary = update_candidate(self.root, payload, record['filename'], candidate,
+                                                measure=lambda *args: record['measurement'])
+            except (OSError, ValueError):
+                continue  # A changed source or new reservation invalidates the admission.
+            payload = dict(payload, rows=rows, summary=summary)
+            changed = True
+        return payload, changed
+
+    def record_manual_candidate(self, filename, candidate, measurement):
+        """Publish against the latest report, serially with background reports."""
+        from tools.build_catalog_inventory import update_candidate, write_report
+
+        with self.lock:
+            if self.closed:
+                raise CatalogError('Der Server wird beendet.', 409)
+            previous = self.report_folder()
+            payload = read_json(previous/'manifest.json')
+            rows, summary = update_candidate(self.root, payload, filename, candidate,
+                                            measure=lambda *args: measurement)
+            row = next(row for row in rows if row['filename'] == filename)
+            svg_hash = hashlib.sha256(candidate.read_bytes()).hexdigest()
+            self.manual_candidates[svg_hash+':'+filename] = dict(
+                filename=filename, candidate=candidate.relative_to(self.root).as_posix(),
+                image_sha256=row['image_sha256'], svg_sha256=svg_hash, measurement=measurement)
+            atomic_json(self.directory/'manual_candidates.json', self.manual_candidates)
+            run_id = uuid.uuid4().hex
+            metadata = read_json(previous/'sources.json', {})
+            if (previous/'measurements.json').is_file():
+                metadata.setdefault('measurement_cache', str(previous/'measurements.json'))
+            write_report(self.root, self.directory/run_id/'report', rows, summary,
+                         metadata)
+            atomic_json(self.directory/'current.json', dict(id=run_id))
+            return row['status']
 
     def report_folder(self):
         pointer = read_json(self.directory/'current.json', {})
@@ -191,6 +243,11 @@ class CatalogQuality:
                     payload = read_json(folder/'report/manifest.json', {})
                     if payload.get('summary', {}).get('schema') != 'catalog_inventory_v1':
                         raise ValueError('Keine vollständige Qualitätsliste erzeugt.')
+                    payload, changed = self._merge_manual_candidates(payload)
+                    if changed:
+                        from tools.build_catalog_inventory import write_report
+                        write_report(self.root, folder/'report', payload['rows'], payload['summary'],
+                                     read_json(folder/'report/sources.json', {}))
                     atomic_json(self.directory/'current.json', dict(id=folder.name))
                     self.job.update(status='done', message='Vollständige Qualitätsliste aktualisiert.')
         except Exception as exc:
