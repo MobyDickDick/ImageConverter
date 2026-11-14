@@ -12,7 +12,7 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterDualArrowBadge import looksLikeDualArrowDescriptionImpl
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register, _hex
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
-from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, horizontal_bar_colors
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, horizontal_bar_colors, arrow_head_directions
 
 
 def _runs(indices):
@@ -20,6 +20,15 @@ def _runs(indices):
 
 
 def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
+    result = _fit_arrow_pair(width, height, description=description, image=image,
+                             render_fn=render_fn, error_fn=error_fn, recover_weak=False)
+    if result is not None:
+        return result
+    return _fit_arrow_pair(width, height, description=description, image=image,
+                           render_fn=render_fn, error_fn=error_fn, recover_weak=True)
+
+
+def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, recover_weak):
     text = ' '.join(normalize_description(description).casefold().split())
     if not looksLikeDualArrowDescriptionImpl(text):
         return None
@@ -30,7 +39,7 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
     b, g, r = pixels.transpose(2, 0, 1)
     masks = [(b > r+30) & (b > g+15), (r > b+30) & (r > g+30)]
     geometries, colors, bars, centers = [], [], [], []
-    for mask in masks:
+    for color_index, mask in enumerate(masks):
         ys, xs = np.where(mask)
         if len(xs) < 12 or np.ptp(ys) < 12:
             return None
@@ -39,6 +48,17 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
         columns = np.flatnonzero(counts > counts.max()*.7)
         if len(_runs(columns)) != 1 or counts.max() < np.ptp(ys)*.45:
             return None
+        # Chroma subsampling can turn a subpixel shaft almost grey for a
+        # few JPEG rows. Recover only weak same-hue evidence beside the
+        # independently established shaft columns, never arbitrary marks.
+        if recover_weak:
+            weak = ((b > r+5) & (b > g+3) if color_index == 0
+                    else (r > b+5) & (r > g+3))
+            near_shaft = np.zeros(width, dtype=bool)
+            near_shaft[max(0, columns[0]-1):min(width, columns[-1]+2)] = True
+            mask = mask | (weak & near_shaft[None, :] & (np.min(pixels, axis=2) < 230))
+            masks[color_index] = mask
+            ys, xs = np.where(mask)
         color = np.percentile(pixels[mask], 5, axis=0)
         colors.extend(color)
         # White-background coverage resolves subpixel line width and center.
@@ -66,7 +86,7 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
         left = np.array([np.flatnonzero(mask[y])[0] for y in head], float)
         right = np.array([np.flatnonzero(mask[y])[-1]+1 for y in head], float)
         lf, rf = np.polyfit(head+.5, left, 1), np.polyfit(head+.5, right, 1)
-        if lf[0]*rf[0] >= 0 or abs(lf[0]-rf[0]) < .3:
+        if lf[0]*rf[0] >= 0 or abs(lf[0]-rf[0]) < .3-1e-9:
             return None
         if max(np.mean(abs(np.polyval(lf, head+.5)-left)),
                np.mean(abs(np.polyval(rf, head+.5)-right))) > .8:
@@ -110,13 +130,11 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
     # anywhere in its clause. A whole-motif translation can append "nach links"
     # after "rechts Spitze nach oben" without an intervening full stop. Commas
     # may separate a side/color from its head direction; full clauses may not.
-    side_word = r'(?:links|rechts|linke[nrsm]?|rechte[nrsm]?)'
-    head_directions = re.findall(
-        r'\b('+side_word+r')\b(?:(?!\b'+side_word+r'\b)[^.;!?])*?\bspitze nach (oben|unten)\b', text)
+    head_directions = arrow_head_directions(description)
     order = np.argsort(centers)
     for side, index in zip(('links', 'rechts'), order):
         color = ('blau', 'rot')[index]
-        if re.search(side+r'\s*[:,]?\s*(?:ist\s+)?'+('rot' if color == 'blau' else 'blau')+r'\b', text):
+        if re.search(side+r'\s*[:,]?\s*(?:ist\s+)?'+('rot' if color == 'blau' else 'blau')+r'(?:e[nrsm]?)?\b', text):
             return None
         # Adjectival subjects can name both primitives before their color:
         # "Die linke Linie und das linke Dreieck ist rot."

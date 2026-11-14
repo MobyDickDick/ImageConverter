@@ -6,14 +6,24 @@ from typing import Any
 
 
 def looksLikeDualArrowDescriptionImpl(desc: str) -> bool:
-    from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
-    normalized = " ".join(normalize_description(desc).casefold().split())
+    import re
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, arrow_head_directions
+    normalized = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalize_description(desc))
+    normalized = " ".join(normalized.casefold().split())
     if not normalized:
         return False
-    required_tokens = ("zwei", "vertikale", "blau", "rot", "dreieck")
-    if not all(token in normalized for token in required_tokens):
+    if not all(token in normalized for token in ('blau', 'rot', 'spitze nach unten', 'spitze nach oben')):
         return False
-    return "spitze nach unten" in normalized and "spitze nach oben" in normalized
+    if all(token in normalized for token in ('zwei', 'vertikale', 'dreieck')):
+        return True
+    # Two side-bound, oppositely directed arrows already describe the pair;
+    # tubes/shafts/lines need not repeat "two vertical lines and triangles".
+    # Raster evidence still has to prove both shafts, heads and their layout.
+    directions = arrow_head_directions(normalized)
+    return (bool(re.search(r'\b(?:röhren?|rohre?|linien|striche|schäfte)\b', normalized))
+            and any(word in normalized for word in ('pfeil', 'dreieck'))
+            and {side for side, _ in directions} == {'links', 'rechts'}
+            and {direction for _, direction in directions} == {'oben', 'unten'})
 
 
 def detectDualArrowBadgeParamsFromImageImpl(

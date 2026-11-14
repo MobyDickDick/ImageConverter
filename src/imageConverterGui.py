@@ -41,6 +41,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
+DESCRIPTION_VALIDATION_VERSION = 2
 
 
 class RequestError(ValueError):
@@ -197,9 +198,9 @@ class Jobs:
                             job.update(status='error', result=False)
                     self.save(job)
                 if (job.get('quality') == 'passed' and job.get('result')
-                        and job.get('description_validation_version') != 1):
+                        and job.get('description_validation_version') != DESCRIPTION_VALIDATION_VERSION):
                     error = result_description_error(path.parent/'result.svg', job.get('description', ''))
-                    job['description_validation_version'] = 1
+                    job['description_validation_version'] = DESCRIPTION_VALIDATION_VERSION
                     if error:
                         job.update(quality='warning', description_error=error,
                                    message='Das gespeicherte SVG besteht die erneute Beschreibungsprüfung nicht. Bitte den Entwurf prüfen.')
@@ -598,7 +599,7 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
                message=message, sample_report=report, pixel_quality=quality,
-               description_validation_version=1)
+               description_validation_version=DESCRIPTION_VALIDATION_VERSION)
 
 
 def result_description_error(svg: Path, description: str) -> str:

@@ -31,7 +31,7 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
             # quoted labels untouched, just like the rest of this vocabulary.
             (r'\b(?:dreick|dreiek)(e)?\b', r'Dreieck\1'),
             (r'\b(dreieck|pfeil)\s+zeigt\s+nach\s+(oben|unten)\b', r'\1 mit Spitze nach \2'),
-            (r'\bpfeil\s+nach\s+(oben|unten)\b', r'Pfeil mit Spitze nach \1'),
+            (r'\b(pfeil|dreieck)\s+nach\s+(oben|unten)\b', r'\1 mit Spitze nach \2'),
             (r'\bspitze?\s+(?:gegen|nach)\s+(oben|unten)\b', r'Spitze nach \1'),
             # Bounded repeated-letter typos in head directions, never labels.
             (r'\b(spitze\s+nach\s+)u+n+t+e+n+\b', r'\1unten'),
@@ -67,6 +67,14 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
     # Labels can contain words from the dictionary, punctuation and mixed case.
     parts = re.split(r'("[^"\n]*"|„[^“\n]*“)', str(description or ''))
     return ''.join(part if i % 2 else normalize(part) for i, part in enumerate(parts))
+
+
+def arrow_head_directions(description: str) -> list[tuple[str, str]]:
+    """Bind each direction to its nearest preceding side, outside quoted labels."""
+    words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalize_description(description)).casefold()
+    side = r'(?:links|rechts|linke[nrsm]?|rechte[nrsm]?)'
+    return [('links' if s.startswith('link') else 'rechts', d) for s, d in re.findall(
+        r'\b('+side+r')\b(?:(?!\b'+side+r'\b)[^.;!?])*?\bspitze nach (oben|unten)\b', words)]
 
 
 def horizontal_bar_colors(description: str) -> set[str]:
@@ -114,9 +122,7 @@ def description_assertions(description: str) -> dict:
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
     if arrow_pair:
-        side = r'(?:links|rechts|linke[nrsm]?|rechte[nrsm]?)'
-        heads = re.findall(r'\b('+side+r')\b(?:(?!\b'+side+r'\b)[^.;!?])*?'
-                           r'\bspitze nach (oben|unten)\b', words)
+        heads = arrow_head_directions(normalized)
         assertions['arrow_heads'] = [dict(side='left' if s.startswith('link') else 'right',
                                         direction='up' if d == 'oben' else 'down') for s, d in heads]
         colors = horizontal_bar_colors(normalized)
