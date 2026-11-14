@@ -61,6 +61,41 @@ function zoom() {
     img.style.height = `${Math.round(current.height * fit * scale)}px`;
   }
 }
+function draftQuality(job) {
+  if (job.status !== "done" || !job.result || job.quality !== "warning") return null;
+  const pixels = job.pixel_quality?.passed;
+  // Sample workers store their description verdict in the report; older jobs
+  // must be explainable on reload without changing their saved acceptance.
+  const error = job.description_error || job.sample_report?.description_error || job.recovery_report?.description_error || "";
+  const imageSummary = pixels === true ? "Bildqualität bestanden" : pixels === false ? "Bildqualität nicht bestanden" : "Bildprüfung noch offen";
+  const parts = [pixels === true ? "Das SVG besteht den Bildvergleich mit dem Original." : pixels === false ? "Das SVG weicht im Bildvergleich noch zu stark vom Original ab." : "Für das SVG liegt keine abgeschlossene Bildprüfung vor."];
+  if (error) {
+    const direction = /^wrong_described_arrow_direction:(left|right)$/.exec(error);
+    if (direction) {
+      const side = direction[1] === "left" ? "links" : "rechts";
+      parts.push(`Die Pfeilrichtung ${side} im Ergebnis stimmt nicht mit der Beschreibung überein.`);
+    } else if (error === "invalid_described_arrow_head") {
+      parts.push("Eine beschriebene Pfeilspitze fehlt oder hat nicht die geforderte Dreiecksform.");
+    } else if (error === "missing_described_horizontal_bar") {
+      parts.push("Die beschriebene horizontale Querlinie konnte nicht bestätigt werden.");
+    } else {
+      parts.push("Das Ergebnis erfüllt die beschriebenen Formen, Farben oder ihre Anordnung noch nicht vollständig.");
+    }
+    parts.push("Vergleiche die Beschreibung mit dem Original. Falls das Original massgeblich ist, passe die Beschreibung an und starte die Konvertierung erneut.");
+  } else if (pixels === true) {
+    parts.push("Die vollständige Modell- und Beschreibungsprüfung ist noch offen. Bitte prüfe den Entwurf vor der Verwendung.");
+  } else {
+    parts.push("Bitte vergleiche Original und Entwurf und prüfe die Beschreibung oder lade ein passendes Sample-SVG.");
+  }
+  if ((job.recovery_report || job.sample_report)?.stop_reason === "time_limit") {
+    parts.push("Das Suchbudget ist ausgeschöpft; dies ist kein zusätzlicher Qualitätsmangel.");
+  }
+  return {
+    summary: `${imageSummary} · ${error ? "Beschreibung nicht erfüllt" : "Gesamtprüfung noch offen"}`,
+    message: parts.join(" "),
+    history: pixels === true ? `Bildqualität bestanden · ${error ? "Beschreibung prüfen" : "Gesamtprüfung offen"}` : `Entwurf · ${imageSummary}`,
+  };
+}
 function renderJob(job, select = false) {
   if (current?.id !== job.id) { $("save-status").hidden = true; $("save-status").textContent = ""; }
   current = job;
@@ -96,7 +131,8 @@ function renderJob(job, select = false) {
   if (showingResult && $("result-image").getAttribute("src") !== displayUrl) $("result-image").src = displayUrl;
   $("result-empty").querySelector("strong").textContent = job.status === "running" ? (job.sample ? "Dein Sample wird verbessert …" : "Dein SVG entsteht …") : "Platz für dein SVG";
   $("result-empty").querySelector("p").textContent = running ? ($("show-intermediate").checked ? "Die Suche läuft. Sobald ein erster SVG-Zwischenstand vorliegt, erscheint er hier automatisch." : "Die Suche läuft. Hier erscheint das Endergebnis. Du kannst die Zwischenergebnisse jederzeit einschalten.") : "Nach der Konvertierung siehst du hier das Ergebnis.";
-  $("status").textContent = job.message;
+  const draft = draftQuality(job);
+  $("status").textContent = draft?.message || job.message;
   $("status-dot").className = `status-dot ${job.status === "running" ? "running" : job.quality === "warning" ? "warning" : ["error", "timeout", "interrupted"].includes(job.status) ? "error" : ""}`;
   $("elapsed").textContent = job.elapsed ? `${Math.round(job.elapsed)} s` : "";
   $("log").textContent = job.log || "Das Protokoll erscheint nach dem Start der Konvertierung.";
@@ -107,7 +143,7 @@ function renderJob(job, select = false) {
   $("download").href = `${resultUrl}?download=1`;
   $("download").download = `${job.name.replace(/\.[^.]*$/, "")}.svg`;
   $("quality").className = `hint ${job.quality === "warning" ? "quality-warning" : job.quality === "passed" ? "quality-passed" : ""}`;
-  $("quality").textContent = running ? (showingPreview ? "Zwischenstand · Suche und Qualitätsprüfung laufen weiter." : "Suche und Qualitätsprüfung laufen.") : job.quality === "warning" ? (job.sample ? "Entwurf · Pixel- oder explizite Beschreibungsprüfung noch offen" : "Entwurf · Qualitätsprüfung nicht bestanden") : job.quality === "passed" ? (job.sample ? "Pixelprüfung bestanden · Sample am Original optimiert" : "Qualitätsprüfung bestanden · Bereit zum Herunterladen") : "Original und Ergebnis lassen sich gemeinsam vergrössern.";
+  $("quality").textContent = running ? (showingPreview ? "Zwischenstand · Suche und Qualitätsprüfung laufen weiter." : "Suche und Qualitätsprüfung laufen.") : draft ? draft.summary : job.quality === "warning" ? "Entwurf · Qualitätsprüfung noch offen" : job.quality === "passed" ? (job.sample ? "Pixelprüfung bestanden · Sample am Original optimiert" : "Qualitätsprüfung bestanden · Bereit zum Herunterladen") : "Original und Ergebnis lassen sich gemeinsam vergrössern.";
   $("sample-metrics").hidden = !job.sample_report;
   if (job.sample_report) {
     const report = job.sample_report;
@@ -129,7 +165,7 @@ function renderHistory() {
     img.src = `/api/jobs/${job.id}/source`; img.alt = "";
     const text = document.createElement("span"), name = document.createElement("strong"), status = document.createElement("small");
     name.textContent = job.name;
-    status.textContent = job.quality === "warning" ? "SVG-Entwurf · Bitte prüfen" : statusLabels[job.status] || job.status;
+    status.textContent = draftQuality(job)?.history || (job.quality === "warning" ? "SVG-Entwurf · Bitte prüfen" : statusLabels[job.status] || job.status);
     text.append(name, status); button.append(img, text); button.title = job.name;
     button.addEventListener("click", async () => {
       try { notice(); renderJob(await request(`/api/jobs/${job.id}`), true); renderHistory(); } catch (error) { notice(error.message); }
