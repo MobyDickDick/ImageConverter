@@ -9,6 +9,13 @@ let history = [];
 let syncingScroll = false;
 let pollTimer;
 let saving = false;
+// A display preference applies to every image and can change during a run.
+try { $("show-intermediate").checked = localStorage.getItem("imageconverter.showIntermediate") !== "false"; }
+catch (_) { $("show-intermediate").checked = true; }
+$("show-intermediate").addEventListener("change", () => {
+  try { localStorage.setItem("imageconverter.showIntermediate", String($("show-intermediate").checked)); } catch (_) {}
+  if (current) renderJob(current);
+});
 
 async function request(path, options = {}) {
   const response = await fetch(path, options);
@@ -79,34 +86,35 @@ function renderJob(job, select = false) {
   document.querySelector(".comparison").classList.toggle("with-sample", Boolean(job.sample));
   const sampleUrl = `/api/jobs/${job.id}/sample`;
   if (job.sample && $("sample-image").getAttribute("src") !== sampleUrl) $("sample-image").src = sampleUrl;
-  const showingPreview = Boolean(job.preview && job.status === "running");
-  const showingResult = Boolean(job.result || showingPreview);
+  const running = job.status === "running";
+  const showingPreview = Boolean($("show-intermediate").checked && job.preview && running);
+  const showingResult = showingPreview || Boolean(job.result && !running);
   $("result-image").hidden = !showingResult;
   $("result-empty").hidden = showingResult;
   const resultUrl = `/api/jobs/${job.id}/result`;
   const displayUrl = showingPreview ? `/api/jobs/${job.id}/preview?v=${job.preview_revision}` : resultUrl;
   if (showingResult && $("result-image").getAttribute("src") !== displayUrl) $("result-image").src = displayUrl;
   $("result-empty").querySelector("strong").textContent = job.status === "running" ? (job.sample ? "Dein Sample wird verbessert …" : "Dein SVG entsteht …") : "Platz für dein SVG";
-  $("result-empty").querySelector("p").textContent = job.status === "running" ? "Die Suche läuft. Du kannst den Fortschritt im Protokoll verfolgen." : "Nach der Konvertierung siehst du hier das Ergebnis.";
+  $("result-empty").querySelector("p").textContent = running ? ($("show-intermediate").checked ? "Die Suche läuft. Sobald ein erster SVG-Zwischenstand vorliegt, erscheint er hier automatisch." : "Die Suche läuft. Hier erscheint das Endergebnis. Du kannst die Zwischenergebnisse jederzeit einschalten.") : "Nach der Konvertierung siehst du hier das Ergebnis.";
   $("status").textContent = job.message;
   $("status-dot").className = `status-dot ${job.status === "running" ? "running" : job.quality === "warning" ? "warning" : ["error", "timeout", "interrupted"].includes(job.status) ? "error" : ""}`;
   $("elapsed").textContent = job.elapsed ? `${Math.round(job.elapsed)} s` : "";
   $("log").textContent = job.log || "Das Protokoll erscheint nach dem Start der Konvertierung.";
-  $("save-actions").hidden = !job.result;
+  $("save-actions").hidden = !job.result || running;
   $("project-status").hidden = !job.project_save;
   $("project-status").textContent = job.project_save?.message || "";
   $("use-plan-b").hidden = serverNeedsRestart || !job.result || job.quality !== "passed" || job.status !== "done";
   $("download").href = `${resultUrl}?download=1`;
   $("download").download = `${job.name.replace(/\.[^.]*$/, "")}.svg`;
   $("quality").className = `hint ${job.quality === "warning" ? "quality-warning" : job.quality === "passed" ? "quality-passed" : ""}`;
-  $("quality").textContent = job.quality === "warning" ? (job.sample ? "Entwurf · Pixel- oder explizite Beschreibungsprüfung noch offen" : "Entwurf · Qualitätsprüfung nicht bestanden") : job.quality === "passed" ? (job.sample ? "Pixelprüfung bestanden · Sample am Original optimiert" : "Qualitätsprüfung bestanden · Bereit zum Herunterladen") : "Original und Ergebnis lassen sich gemeinsam vergrössern.";
+  $("quality").textContent = running ? (showingPreview ? "Zwischenstand · Suche und Qualitätsprüfung laufen weiter." : "Suche und Qualitätsprüfung laufen.") : job.quality === "warning" ? (job.sample ? "Entwurf · Pixel- oder explizite Beschreibungsprüfung noch offen" : "Entwurf · Qualitätsprüfung nicht bestanden") : job.quality === "passed" ? (job.sample ? "Pixelprüfung bestanden · Sample am Original optimiert" : "Qualitätsprüfung bestanden · Bereit zum Herunterladen") : "Original und Ergebnis lassen sich gemeinsam vergrössern.";
   $("sample-metrics").hidden = !job.sample_report;
   if (job.sample_report) {
     const report = job.sample_report;
     const percent = report.initial_mse > 0 ? Math.max(0, (1 - report.final_mse / report.initial_mse) * 100) : 0;
     $("sample-metrics").textContent = `Sample-Vergleich: ${percent.toFixed(1)} % weniger mittlerer Pixelfehler · ${report.evaluations} geprüfte Anpassungen. Vorhandene Formen werden optimiert.`;
   }
-  $("result-meta").textContent = showingPreview ? "SVG · Elementweiser Aufbau läuft" : job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
+  $("result-meta").textContent = showingPreview ? "SVG · Zwischenstand · Suche läuft" : running ? "SVG · Suche läuft" : job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
   controls();
   zoom();
 }

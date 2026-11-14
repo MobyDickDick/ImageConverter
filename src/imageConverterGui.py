@@ -236,7 +236,7 @@ class Jobs:
             job = dict(self.jobs[job_id])
             if job["status"] == "running":
                 job["elapsed"] = round(time.time() - job["started"], 1)
-            preview = folder / 'recovery.svg'
+            preview = self.preview_file(job_id)
             if preview.is_file():
                 job['preview_revision'] = preview.stat().st_mtime_ns
                 job['preview'] = True
@@ -248,6 +248,11 @@ class Jobs:
             else:
                 job["log"] = ""
             return job
+
+    def preview_file(self, job_id: str) -> Path:
+        folder = self.folder(job_id)
+        recovery = folder / 'recovery.svg'
+        return recovery if recovery.is_file() else folder / 'live-preview.svg'
 
     def catalog_description(self, name: str) -> str:
         from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
@@ -391,6 +396,9 @@ class Jobs:
                                ICC_MAX_QUALITY_PASSES="0", ICC_CONVERSION_TIMEOUT_SEC=str(maximum))
             environment.setdefault("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "1")
             environment.setdefault("IMAGE_CONVERTER_REUSE_RENDER_WORKER", "1")
+            if not job.get('catalog_background'):
+                environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
+                                   ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'))
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
@@ -1158,7 +1166,7 @@ class Handler(BaseHTTPRequestHandler):
                     if not asset:
                         return self.json(job)
                     assets = {"source": ("source.png", "image/png"), "sample": ("sample.svg", "image/svg+xml"),
-                              "preview": ("recovery.svg", "image/svg+xml"),
+                              "preview": (jobs.preview_file(job_id).name, "image/svg+xml"),
                               "result": ("result.svg", "image/svg+xml"), "log": ("console.log", "text/plain; charset=utf-8")}
                     if asset in assets and (asset not in {"result", "sample", "preview"} or job.get(asset)):
                         filename, mime = assets[asset]

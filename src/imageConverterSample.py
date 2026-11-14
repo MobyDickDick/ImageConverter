@@ -168,6 +168,8 @@ def render_svg(svg, width, height):
         raise ValueError("Das SVG konnte nicht gerendert werden.")
     if image.shape[:2] != (height, width):
         image = cv2.resize(image, (width, height), interpolation=cv2.INTER_AREA)
+    from src.imageConverterPreview import publish_preview
+    publish_preview(svg, image)
     # The converter works in BGR; uploaded samples and Pillow sources use RGB.
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 

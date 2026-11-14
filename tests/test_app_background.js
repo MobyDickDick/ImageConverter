@@ -41,10 +41,43 @@ test('incremental native previews refresh while conversion remains active', () =
   job.preview_revision = 2;
   vm.runInContext('renderJob(job)', context);
   assert.match(get('result-image').src, /\/preview\?v=2$/);
+  // The switch works immediately, including a result collected between phases.
+  job.result = true;
+  get('show-intermediate').checked = false;
+  get('show-intermediate').listeners.change();
+  assert.equal(get('result-image').hidden, true);
+  assert.equal(get('result-empty').hidden, false);
+  assert.equal(get('save-actions').hidden, true);
+  assert.match(get('result-empty').querySelector('p').textContent, /Endergebnis/);
+  get('show-intermediate').checked = true;
+  get('show-intermediate').listeners.change();
+  assert.equal(get('result-image').hidden, false);
+  assert.match(get('result-meta').textContent, /Zwischenstand/);
+  get('show-intermediate').checked = false;
   job.status = 'done'; job.result = true;
   vm.runInContext('renderJob(job)', context);
   assert.match(get('result-image').src, /\/result$/);
   assert.equal(get('save-actions').hidden, false);
+});
+
+test('intermediate display preference survives a reload', () => {
+  const storage = new Map([['imageconverter.showIntermediate', 'false']]);
+  const elements = new Map();
+  const get = id => {
+    if (!elements.has(id)) elements.set(id, element());
+    return elements.get(id);
+  };
+  const context = vm.createContext({
+    document: {getElementById: get, createElement: element, querySelector: element},
+    window: {location: {search: ''}, addEventListener() {}}, URLSearchParams,
+    localStorage: {getItem: key => storage.get(key), setItem: (key, value) => storage.set(key, value)},
+    setTimeout() {}, clearTimeout() {}, fetch: () => new Promise(() => {}),
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '../web/app.js'), 'utf8'), context);
+  assert.equal(get('show-intermediate').checked, false);
+  get('show-intermediate').checked = true;
+  get('show-intermediate').listeners.change();
+  assert.equal(storage.get('imageconverter.showIntermediate'), 'true');
 });
 
 for (const parallel of [false, true]) {

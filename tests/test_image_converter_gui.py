@@ -71,6 +71,7 @@ def test_red_crossbar_user_description_reaches_real_gui_converter(jobs):
     result = jobs.snapshot(started['id'])
     assert result['status'] == 'done' and result['quality'] == 'passed', result
     assert result['search_summary']['satisfactory']
+    assert (jobs.folder(result['id'])/'live-preview.svg').is_file()
     root = ET.parse(jobs.folder(result['id'])/'result.svg').getroot()
     assert [e.tag.rsplit('}', 1)[-1] for e in root] == ['rect', 'polygon', 'rect', 'polygon', 'rect']
 
@@ -774,6 +775,15 @@ def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, requ
     uploaded = json.loads(body)
     assert b"200" in send("/api/jobs/" + uploaded["id"] + "/source")[0]
     assert b"404" in send("/api/jobs/" + uploaded["id"] + "/result")[0]
+    preview_path = '/api/jobs/' + uploaded['id'] + '/preview'
+    assert send(preview_path)[0] == b'404'
+    folder = jobs.folder(uploaded['id'])
+    live_svg = b'<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>'
+    (folder/'live-preview.svg').write_bytes(live_svg)
+    assert send(preview_path) == (b'200', live_svg)
+    recovery_svg = live_svg.replace(b'10', b'12')
+    (folder/'recovery.svg').write_bytes(recovery_svg)
+    assert send(preview_path) == (b'200', recovery_svg)
     assert 'native_file_dialogs' in json.loads(send('/api/config')[1])
     monkeypatch.setattr(gui, 'open_file_dialog', lambda *args: dict(selected=False))
     assert b'403' in send('/api/pick', 'POST', '', b'{"kind":"image"}')[0]

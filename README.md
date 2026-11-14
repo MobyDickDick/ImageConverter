@@ -8,6 +8,13 @@ Vektorentwurf erhalten. Widersprüche zwischen Bild und Beschreibung werden als
 Warnung angezeigt; ein eingebettetes Originalbild gilt weiterhin nicht als
 Vektorisierung. Siehe [Prüfnachweis](artifacts/evaluation/gui_element_recovery_2026-11-14/README.md).
 
+Unter **Direkt vergleichen** schaltet **Zwischenergebnisse anzeigen** die laufende
+SVG-Vorschau ein oder aus. Die Checkbox ist standardmässig aktiviert, lässt sich
+auch während der Konvertierung umschalten und merkt sich die Auswahl im Browser.
+Etwa jede Sekunde erscheint der beste verfügbare Zwischenstand aus der ersten
+Suche oder der Nachbesserung. Ohne Häkchen erscheint nur das Endergebnis.
+Zwischenstände sind noch nicht abschliessend qualitätsgeprüft.
+
 [Form- und Farbreferenzen](docs/similarity_references.md) lassen sich direkt in
 der Bildbeschreibung kombinieren: `Form ähnlich wie …`, `Farben ähnlich wie …`
 oder `Farbverlauf ähnlich wie …`. Eigene Angaben und unterstützte Ausnahmen

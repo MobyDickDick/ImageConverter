@@ -1326,7 +1326,7 @@ class Action:
         timeout_sec: float | None = None,
         status_callback=None,
     ):
-        return render_dispatch_helpers.renderSvgToNumpyImpl(
+        rendered = render_dispatch_helpers.renderSvgToNumpyImpl(
             svg_string,
             size_w,
             size_h,
@@ -1340,6 +1340,10 @@ class Action:
             is_inprocess_renderer_monkeypatched_fn=_is_inprocess_renderer_monkeypatched,
             render_svg_to_numpy_inprocess_fn=_renderSvgToNumpyInprocess,
         )
+        if os.environ.get('ICC_GUI_PREVIEW_OUTPUT'):
+            from src.imageConverterPreview import publish_preview
+            publish_preview(svg_string, rendered)
+        return rendered
 
     @staticmethod
     def createDiffImage(
