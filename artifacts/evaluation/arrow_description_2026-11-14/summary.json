@@ -1,0 +1,74 @@
+{
+  "description": "zwei vertikale Striche links rot, rechts, blau, unten links Dreieck rot links Spitze nach oben, rechtes Dreieck rechts blau, Spitze nach untten, unteres Drittel rote horizontale Linie.",
+  "input_sha256": "f718a2b3096b2f38a0ecf9ee559a4036e64ce56285cb2e7f2a449b00c56af884",
+  "assertions": {
+    "counts": [
+      {
+        "kind": "triangle",
+        "count": 2
+      }
+    ],
+    "no_text": false,
+    "horizontal_bar": "red"
+  },
+  "quality": {
+    "MuPDF": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0017910132883116603,
+        "foreground_mse": 0.004721500910818577,
+        "edge_alignment": 0.8969302773475647,
+        "foreground_iou": 0.9203125,
+        "foreground_iou_binary": 0.9203125
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 5,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    },
+    "librsvg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0018500416772440076,
+        "foreground_mse": 0.005091077648103237,
+        "edge_alignment": 0.8690687417984009,
+        "foreground_iou": 0.9173166926677067,
+        "foreground_iou_binary": 0.9173166926677067
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 5,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    }
+  },
+  "prior_circle_draft_rejection": "object_count:triangle:2:1",
+  "source_svg_access": {
+    "blocked_svg_reads": []
+  }
+}

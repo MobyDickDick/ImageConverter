@@ -30,6 +30,13 @@ def test_common_minus_and_axis_spellings_preserve_labels_and_negation():
     assert normalize_description(normalized) == normalized
 
 
+def test_head_direction_typos_preserve_quoted_labels_and_polarity():
+    text = 'Links Spitze nach obben, rechts Spitze nach untten. Beschriftung "Spitze nach untten".'
+    normalized = normalize_description(text)
+    assert normalized == 'Links Spitze nach oben, rechts Spitze nach unten. Beschriftung "Spitze nach untten".'
+    assert normalize_description(normalized) == normalized
+
+
 @pytest.mark.parametrize('word', ['Farbübergang', 'Farbenübergang', 'Farbuebergang',
                                  'Graustufenübergang', 'Graustufenuebergang', 'Graustufenverlauf'])
 def test_gradient_synonyms_preserve_label_bytes_and_absence(word):
@@ -55,6 +62,57 @@ def test_native_count_excludes_definitions_and_rejects_missing_instances():
     validate_svg_assertions(svg,description_assertions('Das Motiv enthält genau einen Kreis.'))
     with pytest.raises(DescriptionRejected,match='object_count'):
         validate_svg_assertions(svg,description_assertions('Das Motiv enthält genau zwei Kreise.'))
+
+
+@pytest.mark.parametrize('replacement', [
+    '<circle cx="5" cy="8" r="3"/>',
+    '<ellipse cx="5" cy="8" rx="3" ry="2"/>',
+    '<polygon points="0,0 1,1 2,2"/>',
+    '<polygon points="0,0 4,0 4,4 0,4"/>',
+    '<defs><polygon points="0,0 4,0 2,4"/></defs>',
+])
+def test_described_arrow_heads_cannot_be_replaced_by_other_primitives(replacement):
+    description = ('Zwei vertikale Striche links rot, rechts blau. Unten Dreiecke, '
+                   'links Spitze nach oben, rechts Spitze nach untten.')
+    assertions = description_assertions(description)
+    head = '<polygon points="0,0 4,0 2,4"/>'
+    with pytest.raises(DescriptionRejected, match='object_count:triangle:2:1'):
+        validate_svg_assertions('<svg>'+head+replacement+'</svg>', assertions)
+    validate_svg_assertions('<svg>'+head+head+'</svg>', assertions)
+
+
+def test_triangle_count_is_enforced_before_a_pixel_perfect_checkpoint():
+    import numpy as np
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, SearchPolicy, image_search
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
+    session = ImageSearch(SearchPolicy())
+    session.description_assertions = description_assertions('Es gibt genau zwei Dreiecke.')
+    image = np.full((10,10,3), 255, dtype=np.uint8)
+    with image_search(session), pytest.raises(DescriptionRejected, match='object_count:triangle'):
+        validated_result(dict(svg='<svg><polygon points="0,0 4,0 2,4"/><circle r="3"/></svg>',
+                              rendered=image), image)
+    assert not session.validated
+
+
+@pytest.mark.parametrize('bar,accepted', [
+    ('<line x1="4" y1="68" x2="30" y2="68" stroke="red"/>', True),
+    ('<rect x="4" y="68" width="26" height="1" fill="#eb1820"/>', True),
+    ('<line x1="4" y1="68" x2="30" y2="69" stroke="red"/>', False),
+    ('<line x1="4" y1="68" x2="30" y2="68" stroke="blue"/>', False),
+    ('<rect x="4" y="0" width="1" height="102" fill="red"/>', False),
+    ('<g transform="rotate(2)"><rect width="26" height="1" fill="red"/></g>', False),
+    ('<g transform="translate(1 2) scale(1.1)"><rect width="26" height="1" fill="red"/></g>', True),
+])
+def test_described_red_horizontal_bar_requires_color_and_exact_direction(bar, accepted):
+    assertions = description_assertions('Zwei vertikale Striche rot blau, Dreiecke, '
+        'links Spitze nach oben, rechts Spitze nach unten. Unteres Drittel rote horizontale Linie.')
+    heads = '<polygon points="0,0 4,0 2,4"/><polygon points="20,0 24,0 22,4"/>'
+    svg = '<svg>'+heads+bar+'</svg>'
+    if accepted:
+        validate_svg_assertions(svg, assertions)
+    else:
+        with pytest.raises(DescriptionRejected, match='missing_described_horizontal_bar'):
+            validate_svg_assertions(svg, assertions)
 
 
 def test_quoted_geometry_is_not_an_object_count_assertion():

@@ -6,7 +6,8 @@ from typing import Any
 
 
 def looksLikeDualArrowDescriptionImpl(desc: str) -> bool:
-    normalized = " ".join(str(desc or "").lower().split())
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+    normalized = " ".join(normalize_description(desc).casefold().split())
     if not normalized:
         return False
     required_tokens = ("zwei", "vertikale", "blau", "rot", "dreieck")

@@ -12,6 +12,7 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterDualArrowBadge import looksLikeDualArrowDescriptionImpl
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register, _hex
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
 
 
 def _runs(indices):
@@ -19,7 +20,7 @@ def _runs(indices):
 
 
 def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
-    text = ' '.join(str(description or '').casefold().split())
+    text = ' '.join(normalize_description(description).casefold().split())
     if not looksLikeDualArrowDescriptionImpl(text):
         return None
     arr = np.asarray(image)
@@ -98,13 +99,14 @@ def fit_arrow_pair(width, height, *, description, image, render_fn, error_fn):
         return None
     # Bind each head direction to the preceding side, not to every side word
     # anywhere in its clause. A whole-motif translation can append "nach links"
-    # after "rechts Spitze nach oben" without an intervening full stop.
+    # after "rechts Spitze nach oben" without an intervening full stop. Commas
+    # may separate a side/color from its head direction; full clauses may not.
     head_directions = re.findall(
-        r'\b(links|rechts)\b(?:(?!\b(?:links|rechts)\b)[^.,;])*?\bspitze nach (oben|unten)\b', text)
+        r'\b(links|rechts)\b(?:(?!\b(?:links|rechts)\b)[^.;!?])*?\bspitze nach (oben|unten)\b', text)
     order = np.argsort(centers)
     for side, index in zip(('links', 'rechts'), order):
         color = ('blau', 'rot')[index]
-        if re.search(side+r'\s+(?:ist\s+)?'+('rot' if color == 'blau' else 'blau'), text):
+        if re.search(side+r'\s*[:,]?\s*(?:ist\s+)?'+('rot' if color == 'blau' else 'blau')+r'\b', text):
             return None
         directions = [direction for stated_side, direction in head_directions if stated_side == side]
         expected = 'unten' if geometries[index*8+5] > geometries[index*8+6] else 'oben'

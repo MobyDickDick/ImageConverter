@@ -49,6 +49,9 @@ from src.iCCModules.imageCompositeConverterPlainDisk import fit_plain_disk
 from src.iCCModules.imageCompositeConverterShortLabelDisk import fit_short_label_disk
 from src.iCCModules.imageCompositeConverterAxialPanel import fit_axial_panel
 from src.iCCModules.imageCompositeConverterInsetPanel import fit_inset_panel, inset_panel_contract
+from src.iCCModules.imageCompositeConverterPiecewiseScene import (
+    fit_piecewise_scene, piecewise_contract, load_piecewise_companions,
+)
 from src.iCCModules.imageCompositeConverterGradientTube import fit_gradient_tube, tube_contract
 from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, panel_contract
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
@@ -1435,7 +1438,7 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"} or (
-        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description))
+        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description) or piecewise_contract(description))
     ):
         # A complete raster-backed gradient contract can describe its frame
         # implicitly. A missing rectangle noun must not bypass its fitter.
@@ -1475,6 +1478,7 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in (
+            (fit_piecewise_scene, "non_composite_raster_piecewise_scene"),
             (fit_inset_panel, "non_composite_raster_inset_panel"),
             (fit_gradient_tube, "non_composite_raster_gradient_tube"),
             (fit_spray_panel, "non_composite_raster_spray_panel"),
@@ -1520,9 +1524,16 @@ def runNonCompositeIterationImpl(
             fitted = fit_fn(
                 width, height, description=fit_description, image=perc_img,
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
+                **({'companion_images': load_piecewise_companions(img_path)}
+                   if fit_fn is fit_piecewise_scene and piecewise_contract(fit_description) else {}),
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if status == "non_composite_raster_piecewise_scene":
+                    params['piecewise_scene_registration'] = {
+                        key: value for key, value in fitted.items()
+                        if key not in {'svg', 'rendered'}
+                    }
                 if status == "non_composite_raster_inset_panel":
                     params['inset_panel_registration'] = {
                         key: value for key, value in fitted.items() if key not in {'svg', 'rendered'}

@@ -14,21 +14,25 @@ def _hex(bgr):
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
-              refinement_steps=(1., .5, .25, .125)):
+              refinement_steps=(1., .5, .25, .125), allow_portfolio=True):
     return drain(_register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
         preserve_initial_error=preserve_initial_error, loss_fn=loss_fn,
-        initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn, refinement_steps=refinement_steps))
+        initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn,
+        refinement_steps=refinement_steps, allow_portfolio=allow_portfolio))
 
 
 def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
-              refinement_steps=(1., .5, .25, .125), initial_candidates=(), eager_satisfactory=False):
+              refinement_steps=(1., .5, .25, .125), initial_candidates=(), eager_satisfactory=False,
+              allow_portfolio=True):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
     A caller that refines the seed before search may supply the measured error
     of its original rendered seed as ``initial_error_bound``.
     Contours and reference vectors are never emitted.
+    Intermediate stages can disable the portfolio: their masked objective
+    cannot satisfy the complete scene's quality contract yet.
     """
     height, width = image.shape[:2]
     evaluations = 0
@@ -165,7 +169,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     search = None
     # Keep already accurate incumbent fits byte-identical. Alternative searches
     # address poor fits, rather than introducing random changes to good output.
-    if not stop_reason and settings() and settings()['mode'] == 'portfolio':
+    if allow_portfolio and not stop_reason and settings() and settings()['mode'] == 'portfolio':
         from src.iCCModules.imageCompositeConverterPrimitiveScene import _local_quality
         quality = (pixel_quality(image,best[3]) if session else
                    _local_quality(np.asarray(image, dtype=np.uint8), np.asarray(best[3], dtype=np.uint8)))

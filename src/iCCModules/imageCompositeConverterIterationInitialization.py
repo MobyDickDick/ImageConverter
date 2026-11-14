@@ -89,6 +89,14 @@ def prepareIterationRuntimeImpl(
                             if model_passed:
                                 from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
                                 validated_result(fitted, target_img)
+                        if fitted['improved'] and params.get('piecewise_scene_registration'):
+                            from src.iCCModules.imageCompositeConverterPiecewiseScene import validate_piecewise_refinement
+                            model_passed = validate_piecewise_refinement(
+                                fitted, target_img, params['piecewise_scene_registration'], render_svg_to_numpy_fn)
+                            params['vector_continuation']['piecewise_model_passed'] = model_passed
+                            if model_passed:
+                                from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
+                                validated_result(fitted, target_img)
                         if fitted['improved'] and model_passed:
                             svg_content = fitted['svg']
                             # Supplied render/diff belong to the previous vector.

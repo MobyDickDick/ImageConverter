@@ -16,6 +16,11 @@ DESCRIPTION = ('Zwei vertikale Striche: links rot, rechts blau. Unten links ein 
                'mit Spitze nach oben, unten rechts ein blaues Dreieck mit Spitze nach unten. '
                'Im unteren Drittel verbindet eine rote horizontale Linie die Striche.')
 
+# User wording from the failing conversion, including punctuation and typo.
+USER_DESCRIPTION = ('zwei vertikale Striche links rot, rechts, blau, unten links Dreieck rot '
+                    'links Spitze nach oben, rechtes Dreieck rechts blau, Spitze nach untten, '
+                    'unteres Drittel rote horizontale Linie.')
+
 
 def drawing(*, red='#e62320', blue='#226ebc', dx=0, extra='', same_direction=False, bar=True):
     right = '80,128 73,144 87,144' if same_direction else '73,128 87,128 80,144'
@@ -142,6 +147,48 @@ def test_original_catalog_jpeg_is_an_independent_raster_holdout():
                             render_fn=render,error_fn=lambda a,b:normalized_mse(a,b)[0])
     assert result is not None
     assert measure_quality(image,result['svg'])['satisfactory']
+
+
+@pytest.mark.parametrize('description', [USER_DESCRIPTION, USER_DESCRIPTION.replace('untten', 'unten')])
+def test_user_punctuation_and_typo_keep_both_catalog_triangle_heads(description):
+    from src.iCCModules.imageCompositeConverterPerceptionReflection import Reflection
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    text, params = Reflection({'neutral': description}).parse_description('neutral', 'neutral.png')
+    assert params['mode'] == 'dual_arrow_badge'
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0022.jpg'))
+    height, width = image.shape[:2]
+    result = fit_arrow_pair(width, height, description=description, image=image,
+                            render_fn=render, error_fn=lambda a,b: normalized_mse(a,b)[0])
+    assert result is not None
+    validate_svg_assertions(result['svg'], params['language_assertions'])
+    assert measure_quality(image, result['svg'])['satisfactory']
+    polygons = [e for e in ET.fromstring(result['svg']) if e.tag.endswith('polygon')]
+    assert len(polygons) == 2
+    # Blue/right points down; red/left points up, independently of text order.
+    points = [np.array([float(v) for v in e.get('points').replace(',', ' ').split()]).reshape(3, 2)
+              for e in polygons]
+    assert points[0][0, 1] > points[0][1, 1]
+    assert points[1][0, 1] < points[1][1, 1]
+    assert points[1][:, 0].mean() < points[0][:, 0].mean()
+    # A filled thin rectangle is an exactly horizontal line, not a fitted
+    # diagonal. It must bridge the shafts in the lower portion of the image.
+    bar = list(ET.fromstring(result['svg']))[-1]
+    assert bar.tag.endswith('rect')
+    assert float(bar.get('width')) > 3*float(bar.get('height')) > 0
+    assert height*.5 < float(bar.get('y')) < height*.75
+    assert float(bar.get('x')) < points[1][:, 0].mean()+2
+    assert float(bar.get('x'))+float(bar.get('width')) > points[0][:, 0].mean()-2
+    red, green, blue = (int(bar.get('fill')[i:i+2], 16) for i in (1, 3, 5))
+    assert red > max(green, blue)+30
+
+
+@pytest.mark.parametrize('description', [
+    USER_DESCRIPTION.replace('links rot', 'links, blau'),
+    USER_DESCRIPTION + ' Links, Spitze nach untten.',
+    USER_DESCRIPTION + ' Rechts, Spitze nach oben.',
+])
+def test_tolerant_user_wording_still_rejects_contradictions(description):
+    assert fit(drawing(), description) is None
 
 
 @pytest.mark.parametrize('size', ['L', 'M', 'S'])

@@ -70,6 +70,37 @@ def test_explicit_object_counts_reject_topology_before_rendering():
     assert rejected and all('error' not in p for p in rejected)
 
 
+@pytest.mark.parametrize('damage', ['circle_head', 'diagonal_bar', 'blue_bar'])
+def test_arrow_description_blocks_wrong_fallback_shapes_before_rendering(monkeypatch, damage):
+    from src.iCCModules import imageCompositeConverterFallbackStructure as fallback
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    left = '<polygon points="10,60 5,72 15,72" fill="red"/>'
+    bar = '<line x1="10" y1="52" x2="60" y2="52" stroke="red"/>'
+    seed = scene(left+'<polygon points="60,72 55,60 65,60" fill="blue"/>'+bar)
+    candidate = seed
+    if damage == 'circle_head':
+        candidate = seed.replace(left, '<circle cx="10" cy="66" r="6" fill="red"/>')
+    elif damage == 'diagonal_bar':
+        candidate = seed.replace('y2="52"', 'y2="53"')
+    else:
+        candidate = seed.replace(bar, bar.replace('stroke="red"', 'stroke="blue"'))
+    assertions = description_assertions('Zwei vertikale Striche links rot, rechts blau. '
+        'Unten Dreiecke, links Spitze nach oben, rechts Spitze nach untten. Rote horizontale Linie.')
+    validate_svg_assertions(seed, assertions)
+    monkeypatch.setattr(fallback, '_primitive_scenes', lambda *args: iter([candidate]))
+    image = render(seed, 80, 80)
+    session = ImageSearch(SearchPolicy(seconds=5, max_seconds=5))
+
+    def forbidden(*args):
+        pytest.fail('a forbidden shape must be rejected before pixel scoring')
+
+    with image_search(session):
+        result, report = explore_structures(seed, image, image, forbidden, session, assertions, mode='primitives')
+    assert result['svg'] == seed
+    assert report['proposals'][0]['rejection'] == 'description_assertions'
+    assert report['render_evaluations'] == 0
+
+
 def test_structure_renders_share_existing_deadline_without_new_session():
     seed, target = fixtures()
     now, calls = [0.], []

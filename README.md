@@ -1,5 +1,12 @@
 # ImageConverter
 
+Die [mehrstufige Freiform-Konvertierung](docs/piecewise_contour_conversion.md)
+rekonstruiert Verlaufskreise und davorliegende Konturformen mit lokal angepassten,
+glatt verbundenen Bézier-Abschnitten. Grössenvarianten können dafür gezoomt,
+verschoben und gemeinsam ausgewertet werden. Die drei hautfarbenen Handbilder
+bestehen die Pixelprüfungen mit beiden Renderern; eine graue Kleinvariante
+bleibt wegen der lokalen Topologieprüfung offen.
+
 Die [DLG0016-Korrektur](artifacts/evaluation/inset_panel_2026-11-14/README.md)
 ersetzt die falsche Pfeilbeschreibung durch das gerundete graue Verlaufspanel
 mit rechts abgeschnittenem weissem Innenfeld. Die native Rekonstruktion besteht

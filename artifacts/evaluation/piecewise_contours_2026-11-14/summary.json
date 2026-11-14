@@ -1,0 +1,529 @@
+{
+  "skin_passed": 3,
+  "skin_total": 3,
+  "cases": [
+    {
+      "input": "artifacts\\images_to_convert\\GE0023_1_L.jpg",
+      "source_sha256": "92a4dc9c3fb489dd8e0a27609be1cd909a88539ea4733b393952c27ea1164342",
+      "strategy": "single",
+      "segments": [
+        49,
+        62
+      ],
+      "tolerance": 0.16,
+      "gradient_angle_degrees": 90.08740363052485,
+      "consensus_gain_percent": 0.0,
+      "alignment": [
+        {
+          "name": "GE0023_1_M.jpg",
+          "accepted": true,
+          "correlation": 0.9995273764488497,
+          "initial_zoom": [
+            1.1666666666666667,
+            1.1666666666666667
+          ],
+          "affine": [
+            [
+              0.9976226687431335,
+              -0.00032774294959381223,
+              0.09167055785655975
+            ],
+            [
+              0.00024018660769797862,
+              0.99802166223526,
+              0.04726420342922211
+            ]
+          ],
+          "paint_difference": 7.0
+        },
+        {
+          "name": "GE0023_1_S.jpg",
+          "accepted": true,
+          "correlation": 0.999423410979159,
+          "initial_zoom": [
+            1.4,
+            1.4
+          ],
+          "affine": [
+            [
+              0.9997584223747253,
+              -0.00035901053342968225,
+              0.018835987895727158
+            ],
+            [
+              0.00020523942657746375,
+              0.9992318749427795,
+              0.019549014046788216
+            ]
+          ],
+          "paint_difference": 8.0
+        }
+      ],
+      "mask_topology": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "details": {
+        "passed": true,
+        "regions": [
+          {
+            "iou": 0.9848363926576217,
+            "topology": [
+              1,
+              1
+            ],
+            "rendered_topology": [
+              1,
+              1
+            ]
+          },
+          {
+            "iou": 0.9679802955665024,
+            "topology": [
+              1,
+              0
+            ],
+            "rendered_topology": [
+              1,
+              0
+            ]
+          }
+        ],
+        "worst_tile_mse": 0.000863912740114201
+      },
+      "passed": true,
+      "independent_renderers": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0003013241512235254,
+            "foreground_mse": 0.00024240280617959797,
+            "edge_alignment": 0.8964940309524536,
+            "foreground_iou": 0.990521327014218,
+            "foreground_iou_binary": 0.990521327014218
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 2,
+            "path_command_count": 117,
+            "path_complexity_ratio": 29.25
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0003066952049266547,
+            "foreground_mse": 0.0002426640276098624,
+            "edge_alignment": 0.8933815956115723,
+            "foreground_iou": 0.9899109792284867,
+            "foreground_iou_binary": 0.9899109792284867
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 2,
+            "path_command_count": 117,
+            "path_complexity_ratio": 29.25
+          }
+        }
+      }
+    },
+    {
+      "input": "artifacts\\images_to_convert\\GE0023_1_M.jpg",
+      "source_sha256": "92e1441c32fe5bafaf11935e1da02384e9edef3f9893e70cd0f042d080270ea4",
+      "strategy": "single",
+      "segments": [
+        42,
+        56
+      ],
+      "tolerance": 0.16,
+      "gradient_angle_degrees": 90.11800548979406,
+      "consensus_gain_percent": 0.0,
+      "alignment": [
+        {
+          "name": "GE0023_1_L.jpg",
+          "accepted": true,
+          "correlation": 0.9981055129447383,
+          "initial_zoom": [
+            0.8571428571428571,
+            0.8571428571428571
+          ],
+          "affine": [
+            [
+              1.0012210607528687,
+              0.0014393061865121126,
+              -0.08294083178043365
+            ],
+            [
+              -0.0012136410223320127,
+              1.0006964206695557,
+              0.0385858416557312
+            ]
+          ],
+          "paint_difference": 6.0
+        },
+        {
+          "name": "GE0023_1_S.jpg",
+          "accepted": true,
+          "correlation": 0.9985196627586882,
+          "initial_zoom": [
+            1.2,
+            1.2
+          ],
+          "affine": [
+            [
+              1.0009297132492065,
+              0.0004544875700958073,
+              -0.04812496900558472
+            ],
+            [
+              -0.0002639048616401851,
+              1.000706434249878,
+              0.0013899598270654678
+            ]
+          ],
+          "paint_difference": 7.0
+        }
+      ],
+      "mask_topology": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "details": {
+        "passed": true,
+        "regions": [
+          {
+            "iou": 0.9827027027027027,
+            "topology": [
+              1,
+              1
+            ],
+            "rendered_topology": [
+              1,
+              1
+            ]
+          },
+          {
+            "iou": 0.9616666666666667,
+            "topology": [
+              1,
+              0
+            ],
+            "rendered_topology": [
+              1,
+              0
+            ]
+          }
+        ],
+        "worst_tile_mse": 0.0009813889244877326
+      },
+      "passed": true,
+      "independent_renderers": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00026254146359860897,
+            "foreground_mse": 0.0003270086308475584,
+            "edge_alignment": 0.8637759685516357,
+            "foreground_iou": 0.9098901098901099,
+            "foreground_iou_binary": 0.9098901098901099
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 2,
+            "path_command_count": 104,
+            "path_complexity_ratio": 26.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.00026390847051516175,
+            "foreground_mse": 0.0003278037765994668,
+            "edge_alignment": 0.8663547039031982,
+            "foreground_iou": 0.913235294117647,
+            "foreground_iou_binary": 0.913235294117647
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 2,
+            "path_command_count": 104,
+            "path_complexity_ratio": 26.0
+          }
+        }
+      }
+    },
+    {
+      "input": "artifacts\\images_to_convert\\GE0023_1_S.jpg",
+      "source_sha256": "b1e6e5ddc06843295e541cf9ed9d38a8bb5d410ef327060a606da653beb1cbb6",
+      "strategy": "aligned_consensus",
+      "segments": [
+        37,
+        48
+      ],
+      "tolerance": 0.16,
+      "gradient_angle_degrees": 89.6888218193912,
+      "consensus_gain_percent": 0.33561294273757386,
+      "alignment": [
+        {
+          "name": "GE0023_1_L.jpg",
+          "accepted": true,
+          "correlation": 0.998190682597765,
+          "initial_zoom": [
+            0.7142857142857143,
+            0.7142857142857143
+          ],
+          "affine": [
+            [
+              0.9998641014099121,
+              0.0003257625503465533,
+              -0.0021958164870738983
+            ],
+            [
+              -8.02073918748647e-05,
+              0.9995779991149902,
+              0.02554132044315338
+            ]
+          ],
+          "paint_difference": 7.0
+        },
+        {
+          "name": "GE0023_1_M.jpg",
+          "accepted": true,
+          "correlation": 0.9996741211011646,
+          "initial_zoom": [
+            0.8333333333333334,
+            0.8333333333333334
+          ],
+          "affine": [
+            [
+              0.9981465339660645,
+              -0.00023345931549556553,
+              0.053471487015485764
+            ],
+            [
+              -9.738613152876496e-05,
+              0.9988489747047424,
+              0.024002308025956154
+            ]
+          ],
+          "paint_difference": 7.0
+        }
+      ],
+      "mask_topology": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "details": {
+        "passed": true,
+        "regions": [
+          {
+            "iou": 0.9795918367346939,
+            "topology": [
+              1,
+              1
+            ],
+            "rendered_topology": [
+              1,
+              1
+            ]
+          },
+          {
+            "iou": 0.9563106796116505,
+            "topology": [
+              1,
+              0
+            ],
+            "rendered_topology": [
+              1,
+              0
+            ]
+          }
+        ],
+        "worst_tile_mse": 0.001126489811610919
+      },
+      "passed": true,
+      "independent_renderers": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0005005315761081874,
+            "foreground_mse": 0.00036467250902205706,
+            "edge_alignment": 0.9154166579246521,
+            "foreground_iou": 0.9873052510098096,
+            "foreground_iou_binary": 0.9873052510098096
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 2,
+            "path_command_count": 91,
+            "path_complexity_ratio": 22.75
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.0005079298280179501,
+            "foreground_mse": 0.0003690296143759042,
+            "edge_alignment": 0.9298790097236633,
+            "foreground_iou": 0.9878682842287695,
+            "foreground_iou_binary": 0.9878682842287695
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 2,
+            "path_command_count": 91,
+            "path_complexity_ratio": 22.75
+          }
+        }
+      }
+    }
+  ],
+  "cli": {
+    "status": "validated",
+    "renderers": {
+      "mupdf": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0002479171962477267,
+          "foreground_mse": 0.00021464638120960444,
+          "edge_alignment": 0.882702112197876,
+          "foreground_iou": 0.989320676357164,
+          "foreground_iou_binary": 0.989320676357164
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 2,
+          "path_command_count": 117,
+          "path_complexity_ratio": 29.25
+        }
+      },
+      "librsvg": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0002579332503955811,
+          "foreground_mse": 0.00021864876907784492,
+          "edge_alignment": 0.8760687112808228,
+          "foreground_iou": 0.9869358669833729,
+          "foreground_iou_binary": 0.9869358669833729
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 4,
+          "path_count": 2,
+          "path_command_count": 117,
+          "path_complexity_ratio": 29.25
+        }
+      }
+    }
+  },
+  "exploratory_grey": {
+    "passed": 2,
+    "total": 3,
+    "unresolved": "GE0023_S.jpg: fill topology does not survive reconstruction"
+  }
+}
