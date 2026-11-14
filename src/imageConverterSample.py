@@ -185,92 +185,25 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         target = np.asarray(image.convert("RGB"))
     height, width = target.shape[:2]
     root = ET.fromstring(prepare_sample(sample.read_bytes(), width, height))
-    params = parameters(root)
-    svg = lambda: ET.tostring(root, encoding="unicode")
-    reference = target.astype(np.float32)
-    assertions = description_assertions(description)
-    guard_assertions = False
-    border = np.concatenate((reference[0], reference[-1], reference[:, 0], reference[:, -1]))
-    foreground = np.max(abs(reference - np.median(border, axis=0)), axis=2) > 25
-    weights = 1 + 4 * foreground.astype(np.float32)
-    evaluations = 0
-
-    def measure():
-        nonlocal evaluations
-        if guard_assertions:
-            validate_svg_assertions(svg(), assertions)
-        pixels = render_svg(svg(), width, height)
-        squared = np.square(reference - pixels.astype(np.float32)).mean(axis=2) / 255 ** 2
-        evaluations += 1
-        return float((squared * weights).mean()), float(squared.mean()), pixels
-
-    best, best_mse, rendered = measure()
-    try:
-        validate_svg_assertions(svg(), assertions)
-        guard_assertions = True
-    except ValueError:
-        pass  # A conflicting input may improve, but cannot earn final acceptance.
-    initial_mse = best_mse
+    prepared = ET.tostring(root, encoding="unicode")
+    rendered = render_svg(prepared, width, height)
+    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     initial_quality = pixel_quality(target, rendered)
+    assertions = description_assertions(description)
     started = time.monotonic()
-    # Preserve an already accepted assembly instead of trading its square,
-    # alignment and shared paint for tiny improvements in a few raster pixels.
     accepted_input = bool(initial_quality and initial_quality['passed'])
-    deadline = started if accepted_input else started + seconds
-    accepted = 0
-    print(f"Sample geladen: {len(params)} Parameter, mittlerer Pixelfehler={best_mse:.8f}", flush=True)
-    # Coarse-to-fine coordinate descent retains the uploaded primitive structure.
-    span = max(float(v) for v in NUMBER.findall(root.get("viewBox"))[2:])
-    for fraction, paint_step in [(0.06, 32), (0.025, 16), (0.01, 8), (0.004, 4), (0.0015, 2), (0.0006, 1)]:
-        for sweep in range(4):
-            changed = False
-            for node, attribute, kind, index in params:
-                if time.monotonic() >= deadline:
-                    break
-                step = paint_step if kind == "color" else (fraction if attribute.endswith("opacity") else span * fraction)
-                previous = node.get(attribute)
-                for direction in (-1, 1):
-                    node.set(attribute, adjusted(previous, kind, index, direction * step, attribute))
-                    try:
-                        loss, mse, pixels = measure()
-                    except Exception:
-                        node.set(attribute, previous)
-                        continue
-                    # Each accepted step improves the weighted loss and cannot worsen MSE.
-                    if loss < best - 1e-10 and mse <= best_mse + 1e-12:
-                        best, best_mse, rendered = loss, mse, pixels
-                        previous = node.get(attribute)
-                        changed = True
-                        accepted += 1
-                    else:
-                        node.set(attribute, previous)
-                    if time.monotonic() >= deadline:
-                        break
-            print(f"Sample-Suche: Prüfungen={evaluations}, Verbesserungen={accepted}, Pixelfehler={best_mse:.8f}", flush=True)
-            if not changed or time.monotonic() >= deadline:
-                break
-        if time.monotonic() >= deadline:
-            break
-    final_svg = svg()
-    continuation = None
-    # The finite coordinate schedule can finish well before the requested
-    # effort. Explore coupled assembly/paint moves with the remaining time.
-    if not accepted_input and params and time.monotonic()-started < min(30., seconds):
-        from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
-        from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg
-        with search_configuration(mode='portfolio', adaptive=True, seconds=seconds,
-                                  max_seconds=seconds, minimum_seconds=min(30., seconds)):
-            with configured_image_search(str(source.resolve())) as session:
-                session.spent = time.monotonic()-started
-                fitted = polish_generated_svg(final_svg, target, render_svg,
-                                               assertions=assertions,
-                                               structure_mode='off', color_order='RGB')
-                if fitted is not None:
-                    evaluations += fitted['evaluations']
-                    continuation = fitted['search_control']
-                    if fitted['improved']:
-                        final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
-                        accepted += 1
+    final_svg, best_mse = prepared, initial_mse
+    evaluations, accepted, alignment = 1, 0, None
+    print(f"Sample geladen: mittlerer Pixelfehler={initial_mse:.8f}", flush=True)
+    if not accepted_input:
+        from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
+        fitted = align_sample(root, target, render_svg, deadline=started+seconds, initial=rendered)
+        final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
+        evaluations += fitted['evaluations']
+        accepted = fitted['accepted']
+        alignment = fitted['transform']
+        print(f"Sample gemeinsam ausgerichtet: Prüfungen={evaluations}, "
+              f"Pixelfehler={best_mse:.8f}", flush=True)
     quality = pixel_quality(target, rendered)
     description_error = ""
     try:
@@ -281,8 +214,9 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
                   initial_quality=initial_quality, final_quality=quality,
                   improved=best_mse < initial_mse - 1e-10, evaluations=evaluations,
                   accepted=accepted, description_error=description_error,
-                  stop_reason='quality_target_reached' if accepted_input else 'search_complete',
-                  continuation=continuation,
+                  stop_reason=('quality_target_reached' if accepted_input else
+                               'sample_alignment_accepted' if quality and quality['passed'] else 'search_complete'),
+                  continuation=None, alignment=alignment,
                   passed=bool(quality and quality["passed"] and not description_error),
                   elapsed=round(time.monotonic() - started, 2))
     output.parent.mkdir(parents=True, exist_ok=True)

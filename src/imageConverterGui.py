@@ -596,6 +596,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     message = "Sample am Original verbessert." if report["improved"] else "Keine messbare Verbesserung gefunden. Der Sample-Stand bleibt erhalten."
     if report.get('stop_reason') == 'quality_target_reached':
         message = 'Das Sample erfüllt die Pixelprüfung bereits; seine Formen bleiben erhalten.'
+    elif report.get('stop_reason') == 'sample_alignment_accepted':
+        message = 'Sample als Ganzes skaliert und ausgerichtet; vorhandene Formen bleiben erhalten.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
                message=message, sample_report=report, pixel_quality=quality,
