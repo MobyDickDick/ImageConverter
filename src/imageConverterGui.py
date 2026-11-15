@@ -185,6 +185,9 @@ class Jobs:
         self.closed = False
         self.on_result = None
         self.descriptions = catalog_descriptions()
+        from src.imageConverterRecognition import ImageRecognition
+        self.recognizer = ImageRecognition(ROOT)
+        self.description_store = None
         # Keep recent results usable after a server restart.
         for path in self.directory.glob("*/job.json"):
             try:
@@ -236,7 +239,7 @@ class Jobs:
             if stored['status'] == 'ready' and 'search_seed' not in stored:
                 stored['search_seed'] = secrets.randbits(64)
                 self.save(stored)
-            if stored['status'] == 'ready' and stored.get('description_origin') != 'user':
+            if stored['status'] == 'ready' and stored.get('description_origin') not in {'user', 'recognition'}:
                 description = self.catalog_description(stored['name'])
                 if description != stored['description']:
                     stored.update(description=description, description_origin='catalog' if description else 'empty')
@@ -299,7 +302,7 @@ class Jobs:
         with self.lock:
             source_sha256 = hashlib.sha256(
                 f'{background.width}x{background.height}:'.encode()+background.tobytes()).hexdigest()
-            previous = next((job for job in sorted(self.jobs.values(), key=lambda j:j['created'], reverse=True)
+            previous = next((job for job in sorted(self.jobs.values(), key=lambda j:j.get('description_saved_at', j.get('started', j['created'])), reverse=True)
                              if job.get('source_sha256') == source_sha256
                              and job.get('description_origin') == 'user'), None)
             origin = 'user' if previous else ('catalog' if description else 'empty')
@@ -318,12 +321,54 @@ class Jobs:
             self.save(job)
             return self.snapshot(job_id)
 
+    def _persist_description(self, job: dict) -> None:
+        job['description_saved_at'] = time.time()
+        job['description_save'] = dict(scope='image', message='Beschreibung für dieses Bild gespeichert.')
+        self.save(job)
+        if self.description_store is not None:
+            try:
+                job['description_save'] = self.description_store.save(
+                    job['name'], job.get('source_sha256'), job['description'])
+            except (OSError, ValueError, SyntaxError) as exc:
+                job['description_save'] = dict(scope='image', warning=True,
+                    message=f'Beschreibung für dieses Bild gespeichert. Katalog konnte nicht aktualisiert werden: {exc}')
+            self.save(job)
+
+    def save_description(self, job_id: str, description: str) -> dict:
+        if not isinstance(description, str) or len(description) > 12000:
+            raise RequestError("Bitte eine Bildbeschreibung mit höchstens 12'000 Zeichen eingeben.")
+        with self.lock:
+            self.folder(job_id)
+            if self.jobs[job_id]['status'] == 'running' or job_id in self.processes:
+                raise RequestError('Bitte zuerst die laufende Konvertierung beenden.', 409)
+            job = self.editable(job_id)
+            job.update(description=description, description_origin='user')
+            self._persist_description(job)
+            return self.snapshot(job['id'])
+
     def busy(self, *, background: bool = False) -> bool:
         """Reserve one slot per lane, including workers still cleaning up."""
         with self.lock:
             return any((job['status'] == 'running' or job_id in self.processes)
                        and bool(job.get('catalog_background')) == background
                        for job_id, job in self.jobs.items())
+
+    def recognize(self, job_id: str) -> dict:
+        from src.imageConverterRecognition import rgb_image
+        with self.lock:
+            folder = self.folder(job_id)
+            if self.jobs[job_id]['status'] == 'running':
+                raise RequestError('Bitte zuerst die laufende Konvertierung beenden.', 409)
+        recognition = self.recognizer.recognize(rgb_image(folder/'source.png'))
+        with self.lock:
+            job = self.jobs[job_id]
+            if job['status'] == 'running':
+                raise RequestError('Bitte zuerst die laufende Konvertierung beenden.', 409)
+            job['recognition'] = recognition
+            if job['status'] == 'ready' and not job['description'].strip() and recognition['automatic']:
+                job.update(description=recognition['automatic']['description'], description_origin='recognition')
+            self.save(job)
+            return self.snapshot(job_id)
 
     def start(self, job_id: str, description: str, profile: str, *, background: bool = False,
               seed: str | int | None = None) -> dict:
@@ -357,6 +402,8 @@ class Jobs:
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
+            if origin == 'user' and not background:
+                self._persist_description(job)
             self.save(job)
             thread = threading.Thread(target=self.run, args=(job_id,), daemon=True)
             self.threads.append(thread)
@@ -372,6 +419,8 @@ class Jobs:
             job = self.jobs[copied["id"]]
             job.update(description=previous["description"], profile=previous["profile"],
                        description_origin=previous.get('description_origin', 'user'))
+            if previous.get('recognition'):
+                job['recognition'] = previous['recognition']
             if previous.get("sample"):
                 shutil.copyfile(folder / "sample.svg", self.folder(job["id"]) / "sample.svg")
                 job.update(sample=True, sample_name=previous["sample_name"])
@@ -1092,6 +1141,9 @@ class GuiServer(ThreadingHTTPServer):
                 self.jobs = Jobs(directory if directory is not None else ROOT/'artifacts/gui')
             self.workbench = Workbench(self.jobs)
             self.catalog = CatalogQuality(ROOT, self.jobs.directory/'catalog-quality', stop_process_tree)
+            self.jobs.recognizer.payload_loader = self.catalog.payload
+            from src.imageConverterDescriptionStore import DescriptionStore
+            self.jobs.description_store = DescriptionStore(ROOT)
             self.collection = CategoryCollection(ROOT, self.catalog, self.jobs)
             self.catalog_conversion = CatalogConversion(self.catalog, self.jobs, self.workbench)
             self.catalog_updates = CatalogUpdates(self.catalog, self.jobs)
@@ -1175,10 +1227,23 @@ class Handler(BaseHTTPRequestHandler):
                         workbench_native_exports=True,
                         parallel_background_conversion=True,
                         editable_search_seed=True,
+                        image_recognition=True,
+                        description_autosave=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]
                     return self.file(WEB / filename, mime)
+                reference = re.fullmatch(r'/api/recognition/reference/([0-9a-f]{64})/(source|svg)', path)
+                if reference:
+                    asset = jobs.recognizer.asset(*reference.groups())
+                    if asset is None:
+                        raise RequestError('Diese Bildreferenz ist nicht mehr verfügbar.', 404)
+                    if reference[2] == 'source':
+                        from src.imageConverterRecognition import rgb_image
+                        buffer = io.BytesIO()
+                        rgb_image(asset).save(buffer, format='PNG')
+                        return self.respond(buffer.getvalue(), 'image/png')
+                    return self.file(asset, 'image/svg+xml')
                 if path == '/api/collection':
                     return self.json(self.server.collection.payload())
                 if path.startswith('/api/workbench'):
@@ -1258,6 +1323,11 @@ class Handler(BaseHTTPRequestHandler):
                         raise RequestError('Ungültige Anfrage.')
                     operation = self.server.catalog_conversion
                     return self.json(operation.start(payload.get('profile','normal')) if path.endswith('/start') else operation.cancel())
+                if path == '/api/catalog/delete':
+                    payload = json.loads(data)
+                    if not isinstance(payload, dict):
+                        raise RequestError('Ungültige Anfrage.')
+                    return self.json(self.server.catalog.delete_images(payload.get('filenames')))
                 if path in {'/api/catalog/start','/api/catalog/cancel'}:
                     payload = json.loads(data)
                     if not isinstance(payload, dict):
@@ -1294,6 +1364,10 @@ class Handler(BaseHTTPRequestHandler):
                                 raise RequestError('In der Workbench läuft eine Konvertierung.', 409)
                             return self.json(jobs.start(job_id, payload.get("description", ""),
                                                         payload.get("profile", "normal"), seed=payload.get('seed')))
+                    if not remove and action == 'recognize':
+                        return self.json(jobs.recognize(job_id))
+                    if not remove and action == 'description':
+                        return self.json(jobs.save_description(job_id, payload.get('description')))
                     if not remove and action in {"cancel", "save"}:
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))

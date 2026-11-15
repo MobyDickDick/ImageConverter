@@ -1,5 +1,30 @@
 # ImageConverter
 
+In der **Konvertierungsqualität** können Bilder über die Checkbox **Löschen**
+markiert und mit **Markierte Bilder löschen** aus dem Katalog entfernt werden.
+Die Auswahl bleibt beim Filtern und Blättern erhalten. Vorher laufende
+Qualitätsprüfungen und den Hintergrunddienst stoppen. Originalbilder samt
+Katalogkopien landen in `artifacts/deleted_samples/<Vorgang>/`; SVGs,
+Beschreibungen und historische Prüfbelege bleiben erhalten. Zum Wiederherstellen
+die Bilder an ihre bisherigen Positionen zurücklegen und die Qualitätsliste
+aktualisieren. Nach dem Codeupdate den Webserver neu starten und die Seite neu laden.
+
+Die lokale [Bilderkennung](docs/image_recognition.md) erkennt bekannte Bildinhalte
+auch unter anderen Dateinamen und erstellt Vorschläge für einzelne einfache
+Grundformen. Bei leerer Beschreibung startet sie nach der Bildauswahl automatisch;
+**Bild erkennen** zeigt zusätzlich ähnliche geprüfte Original-/SVG-Paare.
+Unsichere Beschreibungen werden erst durch **Beschreibung übernehmen** verwendet.
+
+Änderungen im Beschreibungsfeld werden automatisch und über **Text speichern**
+gesichert, auch ohne Konvertierungsstart. Die Rückmeldung unter dem Feld bestätigt
+das Speichern. Bei identischem Katalogoriginal wird genau dessen Beschreibung
+in beiden XML-Tabellen ersetzt; Katalogansicht und spätere Konvertierungen lesen
+die Korrektur ein. Andere Grössenvarianten behalten ihre eigenen Beschreibungen.
+Abgeschlossene Konvertierungen bleiben als bisheriger Prüfstand erhalten;
+eine Textänderung erstellt einen neuen bearbeitbaren Auftrag.
+Nach dem Codeupdate laufende Konvertierungen abschliessen, den Webserver neu
+starten und die Browserseite neu laden.
+
 Die Bildbeschreibung unterstützt die Vorgabe **„Alle Linien sind gleich breit“**,
 auch als „Alle Linien haben die gleiche Strichstärke“ oder „Einheitliche
 Linienstärke“. Vektoraufbau und Sample-Anpassung koppeln dafür die Breiten von

@@ -128,3 +128,5 @@ htmlcov/
 !/artifacts/evaluation/neural_real_regions_v*/checks.json
 !/artifacts/evaluation/neural_real_regions_v*/region_audit.json
 !/artifacts/evaluation/neural_real_regions_v*/models/
+# Local recycle bin for originals removed through the catalog UI.
+/artifacts/deleted_samples/

@@ -113,6 +113,82 @@ class CatalogQuality:
                 return folder
         return self.root/'artifacts/catalog_inventory'
 
+    def delete_images(self, filenames):
+        """Move selected originals to a local bin and publish the remaining list."""
+        from tools.build_catalog_inventory import BITMAPS, catalog_summary, write_report
+
+        if (not isinstance(filenames, list) or not filenames or len(filenames) > 500
+                or any(not isinstance(name, str) or not name for name in filenames)):
+            raise CatalogError('Bitte zwischen 1 und 500 Bilder zum Löschen auswählen.')
+        with self.lock:
+            if self.closed:
+                raise CatalogError('Der Server wird beendet.', 409)
+            if self.conversion_owner is not None or (self.thread is not None and self.thread.is_alive()):
+                raise CatalogError('Bitte zuerst die Qualitätsprüfung und den Hintergrunddienst stoppen.', 409)
+            payload = self.payload()
+            selected = {name.casefold() for name in filenames}
+            rows = [r for r in payload['rows'] if r['filename'].casefold() in selected]
+            if len(rows) != len(selected):
+                raise CatalogError('Ein ausgewähltes Bild wurde nicht gefunden. Bitte die Liste neu laden.', 404)
+            source = self.root/'artifacts/images_to_convert'
+            allowed = {source.resolve(), (source/'succesessfulConvertedImages').resolve(),
+                       (source/'nonconvertable').resolve()}
+            paths = set()
+            for row in rows:
+                if row['status'] == 'reserved':
+                    raise CatalogError('Reservierte Prüfbilder können nicht gelöscht werden.', 403)
+                for relative in row.get('all_source_paths') or [row['image']]:
+                    path = (self.root/relative).resolve()
+                    if (not path.is_relative_to(self.root) or path.parent not in allowed
+                            or path.suffix.lower() not in BITMAPS
+                            or path.name.casefold() != row['filename'].casefold()):
+                        raise CatalogError('Unzulässige Katalogdatei.', 403)
+                    paths.add(path)
+                # Include copies added since the last inventory, so deletion
+                # cannot leave a duplicate that reappears at the next refresh.
+                for folder in allowed:
+                    for path in folder.iterdir() if folder.is_dir() else ():
+                        if path.name.casefold() == row['filename'].casefold():
+                            target = path.resolve()
+                            if target.parent != folder or not target.is_relative_to(self.root):
+                                raise CatalogError('Unzulässige Katalogdatei.', 403)
+                            paths.add(target)
+            if any(not path.is_file() for path in paths):
+                raise CatalogError('Ein Originalbild fehlt. Bitte die Qualitätsliste aktualisieren.', 409)
+            run_id = uuid.uuid4().hex
+            trash = (self.root/'artifacts/deleted_samples'/run_id).resolve()
+            if not trash.is_relative_to(self.root):
+                raise CatalogError('Unzulässiger Papierkorb.', 403)
+            remaining = [r for r in payload['rows'] if r['filename'].casefold() not in selected]
+            old = payload['summary']
+            summary = dict(old, **catalog_summary(self.root, remaining,
+                           old.get('measurements_computed', 0), old.get('measurements_reused', 0)))
+            summary.update(full_generated_at=old.get('full_generated_at', old.get('generated_at')),
+                           measurement_scope='catalog_deletion')
+            moved = []
+            try:
+                trash.mkdir(parents=True)
+                atomic_json(trash/'deleted.json', dict(filenames=sorted(selected)))
+                for path in sorted(paths):
+                    target = trash/path.relative_to(source)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    path.replace(target)
+                    moved.append((path, target))
+                previous = self.report_folder()
+                metadata = read_json(previous/'sources.json', {})
+                if (previous/'measurements.json').is_file():
+                    metadata.setdefault('measurement_cache', str(previous/'measurements.json'))
+                write_report(self.root, self.directory/run_id/'report', remaining, summary,
+                             metadata)
+                atomic_json(self.directory/'current.json', dict(id=run_id))
+            except Exception as exc:
+                for path, target in reversed(moved):
+                    target.replace(path)
+                raise CatalogError('Die Bilder konnten nicht gelöscht werden.', 500) from exc
+            self._manifest_stamp = None
+            return dict(deleted=[r['filename'] for r in rows],
+                        message=f'{len(rows)} Bild(er) in den lokalen Papierkorb verschoben.')
+
     def payload(self):
         with self.lock:
             path = self.report_folder()/'manifest.json'
@@ -154,6 +230,9 @@ class CatalogQuality:
                         if row.get('archive'):
                             row['archive']['description_matches_catalog'] = row['archive'].get('description', '') == row['description']
                     value['summary']['current_descriptions_applied'] = True
+                    value['summary']['description_revision'] = hashlib.sha256(
+                        json.dumps([(r['filename'], r.get('description', '')) for r in value['rows']],
+                                   ensure_ascii=False).encode('utf-8')).hexdigest()
                     value['summary']['archive_description_differences'] = sum(
                         bool(r.get('archive')) and not r['archive'].get('description_matches_catalog', False)
                         for r in value['rows'])

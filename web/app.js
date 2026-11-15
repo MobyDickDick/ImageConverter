@@ -1,6 +1,8 @@
 "use strict";
 let nativeFileDialogs = false, preparingPlanB = false, serverNeedsRestart = false;
 let editableSearchSeed = false;
+let imageRecognition = false;
+let descriptionAutosave = false, descriptionDirty = false, descriptionSaveTimer, descriptionSaving = null;
 const $ = (id) => document.getElementById(id);
 let current = null;
 let activeId = null;
@@ -49,6 +51,9 @@ function notice(message = "") {
 function controls() {
   const running = busy || Boolean(activeId);
   $("convert").disabled = running || !current || !$("description").value.trim() || !editableSearchSeed;
+  $("recognize").disabled = running || !current || !imageRecognition;
+  $("save-description").disabled = running || !current || !descriptionAutosave || !descriptionDirty || Boolean(descriptionSaving);
+  for (const button of $("recognition-results").querySelectorAll("button")) button.disabled = running;
   for (const id of ["seed", "random-seed"]) $(id).disabled = running || !current || !editableSearchSeed;
   for (const id of ["description", "profile", "file", "remove-sample"]) $(id).disabled = running;
   $("sample-file").disabled = running || !current;
@@ -109,6 +114,41 @@ function draftQuality(job) {
     history: pixels === true ? `Bildqualität bestanden · ${error ? "Beschreibung prüfen" : "Gesamtprüfung offen"}` : `Entwurf · ${imageSummary}`,
   };
 }
+function renderRecognition(job) {
+  const recognition = job.recognition;
+  $("recognition-status").hidden = !recognition;
+  $("recognition-details").hidden = !recognition;
+  $("recognition-results").replaceChildren();
+  if (!recognition) return;
+  $("recognition-status").textContent = `${recognition.message} Vergleichsbasis: ${recognition.reference_count} geprüfte Bildpaare.`;
+  function proposal(description, label, match = null) {
+    const item = document.createElement('div'); item.className = 'recognition-match';
+    const title = document.createElement('strong'); title.textContent = label; item.append(title);
+    if (match) {
+      const previews = document.createElement('div'); previews.className = 'recognition-previews';
+      for (const [url, label] of [[match.source_url, 'Original'], [match.svg_url, 'Geprüftes SVG']]) {
+        const figure = document.createElement('figure'), img = document.createElement('img'), caption = document.createElement('figcaption');
+        img.src = url; img.alt = `${label}: ${match.filename}`; caption.textContent = label;
+        figure.append(img, caption); previews.append(figure);
+      }
+      item.append(previews);
+    }
+    const text = document.createElement('p'); text.className = 'hint'; text.textContent = description;
+    const button = document.createElement('button'); button.className = 'secondary'; button.type = 'button';
+    button.textContent = 'Beschreibung übernehmen';
+    button.addEventListener('click', () => {
+      if (busy || activeId) return;
+      $("description").value = description;
+      $("description-hint").textContent = 'Erkennungsvorschlag übernommen. Bitte Unterschiede zum Original ergänzen.';
+      descriptionEdited();
+    });
+    item.append(text, button); $("recognition-results").append(item);
+  }
+  if (recognition.automatic) proposal(recognition.automatic.description,
+    recognition.automatic.kind === 'exact_reference' ? 'Bekannter Bildinhalt' : 'Erkannte Grundform');
+  for (const match of recognition.matches) proposal(match.description,
+    `${match.filename} · ${match.exact ? 'identische Bildpunkte' : 'ähnliches Bild'}`, match);
+}
 function renderJob(job, select = false) {
   // Selection, reload and polling must all restore the same active job.
   // Cancellation must not depend on having started it in this page instance.
@@ -132,11 +172,15 @@ function renderJob(job, select = false) {
   $("collection-category").textContent = job.collection_label || '';
   $("collection-next").hidden = !job.collection_next_case_id;
   if (select) {
+    descriptionDirty = false;
+    clearTimeout(descriptionSaveTimer);
     $("description").value = job.description;
+    $("description-save-status").textContent = job.description_save?.message || (descriptionAutosave ? 'Änderungen werden automatisch gespeichert.' : 'Zum Speichern von Textkorrekturen bitte den Webserver neu starten.');
     $("profile").value = job.profile;
-    $("description-hint").textContent = job.description_origin === "user" ? "Deine zuletzt verwendete Beschreibung dieses Bildes wurde übernommen." : job.description ? "Katalogbeschreibung geladen. Du kannst sie vor der Konvertierung anpassen." : "Beschreibe Formen, Farben und ihre Anordnung, damit der Konverter das passende Modell suchen kann.";
+    $("description-hint").textContent = job.description_origin === "user" ? "Deine zuletzt verwendete Beschreibung dieses Bildes wurde übernommen." : job.description_origin === "recognition" ? "Beschreibung aus der lokalen Bilderkennung ergänzt. Bitte prüfen und bei Bedarf anpassen." : job.description ? "Katalogbeschreibung geladen. Du kannst sie vor der Konvertierung anpassen." : "Bild erkennen lassen oder Formen, Farben und ihre Anordnung beschreiben.";
     scale = 1;
   }
+  renderRecognition(job);
   const sourceUrl = `/api/jobs/${job.id}/source`;
   if ($("source-image").getAttribute("src") !== sourceUrl) $("source-image").src = sourceUrl;
   $("source-image").hidden = false;
@@ -198,7 +242,7 @@ function renderHistory() {
     status.textContent = draftQuality(job)?.history || (job.quality === "warning" ? "SVG-Entwurf · Bitte prüfen" : statusLabels[job.status] || job.status);
     text.append(name, status); button.append(img, text); button.title = job.name;
     button.addEventListener("click", async () => {
-      try { notice(); renderJob(await request(`/api/jobs/${job.id}`), true); renderHistory(); } catch (error) { notice(error.message); }
+      try { notice(); await saveDescription(); renderJob(await request(`/api/jobs/${job.id}`), true); renderHistory(); } catch (error) { notice(error.message); }
     });
     $("history").append(button);
   }
@@ -213,6 +257,7 @@ async function update(operation, select = false, input = null) {
   busy = true; controls(); notice();
   let changed = false;
   try {
+    await saveDescription();
     const job = await operation();
     if (!job) return;
     renderJob(job, select);
@@ -227,11 +272,32 @@ async function update(operation, select = false, input = null) {
 function sendFile(path, file) {
   return request(`${path}?name=${encodeURIComponent(file.name)}`, { method: "POST", headers: { "X-ImageConverter": "1" }, body: file });
 }
+async function recognizeUpload(job) {
+  if (imageRecognition && !job.description) {
+    $("recognition-status").hidden = false;
+    $("recognition-status").textContent = 'Bild wird lokal untersucht. Beim ersten Mal werden die geprüften Vergleichsbilder eingelesen …';
+    try { return await post(`/api/jobs/${job.id}/recognize`, {}); }
+    catch (error) { notice(`Bild geladen. Die Erkennung konnte nicht abgeschlossen werden: ${error.message}`); }
+  }
+  return job;
+}
 function upload(file) {
   if (!file || activeId || busy) return;
   if (file.size > 25 * 1024 * 1024) return notice("Bitte ein Bild mit maximal 25 MB auswählen.");
-  return update(() => sendFile("/api/upload", file), true, "file");
+  return update(async () => recognizeUpload(await sendFile("/api/upload", file)), true, "file");
 }
+$("recognize").addEventListener('click', () => {
+  if (!current || busy || activeId) return;
+  const empty = !$("description").value.trim();
+  $("recognition-status").hidden = false;
+  $("recognition-status").textContent = 'Bild wird lokal untersucht …';
+  return update(async () => {
+    const job = await post(`/api/jobs/${current.id}/recognize`, {});
+    if (empty && job.recognition?.automatic) $("description").value = job.recognition.automatic.description;
+    $("recognition-details").open = true;
+    return job;
+  });
+});
 $("file").addEventListener("change", (event) => upload(event.target.files[0]));
 function changeSample(file) {
   if (!current || busy || activeId) return;
@@ -246,13 +312,62 @@ for (const [input, kind] of [["file", "image"], ["sample-file", "sample"]]) {
     if (busy || activeId || (kind === "sample" && !current)) return;
     update(async () => {
       const result = await post("/api/pick", {kind, job_id: current?.id});
-      return result.selected ? result.job : null;
+      return result.selected ? (kind === 'image' ? recognizeUpload(result.job) : result.job) : null;
     }, kind === "image", input);
   });
 }
 $("pick-sample").addEventListener("click", () => $("sample-file").click());
 $("remove-sample").addEventListener("click", () => changeSample(null));
-$("description").addEventListener("input", controls);
+function descriptionEdited() {
+  descriptionDirty = Boolean(current) && $("description").value !== current.description;
+  clearTimeout(descriptionSaveTimer);
+  $("description-save-status").className = 'hint';
+  $("description-save-status").textContent = descriptionDirty
+    ? (descriptionAutosave ? 'Wird automatisch gespeichert …' : 'Noch nicht gespeichert. Bitte den Webserver neu starten.')
+    : current?.description_save?.message || 'Keine ungespeicherten Änderungen.';
+  if (descriptionDirty && descriptionAutosave) descriptionSaveTimer = setTimeout(() => saveDescription().catch(error => notice(error.message)), 600);
+  controls();
+}
+async function saveDescription() {
+  clearTimeout(descriptionSaveTimer);
+  if (descriptionSaving) {
+    await descriptionSaving;
+    if (descriptionDirty) return saveDescription();
+    return;
+  }
+  if (!current || !descriptionDirty || !descriptionAutosave) return;
+  const jobId = current.id, text = $("description").value;
+  $("description-save-status").textContent = 'Beschreibung wird gespeichert …';
+  const operation = (async () => {
+    try {
+      const job = await post(`/api/jobs/${jobId}/description`, {description:text});
+      if (current?.id !== jobId) return;
+      descriptionDirty = $("description").value !== text;
+      renderJob(job);
+      if (job.id !== jobId) window.history?.replaceState({}, '', `/?job=${encodeURIComponent(job.id)}`);
+      history = [job, ...history.filter(previous => previous.id !== job.id)];
+      renderHistory();
+      $("description-save-status").className = job.description_save?.warning ? 'hint quality-warning' : 'hint';
+      $("description-save-status").textContent = descriptionDirty ? 'Weitere Änderung wird gespeichert …' : job.description_save?.message || 'Beschreibung gespeichert.';
+    } catch (error) {
+      $("description-save-status").className = 'hint quality-warning';
+      $("description-save-status").textContent = 'Nicht gespeichert. Bitte «Text speichern» erneut versuchen.';
+      throw error;
+    }
+  })();
+  descriptionSaving = operation; controls();
+  try { await operation; } finally { descriptionSaving = null; controls(); }
+  if (descriptionDirty) return saveDescription();
+}
+$("description").addEventListener("input", descriptionEdited);
+$("description").addEventListener("blur", () => saveDescription().catch(error => notice(error.message)));
+$("save-description").addEventListener("click", () => saveDescription().catch(error => notice(error.message)));
+window.addEventListener('pagehide', () => {
+  if (!current || !descriptionDirty || !descriptionAutosave || activeId) return;
+  fetch(`/api/jobs/${current.id}/description`, {method:'POST', keepalive:true,
+    headers:{'Content-Type':'application/json', 'X-ImageConverter':'1'},
+    body:JSON.stringify({description:$("description").value})}).catch(() => {});
+});
 function randomSeed() {
   const words = crypto.getRandomValues(new Uint32Array(2));
   return ((BigInt(words[0]) << 32n) | BigInt(words[1])).toString();
@@ -368,6 +483,8 @@ async function init() {
       const config = await request("/api/config");
       nativeFileDialogs = config.native_file_dialogs;
       editableSearchSeed = config.editable_search_seed === true;
+      imageRecognition = config.image_recognition === true;
+      descriptionAutosave = config.description_autosave === true;
       if (!config.parallel_background_conversion) {
         serverNeedsRestart = true;
         $("server-version-warning").textContent = "Der laufende Webserver verwendet noch eine ältere Version, die manuelle Konvertierungen während des Hintergrunddienstes blockieren kann. Bitte stopWebServer.cmd und danach startWebServer.cmd ausführen und diese Seite neu laden. Anschliessend den Hintergrunddienst bei Bedarf wieder starten.";
@@ -400,6 +517,7 @@ $("collection-next").addEventListener('click', async () => {
   if (!current?.collection_next_case_id || busy || activeId) return;
   busy = true; controls(); notice();
   try {
+    await saveDescription();
     const next = await post(`/api/collection/${current.collection_next_case_id}/load`, {});
     window.location.assign(`/?job=${encodeURIComponent(next.id)}`);
   } catch (error) {notice(error.message);} finally {busy=false;controls();}

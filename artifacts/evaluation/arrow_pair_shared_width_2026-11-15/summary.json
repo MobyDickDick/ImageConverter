@@ -1,0 +1,497 @@
+{
+  "task": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd",
+  "seed": 229378669285018661,
+  "source_svg_sha256": "facdf4d9495d21a6c55b4778ef30e49ab569db19fecc538dd8d433177e0d4b10",
+  "iterations": 64,
+  "timeout_seconds": 60.0,
+  "before_passed": 0,
+  "after_passed": 17,
+  "reference_equal_width_checks": 17,
+  "output_equal_width_checks": 17,
+  "native_inventory_checks": 17,
+  "independently_remeasured_cases": 17,
+  "blocked_svg_reads": 0,
+  "max_normalized_mse": 0.00026059665833599865,
+  "max_foreground_mse": 0.001832438400015235,
+  "min_edge_alignment": 0.9832295179367065,
+  "min_foreground_iou": 0.9987421383647799,
+  "before_elapsed_seconds": 48.673,
+  "after_elapsed_seconds": 64.763,
+  "provenance": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "python_sources_sha256": "6c67fd45adb338dd508b85908aee9ed1f8b95e7e915865dc387ed13872c311a8",
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "4.14.0.94",
+      "PyMuPDF": "1.26.7",
+      "Pillow": "12.3.0"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "input_sha256": "5541f4be7ccebfb5b3e2764f4cf5a7ff8f9f35832aab9f56c39058e7ac2dbc35",
+      "output_sha256": "3e0d4d19e01c01b1e3951322a6e69922f395665e7c8ec39e6347fe77a5a32213",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.478632,
+        1.478632,
+        1.478632
+      ],
+      "metrics": {
+        "normalized_mse": 1.3399608178588096e-05,
+        "foreground_mse": 0.00010180825483985245,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        474
+      ],
+      "elapsed_seconds": 3.906,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\original\\conversion\\converted_svgs\\original.svg"
+    },
+    {
+      "case_id": "probe_01",
+      "input_sha256": "cdfdeace0924eb7f8e4de4801b2bc3414755e03ad3ae9c1154acdb532bf8932d",
+      "output_sha256": "0970fd2d78714b844872bd8ccb114e20839642e80ef46f688551a1c57afdd220",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.466667,
+        1.466667,
+        1.466667
+      ],
+      "metrics": {
+        "normalized_mse": 2.3080943719833158e-05,
+        "foreground_mse": 0.00019646604778245091,
+        "edge_alignment": 0.9995023012161255,
+        "foreground_iou": 0.9990588426589966,
+        "foreground_iou_binary": 0.9985528219971056
+      },
+      "registration_renderings": [
+        460
+      ],
+      "elapsed_seconds": 3.172,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_01\\conversion\\converted_svgs\\probe_01.svg"
+    },
+    {
+      "case_id": "probe_02",
+      "input_sha256": "4f28d6afcae3b8445563db86bb75f8a495dd76da21ce89234d0e41e44b7f8ef0",
+      "output_sha256": "edbbdb27fa6f1a57178a53c7bdc8225c7a823f3b0225bb4cbdb8d1426a910e02",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.533333,
+        1.533333,
+        1.533333
+      ],
+      "metrics": {
+        "normalized_mse": 2.367488013987895e-05,
+        "foreground_mse": 0.00016975932521745563,
+        "edge_alignment": 0.9995125532150269,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        488
+      ],
+      "elapsed_seconds": 3.562,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_02\\conversion\\converted_svgs\\probe_02.svg"
+    },
+    {
+      "case_id": "probe_03",
+      "input_sha256": "01fc820117b210cef5582abe4d47cbdbcbd0cf8fa30702ee17f577a4d40a06af",
+      "output_sha256": "1551f5f7b21134f9de611bc8f58ed7f5f97171640bcdfed23d1bc5e7715e7adc",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.475556,
+        1.475556,
+        1.475556
+      ],
+      "metrics": {
+        "normalized_mse": 1.5077865100465715e-05,
+        "foreground_mse": 0.00012381337000988424,
+        "edge_alignment": 0.9995062947273254,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        471
+      ],
+      "elapsed_seconds": 3.094,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_03\\conversion\\converted_svgs\\probe_03.svg"
+    },
+    {
+      "case_id": "probe_04",
+      "input_sha256": "258f807e92f1b182a0beed68e36eca92a8f175f4e3648815dc6beb4d7c912b61",
+      "output_sha256": "15a04de1efc23e489bcb58bbb778e1454a33fe26a552d54ab2ad669390c9c819",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.475556,
+        1.475556,
+        1.475556
+      ],
+      "metrics": {
+        "normalized_mse": 2.901939978983137e-06,
+        "foreground_mse": 2.267768832098227e-05,
+        "edge_alignment": 0.999014139175415,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        463
+      ],
+      "elapsed_seconds": 3.468,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_04\\conversion\\converted_svgs\\probe_04.svg"
+    },
+    {
+      "case_id": "probe_05",
+      "input_sha256": "15da88e525a0d56221d4cb7ccb8a8b5be3225fa324a71509acc9939b00a5bf67",
+      "output_sha256": "eb00c744729b5987799efeea77f421335b87aa3110c7c7db05c48fe143860b38",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.542222,
+        1.542222,
+        1.542222
+      ],
+      "metrics": {
+        "normalized_mse": 6.360559723361803e-07,
+        "foreground_mse": 5.402416718425229e-06,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        487
+      ],
+      "elapsed_seconds": 4.062,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_05\\conversion\\converted_svgs\\probe_05.svg"
+    },
+    {
+      "case_id": "probe_06",
+      "input_sha256": "d288db0893de7da31b2e9b05280ed227d0ce9f3feeedfb9d2c110b3a9a124cb8",
+      "output_sha256": "a9ec963bd2e6575ac1c47fc6c65d4f20a6ddfbb40eb45c5416f92265c99c863b",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.470833,
+        1.470833,
+        1.470833
+      ],
+      "metrics": {
+        "normalized_mse": 8.12712314655073e-05,
+        "foreground_mse": 0.0006037835264578462,
+        "edge_alignment": 0.9985774755477905,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        477
+      ],
+      "elapsed_seconds": 4.031,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_06\\conversion\\converted_svgs\\probe_06.svg"
+    },
+    {
+      "case_id": "probe_07",
+      "input_sha256": "4ade3906b7e66c8b3da8a1756770860d5fe8b16a03cd5327e4d70db109388504",
+      "output_sha256": "9cf6af11a194b52762aff63a24dc965fbb4f6b9dbb1c4263ed25c51f6a57525e",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.524444,
+        1.524444,
+        1.524444
+      ],
+      "metrics": {
+        "normalized_mse": 2.9622824513353407e-05,
+        "foreground_mse": 1.3881767699785996e-05,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        491
+      ],
+      "elapsed_seconds": 3.297,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_07\\conversion\\converted_svgs\\probe_07.svg"
+    },
+    {
+      "case_id": "probe_08",
+      "input_sha256": "f5ac6245e3bb9790f4a92d1678d6413419cdab2a9c1c1715b2a4453ae8a6a45c",
+      "output_sha256": "514a7f8f216ffdb1fd6d960346d8cc4ebbf58a34320ea924a0967efd4aab6de6",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.465812,
+        1.465812,
+        1.465812
+      ],
+      "metrics": {
+        "normalized_mse": 2.2820893263997277e-06,
+        "foreground_mse": 1.4931363693904132e-05,
+        "edge_alignment": 0.9995079040527344,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        469
+      ],
+      "elapsed_seconds": 4.328,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_08\\conversion\\converted_svgs\\probe_08.svg"
+    },
+    {
+      "case_id": "probe_09",
+      "input_sha256": "f9273dc60d88cfd0ee1329b2708868368d325cb9bada6f2935c2578ad28dad60",
+      "output_sha256": "4c9b88119a6aeaacd46cfc5740d1a37a735f5b4ff91daec5e483cf56717a8210",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.472756,
+        1.472756,
+        1.472756
+      ],
+      "metrics": {
+        "normalized_mse": 5.2146609959891066e-05,
+        "foreground_mse": 0.0004091064620297402,
+        "edge_alignment": 0.9995038509368896,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        472
+      ],
+      "elapsed_seconds": 4.875,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_09\\conversion\\converted_svgs\\probe_09.svg"
+    },
+    {
+      "case_id": "probe_10",
+      "input_sha256": "96a9144c4dec3287322a48fa16ce7ad78e340d1ab80a6271a74935d6e4a33e96",
+      "output_sha256": "afa1819fb27398559ff99caedccf270f089497f30bacb2d8b4395942b92fdf83",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.410256,
+        1.410256,
+        1.410256
+      ],
+      "metrics": {
+        "normalized_mse": 3.885501791955903e-05,
+        "foreground_mse": 0.0002731042623054236,
+        "edge_alignment": 0.9989931583404541,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        461
+      ],
+      "elapsed_seconds": 4.843,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_10\\conversion\\converted_svgs\\probe_10.svg"
+    },
+    {
+      "case_id": "probe_11",
+      "input_sha256": "603c7e420ee1ace81b79015423280c44af66e601deae7f8580bb9c7cbf2fddd7",
+      "output_sha256": "44f2f4ddc053792438b7266e4734d117b9a1e1bb8e3112fe2b67297480f54aab",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.58547,
+        1.58547,
+        1.58547
+      ],
+      "metrics": {
+        "normalized_mse": 3.243507990191574e-06,
+        "foreground_mse": 2.289643816766329e-05,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        483
+      ],
+      "elapsed_seconds": 3.844,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_11\\conversion\\converted_svgs\\probe_11.svg"
+    },
+    {
+      "case_id": "probe_12",
+      "input_sha256": "43536dedc343c2e26ca9a6629321612e68b1bd6658dd078cebc0a6bc5f47b0e4",
+      "output_sha256": "d1add2183a89b22d4dd7272a1dcf78e1f7009b6e5ffc6a969034ccc59dc41ebc",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.524167,
+        1.524167,
+        1.524167
+      ],
+      "metrics": {
+        "normalized_mse": 4.741842712974176e-05,
+        "foreground_mse": 0.00031515126465819776,
+        "edge_alignment": 0.9832295179367065,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        476
+      ],
+      "elapsed_seconds": 3.719,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_12\\conversion\\converted_svgs\\probe_12.svg"
+    },
+    {
+      "case_id": "probe_13",
+      "input_sha256": "8c26776964178d4a69b70fa1323068bf0bdf854bdb3307f0e066ba3cae5984ae",
+      "output_sha256": "2620c7c3ade531772cbb52fec844900f7d16925ccbfda905304226ec6faa7168",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.466667,
+        1.466667,
+        1.466667
+      ],
+      "metrics": {
+        "normalized_mse": 6.856465461169137e-06,
+        "foreground_mse": 5.8279503718949854e-05,
+        "edge_alignment": 0.9990077614784241,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        470
+      ],
+      "elapsed_seconds": 3.547,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_13\\conversion\\converted_svgs\\probe_13.svg"
+    },
+    {
+      "case_id": "probe_14",
+      "input_sha256": "9cc18b37ee19e3d325941f3c8916716a60349d517b602246a481883036d77504",
+      "output_sha256": "08ba4c32fd0024875b8c4ee40dd8c937295f97be10f581d0fbb1a271cec85487",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.471111,
+        1.471111,
+        1.471111
+      ],
+      "metrics": {
+        "normalized_mse": 2.1041278159827925e-06,
+        "foreground_mse": 1.543551843496971e-05,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        464
+      ],
+      "elapsed_seconds": 3.61,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_14\\conversion\\converted_svgs\\probe_14.svg"
+    },
+    {
+      "case_id": "probe_15",
+      "input_sha256": "e11e25938c0f35b09af1d7b99e9bd815b202790362c4958ddffefb25ba887487",
+      "output_sha256": "af705b2f108557a8fe8c56737bc82d67b09305b395a3b09ed97b0534b7fa7a03",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.440139,
+        1.440139,
+        1.440139
+      ],
+      "metrics": {
+        "normalized_mse": 0.00026059665833599865,
+        "foreground_mse": 0.001832438400015235,
+        "edge_alignment": 0.9934836626052856,
+        "foreground_iou": 0.9987421383647799,
+        "foreground_iou_binary": 0.9987421383647799
+      },
+      "registration_renderings": [
+        495
+      ],
+      "elapsed_seconds": 3.734,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_15\\conversion\\converted_svgs\\probe_15.svg"
+    },
+    {
+      "case_id": "probe_16",
+      "input_sha256": "886d10dbb8e1b1de8d7142875e5c089fbd849acab735fc8f829f9e28e90d4fa3",
+      "output_sha256": "1bb38899f749e909ce1c7b3999c7e8e6668ab73017c05fec5815546e63d6b6f8",
+      "before_failures": [
+        "embedded_raster",
+        "no_vectors"
+      ],
+      "after_failures": [],
+      "widths": [
+        1.592415,
+        1.592415,
+        1.592415
+      ],
+      "metrics": {
+        "normalized_mse": 7.530597213190049e-05,
+        "foreground_mse": 0.0004710614448413253,
+        "edge_alignment": 0.9976324439048767,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "registration_renderings": [
+        504
+      ],
+      "elapsed_seconds": 3.671,
+      "output_svg": "artifacts\\gui\\workbench\\b231e7854c0041b1916eff717851a2dd\\attempts\\attempt_0002\\probe_16\\conversion\\converted_svgs\\probe_16.svg"
+    }
+  ],
+  "regression_tests": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_arrow_pair_runtime.py tests/test_arrow_pair_conditions.py tests/test_stroke_constraints.py tests/detailtests/test_dual_arrow_runtime_helpers.py -q",
+    "passed": 164,
+    "elapsed_seconds": 225.8
+  }
+}

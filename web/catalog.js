@@ -2,7 +2,9 @@
 const el = id => document.getElementById(id);
 let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polling = false, conversionActive = false, conversionAvailable = true;
 let legacyLastJob = null;
-const reportKey = summary => JSON.stringify([summary.generated_at || '', summary.catalog_statuses || {}]);
+const deleteSelection = new Set();
+let deleting = false, catalogBusy = false;
+const reportKey = summary => JSON.stringify([summary.generated_at || '', summary.catalog_statuses || {}, summary.description_revision || '']);
 const asset = path => '/api/catalog/asset?path=' + encodeURIComponent(path);
 function node(tag, text, cls) {
   const result = document.createElement(tag);
@@ -27,6 +29,11 @@ function metrics(row) {
   return {mse: worst('normalized_mse', Math.max), edge: worst('edge_alignment', Math.min), iou: worst('foreground_iou', Math.min)};
 }
 function link(text, path) { const a = node('a', text); a.href = asset(path); a.target = '_blank'; a.rel = 'noopener'; return a; }
+function updateDeleteAction() {
+  const button = el('delete-selected');
+  button.textContent = deleting ? 'Bilder werden gelöscht …' : `Markierte Bilder löschen (${deleteSelection.size})`;
+  button.disabled = deleting || catalogBusy || conversionActive || deleteSelection.size === 0;
+}
 function render() {
   const search = el('search').value.trim().toLocaleLowerCase('de');
   let rows = data.rows.filter(r => (!search || (r.filename + ' ' + r.description + ' ' + (r.classification?.label || '')).toLocaleLowerCase('de').includes(search)) && (!el('geometry-class').value || r.classification?.class_id === el('geometry-class').value) && (!el('status').value || r.status === el('status').value) && (!el('archive').value || r.archived === (el('archive').value === 'yes')));
@@ -55,6 +62,15 @@ function render() {
         const a = link('', path), img = node('img'); img.src = asset(path); img.alt = title + ' ' + row.filename; img.loading = 'lazy'; a.append(img); thumbs.append(a);
       }
       image.append(thumbs);
+      const label = node('label', undefined, 'delete-choice'), checkbox = node('input');
+      checkbox.type = 'checkbox'; checkbox.checked = deleteSelection.has(row.filename);
+      checkbox.disabled = deleting;
+      checkbox.setAttribute('aria-label', row.filename + ' zum Löschen markieren');
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) deleteSelection.add(row.filename); else deleteSelection.delete(row.filename);
+        updateDeleteAction();
+      });
+      label.append(checkbox, node('span', 'Löschen')); image.append(label);
     }
     const quality = node('td'); quality.append(node('span', data.labels[row.status] || row.status, 'badge ' + row.status));
     const m = metrics(row), metric = node('td', undefined, 'metric');
@@ -93,10 +109,12 @@ function render() {
     more.append(list, node('small', 'Vollständige fachliche Neubewertung: nicht durchgeführt.')); detail.append(more);
     tr.append(image, quality, metric, archive, detail); body.append(tr);
   }
-  el('rows').replaceChildren(body); el('empty').hidden = rows.length > 0;
+  el('rows').replaceChildren(body); el('empty').hidden = rows.length > 0; updateDeleteAction();
 }
 async function loadList() {
   data = await api('/api/catalog/list');
+  const available = new Set(data.rows.filter(r => r.status !== 'reserved').map(r => r.filename));
+  for (const name of deleteSelection) if (!available.has(name)) deleteSelection.delete(name);
   const old = el('status').value;
   el('status').replaceChildren(new Option('Alle Qualitätsstände', ''), ...Object.entries(data.labels).map(([key,label]) => new Option(label,key)));
   el('status').value = old;
@@ -110,6 +128,7 @@ async function loadList() {
 }
 function showJob(job) {
   const running = ['running','cancelling'].includes(job.status), p = job.progress || {};
+  catalogBusy = running; updateDeleteAction();
   el('refresh').disabled = running || conversionActive; el('force').disabled = running || conversionActive;
   el('stop').hidden = !running || conversionActive; el('stop').disabled = job.status === 'cancelling';
   el('conversion-start').disabled = running || conversionActive || !conversionAvailable;
@@ -158,6 +177,7 @@ function showConversion(service) {
   showConversionOverview(service);
   conversionAvailable = true;
   conversionActive = ['running','stopping'].includes(service.status);
+  updateDeleteAction();
   el('conversion-start').disabled = conversionActive;
   el('conversion-stop').disabled = !conversionActive || service.status === 'stopping';
   el('conversion-profile').disabled = conversionActive;
@@ -248,6 +268,20 @@ async function poll() {
 }
 for (const id of ['search','geometry-class','status','archive','sort','page-size']) el(id).addEventListener(id === 'search' ? 'input' : 'change', () => {page=0;render();});
 el('previous').onclick = () => {page--;render();}; el('next').onclick = () => {page++;render();};
+el('delete-selected').onclick = async () => {
+  if (deleting || catalogBusy || conversionActive || !deleteSelection.size) return;
+  deleting = true; render(); el('delete-status').textContent = '';
+  try {
+    const result = await api('/api/catalog/delete', {filenames: [...deleteSelection]});
+    for (const name of result.deleted) deleteSelection.delete(name);
+    el('delete-status').textContent = result.message;
+    await loadList(); await poll();
+  } catch (error) {
+    el('delete-status').textContent = error.status === 404
+      ? 'Löschen nicht verfügbar oder Bild nicht gefunden. Bitte den Webserver neu starten und die Seite neu laden.'
+      : error.message;
+  } finally {deleting = false; render();}
+};
 el('refresh').onclick = async () => {el('notice').hidden=true;el('refresh').disabled=true;try {showJob(await api('/api/catalog/start',{force:el('force').checked}));} catch(error) {notice(error);await poll();}};
 el('stop').onclick = async () => {el('stop').disabled=true;try {showJob(await api('/api/catalog/cancel',{}));} catch(error) {notice(error);await poll();}};
 el('conversion-start').onclick = async () => {el('notice').hidden=true;el('conversion-start').disabled=true;try {showConversion(await api('/api/catalog/conversion/start',{profile:el('conversion-profile').value}));} catch(error) {notice(error);} await poll();};

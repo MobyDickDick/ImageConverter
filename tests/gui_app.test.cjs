@@ -34,7 +34,7 @@ function harness(respond = () => []) {
     setTimeout(fn) {timers.set(++timer, fn); return timer;}, clearTimeout(id) {timers.delete(id);},
     requestAnimationFrame(fn) {fn();},
     fetch:async (url, options = {}) => {
-      requests.push({url, body:options.body && JSON.parse(options.body)});
+      requests.push({url, body:typeof options.body === 'string' ? JSON.parse(options.body) : options.body});
       return {ok:true, json:async () => respond(url, options)};
     },
   });
@@ -108,4 +108,94 @@ test('seed edits keep full precision and remain independent of cancellation', as
   assert.equal(h.requests[0].body.seed, '18446744073709551615');
   assert.equal(h.element('seed').disabled, true);
   assert.equal(h.element('cancel').disabled, false);
+});
+
+test('recognition keeps typed descriptions and requires explicit adoption of neighbours', async () => {
+  const recognized = {...ready, recognition:{message:'Ähnliches Bild', reference_count:507, automatic:null,
+    matches:[{filename:'reference.png', description:'Ein roter Kreis.', source_url:'/source', svg_url:'/svg', exact:false}]}};
+  const h = harness(url => url.endsWith('/recognize') ? recognized : []); h.load();
+  h.context.job = ready;
+  h.run('imageRecognition = true; renderJob(job, true)');
+  h.element('description').value = 'Meine ungespeicherte Beschreibung';
+  await h.element('recognize').listeners.click();
+  assert.equal(h.element('description').value, 'Meine ungespeicherte Beschreibung');
+  assert.equal(h.element('recognition-results').children.length, 1);
+  const proposal = h.element('recognition-results').children[0];
+  proposal.children.at(-1).listeners.click();
+  assert.equal(h.element('description').value, 'Ein roter Kreis.');
+});
+
+test('empty descriptions are filled by automatic recognition through the real upload flow', async () => {
+  const empty = {...ready, description:''};
+  const recognized = {...ready, description_origin:'recognition', recognition:{message:'Kreis erkannt', reference_count:0,
+    automatic:{kind:'plain_shape', description:ready.description}, matches:[]}};
+  const h = harness(url => url.startsWith('/api/upload') ? empty : url.endsWith('/recognize') ? recognized : []);
+  h.load(); h.run('imageRecognition = true; editableSearchSeed = true');
+  await h.run("upload({name:'renamed.png', size:100})");
+  assert.equal(h.element('description').value, ready.description);
+  assert.equal(h.element('convert').disabled, false);
+  assert.ok(h.requests.some(request => request.url.endsWith('/recognize')));
+});
+
+test('text corrections are saved without starting a conversion', async () => {
+  const h = harness((url, options) => url.endsWith('/description')
+    ? {...ready, description:JSON.parse(options.body).description, description_origin:'user',
+      description_save:{scope:'catalog', message:'Im Katalog gespeichert.'}} : []);
+  h.load(); h.context.job = ready;
+  h.run('descriptionAutosave = true; renderJob(job, true)');
+  h.element('description').value = 'Korrigierter Text ohne Konvertierung';
+  h.element('description').listeners.input();
+  await h.run('saveDescription()');
+  assert.equal(h.requests[0].url, '/api/jobs/original/description');
+  assert.equal(h.requests[0].body.description, 'Korrigierter Text ohne Konvertierung');
+  assert.equal(h.run('descriptionDirty'), false);
+  assert.equal(h.element('description-save-status').textContent, 'Im Katalog gespeichert.');
+});
+
+test('edits made during a save are serialized and the newest text survives', async () => {
+  let finish;
+  const h = harness((url, options) => {
+    const job = {...ready, description:JSON.parse(options.body).description};
+    return h.requests.length === 1 ? new Promise(resolve => {finish = () => resolve(job);}) : job;
+  });
+  h.load(); h.context.job = ready;
+  h.run('descriptionAutosave = true; renderJob(job, true)');
+  h.element('description').value = 'Erste Korrektur';
+  h.element('description').listeners.input();
+  const pending = h.run('saveDescription()');
+  await new Promise(resolve => setImmediate(resolve));
+  h.element('description').value = 'Zweite Korrektur';
+  h.element('description').listeners.input();
+  finish(); await pending;
+  assert.deepEqual(h.requests.map(request => request.body.description), ['Erste Korrektur', 'Zweite Korrektur']);
+  assert.equal(h.run('current.description'), 'Zweite Korrektur');
+  assert.equal(h.element('description').value, 'Zweite Korrektur');
+});
+
+test('switching to another image waits until its edited text is saved', async () => {
+  const h = harness((url, options) => url.endsWith('/description')
+    ? {...ready, description:JSON.parse(options.body).description}
+    : url.startsWith('/api/upload') ? {...ready, id:'next'} : []);
+  h.load(); h.context.job = ready;
+  h.run('descriptionAutosave = true; renderJob(job, true)');
+  h.element('description').value = 'Vor Bildwechsel sichern';
+  h.element('description').listeners.input();
+  await h.run("upload({name:'next.png', size:100})");
+  assert.equal(h.requests[0].url, '/api/jobs/original/description');
+  assert.ok(h.requests[1].url.startsWith('/api/upload'));
+  assert.equal(h.run('current.id'), 'next');
+});
+
+test('a failed text save keeps the edit and prevents a premature conversion', async () => {
+  const h = harness(() => {throw new Error('Speicher nicht verfügbar');});
+  h.load(); h.context.job = ready;
+  h.run('descriptionAutosave = true; editableSearchSeed = true; renderJob(job, true)');
+  h.element('description').value = 'Darf nicht verloren gehen';
+  h.element('description').listeners.input();
+  await h.element('convert').listeners.click();
+  assert.equal(h.run('descriptionDirty'), true);
+  assert.equal(h.element('description').value, 'Darf nicht verloren gehen');
+  assert.equal(h.element('save-description').disabled, false);
+  assert.ok(h.element('description-save-status').textContent.startsWith('Nicht gespeichert'));
+  assert.ok(h.requests.every(request => !request.url.endsWith('/start')));
 });

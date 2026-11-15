@@ -72,6 +72,7 @@ def test_xml_correction_replaces_cached_manifest_description_without_measurement
     row = updated['rows'][0]
     assert row['description']=='Ein blaues Rechteck ohne Text.'
     assert updated['summary']['current_descriptions_applied']
+    assert updated['summary']['description_revision'] != first['summary']['description_revision']
     assert row['candidates']==original_candidates
     assert row['archive']['description_matches_catalog'] is False
     assert updated['summary']['archive_description_differences']==1
@@ -99,6 +100,74 @@ def wait_for(path, timeout=8):
     while not path.exists() and time.monotonic()<end:
         time.sleep(.02)
     assert path.exists()
+
+
+def test_delete_moves_all_original_copies_and_persists_the_reduced_catalog(catalog):
+    source = catalog.root/'artifacts/images_to_convert/AA0010.jpg'
+    original = source.read_bytes()
+    copy = source.parent/'nonconvertable'/source.name
+    copy.parent.mkdir()
+    copy.write_bytes(original)  # Added after the last inventory.
+    previous = catalog.report_folder()/'manifest.json'
+    previous_bytes = previous.read_bytes()
+    result = catalog.delete_images(['AA0010.jpg'])
+    assert result['deleted'] == ['AA0010.jpg']
+    assert not source.exists() and not copy.exists()
+    removed = list((catalog.root/'artifacts/deleted_samples').rglob('*.jpg'))
+    assert len(removed) == 2 and all(p.read_bytes() == original for p in removed)
+    assert previous.read_bytes() == previous_bytes
+    assert (catalog.root/'artifacts/converted_images/converted_svgs/aa0010.svg').is_file()
+    assert (catalog.root/'artifacts/satisfactory_conversions/images/AA0010.jpg').is_file()
+    assert catalog.payload()['rows'] == []
+    summary = catalog.payload()['summary']
+    assert summary['catalog_bitmaps'] == summary['archived'] == 0
+    assert summary['catalog_statuses'] == {} and summary['geometry_classes']['catalog_bitmaps'] == 0
+    restored = CatalogQuality(catalog.root, catalog.directory, gui.stop_process_tree)
+    try:
+        assert restored.payload()['rows'] == []
+        rows, summary, _ = build(catalog.root, measure=lambda *args: pytest.fail('No images left'))
+        assert rows == [] and summary['catalog_bitmaps'] == 0
+    finally:
+        restored.close()
+
+
+@pytest.mark.parametrize('selection', [None, [], 'AA0010.jpg', [12], ['../AA0010.jpg'],
+                                      ['AA0010.jpg', 'missing.jpg']])
+def test_delete_rejects_invalid_or_stale_selection_without_removing_files(catalog, selection):
+    with pytest.raises(CatalogError):
+        catalog.delete_images(selection)
+    assert (catalog.root/'artifacts/images_to_convert/AA0010.jpg').is_file()
+    assert len(catalog.payload()['rows']) == 1
+
+
+def test_delete_rejects_busy_reserved_and_untrusted_paths(catalog):
+    catalog.conversion_owner = object()
+    with pytest.raises(CatalogError, match='stoppen'):
+        catalog.delete_images(['AA0010.jpg'])
+    catalog.conversion_owner = None
+    row = catalog.payload()['rows'][0]
+    status = row['status']
+    row['status'] = 'reserved'
+    with pytest.raises(CatalogError, match='Reservierte'):
+        catalog.delete_images(['AA0010.jpg'])
+    row['status'] = status
+    row['all_source_paths'] = ['artifacts/satisfactory_conversions/images/AA0010.jpg']
+    with pytest.raises(CatalogError, match='Unzulässige'):
+        catalog.delete_images(['AA0010.jpg'])
+    assert (catalog.root/'artifacts/images_to_convert/AA0010.jpg').is_file()
+
+
+def test_delete_rolls_back_originals_when_report_publication_fails(catalog, monkeypatch):
+    import tools.build_catalog_inventory as inventory
+    previous = catalog.report_folder()
+    def fail(*args, **kwargs):
+        raise OSError('Disk full')
+    monkeypatch.setattr(inventory, 'write_report', fail)
+    with pytest.raises(CatalogError, match='nicht gelöscht'):
+        catalog.delete_images(['AA0010.jpg'])
+    assert (catalog.root/'artifacts/images_to_convert/AA0010.jpg').is_file()
+    assert catalog.report_folder() == previous
+    assert len(catalog.payload()['rows']) == 1
 
 
 def test_cancel_kills_worker_and_child_keeps_prior_list_and_allows_restart(catalog,monkeypatch,tmp_path):
@@ -265,6 +334,13 @@ def test_http_catalog_routes_downloads_and_origin_protection(catalog,monkeypatch
         assert request('/api/catalog/conversion/start','POST',{'X-ImageConverter':'1'},b'[]')[0] == 400
         assert request('/api/catalog/conversion/start','POST',{'X-ImageConverter':'1'},b'{"profile":[]}')[0] == 400
         assert request('/api/catalog/conversion/stop','POST',{'X-ImageConverter':'1'},b'{}')[0] == 200
+        assert request('/api/catalog/delete','POST',body=b'')[0] == 403
+        assert request('/api/catalog/delete','POST',{'X-ImageConverter':'1','Origin':'https://example.org'},b'')[0] == 403
+        assert request('/api/catalog/delete','POST',{'X-ImageConverter':'1'},b'[]')[0] == 400
+        assert request('/api/catalog/delete','POST',{'X-ImageConverter':'1'},b'{"filenames":[]}')[0] == 400
+        status, body = request('/api/catalog/delete','POST',{'X-ImageConverter':'1'},b'{"filenames":["AA0010.jpg"]}')
+        assert status == 200 and json.loads(body)['deleted'] == ['AA0010.jpg']
+        assert json.loads(request('/api/catalog/list')[1])['rows'] == []
     finally:
         server.shutdown();thread.join(timeout=5);server.server_close();jobs.close()
 

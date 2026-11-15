@@ -281,6 +281,11 @@ def build(root, *, measure, cache=None, signature='uncached', force=False, progr
         rows.append(row)
         if progress:
             progress(number, len(copies), measured, used_cache)
+    return rows, catalog_summary(root, rows, measured, used_cache), cache
+
+
+def catalog_summary(root, rows, measured=0, used_cache=0):
+    """Summarize the current rows, including after catalog removals."""
     catalog = [r for r in rows if r['role'] == 'catalog']
     archived = [r for r in catalog if r['archived']]
     groups = {}
@@ -305,7 +310,7 @@ def build(root, *, measure, cache=None, signature='uncached', force=False, progr
         manual_reviews_systematically_recorded=False)
     from src.imageConverterClasses import enrich_catalog
     summary['geometry_classes'] = enrich_catalog(root, rows)
-    return rows, summary, cache
+    return summary
 
 
 def runtime_signature(root):

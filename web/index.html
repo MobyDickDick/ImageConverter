@@ -37,10 +37,18 @@
             <button id="pick-sample" class="secondary" hidden>Sample-SVG auswählen …</button>
             <div class="sample-info"><span id="sample-info" class="hint">Gespeichertes SVG zusammen mit dem Original laden und weiter verbessern.</span><button id="remove-sample" class="text-button" hidden>Entfernen</button></div>
           </div>
-          <h2 class="section-gap"><span class="number">02</span> Formen beschreiben</h2>
+          <h2 class="section-gap"><span class="number">02</span> Formen erkennen und beschreiben</h2>
+          <button id="recognize" class="secondary full" type="button" disabled>Bild erkennen</button>
+          <p id="recognition-status" class="hint" role="status" hidden></p>
+          <details id="recognition-details" class="recognition-details" hidden>
+            <summary>Erkennung und ähnliche Bilder</summary>
+            <div id="recognition-results"></div>
+            <p class="hint">Ähnlichkeit ist keine Erkennungssicherheit. Prüfe besonders Text, Farben und zusätzliche Linien. Die Qualitätsprüfung erfolgt bei der Konvertierung.</p>
+          </details>
           <label for="description" class="sr-only">Bildbeschreibung</label>
           <textarea id="description" rows="5" maxlength="12000" placeholder="Zum Beispiel: Ein blauer Kreis mit schwarzer Kontur auf weissem Hintergrund."></textarea>
-          <p id="description-hint" class="hint">Beschreibe Formen, Farben und ihre Anordnung. Vorgaben wie „Alle Linien sind gleich breit“ werden bei der Suche berücksichtigt und am Ergebnis geprüft. Bei bekannten Katalogbildern wird die Beschreibung ergänzt.</p>
+          <div class="description-save"><span id="description-save-status" class="hint" role="status" aria-live="polite"></span><button id="save-description" class="text-button" type="button" disabled>Text speichern</button></div>
+          <p id="description-hint" class="hint">Bei leerer Beschreibung wird das Bild lokal untersucht. Bekannte Bildinhalte und einfache Grundformen können die Beschreibung ergänzen. Du kannst sie prüfen und anpassen. Vorgaben wie „Alle Linien sind gleich breit“ werden am Ergebnis geprüft.</p>
           <details class="hint"><summary>Ähnliche Bilder als Hilfe verwenden</summary>
             <p>Du kannst auf hinterlegte Katalogbeschreibungen verweisen: <strong>Form ähnlich wie BILDNAME</strong>, <strong>Farben ähnlich wie BILDNAME</strong> oder <strong>Farbverlauf ähnlich wie BILDNAME</strong>. Ersetze BILDNAME durch die Kennung des Katalogbildes; auch eine genaue Grössenvariante ist möglich.</p>
             <p>Form und Farben lassen sich aus verschiedenen Bildern kombinieren. Ergänze Unterschiede, zum Beispiel „aber ohne Anschluss“ oder „ohne Text“. Die Referenzen geben Hinweise aus den Beschreibungen; die genaue Anpassung und Qualitätsprüfung erfolgen am aktuellen Bild. Die aufgelöste Beschreibung steht im Konvertierungsprotokoll.</p>

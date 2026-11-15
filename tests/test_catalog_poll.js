@@ -9,8 +9,64 @@ function element() {
   return {value: '', hidden: false, disabled: false, textContent: '', children: [],
     append(...items) {this.children.push(...items);},
     replaceChildren(...items) {this.children = items;},
-    addEventListener() {}, removeAttribute() {}};
+    listeners: {}, attributes: {},
+    addEventListener(type, handler) {this.listeners[type] = handler;},
+    setAttribute(name, value) {this.attributes[name] = value;}, removeAttribute() {}};
 }
+
+test('delete selection survives filtering, reports failures and removes only submitted originals', async () => {
+  const elements = new Map(), requests = [];
+  const get = id => {
+    if (!elements.has(id)) elements.set(id, element());
+    return elements.get(id);
+  };
+  get('sort').value = 'filename'; get('page-size').value = '25';
+  let rows = ['first.jpg', 'second.jpg', 'reserved.jpg'].map(filename => ({
+    filename, image:'artifacts/images_to_convert/'+filename, description:'',
+    status:filename === 'reserved.jpg' ? 'reserved' : 'no_svg', candidates:[], archived:false,
+  }));
+  let fail = true;
+  const context = vm.createContext({
+    document:{getElementById:get, createElement:element, createDocumentFragment:element},
+    Option:function(text, value) {return {text, value};}, setInterval() {},
+    fetch:async (url, options = {}) => {
+      if (url === '/api/catalog/delete') {
+        const body = JSON.parse(options.body); requests.push(body);
+        if (fail) return {ok:false, status:409, json:async () => ({error:'Bitte zuerst stoppen.'})};
+        rows = rows.filter(row => !body.filenames.includes(row.filename));
+        return {ok:true, json:async () => ({deleted:body.filenames, message:'1 Bild verschoben.'})};
+      }
+      return {ok:true, json:async () => url === '/api/catalog/list' ? {rows, summary:{}, labels:{}}
+        : {status:'idle', summary:{}}};
+    },
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname,'../web/catalog.js'),'utf8'), context);
+  await new Promise(setImmediate);
+  const firstRow = get('rows').children[0].children[0];
+  const checkbox = firstRow.children[0].children[2].children[0];
+  assert.equal(checkbox.type, 'checkbox');
+  assert.match(checkbox.attributes['aria-label'], /first.jpg/);
+  checkbox.checked = true; checkbox.listeners.change();
+  assert.equal(get('delete-selected').disabled, false);
+  assert.match(get('delete-selected').textContent, /\(1\)/);
+  get('search').value = 'second';
+  get('search').listeners.input();
+  assert.equal(vm.runInContext('deleteSelection.has("first.jpg")', context), true);
+  vm.runInContext('showJob({status:"running"})', context);
+  assert.equal(get('delete-selected').disabled, true);
+  vm.runInContext('showJob({status:"idle"})', context);
+  await get('delete-selected').onclick();
+  assert.equal(get('delete-status').textContent, 'Bitte zuerst stoppen.');
+  assert.equal(get('delete-selected').disabled, false);
+  fail = false;
+  await get('delete-selected').onclick();
+  assert.deepEqual(requests, [{filenames:['first.jpg']}, {filenames:['first.jpg']}]);
+  assert.equal(get('delete-status').textContent, '1 Bild verschoben.');
+  assert.equal(get('delete-selected').disabled, true);
+  assert.equal(vm.runInContext('data.rows.length', context), 2);
+  get('search').value = 'reserved'; get('search').listeners.input();
+  assert.equal(get('rows').children[0].children[0].children[0].children.length, 1);
+});
 
 test('missing background API preserves catalog polling and recovers after restart', async () => {
   const elements = new Map();

@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-15",
+  "integration_suite": {
+    "command": "python -m pytest tests/test_image_recognition.py tests/test_description_persistence.py tests/test_gui_app_browser.py tests/test_catalog_quality_server.py tests/test_catalog_updates.py tests/test_image_converter_gui.py::test_http_manual_conversion_runs_alongside_background tests/test_image_converter_gui.py::test_cancel_stops_a_real_background_process tests/test_image_converter_gui.py::test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests -q",
+    "passed": 72,
+    "failed": 0,
+    "seconds": 59.21,
+    "environment": "Local HTTP connections and test subprocess termination enabled; the sandbox-only failures were rerun successfully."
+  },
+  "final_persistence_followup": {
+    "command": "python -m pytest tests/test_description_persistence.py tests/test_image_converter_gui.py::test_last_submitted_description_is_reused_by_image_content tests/test_image_converter_gui.py::test_unchanged_catalog_submission_does_not_pin_old_text_as_user_correction tests/test_image_converter_gui.py::test_primary_catalog_table_beats_stale_secondary_image_alias -q",
+    "passed": 11,
+    "failed": 0
+  },
+  "javascript_gui": {"command": "node --test tests/gui_app.test.cjs", "passed": 11, "failed": 0},
+  "javascript_catalog": {"command": "node --test tests/test_catalog_poll.js", "passed": 3, "failed": 0},
+  "real_conversion_without_manual_description": "A synthetic plain circle, no reference images, neutral filename, seed 1234: GUI worker done, quality passed, pixel_quality passed.",
+  "limits": "Selected regression suites and known-reference retrieval only; no general semantic or OCR accuracy claim."
+}
