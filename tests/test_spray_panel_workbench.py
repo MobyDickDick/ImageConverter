@@ -25,13 +25,49 @@ def test_contradictory_wording_still_declines_the_model(extra):
 
 
 @pytest.mark.parametrize('phrase', ['gestrichelte graue Sprühstrahlen',
-                                   'gestrichelte hellgraue Linien', 'gestrichelte Spruehstrahlen'])
+                                   'gestrichelte hellgraue Linien', 'gestrichelte Spruehstrahlen',
+                                   'graue gestricelte Linien', 'graue gestrichelte Linien',
+                                   'Die Linien sind gestrichelt.',
+                                   'Die Sprühstrahlen bestehen aus gestrichelten Linien.'])
 def test_gray_attribute_does_not_hide_ray_dashes(phrase):
     assert _dashed_spray_rays(phrase)
 
 
 def test_dashed_inner_rectangle_alone_does_not_request_dashed_rays():
     assert not _dashed_spray_rays('Ein gestricheltes graues Rechteck neben drei grauen Sprühstrahlen.')
+
+
+def test_explicit_ray_dashes_are_checked_in_samples_and_recovery_too():
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions,validate_svg_assertions
+    description = DESCRIPTION.replace('fein gestrichelte graue Sprühstrahlen','graue gestricelte Linien')
+    claims = description_assertions(description)
+    assert claims['dashed_spray_rays'] == 15
+    svg = (FIXTURES/'spray_panel_workbench.svg').read_text(encoding='utf-8')
+    validate_svg_assertions(svg,claims)
+    root = ET.fromstring(svg)
+    for node in root.iter():
+        if node.tag.rsplit('}',1)[-1] in {'line','path'}:
+            node.attrib.pop('stroke-dasharray',None)
+    with pytest.raises(ValueError,match='missing_described_dashed_spray_rays'):
+        validate_svg_assertions(ET.tostring(root,encoding='unicode'),claims)
+
+
+@pytest.mark.parametrize('attribute,value',[('stroke-dasharray','100 1'),('opacity','0.0'),
+                                           ('stroke-opacity','0'),('stroke-width','0')])
+def test_invisible_or_effectively_solid_dashes_do_not_fulfil_the_ray_claim(attribute,value):
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions,validate_svg_assertions
+    root = ET.fromstring((FIXTURES/'spray_panel_workbench.svg').read_text(encoding='utf-8'))
+    for node in root.iter():
+        if node.tag.rsplit('}',1)[-1]=='path' and node.get('stroke-dasharray','none')!='none':
+            node.set(attribute,value)
+    with pytest.raises(ValueError,match='missing_described_dashed_spray_rays'):
+        validate_svg_assertions(ET.tostring(root,encoding='unicode'),description_assertions(DESCRIPTION))
+
+
+@pytest.mark.parametrize('phrase',['Keine gestrichelten Linien.','Ohne gestrichelte Linien.',
+                                   'Die Linien sind nicht gestrichelt.'])
+def test_negated_dash_wording_does_not_request_dashed_rays(phrase):
+    assert not _dashed_spray_rays(phrase)
 
 
 def test_actual_workbench_source_path_dashes_match_independent_renderer():

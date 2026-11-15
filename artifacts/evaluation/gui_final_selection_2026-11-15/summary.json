@@ -1,0 +1,73 @@
+{
+  "schema": "gui_best_preview_spray_dashes_v1",
+  "date": "2026-11-15",
+  "reported_job": "b5014d1577134a9e881075086e9b7bc2",
+  "original_job_untouched": true,
+  "original_source_sha256": "11b5c2f7cbbab826105054f7623e85bace00a18224b47b77a30e42a96a418fc8",
+  "replay": {
+    "before": {
+      "normalized_mse": 0.004192315507680178,
+      "foreground_mse": 0.0047986735589802265,
+      "foreground_iou": 0.9626587005227782,
+      "foreground_iou_binary": 0.9626587005227782,
+      "edge_alignment": 0.6358617544174194,
+      "passed": false,
+      "observed_foreground_pixels": 2580,
+      "output_foreground_pixels": 2676
+    },
+    "after": {
+      "normalized_mse": 0.0007040945929475129,
+      "foreground_mse": 0.0007493767188861966,
+      "foreground_iou": 0.992289899768697,
+      "foreground_iou_binary": 0.992289899768697,
+      "edge_alignment": 0.8864505887031555,
+      "passed": true,
+      "observed_foreground_pixels": 2580,
+      "output_foreground_pixels": 2588
+    },
+    "quality": "warning",
+    "description_error": "missing_described_dashed_spray_rays: expected=15, observed=0",
+    "retained_preview": true
+  },
+  "final_gui": {
+    "id": "1bb713dafa8a4713ae93ab5df2c04daf",
+    "status": "done",
+    "quality": "passed",
+    "message": "SVG erstellt. Bildvergleich und Beschreibungsprüfung bestanden.",
+    "elapsed": 63.2,
+    "description_error": "",
+    "pixel_quality": {
+      "normalized_mse": 0.0003156237944494933,
+      "foreground_mse": 0.0002701528719626367,
+      "foreground_iou": 0.992289899768697,
+      "foreground_iou_binary": 0.992289899768697,
+      "edge_alignment": 0.9289581775665283,
+      "passed": true,
+      "observed_foreground_pixels": 2580,
+      "output_foreground_pixels": 2588
+    },
+    "retained_preview": true,
+    "recovery": true
+  },
+  "final_svg_sha256": "666fcb617832861ac7a5aff8888981756229a41faa1a1e98bf3a2592a2caac08",
+  "independent_renderer": {
+    "normalized_mse": 0.0003310201282147318,
+    "foreground_mse": 0.00027867028256878257,
+    "foreground_iou": 0.9926754047802622,
+    "foreground_iou_binary": 0.9926754047802622,
+    "edge_alignment": 0.9278460144996643,
+    "passed": true
+  },
+  "description_validation_version": 5,
+  "benchmark_ms_per_render": {
+    "no_preview": 2.9868,
+    "original_preview": 16.8796,
+    "persistent_journal_preview": 4.6419
+  },
+  "tests": {
+    "python_targeted": 182,
+    "javascript": 10,
+    "additional_http": "see gui_http_tests.log"
+  },
+  "scope": "reported_gui_job_and_targeted_regressions_not_full_17_case_plan_b_acceptance"
+}

@@ -91,7 +91,11 @@ function draftQuality(job) {
   const parts = [pixels === true ? "Das SVG besteht den Bildvergleich mit dem Original." : pixels === false ? "Das SVG weicht im Bildvergleich noch zu stark vom Original ab." : "Für das SVG liegt keine abgeschlossene Bildprüfung vor."];
   if (error) {
     const direction = /^wrong_described_arrow_direction:(left|right)$/.exec(error);
-    if (direction) {
+    const spray = /^missing_described_dashed_spray_rays: expected=(\d+), observed=(\d+)$/.exec(error);
+    if (spray) {
+      parts.push(`Die Beschreibung fordert ${spray[1]} gestrichelte Linien; im Ergebnis sind ${spray[2]} bestätigt.`);
+      parts.push("Die Konvertierung hat diese Vorgabe noch nicht vollständig umgesetzt.");
+    } else if (direction) {
       const side = direction[1] === "left" ? "links" : "rechts";
       parts.push(`Die Pfeilrichtung ${side} im Ergebnis stimmt nicht mit der Beschreibung überein.`);
     } else if (error === "invalid_described_arrow_head") {
@@ -101,7 +105,7 @@ function draftQuality(job) {
     } else {
       parts.push("Das Ergebnis erfüllt die beschriebenen Formen, Farben oder ihre Anordnung noch nicht vollständig.");
     }
-    parts.push("Vergleiche die Beschreibung mit dem Original. Falls das Original massgeblich ist, passe die Beschreibung an und starte die Konvertierung erneut.");
+    if (!spray) parts.push("Vergleiche die Beschreibung mit dem Original. Falls das Original massgeblich ist, passe die Beschreibung an und starte die Konvertierung erneut.");
   } else if (pixels === true) {
     parts.push("Die vollständige Modell- und Beschreibungsprüfung ist noch offen. Bitte prüfe den Entwurf vor der Verwendung.");
   } else {

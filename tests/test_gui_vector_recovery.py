@@ -124,13 +124,19 @@ def test_failed_first_attempt_spends_remaining_budget_and_keeps_killed_worker_dr
     assert 'result_rejection' not in job and (folder/'result.svg').read_text() == SVG
 
 
-def test_passed_first_attempt_finishes_without_recovery(case, monkeypatch):
+@pytest.mark.parametrize('isolation',[None,'0','1'])
+def test_passed_first_attempt_finishes_without_recovery(case, monkeypatch, isolation):
     jobs, job, folder = case
+    if isolation is None:
+        monkeypatch.delenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER',raising=False)
+    else:
+        monkeypatch.setenv('IMAGE_CONVERTER_ISOLATE_SVG_RENDER',isolation)
     job.update(status='running', started=gui.time.time(), search_seed=7, description='Ein Kreis.')
     commands = []
     class Process:
         returncode = 0
         def __init__(self, command, **kwargs):
+            assert kwargs['env']['IMAGE_CONVERTER_ISOLATE_SVG_RENDER'] == (isolation or '0')
             commands.append(command)
             path = folder/'output/converted_svgs/UPLOAD.svg'
             path.parent.mkdir(parents=True)

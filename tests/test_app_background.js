@@ -24,6 +24,21 @@ function popup() {
   return {closed: false, location: {replace() {}}, close() {this.closed = true;}};
 }
 
+test('missing spray dashes are explained without asking to change a correct description', () => {
+  const context = vm.createContext({
+    document: {getElementById: element, createElement: element, querySelector: element},
+    window: {location: {search: ''}, addEventListener() {}}, URLSearchParams,
+    setTimeout() {}, clearTimeout() {}, fetch: () => new Promise(() => {}),
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '../web/app.js'), 'utf8'), context);
+  context.job = {status: 'done', result: true, quality: 'warning', pixel_quality: {passed: true},
+    description_error: 'missing_described_dashed_spray_rays: expected=15, observed=0'};
+  const quality = vm.runInContext('draftQuality(job)', context);
+  assert.match(quality.message, /15 gestrichelte Linien/);
+  assert.match(quality.message, /0 bestätigt/);
+  assert.doesNotMatch(quality.message, /passe die Beschreibung an/);
+});
+
 test('incremental native previews refresh while conversion remains active', () => {
   const elements = new Map();
   const opened = [];

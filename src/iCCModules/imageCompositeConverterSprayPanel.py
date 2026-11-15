@@ -17,8 +17,9 @@ SOURCE = 'raster_spray_panel_v1'
 
 
 def _description_text(description):
-    return (str(description or '').casefold().replace('sprueh', 'sprüh')
+    text = (str(description or '').casefold().replace('sprueh', 'sprüh')
             .replace('dues', 'düs').replace('anschluess', 'anschlüss'))
+    return re.sub(r'\bgestricelt(\w*)', r'gestrichelt\1', text)
 
 
 def spray_contract(description):
@@ -30,8 +31,63 @@ def spray_contract(description):
 
 
 def _dashed_spray_rays(description):
-    return bool(re.search(r'gestrichelt\w*\s+(?:(?:hell)?grau\w*\s+)?(?:linien|strahlen|sprüh)',
-                          _description_text(description)))
+    text = _description_text(description)
+    pattern = (r'gestrichelt\w*\s+(?:(?:hell)?grau\w*\s+)?(?:linien|strahlen|sprüh)'
+               r'|(?:linien|strahlen|sprühstrahlen)\s+(?:sind|bestehen aus)\s+'
+               r'(?:fein\s+)?gestrichelt')
+    return any(not re.search(r'\b(?:kein\w*|ohne|nicht)\s+(?:fein\s+)?$',text[:m.start()])
+               for m in re.finditer(pattern,text))
+
+
+def validate_dashed_spray_rays(svg, expected):
+    """Check the explicit ray-count/paint claim even outside this fitter.
+
+    This is a bounded deliverable assertion, not the full geometric scene
+    contract. Rectangular frame dashes cannot stand in for missing rays.
+    """
+    from xml.etree import ElementTree as ET
+    from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
+    from src.iCCModules.imageCompositeConverterDashedRectangles import _straight_path_endpoints
+    observed = 0
+    def visit(node, inherited):
+        nonlocal observed
+        tag = node.tag.rsplit('}', 1)[-1]
+        if tag in {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'} or node.get('display') == 'none':
+            return
+        attrs = dict(inherited, **node.attrib)
+        if attrs.get('visibility') == 'hidden' or re.fullmatch(r'[+]?0+(?:\.0*)?%?',attrs.get('opacity','1')):
+            return
+        if tag in {'line', 'path'} and attrs.get('stroke', 'none') != 'none':
+            try:
+                pattern = [float(v) for v in re.split(r'[\s,]+', attrs.get('stroke-dasharray', 'none').strip())]
+                ends = (_straight_path_endpoints(node.get('d','')) if tag == 'path' else
+                        tuple(float(node.get(k,'0')) for k in ('x1','y1','x2','y2')))
+                if ends is not None and pattern and np.isfinite(pattern).all() and min(pattern) > 0:
+                    length = float(np.hypot(ends[2]-ends[0],ends[3]-ends[1]))
+                    if len(pattern)%2:
+                        pattern *= 2
+                    period = sum(pattern)
+                    phase = float(attrs.get('stroke-dashoffset','0'))%period
+                    if (np.isfinite([length,period,phase]).all() and 0 < length/min(pattern) <= 4096
+                            and float(attrs.get('stroke-width','1')) > 0
+                            and float(attrs.get('stroke-opacity','1')) > 0):
+                        cursor = -phase
+                        for _ in range(int(length/min(pattern))+2):
+                            for index,span in enumerate(pattern):
+                                if index%2 and min(length,cursor+span)-max(0,cursor) > 1e-9:
+                                    observed += 1
+                                    break
+                                cursor += span
+                            else:
+                                continue
+                            break
+            except (ValueError, OverflowError, ZeroDivisionError):
+                pass
+        for child in node:
+            visit(child, attrs)
+    visit(ET.fromstring(inline_simple_svg_styles(svg)), {})
+    if observed != expected:
+        raise ValueError(f'missing_described_dashed_spray_rays: expected={expected}, observed={observed}')
 
 
 def _runs(mask):

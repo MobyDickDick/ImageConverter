@@ -166,6 +166,11 @@ def description_assertions(description: str) -> dict:
             raise DescriptionRejected('conflicting_horizontal_bar_colors')
         if colors:
             assertions['horizontal_bar'] = colors.pop()
+    if 'balken' in words and 'rechteck' in words:
+        from src.iCCModules.imageCompositeConverterSprayPanel import spray_contract, _dashed_spray_rays
+        ray_count = re.search(r'\b(\d+)\s+(?:sprüh)?strahlen\b', words)
+        if ray_count and spray_contract(description) and _dashed_spray_rays(description):
+            assertions['dashed_spray_rays'] = int(ray_count.group(1))
     return assertions
 
 
@@ -179,8 +184,15 @@ def gradient_direction(text: str, direction: str) -> bool:
 
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
-                              or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')):
+                              or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')
+                              or assertions.get('dashed_spray_rays')):
         return
+    if assertions.get('dashed_spray_rays'):
+        from src.iCCModules.imageCompositeConverterSprayPanel import validate_dashed_spray_rays
+        try:
+            validate_dashed_spray_rays(svg, assertions['dashed_spray_rays'])
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if assertions.get('equal_stroke_width'):
         from src.iCCModules.imageCompositeConverterStrokeConstraints import validate_equal_stroke_width
         try:

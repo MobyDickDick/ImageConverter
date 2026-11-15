@@ -20,9 +20,20 @@ class AttemptJournal:
     Workers run sequentially. Commit an offset only after its full record has
     been flushed, so a cancelled worker cannot expose a partial SVG.
     """
-    def __init__(self, folder: Path):
+    def __init__(self, folder: Path, *, persistent=False):
         self.records = folder / 'attempts.jsonl'
         self.index = folder / 'attempts.idx'
+        self.persistent = persistent
+        self._writers = None
+
+    def close(self):
+        writers, self._writers = getattr(self,'_writers',None), None
+        if writers:
+            for stream in writers:
+                stream.close()
+
+    def __del__(self):
+        self.close()
 
     @property
     def count(self):
@@ -31,15 +42,30 @@ class AttemptJournal:
     def append(self, svg, error):
         record = dict(svg=svg, mse=error / 255**2,
                       phase=os.environ.get('ICC_GUI_PREVIEW_PHASE', 'Suche'))
-        self.records.parent.mkdir(parents=True, exist_ok=True)
-        with self.records.open('ab') as stream:
+        def commit(stream,index):
             offset = stream.tell()
             stream.write((json.dumps(record, ensure_ascii=False) + '\n').encode('utf-8'))
             stream.flush()
-        with self.index.open('a+b') as stream:
-            # Discard an incomplete offset left by a terminated worker.
-            stream.truncate(stream.tell() // 8 * 8)
-            stream.write(offset.to_bytes(8, 'little'))
+            index.write(offset.to_bytes(8, 'little'))
+            index.flush()
+        if self.persistent:
+            if self._writers is None:
+                self.records.parent.mkdir(parents=True, exist_ok=True)
+                stream = self.records.open('ab')
+                try:
+                    index = self.index.open('a+b')
+                    index.truncate(index.tell() // 8 * 8)
+                    self._writers = stream,index
+                except OSError:
+                    stream.close()
+                    raise
+            commit(*self._writers)
+        else:
+            self.records.parent.mkdir(parents=True, exist_ok=True)
+            with self.records.open('ab') as stream, self.index.open('a+b') as index:
+                # Discard an incomplete offset left by a terminated worker.
+                index.truncate(index.tell() // 8 * 8)
+                commit(stream,index)
 
     def read(self, number):
         if not 1 <= number <= self.count:
@@ -58,6 +84,28 @@ class AttemptJournal:
             items.append(record)
         return dict(total=total, attempts=items)
 
+    def best(self):
+        """Read committed records with bounded memory, across worker phases."""
+        import math
+        best = None
+        if not self.count:
+            return None
+        with self.index.open('rb') as index, self.records.open('rb') as stream:
+            for _ in range(self.count):
+                offset = index.read(8)
+                if len(offset) != 8:
+                    break
+                stream.seek(int.from_bytes(offset, 'little'))
+                try:
+                    record = json.loads(stream.readline())
+                    error = float(record['mse'])
+                    if (isinstance(record.get('svg'),str) and math.isfinite(error) and error >= 0
+                            and (best is None or error < best['mse'])):
+                        best = dict(record, mse=error)
+                except (ValueError, KeyError, TypeError):
+                    continue
+        return best
+
 
 class PreviewPublisher:
     def __init__(self, source: Path, output: Path):
@@ -67,8 +115,25 @@ class PreviewPublisher:
         with Image.open(source) as image:
             self.target = np.asarray(image.convert('RGB'), dtype=np.float32)
         self.output = output
-        self.attempts = AttemptJournal(output.parent)
+        self.attempts = AttemptJournal(output.parent,persistent=True)
         self.best_error = float('inf')
+        # Recovery is a new process. Recheck the previous phase's preview so
+        # its first (usually poor) seed cannot reset the displayed incumbent.
+        if output.is_file():
+            try:
+                import cv2
+                import fitz
+                from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+                h, w = self.target.shape[:2]
+                raster = render_svg_to_numpy_inprocess(output.read_text(encoding='utf-8'), w, h,
+                    fitz_module=fitz, np_module=np, cv2_module=cv2)
+                if raster is not None and raster.shape == self.target.shape:
+                    self.best_error = float(np.square(self.target-raster[:, :, ::-1].astype(np.float32)).mean())
+            except (OSError, ValueError, TypeError):
+                pass
+
+    def close(self):
+        self.attempts.close()
 
     def consider(self, svg, rendered, *, bgr=True):
         import numpy as np
@@ -108,6 +173,8 @@ def publish_preview(svg, rendered, *, bgr=True):
     try:
         configuration = (source, output)
         if configuration != _configuration:
+            if _publisher is not None:
+                _publisher.close()
             _publisher = PreviewPublisher(Path(source), Path(output))
             _configuration = configuration
         _publisher.consider(svg, rendered, bgr=bgr)

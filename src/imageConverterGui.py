@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 4
+DESCRIPTION_VALIDATION_VERSION = 5
 
 
 class RequestError(ValueError):
@@ -272,8 +272,8 @@ class Jobs:
 
     def preview_file(self, job_id: str) -> Path:
         folder = self.folder(job_id)
-        recovery = folder / 'recovery.svg'
-        return recovery if recovery.is_file() else folder / 'live-preview.svg'
+        preview = folder / 'live-preview.svg'
+        return preview if preview.is_file() else folder / 'recovery.svg'
 
     def catalog_description(self, name: str) -> str:
         from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
@@ -491,7 +491,10 @@ class Jobs:
             environment = os.environ.copy()
             environment.update(PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8",
                                ICC_MAX_QUALITY_PASSES="0", ICC_CONVERSION_TIMEOUT_SEC=str(maximum))
-            environment.setdefault("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "1")
+            # This whole CLI already runs in a killable, deadline-supervised
+            # process tree. Per-candidate renderer IPC consumes the model's
+            # budget before multi-part scenes finish. Keep explicit overrides.
+            environment.setdefault("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "0")
             environment.setdefault("IMAGE_CONVERTER_REUSE_RENDER_WORKER", "1")
             if not job.get('catalog_background'):
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
@@ -529,9 +532,11 @@ class Jobs:
                 collected = dict(job)
                 collect = collect_sample_result if job.get('sample') else collect_result
                 collect(folder, collected, process.returncode)
+                retain_best_preview(folder, collected)
                 needs_recovery = collected.get('quality') != 'passed' or not collected.get('result')
             if needs_recovery and deadline-time.monotonic() > .1:
                 self.recover_result(job_id, collected, deadline, environment, options)
+            retain_best_preview(folder, collected)
             with self.lock:
                 if job["status"] == "running":
                     job.update(collected)
@@ -598,6 +603,7 @@ class Jobs:
                 # deadline. Keep them even after cancellation or termination.
                 collect_recovery_result(folder, collected,
                     stop_reason='time_limit' if time.monotonic() >= deadline else 'worker_finished')
+                retain_best_preview(folder, collected)
                 with self.lock:
                     if job['status'] == 'cancelled' and collected.get('result'):
                         job.update(collected)
@@ -743,6 +749,52 @@ class Jobs:
                     self.cancel(job_id)
         for thread in self.threads:
             thread.join(timeout=20)
+
+
+def retain_best_preview(folder: Path, job: dict) -> None:
+    """Keep the independently rechecked best observation at phase boundaries.
+
+    Preview scores and worker reports cannot certify a model. A recovered
+    observation remains an explicitly unconfirmed draft, even if pixels pass.
+    """
+    from src.imageConverterPreview import AttemptJournal
+    from src.imageConverterSample import prepare_sample
+    result = folder/'result.svg'
+    candidates = [folder/'live-preview.svg']
+    best = AttemptJournal(folder).best()
+    if best is not None:
+        observed = folder/'best-observed.svg'
+        observed.write_text(best['svg'], encoding='utf-8')
+        candidates.append(observed)
+    previous = saved_svg_quality(folder/'source.png', result) if job.get('result') else None
+    previous_error = result_description_error(result, job.get('description', '')) if previous else ''
+    if job.get('quality') == 'passed' and previous and previous['passed'] and not previous_error:
+        return
+    for candidate in candidates:
+        if not candidate.is_file():
+            continue
+        try:
+            prepare_sample(candidate.read_bytes(), job['width'], job['height'])
+        except (OSError, ValueError, SyntaxError):
+            continue
+        quality = saved_svg_quality(folder/'source.png', candidate)
+        if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
+            continue
+        error = result_description_error(candidate, job.get('description', ''))
+        # Prefer a valid deliverable over a numerically closer contradiction.
+        rank = (bool(error), not quality['passed'], quality['normalized_mse'])
+        old_rank = ((bool(previous_error), not previous['passed'], previous['normalized_mse'])
+                    if previous else (True, True, float('inf')))
+        if previous and rank >= old_rank:
+            continue
+        shutil.copyfile(candidate, result)
+        previous, previous_error = quality, error
+        job.pop('result_rejection',None)
+        job.update(status='done', result=True, quality='warning', pixel_quality=quality,
+                   description_error=error, retained_preview=True,
+                   description_validation_version=DESCRIPTION_VALIDATION_VERSION,
+                   message='Bester vorhandener Vektorentwurf aus der Suche erhalten. '
+                           'Die vollständige Modellprüfung ist noch offen; bitte den Entwurf prüfen.')
 
 
 def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> None:
