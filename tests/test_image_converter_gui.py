@@ -325,13 +325,16 @@ def test_http_manual_conversion_runs_alongside_background(jobs, monkeypatch, bac
 
     try:
         assert request('/api/config')[1]['parallel_background_conversion']
+        assert request('/api/config')[1]['editable_search_seed']
         for lane in (background_first, not background_first):
             if lane:
                 jobs.start(background['id'], 'Ein Kreis.', 'quick', background=True)
             else:
                 status, result = request(f"/api/jobs/{manual['id']}/start",
-                                         dict(description='Ein Kreis.', profile='quick'))
+                                         dict(description='Ein Kreis.', profile='quick', seed='18446744073709551615'))
                 assert status == 200, result
+                assert result['search_seed'] == '18446744073709551615'
+                assert jobs.jobs[result['id']]['search_seed'] == 2**64-1
             assert entered[lane].wait(5)
         assert jobs.busy() and jobs.busy(background=True)
         # Background history must not push manual jobs out of the 20-item window.
@@ -488,8 +491,9 @@ def test_reference_descriptions_reload_at_worker_start(jobs,job,monkeypatch):
     from src.iCCModules.imageCompositeConverterDescriptions import loadDescriptionMappingFromCsvImpl
     monkeypatch.setattr(gui,'catalog_descriptions',lambda:{'AC1234':'Korrigierte Referenz.'})
     job.update(description='Wie AC1234, jedoch rot.',profile='quick',status='running',
-               started=0,search_seed=1)
+               started=0,search_seed=2**64-1)
     def capture(command,**kwargs):
+        assert command[command.index('--search-seed')+1] == '18446744073709551615'
         descriptions = loadDescriptionMappingFromCsvImpl(command[command.index('--descriptions-path')+1])
         assert descriptions['AC1234']=='Korrigierte Referenz.'
         assert descriptions['UPLOAD']=='Wie AC1234, jedoch rot.'
@@ -692,18 +696,59 @@ def test_retry_keeps_previous_result_and_original(jobs, monkeypatch):
 
 
 def test_each_explicit_gui_attempt_gets_a_fresh_saved_search_seed(jobs, monkeypatch):
+    from itertools import count
     monkeypatch.setattr(jobs, 'run', lambda job_id: None)
-    seeds = iter([1001, 2002])
+    seeds = count(1001)
     monkeypatch.setattr(gui.secrets, 'randbits', lambda _: next(seeds))
     uploaded = jobs.upload('image.png', image_bytes())
     first = jobs.start(uploaded['id'], 'Ein Kreis', 'quick')
     jobs.cancel(first['id'])
     retry = jobs.start(first['id'], 'Ein Kreis', 'quick')
-    assert (first['search_seed'], retry['search_seed']) == (1001, 2002)
+    assert first['search_seed'] != retry['search_seed']
     assert retry['previous_job_id'] == first['id']
     saved = json.loads((jobs.folder(retry['id'])/'job.json').read_text(encoding='utf-8'))
-    assert saved['search_seed'] == 2002
+    assert saved['search_seed'] == int(retry['search_seed'])
     jobs.cancel(retry['id'])
+
+
+@pytest.mark.parametrize('seed', ['0', '9007199254740993', '18446744073709551615', 42])
+def test_manual_search_seed_is_exact_saved_and_reusable(jobs, monkeypatch, seed):
+    monkeypatch.setattr(jobs, 'run', lambda job_id: None)
+    uploaded = jobs.upload('seed.png', image_bytes())
+    assert uploaded['search_seed'].isdigit()
+    assert 0 <= int(uploaded['search_seed']) < 2**64
+    assert jobs.snapshot(uploaded['id'])['search_seed'] == uploaded['search_seed']
+    first = jobs.start(uploaded['id'], 'Ein Kreis.', 'quick', seed=seed)
+    assert first['search_seed'] == str(seed)
+    jobs.cancel(first['id'])
+    retry = jobs.start(first['id'], 'Ein Kreis.', 'quick', seed=first['search_seed'])
+    assert retry['search_seed'] == first['search_seed']
+    saved = json.loads((jobs.folder(retry['id'])/'job.json').read_text(encoding='utf-8'))
+    assert type(saved['search_seed']) is int and saved['search_seed'] == int(seed)
+    jobs.cancel(retry['id'])
+    restored = gui.Jobs(jobs.directory)
+    try:
+        assert restored.snapshot(retry['id'])['search_seed'] == str(seed)
+    finally:
+        restored.close()
+
+
+@pytest.mark.parametrize('seed', ['', '-1', '1.2', '1e3', ' 42 ', 'abc',
+                                 '18446744073709551616', -1, 1.5, True, [], {}])
+def test_invalid_search_seed_rejected_before_start(jobs, seed):
+    uploaded = jobs.upload('seed.png', image_bytes())
+    with pytest.raises(gui.RequestError, match='Seed'):
+        jobs.start(uploaded['id'], 'Ein Kreis.', 'quick', seed=seed)
+    assert jobs.jobs[uploaded['id']]['status'] == 'ready'
+    assert not jobs.threads
+
+
+def test_legacy_ready_job_gets_one_persistent_seed(jobs):
+    uploaded = jobs.upload('legacy.png', image_bytes())
+    del jobs.jobs[uploaded['id']]['search_seed']
+    first = jobs.snapshot(uploaded['id'])['search_seed']
+    assert jobs.snapshot(uploaded['id'])['search_seed'] == first
+    assert json.loads((jobs.folder(uploaded['id'])/'job.json').read_text())['search_seed'] == int(first)
 
 
 @pytest.mark.parametrize('evaluations', [0, 123])

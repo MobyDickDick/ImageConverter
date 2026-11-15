@@ -116,6 +116,8 @@ def test_failed_first_attempt_spends_remaining_budget_and_keeps_killed_worker_dr
     jobs.run(job['id'])
     assert waits == [240., 238.]
     assert len(stopped) == 1 and len(commands) == 2
+    assert commands[0][commands[0].index('--search-seed')+1] == '7'
+    assert commands[1][commands[1].index('--seed')+1] == '7'
     assert job['status'] == 'done' and job['result'] and job['quality'] == 'passed'
     assert job['pixel_quality']['passed']
     assert job['recovery_report']['stop_reason'] == 'time_limit'

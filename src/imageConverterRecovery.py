@@ -21,6 +21,7 @@ from src.iCCModules.imageCompositeConverterDescriptionLanguage import descriptio
 from src.iCCModules.imageCompositeConverterFallbackGroups import canvas
 from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
 from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg
+from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width
 from src.imageConverterCatalog import atomic_json
 from src.imageConverterSample import prepare_sample
 
@@ -45,6 +46,8 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
         assertion_error = str(exc)
         assertions = dict(counts=[], no_text=False)
     partial_assertions = dict(counts=[], no_text=assertions.get('no_text', False))
+    if assertions.get('equal_stroke_width'):
+        partial_assertions['equal_stroke_width'] = True
     # Rendering remains in this killable worker. Each completed improvement is
     # published immediately, so termination cannot erase the best native draft.
     from src.imageConverterSample import render_svg
@@ -78,6 +81,7 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
 
     def render(svg, width, height, *, preview=True):
         nonlocal evaluations
+        svg = constrain_stroke_width(svg, partial_assertions)
         evaluations += 1
         raster = render_svg(svg, width, height)[:, :, ::-1].copy()
         if preview:
@@ -117,10 +121,14 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
             # Structural composition inserts observed objects and residual
             # lines. Parameter searches then vary placement, widths and colors.
             # Only the actual published vector passing both checks can finish.
+            first_polish = True
             while not report['passed'] and not session.time_reason():
                 fitted = polish_generated_svg(svg, image, render, assertions=partial_assertions,
+                                               structure_mode=('off' if first_polish and
+                                                   partial_assertions.get('equal_stroke_width') else None),
                                                acceptance_fn=lambda candidate: bool(
                                                    report['passed'] and best and candidate == best['svg']))
+                first_polish = False
                 if fitted:
                     svg = best['svg'] if best else fitted['svg']
                 elif not report['passed']:

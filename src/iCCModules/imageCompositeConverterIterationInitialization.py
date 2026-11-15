@@ -65,7 +65,8 @@ def prepareIterationRuntimeImpl(
     assertions = params.get('language_assertions') or {}
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
     session = current_search()
-    if assertions.get('counts') or assertions.get('no_text') or (session and session.policy.minimum_seconds):
+    if (any(assertions.get(key) for key in ('counts', 'no_text', 'horizontal_bar', 'arrow_heads', 'equal_stroke_width'))
+            or (session and session.policy.minimum_seconds)):
         write_artifacts = artifact_callbacks['write_attempt_artifacts']
 
         def write_checked_artifacts(svg_content, *args, **kwargs):

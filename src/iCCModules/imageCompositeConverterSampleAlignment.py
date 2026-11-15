@@ -2,15 +2,17 @@
 from __future__ import annotations
 
 import copy
+import math
 import time
 import xml.etree.ElementTree as ET
 
 import numpy as np
 
 
-def align_sample(root, target, render_fn, *, deadline, initial):
+def align_sample(root, target, render_fn, *, deadline, initial, assertions=None):
     from PIL import ImageColor
     from src.imageConverterSample import NUMBER, SVG_NS
+    from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width, width_bindings
 
     height, width = target.shape[:2]
     reference = target.astype(np.float32)
@@ -29,6 +31,10 @@ def align_sample(root, target, render_fn, *, deadline, initial):
                 paints.setdefault(rgb, []).append((index, attribute))
     palette = list(paints)
     paint_indices, values = [], [0., 0., 100., 100.]
+    shared_width = bool(assertions and assertions.get('equal_stroke_width'))
+    bindings = width_bindings(root) if shared_width else []
+    if bindings:
+        values.append(bindings[0][2]*bindings[0][3])
     for rgb in palette:
         gray = max(rgb)-min(rgb) <= 2
         paint_indices.append((len(values), gray))
@@ -66,12 +72,15 @@ def align_sample(root, target, render_fn, *, deadline, initial):
                 candidate.remove(child)
                 group.append(child)
         candidate.append(group)
-        return ET.tostring(candidate, encoding='unicode')
+        return constrain_stroke_width(ET.tostring(candidate, encoding='unicode'), assertions,
+                                      width=p[4] if bindings else None)
 
     def valid(p):
         if (not np.isfinite(p).all() or not (10 <= p[2] <= 400 and 10 <= p[3] <= 400)
                 or abs(p[0]) > width*2 or abs(p[1]) > height*2
-                or np.any(p[4:] < 0) or np.any(p[4:] > 255)):
+                or np.any(p[4:] < 0) or np.any(p[4:] > 255)
+                or (bindings and p[4] <= 0)
+                or (shared_width and not math.isclose(p[2], p[3], abs_tol=1e-8))):
             return False
         for rgb, (offset, gray) in zip(palette, paint_indices):
             color = np.repeat(p[offset], 3) if gray else p[offset:offset+3]
@@ -125,6 +134,8 @@ def align_sample(root, target, render_fn, *, deadline, initial):
         for sx, sy in [(1., 1.), (float(np.mean(sizes)),)*2, tuple(sizes),
                        *[(s, s) for s in (.25, .5, .75, .9, 1.1, 1.5, 2.)]]:
             p = np.array(values, dtype=float)
+            if shared_width:
+                sx = sy = (sx+sy)/2
             scales = np.array([sx, sy])
             p[2:4] = scales*100
             p[:2] = ((observed[:2]+observed[2:])/2
@@ -134,13 +145,18 @@ def align_sample(root, target, render_fn, *, deadline, initial):
     # Alternate common geometry with shared paint. Individual paths, polygon
     # vertices, opacities and small-symbol dimensions are never edited here.
     for step, paint_step in [(2., 32.), (1., 16.), (.5, 8.), (.25, 4.), (.125, 2.), (.0625, 1.)]:
-        steps = [step, step, 100*step/width, 100*step/height] + [paint_step]*(len(values)-4)
+        steps = [step, step, 100*step/width, 100*step/height] + ([step] if bindings else [])
+        steps += [paint_step]*(len(values)-len(steps))
         for _ in range(4):
             changed = False
             for index, delta in enumerate(steps):
+                if shared_width and index == 3:
+                    continue
                 for sign in (-1, 1):
                     candidate = parameters.copy()
                     candidate[index] += sign*delta
+                    if shared_width and index == 2:
+                        candidate[3] = candidate[2]
                     changed = consider(candidate) or changed
                 if time.monotonic() >= deadline:
                     break

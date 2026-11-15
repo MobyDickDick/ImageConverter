@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 3
+DESCRIPTION_VALIDATION_VERSION = 4
 
 
 class RequestError(ValueError):
@@ -233,12 +233,18 @@ class Jobs:
         with self.lock:
             folder = self.folder(job_id)
             stored = self.jobs[job_id]
+            if stored['status'] == 'ready' and 'search_seed' not in stored:
+                stored['search_seed'] = secrets.randbits(64)
+                self.save(stored)
             if stored['status'] == 'ready' and stored.get('description_origin') != 'user':
                 description = self.catalog_description(stored['name'])
                 if description != stored['description']:
                     stored.update(description=description, description_origin='catalog' if description else 'empty')
                     self.save(stored)
             job = dict(self.jobs[job_id])
+            # JSON numbers lose 64-bit integer precision in the browser.
+            if 'search_seed' in job:
+                job['search_seed'] = str(job['search_seed'])
             if job["status"] == "running":
                 job["elapsed"] = round(time.time() - job["started"], 1)
             preview = self.preview_file(job_id)
@@ -319,11 +325,17 @@ class Jobs:
                        and bool(job.get('catalog_background')) == background
                        for job_id, job in self.jobs.items())
 
-    def start(self, job_id: str, description: str, profile: str, *, background: bool = False) -> dict:
+    def start(self, job_id: str, description: str, profile: str, *, background: bool = False,
+              seed: str | int | None = None) -> dict:
         if not isinstance(description, str) or not description.strip() or len(description) > 12000:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
+        if seed is not None:
+            if (type(seed) not in (str, int) or not re.fullmatch(r'[0-9]{1,20}', str(seed))
+                    or not 0 <= int(seed) < 2**64):
+                raise RequestError("Der Seed muss eine ganze Zahl zwischen 0 und 18446744073709551615 sein.")
+            seed = int(seed)
         try:
             from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
             resolve_similarity_description(description, catalog_descriptions(), base_name=getBaseNameFromFileImpl)
@@ -343,7 +355,7 @@ class Jobs:
             job.update(description=description.strip(), profile=profile, status="running",
                        catalog_background=background,
                        description_origin=origin,
-                       search_seed=secrets.randbits(64),
+                       search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
             self.save(job)
             thread = threading.Thread(target=self.run, args=(job_id,), daemon=True)
@@ -1162,6 +1174,7 @@ class Handler(BaseHTTPRequestHandler):
                         application='imageconverter_gui', api_version=1,
                         workbench_native_exports=True,
                         parallel_background_conversion=True,
+                        editable_search_seed=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]
@@ -1279,7 +1292,8 @@ class Handler(BaseHTTPRequestHandler):
                         with jobs.lock:
                             if self.server.workbench.busy():
                                 raise RequestError('In der Workbench läuft eine Konvertierung.', 409)
-                            return self.json(jobs.start(job_id, payload.get("description", ""), payload.get("profile", "normal")))
+                            return self.json(jobs.start(job_id, payload.get("description", ""),
+                                                        payload.get("profile", "normal"), seed=payload.get('seed')))
                     if not remove and action in {"cancel", "save"}:
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))

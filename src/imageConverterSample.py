@@ -180,6 +180,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
+    from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width
 
     description = resolve_catalog_similarity_description(description, Path(__file__).resolve().parents[1]).text
 
@@ -192,14 +193,20 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     initial_quality = pixel_quality(target, rendered)
     assertions = description_assertions(description)
+    constrained = constrain_stroke_width(prepared, assertions)
+    if constrained != prepared:
+        root = ET.fromstring(constrained)
+        rendered = render_svg(constrained, width, height)
     started = time.monotonic()
-    accepted_input = bool(initial_quality and initial_quality['passed'])
-    final_svg, best_mse = prepared, initial_mse
-    evaluations, accepted, alignment = 1, 0, None
+    accepted_input = bool(pixel_quality(target, rendered)['passed'])
+    final_svg = constrained
+    best_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
+    evaluations, accepted, alignment = (2 if constrained != prepared else 1), 0, None
     print(f"Sample geladen: mittlerer Pixelfehler={initial_mse:.8f}", flush=True)
     if not accepted_input:
         from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
-        fitted = align_sample(root, target, render_svg, deadline=started+seconds, initial=rendered)
+        fitted = align_sample(root, target, render_svg, deadline=started+seconds, initial=rendered,
+                              assertions=assertions)
         final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
         evaluations += fitted['evaluations']
         accepted = fitted['accepted']

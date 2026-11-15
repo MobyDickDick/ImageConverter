@@ -220,6 +220,8 @@ class Reflection:
                     counts=[c for c in parent_assertions.get('counts', []) if c['kind'] not in child_kinds]
                            + assertions['counts'],
                     no_text=bool(parent_assertions.get('no_text') or assertions['no_text']))
+                if parent_assertions.get('equal_stroke_width') or assertions.get('equal_stroke_width'):
+                    inherited_params['language_assertions']['equal_stroke_width'] = True
                 inherited_params["badge_param_source_ref"] = reference_symbol
                 if "viereckig" in desc and ("anstatt rund" in desc or "statt rund" in desc):
                     inherited_params["head_style"] = "square_badge"

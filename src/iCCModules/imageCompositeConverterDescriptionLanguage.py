@@ -137,6 +137,19 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    # Global, positive claims only. Quoted labels and negative clauses must
+    # never turn into an instruction to regularize the drawing.
+    uniform = (r'\b(?:alle|sämtliche)\s+(?:linien|striche|konturen)\s+'
+               r'(?:(?:sind|sollen|müssen)\s+(?:alle\s+)?(?:gleich\s+(?:breit|dick|stark)|gleichmässig\s+breit|gleichmäßig\s+breit)'
+               r'|haben\s+(?:(?:die|eine)\s+)?(?:gleiche|einheitliche|identische)\s+(?:breite|dicke|strichstärke|linienstärke))\b'
+               r'|\b(?:einheitliche|identische)\s+(?:strichstärke|linienstärke|linienbreite)\b')
+    for clause in re.split(r'[.;!?\n]', words):
+        for match in re.finditer(uniform, clause):
+            if not re.search(r'\b(?:nicht|keine?|ohne)(?:\s+(?:eine?|unbedingt|zwingend))?\s*$',
+                             clause[:match.start()]):
+                if re.search(r'\b(?:außer|ausser|ausgenommen|bis auf|mit ausnahme)\b', clause[match.end():]):
+                    raise DescriptionRejected('unsupported_line_width_exception')
+                assertions['equal_stroke_width'] = True
     if arrow_pair:
         assertions['arrow_heads'] = []
         for side, direction in heads:
@@ -165,8 +178,15 @@ def gradient_direction(text: str, direction: str) -> bool:
 
 
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
-    if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')):
+    if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
+                              or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')):
         return
+    if assertions.get('equal_stroke_width'):
+        from src.iCCModules.imageCompositeConverterStrokeConstraints import validate_equal_stroke_width
+        try:
+            validate_equal_stroke_width(svg)
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     root = ET.fromstring(svg)
     excluded = {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}
     def visible_nodes(element):
@@ -181,7 +201,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         raise DescriptionRejected('unexpected_text_in_svg')
     # Only the native contract can prove an explicit count. Do not claim a
     # count of semantic circles from arbitrary paths, use instances or clipping.
-    for assertion in assertions['counts']:
+    for assertion in assertions.get('counts', []):
         if assertion['kind'] == 'triangle':
             # Native, nondegenerate triangles prove the requested heads. A
             # circle, arbitrary path or four-sided polygon cannot stand in.

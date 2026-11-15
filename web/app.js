@@ -1,5 +1,6 @@
 "use strict";
 let nativeFileDialogs = false, preparingPlanB = false, serverNeedsRestart = false;
+let editableSearchSeed = false;
 const $ = (id) => document.getElementById(id);
 let current = null;
 let activeId = null;
@@ -47,7 +48,8 @@ function notice(message = "") {
 }
 function controls() {
   const running = busy || Boolean(activeId);
-  $("convert").disabled = running || !current || !$("description").value.trim();
+  $("convert").disabled = running || !current || !$("description").value.trim() || !editableSearchSeed;
+  for (const id of ["seed", "random-seed"]) $(id).disabled = running || !current || !editableSearchSeed;
   for (const id of ["description", "profile", "file", "remove-sample"]) $(id).disabled = running;
   $("sample-file").disabled = running || !current;
   $("drop-zone").classList.toggle("busy", running);
@@ -108,6 +110,19 @@ function draftQuality(job) {
   };
 }
 function renderJob(job, select = false) {
+  // Selection, reload and polling must all restore the same active job.
+  // Cancellation must not depend on having started it in this page instance.
+  if (job.status === "running") {
+    activeId = job.id;
+    schedulePoll();
+  } else if (activeId === job.id) {
+    activeId = null;
+    clearTimeout(pollTimer);
+  }
+  if (select || current?.id !== job.id) {
+    $("seed").value = job.search_seed ?? randomSeed();
+    validateSeed();
+  }
   if (current?.id !== job.id && attemptWindow && !attemptWindow.closed) {
     attemptWindow.location.replace(`/attempts?job=${job.id}`);
   }
@@ -196,16 +211,18 @@ async function refreshHistory() {
 async function update(operation, select = false, input = null) {
   if (busy) return;
   busy = true; controls(); notice();
+  let changed = false;
   try {
     const job = await operation();
     if (!job) return;
-    activeId = job.status === "running" ? job.id : null;
-    clearTimeout(pollTimer);
     renderJob(job, select);
-    await refreshHistory();
-    if (activeId) schedulePoll();
+    changed = true;
   } catch (error) { notice(error.message); }
   finally { busy = false; if (input) $(input).value = ""; controls(); }
+  // History is secondary: a slow request must never lock the stop button.
+  if (changed) {
+    try { await refreshHistory(); } catch (error) { notice(error.message); }
+  }
 }
 function sendFile(path, file) {
   return request(`${path}?name=${encodeURIComponent(file.name)}`, { method: "POST", headers: { "X-ImageConverter": "1" }, body: file });
@@ -236,6 +253,21 @@ for (const [input, kind] of [["file", "image"], ["sample-file", "sample"]]) {
 $("pick-sample").addEventListener("click", () => $("sample-file").click());
 $("remove-sample").addEventListener("click", () => changeSample(null));
 $("description").addEventListener("input", controls);
+function randomSeed() {
+  const words = crypto.getRandomValues(new Uint32Array(2));
+  return ((BigInt(words[0]) << 32n) | BigInt(words[1])).toString();
+}
+function validateSeed() {
+  const value = $("seed").value;
+  const valid = /^[0-9]{1,20}$/.test(value) && BigInt(value) <= 18446744073709551615n;
+  $("seed").setCustomValidity(valid ? "" : "Bitte eine ganze Zahl zwischen 0 und 18446744073709551615 eingeben.");
+  return valid;
+}
+$("seed").addEventListener("input", validateSeed);
+$("random-seed").addEventListener("click", () => {
+  $("seed").value = randomSeed();
+  validateSeed();
+});
 $("drop-zone").addEventListener("keydown", (event) => {
   if (["Enter", " "].includes(event.key) && !busy && !activeId) { event.preventDefault(); $("file").click(); }
 });
@@ -250,9 +282,11 @@ for (const name of ["dragenter", "dragover", "dragleave", "drop"]) {
 window.addEventListener("dragover", (event) => event.preventDefault());
 window.addEventListener("drop", (event) => event.preventDefault());
 $("convert").addEventListener("click", () => {
-  if (!current || busy || activeId) return;
+  if (!current || busy || activeId || !editableSearchSeed) return;
+  validateSeed();
+  if (!$("seed").reportValidity()) return;
   if ($("show-intermediate").checked) openAttemptWindow();
-  return update(() => post(`/api/jobs/${current.id}/start`, { description: $("description").value, profile: $("profile").value }));
+  return update(() => post(`/api/jobs/${current.id}/start`, { description: $("description").value, profile: $("profile").value, seed: $("seed").value }));
 });
 $("cancel").addEventListener("click", () => {
   if (!activeId || busy) return;
@@ -299,10 +333,8 @@ async function poll() {
     const job = await request(`/api/jobs/${id}`);
     if (activeId !== id) return;
     notice();
-    if (job.status !== "running") activeId = null;
     renderJob(job);
-    if (activeId) schedulePoll();
-    else await refreshHistory();
+    if (!activeId) await refreshHistory();
   } catch (error) {
     notice(`Verbindung zum lokalen Server unterbrochen. Erneuter Versuch … ${error.message}`);
     if (activeId === id) schedulePoll();
@@ -335,9 +367,15 @@ async function init() {
     try {
       const config = await request("/api/config");
       nativeFileDialogs = config.native_file_dialogs;
+      editableSearchSeed = config.editable_search_seed === true;
       if (!config.parallel_background_conversion) {
         serverNeedsRestart = true;
         $("server-version-warning").textContent = "Der laufende Webserver verwendet noch eine ältere Version, die manuelle Konvertierungen während des Hintergrunddienstes blockieren kann. Bitte stopWebServer.cmd und danach startWebServer.cmd ausführen und diese Seite neu laden. Anschliessend den Hintergrunddienst bei Bedarf wieder starten.";
+        $("server-version-warning").hidden = false;
+      }
+      if (!editableSearchSeed) {
+        serverNeedsRestart = true;
+        $("server-version-warning").textContent = "Für editierbare Seeds muss der Webserver neu gestartet werden. Lass laufende Konvertierungen fertig werden, führe stopWebServer.cmd und danach startWebServer.cmd aus und lade diese Seite neu.";
         $("server-version-warning").hidden = false;
       }
     } catch (error) {
@@ -351,11 +389,11 @@ async function init() {
     await refreshHistory();
     const running = history.find((job) => job.status === "running");
     const requestedId = new URLSearchParams(window.location.search).get('job');
-    const selected = requestedId ? await request(`/api/jobs/${encodeURIComponent(requestedId)}`) : running || history[0];
-    if (selected?.status === 'running') activeId = selected.id;
+    // Retry links can still name the immutable original job. Keep the active
+    // foreground conversion reachable even when that old link is reloaded.
+    const selected = running || (requestedId ? await request(`/api/jobs/${encodeURIComponent(requestedId)}`) : history[0]);
     if (selected) renderJob(selected, true);
     renderHistory();
-    if (activeId) schedulePoll();
   } catch (error) { notice(`Die Oberfläche konnte nicht geladen werden. ${error.message}`); }
 }
 $("collection-next").addEventListener('click', async () => {

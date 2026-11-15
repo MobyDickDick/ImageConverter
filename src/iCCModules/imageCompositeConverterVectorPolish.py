@@ -23,11 +23,13 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     from src.imageConverterSample import prepare_sample, NUMBER, SVG_NS
     from src.iCCModules.imageCompositeConverterFilledSymbols import _register
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width, width_bindings
     from PIL import ImageColor
 
     h, w = image.shape[:2]
     # Unsupported/embedded content is left to its existing failure handling.
     try:
+        svg = constrain_stroke_width(svg, assertions)
         root = ET.fromstring(prepare_sample(svg.encode('utf-8'), w, h))
         validate_svg_assertions(svg, assertions)
     except (ValueError, SyntaxError):
@@ -79,6 +81,12 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
             if stops:
                 gradients.append(stops)
     width_groups, color_groups = list(widths.items()), list(colors.items())
+    shared_width = bool(assertions and assertions.get('equal_stroke_width'))
+    if shared_width:
+        bindings = width_bindings(root)
+        # One search parameter controls every displayed width, including
+        # inherited strokes, transformed groups and rectangular shafts.
+        width_groups = [(bindings[0][2]*bindings[0][3], [])] if bindings else []
     stops = [stop for gradient in gradients for stop in gradient]
     geometry = 3 + len(width_groups) + len(stops)
     seed = np.array([0., 0., 100.] + [value for value, _ in width_groups]
@@ -121,7 +129,8 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
                 candidate.remove(child)
                 wrapper.append(child)
         candidate.append(wrapper)
-        return ET.tostring(candidate, encoding='unicode')
+        return constrain_stroke_width(ET.tostring(candidate, encoding='unicode'), assertions,
+                                      width=p[3] if shared_width and width_groups else None)
 
     reference = image.astype(np.float32)
     border = np.concatenate((reference[0], reference[-1], reference[:, 0], reference[:, -1]))

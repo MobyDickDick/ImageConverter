@@ -1,5 +1,24 @@
 # ImageConverter
 
+Die Bildbeschreibung unterstützt die Vorgabe **„Alle Linien sind gleich breit“**,
+auch als „Alle Linien haben die gleiche Strichstärke“ oder „Einheitliche
+Linienstärke“. Vektoraufbau und Sample-Anpassung koppeln dafür die Breiten von
+SVG-Konturen und schmalen rechteckigen Linien (Seitenverhältnis über 3:1).
+Die endgültige Beschreibungsprüfung berücksichtigt Gruppen, Skalierung,
+geerbte Attribute und einfache SVG-Stile. Bildvergleich und Qualitätsgrenzen
+bleiben verbindlich; bei widersprüchlichen Vorgaben bleibt ein Entwurf offen.
+Ohne diese Angabe werden Strichstärken weiterhin unabhängig angepasst.
+Beliebige Bedingungen in Freitext werden noch nicht allgemein verstanden.
+Ausnahmen wie „ausser der roten Linie“ werden als noch nicht unterstützte
+Vorgabe gemeldet.
+Gefüllte Freiformpfade lassen keine Strichstärke erkennen; nicht unterstützte
+Transformationen von Kurven können unter dieser Vorgabe nicht bestätigt werden.
+
+Bei Einzelkonvertierungen zeigt das Feld **Seed** einen zufällig vorbelegten
+Wert. Er lässt sich vor dem Start bearbeiten oder mit **Neu würfeln** ersetzen.
+Der verwendete Seed wird im Auftrag gespeichert und beim erneuten Auswählen
+wieder angezeigt. Für einen weiteren Versuch kann derselbe Wert übernommen werden.
+
 Die Weboberfläche nutzt nach einem fehlgeschlagenen oder unvollständigen ersten
 Versuch die verbleibende Profilzeit für einen elementweisen Vektoraufbau
 (45/120/240 Sekunden insgesamt). Verbesserte Zwischenstände erscheinen bereits

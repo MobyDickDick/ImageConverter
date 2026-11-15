@@ -198,6 +198,8 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
             row['rejection'] = 'element_limit'
             return None
         try:
+            from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width
+            candidate = constrain_stroke_width(candidate, assertions)
             validate_svg_assertions(candidate, assertions)
         except ValueError:
             row['rejection'] = 'description_assertions'
