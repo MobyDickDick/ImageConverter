@@ -14,6 +14,61 @@ function element() {
     setAttribute(name, value) {this.attributes[name] = value;}, removeAttribute() {}};
 }
 
+async function conversionSetup({running = false, uploadError = false} = {}) {
+  const elements = new Map(), calls = [], locations = [], original = new Uint8Array([255, 216, 255, 217]);
+  const get = id => {if (!elements.has(id)) elements.set(id, element()); return elements.get(id);};
+  get('sort').value = 'filename'; get('page-size').value = '25';
+  const row = {filename:'AC0401_ä & neu.jpg', image:'artifacts/images_to_convert/AC0401_ä & neu.jpg',
+    description:'Kreis mit Dreieck.', status:'pixel_fail', candidates:[], archived:false};
+  const context = vm.createContext({
+    document:{getElementById:get, createElement:tag => ({...element(), tagName:tag}), createDocumentFragment:element},
+    window:{location:{assign:url => locations.push(url)}},
+    Option:function(text,value) {return {text,value};}, setInterval() {},
+    fetch:async (url, options = {}) => {
+      calls.push([url, options]);
+      if (url === '/api/catalog/list') return {ok:true,json:async () => ({rows:[row],summary:{},labels:{pixel_fail:'Rastergates verfehlt'}})};
+      if (url === '/api/jobs?scope=foreground') return {ok:true,json:async () => running ? [{status:'running'}] : []};
+      if (url.startsWith('/api/catalog/asset?')) return {ok:true,blob:async () => original};
+      if (url.startsWith('/api/upload?')) return {ok:!uploadError,json:async () => uploadError ? {error:'Upload fehlgeschlagen.'} : {id:'a'.repeat(32)}};
+      return {ok:true,json:async () => ({status:'idle',summary:{}})};
+    }
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname,'../web/catalog.js'),'utf8'),context);
+  await new Promise(setImmediate);
+  const button = get('rows').children[0].children[0].children[1].children[0];
+  return {get, calls, locations, original, row, button};
+}
+
+test('quality button loads the matching original through the upload flow and opens its new job', async () => {
+  const {button, calls, locations, original, row} = await conversionSetup();
+  assert.equal(button.tagName, 'button');
+  assert.match(button.attributes['aria-label'], /AC0401_ä & neu.jpg/);
+  const opening = button.onclick();
+  assert.equal(button.disabled, true);
+  await button.onclick(); // A double click must not create another job.
+  await opening;
+  const uploads = calls.filter(([url]) => url.startsWith('/api/upload?'));
+  assert.equal(uploads.length, 1);
+  assert.equal(uploads[0][0], '/api/upload?name='+encodeURIComponent(row.filename));
+  assert.equal(uploads[0][1].body, original);
+  assert.equal(uploads[0][1].headers['X-ImageConverter'], '1');
+  assert.deepEqual(locations, ['/?job='+'a'.repeat(32)]);
+  assert.ok(!calls.some(([url]) => url.endsWith('/start')));
+});
+
+for (const options of [{running:true}, {uploadError:true}]) {
+  test(`quality button explains ${options.running ? 'an active foreground conversion' : 'an upload failure'} and stays usable`, async () => {
+    const {get, button, calls, locations} = await conversionSetup(options);
+    await button.onclick();
+    assert.equal(button.disabled, false);
+    assert.equal(button.textContent, 'Rastergates verfehlt');
+    assert.equal(get('notice').hidden, false);
+    assert.match(get('notice').textContent, options.running ? /laufende Einzelkonvertierung/ : /Upload fehlgeschlagen/);
+    assert.equal(locations.length, 0);
+    if (options.running) assert.ok(!calls.some(([url]) => url.startsWith('/api/upload?')));
+  });
+}
+
 test('delete selection survives filtering, reports failures and removes only submitted originals', async () => {
   const elements = new Map(), requests = [];
   const get = id => {

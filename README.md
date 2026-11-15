@@ -1,5 +1,10 @@
 # ImageConverter
 
+In der **Konvertierungsqualität** öffnet ein Klick auf die Qualitätsbezeichnung
+(zum Beispiel **Rastergates verfehlt**) das betreffende Original mit seiner
+gespeicherten Beschreibung in der Einzelkonvertierung. Dort lässt sich ein neuer
+Versuch starten. Zum Aktivieren genügt es, die Katalogseite neu zu laden.
+
 Bei ausbleibendem Fortschritt gibt die native SVG-Nachbesserung einen weiterhin
 schlechten Fit nach 96 neuen Renderings ohne mindestens ein Prozent Verbesserung
 zur erneuten Strukturprüfung zurück. Ein erfolgloser Parameterabschnitt endet

@@ -4,6 +4,7 @@ let data = {rows: [], summary: {}, labels: {}}, page = 0, lastReport = '', polli
 let legacyLastJob = null;
 const deleteSelection = new Set();
 let deleting = false, catalogBusy = false;
+let openingImage = null;
 const reportKey = summary => JSON.stringify([summary.generated_at || '', summary.catalog_statuses || {}, summary.description_revision || '']);
 const asset = path => '/api/catalog/asset?path=' + encodeURIComponent(path);
 function node(tag, text, cls) {
@@ -29,6 +30,28 @@ function metrics(row) {
   return {mse: worst('normalized_mse', Math.max), edge: worst('edge_alignment', Math.min), iou: worst('foreground_iou', Math.min)};
 }
 function link(text, path) { const a = node('a', text); a.href = asset(path); a.target = '_blank'; a.rel = 'noopener'; return a; }
+async function openConversion(row, button) {
+  if (openingImage) return;
+  openingImage = row.filename;
+  const label = button.textContent;
+  button.disabled = true; button.textContent = 'Bild wird geladen …';
+  el('notice').hidden = true;
+  try {
+    const jobs = await api('/api/jobs?scope=foreground');
+    if (jobs.some(job => job.status === 'running' && !job.catalog_background)) {
+      throw new Error('Bitte die laufende Einzelkonvertierung zuerst abschliessen oder abbrechen.');
+    }
+    const original = await fetch(asset(row.image));
+    if (!original.ok) throw new Error('Das Originalbild konnte nicht geladen werden.');
+    const response = await fetch('/api/upload?name=' + encodeURIComponent(row.filename), {
+      method: 'POST', headers: {'X-ImageConverter': '1'}, body: await original.blob()
+    });
+    const job = await response.json();
+    if (!response.ok) throw new Error(job.error || 'Das Bild konnte nicht zur Konvertierung geladen werden.');
+    window.location.assign('/?job=' + encodeURIComponent(job.id));
+  } catch (error) { notice(error); }
+  finally { openingImage = null; button.disabled = false; button.textContent = label; }
+}
 function updateDeleteAction() {
   const button = el('delete-selected');
   button.textContent = deleting ? 'Bilder werden gelöscht …' : `Markierte Bilder löschen (${deleteSelection.size})`;
@@ -72,7 +95,17 @@ function render() {
       });
       label.append(checkbox, node('span', 'Löschen')); image.append(label);
     }
-    const quality = node('td'); quality.append(node('span', data.labels[row.status] || row.status, 'badge ' + row.status));
+    const quality = node('td');
+    const actionable = row.status !== 'reserved' && row.image;
+    const status = node(actionable ? 'button' : 'span', data.labels[row.status] || row.status,
+      'badge ' + row.status + (actionable ? ' quality-action' : ''));
+    if (actionable) {
+      status.type = 'button'; status.disabled = Boolean(openingImage);
+      status.title = row.filename + ' zur Einzelkonvertierung öffnen';
+      status.setAttribute('aria-label', status.textContent + ': ' + status.title);
+      status.onclick = () => openConversion(row, status);
+    }
+    quality.append(status);
     const m = metrics(row), metric = node('td', undefined, 'metric');
     metric.append(node('div', 'MSE: ' + (m.mse === null ? '—' : m.mse.toFixed(6))), node('div', 'Kanten: ' + (m.edge === null ? '—' : m.edge.toFixed(4))), node('div', 'IoU: ' + (m.iou === null ? '—' : m.iou.toFixed(4))));
     const archive = node('td', row.archived ? 'Historisch archiviert' : 'Nicht archiviert');
