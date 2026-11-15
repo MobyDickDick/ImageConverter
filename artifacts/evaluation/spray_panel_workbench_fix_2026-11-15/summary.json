@@ -1,0 +1,112 @@
+{
+  "schema": "spray_panel_workbench_fix_v1",
+  "date": "2026-11-15",
+  "input_zip_sha256": "8f2b17889649b308bed2c012796f9973162957b3e7ca142416d0cd9c2b56c993",
+  "source_svg_sha256": "d89bcbe16cb6321dfa6328402474239343c2952679067a9755ae07c25b4cce23",
+  "seed": 3935970335737749794,
+  "scope": "original_and_probe_01_only_not_full_17_case_acceptance",
+  "timeout_seconds": 240,
+  "default_timeout_unchanged": 60,
+  "code_provenance": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+    "python_sources_sha256": "ea100c613a34a5b7adfa9243f21ecf17cbeb9fe979f8d19c16861273b31cc29b",
+    "packages": {
+      "numpy": "2.2.6",
+      "opencv-python-headless": "4.14.0.94",
+      "PyMuPDF": "1.26.7",
+      "Pillow": "12.3.0"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "original",
+      "before": {
+        "normalized_mse": 0.005819850135594606,
+        "foreground_mse": 0.006641274783760309,
+        "edge_alignment": 0.7016192674636841,
+        "foreground_iou": 0.9405543398978847,
+        "foreground_iou_binary": 0.9405543398978847
+      },
+      "before_failures": [
+        "edge_alignment_outside_limit"
+      ],
+      "after": {
+        "case_id": "original",
+        "muPDF": {
+          "normalized_mse": 0.00015321992395911366,
+          "foreground_mse": 0.00017153385851997882,
+          "edge_alignment": 0.9744534492492676,
+          "foreground_iou": 0.9949285984039307,
+          "foreground_iou_binary": 0.9854586129753915
+        },
+        "librsvg": {
+          "normalized_mse": 0.00016763265011832118,
+          "foreground_mse": 0.00018522625032346696,
+          "foreground_iou": 0.9935190677642822,
+          "foreground_iou_binary": 0.9854694485842027,
+          "edge_alignment": 0.9727164506912231,
+          "passed": true
+        },
+        "satisfactory": true,
+        "seconds": 36.656,
+        "inventory": {
+          "rect": 3,
+          "polygon": 5,
+          "line": 15,
+          "image": 0
+        },
+        "all_rays_dashed": true,
+        "blocked_svg_reads": []
+      }
+    },
+    {
+      "case_id": "probe_01",
+      "before": {
+        "normalized_mse": 0.004463352262973785,
+        "foreground_mse": 0.00521291047334671,
+        "edge_alignment": 0.7550991773605347,
+        "foreground_iou": 0.779296875,
+        "foreground_iou_binary": 0.779296875
+      },
+      "before_failures": [
+        "foreground_iou_outside_limit"
+      ],
+      "after": {
+        "case_id": "probe_01",
+        "muPDF": {
+          "normalized_mse": 0.004669516813009977,
+          "foreground_mse": 0.006740138400346041,
+          "edge_alignment": 0.888792872428894,
+          "foreground_iou": 0.8909341923607915,
+          "foreground_iou_binary": 0.8909341923607915
+        },
+        "librsvg": {
+          "normalized_mse": 0.00466895941644907,
+          "foreground_mse": 0.006748592015355825,
+          "foreground_iou": 0.8907834101382488,
+          "foreground_iou_binary": 0.8907834101382488,
+          "edge_alignment": 0.8883853554725647,
+          "passed": true
+        },
+        "satisfactory": true,
+        "seconds": 45.031,
+        "inventory": {
+          "rect": 3,
+          "polygon": 5,
+          "line": 15,
+          "image": 0
+        },
+        "all_rays_dashed": true,
+        "blocked_svg_reads": []
+      }
+    }
+  ],
+  "tests": {
+    "regressions": 135,
+    "full_shifted_variant_fit": 1,
+    "passed": 136,
+    "initial_sandbox_http_failures": "local_socket_and_process_termination_permissions",
+    "final_regressions_outside_sandbox": true
+  }
+}

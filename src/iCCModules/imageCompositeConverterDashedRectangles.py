@@ -11,13 +11,37 @@ import re
 from xml.etree import ElementTree as ET
 
 
+def _straight_path_endpoints(data):
+    """One open straight segment, including SVG's implicit lineto after M.
+
+    Curves, multiple segments and subpaths retain the renderer's own semantics.
+    The first relative moveto starts at the SVG path origin, just like M.
+    """
+    number = r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'
+    pair = rf'({number})[\s,]+({number})'
+    match = re.fullmatch(rf'\s*[Mm]\s*{pair}\s*(?:([LlHhVv])\s*)?({number})(?:[\s,]+({number}))?\s*', data)
+    if match is None:
+        return None
+    x, y = map(float, match.group(1, 2))
+    command = match.group(3) or ('l' if data.lstrip().startswith('m') else 'L')
+    a = float(match.group(4))
+    b = float(match.group(5)) if match.group(5) is not None else None
+    if command in 'Ll' and b is not None:
+        return (x, y, a+x if command == 'l' else a, b+y if command == 'l' else b)
+    if command in 'Hh' and b is None:
+        return x, y, a+x if command == 'h' else a, y
+    if command in 'Vv' and b is None:
+        return x, y, x, a+y if command == 'v' else a
+    return None
+
+
 def normalize_dashed_lines(svg):
     """Expand straight butt-capped dash strokes only in private render input.
 
     MuPDF ignores line dash arrays too. Preserve direction, inherited paint and
     positive/negative offsets; saved SVGs retain one native logical line.
     """
-    if 'stroke-dasharray' not in svg or 'line' not in svg:
+    if 'stroke-dasharray' not in svg or not ('line' in svg or 'path' in svg):
         return svg
     try:
         root=ET.fromstring(svg)
@@ -29,7 +53,8 @@ def normalize_dashed_lines(svg):
         nonlocal changed
         inherited=dict(inherited,**{k:v for k,v in parent.attrib.items() if k in keys})
         for node in list(parent):
-            if node.tag.rsplit('}',1)[-1] != 'line':
+            kind = node.tag.rsplit('}',1)[-1]
+            if kind not in {'line', 'path'}:
                 visit(node,inherited)
                 continue
             attrs=dict(inherited,**{k:v for k,v in node.attrib.items() if k in keys})
@@ -38,7 +63,13 @@ def normalize_dashed_lines(svg):
                     or any(k in node.attrib for k in ('pathLength','style','marker-start','marker-end','marker-mid'))):
                 continue
             try:
-                x,y,X,Y=[float(node.get(k,'0')) for k in ('x1','y1','x2','y2')]
+                if kind == 'path':
+                    endpoints = _straight_path_endpoints(node.get('d', ''))
+                    if endpoints is None:
+                        continue
+                    x,y,X,Y = endpoints
+                else:
+                    x,y,X,Y=[float(node.get(k,'0')) for k in ('x1','y1','x2','y2')]
                 pattern=[float(v) for v in re.split(r'[\s,]+',attrs['stroke-dasharray'].strip())]
                 offset=float(attrs.get('stroke-dashoffset','0'))
                 length=math.hypot(X-x,Y-y)
@@ -62,7 +93,7 @@ def normalize_dashed_lines(svg):
                         c,d=x+(X-x)*end/length,y+(Y-y)*end/length
                         commands.append(f'M {a:.9g} {b:.9g} L {c:.9g} {d:.9g}')
                     position=end;slot=(slot+1)%len(pattern);remaining=pattern[slot]
-                node.tag=node.tag[:-4]+'path'
+                node.tag=node.tag[:-len(kind)]+'path'
                 for k in ('x1','y1','x2','y2'):
                     node.attrib.pop(k,None)
                 node.set('d',' '.join(commands));node.set('stroke-dasharray','none');node.set('stroke-dashoffset','0')

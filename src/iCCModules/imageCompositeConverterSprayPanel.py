@@ -16,11 +16,22 @@ from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
 SOURCE = 'raster_spray_panel_v1'
 
 
+def _description_text(description):
+    return (str(description or '').casefold().replace('sprueh', 'sprüh')
+            .replace('dues', 'düs').replace('anschluess', 'anschlüss'))
+
+
 def spray_contract(description):
-    text = str(description or '').casefold().replace('ue', 'ü')
-    return (all(t in text for t in ('rechteck', 'balken', 'gestrichelt', 'düs', 'sprüh','horizontal','verlauf'))
+    text = _description_text(description)
+    return (all(t in text for t in ('rechteck', 'balken', 'gestrichelt', 'sprüh','horizontal','verlauf'))
+            and any(t in text for t in ('düs', 'queranschlüss'))
             and not any(t in text for t in ('zickzack', 'andreaskreuz', 'kreis', 'vertikaler verlauf','durchgezogen'))
-            and not re.search(r'\b(?:kein\w*|ohne)\s+(?:düs|sprüh|balken|farbverlauf|rahmen)',text))
+            and not re.search(r'\b(?:kein\w*|ohne)\s+(?:düs|queranschlüss|sprüh|balken|farbverlauf|rahmen)',text))
+
+
+def _dashed_spray_rays(description):
+    return bool(re.search(r'gestrichelt\w*\s+(?:(?:hell)?grau\w*\s+)?(?:linien|strahlen|sprüh)',
+                          _description_text(description)))
 
 
 def _runs(mask):
@@ -28,11 +39,18 @@ def _runs(mask):
     return np.split(indices, np.flatnonzero(np.diff(indices) > 1)+1) if len(indices) else []
 
 
+def _nozzle_groups(signal):
+    # The housing's top/bottom rims are darker than subpixel nozzle strokes.
+    # Let only the interior set the contrast threshold, before pitch checks.
+    interior = signal[2:-2]
+    threshold = max(18, float(interior.max())*.35) if len(interior) else 18
+    return [r for r in _runs(signal > threshold) if r[0] > 1 and r[-1] < len(signal)-2]
+
+
 def fit_spray_panel(width, height, *, description, image, render_fn, error_fn):
     if not spray_contract(description):
         return None
-    dashed_rays=bool(re.search(r'gestrichelt\w*\s+(?:hellgrau\w*\s+)?(?:linien|strahlen|sprüh)',
-                              str(description).casefold()))
+    dashed_rays = _dashed_spray_rays(description)
     dash_enabled=False
     ray_dashes=[]
     arr = np.asarray(image)
@@ -91,7 +109,7 @@ def fit_spray_panel(width, height, *, description, image, render_fn, error_fn):
     nozzle_end = min(x+left-3,nozzle_start+max(2,int(w*.08)))
     contrast = np.maximum(0,fill[None,:]-gray[y:Y,x:X])
     signal = contrast[:,nozzle_start-x:nozzle_end-x].mean(axis=1)
-    groups = [r for r in _runs(signal > max(18,float(signal.max())*.35)) if r[0] > 1 and r[-1] < h-2]
+    groups = _nozzle_groups(signal)
     if not 3 <= len(groups) <= 12:
         return None
     nozzle_centers = [y+float(np.average(r+.5,weights=signal[r])) for r in groups]
@@ -351,7 +369,24 @@ def fit_spray_panel(width, height, *, description, image, render_fn, error_fn):
     delta = np.square(pixels-final[3].astype(float)).mean(axis=2)/255**2
     details = [dict(component=name,normalized_mse=float(delta[mask].mean()),
                     passed=bool(delta[mask].mean() <= .002)) for name,mask in component_masks.items()]
+    # The first housing/frame fit sees only initial nozzle/ray geometry. If
+    # those parts now pass, revisit the two shared surfaces against the final
+    # foreground instead of rejecting their earlier coordinate compromise.
+    failed = {d['component'] for d in details if not d['passed']}
+    if failed and failed <= {'background', 'dashed_frame'}:
+        for name,vector,mask,factors in (
+                ('background',bg,clean,[scale]*5+[8]*4+[scale,scale]),
+                ('dashed_frame',frame,frame_mask,[scale]*5+[8]+[0.,0.,scale])):
+            if name in failed and not refine(name,vector,mask,factors,steps=(.5,.25,.125,.0625,.03125)):
+                return None
+        final = measure()
+        if final is None:
+            return None
+        delta = np.square(pixels-final[3].astype(float)).mean(axis=2)/255**2
+        details = [dict(component=name,normalized_mse=float(delta[mask].mean()),
+                        passed=bool(delta[mask].mean() <= .002)) for name,mask in component_masks.items()]
     if not all(d['passed'] for d in details):
+        progress(SOURCE,event='component_quality_rejected',details=details)
         return None
     return dict(svg=final[2],rendered=final[3],error=final[1],initial_error=initial[1],
                 source=SOURCE,evaluations=evaluations,parameters=dict(background=bg,rail=rail_p,frame=frame,

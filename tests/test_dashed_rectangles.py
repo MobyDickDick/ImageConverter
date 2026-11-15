@@ -59,3 +59,26 @@ def test_horizontal_vertical_oblique_and_reversed_dashed_rays(points,offset):
     reference=render_librsvg(svg,80,100)
     for raster in [render_librsvg(normalize_dashed_lines(svg),80,100),render(svg,80,100)]:
         assert np.square(reference.astype(float)-raster).mean()/255**2 < .00006
+
+
+@pytest.mark.parametrize('data', ['M 0 0 45 30', 'm 5 7 40 23', 'M 0 0 L 45 30',
+                                'm 0 0 l 45 30', 'm 0 0 h 45', 'M 0 0 H 45',
+                                'm 0 0 v 60', 'M 0 0 V 60', 'M 45 30 0 0'])
+@pytest.mark.parametrize('offset', [0, -2.6])
+def test_single_segment_dashed_paths_preserve_transforms_and_inherited_paint(data, offset):
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="80" height="100">'
+           '<rect width="80" height="100" fill="white"/>'
+           f'<g transform="translate(10 10) scale(1.1)" stroke="#777777" stroke-width="1.2" '
+           f'stroke-dasharray="2.1 1.3" stroke-dashoffset="{offset}">'
+           f'<path d="{data}"/></g></svg>')
+    reference = render_librsvg(svg,80,100)
+    assert normalize_dashed_lines(svg) != svg
+    assert np.square(reference.astype(float)-render(svg,80,100)).mean()/255**2 < .00006
+
+
+@pytest.mark.parametrize('data', ['M 1 2 C 3 4 5 6 7 8', 'M 1 2 L 3 4 L 5 6',
+                                'M 1 2 L 3 4 Z', 'M 1 2 M 3 4', 'M 1 2 h 3 4',
+                                'M 1 2', 'M 1 2 H 3 4'])
+def test_unsupported_dashed_path_geometry_is_left_unchanged(data):
+    svg = f'<svg><path d="{data}" stroke="gray" stroke-dasharray="2 1"/></svg>'
+    assert normalize_dashed_lines(svg) == svg
