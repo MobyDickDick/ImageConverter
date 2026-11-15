@@ -11,7 +11,7 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,
 
 
 def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mode=None, color_order='BGR',
-                         acceptance_fn=None):
+                         acceptance_fn=None, stop_fn=None):
     structure_mode = structure_mode or os.environ.get('ICC_FALLBACK_STRUCTURE_MODE', 'combined')
     if structure_mode not in {'off', 'primitives', 'lines', 'combined', 'legacy_combined', 'groups'}:
         raise ValueError('Unknown fallback structure mode')
@@ -54,11 +54,19 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
             raster = render_fn(candidate, width, height)
             return raster if raster is None or color_order == 'BGR' else raster[:, :, ::-1].copy()
         selected, structure = explore_structures(svg, structure_image, structure_initial, render_structure, session, assertions,
-                                                 mode=structure_mode)
+                                                 mode=structure_mode, stop_fn=stop_fn)
         svg, initial = selected['svg'], selected['rendered']
         if color_order == 'RGB':
             initial = initial[:, :, ::-1].copy()
         root = ET.fromstring(prepare_sample(svg.encode('utf-8'), w, h))
+        if (stop_fn is not None and stop_fn()) or (acceptance_fn is not None and acceptance_fn(svg)):
+            error = float(np.square(image.astype(float)-initial.astype(float)).mean()/255**2)
+            accepted = acceptance_fn is not None and acceptance_fn(svg)
+            return dict(svg=svg, rendered=initial,
+                        error=error, initial_error=original_error, improved=error < original_error-1e-10,
+                        evaluations=structure['render_evaluations'], structure_search=structure,
+                        source='native_svg_continuation',
+                        search_control=dict(stop_reason='satisfactory' if accepted else 'accepted_preview', **session.report()))
     nodes = list(root.iter())
     widths, colors, gradients = {}, {}, []
     for index, node in enumerate(nodes):
@@ -147,7 +155,7 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
 
     result = _register(seed, geometry, build, valid, image, render_fn, lambda a, b: error(b),
                        'native_svg_continuation', loss_fn=lambda a, b: loss(b), satisfactory_fn=satisfactory,
-                       preserve_initial_error=True)
+                       preserve_initial_error=True, reconsider_after=96)
     if result is None:
         if structure is None:
             return None

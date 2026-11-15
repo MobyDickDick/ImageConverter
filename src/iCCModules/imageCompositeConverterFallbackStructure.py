@@ -15,6 +15,7 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterFilledSymbols import _hex
 from src.iCCModules.imageCompositeConverterPrimitiveScene import _circle
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 
 NS = 'http://www.w3.org/2000/svg'
 
@@ -168,7 +169,8 @@ def _line_proposals(image, rendered, session):
             return
 
 
-def explore_structures(svg, image, initial, render_fn, session, assertions, *, mode='combined', max_probes=32):
+def explore_structures(svg, image, initial, render_fn, session, assertions, *, mode='combined', max_probes=32,
+                       stop_fn=None):
     """Compare native complete constructions and residual add operations.
 
     No acceptance gates are weakened: explicit assertions are checked before
@@ -176,6 +178,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
     A caller must still treat every result as an unvalidated draft.
     """
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    from src.iCCModules.imageCompositeConverterFallbackGroups import part_regions
     if mode not in {'primitives', 'lines', 'combined', 'legacy_combined', 'groups'}:
         raise ValueError('Unknown fallback structure mode')
     reference = image.astype(float)
@@ -188,10 +191,12 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         report['stop_reason'] = 'raster_size_limit'
         return best, report
     h, w = image.shape[:2]
+    def finished():
+        return session.time_reason() or (stop_fn is not None and stop_fn())
 
     def probe(candidate, origin, parent, regions=None, residual_line=None):
         nonlocal best
-        if session.time_reason() or len(report['proposals']) >= max_probes:
+        if finished() or len(report['proposals']) >= max_probes:
             return None
         row = dict(origin=origin, inventory=inventory(candidate), accepted=False)
         report['proposals'].append(row)
@@ -262,19 +267,31 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         return result if accepted else None
 
     bases = [best]
-    if mode in {'groups', 'combined'} and max_probes>0:
+    if mode == 'combined' and max_probes > 0 and not pixel_quality(image, initial)['passed']:
+        from src.iCCModules.imageCompositeConverterConstructionVariants import construction_variants
+        for candidate, origin in construction_variants(svg, image, initial, session):
+            probe(candidate, origin, bases[0])
+            if finished() or len(report['proposals']) >= min(6, max_probes):
+                break
+        from src.iCCModules.imageCompositeConverterRuledPanel import ruled_panel_candidates
+        for alternative in (() if finished() or len(report['proposals']) >= max_probes else
+                            ruled_panel_candidates(image, render_fn, lambda a, b: error(b))):
+            probe(alternative['svg'], 'raster_ruled_panel:'+str(alternative['gradient_axis']), bases[0])
+            if finished() or len(report['proposals']) >= max_probes:
+                break
+    if mode in {'groups', 'combined'} and max_probes>0 and not finished():
         # Keep complete constructions as alternatives for old, deeply
         # transformed drafts; composition then builds on the best valid scene.
         from src.iCCModules.imageCompositeConverterFallbackGroups import group_proposals, part_regions
         groups=[]
         for candidate, family in group_proposals(image, session, render_fn):
-            if session.time_reason() or len(report['proposals']) >= min(8,max_probes):
+            if finished() or len(report['proposals']) >= min(8,max_probes):
                 break
             groups.append((candidate,family))
             probe(candidate, 'native_object_group:'+family, bases[0], part_regions(candidate,w,h))
         from src.iCCModules.imageCompositeConverterFallbackComposition import compose
         compose(image, session, lambda: best, probe, min(24,max_probes)-len(report['proposals']), proposals=groups)
-    if mode in {'primitives', 'combined', 'legacy_combined'}:
+    if mode in {'primitives', 'combined', 'legacy_combined'} and not finished():
         primitive_limit = min(max_probes-6 if mode == 'combined' else max_probes,
                               len(report['proposals'])+12)
         for candidate in _primitive_scenes(image, session):
@@ -300,14 +317,14 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
                         continue
                     parent = best
                     for edited, operation in edits(parent['svg'],node,w,h):
-                        if session.time_reason() or len(report['proposals']) >= primitive_limit:
+                        if finished() or len(report['proposals']) >= primitive_limit:
                             break
                         probe(edited,'raster_primitive:'+operation,parent,part_regions(edited,w,h))
-                    if session.time_reason() or len(report['proposals']) >= primitive_limit:
+                    if finished() or len(report['proposals']) >= primitive_limit:
                         break
-            if session.time_reason() or len(report['proposals']) >= primitive_limit:
+            if finished() or len(report['proposals']) >= primitive_limit:
                 break
-    if mode in {'lines', 'combined', 'legacy_combined'}:
+    if mode in {'lines', 'combined', 'legacy_combined'} and not finished():
         # Complete the best composed scene first; an obsolete original must not
         # consume every remaining probe before its missing details are visited.
         parents = [bases[0]] + ([best] if best is not bases[0] else [])
@@ -324,12 +341,12 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
                 result = probe(candidate, parent['origin']+'+residual_line_group', current, residual_line=line)
                 if result:
                     current = result
-                if session.time_reason() or len(report['proposals']) >= max_probes:
+                if finished() or len(report['proposals']) >= max_probes:
                     break
     report.update(selected_origin=best['origin'], selected_inventory=inventory(best['svg']),
                   render_evaluations=session.evaluations-starting_evaluations,
                   probe_count=len(report['proposals']),
-                  stop_reason='time_limit' if session.time_reason() else
+                  stop_reason='accepted_preview' if stop_fn is not None and stop_fn() else 'time_limit' if session.time_reason() else
                   ('probe_limit' if len(report['proposals']) >= max_probes else report['stop_reason']))
     progress('native_svg_structure', event='structure_search_finished', **report)
     return best, report

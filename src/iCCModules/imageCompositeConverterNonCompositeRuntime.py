@@ -55,6 +55,7 @@ from src.iCCModules.imageCompositeConverterPiecewiseScene import (
 )
 from src.iCCModules.imageCompositeConverterGradientTube import fit_gradient_tube, tube_contract
 from src.iCCModules.imageCompositeConverterFramedPanel import fit_framed_panel, panel_contract
+from src.iCCModules.imageCompositeConverterRuledPanel import fit_ruled_panel
 from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_line_panel
 from src.iCCModules.imageCompositeConverterHeatPanel import fit_heat_panel
 from src.iCCModules.imageCompositeConverterDiagonalCrossPanel import fit_diagonal_cross_panel
@@ -1487,6 +1488,7 @@ def runNonCompositeIterationImpl(
             (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
             (fit_heat_panel, "non_composite_raster_heat_panel"),
             (fit_paired_line_panel, "non_composite_raster_paired_line_panel"),
+            (fit_ruled_panel, "non_composite_raster_ruled_panel"),
             (fit_framed_panel, "non_composite_raster_framed_panel"),
             (fit_axial_panel, "non_composite_raster_axial_panel"),
             (fit_short_label_disk, "non_composite_raster_short_label_disk"),

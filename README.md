@@ -1,5 +1,21 @@
 # ImageConverter
 
+Bei ausbleibendem Fortschritt gibt die native SVG-Nachbesserung einen weiterhin
+schlechten Fit nach 96 neuen Renderings ohne mindestens ein Prozent Verbesserung
+zur erneuten Strukturprüfung zurück. Ein erfolgloser Parameterabschnitt endet
+spätestens nach 288 neuen Renderings. Andere Verlaufsachsen, unabhängig angepasste
+Breite/Höhe und ausgerichtete Linien werden als eigene Konstruktionen verglichen.
+Der Seed bestimmt ihre Reihenfolge; identische geprüfte Vorschläge werden innerhalb
+der Bildsuche ausgelassen. Ein anderer Seed kann zum gleichen guten Ergebnis führen.
+Gerahmte Verlaufsflächen mit parallelen Innenlinien werden zusätzlich direkt aus
+Rahmen, Farbprofil und einzelnen Balken des Rasters rekonstruiert.
+
+Plan-B-Fälle nutzen nach einem unzureichenden ersten CLI-Ergebnis dieselbe native
+Vektorsuche wie die Einzelkonvertierung, innerhalb des bisherigen Zeitlimits und
+ohne Zugriff auf Referenz-SVGs. Verschobene dünne Rahmen werden über zwei benachbarte
+Pixel vermessen. Historische Workbench-Ergebnisse bleiben erhalten; ein neuer Lauf
+verwendet die Korrektur. Siehe [Prüfnachweis](artifacts/evaluation/search_reconsideration_2026-11-15/README.md).
+
 In der **Konvertierungsqualität** können Bilder über die Checkbox **Löschen**
 markiert und mit **Markierte Bilder löschen** aus dem Katalog entfernt werden.
 Die Auswahl bleibt beim Filtern und Blättern erhalten. Vorher laufende

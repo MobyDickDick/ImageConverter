@@ -128,7 +128,7 @@ def explore_bots(parameters, geometry_count, measure, incumbent, *, source, imag
 
 
 def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source, image,
-                 satisfactory_fn, session, config, emit):
+                 satisfactory_fn, session, config, emit, reconsider=None):
     # The initial SVG and objective values distinguish parameterizations and
     # differently weighted fits even when they have the same source label.
     contract = [source, raster_identity(image), incumbent[2], parameters.tolist(),
@@ -170,7 +170,7 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
                 break
         selected = board.selector.choose([bot.name for bot in active])
         bot = next(bot for bot in active if bot.name == selected)
-        board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
+        board.reason = (reconsider() if reconsider else None) or monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
         if board.reason:
             break
         if board.best[0] < bot.best[0]-1e-9:
@@ -186,7 +186,7 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
         slice_elapsed, slice_loss = 0., board.best[0]
         # A slice counts unique measurements; duplicate generation is bounded too.
         while used < slice_size and generated < 64 and (session.minimum_pending or board.generated < monitor.maximum*8):
-            board.reason = monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
+            board.reason = (reconsider() if reconsider else None) or monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))
             if board.reason:
                 break
             probe = bot.proposal(geometry_count, board.rng, board.seed)

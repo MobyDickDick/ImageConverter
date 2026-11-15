@@ -65,10 +65,68 @@ def converter_worker(argv: list[str]) -> int:
     sys.addaudithook(audit)
     try:
         from src.iCCModules.imageCompositeConverterCli import main as convert
-        return convert(cli_args)
+        code = convert(cli_args)
+        deadline = float(os.environ.get('ICC_PLAN_B_DEADLINE', '0'))
+        if deadline > time.time():
+            recovered = recover_case_output(conversion_dir, cli_args, deadline)
+            if recovered:
+                code = 0
+        return code
     finally:
         (conversion_dir.parent / "reference_access.json").write_text(
             json.dumps({"blocked_svg_reads": blocked}, indent=2) + "\n", encoding="utf-8")
+
+
+def recover_case_output(conversion_dir: Path, cli_args: list[str], deadline: float) -> bool:
+    """Use the GUI's recovery inside the same audited, killable case worker.
+
+    Recovery receives only input pixels, wording and this case's own draft.
+    The parent still measures the delivered SVG with the frozen Plan-B gates.
+    """
+    from src.imageConverterRecovery import atomic_svg, recover
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    cv2 = import_with_vendored_fallback('cv2')
+    def option(name):
+        return cli_args[cli_args.index(name)+1]
+    name = option('--start')
+    source = Path(cli_args[0])/(name+'.png')
+    image = cv2.imread(str(source))
+    if image is None:
+        return False
+    mapping = loadDescriptionMappingImpl(option('--descriptions-path'), get_base_name_from_file_fn=getBaseNameFromFileImpl)
+    description = mapping.get(name, mapping.get(getBaseNameFromFileImpl(name), ''))
+    if not description:
+        return False
+    candidates = [p for folder in ('converted_svgs', 'converted_svg_failed')
+                  for p in (conversion_dir/folder).glob('*.svg')
+                  if p.stem.casefold() in {name.casefold(), 'failed_'+name.casefold()}]
+    if len(candidates) > 1:
+        return False
+    candidate = candidates[0] if candidates else None
+    old = measure_quality(image, candidate.read_text(encoding='utf-8')) if candidate else None
+    if old and old['satisfactory']:
+        try:
+            validate_svg_assertions(candidate.read_text(encoding='utf-8'), description_assertions(description))
+            return False
+        except ValueError:
+            pass
+    seconds = deadline-time.time()-.25
+    if seconds <= 0:
+        return False
+    print('[Plan B] Erster Versuch unvollständig; verbleibende Zeit für native Vektorsuche.', flush=True)
+    output = conversion_dir/'recovery'/(name+'.svg')
+    seed = int(option('--search-seed')) if '--search-seed' in cli_args else int(os.environ.get('ICC_SEARCH_SEED', '0'))
+    report = recover(source, output, description, seconds, seed=seed, candidate=candidate)
+    if not output.is_file():
+        return False
+    measured = measure_quality(image, output.read_text(encoding='utf-8'))
+    old_error = old['metrics'].get('normalized_mse', math.inf) if old else math.inf
+    if (measured['satisfactory'] and report['passed']) or measured['metrics'].get('normalized_mse', math.inf) < old_error:
+        if candidate is None:
+            candidate = conversion_dir/'converted_svg_failed'/('Failed_'+name+'.svg')
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+        atomic_svg(candidate, output.read_text(encoding='utf-8'))
+    return bool(measured['satisfactory'] and report['passed'])
 
 
 class TaskPoolExhausted(ValueError):
@@ -413,6 +471,13 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
     environment = dict(os.environ, TINY_ICC_OUTPUT_VARIATION="0", PYTHONHASHSEED="0",
                        ICC_SEARCH_SEED=os.environ.get('ICC_SEARCH_SEED', '0'),
                        ICC_FORCE_RECONVERT="1", PYTHONIOENCODING="utf-8")
+    environment['ICC_PLAN_B_DEADLINE'] = str(time.time()+timeout)
+    # Reserve recovery time within the existing hard limit instead of adding
+    # a second timeout. Explicit caller budgets remain authoritative.
+    if not any(flag in extra_cli_args for flag in ('--search-seconds', '--search-max-seconds', '--search-min-seconds')):
+        first_seconds = max(.05, timeout*.55)
+        command.extend(['--search-seconds', str(first_seconds), '--search-max-seconds', str(first_seconds),
+                        '--search-min-seconds', str(min(30., first_seconds))])
     environment["PYTHONPATH"] = os.pathsep.join([str(working_root), *sys.path])
     result = {**case, "satisfactory": False, "failures": [], "command": command}
     started = time.monotonic()
@@ -439,6 +504,9 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
             return result
         svg_path = candidates[0]
         svg = svg_path.read_text(encoding="utf-8")
+        recovery_report = case_dir/'conversion/recovery'/(name+'.json')
+        if recovery_report.is_file():
+            result['recovery'] = json.loads(recovery_report.read_text(encoding='utf-8'))
         result.update(measure_quality(reference, svg))
         result.update(output_svg=svg_path.relative_to(output).as_posix(), output_sha256=sha256(svg_path.read_bytes()))
         # Batch acceptance is based on independently measured saved vectors, not

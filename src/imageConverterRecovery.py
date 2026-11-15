@@ -126,6 +126,7 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
                 fitted = polish_generated_svg(svg, image, render, assertions=partial_assertions,
                                                structure_mode=('off' if first_polish and
                                                    partial_assertions.get('equal_stroke_width') else None),
+                                               stop_fn=lambda: report['passed'],
                                                acceptance_fn=lambda candidate: bool(
                                                    report['passed'] and best and candidate == best['svg']))
                 first_polish = False

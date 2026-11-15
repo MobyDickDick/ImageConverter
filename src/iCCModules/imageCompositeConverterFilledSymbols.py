@@ -14,17 +14,17 @@ def _hex(bgr):
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
-              refinement_steps=(1., .5, .25, .125), allow_portfolio=True):
+              refinement_steps=(1., .5, .25, .125), allow_portfolio=True, reconsider_after=None):
     return drain(_register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
         preserve_initial_error=preserve_initial_error, loss_fn=loss_fn,
         initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn,
-        refinement_steps=refinement_steps, allow_portfolio=allow_portfolio))
+        refinement_steps=refinement_steps, allow_portfolio=allow_portfolio, reconsider_after=reconsider_after))
 
 
 def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
               refinement_steps=(1., .5, .25, .125), initial_candidates=(), eager_satisfactory=False,
-              allow_portfolio=True):
+              allow_portfolio=True, reconsider_after=None):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
@@ -42,10 +42,18 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         from src.iCCModules.imageCompositeConverterAdaptiveSearch import raster_identity
         raster_key = raster_identity(image)
     stop_reason = None
+    progress_error, progress_evaluation = float('inf'), 0
     progress(source, event='registration_started', evaluations=0)
 
+    def reconsider():
+        if (reconsider_after
+                and (evaluations-progress_evaluation >= reconsider_after or evaluations >= reconsider_after*3)
+                and not pixel_quality(image, best[3])['passed']):
+            return 'structure_reconsideration'
+        return None
+
     def measure(p):
-        nonlocal evaluations
+        nonlocal evaluations, progress_error, progress_evaluation
         if not valid(p):
             return None
         svg = build(p)
@@ -72,6 +80,10 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         if rendered_new and evaluations % 64 == 0 and np.isfinite(error):
             progress(source, event='registering', evaluations=evaluations, current_error=error)
         measured = (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
+        if reconsider_after and measured is not None:
+            gain = max(1e-9, abs(progress_error)*.01) if np.isfinite(progress_error) else 0.
+            if error < progress_error-gain:
+                progress_error, progress_evaluation = error, evaluations
         if session and len(render_cache) >= 256:
             render_cache.clear()
         render_cache[svg] = measured
@@ -142,7 +154,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                     break
                 for sign in (-1., 1.):
                     if session:
-                        stop_reason = session.time_reason()
+                        stop_reason = session.time_reason() or reconsider()
                         if not stop_reason and session.finish_model_searches and not session.minimum_pending:
                             stop_reason = 'candidate_comparison'
                         if stop_reason:
@@ -182,7 +194,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                 from src.iCCModules.imageCompositeConverterSearchBots import explore_bots_steps
                 parameters, best, search = yield from explore_bots_steps(
                     parameters, geometry_count, measure, best, source=source, image=image,
-                    satisfactory_fn=satisfactory, session=session, config=settings(), emit=progress)
+                    satisfactory_fn=satisfactory, session=session, config=settings(), emit=progress,
+                    reconsider=reconsider)
             else:
                 parameters, best, search = explore_parameters(parameters, geometry_count, measure, best,
                                                              source=source, image=image,satisfactory_fn=satisfactory)
