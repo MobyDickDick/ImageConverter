@@ -1,0 +1,7130 @@
+{
+  "positives": [
+    {
+      "case_id": "quadratic-plain",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2,
+          "ellipse": 3,
+          "hidden_curve": 4,
+          "cover": 5
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 7,
+        "reason": "passed"
+      }
+    }
+  ],
+  "negatives": [
+    {
+      "case_id": "quadratic-plain",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-plain",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-plain",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-rotated",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-scaled",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-reflected",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "cubic-oblique",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-plain",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-rotated",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-scaled",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-reflected",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "missing_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "extra_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "hidden_missing",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "hidden_extra",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 7,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "hidden_geometry",
+      "expected_hidden": true,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "hidden_curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": true,
+        "librsvg": true
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_control",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_connection",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_tangent",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_width",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_paint",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_transform",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "lead",
+          "curve",
+          "ellipse",
+          "hidden_curve",
+          "cover"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_depth",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [],
+        "mapping": {},
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          },
+          {
+            "kind": "front_of",
+            "objects": [
+              "cover",
+              "hidden_curve"
+            ],
+            "passed": false
+          }
+        ],
+        "hidden_geometry_verified": false,
+        "assignments_visited": 7,
+        "reason": "assignment_or_relations"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_arc_sweep",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_arc_large",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_arc_rotation",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "wrong_arc_radius",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 6,
+        "unmatched_expected": [
+          "ellipse"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "filled_curve",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Only unfilled stroked curves supported"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "compound_path",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported numeric syntax"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    },
+    {
+      "case_id": "arc-oblique",
+      "damage": "transparent_cover",
+      "expected_hidden": false,
+      "check": {
+        "complete": false,
+        "supported": false,
+        "hidden_geometry_verified": false,
+        "reason": "Unsupported attribute on rect"
+      },
+      "raster_identical": {
+        "MuPDF": false,
+        "librsvg": false
+      }
+    }
+  ],
+  "positive_count": 15,
+  "negative_count": 285,
+  "raster_identical_rejected": 45,
+  "sealed_files": {
+    "checker.py": "d1694478c83a3ec6477157ecd4861d7d9224c0fd51bf8e3443dcf2fd9180a16b",
+    "constructions.py": "b22a5dad344f234f4df84bc801f1f0942579248b3a92433458b290dffae164e9",
+    "evaluator.py": "9a2e99414e04dc28b4895e9d364c95b971cad43f38100564a813882d6fbecbee",
+    "strict_checker.py": "d5b7223fdcd43e959169103186dd9b3cede39eb74d51c553c0e4cf157ff94782",
+    "segment_checker.py": "bc1db0ee15dc04e43f2c1c25be8c709a9262ff25539e48737b101a8ff48a9e3d",
+    "manifest.json": "cd46813681b5ccd0af076bccb7c25fc851dabfa854913e48ac1b77a6aa8302c5"
+  },
+  "converter_executions": 0,
+  "model_promotions": 0,
+  "real_reserves_executed": false
+}

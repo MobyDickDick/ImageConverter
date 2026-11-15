@@ -1,0 +1,123 @@
+{
+  "schema": "curve_group_proposal_study_v1",
+  "cases": [
+    {
+      "case_id": "quadratic-plain",
+      "proposals": [],
+      "elapsed_seconds": 0.01600000000325963,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-plain",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-rotated",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-scaled",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-reflected",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-oblique",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-plain",
+      "proposals": [],
+      "elapsed_seconds": 0.015000000013969839,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-rotated",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-scaled",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-reflected",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-oblique",
+      "proposals": [],
+      "elapsed_seconds": 0.0,
+      "stop_reason": null,
+      "model_confirmed": false
+    }
+  ],
+  "seconds": 5,
+  "max_proposals": 32,
+  "checker_seal_sha256": "2737ab7037b5c5122db9519a1bc97e1f06fc5048c4e3d8c25a94e3f9e04641c9",
+  "study_sha256": "f244c9c534a1c9a4a30918006350a5be78440a8e9375dfe75dd8f71f1e94404c",
+  "runtime_sha256": {
+    "imageCompositeConverterFallbackGroups.py": "d6b75dc5f886e4dbeb2ed270f7de013003e9266f227914398ba0f84717afdad5",
+    "imageCompositeConverterFallbackStructure.py": "9d88bc039123da4f7c16b956bb7e01e881757697146728722cddfdb07a126fc1",
+    "imageCompositeConverterFallbackComposition.py": "6ab07e513f3dc2e128bccd2971015cba3cfc78dbdd1c44010a5c63dac8550d30",
+    "imageCompositeConverterAdaptiveSearch.py": "9103c46905f8c6a6162e34c7e52e967e3e93345564f778c388431f094853fae6"
+  },
+  "converter_executions": 0,
+  "real_reserves_executed": false,
+  "model_promotions": 0
+}
