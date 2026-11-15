@@ -478,7 +478,9 @@ $("use-plan-b").addEventListener("click", async () => {
   preparingPlanB = true; controls(); notice();
   $("use-plan-b").textContent = "Plan-B-Varianten werden vorbereitet …";
   try {
-    const report = await post(`/api/jobs/${current.id}/workbench`, {});
+    const description = $("description").value;
+    const report = await post(`/api/jobs/${current.id}/workbench`, {description});
+    if (report.source_description !== description.trim()) throw new Error("Der Webserver hat noch die alte Beschreibung übernommen. Bitte nach Abschluss laufender Aufgaben den Webserver neu starten und diese Seite neu laden.");
     window.location.assign(`/workbench?run=${encodeURIComponent(report.id)}`);
   } catch (error) { notice(error.message); }
   finally {

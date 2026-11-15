@@ -657,6 +657,24 @@ def test_conversion_handoff_prepares_exact_svg_description_and_reuses_run(jobs, 
     assert error.value.status == 409
 
 
+def test_plan_b_handoff_uses_editor_description_instead_of_cached_task(jobs, job):
+    finished_svg(jobs, job)
+    workbench = gui.Workbench(jobs)
+    original = workbench.from_job(job['id'])
+    folder = workbench.folder(original['id'])
+    previous = (folder / 'report.json').read_bytes()
+    updated = 'Ein grauer Kreis mit einem Rand im Vordergrund.'
+    fresh = workbench.from_job(job['id'], dict(description=updated))
+    assert fresh['id'] != original['id']
+    assert fresh['source_description'] == updated
+    assert all(case['description'].startswith(updated) for case in fresh['cases'])
+    assert workbench.from_job(job['id'], dict(description=updated))['id'] == fresh['id']
+    assert (folder / 'report.json').read_bytes() == previous
+    assert jobs.snapshot(job['id'])['description'] == job['description']
+    with pytest.raises(gui.RequestError):
+        workbench.from_job(job['id'], dict(description=''))
+
+
 def test_restart_recovers_result_and_marks_unfinished_jobs(jobs, job):
     job.update(status="running", started=0)
     jobs.save(job)

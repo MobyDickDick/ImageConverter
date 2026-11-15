@@ -1017,27 +1017,33 @@ class Workbench:
             if previous['status'] == 'running':
                 raise RequestError('Bitte die laufende Aufgabe zuerst beenden.', 409)
             result = self.prepare(dict(svg=(folder / 'source.svg').read_text(encoding='utf-8'),
-                                       description=previous['source_description'],
-                                       name=previous['name'], seed=previous['seed']))
+                                       description=payload.get('description', previous['source_description']),
+                                       name=previous['name'], seed=payload.get('seed', previous['seed'])))
             new_folder = self.folder(result['id'])
             report = read_report(new_folder)
             report['reprepared_from'] = run_id
             save_report(new_folder, report)
             return self.snapshot(result['id'])
 
-    def from_job(self, job_id):
+    def from_job(self, job_id, payload=None):
         with self.jobs.lock:
             job = self.jobs.snapshot(job_id)
             if job['status'] != 'done' or not job.get('result') or job.get('quality') != 'passed':
                 raise RequestError('Bitte zuerst ein SVG mit bestandener Qualitätsprüfung erstellen.', 409)
+            description = (payload or {}).get('description', job['description'])
+            if not isinstance(description, str) or not 1 <= len(description.strip()) <= 12000:
+                raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
+            description = description.strip()
             if job.get('workbench_id'):
-                return self.snapshot(job['workbench_id'])
+                previous = self.snapshot(job['workbench_id'])
+                if previous['source_description'] == description:
+                    return previous
             folder = self.jobs.folder(job_id)
             quality = saved_svg_quality(folder / 'source.png', folder / 'result.svg')
             if not quality or not quality['passed']:
                 raise RequestError('Das gespeicherte SVG besteht die erneute Pixelprüfung nicht.', 409)
             report = self.prepare(dict(svg=(folder / 'result.svg').read_text(encoding='utf-8'),
-                                       description=job['description'], name=Path(job['name']).stem + '.svg'))
+                                       description=description, name=Path(job['name']).stem + '.svg'))
             from tools.plan_b_workbench import read_report, save_report
             run_folder = self.folder(report['id'])
             stored = read_report(run_folder)
@@ -1254,6 +1260,7 @@ class Handler(BaseHTTPRequestHandler):
                     return self.json(dict(native_file_dialogs=os.name == 'nt',
                         application='imageconverter_gui', api_version=1,
                         workbench_native_exports=True,
+                        workbench_description_updates=True,
                         parallel_background_conversion=True,
                         editable_search_seed=True,
                         image_recognition=True,
@@ -1404,7 +1411,7 @@ class Handler(BaseHTTPRequestHandler):
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))
                     if not remove and action == 'workbench':
-                        return self.json(self.server.workbench.from_job(job_id), 201)
+                        return self.json(self.server.workbench.from_job(job_id, payload), 201)
             raise RequestError("Nicht gefunden.", 404)
         except (RequestError, CatalogError) as exc:
             self.json({"error": str(exc)}, exc.status)
@@ -1450,7 +1457,7 @@ class Handler(BaseHTTPRequestHandler):
                 report = workbench.snapshot(report_path.parent.name)
                 runs.append({k: report[k] for k in ('id', 'name', 'created', 'seed', 'status', 'summary', 'active_case')})
             return self.json(runs)
-        match = re.fullmatch(r'/api/workbench/([0-9a-f]{32})(?:/(report|csv|bundle|asset))?', path)
+        match = re.fullmatch(r'/api/workbench/([0-9a-f]{32})(?:/(report|csv|bundle|asset|description))?', path)
         if not match:
             raise RequestError('Nicht gefunden.', 404)
         run_id, asset = match.groups()
@@ -1458,6 +1465,8 @@ class Handler(BaseHTTPRequestHandler):
             data, mime, filename = workbench.export_data(run_id, asset)
             return self.respond(data, mime, download=filename)
         report = workbench.snapshot(run_id)
+        if asset == 'description':
+            return self.json(find_svg_description(report['name']))
         folder = workbench.folder(run_id)
         if asset is None:
             return self.json(report)

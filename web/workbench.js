@@ -6,6 +6,7 @@ let loadedSource = null, previewUrl = null;
 let activity = null;
 let nativeFileDialogs = false;
 let nativeExportDialogs = false;
+let workbenchDescriptionUpdates = false;
 const labels = {prepared: "Vorbereitet", running: "Läuft", completed: "Abgeschlossen", cancelled: "Abgebrochen", interrupted: "Unterbrochen", error: "Ausführungsfehler"};
 async function request(path, body) {
   const response = await fetch(path, body === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json", "X-ImageConverter": "1"}, body: JSON.stringify(body)});
@@ -22,12 +23,15 @@ function asset(path, download = false) { return `/api/workbench/${current.id}/as
 function controls() {
   const running = current?.status === "running";
   const unpreparedSource = loadedSource && loadedSource.preparedId !== current?.id;
+  const editedDescription = current && $("description").value.trim() !== current.source_description;
   for (const id of ["file", "description", "seed", "iterations", "timeout"]) $(id).disabled = busy || running;
   $("pick-reference").disabled = busy || running;
+  $("load-description").disabled = busy || running || !current || Boolean(loadedSource);
   $("reprepare").disabled = busy || running || !current;
-  $("prepare").disabled = busy || running || !loadedSource || !$("description").value.trim();
-  $("run-selected").disabled = busy || running || Boolean(activity) || unpreparedSource || !current || !selected.size;
-  $("run-all").disabled = busy || running || Boolean(activity) || unpreparedSource || !current;
+  $("prepare").disabled = busy || running || (!loadedSource && !current) || !$("description").value.trim();
+  $("prepare").textContent = current && !loadedSource ? "Mit dieser Beschreibung neu vorbereiten →" : "Varianten vorbereiten →";
+  $("run-selected").disabled = busy || running || Boolean(activity) || unpreparedSource || editedDescription || !current || !selected.size;
+  $("run-all").disabled = busy || running || Boolean(activity) || unpreparedSource || editedDescription || !current;
   $("select-all").disabled = busy || running || !current;
   $("cancel").hidden = !running; $("cancel").disabled = busy;
   $("activity-cancel").disabled = busy;
@@ -83,7 +87,7 @@ function restoreSource(report) {
   loadedSource = null; $("file").value = "";
   $("description").value = report.source_description;
   $("seed").value = report.seed;
-  $("description-source").textContent = "Beschreibung aus dieser gespeicherten Aufgabe geladen. Für eine neue Aufgabe ein SVG auswählen.";
+  $("description-source").textContent = "Beschreibung aus dieser gespeicherten Aufgabe geladen. Änderungen mit «Neu vorbereiten» für alle 17 Fälle übernehmen.";
   const original = report.cases[0];
   sourcePreview(`/api/workbench/${report.id}/asset?path=source.svg`, `${report.name} · ${original.width} × ${original.height} px`);
 }
@@ -204,6 +208,13 @@ async function operation(callback) {
   finally { busy = false; controls(); await refreshActivity().catch(() => {}); }
 }
 $("description").addEventListener("input", controls);
+$("load-description").addEventListener("click", () => operation(async () => {
+  if (!workbenchDescriptionUpdates) throw new Error("Bitte nach Abschluss laufender Aufgaben den Webserver neu starten und diese Seite neu laden, um aktuelle Beschreibungen zu übernehmen.");
+  const result = await request(`/api/workbench/${current.id}/description`);
+  if (!result.description) throw new Error("Für diese Vorlage wurde keine gespeicherte Bildbeschreibung gefunden.");
+  $("description").value = result.description;
+  $("description-source").textContent = "Aktuelle Bildbeschreibung geladen. Mit «Neu vorbereiten» für alle 17 Fälle übernehmen.";
+}));
 $("file").addEventListener("change", () => operation(loadSource));
 $("pick-reference").addEventListener("click", () => operation(async () => {
   const result = await request("/api/pick", {kind: "workbench"});
@@ -212,17 +223,23 @@ $("pick-reference").addEventListener("click", () => operation(async () => {
 $("source-image").addEventListener("load", () => { $("source-loading").hidden = true; });
 $("source-image").addEventListener("error", () => { $("source-image").hidden = true; $("source-loading").hidden = false; $("source-loading").textContent = "Die SVG-Vorschau konnte nicht angezeigt werden."; });
 $("prepare").addEventListener("click", () => operation(async () => {
-  const source = loadedSource; if (!source) throw new Error("Bitte zuerst ein SVG auswählen.");
+  const source = loadedSource; if (!source && !current) throw new Error("Bitte zuerst ein SVG auswählen.");
+  if (!source && !workbenchDescriptionUpdates) throw new Error("Bitte nach Abschluss laufender Aufgaben den Webserver neu starten und diese Seite neu laden, um die geänderte Beschreibung zu übernehmen.");
   const seedText = $("seed").value.trim();
   // JSON numbers lose precision for large replay seeds. Send their exact decimal string.
   if (seedText && !/^\d+$/.test(seedText)) throw new Error("Bitte einen nichtnegativen ganzzahligen Seed eingeben.");
-  const report = await request("/api/workbench/prepare", {svg: source.text, name: source.file.name, description: $("description").value, seed: seedText || null});
-  source.preparedId = report.id;
+  const report = source
+    ? await request("/api/workbench/prepare", {svg: source.text, name: source.file.name, description: $("description").value, seed: seedText || null})
+    : await request(`/api/workbench/${current.id}/reprepare`, {description: $("description").value, seed: seedText || null});
+  if (source) source.preparedId = report.id;
+  else restoreSource(report);
   render(report, true);
+  window.history.replaceState(null, "", `/workbench?run=${encodeURIComponent(report.id)}`);
   await history();
 }));
 $("select-all").addEventListener("change", () => { selected = new Set($("select-all").checked ? current.cases.map(c => c.case_id) : []); render(current); });
 async function run(all) {
+  if ($("description").value.trim() !== current.source_description) throw new Error("Bitte die Varianten zuerst mit der geänderten Beschreibung neu vorbereiten.");
   const iterations = Number($("iterations").value), timeout = Number($("timeout").value);
   if (!Number.isInteger(iterations) || iterations < 1 || iterations > 4096 || timeout < 1 || timeout > 600) throw new Error("Bitte gültige Iterationen (1–4096) und ein Zeitlimit (1–600 Sekunden) eingeben.");
   render(await request(`/api/workbench/${current.id}/start`, {cases: all ? current.cases.map(c => c.case_id) : [...selected], iterations, timeout})); schedule();
@@ -230,7 +247,8 @@ async function run(all) {
 $("run-selected").addEventListener("click", () => operation(() => run(false)));
 $("run-all").addEventListener("click", () => operation(() => run(true)));
 $("reprepare").addEventListener("click", () => operation(async () => {
-  const report = await request(`/api/workbench/${current.id}/reprepare`, {});
+  if (!workbenchDescriptionUpdates && $("description").value.trim() !== current.source_description) throw new Error("Bitte nach Abschluss laufender Aufgaben den Webserver neu starten und diese Seite neu laden, um die geänderte Beschreibung zu übernehmen.");
+  const report = await request(`/api/workbench/${current.id}/reprepare`, {description: $("description").value, seed: $("seed").value.trim() || null});
   restoreSource(report); render(report, true); await history();
   window.history.replaceState(null, "", `/workbench?run=${encodeURIComponent(report.id)}`);
 }));
@@ -265,6 +283,7 @@ async function init() {
     const config = await request("/api/config");
     nativeFileDialogs = config.native_file_dialogs;
     nativeExportDialogs = Boolean(nativeFileDialogs && config.workbench_native_exports);
+    workbenchDescriptionUpdates = Boolean(config.workbench_description_updates);
   } catch (error) {
     if (error.status !== 404) throw error;
     $("server-version-warning").textContent = "Der Webserver läuft noch mit einer älteren Version. Lass laufende Konvertierungen fertig werden und starte ihn danach über startWebServer.cmd neu. Lade anschliessend diese Seite neu, um die neuen Funktionen zu verwenden.";

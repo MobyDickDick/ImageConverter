@@ -308,6 +308,42 @@ def test_workbench_respects_active_gui_conversion(server):
         server.jobs.jobs.pop('other')
 
 
+def test_reprepare_applies_edited_description_to_every_case_without_overwriting_evidence(server):
+    original = server.workbench.prepare(dict(svg=SVG, description=DESCRIPTION, seed=472, name='Quelle.svg'))
+    folder = server.workbench.folder(original['id'])
+    previous = (folder / 'report.json').read_bytes()
+    updated = 'Ein grüner Kreis auf weissem Hintergrund. Der Rand liegt im Vordergrund.'
+    status, data = send(server, '/api/workbench/' + original['id'] + '/reprepare',
+                        dict(description=updated, seed='472'))
+    fresh = json.loads(data)
+    assert status == 200 and fresh['source_description'] == updated
+    assert fresh['effective_source_description'] == updated
+    assert fresh['cases'][0]['description'] == updated
+    assert all(c['description'].startswith(updated) for c in fresh['cases'])
+    assert [c['input_sha256'] for c in fresh['cases']] == [c['input_sha256'] for c in original['cases']]
+    new_folder = server.workbench.folder(fresh['id'])
+    assert (new_folder / 'source_description.txt').read_text(encoding='utf-8') == updated
+    for case in fresh['cases']:
+        assert updated in (new_folder / case['case_id'] / 'input' / 'descriptions.xml').read_text(encoding='utf-8')
+    assert (folder / 'report.json').read_bytes() == previous
+    assert send(server, '/api/workbench/' + original['id'] + '/reprepare', dict(description=''))[0] == 400
+
+
+def test_workbench_can_load_current_catalog_description_without_mutating_saved_task(server, monkeypatch):
+    original = server.workbench.prepare(dict(svg=SVG, description=DESCRIPTION, seed=472, name='Quelle.svg'))
+    folder = server.workbench.folder(original['id'])
+    previous = (folder / 'report.json').read_bytes()
+    calls = []
+    def lookup(name):
+        calls.append(name)
+        return dict(description='Aktualisierte Beschreibung.', description_source='catalog.xml')
+    monkeypatch.setattr(gui, 'find_svg_description', lookup)
+    status, data = send(server, '/api/workbench/' + original['id'] + '/description')
+    assert status == 200 and json.loads(data)['description'] == 'Aktualisierte Beschreibung.'
+    assert calls == ['Quelle.svg']
+    assert (folder / 'report.json').read_bytes() == previous
+
+
 @pytest.mark.parametrize('foreground_kind', ['conversion', 'workbench'])
 @pytest.mark.parametrize('background_first', [False, True])
 @pytest.mark.parametrize('cancel_background', [False, True])

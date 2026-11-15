@@ -14,6 +14,8 @@ function element() {
     addEventListener(name, handler) {this.listeners[name] = handler;},
     getAttribute(name) {return this.attributes[name];},
     setAttribute(name, value) {this.attributes[name] = value;},
+    setCustomValidity(message) {this.validationMessage = message;},
+    reportValidity() {return !this.validationMessage;},
     querySelector() {return this.child ||= element();},
     querySelectorAll() {return this.children;}};
 }
@@ -31,6 +33,7 @@ test('incremental native previews refresh while conversion remains active', () =
     return elements.get(id);
   };
   const context = vm.createContext({
+    crypto: require('node:crypto').webcrypto,
     document: {getElementById: get, createElement: element, querySelector: element},
     window: {location: {search: ''}, addEventListener() {}, open() {
       const child = popup();
@@ -113,6 +116,7 @@ for (const parallel of [false, true]) {
     const opened = [];
     const timers = [];
     const context = vm.createContext({
+      crypto: require('node:crypto').webcrypto,
       document: {getElementById: get, createElement: element, querySelector: element},
       window: {location: {search: ''}, addEventListener() {},
         open(...args) {opened.push(args); return popup();}}, URLSearchParams,
@@ -120,7 +124,7 @@ for (const parallel of [false, true]) {
       fetch: async (url, options) => {
         calls.push([url, options]);
         let result;
-        if (url === '/api/config') result = {native_file_dialogs: false,
+        if (url === '/api/config') result = {native_file_dialogs: false, editable_search_seed: true,
           ...(parallel ? {parallel_background_conversion: true} : {})};
         // An older server ignores scope=foreground and returns both lanes.
         else if (url === '/api/jobs?scope=foreground') result = [background, manual];
@@ -153,3 +157,30 @@ for (const parallel of [false, true]) {
     assert.equal(timers.length, 1);
   });
 }
+
+test('Plan B receives the current editor text even before autosave', async () => {
+  const elements = new Map(), calls = [];
+  const get = id => {
+    if (!elements.has(id)) elements.set(id, element());
+    return elements.get(id);
+  };
+  let destination;
+  const context = vm.createContext({
+    document: {getElementById: get, createElement: element, querySelector: element},
+    window: {location: {search: '', assign(url) {destination = url;}}, addEventListener() {}},
+    URLSearchParams, setTimeout() {}, clearTimeout() {},
+    fetch: async (url, options) => {
+      if (url === '/api/config') return new Promise(() => {});
+      calls.push([url, options]);
+      return {ok: true, json: async () => ({id: 'b'.repeat(32), source_description: JSON.parse(options.body).description})};
+    },
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '../web/app.js'), 'utf8'), context);
+  vm.runInContext('current = {id: "' + 'a'.repeat(32) + '", description: "Alter Text."};', context);
+  get('description').value = 'Aktuelle Beschreibung mit grauem Rahmen.';
+  await get('use-plan-b').listeners.click();
+  const [url, options] = calls.find(([url]) => url.endsWith('/workbench'));
+  assert.equal(url, '/api/jobs/' + 'a'.repeat(32) + '/workbench');
+  assert.deepEqual(JSON.parse(options.body), {description: get('description').value});
+  assert.equal(destination, '/workbench?run=' + 'b'.repeat(32));
+});
