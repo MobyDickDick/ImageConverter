@@ -55,6 +55,26 @@ def test_elementwise_symbol_fit_logs_distinct_iteration_parameter_hashes() -> No
     assert len(set(hashes[:12])) == 12
 
 
+def test_symbol_fallback_keeps_plural_diagonals_and_stacked_symbol_marks_behind_front_frame():
+    from xml.etree import ElementTree as ET
+    raster = np.full((80,40,3),180,dtype=np.uint8)
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=40,height=80,description='Die Diagonalen sind grau. Oben in der Mitte ein + Zeichen und darunter ein "-" Zeichen. Ganz zuforderst liegt ein grauer Rahmen.',
+        perc_img=raster,render_svg_to_numpy_fn=lambda *args:raster,calculate_error_fn=lambda *args:0.)
+    assert result is not None
+    params = result[3]
+    assert params['diag1_width'] > 0 and params['diag2_width'] > 0
+    assert params['plus_width'] > 0 and params['minus_width'] > 0
+    assert params['minus_below'] and params['border_foreground']
+    root = ET.fromstring(result[1])
+    lines = root.findall('{http://www.w3.org/2000/svg}line')
+    assert len(lines) == 5
+    plus,vertical,minus = lines[2:]
+    assert float(minus.get('y1')) > float(vertical.get('y2'))
+    assert (float(plus.get('x1'))+float(plus.get('x2')))/2 == (float(minus.get('x1'))+float(minus.get('x2')))/2
+    assert root[-1].tag.endswith('rect') and root[-1].get('fill') == 'none'
+
+
 def test_symbol_params_detect_glyph_geometry_from_raster() -> None:
     raster = np.ones((80, 40, 3), dtype=np.uint8) * 150
     raster[:, 18:22] = 210

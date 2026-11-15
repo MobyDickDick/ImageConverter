@@ -615,6 +615,8 @@ def _build_structured_symbol_svg(
     chevron_peak_x_ratio: float = 1.0,
     chevron_peak_y_ratio: float = 0.5,
     gradient_vertical: bool = False,
+    minus_below: bool = False,
+    border_foreground: bool = False,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -631,6 +633,10 @@ def _build_structured_symbol_svg(
     minus_y = plus_cy
     minus_half = max(2.0, min(safe_w, safe_h) * 0.07)
     minus_start_x = plus_cx + plus_half * float(minus_gap_ratio)
+    minus_length = minus_half*1.8
+    if minus_below:
+        minus_y = plus_cy + plus_half * float(minus_gap_ratio)
+        minus_start_x, minus_length = plus_cx-plus_half, 2*plus_half
     diagonal_inset = max(0.0, min(0.45, float(diagonal_inset_ratio)))
     diag_x0 = content_x + content_w * diagonal_inset
     diag_x1 = content_x + content_w * (1.0 - diagonal_inset)
@@ -663,20 +669,22 @@ def _build_structured_symbol_svg(
     # later gradient reference render as transparent/black during optimization.
     definitions, gradient_panel = gradient_rects.split("  </defs>\n", 1)
     definitions += "  </defs>\n"
+    frame = (f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" '
+             f'fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n')
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
         f'{definitions}'
         f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#ffffff" stroke="none"/>\n'
         f'{gradient_panel}'
-        f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
+        + ('' if border_foreground else frame)
         + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
         + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
         + (f'  <path d="M {chevron_x0:g} {chevron_y0:g} L {chevron_x1:g} {chevron_peak_y:g} L {chevron_x0:g} {chevron_y1:g}" fill="none" stroke="{_color_hex(diag_gray)}" stroke-width="{chevron_width:.2f}" stroke-linejoin="round" stroke-linecap="butt" clip-path="url(#innerRect)"/>\n' if chevron_width > 0 else '')
         + (f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
         + (f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
-        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
+        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_length:.2f}" y2="{minus_y:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
         + (f'  <circle cx="{safe_w * 0.5:.2f}" cy="{safe_h * 0.5:.2f}" r="{center_dot_radius:.2f}" fill="{_color_hex(center_dot_gray)}"/>\n' if center_dot_radius > 0 else '')
-        + '</svg>\n'
+        + (frame if border_foreground else '') + '</svg>\n'
     )
 
 
@@ -903,13 +911,13 @@ def _fit_symbol_element_by_element(
     description_text = (description or "").casefold()
     glyph_is_top = any(token in description_text for token in ("oben links", "top left", "top-left"))
     has_plus = "plus" in description_text or "+" in description_text
-    has_minus = "minus" in description_text
+    has_minus = bool(re.search(r'\bminus\w*\b|["„]\s*[-−]\s*["“]|(?<!\w)[-−]\s*zeichen\b', description_text))
     has_center_dot = "punkt" in description_text and any(
         token in description_text for token in ("mitte", "mittig", "zentrum", "center")
     )
     has_both_diagonals = any(
         token in description_text
-        for token in ("beide diagonalen", "beiden diagonalen", "andreaskreuz", "diagonalkreuz")
+        for token in ("beide diagonalen", "beiden diagonalen", "die diagonalen", "zwei diagonalen", "andreaskreuz", "diagonalkreuz")
     )
     diagonal_tl_br = bool(re.search(r"oben\s+links.*unten\s+rechts|unten\s+rechts.*oben\s+links", description_text))
     diagonal_tr_bl = bool(re.search(r"oben\s+rechts.*unten\s+links|unten\s+links.*oben\s+rechts", description_text))
@@ -954,6 +962,14 @@ def _fit_symbol_element_by_element(
     current.setdefault("center_dot_gray", 79.0)
     current["plus_width"] = float(current["plus_width"]) if has_plus else 0.0
     current["minus_width"] = 1.0 if has_minus else 0.0
+    if has_plus and has_minus and re.search(r'\bdarunter\b|\buntereinander\b', description_text):
+        current['minus_below'] = True
+        if 'mitte' in description_text or 'symmetrieachse' in description_text:
+            current['plus_x_ratio'] = .5
+        if 'oben' in description_text:
+            current['glyph_y_ratio'] = .12
+    current['border_foreground'] = bool(re.search(r'\b(?:vordergrund|zuforderst|ganz vorne)\b', description_text)
+                                        and any(t in description_text for t in ('rand','rahmen')))
     current["center_dot_radius"] = max(1.0, min(width, height) * 0.12) if has_center_dot else 0.0
     heat_exchanger_contract = (
         "heizelement" in description_text

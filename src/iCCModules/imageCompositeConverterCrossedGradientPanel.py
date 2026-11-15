@@ -16,8 +16,12 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _register
 
 def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, error_fn):
     text = ' '.join(normalize_description(description).casefold().split())
+    plus = bool(re.search(r'\bplus(?:zeichen)?\b|\+', text))
+    minus = bool(re.search(r'\bminus(?:zeichen)?\b|["„]\s*[-−]\s*["“]|(?<!\w)[-−]\s*zeichen\b', text))
+    stacked = plus and minus and bool(re.search(r'\bdarunter\b|\buntereinander\b', text))
     crossed = 'kreuz' in text or bool(re.search(r'\b(?:zwei|beide[nr]?|2)\s+(?:\w+\s+){0,3}diagonalen\b', text))
-    if not (crossed and all(t in text for t in ('grau', 'rechteck', 'diagonal', 'minus', 'horizontal', 'verlauf'))
+    crossed = crossed or (stacked and 'diagonalen' in text)
+    if not (crossed and minus and all(t in text for t in ('grau', 'rechteck', 'diagonal', 'horizontal', 'verlauf'))
             and any(t in text for t in ('rand', 'umrandung', 'rahmen'))
             and any(t in text for t in ('abgeschnitten', 'begrenzt'))):
         return None
@@ -51,7 +55,7 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
     yy,xx = np.indices(gray.shape,dtype=float)
     yy += .5
     xx += .5
-    sample_rows = np.flatnonzero(((yy[:,0] > top+h*.2) & (yy[:,0] < top+h*.37))
+    sample_rows = np.flatnonzero(((yy[:,0] > top+h*(.3 if stacked else .2)) & (yy[:,0] < top+h*(.42 if stacked else .37)))
                                | ((yy[:,0] > top+h*.63) & (yy[:,0] < top+h*.8)))
     axes = []
     for ascending in (False,True):
@@ -82,13 +86,17 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
         region = (distance < .7) & (yy > top+h*.2) & (yy < top+h*.8)
         shade = float(np.percentile(gray[region],15))
         axes.append((float(intercept),float(slope*height+intercept),max(1,w*.075),shade,distance))
-    # Observe a separate short horizontal mark above the crossing.
+    # Observe distinct marks above the crossing; wording selects their relation,
+    # while connected raster support determines their positions and sizes.
     mark = ((xx > left+w*.25) & (xx < left+w*.75) & (yy > top+h*.03)
-            & (yy < top+h*.2) & (darkness > 45))
+            & (yy < top+h*(.3 if stacked else .2)) & (darkness > 45))
     count,marks,mark_stats,_ = cv2.connectedComponentsWithStats(mark.astype('uint8'))
     if count < 2:
         return None
-    i = 1+int(np.argmax(mark_stats[1:, cv2.CC_STAT_AREA]))
+    eligible = [i for i in range(1,count) if mark_stats[i,cv2.CC_STAT_WIDTH] >= 2.5*mark_stats[i,cv2.CC_STAT_HEIGHT]]
+    if not eligible:
+        return None
+    i = max(eligible,key=lambda i:mark_stats[i,cv2.CC_STAT_AREA])
     mx,my,mw,mh,mark_area = mark_stats[i]
     # Subpixel placement spreads a short antialiased minus over three rows;
     # its thresholded outer rows need not fill 70% of the bounding rectangle.
@@ -96,11 +104,33 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
     if not (mw >= mh*2.5 and mw >= w*.12 and mark_area >= mw*mh*.6):
         return None
     minus_shade = float(np.percentile(gray[marks==i],10))
+    plus_geometry = []
+    plus_shade = None
+    if plus:
+        if not stacked:
+            return None
+        eligible = [j for j in range(1,count) if j != i
+                    and .65 < mark_stats[j,cv2.CC_STAT_WIDTH]/max(1,mark_stats[j,cv2.CC_STAT_HEIGHT]) < 1.5
+                    and mark_stats[j,cv2.CC_STAT_TOP]+mark_stats[j,cv2.CC_STAT_HEIGHT] < my
+                    and abs(mark_stats[j,cv2.CC_STAT_LEFT]+mark_stats[j,cv2.CC_STAT_WIDTH]/2-(mx+mw/2)) < w*.1]
+        if not eligible:
+            return None
+        j = max(eligible,key=lambda j:mark_stats[j,cv2.CC_STAT_AREA])
+        px,py,pw,ph,_ = mark_stats[j]
+        support = marks[py:py+ph,px:px+pw] == j
+        rows,cols = support.sum(axis=1),support.sum(axis=0)
+        hs,vs = int((rows >= pw*.7).sum()),int((cols >= ph*.7).sum())
+        if not (pw >= 4 and ph >= 4 and 0 < hs < ph*.6 and 0 < vs < pw*.6):
+            return None
+        plus_geometry = [float(px),float(py),float(pw),float(ph),float(hs),float(vs)]
+        plus_shade = float(np.percentile(gray[marks==j],10))
     rim = float(np.percentile(np.concatenate((gray[y:y+h,x+1],gray[y:y+h,x+w-2],
                                             gray[y+1,x:x+w],gray[y+h-2,x:x+w])),15))
     p = [left,top,right,bottom,1.2,peak,
          *axes[0][:3],*axes[1][:3],float(mx),float(my),float(mw),float(mh),
-         *paint,rim,axes[0][3],axes[1][3],minus_shade]
+         *plus_geometry,*paint,rim,axes[0][3],axes[1][3],minus_shade,
+         *([plus_shade] if plus else [])]
+    colors = 16+len(plus_geometry)
 
     def color(v):
         return '#'+f'{int(np.clip(round(v),0,255)):02x}'*3
@@ -108,10 +138,36 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
     def build(v):
         l,t,r,b,sw,peak = v[:6]
         stops = ''.join(f'<stop offset="{offset:.7f}" stop-color="{color(c)}"/>'
-                        for offset,c in zip((0,(peak-l)/(r-l),1),v[16:19]))
+                        for offset,c in zip((0,(peak-l)/(r-l),1),v[colors:colors+3]))
         lines = ''.join(f'<line x1="{v[k]:.6f}" y1="0" x2="{v[k+1]:.6f}" y2="{height}" '
-                        f'stroke="{color(v[20+i])}" stroke-width="{v[k+2]:.6f}"/>'
+                        f'stroke="{color(v[colors+4+i])}" stroke-width="{v[k+2]:.6f}"/>'
                         for i,k in enumerate((6,9)))
+        if stacked:
+            # Some SVG rasterizers ignore clipPath, even on individual lines.
+            # Intersect each stroke's four corners with the panel explicitly;
+            # the delivered native geometry must stay inside the frame too.
+            lines = ''
+            for i,k in enumerate((6,9)):
+                dx = v[k+1]-v[k]
+                nx,ny = height*v[k+2]/(2*np.hypot(dx,height)),-dx*v[k+2]/(2*np.hypot(dx,height))
+                polygon = [(v[k]+nx,ny),(v[k]-nx,-ny),(v[k+1]-nx,height-ny),(v[k+1]+nx,height+ny)]
+                for axis,bound,sign in ((0,l,1),(0,r,-1),(1,t,1),(1,b,-1)):
+                    clipped = []
+                    for start,end in zip(polygon,polygon[1:]+polygon[:1]):
+                        inside_start,inside_end = sign*(start[axis]-bound)>=0,sign*(end[axis]-bound)>=0
+                        if inside_start != inside_end:
+                            fraction = (bound-start[axis])/(end[axis]-start[axis])
+                            clipped.append(tuple(start[j]+fraction*(end[j]-start[j]) for j in (0,1)))
+                        if inside_end:
+                            clipped.append(end)
+                    polygon = clipped
+                points = ' '.join(f'{x:.6f},{y:.6f}' for x,y in polygon)
+                lines += f'<polygon points="{points}" fill="{color(v[colors+4+i])}"/>'
+        glyph = ''
+        if plus:
+            px,py,pw,ph,hs,vs = v[16:22]
+            glyph = (f'<rect x="{px:.6f}" y="{py+(ph-hs)/2:.6f}" width="{pw:.6f}" height="{hs:.6f}" fill="{color(v[colors+7])}"/>'
+                     f'<rect x="{px+(pw-vs)/2:.6f}" y="{py:.6f}" width="{vs:.6f}" height="{ph:.6f}" fill="{color(v[colors+7])}"/>')
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 f'<defs><linearGradient id="panelPaint" gradientUnits="userSpaceOnUse" x1="{l:.6f}" x2="{r:.6f}" y1="0" y2="0">'
                 f'{stops}</linearGradient><clipPath id="panelClip"><rect x="{l:.6f}" y="{t:.6f}" '
@@ -119,9 +175,9 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
                 f'<rect width="{width}" height="{height}" fill="white"/>'
                 f'<rect x="{l:.6f}" y="{t:.6f}" width="{r-l:.6f}" height="{b-t:.6f}" fill="url(#panelPaint)"/>'
                 f'<g clip-path="url(#panelClip)">{lines}<rect x="{v[12]:.6f}" y="{v[13]:.6f}" '
-                f'width="{v[14]:.6f}" height="{v[15]:.6f}" fill="{color(v[22])}"/></g>'
+                f'width="{v[14]:.6f}" height="{v[15]:.6f}" fill="{color(v[colors+6])}"/>{glyph}</g>'
                 f'<rect x="{l:.6f}" y="{t:.6f}" width="{r-l:.6f}" height="{b-t:.6f}" fill="none" '
-                f'stroke="{color(v[19])}" stroke-width="{sw:.6f}"/></svg>')
+                f'stroke="{color(v[colors+3])}" stroke-width="{sw:.6f}"/></svg>')
 
     def valid(v):
         l,t,r,b,sw,peak = v[:6]
@@ -132,11 +188,17 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
                 and abs(v[6]-l) < w*.15 and abs(v[7]-r) < w*.15
                 and abs(v[9]-r) < w*.15 and abs(v[10]-l) < w*.15
                 and l+(r-l)*.25 < v[12]+v[14]/2 < l+(r-l)*.75
-                and t < v[13] < t+(b-t)*.2 and .1*w < v[14] < .4*w and .5 < v[15] < h*.07
-                and np.all((v[16:] >= 0) & (v[16:] <= 255))
-                and min(v[16],v[18]) > v[19]+8 and v[17] > max(v[16],v[18])+12):
+                and t < v[13] < t+(b-t)*(.3 if stacked else .2) and .1*w < v[14] < .4*w and .5 < v[15] < h*.07
+                and np.all((v[colors:] >= 0) & (v[colors:] <= 255))
+                and min(v[colors],v[colors+2]) > v[colors+3]+8 and v[colors+1] > max(v[colors],v[colors+2])+12):
             return False
-        return max(v[20:]) < min(v[16],v[18])-20
+        if plus:
+            px,py,pw,ph,hs,vs = v[16:22]
+            if not (l < px < r-pw and t < py < v[13]-ph and .12*w < pw < .4*w
+                    and .65 < pw/ph < 1.5 and .5 < hs < ph*.6 and .5 < vs < pw*.6
+                    and abs(px+pw/2-(v[12]+v[14]/2)) < w*.08):
+                return False
+        return max(v[colors+4:]) < min(v[colors],v[colors+2])-20
 
     def details(rendered):
         error = ((pixels-rendered.astype(float))**2).mean(axis=2)/255**2
@@ -144,10 +206,11 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
         diagonal_errors = [float(error[(a[4] < 2.5) & (yy>top+h*.15) & (yy<top+h*.85)].mean()) for a in axes]
         actual = np.percentile(rendered[y+3:y+h-3,x:x+w].mean(axis=2),75,axis=0)
         profile_error = float(np.percentile(abs(actual[3:-3]-profile[3:-3]),95))
-        return dict(minus_mse=minus_error,diagonal_mse=diagonal_errors,profile_error_p95=profile_error,
-                    passed=bool(minus_error < .02 and max(diagonal_errors) < .02 and profile_error <= 8))
+        plus_error = float(error[max(0,py-1):min(height,py+ph+1),max(0,px-1):min(width,px+pw+1)].mean()) if plus else 0.
+        return dict(minus_mse=minus_error,plus_mse=plus_error,diagonal_mse=diagonal_errors,profile_error_p95=profile_error,
+                    passed=bool(minus_error < .02 and plus_error < .02 and max(diagonal_errors) < .02 and profile_error <= 8))
 
-    result = _register(p,16,build,valid,arr,render_fn,error_fn,'raster_crossed_gradient_panel_v1',
+    result = _register(p,colors,build,valid,arr,render_fn,error_fn,'raster_crossed_gradient_panel_v1',
                        satisfactory_fn=lambda p,m: details(m[3])['passed'],
                        refinement_steps=(1.,.5,.25,.125,.0625))
     if result is None:

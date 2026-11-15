@@ -463,6 +463,33 @@ def test_real_cli_boundary_failure_paths_and_metrics(tmp_path, monkeypatch, fail
         assert 3000 < len(result['converter_log_tail']) <= 4000
 
 
+@pytest.mark.parametrize('bad_pixels,blocked,attested', [(False,False,True),(True,False,True),(False,True,True),(False,False,False)])
+def test_timeout_rechecks_published_vectors_and_requires_completed_access_audit(tmp_path, monkeypatch, bad_pixels, blocked, attested):
+    output = tmp_path / 'run'
+    case = battery.prepare_cases(SVG, DESCRIPTION, output, 123)[0]
+    def timeout(command, **kwargs):
+        result_dir = output / case['case_id'] / 'conversion/converted_svgs'
+        result_dir.mkdir(parents=True)
+        svg = (output / case['reference_svg']).read_text(encoding='utf-8')
+        (result_dir / (case['case_id']+'.svg')).write_text(
+            svg.replace('fill="green"','fill="red"') if bad_pixels else svg,encoding='utf-8')
+        if attested:
+            (result_dir.parents[1]/'reference_access.json').write_text(json.dumps(
+                {'blocked_svg_reads':['forbidden.svg'] if blocked else []}),encoding='utf-8')
+        raise subprocess.TimeoutExpired(command,60)
+    monkeypatch.setattr(battery,'run_timed_process',timeout)
+    result = battery.run_case(case,output,timeout=60,iterations=64)
+    assert result['timed_out']
+    assert result['satisfactory'] == (not bad_pixels and not blocked and attested)
+    if blocked:
+        assert result['failures'] == ['reference_svg_access']
+    elif bad_pixels or not attested:
+        assert 'conversion_timeout' in result['failures']
+    else:
+        assert result['metrics']['foreground_iou'] >= .85
+        assert result['failures'] == []
+
+
 def test_all_sixteen_run_even_after_failure_and_overall_exit_is_red(tmp_path, monkeypatch):
     source = tmp_path / "source.svg"
     source.write_text(SVG, encoding="utf-8")

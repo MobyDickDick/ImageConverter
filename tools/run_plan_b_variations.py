@@ -110,7 +110,9 @@ def recover_case_output(conversion_dir: Path, cli_args: list[str], deadline: flo
             return False
         except ValueError:
             pass
-    seconds = deadline-time.time()-.25
+    # Leave time to measure/publish the final vector and finish the worker.
+    # A quarter second can be consumed by renderer cleanup alone on Windows.
+    seconds = deadline-time.time()-2.
     if seconds <= 0:
         return False
     print('[Plan B] Erster Versuch unvollständig; verbleibende Zeit für native Vektorsuche.', flush=True)
@@ -483,14 +485,24 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
     started = time.monotonic()
     try:
         with (case_dir / "converter.log").open("w", encoding="utf-8") as log:
-            completed = run_timed_process(command, cwd=working_root, env=environment,
-                                          stdout=log, stderr=subprocess.STDOUT, timeout=timeout, check=False)
+            try:
+                completed = run_timed_process(command, cwd=working_root, env=environment,
+                                              stdout=log, stderr=subprocess.STDOUT, timeout=timeout, check=False)
+            except subprocess.TimeoutExpired:
+                # A worker may have published its complete result before slow
+                # interpreter shutdown crosses the deadline. Independently
+                # verify those pixels/vectors; never trust its cached pass flag.
+                result['timed_out'] = True
+                completed = subprocess.CompletedProcess(command, None)
         result["returncode"] = completed.returncode
         access_report = case_dir / "reference_access.json"
         blocked = json.loads(access_report.read_text(encoding="utf-8"))["blocked_svg_reads"] if access_report.exists() else []
         result["blocked_svg_reads"] = blocked
         if blocked:
             result["failures"] = ["reference_svg_access"]
+            return result
+        if result.get('timed_out') and not access_report.exists():
+            result['failures'] = ['conversion_timeout']
             return result
         if completed.returncode:
             result["failures"] = ["converter_error"]
@@ -500,7 +512,7 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
                       for path in (case_dir / "conversion" / folder).glob("*.svg")
                       if path.stem.casefold() in {name.casefold(), "failed_" + name.casefold()}]
         if len(candidates) != 1:
-            result["failures"] = ["missing_or_ambiguous_output"]
+            result["failures"] = ["conversion_timeout" if result.get('timed_out') else "missing_or_ambiguous_output"]
             return result
         svg_path = candidates[0]
         svg = svg_path.read_text(encoding="utf-8")
@@ -508,6 +520,11 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
         if recovery_report.is_file():
             result['recovery'] = json.loads(recovery_report.read_text(encoding='utf-8'))
         result.update(measure_quality(reference, svg))
+        if result.get('timed_out'):
+            from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+            validate_svg_assertions(svg, description_assertions(case['description']))
+            if not result['satisfactory']:
+                result['failures'].append('conversion_timeout')
         result.update(output_svg=svg_path.relative_to(output).as_posix(), output_sha256=sha256(svg_path.read_bytes()))
         # Batch acceptance is based on independently measured saved vectors, not
         # the converter's historical success/failed labels or checkpoints.
