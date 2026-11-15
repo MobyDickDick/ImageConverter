@@ -129,6 +129,12 @@ erstellt keine GitHub-Issues oder automatischen Algorithmusänderungen.
 Die fachliche Nachbearbeitung folgt dem
 [Plan-B-Lernworkflow](plan_b_learning_workflow.md).
 
+Bei `AC0090_L` führten unabhängig optimierte Linienbreiten trotz der Vorgabe
+„Alle Linien sind gleich breit“ zu 17 fehlgeschlagenen Fällen. Der Pfeilfitter
+verwendet dafür jetzt eine gemeinsame Breite während der Suche; derselbe
+17-Fälle-Lauf besteht vollständig. Details und Gegenproben stehen im
+[Nachweis zur gemeinsamen Linienbreite](plan_b_arrow_width_2026-11-15.md).
+
 ## Ohne Browser
 
 Vorbereiten, anschliessend alle oder einzelne Fälle ausführen:

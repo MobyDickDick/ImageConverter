@@ -12,7 +12,9 @@ import numpy as np
 from src.iCCModules.imageCompositeConverterDualArrowBadge import looksLikeDualArrowDescriptionImpl
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register, _hex
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
-from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description, horizontal_bar_colors, arrow_head_directions
+from src.iCCModules.imageCompositeConverterDescriptionLanguage import (
+    normalize_description, horizontal_bar_colors, arrow_head_directions, description_assertions,
+)
 
 
 def _runs(indices):
@@ -161,23 +163,47 @@ def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, r
     if unexplained.sum() > max(2, foreground.sum()*.01):
         return None
     parameters = geometries + ([*bars[0][1]] if bars else []) + colors
-    geometry_count = 16+4*len(bars)
+    full_geometry_count = geometry_count = 16+4*len(bars)
+    equal_width = description_assertions(description).get('equal_stroke_width', False)
+    if equal_width:
+        # Fit one width for all observed shafts/bars. Projecting only the final
+        # SVG would invalidate its measured raster and optimized loss.
+        width_indices = [3, 11] + ([19] if bars else [])
+        parameters[3] = float(np.median([parameters[i] for i in width_indices]))
+        if bars:
+            parameters[17] += parameters[19]/2  # Search the crossbar center.
+        retained = [i for i in range(len(parameters)) if i not in width_indices[1:]]
+        full_parameter_count = len(parameters)
+        parameters = [parameters[i] for i in retained]
+        geometry_count -= len(width_indices)-1
+
+    def unpack(p):
+        if not equal_width:
+            return p
+        expanded = np.empty(full_parameter_count)
+        expanded[retained] = p
+        expanded[width_indices[1:]] = expanded[3]
+        return expanded
 
     def build(p):
+        p = unpack(p)
         parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">']
         for index in range(2):
             cx, top, bottom, sw, tcx, tip, base, half = p[index*8:index*8+8]
-            color = _hex(np.array(p[geometry_count+index*3:geometry_count+index*3+3]))
+            color = _hex(np.array(p[full_geometry_count+index*3:full_geometry_count+index*3+3]))
             parts.append(f'<rect x="{cx-sw/2:.6f}" y="{top:.6f}" width="{sw:.6f}" height="{bottom-top:.6f}" fill="{color}"/>')
             parts.append(f'<polygon points="{tcx:.6f},{tip:.6f} {tcx-half:.6f},{base:.6f} {tcx+half:.6f},{base:.6f}" fill="{color}"/>')
         if bars:
             x1, y, x2, h = p[16:20]
+            if equal_width:
+                y -= h/2
             index = bars[0][0]
-            color = _hex(np.array(p[geometry_count+index*3:geometry_count+index*3+3]))
+            color = _hex(np.array(p[full_geometry_count+index*3:full_geometry_count+index*3+3]))
             parts.append(f'<rect x="{x1:.6f}" y="{y:.6f}" width="{x2-x1:.6f}" height="{h:.6f}" fill="{color}"/>')
         return ''.join(parts)+'</svg>'
 
     def valid(p):
+        p = unpack(p)
         for index in range(2):
             cx, top, bottom, sw, tcx, tip, base, half = p[index*8:index*8+8]
             if not (-2 <= top < bottom <= height+2 and .3 <= sw <= width*.15

@@ -183,6 +183,41 @@ def fit(svg, description=DESCRIPTION, **kwargs):
                           error_fn=kwargs.get('error_fn', lambda a,b: normalized_mse(a,b)[0]))
 
 
+@pytest.mark.parametrize('bar', [False, True])
+@pytest.mark.parametrize('dx,red,blue', [(0., '#e62320', '#226ebc'), (3.3, '#b52d35', '#12628e')])
+def test_equal_arrow_widths_hold_during_search_and_in_saved_geometry(bar, dx, red, blue):
+    from src.iCCModules.imageCompositeConverterStrokeConstraints import validate_equal_stroke_width
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    source = drawing(bar=bar, dx=dx, red=red, blue=blue)
+    description = (DESCRIPTION if bar else SUBJECT_DESCRIPTION)+' Alle Linien sind gleich breit.'
+    widths = set()
+
+    def checked_render(svg, width, height):
+        # Check every candidate, including the initial estimate and rejected
+        # steps, so a final width projection cannot hide an unconstrained fit.
+        validate_equal_stroke_width(svg)
+        nodes = list(ET.fromstring(svg))
+        widths.add(float(nodes[0].get('width')))
+        return render(svg, width, height)
+
+    result = fit(source, description, render_fn=checked_render)
+    assert result is not None
+    assert len(widths) > 1  # The shared width is fitted, rather than frozen.
+    validate_svg_assertions(result['svg'], description_assertions(description))
+    assert measure_quality(render(source, 100, 150), result['svg'])['satisfactory']
+    np.testing.assert_array_equal(result['rendered'], render(result['svg'], 100, 150))
+
+
+@pytest.mark.parametrize('condition', ['', ' Nicht alle Linien sind gleich breit.'])
+def test_arrow_widths_remain_independent_without_positive_constraint(condition):
+    source = drawing().replace('width="1.8"', 'width="2.7"', 1).replace('width="1.8"', 'width="1.2"', 1)
+    result = fit(source, DESCRIPTION+condition)
+    assert result is not None
+    nodes = list(ET.fromstring(result['svg']))
+    assert float(nodes[2].get('width')) > float(nodes[0].get('width'))+.5
+    assert measure_quality(render(source, 100, 150), result['svg'])['satisfactory']
+
+
 @pytest.mark.parametrize('red,blue,dx', [('#e62320','#226ebc',0), ('#b52d35','#12628e',3.3)])
 def test_native_inventory_generalizes_colors_and_positions(red, blue, dx):
     svg = drawing(red=red, blue=blue, dx=dx)
