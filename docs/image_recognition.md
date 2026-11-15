@@ -5,6 +5,54 @@ Beschreibung nach dem Hochladen oder der Windows-Dateiauswahl automatisch.
 **Bild erkennen** lässt sich auch bei vorhandener Beschreibung verwenden.
 Eigene Texte werden dabei nicht überschrieben.
 
+## Beschreibung mit dem Bild abgleichen
+
+Die Weboberfläche prüft Beschreibungen beim Laden eines Bildes, beim Speichern
+einer Textkorrektur und vor einem Konvertierungsstart. **Beschreibung am Bild
+prüfen** vergleicht den aktuell sichtbaren Text auch ohne Speichern oder
+Konvertierung. Ein Prüfergebnis wird beim Auftrag gespeichert und bleibt nach
+einem Serverneustart verfügbar. Änderungen am Text kennzeichnen den alten
+Befund sofort als veraltet; beim Speichern entsteht eine neue Prüfung.
+Extern korrigierte Katalogtexte werden beim nächsten Laden erneut geprüft.
+
+Die Prüfung verwendet unabhängig vom Katalog die vorhandene Rastererkennung
+für einzelne einfache Grundformen. Sie vergleicht unterstützte deutsche Angaben
+zur Grundform, Flächenfarbe, Randfarbe und zum Hintergrund. Zum Beispiel meldet
+ein grauer Kreis bei **„Ein rotes Dreieck.“** die abweichende Grundform und
+Flächenfarbe. **„Ein grauer Kreis mit schwarzem Rand. Hintergrund: weiss.“**
+liefert Übereinstimmungen nur für diese Angaben. Nahe Farbgrenzen werden nicht
+als Widerspruch ausgelegt. Ein Quadrat darf auch als Rechteck beschrieben sein.
+
+Eine zusätzliche Konturprüfung kann die vollständig sichtbare äussere Grundform
+auch bei Verläufen und inneren Zeichen erkennen. Dann bleiben Flächenfarbe,
+Rand und innere Details ungeprüft. Eine abweichende Form wird in diesem Modus
+nur bei einer expliziten Angabe wie **„Äussere Grundform: ein Dreieck.“** als
+Widerspruch gemeldet: Ein beschriebenes Dreieck könnte sonst auch innerhalb
+einer äusseren Kreisform liegen. Knapp zugeschnittene, vollständige Kreise sind
+zulässig; deutlich abgeschnittene Formen und unsichere Konturen bleiben offen.
+
+Die Anzeige unterscheidet **Abweichung erkannt**, **prüfbare Angaben stimmen
+überein**, **nicht sicher prüfbar** und **keine Beschreibung vorhanden**.
+Negationen, Alternativen und Vergleichssätze werden vorsichtig ausgelassen;
+beliebiger Freitext, Schriftinhalt, Anordnung und komplexe Motive bleiben offen.
+Selbst eine vollständig identische Katalogbeschreibung ist kein unabhängiger
+Beleg für ihre Richtigkeit. Ähnliche Referenzbilder begründen keinen Widerspruch.
+Eine Übereinstimmung ist keine vollständige Semantikabnahme. Die Prüfung
+überschreibt keine Texte und blockiert keine Konvertierung; sie ergänzt die
+bisherigen Ergebnisprüfungen um Hinweise zur Eingabe.
+
+API: `POST /api/jobs/<id>/check` mit `{"description":"Ein roter Kreis."}`
+liefert den Auftrag samt `description_check`. Der Befund bindet sich an den
+geprüften Text und den SHA-256 der normalisierten Bildpunkte. `status` ist
+`mismatch`, `partial`, `unknown` oder `missing`; `checks` enthält die einzelnen
+Vergleiche. Die Anfrage benötigt wie die übrigen GUI-Aktionen den lokalen
+Host/Origin und `X-ImageConverter: 1`. Laufende Aufträge werden mit HTTP 409
+zurückgewiesen. `/api/config` weist die Funktion mit `description_check` aus.
+Nach dem Update laufende Konvertierungen abschliessen, den Webserver neu
+starten und die Browserseite neu laden.
+
+## Erkennung und Referenzsuche
+
 Die erste Stufe vergleicht Bildpunkte mit rund 500 verwendbaren, bereits
 pixelgeprüften Katalogpaaren. Identische Bildpunkte liefern die aktuelle
 Beschreibung unabhängig vom Dateinamen und Bildformat. Widersprüchliche

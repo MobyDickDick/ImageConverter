@@ -156,6 +156,9 @@ def plain_shape(image):
         description += f' mit {adjective(rim_color, "em")} Rand'
     description += f'. Hintergrund: {background_color}.'
     return dict(kind='plain_shape', shape=shape, description=description,
+                fill_color=color, background_color=background_color, rim_color=rim_color,
+                fill_rgb=fill.tolist(), background_rgb=background.tolist(),
+                rim_rgb=rim.tolist() if rim is not None else None,
                 message=f'Einfache Grundform erkannt: {shape}. Bitte am Original prüfen.')
 
 

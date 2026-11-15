@@ -243,7 +243,12 @@ class Jobs:
                 description = self.catalog_description(stored['name'])
                 if description != stored['description']:
                     stored.update(description=description, description_origin='catalog' if description else 'empty')
+                    self._check_description(stored)
                     self.save(stored)
+            if (stored['status'] != 'running' and not stored.get('description_check')
+                    and (folder/'source.png').is_file()):
+                self._check_description(stored)
+                self.save(stored)
             job = dict(self.jobs[job_id])
             # JSON numbers lose 64-bit integer precision in the browser.
             if 'search_seed' in job:
@@ -318,6 +323,26 @@ class Jobs:
                        result=False, quality="unknown", profile="normal", elapsed=0,
                        source_sha256=source_sha256, description_origin=origin)
             self.jobs[job_id] = job
+            self._check_description(job)
+            self.save(job)
+            return self.snapshot(job_id)
+
+    def _check_description(self, job: dict, description: str | None = None) -> None:
+        from src.imageConverterDescriptionCheck import check_description
+        from src.imageConverterRecognition import rgb_image
+        job['description_check'] = check_description(
+            rgb_image(self.folder(job['id'])/'source.png'),
+            job['description'] if description is None else description)
+
+    def check_description(self, job_id: str, description: str) -> dict:
+        if not isinstance(description, str) or len(description) > 12000:
+            raise RequestError("Bitte eine Bildbeschreibung mit höchstens 12'000 Zeichen eingeben.")
+        with self.lock:
+            self.folder(job_id)
+            job = self.jobs[job_id]
+            if job['status'] == 'running' or job_id in self.processes:
+                raise RequestError('Bitte zuerst die laufende Konvertierung beenden.', 409)
+            self._check_description(job, description)
             self.save(job)
             return self.snapshot(job_id)
 
@@ -343,6 +368,7 @@ class Jobs:
                 raise RequestError('Bitte zuerst die laufende Konvertierung beenden.', 409)
             job = self.editable(job_id)
             job.update(description=description, description_origin='user')
+            self._check_description(job)
             self._persist_description(job)
             return self.snapshot(job['id'])
 
@@ -367,6 +393,7 @@ class Jobs:
             job['recognition'] = recognition
             if job['status'] == 'ready' and not job['description'].strip() and recognition['automatic']:
                 job.update(description=recognition['automatic']['description'], description_origin='recognition')
+            self._check_description(job)
             self.save(job)
             return self.snapshot(job_id)
 
@@ -402,6 +429,7 @@ class Jobs:
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
+            self._check_description(job)
             if origin == 'user' and not background:
                 self._persist_description(job)
             self.save(job)
@@ -419,6 +447,7 @@ class Jobs:
             job = self.jobs[copied["id"]]
             job.update(description=previous["description"], profile=previous["profile"],
                        description_origin=previous.get('description_origin', 'user'))
+            self._check_description(job)
             if previous.get('recognition'):
                 job['recognition'] = previous['recognition']
             if previous.get("sample"):
@@ -1228,6 +1257,7 @@ class Handler(BaseHTTPRequestHandler):
                         parallel_background_conversion=True,
                         editable_search_seed=True,
                         image_recognition=True,
+                        description_check=True,
                         description_autosave=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
@@ -1368,6 +1398,8 @@ class Handler(BaseHTTPRequestHandler):
                         return self.json(jobs.recognize(job_id))
                     if not remove and action == 'description':
                         return self.json(jobs.save_description(job_id, payload.get('description')))
+                    if not remove and action == 'check':
+                        return self.json(jobs.check_description(job_id, payload.get('description')))
                     if not remove and action in {"cancel", "save"}:
                         operation = jobs.cancel if action == "cancel" else jobs.save_as
                         return self.json(operation(job_id))

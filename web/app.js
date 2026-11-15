@@ -2,6 +2,7 @@
 let nativeFileDialogs = false, preparingPlanB = false, serverNeedsRestart = false;
 let editableSearchSeed = false;
 let imageRecognition = false;
+let descriptionCheck = false;
 let descriptionAutosave = false, descriptionDirty = false, descriptionSaveTimer, descriptionSaving = null;
 const $ = (id) => document.getElementById(id);
 let current = null;
@@ -52,6 +53,7 @@ function controls() {
   const running = busy || Boolean(activeId);
   $("convert").disabled = running || !current || !$("description").value.trim() || !editableSearchSeed;
   $("recognize").disabled = running || !current || !imageRecognition;
+  $("check-description").disabled = running || !current || !descriptionCheck || !$("description").value.trim() || Boolean(descriptionSaving);
   $("save-description").disabled = running || !current || !descriptionAutosave || !descriptionDirty || Boolean(descriptionSaving);
   for (const button of $("recognition-results").querySelectorAll("button")) button.disabled = running;
   for (const id of ["seed", "random-seed"]) $(id).disabled = running || !current || !editableSearchSeed;
@@ -113,6 +115,37 @@ function draftQuality(job) {
     message: parts.join(" "),
     history: pixels === true ? `Bildqualität bestanden · ${error ? "Beschreibung prüfen" : "Gesamtprüfung offen"}` : `Entwurf · ${imageSummary}`,
   };
+}
+function renderDescriptionCheck(job) {
+  const container = $("description-check"), report = job?.description_check;
+  container.replaceChildren();
+  if (!descriptionCheck) {
+    container.hidden = false;
+    container.textContent = 'Für die Prüfung der Bildbeschreibungen bitte laufende Konvertierungen abschliessen, den Webserver neu starten und die Seite neu laden.';
+    return;
+  }
+  container.hidden = !report;
+  if (container.hidden) return;
+  container.className = 'description-check';
+  if (report.description !== $("description").value) {
+    container.textContent = 'Beschreibung geändert. Für diesen Text liegt noch keine aktuelle Prüfung vor.';
+    return;
+  }
+  container.classList.toggle('quality-warning', report.status === 'mismatch');
+  const message = document.createElement('strong'); message.textContent = report.message;
+  container.append(message);
+  for (const check of report.checks || []) {
+    const line = document.createElement('p'); line.className = 'hint';
+    line.textContent = `${check.status === 'mismatch' ? 'Abweichung' : 'Übereinstimmung'} · ${check.message}`;
+    container.append(line);
+  }
+  if (report.observations) {
+    const observed = document.createElement('p'); observed.className = 'hint';
+    observed.textContent = `Aus dem Bild erkannt: ${report.observations.description}`;
+    container.append(observed);
+  }
+  const limits = document.createElement('p'); limits.className = 'hint'; limits.textContent = report.limitations;
+  container.append(limits);
 }
 function renderRecognition(job) {
   const recognition = job.recognition;
@@ -181,6 +214,7 @@ function renderJob(job, select = false) {
     scale = 1;
   }
   renderRecognition(job);
+  renderDescriptionCheck(job);
   const sourceUrl = `/api/jobs/${job.id}/source`;
   if ($("source-image").getAttribute("src") !== sourceUrl) $("source-image").src = sourceUrl;
   $("source-image").hidden = false;
@@ -252,12 +286,12 @@ async function refreshHistory() {
   history = (await request("/api/jobs?scope=foreground")).filter(job => !job.catalog_background);
   renderHistory();
 }
-async function update(operation, select = false, input = null) {
+async function update(operation, select = false, input = null, persistDescription = true) {
   if (busy) return;
   busy = true; controls(); notice();
   let changed = false;
   try {
-    await saveDescription();
+    if (persistDescription) await saveDescription();
     const job = await operation();
     if (!job) return;
     renderJob(job, select);
@@ -298,6 +332,16 @@ $("recognize").addEventListener('click', () => {
     return job;
   });
 });
+$("check-description").addEventListener('click', async () => {
+  if (!current || busy || activeId || !descriptionCheck || descriptionSaving) return;
+  clearTimeout(descriptionSaveTimer);
+  const text = $("description").value;
+  try {
+    await update(() => post(`/api/jobs/${current.id}/check`, {description:text}), false, null, false);
+  } finally {
+    if (descriptionDirty && descriptionAutosave) descriptionSaveTimer = setTimeout(() => saveDescription().catch(error => notice(error.message)), 600);
+  }
+});
 $("file").addEventListener("change", (event) => upload(event.target.files[0]));
 function changeSample(file) {
   if (!current || busy || activeId) return;
@@ -320,6 +364,7 @@ $("pick-sample").addEventListener("click", () => $("sample-file").click());
 $("remove-sample").addEventListener("click", () => changeSample(null));
 function descriptionEdited() {
   descriptionDirty = Boolean(current) && $("description").value !== current.description;
+  renderDescriptionCheck(current);
   clearTimeout(descriptionSaveTimer);
   $("description-save-status").className = 'hint';
   $("description-save-status").textContent = descriptionDirty
@@ -484,6 +529,7 @@ async function init() {
       nativeFileDialogs = config.native_file_dialogs;
       editableSearchSeed = config.editable_search_seed === true;
       imageRecognition = config.image_recognition === true;
+      descriptionCheck = config.description_check === true;
       descriptionAutosave = config.description_autosave === true;
       if (!config.parallel_background_conversion) {
         serverNeedsRestart = true;

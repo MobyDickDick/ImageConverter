@@ -48,6 +48,8 @@
           <label for="description" class="sr-only">Bildbeschreibung</label>
           <textarea id="description" rows="5" maxlength="12000" placeholder="Zum Beispiel: Ein blauer Kreis mit schwarzer Kontur auf weissem Hintergrund."></textarea>
           <div class="description-save"><span id="description-save-status" class="hint" role="status" aria-live="polite"></span><button id="save-description" class="text-button" type="button" disabled>Text speichern</button></div>
+          <button id="check-description" class="secondary full" type="button" disabled>Beschreibung am Bild prüfen</button>
+          <div id="description-check" class="description-check" role="status" aria-live="polite" hidden></div>
           <p id="description-hint" class="hint">Bei leerer Beschreibung wird das Bild lokal untersucht. Bekannte Bildinhalte und einfache Grundformen können die Beschreibung ergänzen. Du kannst sie prüfen und anpassen. Vorgaben wie „Alle Linien sind gleich breit“ werden am Ergebnis geprüft.</p>
           <details class="hint"><summary>Ähnliche Bilder als Hilfe verwenden</summary>
             <p>Du kannst auf hinterlegte Katalogbeschreibungen verweisen: <strong>Form ähnlich wie BILDNAME</strong>, <strong>Farben ähnlich wie BILDNAME</strong> oder <strong>Farbverlauf ähnlich wie BILDNAME</strong>. Ersetze BILDNAME durch die Kennung des Katalogbildes; auch eine genaue Grössenvariante ist möglich.</p>

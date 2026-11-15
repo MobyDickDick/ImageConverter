@@ -199,3 +199,41 @@ test('a failed text save keeps the edit and prevents a premature conversion', as
   assert.ok(h.element('description-save-status').textContent.startsWith('Nicht gespeichert'));
   assert.ok(h.requests.every(request => !request.url.endsWith('/start')));
 });
+
+test('description check sends the current text without saving or starting conversion', async () => {
+  const text = 'Ein rotes Dreieck.';
+  const report = {description:text, status:'mismatch', message:'Abweichung erkannt.',
+    checks:[{status:'mismatch', message:'Grundform: Dreieck statt Kreis.'}], limitations:'Begrenzte Prüfung.'};
+  const h = harness(url => url.endsWith('/check') ? {...ready, description_check:report} : []);
+  h.load(); h.context.job = ready;
+  h.run('descriptionCheck = true; descriptionAutosave = true; renderJob(job, true)');
+  h.element('description').value = text;
+  h.element('description').listeners.input();
+  await h.element('check-description').listeners.click();
+  assert.equal(h.requests[0].url, '/api/jobs/original/check');
+  assert.equal(h.requests[0].body.description, text);
+  assert.ok(h.requests.every(r => !r.url.endsWith('/description') && !r.url.endsWith('/start')));
+  assert.equal(h.element('description').value, text);
+  assert.equal(h.run('descriptionDirty'), true);
+  assert.equal(h.element('description-check').hidden, false);
+  assert.equal(h.element('description-check').children[0].textContent, report.message);
+  h.element('description').value = 'Ein grauer Kreis.';
+  h.element('description').listeners.input();
+  assert.equal(h.element('description-check').children.length, 0);
+  assert.match(h.element('description-check').textContent, /keine aktuelle Prüfung/);
+});
+
+test('description checks are unavailable during conversion and on an older server', () => {
+  const h = harness(); h.load(); h.context.job = ready;
+  h.run('renderJob(job, true)');
+  assert.equal(h.element('check-description').disabled, true);
+  assert.match(h.element('description-check').textContent, /Webserver neu starten/);
+  h.run('descriptionCheck = true; controls()');
+  assert.equal(h.element('check-description').disabled, false);
+  h.run('descriptionSaving = Promise.resolve(); controls()');
+  assert.equal(h.element('check-description').disabled, true);
+  h.run('descriptionSaving = null');
+  h.context.job = running;
+  h.run('renderJob(job)');
+  assert.equal(h.element('check-description').disabled, true);
+});

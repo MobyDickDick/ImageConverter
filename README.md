@@ -15,6 +15,14 @@ Grundformen. Bei leerer Beschreibung startet sie nach der Bildauswahl automatisc
 **Bild erkennen** zeigt zusätzlich ähnliche geprüfte Original-/SVG-Paare.
 Unsichere Beschreibungen werden erst durch **Beschreibung übernehmen** verwendet.
 
+**Beschreibung am Bild prüfen** vergleicht den sichtbaren Text mit der lokalen
+Grundformerkennung und zeigt konkrete Abweichungen bei Form, Flächenfarbe,
+Rand und Hintergrund. Beim Laden und Speichern läuft diese Prüfung automatisch.
+Komplexe Motive und nicht unterstützte Aussagen bleiben ausdrücklich ungeprüft;
+eine Übereinstimmung bestätigt nur die prüfbaren Angaben. Textänderungen
+kennzeichnen ältere Befunde als veraltet. Nach dem Update den Webserver nach
+laufenden Konvertierungen neu starten und die Browserseite neu laden.
+
 Änderungen im Beschreibungsfeld werden automatisch und über **Text speichern**
 gesichert, auch ohne Konvertierungsstart. Die Rückmeldung unter dem Feld bestätigt
 das Speichern. Bei identischem Katalogoriginal wird genau dessen Beschreibung
