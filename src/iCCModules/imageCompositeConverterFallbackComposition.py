@@ -197,7 +197,7 @@ def edits(svg, group, w, h):
     yield ET.tostring(added,encoding='unicode'),'add'
 
 
-def compose(image, session, incumbent, probe, remaining):
+def compose(image, session, incumbent, probe, remaining, proposals=None):
     """Use the current best scene after every edit; all renders use caller budget."""
     from src.iCCModules.imageCompositeConverterFallbackGroups import group_proposals
     h,w=image.shape[:2]
@@ -220,7 +220,7 @@ def compose(image, session, incumbent, probe, remaining):
         used+=1
     # Detectors return a few coupled registration alternatives. Process each
     # group separately so different families accumulate in one scene.
-    for index,(candidate,family) in enumerate(group_proposals(image,session)):
+    for index,(candidate,family) in enumerate(group_proposals(image,session) if proposals is None else proposals):
         if index >= 8 or session.time_reason() or used >= remaining:
             return
         for group in ET.fromstring(candidate):

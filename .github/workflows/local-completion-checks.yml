@@ -30,6 +30,11 @@ jobs:
         run: |
           python -m pytest -q tests/test_curve_checker.py
           python -m tools.evaluate_curve_checker --output .tmp/curve-checker-ci
+      - name: Require observed native curve proposals and unchanged independent gates
+        run: |
+          python -m pytest -q tests/test_curve_proposals.py
+          python -m tools.evaluate_curve_proposals --output .tmp/curve-proposals-ci
+          python -m tools.evaluate_curve_proposals --controls --output .tmp/curve-controls-ci
       - name: Require decomposed humidifier parts and true dashed rectangle rendering
         run: |
           python -m pytest -q tests/test_dashed_rectangles.py tests/test_dashed_spray.py tests/test_spray_panel.py tests/test_zigzag_panel_runtime.py
@@ -54,6 +59,8 @@ jobs:
             .tmp/fallback-checker-ci/
             .tmp/segment-checker-ci/
             .tmp/curve-checker-ci/
+            .tmp/curve-proposals-ci/
+            .tmp/curve-controls-ci/
             .tmp/spray-panel-ci/
             .tmp/spray-dashed-ci/
           retention-days: 7

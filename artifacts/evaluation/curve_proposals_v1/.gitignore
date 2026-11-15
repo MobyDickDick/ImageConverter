@@ -1,0 +1,13 @@
+*
+!.gitignore
+!README.md
+!manifest.json
+!seal.json
+!inputs/
+!inputs/*.py
+!inputs/*.png
+!results/
+!results/review/
+!results/review/**
+__pycache__/
+*.pyc

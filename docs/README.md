@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [P0: native sichtbare Kurvenvorschläge, zwei Renderer und verbleibende enge Geometrieabnahme (2026-11-15)](next_arbeitspaket_2026-11-15_curve_proposals.md)
+
 - [P0: unabhängiger Kurven-/Bogenprüfer, 285 Gegenproben und produktive Vorschlagsgrenze (2026-11-15)](next_arbeitspaket_2026-11-15_curve_checker.md)
 
 - [Luftbefeuchter: alle 15 Sprühstrahlen gestrichelt, unveränderte Geometrie und neue CLI-Abnahme (2026-11-14)](spray_panel_dashed_mist_2026-11-14.md)

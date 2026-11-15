@@ -228,9 +228,11 @@ def panel_groups(image, session):
                         yield ET.tostring(candidate, encoding='unicode'), 'crossed_panel_linkage'
 
 
-def group_proposals(image, session):
+def group_proposals(image, session, render_fn=None):
     yield from arrow_groups(image, session)
     yield from panel_groups(image, session)
+    from src.iCCModules.imageCompositeConverterFallbackCurves import curve_groups
+    yield from curve_groups(image, session, render_fn)
 
 
 def part_regions(svg, width, height):
@@ -256,6 +258,21 @@ def part_regions(svg, width, height):
             elif tag == 'rect':
                 x, y, w, h = [float(node.get(k)) for k in ('x','y','width','height')]
                 xs, ys = [x,x+w], [y,y+h]
+            elif tag == 'path' and group.get('data-fallback-group') == 'open_curve_lead':
+                from src.iCCModules.imageCompositeConverterFallbackCurves import curve_points, sample_curve
+                try:
+                    samples=sample_curve(curve_points(node))
+                    padding=max(2.,float(node.get('stroke-width','1'))/2+1)
+                except (ValueError,TypeError):
+                    continue
+                # Small windows follow actual curvature, including its middle;
+                # a mostly empty enclosing rectangle cannot certify a curve.
+                for index,p in enumerate(samples):
+                    a,b=np.maximum(0,np.floor(p-padding)).astype(int)
+                    A,B=np.minimum([width,height],np.ceil(p+padding+1)).astype(int)
+                    if A>a and B>b:
+                        result.append(dict(group=group.get('data-fallback-group'),part=role+':'+str(index),box=[int(a),int(b),int(A-a),int(B-b)]))
+                continue
             else:
                 continue
             x, X = max(0, int(min(xs))-2), min(width, int(max(xs))+3)
@@ -282,13 +299,41 @@ def check_relations(svg):
     """Require actual native connectivity; group labels alone prove nothing."""
     checks = []
     point = lambda n, suffix: np.array([float(n.get('x'+suffix)),float(n.get('y'+suffix))])
-    for group in ET.fromstring(svg).iter():
+    root=ET.fromstring(svg)
+    parents={child:parent for parent in root.iter() for child in parent}
+    for group in root.iter():
         kind = group.get('data-fallback-group')
         if not kind:
             continue
         parts = {n.get('data-part'):n for n in group if n.get('data-part')}
         passed = False
-        if kind == 'shaft_triangle' and set(parts) == {'shaft','head'}:
+        if kind == 'open_curve_lead' and set(parts) == {'lead','curve'} and len(group)==2:
+            from src.iCCModules.imageCompositeConverterFallbackCurves import curve_points
+            try:
+                pts=curve_points(parts['curve'])
+                if parts['lead'].tag.rsplit('}',1)[-1]!='line' or parts['curve'].tag.rsplit('}',1)[-1]!='path':
+                    raise ValueError('Wrong curve group primitives')
+                effects={'transform','style','opacity','stroke-opacity','fill-opacity','stroke-dasharray',
+                         'clip-path','mask','filter','marker-start','marker-mid','marker-end',
+                         'vector-effect','display','visibility'}
+                ancestor=group
+                while ancestor is not None:
+                    if effects.intersection(ancestor.attrib):
+                        raise ValueError('Unsupported curve group effects')
+                    ancestor=parents.get(ancestor)
+                if effects.intersection(parts['lead'].attrib):
+                    raise ValueError('Unsupported lead effects')
+                a,b=point(parts['lead'],'1'),point(parts['lead'],'2')
+                tangent=pts[1]-pts[0]; lead=a-b
+                norm=np.linalg.norm(tangent)*np.linalg.norm(lead)
+                passed=(np.linalg.norm(b-pts[0])<=.01 and norm>1e-8
+                        and np.dot(tangent,lead)/norm<=-np.cos(np.deg2rad(.1))
+                        and parts['lead'].get('stroke')==parts['curve'].get('stroke')
+                        and abs(float(parts['lead'].get('stroke-width','1'))-float(parts['curve'].get('stroke-width','1')))<=.01
+                        and not group.get('transform') and not group.get('style'))
+            except (ValueError,TypeError):
+                passed=False
+        elif kind == 'shaft_triangle' and set(parts) == {'shaft','head'}:
             line, head = parts['shaft'], parts['head']
             tri = np.array([list(map(float,p.split(','))) for p in head.get('points','').split()],dtype='float32')
             if len(tri) == 3:

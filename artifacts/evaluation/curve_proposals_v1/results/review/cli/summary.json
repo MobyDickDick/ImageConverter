@@ -1,0 +1,854 @@
+{
+  "results": [
+    {
+      "case_id": "visible_Q_0",
+      "width": 128,
+      "height": 128,
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_0\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_0\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_0\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_0\\conversion",
+        "--start",
+        "visible_Q_0",
+        "--end",
+        "visible_Q_0",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seed",
+        "17",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5",
+        "--search-min-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 6.914658001733187e-08,
+        "foreground_mse": 3.472609705568175e-06,
+        "edge_alignment": 1.0,
+        "foreground_iou": 1.0,
+        "foreground_iou_binary": 1.0
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "visible_Q_0/conversion/converted_svgs/visible_Q_0.svg",
+      "output_sha256": "cae56c2aacd16fdb3a4715257cce758e2ddd546c296457e9aa278b4205de6994",
+      "elapsed_seconds": 7.515,
+      "check": {
+        "complete": true,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [],
+        "mapping": {
+          "background": 0,
+          "lead": 1,
+          "curve": 2
+        },
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "passed": true
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1,
+            "passed": true
+          }
+        ],
+        "hidden_geometry_verified": true,
+        "assignments_visited": 4,
+        "reason": "passed"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 6.914658001733187e-08,
+            "foreground_mse": 3.472609705568175e-06,
+            "edge_alignment": 1.0,
+            "foreground_iou": 1.0,
+            "foreground_iou_binary": 1.0
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 9.77188210526947e-06,
+            "foreground_mse": 0.0004967995919287205,
+            "edge_alignment": 0.9853662848472595,
+            "foreground_iou": 0.9787712693214417,
+            "foreground_iou_binary": 0.9742765273311897
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_1",
+      "width": 128,
+      "height": 128,
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_1\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_1\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_1\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_1\\conversion",
+        "--start",
+        "visible_Q_1",
+        "--end",
+        "visible_Q_1",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seed",
+        "17",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5",
+        "--search-min-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 1.921711827890249e-06,
+        "foreground_mse": 0.000135275608045049,
+        "edge_alignment": 0.9962940216064453,
+        "foreground_iou": 0.9882946610450745,
+        "foreground_iou_binary": 0.9814814814814815
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "visible_Q_1/conversion/converted_svgs/visible_Q_1.svg",
+      "output_sha256": "eacb2c9e0320545ed8c74e7d0f6aa1263bb40948400c701a4afed38d39f873f1",
+      "elapsed_seconds": 6.859,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 1.921711827890249e-06,
+            "foreground_mse": 0.000135275608045049,
+            "edge_alignment": 0.9962940216064453,
+            "foreground_iou": 0.9882946610450745,
+            "foreground_iou_binary": 0.9814814814814815
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 3.253644081269158e-06,
+            "foreground_mse": 0.00022752406948711723,
+            "edge_alignment": 0.9869954586029053,
+            "foreground_iou": 0.986905574798584,
+            "foreground_iou_binary": 0.9861111111111112
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_2",
+      "width": 128,
+      "height": 128,
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_2\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_2\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_2\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_Q_2\\conversion",
+        "--start",
+        "visible_Q_2",
+        "--end",
+        "visible_Q_2",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seed",
+        "17",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5",
+        "--search-min-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.256147010688437e-06,
+        "foreground_mse": 0.00013426123769022524,
+        "edge_alignment": 0.9936864376068115,
+        "foreground_iou": 0.9943820224719101,
+        "foreground_iou_binary": 0.9943820224719101
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "visible_Q_2/conversion/converted_svgs/visible_Q_2.svg",
+      "output_sha256": "48170fae6fad52eb8242aa80731e38b908d7af9a884c1675b9a196e2d9524b12",
+      "elapsed_seconds": 7.172,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 3.256147010688437e-06,
+            "foreground_mse": 0.00013426123769022524,
+            "edge_alignment": 0.9936864376068115,
+            "foreground_iou": 0.9943820224719101,
+            "foreground_iou_binary": 0.9943820224719101
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 8.69807627168484e-06,
+            "foreground_mse": 0.00037343965959735215,
+            "edge_alignment": 0.9886335134506226,
+            "foreground_iou": 0.9587715268135071,
+            "foreground_iou_binary": 0.927170868347339
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_0",
+      "width": 128,
+      "height": 128,
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_0\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_0\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_0\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_0\\conversion",
+        "--start",
+        "visible_C_0",
+        "--end",
+        "visible_C_0",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seed",
+        "17",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5",
+        "--search-min-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 1.7884246972244e-06,
+        "foreground_mse": 9.129737736657262e-05,
+        "edge_alignment": 0.9956609010696411,
+        "foreground_iou": 0.9967213114754099,
+        "foreground_iou_binary": 0.9967213114754099
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "visible_C_0/conversion/converted_svgs/visible_C_0.svg",
+      "output_sha256": "3caceebcd4538768dbabea4d8206041cb6e3d2f668a19dc1d2d3b1b2976e4132",
+      "elapsed_seconds": 6.766,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 1.7884246972244e-06,
+            "foreground_mse": 9.129737736657262e-05,
+            "edge_alignment": 0.9956609010696411,
+            "foreground_iou": 0.9967213114754099,
+            "foreground_iou_binary": 0.9967213114754099
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 1.405146122124279e-05,
+            "foreground_mse": 0.0007265559397637844,
+            "edge_alignment": 0.9797004461288452,
+            "foreground_iou": 0.9869706840390879,
+            "foreground_iou_binary": 0.9869706840390879
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_1",
+      "width": 128,
+      "height": 128,
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_1\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_1\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_1\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_1\\conversion",
+        "--start",
+        "visible_C_1",
+        "--end",
+        "visible_C_1",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seed",
+        "17",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5",
+        "--search-min-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 7.615510071445897e-07,
+        "foreground_mse": 5.0708149501588196e-05,
+        "edge_alignment": 0.9944632053375244,
+        "foreground_iou": 0.991483747959137,
+        "foreground_iou_binary": 0.990990990990991
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "visible_C_1/conversion/converted_svgs/visible_C_1.svg",
+      "output_sha256": "76b19b3e698ed6ac3d278564bdd9d9a475501d2eb70f005c134a678f6e3fa754",
+      "elapsed_seconds": 6.485,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 7.615510071445897e-07,
+            "foreground_mse": 5.0708149501588196e-05,
+            "edge_alignment": 0.9944632053375244,
+            "foreground_iou": 0.991483747959137,
+            "foreground_iou_binary": 0.990990990990991
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 2.411682544334326e-06,
+            "foreground_mse": 0.00016854780551511794,
+            "edge_alignment": 0.9981580972671509,
+            "foreground_iou": 0.9843401312828064,
+            "foreground_iou_binary": 0.9732142857142857
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        }
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_2",
+      "width": 128,
+      "height": 128,
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "satisfactory": true,
+      "failures": [],
+      "command": [
+        "C:\\Users\\marku\\myCloud\\imageConverter\\.venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys, runpy; sys.path[:0] = ['C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\Lib\\\\site-packages', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\python310.zip', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\DLLs', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64\\\\lib', 'C:\\\\Users\\\\marku\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.10-64', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv', 'C:\\\\Users\\\\marku\\\\myCloud\\\\imageConverter\\\\.venv\\\\lib\\\\site-packages']; import numpy, cv2, fitz; from PIL import Image; runpy.run_module('tools.run_plan_b_variations', run_name='__main__')",
+        "--_worker",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_2\\conversion",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_2\\input",
+        "--descriptions-path",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_2\\input\\descriptions.xml",
+        "--output-dir",
+        "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\curve_proposals_v1\\results\\cli\\visible_C_2\\conversion",
+        "--start",
+        "visible_C_2",
+        "--end",
+        "visible_C_2",
+        "--execution-mode",
+        "semantic-only",
+        "--deterministic-order",
+        "--iterations",
+        "64",
+        "--search-seed",
+        "17",
+        "--search-seconds",
+        "5",
+        "--search-max-seconds",
+        "5",
+        "--search-min-seconds",
+        "5"
+      ],
+      "returncode": 0,
+      "blocked_svg_reads": [],
+      "metrics": {
+        "normalized_mse": 3.1225470138451783e-06,
+        "foreground_mse": 0.00013640677207149565,
+        "edge_alignment": 0.9899556040763855,
+        "foreground_iou": 0.9893348813056946,
+        "foreground_iou_binary": 0.9859550561797753
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 3,
+        "path_count": 1,
+        "path_command_count": 2,
+        "path_complexity_ratio": 0.6667
+      },
+      "output_svg": "visible_C_2/conversion/converted_svgs/visible_C_2.svg",
+      "output_sha256": "1214174f2e4c0da1daa4ea3098f695b54e4217e3ea158689daac16f9310faf12",
+      "elapsed_seconds": 6.797,
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 3.1225470138451783e-06,
+            "foreground_mse": 0.00013640677207149565,
+            "edge_alignment": 0.9899556040763855,
+            "foreground_iou": 0.9893348813056946,
+            "foreground_iou_binary": 0.9859550561797753
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        },
+        "librsvg": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 4.798022018803749e-06,
+            "foreground_mse": 0.0002082061837427318,
+            "edge_alignment": 0.9885866641998291,
+            "foreground_iou": 0.9858757062146892,
+            "foreground_iou_binary": 0.9858757062146892
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 1,
+            "path_command_count": 2,
+            "path_complexity_ratio": 0.6667
+          }
+        }
+      },
+      "model_confirmed": false
+    }
+  ],
+  "manifest_sha256": "726cb7c60b3aca96d1120ebeed65eef10c6e73a379ad8f8a3be989f833017694",
+  "evaluator_sha256": "b794395f1b42d45bacaba2fb391e9b9b9fc3de20aae469e52139a4ba0a1c4938",
+  "seconds": 5,
+  "seed": 17,
+  "real_reserves_executed": false,
+  "model_promotions": 0
+}

@@ -1,0 +1,200 @@
+{
+  "results": [
+    {
+      "case_id": "quadratic-plain",
+      "elapsed_seconds": 0.015000000013969839,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-rotated",
+      "elapsed_seconds": 0.01600000000325963,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-scaled",
+      "elapsed_seconds": 0.0,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-reflected",
+      "elapsed_seconds": 0.0,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "quadratic-oblique",
+      "elapsed_seconds": 0.01600000000325963,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-plain",
+      "elapsed_seconds": 0.015000000013969839,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-rotated",
+      "elapsed_seconds": 0.01600000000325963,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-scaled",
+      "elapsed_seconds": 0.0,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-reflected",
+      "elapsed_seconds": 0.0,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "cubic-oblique",
+      "elapsed_seconds": 0.014999999955762178,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-plain",
+      "elapsed_seconds": 1.3130000000237487,
+      "proposals": [
+        {
+          "family": "open_curve_lead",
+          "sha256": "ffaac228397c9e24a17c39109a55a86fe68f7d1deb0e4f451cd1a850652f288c",
+          "check": {
+            "complete": false,
+            "supported": true,
+            "actual_count": 3,
+            "expected_count": 6,
+            "unmatched_expected": [
+              "lead",
+              "curve",
+              "ellipse",
+              "hidden_curve",
+              "cover"
+            ],
+            "mapping": {},
+            "relations": [],
+            "hidden_geometry_verified": false,
+            "reason": "object_inventory_or_geometry"
+          }
+        }
+      ],
+      "render_evaluations": 717,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-rotated",
+      "elapsed_seconds": 1.0160000000032596,
+      "proposals": [
+        {
+          "family": "open_curve_lead",
+          "sha256": "ed01f5f33870f837492ffff6ae3ef119fba9536603b011b6c0ba97a5135ae895",
+          "check": {
+            "complete": false,
+            "supported": true,
+            "actual_count": 3,
+            "expected_count": 6,
+            "unmatched_expected": [
+              "lead",
+              "curve",
+              "ellipse",
+              "hidden_curve",
+              "cover"
+            ],
+            "mapping": {},
+            "relations": [],
+            "hidden_geometry_verified": false,
+            "reason": "object_inventory_or_geometry"
+          }
+        }
+      ],
+      "render_evaluations": 659,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-scaled",
+      "elapsed_seconds": 2.0160000000032596,
+      "proposals": [
+        {
+          "family": "open_curve_lead",
+          "sha256": "8b0589479e1c6cc69b3fde71145282e03882fcd2e33dcdc0638b5611a0b0dded",
+          "check": {
+            "complete": false,
+            "supported": true,
+            "actual_count": 3,
+            "expected_count": 6,
+            "unmatched_expected": [
+              "lead",
+              "curve",
+              "ellipse",
+              "hidden_curve",
+              "cover"
+            ],
+            "mapping": {},
+            "relations": [],
+            "hidden_geometry_verified": false,
+            "reason": "object_inventory_or_geometry"
+          }
+        }
+      ],
+      "render_evaluations": 674,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-reflected",
+      "elapsed_seconds": 2.514999999955762,
+      "proposals": [
+        {
+          "family": "open_curve_lead",
+          "sha256": "1976b5914f498d9d47a2b529df69527be7328f79aebf1212baa68e26eec2cc76",
+          "check": {
+            "complete": false,
+            "supported": true,
+            "actual_count": 3,
+            "expected_count": 6,
+            "unmatched_expected": [
+              "lead",
+              "curve",
+              "ellipse",
+              "hidden_curve",
+              "cover"
+            ],
+            "mapping": {},
+            "relations": [],
+            "hidden_geometry_verified": false,
+            "reason": "object_inventory_or_geometry"
+          }
+        }
+      ],
+      "render_evaluations": 684,
+      "model_confirmed": false
+    },
+    {
+      "case_id": "arc-oblique",
+      "elapsed_seconds": 0.03200000000651926,
+      "proposals": [],
+      "render_evaluations": 0,
+      "model_confirmed": false
+    }
+  ],
+  "checker_sha256": "2737ab7037b5c5122db9519a1bc97e1f06fc5048c4e3d8c25a94e3f9e04641c9",
+  "real_reserves_executed": false,
+  "model_promotions": 0
+}

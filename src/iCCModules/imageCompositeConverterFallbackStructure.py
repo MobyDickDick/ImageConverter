@@ -183,6 +183,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
     best = dict(svg=svg, rendered=initial, error=error(initial), origin='incumbent')
     report = dict(mode=mode, max_probes=max_probes, proposals=[], selected_origin='incumbent',
                   model_confirmed=False, stop_reason='proposals_exhausted', render_evaluations=0)
+    starting_evaluations=session.evaluations
     if max(image.shape[:2]) > 512:
         report['stop_reason'] = 'raster_size_limit'
         return best, report
@@ -223,7 +224,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         after = np.square(reference-raster.astype(float)).mean(axis=2)
         local_gain = float((before[changed]-after[changed]).mean()/255**2) if changed.any() else 0.
         row.update(error=measured, local_gain=local_gain, changed_pixels=int(changed.sum()))
-        if regions:
+        if regions is not None:
             from src.iCCModules.imageCompositeConverterFallbackGroups import check_parts, check_relations
             row['parts'] = check_parts(image, raster, regions)
             row['relations'] = check_relations(candidate)
@@ -247,7 +248,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
                    for a,b in zip(before_parts,after_parts)):
                 accepted = False
                 row['rejection'] = 'protected_group_part'
-        if regions and not all(p['passed'] for p in row['parts']+row['relations']):
+        if regions is not None and not all(p['passed'] for p in row['parts']+row['relations']):
             accepted = False
             row['rejection'] = 'group_part_evidence'
         row['accepted'] = accepted
@@ -261,16 +262,18 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         return result if accepted else None
 
     bases = [best]
-    if mode in {'groups', 'combined'}:
+    if mode in {'groups', 'combined'} and max_probes>0:
         # Keep complete constructions as alternatives for old, deeply
         # transformed drafts; composition then builds on the best valid scene.
         from src.iCCModules.imageCompositeConverterFallbackGroups import group_proposals, part_regions
-        for candidate, family in group_proposals(image, session):
+        groups=[]
+        for candidate, family in group_proposals(image, session, render_fn):
             if session.time_reason() or len(report['proposals']) >= min(8,max_probes):
                 break
+            groups.append((candidate,family))
             probe(candidate, 'native_object_group:'+family, bases[0], part_regions(candidate,w,h))
         from src.iCCModules.imageCompositeConverterFallbackComposition import compose
-        compose(image, session, lambda: best, probe, min(24,max_probes)-len(report['proposals']))
+        compose(image, session, lambda: best, probe, min(24,max_probes)-len(report['proposals']), proposals=groups)
     if mode in {'primitives', 'combined', 'legacy_combined'}:
         primitive_limit = min(max_probes-6 if mode == 'combined' else max_probes,
                               len(report['proposals'])+12)
@@ -324,6 +327,7 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
                 if session.time_reason() or len(report['proposals']) >= max_probes:
                     break
     report.update(selected_origin=best['origin'], selected_inventory=inventory(best['svg']),
+                  render_evaluations=session.evaluations-starting_evaluations,
                   probe_count=len(report['proposals']),
                   stop_reason='time_limit' if session.time_reason() else
                   ('probe_limit' if len(report['proposals']) >= max_probes else report['stop_reason']))

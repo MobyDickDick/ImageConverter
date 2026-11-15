@@ -1,0 +1,3374 @@
+{
+  "baseline": true,
+  "results": [
+    {
+      "case_id": "visible_Q_0",
+      "seed": 17,
+      "elapsed_seconds": 0.14100000000325963,
+      "svg_sha256": "4236a3bbb6e156c665868863232612054248224cf614000342a31a21d173e0aa",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0017848475836217403,
+            "foreground_mse": 0.08179543167352676,
+            "edge_alignment": 0.7362630367279053,
+            "foreground_iou": 0.7058823529411765,
+            "foreground_iou_binary": 0.7058823529411765
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0017345971427857876,
+            "foreground_mse": 0.07991839200258255,
+            "edge_alignment": 0.7362630367279053,
+            "foreground_iou": 0.7070422535211267,
+            "foreground_iou_binary": 0.7070422535211267
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": false,
+            "error": 0.005816246931268422,
+            "local_gain": 0.05449455666295343,
+            "changed_pixels": 156,
+            "improved_fraction": 0.532051282051282,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.004231195133282071,
+            "local_gain": 0.26535742663078304,
+            "changed_pixels": 130,
+            "improved_fraction": 0.8076923076923077
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": false,
+            "error": 0.003716298080966455,
+            "local_gain": 0.09696635982918446,
+            "changed_pixels": 87,
+            "improved_fraction": 0.4482758620689655,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.003226327589348648,
+            "local_gain": 0.19108774502353,
+            "changed_pixels": 86,
+            "improved_fraction": 0.6627906976744186
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0037040644548771303,
+            "local_gain": -0.1695657745905978,
+            "changed_pixels": 46,
+            "improved_fraction": 0.043478260869565216,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0022517543833301293,
+            "local_gain": 0.2575388291517323,
+            "changed_pixels": 62,
+            "improved_fraction": 0.6612903225806451
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": true,
+            "error": 0.0020253881845323915,
+            "local_gain": 0.08626389969272402,
+            "changed_pixels": 43,
+            "improved_fraction": 0.6511627906976745
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 5
+            },
+            "accepted": true,
+            "error": 0.0017848475621355568,
+            "local_gain": 0.11256066348107871,
+            "changed_pixels": 35,
+            "improved_fraction": 0.7428571428571429
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 6
+            },
+            "accepted": false,
+            "error": 0.0019664765479823466,
+            "local_gain": -0.058349202041447105,
+            "changed_pixels": 51,
+            "improved_fraction": 0.3333333333333333,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 6
+            },
+            "accepted": false,
+            "error": 0.002092400609140715,
+            "local_gain": -0.16258494458293543,
+            "changed_pixels": 31,
+            "improved_fraction": 0.06451612903225806,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 10,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 5
+        },
+        "probe_count": 10
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_0",
+      "seed": 29,
+      "elapsed_seconds": 0.06300000002374873,
+      "svg_sha256": "4236a3bbb6e156c665868863232612054248224cf614000342a31a21d173e0aa",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0017848475836217403,
+            "foreground_mse": 0.08179543167352676,
+            "edge_alignment": 0.7362630367279053,
+            "foreground_iou": 0.7058823529411765,
+            "foreground_iou_binary": 0.7058823529411765
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0017345971427857876,
+            "foreground_mse": 0.07991839200258255,
+            "edge_alignment": 0.7362630367279053,
+            "foreground_iou": 0.7070422535211267,
+            "foreground_iou_binary": 0.7070422535211267
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": false,
+            "error": 0.005816246931268422,
+            "local_gain": 0.05449455666295343,
+            "changed_pixels": 156,
+            "improved_fraction": 0.532051282051282,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.004231195133282071,
+            "local_gain": 0.26535742663078304,
+            "changed_pixels": 130,
+            "improved_fraction": 0.8076923076923077
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": false,
+            "error": 0.003716298080966455,
+            "local_gain": 0.09696635982918446,
+            "changed_pixels": 87,
+            "improved_fraction": 0.4482758620689655,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.003226327589348648,
+            "local_gain": 0.19108774502353,
+            "changed_pixels": 86,
+            "improved_fraction": 0.6627906976744186
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0037040644548771303,
+            "local_gain": -0.1695657745905978,
+            "changed_pixels": 46,
+            "improved_fraction": 0.043478260869565216,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0022517543833301293,
+            "local_gain": 0.2575388291517323,
+            "changed_pixels": 62,
+            "improved_fraction": 0.6612903225806451
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": true,
+            "error": 0.0020253881845323915,
+            "local_gain": 0.08626389969272402,
+            "changed_pixels": 43,
+            "improved_fraction": 0.6511627906976745
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 5
+            },
+            "accepted": true,
+            "error": 0.0017848475621355568,
+            "local_gain": 0.11256066348107871,
+            "changed_pixels": 35,
+            "improved_fraction": 0.7428571428571429
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 6
+            },
+            "accepted": false,
+            "error": 0.0019664765479823466,
+            "local_gain": -0.058349202041447105,
+            "changed_pixels": 51,
+            "improved_fraction": 0.3333333333333333,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 6
+            },
+            "accepted": false,
+            "error": 0.002092400609140715,
+            "local_gain": -0.16258494458293543,
+            "changed_pixels": 31,
+            "improved_fraction": 0.06451612903225806,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 10,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 5
+        },
+        "probe_count": 10
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_0",
+      "seed": 43,
+      "elapsed_seconds": 0.06300000002374873,
+      "svg_sha256": "4236a3bbb6e156c665868863232612054248224cf614000342a31a21d173e0aa",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 6,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0017848475836217403,
+            "foreground_mse": 0.08179543167352676,
+            "edge_alignment": 0.7362630367279053,
+            "foreground_iou": 0.7058823529411765,
+            "foreground_iou_binary": 0.7058823529411765
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0017345971427857876,
+            "foreground_mse": 0.07991839200258255,
+            "edge_alignment": 0.7362630367279053,
+            "foreground_iou": 0.7070422535211267,
+            "foreground_iou_binary": 0.7070422535211267
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 6,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": false,
+            "error": 0.005816246931268422,
+            "local_gain": 0.05449455666295343,
+            "changed_pixels": 156,
+            "improved_fraction": 0.532051282051282,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.004231195133282071,
+            "local_gain": 0.26535742663078304,
+            "changed_pixels": 130,
+            "improved_fraction": 0.8076923076923077
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": false,
+            "error": 0.003716298080966455,
+            "local_gain": 0.09696635982918446,
+            "changed_pixels": 87,
+            "improved_fraction": 0.4482758620689655,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.003226327589348648,
+            "local_gain": 0.19108774502353,
+            "changed_pixels": 86,
+            "improved_fraction": 0.6627906976744186
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0037040644548771303,
+            "local_gain": -0.1695657745905978,
+            "changed_pixels": 46,
+            "improved_fraction": 0.043478260869565216,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0022517543833301293,
+            "local_gain": 0.2575388291517323,
+            "changed_pixels": 62,
+            "improved_fraction": 0.6612903225806451
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": true,
+            "error": 0.0020253881845323915,
+            "local_gain": 0.08626389969272402,
+            "changed_pixels": 43,
+            "improved_fraction": 0.6511627906976745
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 5
+            },
+            "accepted": true,
+            "error": 0.0017848475621355568,
+            "local_gain": 0.11256066348107871,
+            "changed_pixels": 35,
+            "improved_fraction": 0.7428571428571429
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 6
+            },
+            "accepted": false,
+            "error": 0.0019664765479823466,
+            "local_gain": -0.058349202041447105,
+            "changed_pixels": 51,
+            "improved_fraction": 0.3333333333333333,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 6
+            },
+            "accepted": false,
+            "error": 0.002092400609140715,
+            "local_gain": -0.16258494458293543,
+            "changed_pixels": 31,
+            "improved_fraction": 0.06451612903225806,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 10,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 5
+        },
+        "probe_count": 10
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_1",
+      "seed": 17,
+      "elapsed_seconds": 0.031000000017229468,
+      "svg_sha256": "b30020d26bbc5e8bf809795068b90736c74131c403b86b2eaf243adff925d887",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.001321681891568005,
+            "foreground_mse": 0.08458059281110764,
+            "edge_alignment": 0.6249243021011353,
+            "foreground_iou": 0.5764705882352941,
+            "foreground_iou_binary": 0.5764705882352941
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0013175862841308117,
+            "foreground_mse": 0.08435315638780594,
+            "edge_alignment": 0.6212481260299683,
+            "foreground_iou": 0.5725490196078431,
+            "foreground_iou_binary": 0.5725490196078431
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.0026637998055635656,
+            "local_gain": 0.11638843359841354,
+            "changed_pixels": 95,
+            "improved_fraction": 0.6421052631578947
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0021762134630710942,
+            "local_gain": 0.10780642233929431,
+            "changed_pixels": 74,
+            "improved_fraction": 0.6891891891891891
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0013216818526328015,
+            "local_gain": 0.19994712656304356,
+            "changed_pixels": 70,
+            "improved_fraction": 0.7714285714285715
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0015056136386846406,
+            "local_gain": -0.06415263087574066,
+            "changed_pixels": 47,
+            "improved_fraction": 0.3191489361702128,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 4,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 4
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_1",
+      "seed": 29,
+      "elapsed_seconds": 0.014999999955762178,
+      "svg_sha256": "b30020d26bbc5e8bf809795068b90736c74131c403b86b2eaf243adff925d887",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.001321681891568005,
+            "foreground_mse": 0.08458059281110764,
+            "edge_alignment": 0.6249243021011353,
+            "foreground_iou": 0.5764705882352941,
+            "foreground_iou_binary": 0.5764705882352941
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0013175862841308117,
+            "foreground_mse": 0.08435315638780594,
+            "edge_alignment": 0.6212481260299683,
+            "foreground_iou": 0.5725490196078431,
+            "foreground_iou_binary": 0.5725490196078431
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.0026637998055635656,
+            "local_gain": 0.11638843359841354,
+            "changed_pixels": 95,
+            "improved_fraction": 0.6421052631578947
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0021762134630710942,
+            "local_gain": 0.10780642233929431,
+            "changed_pixels": 74,
+            "improved_fraction": 0.6891891891891891
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0013216818526328015,
+            "local_gain": 0.19994712656304356,
+            "changed_pixels": 70,
+            "improved_fraction": 0.7714285714285715
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0015056136386846406,
+            "local_gain": -0.06415263087574066,
+            "changed_pixels": 47,
+            "improved_fraction": 0.3191489361702128,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 4,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 4
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_1",
+      "seed": 43,
+      "elapsed_seconds": 0.031000000017229468,
+      "svg_sha256": "b30020d26bbc5e8bf809795068b90736c74131c403b86b2eaf243adff925d887",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.001321681891568005,
+            "foreground_mse": 0.08458059281110764,
+            "edge_alignment": 0.6249243021011353,
+            "foreground_iou": 0.5764705882352941,
+            "foreground_iou_binary": 0.5764705882352941
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0013175862841308117,
+            "foreground_mse": 0.08435315638780594,
+            "edge_alignment": 0.6212481260299683,
+            "foreground_iou": 0.5725490196078431,
+            "foreground_iou_binary": 0.5725490196078431
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.0026637998055635656,
+            "local_gain": 0.11638843359841354,
+            "changed_pixels": 95,
+            "improved_fraction": 0.6421052631578947
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0021762134630710942,
+            "local_gain": 0.10780642233929431,
+            "changed_pixels": 74,
+            "improved_fraction": 0.6891891891891891
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0013216818526328015,
+            "local_gain": 0.19994712656304356,
+            "changed_pixels": 70,
+            "improved_fraction": 0.7714285714285715
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0015056136386846406,
+            "local_gain": -0.06415263087574066,
+            "changed_pixels": 47,
+            "improved_fraction": 0.3191489361702128,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 4,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 4
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_2",
+      "seed": 17,
+      "elapsed_seconds": 0.062000000034458935,
+      "svg_sha256": "8c4d72204224e641d56e2f970ccafd958d2ea79d922d1e0d9accefb2e738d983",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0019013280980288982,
+            "foreground_mse": 0.07853381335735321,
+            "edge_alignment": 0.7231403589248657,
+            "foreground_iou": 0.6843434343434344,
+            "foreground_iou_binary": 0.6843434343434344
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0018608730752021074,
+            "foreground_mse": 0.07669968903064728,
+            "edge_alignment": 0.7303192019462585,
+            "foreground_iou": 0.6851385390428212,
+            "foreground_iou_binary": 0.6851385390428212
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.00460913595932654,
+            "local_gain": 0.2415408901565389,
+            "changed_pixels": 129,
+            "improved_fraction": 0.7829457364341085
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0031087843442626235,
+            "local_gain": 0.24099765550203167,
+            "changed_pixels": 102,
+            "improved_fraction": 0.7156862745098039
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0029611094591022683,
+            "local_gain": 0.025033610554644974,
+            "changed_pixels": 95,
+            "improved_fraction": 0.4842105263157895,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.003257524274517814,
+            "local_gain": -0.030085864411123923,
+            "changed_pixels": 81,
+            "improved_fraction": 0.345679012345679,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.002073365274674004,
+            "local_gain": 0.20168231998681832,
+            "changed_pixels": 84,
+            "improved_fraction": 0.7380952380952381
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0023006535321951497,
+            "local_gain": -0.0740635140330642,
+            "changed_pixels": 50,
+            "improved_fraction": 0.28,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.001997484566232539,
+            "local_gain": 0.02833910034602077,
+            "changed_pixels": 44,
+            "improved_fraction": 0.5227272727272727,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": true,
+            "error": 0.001901328265170447,
+            "local_gain": 0.06789574217486559,
+            "changed_pixels": 42,
+            "improved_fraction": 0.6190476190476191
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 5
+            },
+            "accepted": false,
+            "error": 0.002044237668004293,
+            "local_gain": -0.10471753288362287,
+            "changed_pixels": 22,
+            "improved_fraction": 0.13636363636363635,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 9,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 4
+        },
+        "probe_count": 9
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_2",
+      "seed": 29,
+      "elapsed_seconds": 0.07800000003771856,
+      "svg_sha256": "8c4d72204224e641d56e2f970ccafd958d2ea79d922d1e0d9accefb2e738d983",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0019013280980288982,
+            "foreground_mse": 0.07853381335735321,
+            "edge_alignment": 0.7231403589248657,
+            "foreground_iou": 0.6843434343434344,
+            "foreground_iou_binary": 0.6843434343434344
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0018608730752021074,
+            "foreground_mse": 0.07669968903064728,
+            "edge_alignment": 0.7303192019462585,
+            "foreground_iou": 0.6851385390428212,
+            "foreground_iou_binary": 0.6851385390428212
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.00460913595932654,
+            "local_gain": 0.2415408901565389,
+            "changed_pixels": 129,
+            "improved_fraction": 0.7829457364341085
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0031087843442626235,
+            "local_gain": 0.24099765550203167,
+            "changed_pixels": 102,
+            "improved_fraction": 0.7156862745098039
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0029611094591022683,
+            "local_gain": 0.025033610554644974,
+            "changed_pixels": 95,
+            "improved_fraction": 0.4842105263157895,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.003257524274517814,
+            "local_gain": -0.030085864411123923,
+            "changed_pixels": 81,
+            "improved_fraction": 0.345679012345679,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.002073365274674004,
+            "local_gain": 0.20168231998681832,
+            "changed_pixels": 84,
+            "improved_fraction": 0.7380952380952381
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0023006535321951497,
+            "local_gain": -0.0740635140330642,
+            "changed_pixels": 50,
+            "improved_fraction": 0.28,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.001997484566232539,
+            "local_gain": 0.02833910034602077,
+            "changed_pixels": 44,
+            "improved_fraction": 0.5227272727272727,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": true,
+            "error": 0.001901328265170447,
+            "local_gain": 0.06789574217486559,
+            "changed_pixels": 42,
+            "improved_fraction": 0.6190476190476191
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 5
+            },
+            "accepted": false,
+            "error": 0.002044237668004293,
+            "local_gain": -0.10471753288362287,
+            "changed_pixels": 22,
+            "improved_fraction": 0.13636363636363635,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 9,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 4
+        },
+        "probe_count": 9
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_Q_2",
+      "seed": 43,
+      "elapsed_seconds": 0.062000000034458935,
+      "svg_sha256": "8c4d72204224e641d56e2f970ccafd958d2ea79d922d1e0d9accefb2e738d983",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 5,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0019013280980288982,
+            "foreground_mse": 0.07853381335735321,
+            "edge_alignment": 0.7231403589248657,
+            "foreground_iou": 0.6843434343434344,
+            "foreground_iou_binary": 0.6843434343434344
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0018608730752021074,
+            "foreground_mse": 0.07669968903064728,
+            "edge_alignment": 0.7303192019462585,
+            "foreground_iou": 0.6851385390428212,
+            "foreground_iou_binary": 0.6851385390428212
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.00460913595932654,
+            "local_gain": 0.2415408901565389,
+            "changed_pixels": 129,
+            "improved_fraction": 0.7829457364341085
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0031087843442626235,
+            "local_gain": 0.24099765550203167,
+            "changed_pixels": 102,
+            "improved_fraction": 0.7156862745098039
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0029611094591022683,
+            "local_gain": 0.025033610554644974,
+            "changed_pixels": 95,
+            "improved_fraction": 0.4842105263157895,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.003257524274517814,
+            "local_gain": -0.030085864411123923,
+            "changed_pixels": 81,
+            "improved_fraction": 0.345679012345679,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.002073365274674004,
+            "local_gain": 0.20168231998681832,
+            "changed_pixels": 84,
+            "improved_fraction": 0.7380952380952381
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0023006535321951497,
+            "local_gain": -0.0740635140330642,
+            "changed_pixels": 50,
+            "improved_fraction": 0.28,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.001997484566232539,
+            "local_gain": 0.02833910034602077,
+            "changed_pixels": 44,
+            "improved_fraction": 0.5227272727272727,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": true,
+            "error": 0.001901328265170447,
+            "local_gain": 0.06789574217486559,
+            "changed_pixels": 42,
+            "improved_fraction": 0.6190476190476191
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 5
+            },
+            "accepted": false,
+            "error": 0.002044237668004293,
+            "local_gain": -0.10471753288362287,
+            "changed_pixels": 22,
+            "improved_fraction": 0.13636363636363635,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 9,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 4
+        },
+        "probe_count": 9
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_0",
+      "seed": 17,
+      "elapsed_seconds": 0.0470000000204891,
+      "svg_sha256": "16f79f5ca4a665e12427d29b2689545c3d99ad68956640b827d1750db3ec7899",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.00402684835717082,
+            "foreground_mse": 0.18105332553386688,
+            "edge_alignment": 0.5329397916793823,
+            "foreground_iou": 0.4478021978021978,
+            "foreground_iou_binary": 0.4478021978021978
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.004025174304842949,
+            "foreground_mse": 0.1809949278831482,
+            "edge_alignment": 0.5303903222084045,
+            "foreground_iou": 0.4532967032967033,
+            "foreground_iou_binary": 0.4532967032967033
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.0045497077571326735,
+            "local_gain": 0.19208075789390666,
+            "changed_pixels": 156,
+            "improved_fraction": 0.6666666666666666
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": false,
+            "error": 0.003800601531462258,
+            "local_gain": 0.1250016869492895,
+            "changed_pixels": 98,
+            "improved_fraction": 0.5408163265306123,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0042953960140530885,
+            "local_gain": 0.07941238175250734,
+            "changed_pixels": 54,
+            "improved_fraction": 0.7222222222222222
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0039454486030012495,
+            "local_gain": 0.08783201727146363,
+            "changed_pixels": 65,
+            "improved_fraction": 0.5692307692307692,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0040268485228037295,
+            "local_gain": 0.06983939835919843,
+            "changed_pixels": 63,
+            "improved_fraction": 0.6666666666666666
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.004139216412157183,
+            "local_gain": -0.05937600509316103,
+            "changed_pixels": 31,
+            "improved_fraction": 0.3548387096774194,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 6,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 6
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_0",
+      "seed": 29,
+      "elapsed_seconds": 0.06300000002374873,
+      "svg_sha256": "16f79f5ca4a665e12427d29b2689545c3d99ad68956640b827d1750db3ec7899",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.00402684835717082,
+            "foreground_mse": 0.18105332553386688,
+            "edge_alignment": 0.5329397916793823,
+            "foreground_iou": 0.4478021978021978,
+            "foreground_iou_binary": 0.4478021978021978
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.004025174304842949,
+            "foreground_mse": 0.1809949278831482,
+            "edge_alignment": 0.5303903222084045,
+            "foreground_iou": 0.4532967032967033,
+            "foreground_iou_binary": 0.4532967032967033
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.0045497077571326735,
+            "local_gain": 0.19208075789390666,
+            "changed_pixels": 156,
+            "improved_fraction": 0.6666666666666666
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": false,
+            "error": 0.003800601531462258,
+            "local_gain": 0.1250016869492895,
+            "changed_pixels": 98,
+            "improved_fraction": 0.5408163265306123,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0042953960140530885,
+            "local_gain": 0.07941238175250734,
+            "changed_pixels": 54,
+            "improved_fraction": 0.7222222222222222
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0039454486030012495,
+            "local_gain": 0.08783201727146363,
+            "changed_pixels": 65,
+            "improved_fraction": 0.5692307692307692,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0040268485228037295,
+            "local_gain": 0.06983939835919843,
+            "changed_pixels": 63,
+            "improved_fraction": 0.6666666666666666
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.004139216412157183,
+            "local_gain": -0.05937600509316103,
+            "changed_pixels": 31,
+            "improved_fraction": 0.3548387096774194,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 6,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 6
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_0",
+      "seed": 43,
+      "elapsed_seconds": 0.03200000000651926,
+      "svg_sha256": "16f79f5ca4a665e12427d29b2689545c3d99ad68956640b827d1750db3ec7899",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.00402684835717082,
+            "foreground_mse": 0.18105332553386688,
+            "edge_alignment": 0.5329397916793823,
+            "foreground_iou": 0.4478021978021978,
+            "foreground_iou_binary": 0.4478021978021978
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.004025174304842949,
+            "foreground_mse": 0.1809949278831482,
+            "edge_alignment": 0.5303903222084045,
+            "foreground_iou": 0.4532967032967033,
+            "foreground_iou_binary": 0.4532967032967033
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.0045497077571326735,
+            "local_gain": 0.19208075789390666,
+            "changed_pixels": 156,
+            "improved_fraction": 0.6666666666666666
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": false,
+            "error": 0.003800601531462258,
+            "local_gain": 0.1250016869492895,
+            "changed_pixels": 98,
+            "improved_fraction": 0.5408163265306123,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.0042953960140530885,
+            "local_gain": 0.07941238175250734,
+            "changed_pixels": 54,
+            "improved_fraction": 0.7222222222222222
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0039454486030012495,
+            "local_gain": 0.08783201727146363,
+            "changed_pixels": 65,
+            "improved_fraction": 0.5692307692307692,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.0040268485228037295,
+            "local_gain": 0.06983939835919843,
+            "changed_pixels": 63,
+            "improved_fraction": 0.6666666666666666
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.004139216412157183,
+            "local_gain": -0.05937600509316103,
+            "changed_pixels": 31,
+            "improved_fraction": 0.3548387096774194,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 6,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 6
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_1",
+      "seed": 17,
+      "elapsed_seconds": 0.030999999959021807,
+      "svg_sha256": "fe5dd0b8870e8aa984830c9f5fd742514ecd6177f912bcda9b6eeba64e674458",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0015700773801654577,
+            "foreground_mse": 0.09796734899282455,
+            "edge_alignment": 0.5965279340744019,
+            "foreground_iou": 0.5572519083969466,
+            "foreground_iou_binary": 0.5572519083969466
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0015910359797999263,
+            "foreground_mse": 0.09927624464035034,
+            "edge_alignment": 0.5917571187019348,
+            "foreground_iou": 0.5534351145038168,
+            "foreground_iou_binary": 0.5534351145038168
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.002487972249255094,
+            "local_gain": 0.12692261860597925,
+            "changed_pixels": 114,
+            "improved_fraction": 0.6578947368421053
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.001570077339044278,
+            "local_gain": 0.17083790616662586,
+            "changed_pixels": 88,
+            "improved_fraction": 0.7613636363636364
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0015677858025358836,
+            "local_gain": 0.0003342494102458235,
+            "changed_pixels": 54,
+            "improved_fraction": 0.48148148148148145,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0015870326441953415,
+            "local_gain": -0.01027275834080909,
+            "changed_pixels": 24,
+            "improved_fraction": 0.375,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 4,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 2
+        },
+        "probe_count": 4
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_1",
+      "seed": 29,
+      "elapsed_seconds": 0.031000000017229468,
+      "svg_sha256": "fe5dd0b8870e8aa984830c9f5fd742514ecd6177f912bcda9b6eeba64e674458",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0015700773801654577,
+            "foreground_mse": 0.09796734899282455,
+            "edge_alignment": 0.5965279340744019,
+            "foreground_iou": 0.5572519083969466,
+            "foreground_iou_binary": 0.5572519083969466
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0015910359797999263,
+            "foreground_mse": 0.09927624464035034,
+            "edge_alignment": 0.5917571187019348,
+            "foreground_iou": 0.5534351145038168,
+            "foreground_iou_binary": 0.5534351145038168
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.002487972249255094,
+            "local_gain": 0.12692261860597925,
+            "changed_pixels": 114,
+            "improved_fraction": 0.6578947368421053
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.001570077339044278,
+            "local_gain": 0.17083790616662586,
+            "changed_pixels": 88,
+            "improved_fraction": 0.7613636363636364
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0015677858025358836,
+            "local_gain": 0.0003342494102458235,
+            "changed_pixels": 54,
+            "improved_fraction": 0.48148148148148145,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0015870326441953415,
+            "local_gain": -0.01027275834080909,
+            "changed_pixels": 24,
+            "improved_fraction": 0.375,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 4,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 2
+        },
+        "probe_count": 4
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_1",
+      "seed": 43,
+      "elapsed_seconds": 0.0470000000204891,
+      "svg_sha256": "fe5dd0b8870e8aa984830c9f5fd742514ecd6177f912bcda9b6eeba64e674458",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 3,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0015700773801654577,
+            "foreground_mse": 0.09796734899282455,
+            "edge_alignment": 0.5965279340744019,
+            "foreground_iou": 0.5572519083969466,
+            "foreground_iou_binary": 0.5572519083969466
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "edge_alignment_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0015910359797999263,
+            "foreground_mse": 0.09927624464035034,
+            "edge_alignment": 0.5917571187019348,
+            "foreground_iou": 0.5534351145038168,
+            "foreground_iou_binary": 0.5534351145038168
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 3,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.002487972249255094,
+            "local_gain": 0.12692261860597925,
+            "changed_pixels": 114,
+            "improved_fraction": 0.6578947368421053
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.001570077339044278,
+            "local_gain": 0.17083790616662586,
+            "changed_pixels": 88,
+            "improved_fraction": 0.7613636363636364
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0015677858025358836,
+            "local_gain": 0.0003342494102458235,
+            "changed_pixels": 54,
+            "improved_fraction": 0.48148148148148145,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0015870326441953415,
+            "local_gain": -0.01027275834080909,
+            "changed_pixels": 24,
+            "improved_fraction": 0.375,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 4,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 2
+        },
+        "probe_count": 4
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_2",
+      "seed": 17,
+      "elapsed_seconds": 0.06300000002374873,
+      "svg_sha256": "12ec0590afe3dfe3d82202c7620060e71cd09db677a0d116f57faa5948319804",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.00216508936136961,
+            "foreground_mse": 0.09308714419603348,
+            "edge_alignment": 0.7238680720329285,
+            "foreground_iou": 0.6815789473684211,
+            "foreground_iou_binary": 0.6815789473684211
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0021399841643869877,
+            "foreground_mse": 0.09222636371850967,
+            "edge_alignment": 0.7247302532196045,
+            "foreground_iou": 0.6807387862796834,
+            "foreground_iou_binary": 0.6807387862796834
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.00438939031111832,
+            "local_gain": 0.25278297217927637,
+            "changed_pixels": 141,
+            "improved_fraction": 0.8368794326241135
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.002832488994116846,
+            "local_gain": 0.24293591597859188,
+            "changed_pixels": 105,
+            "improved_fraction": 0.7047619047619048
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.002957532609653339,
+            "local_gain": -0.03843448849487251,
+            "changed_pixels": 51,
+            "improved_fraction": 0.37254901960784315,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0023482761287725875,
+            "local_gain": 0.07873038574907086,
+            "changed_pixels": 100,
+            "improved_fraction": 0.56,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.002977699006992503,
+            "local_gain": -0.029371862357466187,
+            "changed_pixels": 81,
+            "improved_fraction": 0.345679012345679,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0032564129231145073,
+            "local_gain": -0.11974519084171871,
+            "changed_pixels": 58,
+            "improved_fraction": 0.27586206896551724,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0028480210060433486,
+            "local_gain": -0.006542504522708921,
+            "changed_pixels": 43,
+            "improved_fraction": 0.46511627906976744,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.002165089623982763,
+            "local_gain": 0.17556117787616837,
+            "changed_pixels": 62,
+            "improved_fraction": 0.6451612903225806
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0021638061883250035,
+            "local_gain": 0.0007250968902323154,
+            "changed_pixels": 29,
+            "improved_fraction": 0.41379310344827586,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 9,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 9
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_2",
+      "seed": 29,
+      "elapsed_seconds": 0.0779999999795109,
+      "svg_sha256": "12ec0590afe3dfe3d82202c7620060e71cd09db677a0d116f57faa5948319804",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.00216508936136961,
+            "foreground_mse": 0.09308714419603348,
+            "edge_alignment": 0.7238680720329285,
+            "foreground_iou": 0.6815789473684211,
+            "foreground_iou_binary": 0.6815789473684211
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0021399841643869877,
+            "foreground_mse": 0.09222636371850967,
+            "edge_alignment": 0.7247302532196045,
+            "foreground_iou": 0.6807387862796834,
+            "foreground_iou_binary": 0.6807387862796834
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.00438939031111832,
+            "local_gain": 0.25278297217927637,
+            "changed_pixels": 141,
+            "improved_fraction": 0.8368794326241135
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.002832488994116846,
+            "local_gain": 0.24293591597859188,
+            "changed_pixels": 105,
+            "improved_fraction": 0.7047619047619048
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.002957532609653339,
+            "local_gain": -0.03843448849487251,
+            "changed_pixels": 51,
+            "improved_fraction": 0.37254901960784315,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0023482761287725875,
+            "local_gain": 0.07873038574907086,
+            "changed_pixels": 100,
+            "improved_fraction": 0.56,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.002977699006992503,
+            "local_gain": -0.029371862357466187,
+            "changed_pixels": 81,
+            "improved_fraction": 0.345679012345679,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0032564129231145073,
+            "local_gain": -0.11974519084171871,
+            "changed_pixels": 58,
+            "improved_fraction": 0.27586206896551724,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0028480210060433486,
+            "local_gain": -0.006542504522708921,
+            "changed_pixels": 43,
+            "improved_fraction": 0.46511627906976744,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.002165089623982763,
+            "local_gain": 0.17556117787616837,
+            "changed_pixels": 62,
+            "improved_fraction": 0.6451612903225806
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0021638061883250035,
+            "local_gain": 0.0007250968902323154,
+            "changed_pixels": 29,
+            "improved_fraction": 0.41379310344827586,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 9,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 9
+      },
+      "model_confirmed": false
+    },
+    {
+      "case_id": "visible_C_2",
+      "seed": 43,
+      "elapsed_seconds": 0.0470000000204891,
+      "svg_sha256": "12ec0590afe3dfe3d82202c7620060e71cd09db677a0d116f57faa5948319804",
+      "check": {
+        "complete": false,
+        "supported": true,
+        "actual_count": 4,
+        "expected_count": 3,
+        "unmatched_expected": [
+          "lead",
+          "curve"
+        ],
+        "mapping": {},
+        "relations": [],
+        "hidden_geometry_verified": false,
+        "reason": "object_inventory_or_geometry"
+      },
+      "quality": {
+        "MuPDF": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.00216508936136961,
+            "foreground_mse": 0.09308714419603348,
+            "edge_alignment": 0.7238680720329285,
+            "foreground_iou": 0.6815789473684211,
+            "foreground_iou_binary": 0.6815789473684211
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "foreground_mse_outside_limit",
+            "foreground_iou_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.0021399841643869877,
+            "foreground_mse": 0.09222636371850967,
+            "edge_alignment": 0.7247302532196045,
+            "foreground_iou": 0.6807387862796834,
+            "foreground_iou_binary": 0.6807387862796834
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 4,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "report": {
+        "mode": "combined",
+        "max_probes": 32,
+        "proposals": [
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 1
+            },
+            "accepted": true,
+            "error": 0.00438939031111832,
+            "local_gain": 0.25278297217927637,
+            "changed_pixels": 141,
+            "improved_fraction": 0.8368794326241135
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 2
+            },
+            "accepted": true,
+            "error": 0.002832488994116846,
+            "local_gain": 0.24293591597859188,
+            "changed_pixels": 105,
+            "improved_fraction": 0.7047619047619048
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.002957532609653339,
+            "local_gain": -0.03843448849487251,
+            "changed_pixels": 51,
+            "improved_fraction": 0.37254901960784315,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0023482761287725875,
+            "local_gain": 0.07873038574907086,
+            "changed_pixels": 100,
+            "improved_fraction": 0.56,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.002977699006992503,
+            "local_gain": -0.029371862357466187,
+            "changed_pixels": 81,
+            "improved_fraction": 0.345679012345679,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0032564129231145073,
+            "local_gain": -0.11974519084171871,
+            "changed_pixels": 58,
+            "improved_fraction": 0.27586206896551724,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": false,
+            "error": 0.0028480210060433486,
+            "local_gain": -0.006542504522708921,
+            "changed_pixels": 43,
+            "improved_fraction": 0.46511627906976744,
+            "rejection": "local_or_global_error"
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 3
+            },
+            "accepted": true,
+            "error": 0.002165089623982763,
+            "local_gain": 0.17556117787616837,
+            "changed_pixels": 62,
+            "improved_fraction": 0.6451612903225806
+          },
+          {
+            "origin": "incumbent+residual_line_group",
+            "inventory": {
+              "rect": 1,
+              "line": 4
+            },
+            "accepted": false,
+            "error": 0.0021638061883250035,
+            "local_gain": 0.0007250968902323154,
+            "changed_pixels": 29,
+            "improved_fraction": 0.41379310344827586,
+            "rejection": "local_or_global_error"
+          }
+        ],
+        "selected_origin": "incumbent+residual_line_group",
+        "model_confirmed": false,
+        "stop_reason": "proposals_exhausted",
+        "render_evaluations": 9,
+        "selected_inventory": {
+          "rect": 1,
+          "line": 3
+        },
+        "probe_count": 9
+      },
+      "model_confirmed": false
+    }
+  ],
+  "manifest_sha256": "726cb7c60b3aca96d1120ebeed65eef10c6e73a379ad8f8a3be989f833017694",
+  "evaluator_sha256": "cb112fd82008dcb781111cc6ef8109b1c77e1cc6b051bc59de5e23cbde9cb944",
+  "source_sha256": {
+    "imageCompositeConverterFallbackGroups.py": "d6b75dc5f886e4dbeb2ed270f7de013003e9266f227914398ba0f84717afdad5",
+    "imageCompositeConverterFallbackComposition.py": "6ab07e513f3dc2e128bccd2971015cba3cfc78dbdd1c44010a5c63dac8550d30",
+    "imageCompositeConverterFallbackStructure.py": "9d88bc039123da4f7c16b956bb7e01e881757697146728722cddfdb07a126fc1"
+  },
+  "real_reserves_executed": false,
+  "model_promotions": 0
+}

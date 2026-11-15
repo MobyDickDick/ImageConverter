@@ -1,0 +1,716 @@
+{
+  "schema": "visible_curve_proposal_development_v1",
+  "cases": [
+    {
+      "case_id": "visible_Q_0",
+      "width": 128,
+      "height": 128,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/><line x1=\"32.0\" y1=\"20.0\" x2=\"32.0\" y2=\"40.0\" stroke=\"#224466\" stroke-width=\"2.4\"/><path d=\"M 32.0 40.0 Q 32.0 64.0 80.0 88.0\" stroke=\"#224466\" stroke-width=\"2.4\" fill=\"none\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/></svg>",
+      "annotation": {
+        "schema": "independent_curve_scene_v1",
+        "size": [
+          128,
+          128
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.05,
+          "color": 0,
+          "stroke_width": 0.01,
+          "angle": 0.01
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                128,
+                0
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                0,
+                128
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "lead",
+            "kind": "line",
+            "points": [
+              [
+                32.0,
+                20.0
+              ],
+              [
+                32.0,
+                40.0
+              ]
+            ],
+            "stroke": "#224466",
+            "stroke_width": 2.4
+          },
+          {
+            "id": "curve",
+            "kind": "quadratic",
+            "points": [
+              [
+                32.0,
+                40.0
+              ],
+              [
+                32.0,
+                64.0
+              ],
+              [
+                80.0,
+                88.0
+              ]
+            ],
+            "stroke": "#224466",
+            "stroke_width": 2.4
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1
+          }
+        ]
+      },
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "regions": [
+        {
+          "name": "lead",
+          "box": [
+            29,
+            17,
+            7,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "visible_Q_1",
+      "width": 128,
+      "height": 128,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/><line x1=\"101.4\" y1=\"36.8\" x2=\"84.4\" y2=\"36.8\" stroke=\"#993355\" stroke-width=\"2.04\"/><path d=\"M 84.4 36.8 Q 64.0 36.8 43.6 77.6\" stroke=\"#993355\" stroke-width=\"2.04\" fill=\"none\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/></svg>",
+      "annotation": {
+        "schema": "independent_curve_scene_v1",
+        "size": [
+          128,
+          128
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.05,
+          "color": 0,
+          "stroke_width": 0.01,
+          "angle": 0.01
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                128,
+                0
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                0,
+                128
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "lead",
+            "kind": "line",
+            "points": [
+              [
+                101.4,
+                36.8
+              ],
+              [
+                84.4,
+                36.8
+              ]
+            ],
+            "stroke": "#993355",
+            "stroke_width": 2.04
+          },
+          {
+            "id": "curve",
+            "kind": "quadratic",
+            "points": [
+              [
+                84.4,
+                36.8
+              ],
+              [
+                64.0,
+                36.8
+              ],
+              [
+                43.6,
+                77.6
+              ]
+            ],
+            "stroke": "#993355",
+            "stroke_width": 2.04
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1
+          }
+        ]
+      },
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "regions": [
+        {
+          "name": "lead",
+          "box": [
+            81,
+            33,
+            24,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "visible_Q_2",
+      "width": 128,
+      "height": 128,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/><line x1=\"99.2\" y1=\"112.4\" x2=\"99.2\" y2=\"90.39999999999999\" stroke=\"#397a46\" stroke-width=\"2.64\"/><path d=\"M 99.2 90.39999999999999 Q 99.2 63.99999999999999 46.4 37.599999999999994\" stroke=\"#397a46\" stroke-width=\"2.64\" fill=\"none\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/></svg>",
+      "annotation": {
+        "schema": "independent_curve_scene_v1",
+        "size": [
+          128,
+          128
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.05,
+          "color": 0,
+          "stroke_width": 0.01,
+          "angle": 0.01
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                128,
+                0
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                0,
+                128
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "lead",
+            "kind": "line",
+            "points": [
+              [
+                99.2,
+                112.4
+              ],
+              [
+                99.2,
+                90.39999999999999
+              ]
+            ],
+            "stroke": "#397a46",
+            "stroke_width": 2.64
+          },
+          {
+            "id": "curve",
+            "kind": "quadratic",
+            "points": [
+              [
+                99.2,
+                90.39999999999999
+              ],
+              [
+                99.2,
+                63.99999999999999
+              ],
+              [
+                46.4,
+                37.599999999999994
+              ]
+            ],
+            "stroke": "#397a46",
+            "stroke_width": 2.64
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1
+          }
+        ]
+      },
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "regions": [
+        {
+          "name": "lead",
+          "box": [
+            96,
+            87,
+            7,
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "visible_C_0",
+      "width": 128,
+      "height": 128,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/><line x1=\"32.0\" y1=\"20.0\" x2=\"32.0\" y2=\"40.0\" stroke=\"#224466\" stroke-width=\"2.4\"/><path d=\"M 32.0 40.0 C 32.0 56.0 44.0 72.0 80.0 88.0\" stroke=\"#224466\" stroke-width=\"2.4\" fill=\"none\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/></svg>",
+      "annotation": {
+        "schema": "independent_curve_scene_v1",
+        "size": [
+          128,
+          128
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.05,
+          "color": 0,
+          "stroke_width": 0.01,
+          "angle": 0.01
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                128,
+                0
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                0,
+                128
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "lead",
+            "kind": "line",
+            "points": [
+              [
+                32.0,
+                20.0
+              ],
+              [
+                32.0,
+                40.0
+              ]
+            ],
+            "stroke": "#224466",
+            "stroke_width": 2.4
+          },
+          {
+            "id": "curve",
+            "kind": "cubic",
+            "points": [
+              [
+                32.0,
+                40.0
+              ],
+              [
+                32.0,
+                56.0
+              ],
+              [
+                44.0,
+                72.0
+              ],
+              [
+                80.0,
+                88.0
+              ]
+            ],
+            "stroke": "#224466",
+            "stroke_width": 2.4
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1
+          }
+        ]
+      },
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "regions": [
+        {
+          "name": "lead",
+          "box": [
+            29,
+            17,
+            7,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "visible_C_1",
+      "width": 128,
+      "height": 128,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/><line x1=\"101.4\" y1=\"36.8\" x2=\"84.4\" y2=\"36.8\" stroke=\"#993355\" stroke-width=\"2.04\"/><path d=\"M 84.4 36.8 C 70.8 36.8 57.2 47.0 43.6 77.6\" stroke=\"#993355\" stroke-width=\"2.04\" fill=\"none\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/></svg>",
+      "annotation": {
+        "schema": "independent_curve_scene_v1",
+        "size": [
+          128,
+          128
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.05,
+          "color": 0,
+          "stroke_width": 0.01,
+          "angle": 0.01
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                128,
+                0
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                0,
+                128
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "lead",
+            "kind": "line",
+            "points": [
+              [
+                101.4,
+                36.8
+              ],
+              [
+                84.4,
+                36.8
+              ]
+            ],
+            "stroke": "#993355",
+            "stroke_width": 2.04
+          },
+          {
+            "id": "curve",
+            "kind": "cubic",
+            "points": [
+              [
+                84.4,
+                36.8
+              ],
+              [
+                70.8,
+                36.8
+              ],
+              [
+                57.2,
+                47.0
+              ],
+              [
+                43.6,
+                77.6
+              ]
+            ],
+            "stroke": "#993355",
+            "stroke_width": 2.04
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1
+          }
+        ]
+      },
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "regions": [
+        {
+          "name": "lead",
+          "box": [
+            81,
+            33,
+            24,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "visible_C_2",
+      "width": 128,
+      "height": 128,
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/><line x1=\"99.2\" y1=\"112.4\" x2=\"99.2\" y2=\"90.39999999999999\" stroke=\"#397a46\" stroke-width=\"2.64\"/><path d=\"M 99.2 90.39999999999999 C 99.2 72.8 86.0 55.2 46.4 37.599999999999994\" stroke=\"#397a46\" stroke-width=\"2.64\" fill=\"none\"/></svg>",
+      "seed_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"><rect width=\"128\" height=\"128\" fill=\"white\"/></svg>",
+      "annotation": {
+        "schema": "independent_curve_scene_v1",
+        "size": [
+          128,
+          128
+        ],
+        "complete_inventory": true,
+        "limits": {
+          "position": 0.05,
+          "color": 0,
+          "stroke_width": 0.01,
+          "angle": 0.01
+        },
+        "objects": [
+          {
+            "id": "background",
+            "kind": "rect",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                128,
+                0
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                0,
+                128
+              ]
+            ],
+            "fill": "white"
+          },
+          {
+            "id": "lead",
+            "kind": "line",
+            "points": [
+              [
+                99.2,
+                112.4
+              ],
+              [
+                99.2,
+                90.39999999999999
+              ]
+            ],
+            "stroke": "#397a46",
+            "stroke_width": 2.64
+          },
+          {
+            "id": "curve",
+            "kind": "cubic",
+            "points": [
+              [
+                99.2,
+                90.39999999999999
+              ],
+              [
+                99.2,
+                72.8
+              ],
+              [
+                86.0,
+                55.2
+              ],
+              [
+                46.4,
+                37.599999999999994
+              ]
+            ],
+            "stroke": "#397a46",
+            "stroke_width": 2.64
+          }
+        ],
+        "relations": [
+          {
+            "kind": "endpoints_meet",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01
+          },
+          {
+            "kind": "tangent_join",
+            "objects": [
+              "lead",
+              "curve"
+            ],
+            "tolerance": 0.01,
+            "angle_tolerance": 0.1
+          }
+        ]
+      },
+      "description": "Eine offene farbige Kurve mit einer tangential angeschlossenen geraden Linie auf weissem Hintergrund.",
+      "regions": [
+        {
+          "name": "lead",
+          "box": [
+            96,
+            87,
+            7,
+            29
+          ]
+        }
+      ]
+    }
+  ],
+  "seconds": 5,
+  "max_probes": 32,
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "checker_sha256": "2737ab7037b5c5122db9519a1bc97e1f06fc5048c4e3d8c25a94e3f9e04641c9",
+  "files": {
+    "imageCompositeConverterFallbackComposition.py": "6ab07e513f3dc2e128bccd2971015cba3cfc78dbdd1c44010a5c63dac8550d30",
+    "imageCompositeConverterFallbackGroups.py": "d6b75dc5f886e4dbeb2ed270f7de013003e9266f227914398ba0f84717afdad5",
+    "imageCompositeConverterFallbackStructure.py": "9d88bc039123da4f7c16b956bb7e01e881757697146728722cddfdb07a126fc1",
+    "visible_C_0.png": "b3befea1ebfe78108db8ded8e488790930756f6fafeecafb44fbd06b0ff718b0",
+    "visible_C_1.png": "b1b823d01d011e90e2bc8bef72155def39d2e2a7878bcca220bbf1b340b29bda",
+    "visible_C_2.png": "a5dd2a28c0345b9cd7a87b1fb206c0bfdec239299de3f83f2d5bb5628d065cca",
+    "visible_Q_0.png": "d87a9aa015917edc851cf426a7f3403f8b55cd84d40e233da2882ac9d925fc02",
+    "visible_Q_1.png": "64b80f157a81d0f8944f6f8bfa296f8eb50f189e64ab8ee10577b00e417d7077",
+    "visible_Q_2.png": "a2839168a45595224432c3e5eb75ac12525e2abc037601dfd7ad6c4ed3567945"
+  },
+  "real_reserves_executed": false,
+  "model_promotions": 0
+}

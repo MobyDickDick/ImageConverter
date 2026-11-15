@@ -1,0 +1,88 @@
+{
+  "cli": [
+    {
+      "case_id": "visible_Q_0",
+      "batch_failures": [
+        {
+          "filename": "visible_Q_0.png",
+          "status": "batch_error",
+          "reason": "TimeoutError",
+          "details": "{\"elapsed_seconds\": 5.031, \"limit_seconds\": 5.0, \"minimum_seconds\": 5.0, \"max_seconds\": 5.0, \"time_extensions\": 0, \"candidate_evaluations\": 657, \"stop_reason\": \"time_limit\", \"isolated\": true, \"timing_trace\": \"visible_Q_0_timing.jsonl\", \"observation_interruptions\": [], \"external_max_seconds\": null, \"recovered_checkpoint\": false, \"retained_output\": true}",
+          "log_file": "visible_Q_0_deadline.json",
+          "reachability_reason": "budget_exceeded",
+          "report_code": "NR002",
+          "exit_code": "21"
+        }
+      ],
+      "clean_process_completion": false
+    },
+    {
+      "case_id": "visible_Q_1",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_Q_2",
+      "batch_failures": [
+        {
+          "filename": "visible_Q_2.png",
+          "status": "batch_error",
+          "reason": "TimeoutError",
+          "details": "{\"elapsed_seconds\": 5.047, \"limit_seconds\": 5.0, \"minimum_seconds\": 5.0, \"max_seconds\": 5.0, \"time_extensions\": 0, \"candidate_evaluations\": 720, \"stop_reason\": \"time_limit\", \"isolated\": true, \"timing_trace\": \"visible_Q_2_timing.jsonl\", \"observation_interruptions\": [], \"external_max_seconds\": null, \"recovered_checkpoint\": false, \"retained_output\": true}",
+          "log_file": "visible_Q_2_deadline.json",
+          "reachability_reason": "budget_exceeded",
+          "report_code": "NR002",
+          "exit_code": "21"
+        }
+      ],
+      "clean_process_completion": false
+    },
+    {
+      "case_id": "visible_C_0",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_C_1",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_C_2",
+      "batch_failures": [],
+      "clean_process_completion": true
+    }
+  ],
+  "cli_serial": [
+    {
+      "case_id": "visible_Q_0",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_Q_1",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_Q_2",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_C_0",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_C_1",
+      "batch_failures": [],
+      "clean_process_completion": true
+    },
+    {
+      "case_id": "visible_C_2",
+      "batch_failures": [],
+      "clean_process_completion": true
+    }
+  ]
+}

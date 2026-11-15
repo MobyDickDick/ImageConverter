@@ -1,6 +1,6 @@
 # Fortschritt zum Ziel einer breiten Bitmap-zu-SVG-Konvertierung
 
-Aktualisiert am 14.11.2026 nach FALLBACK-GROUPS-CLEANUP-06.
+Aktualisiert am 15.11.2026 nach FALLBACK-GROUPS-CURVE-PROPOSALS-08.
 
 Die belegte Katalogabdeckung liegt bei ungefähr einem Fünftel. Ein Grossteil
 der Bilder ist noch nicht erfolgreich abgenommen. Die vielen abgeschlossenen
@@ -90,9 +90,14 @@ lässt sich daraus noch nicht ableiten.
 
 ## Die nächsten wirksamen Schritte
 
-1. **FALLBACK-GROUPS-CURVES-07:** Separaten unabhängigen Prüfumfang für native
-   Kurven/Bögen samt externen synthetischen Annotationen und Gegenproben
-   schaffen; danach entsprechende saubere produktive Gruppen untersuchen.
+1. **FALLBACK-GROUPS-CURVE-REGISTRATION-09:** Die fünf noch geometrisch
+   unbestätigten sichtbaren Kurvenkonstruktionen bei unveränderten engen
+   Prüftoleranzen und Budgets stabil registrieren. Der unabhängige
+   [Kurvenprüfer](next_arbeitspaket_2026-11-15_curve_checker.md) und erste
+   [produktive Q-/C-Gruppenvorschläge](next_arbeitspaket_2026-11-15_curve_proposals.md)
+   sind umgesetzt: beide Rastergates 18/18, vollständiger nativer Vertrag
+   erst 3/18; gespeicherte echte CLI-SVGs entsprechend 6/6 und 1/6.
+   Das ist keine zusätzliche reale Katalogabnahme.
 2. **Allgemeine Form- und Abnahmeabdeckung:** Kurven, weitere Symbolkompositionen,
    passende Beschreibungen sowie fachliche Prüfung bisheriger guter Entwürfe.
    Keine Freigabe allein aufgrund eines globalen Pixelwerts.
