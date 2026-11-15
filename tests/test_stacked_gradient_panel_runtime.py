@@ -3,13 +3,20 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 import pytest
+import cv2
 
 from tests.test_crossed_gradient_panel_runtime import drawing,fit
 from tools.run_plan_b_variations import render,measure_quality,make_original_case,make_variations
+from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration,configured_image_search
 
 ROOT = Path(__file__).resolve().parents[1]
 SVG = (ROOT/'tests/fixtures/stacked_panel_workbench.svg').read_text(encoding='utf-8')
 DESCRIPTION = (ROOT/'tests/fixtures/descriptions/stacked_panel_workbench_user.txt').read_text(encoding='utf-8').strip()
+SMALL_SVG = (ROOT/'tests/fixtures/stacked_panel_small_workbench.svg').read_text(encoding='utf-8')
+SMALL_DESCRIPTION = (ROOT/'tests/fixtures/descriptions/stacked_panel_small_workbench_user.txt').read_text(encoding='utf-8').strip()
+medium = ET.fromstring(SMALL_SVG)
+medium.set('width','26'); medium.set('height','52')
+MEDIUM_SVG = ET.tostring(medium,encoding='unicode')
 NS = {'s':'http://www.w3.org/2000/svg'}
 
 
@@ -45,6 +52,24 @@ def test_workbench_original_and_all_variants_keep_cross_and_stacked_signs(case):
     assert_marks(result['svg'])
 
 
+@pytest.mark.parametrize('case',[
+    make_original_case(SMALL_SVG,SMALL_DESCRIPTION),*make_variations(SMALL_SVG,SMALL_DESCRIPTION,7388058509807368710,expand_canvas=True),
+    make_original_case(MEDIUM_SVG,SMALL_DESCRIPTION),*make_variations(MEDIUM_SVG,SMALL_DESCRIPTION,7388058509807368710,expand_canvas=True),
+],ids=lambda c:f"{c['width']}x{c['height']}-{c['case_id']}")
+def test_small_and_medium_workbench_keep_separate_marks_at_every_subpixel_offset(case):
+    image = render(case['svg'],case['width'],case['height'])
+    # Exercise the bounded portfolio used by the real CLI. Quantized border
+    # placement can require a second search direction after coordinate descent.
+    with search_configuration(mode='portfolio',adaptive=True,seed=7388058509807368710,
+                              budget=384,seconds=10,max_seconds=10,minimum_seconds=10):
+        with configured_image_search('small-panel-registration'):
+            result = fit(image,case['description'],error_fn=lambda a,b:float(cv2.absdiff(a,b).mean()))
+    assert result is not None
+    assert measure_quality(image,result['svg'])['satisfactory']
+    assert result['details']['passed']
+    assert_marks(result['svg'])
+
+
 def independent(plus=True,minus=True,swapped=False,second=True):
     svg = drawing(minus=False,second=second)
     py,my = (17,8) if swapped else (8,17)
@@ -54,11 +79,12 @@ def independent(plus=True,minus=True,swapped=False,second=True):
 
 
 @pytest.mark.parametrize('kwargs',[dict(plus=False),dict(minus=False),dict(swapped=True),dict(second=False)])
-def test_missing_or_swapped_marks_and_missing_diagonal_are_rejected(kwargs):
-    assert fit(render(independent(**kwargs),40,80),DESCRIPTION) is None
+@pytest.mark.parametrize('width,height',[(20,40),(26,52),(40,80)])
+def test_missing_or_swapped_marks_and_missing_diagonal_are_rejected(kwargs,width,height):
+    assert fit(render(independent(**kwargs),width,height),DESCRIPTION) is None
 
 
-@pytest.mark.parametrize('width,height',[(32,64),(48,96),(60,120)])
+@pytest.mark.parametrize('width,height',[(20,40),(26,52),(32,64),(48,96),(60,120)])
 def test_independent_native_paths_and_different_sizes(width,height):
     image = render(independent(),width,height)
     result = fit(image,DESCRIPTION)

@@ -14,6 +14,48 @@ from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register
 
 
+def _observe_marks(gray, darkness, region, axes, panel_width, stacked, plus):
+    # At small sizes antialiasing can join a minus to a diagonal, or bridge
+    # the one-pixel gap below a plus. Remove observed diagonal support and try
+    # bounded contrast levels; every candidate still needs a complete cross
+    # and a distinct horizontal mark before the native render is fitted.
+    for threshold in ((45,65,85) if stacked else (45,)):
+        mark = region & (darkness > threshold)
+        if stacked:
+            for axis in axes:
+                mark &= axis[4] > axis[2]*.65
+        count,labels,stats,_ = cv2.connectedComponentsWithStats(mark.astype('uint8'))
+        # A one-pixel-high minus may occupy two antialiased rows. The stacked
+        # pair permits one pixel of bounding-box quantization, not a lower
+        # final quality threshold or a missing/filled-in plus.
+        eligible = sorted((i for i in range(1,count)
+                           if stats[i,cv2.CC_STAT_WIDTH] >= 2.5*stats[i,cv2.CC_STAT_HEIGHT]-(1 if stacked else 0)),
+                          key=lambda i:stats[i,cv2.CC_STAT_AREA],reverse=True)
+        for i in eligible:
+            mx,my,mw,mh,area = stats[i]
+            if mw < panel_width*.12 or area < mw*mh*.6:
+                continue
+            shade = float(np.percentile(gray[labels==i],10))
+            if not plus:
+                return (mx,my,mw,mh),shade,[],None
+            if not stacked:
+                continue
+            candidates = [j for j in range(1,count) if j != i
+                          and .65 < stats[j,cv2.CC_STAT_WIDTH]/max(1,stats[j,cv2.CC_STAT_HEIGHT]) < 1.5
+                          and stats[j,cv2.CC_STAT_TOP]+stats[j,cv2.CC_STAT_HEIGHT] < my
+                          and abs(stats[j,cv2.CC_STAT_LEFT]+stats[j,cv2.CC_STAT_WIDTH]/2-(mx+mw/2)) < panel_width*.1]
+            for j in sorted(candidates,key=lambda j:stats[j,cv2.CC_STAT_AREA],reverse=True):
+                px,py,pw,ph,_ = stats[j]
+                support = labels[py:py+ph,px:px+pw] == j
+                hs = int((support.sum(axis=1) >= pw*.7).sum())
+                vs = int((support.sum(axis=0) >= ph*.7).sum())
+                if pw >= 4 and ph >= 4 and 0 < hs < ph*.6 and 0 < vs < pw*.6:
+                    return ((mx,my,mw,mh),shade,
+                            [float(v) for v in (px,py,pw,ph,hs,vs)],
+                            float(np.percentile(gray[labels==j],10)))
+    return None
+
+
 def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, error_fn):
     text = ' '.join(normalize_description(description).casefold().split())
     plus = bool(re.search(r'\bplus(?:zeichen)?\b|\+', text))
@@ -41,7 +83,8 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
     x,y,w,h,area = stats[index]
     if w < 14 or h < w*1.25 or area < w*h*.5:
         return None
-    left,top,right,bottom = x+1.25,y+1.25,x+w-1.25,y+h-1.25
+    inset = min(1.25,max(.5,w*.03)) if stacked else 1.25
+    left,top,right,bottom = x+inset,y+inset,x+w-inset,y+h-inset
     profile = np.percentile(gray[y+3:y+h-3, x:x+w],75,axis=0)
     columns = np.arange(x+3,x+w-3)
     peak = float(x+3+np.argmax(profile[3:-3])+.5)
@@ -88,45 +131,18 @@ def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, 
         axes.append((float(intercept),float(slope*height+intercept),max(1,w*.075),shade,distance))
     # Observe distinct marks above the crossing; wording selects their relation,
     # while connected raster support determines their positions and sizes.
-    mark = ((xx > left+w*.25) & (xx < left+w*.75) & (yy > top+h*.03)
-            & (yy < top+h*(.3 if stacked else .2)) & (darkness > 45))
-    count,marks,mark_stats,_ = cv2.connectedComponentsWithStats(mark.astype('uint8'))
-    if count < 2:
+    region = ((xx > left+w*.25) & (xx < left+w*.75) & (yy > top+h*.03)
+              & (yy < top+h*(.3 if stacked else .2)))
+    marks = _observe_marks(gray,darkness,region,axes,w,stacked,plus)
+    if marks is None:
         return None
-    eligible = [i for i in range(1,count) if mark_stats[i,cv2.CC_STAT_WIDTH] >= 2.5*mark_stats[i,cv2.CC_STAT_HEIGHT]]
-    if not eligible:
-        return None
-    i = max(eligible,key=lambda i:mark_stats[i,cv2.CC_STAT_AREA])
-    mx,my,mw,mh,mark_area = mark_stats[i]
-    # Subpixel placement spreads a short antialiased minus over three rows;
-    # its thresholded outer rows need not fill 70% of the bounding rectangle.
-    # The horizontal aspect, connected support and local render check remain.
-    if not (mw >= mh*2.5 and mw >= w*.12 and mark_area >= mw*mh*.6):
-        return None
-    minus_shade = float(np.percentile(gray[marks==i],10))
-    plus_geometry = []
-    plus_shade = None
+    (mx,my,mw,mh),minus_shade,plus_geometry,plus_shade = marks
     if plus:
-        if not stacked:
-            return None
-        eligible = [j for j in range(1,count) if j != i
-                    and .65 < mark_stats[j,cv2.CC_STAT_WIDTH]/max(1,mark_stats[j,cv2.CC_STAT_HEIGHT]) < 1.5
-                    and mark_stats[j,cv2.CC_STAT_TOP]+mark_stats[j,cv2.CC_STAT_HEIGHT] < my
-                    and abs(mark_stats[j,cv2.CC_STAT_LEFT]+mark_stats[j,cv2.CC_STAT_WIDTH]/2-(mx+mw/2)) < w*.1]
-        if not eligible:
-            return None
-        j = max(eligible,key=lambda j:mark_stats[j,cv2.CC_STAT_AREA])
-        px,py,pw,ph,_ = mark_stats[j]
-        support = marks[py:py+ph,px:px+pw] == j
-        rows,cols = support.sum(axis=1),support.sum(axis=0)
-        hs,vs = int((rows >= pw*.7).sum()),int((cols >= ph*.7).sum())
-        if not (pw >= 4 and ph >= 4 and 0 < hs < ph*.6 and 0 < vs < pw*.6):
-            return None
-        plus_geometry = [float(px),float(py),float(pw),float(ph),float(hs),float(vs)]
-        plus_shade = float(np.percentile(gray[marks==j],10))
+        px,py,pw,ph,_,_ = map(int,plus_geometry)
     rim = float(np.percentile(np.concatenate((gray[y:y+h,x+1],gray[y:y+h,x+w-2],
                                             gray[y+1,x:x+w],gray[y+h-2,x:x+w])),15))
-    p = [left,top,right,bottom,1.2,peak,
+    rim_width = min(1.2,max(.6,w*.03)) if stacked else 1.2
+    p = [left,top,right,bottom,rim_width,peak,
          *axes[0][:3],*axes[1][:3],float(mx),float(my),float(mw),float(mh),
          *plus_geometry,*paint,rim,axes[0][3],axes[1][3],minus_shade,
          *([plus_shade] if plus else [])]
