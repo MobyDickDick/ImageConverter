@@ -89,7 +89,15 @@ def recover_case_output(conversion_dir: Path, cli_args: list[str], deadline: flo
     def option(name):
         return cli_args[cli_args.index(name)+1]
     name = option('--start')
-    source = Path(cli_args[0])/(name+'.png')
+    inputs = Path(cli_args[0])
+    # The CLI archives rejected inputs before returning. Recovery must still
+    # see the same raster instead of silently skipping these very failures.
+    sources = [folder/(name+'.png') for folder in
+               (inputs,inputs/'nonconvertable',inputs/'succesessfulConvertedImages')]
+    sources = [path for path in sources if path.is_file()]
+    if len(sources) != 1:
+        return False
+    source = sources[0]
     image = cv2.imread(str(source))
     if image is None:
         return False

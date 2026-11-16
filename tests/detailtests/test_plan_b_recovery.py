@@ -56,11 +56,15 @@ def test_good_result_or_exhausted_deadline_never_starts_recovery(case, monkeypat
     assert not battery.recover_case_output(conversion, args, time.time()+remaining)
 
 
-def test_real_audited_worker_recovers_a_failed_first_stage(case):
+@pytest.mark.parametrize('archive',[False,True])
+def test_real_audited_worker_recovers_a_failed_first_stage(case,archive):
     conversion, target, args = case
     # Substitute only the first CLI stage. Real native recovery, rendering,
     # assertions and the worker's reference-access audit remain in force.
-    bootstrap = ('import sys; from src.iCCModules import imageCompositeConverterCli as cli; '
+    archive_code = ("from pathlib import Path; inputs=Path(sys.argv[2]); "
+                    "(inputs/'nonconvertable').mkdir(); "
+                    "(inputs/'original.png').replace(inputs/'nonconvertable/original.png'); ") if archive else ''
+    bootstrap = ('import sys; '+archive_code+'from src.iCCModules import imageCompositeConverterCli as cli; '
                  'cli.main=lambda args:0; from tools.run_plan_b_variations import converter_worker; '
                  'raise SystemExit(converter_worker(sys.argv[1:]))')
     environment = dict(os.environ, ICC_PLAN_B_DEADLINE=str(time.time()+8))
@@ -72,5 +76,35 @@ def test_real_audited_worker_recovers_a_failed_first_stage(case):
     access = json.loads((conversion.parent/'reference_access.json').read_text())
     assert not access['blocked_svg_reads']
     import cv2
-    image = cv2.imread(str(Path(args[0])/'original.png'))
+    image = cv2.imread(str((Path(args[0])/'nonconvertable' if archive else Path(args[0]))/'original.png'))
     assert battery.measure_quality(image, target.read_text())['satisfactory']
+
+
+@pytest.mark.parametrize('archive',['nonconvertable','succesessfulConvertedImages'])
+def test_cli_archived_input_still_reaches_native_recovery(case,monkeypatch,archive):
+    conversion,target,args = case
+    inputs = Path(args[0])
+    archived = inputs/archive/'original.png'
+    archived.parent.mkdir()
+    (inputs/'original.png').replace(archived)
+    called = []
+    def recover(source,output,description,seconds,**kwargs):
+        called.append(source)
+        assert source == archived and 0 < seconds <= 5
+        output.parent.mkdir(parents=True)
+        output.write_text(SVG)
+        return dict(passed=True)
+    monkeypatch.setattr(recovery,'recover',recover)
+    assert battery.recover_case_output(conversion,args,time.time()+5)
+    assert called == [archived]
+    assert target.read_text() == SVG
+
+
+def test_ambiguous_archived_rasters_are_not_arbitrarily_chosen(case,monkeypatch):
+    conversion,target,args = case
+    inputs = Path(args[0])
+    archive = inputs/'nonconvertable'
+    archive.mkdir()
+    (archive/'original.png').write_bytes((inputs/'original.png').read_bytes())
+    monkeypatch.setattr(recovery,'recover',lambda *a,**k:pytest.fail('Ambiguous source'))
+    assert not battery.recover_case_output(conversion,args,time.time()+5)

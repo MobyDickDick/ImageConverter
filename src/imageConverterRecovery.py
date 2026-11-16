@@ -17,6 +17,7 @@ import numpy as np
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 from src.iCCModules.imageCompositeConverterArrowPair import fit_arrow_pair
+from src.iCCModules.imageCompositeConverterHollowCrossPanel import fit_hollow_cross_panel
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
 from src.iCCModules.imageCompositeConverterFallbackGroups import canvas
 from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
@@ -103,6 +104,12 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
                     render(svg, w, h)
                 except (ValueError, SyntaxError):
                     pass
+            if not report['passed']:
+                panel = fit_hollow_cross_panel(w,h,description=description,image=image,
+                    render_fn=lambda svg,width,height: render(svg,width,height,preview=False),
+                    error_fn=lambda a,b: float(np.square(a.astype(float)-b.astype(float)).mean()/255**2))
+                if panel is not None:
+                    publish(panel['svg'],panel['rendered'],panel['error'])
             arrow = None if report['passed'] else fit_arrow_pair(w, h, description=description, image=image,
                 render_fn=lambda svg, width, height: render(svg, width, height, preview=False),
                 error_fn=lambda a, b: float(np.square(a.astype(float)-b.astype(float)).mean()/255**2),

@@ -60,6 +60,7 @@ from src.iCCModules.imageCompositeConverterPairedLinePanel import fit_paired_lin
 from src.iCCModules.imageCompositeConverterHeatPanel import fit_heat_panel
 from src.iCCModules.imageCompositeConverterDiagonalCrossPanel import fit_diagonal_cross_panel
 from src.iCCModules.imageCompositeConverterCrossedGradientPanel import fit_crossed_gradient_panel
+from src.iCCModules.imageCompositeConverterHollowCrossPanel import fit_hollow_cross_panel, hollow_cross_contract
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1456,7 +1457,7 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"} or (
-        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description) or piecewise_contract(description))
+        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description) or piecewise_contract(description) or hollow_cross_contract(description))
     ):
         # A complete raster-backed gradient contract can describe its frame
         # implicitly. A missing rectangle noun must not bypass its fitter.
@@ -1500,6 +1501,7 @@ def runNonCompositeIterationImpl(
             (fit_inset_panel, "non_composite_raster_inset_panel"),
             (fit_gradient_tube, "non_composite_raster_gradient_tube"),
             (fit_spray_panel, "non_composite_raster_spray_panel"),
+            (fit_hollow_cross_panel, "non_composite_raster_hollow_cross_panel"),
             (fit_crossed_gradient_panel, "non_composite_raster_crossed_gradient_panel"),
             (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
             (fit_heat_panel, "non_composite_raster_heat_panel"),
@@ -1568,7 +1570,7 @@ def runNonCompositeIterationImpl(
                 if status == "non_composite_raster_spray_panel":
                     params[fitted['source']] = {key:value for key,value in fitted.items()
                                                 if key not in {'svg','rendered'}}
-                if status == "non_composite_raster_crossed_gradient_panel":
+                if status in {"non_composite_raster_crossed_gradient_panel", "non_composite_raster_hollow_cross_panel"}:
                     params[fitted['source']] = {key: fitted[key] for key in
                         ('initial_error','error','parameters','evaluations','quality','details')}
                 if status == "non_composite_raster_heat_panel":

@@ -1,5 +1,17 @@
 # ImageConverter
 
+Schmale graue Verlaufspanels mit einer innen ausgesparten Diagonale und einem
+umrandeten Quadrat im Zentrum werden aus dem Originalraster rekonstruiert.
+Die vollständige Raute und der helle Innenstreifen werden zusätzlich geprüft,
+auch bei vorhandenen Sample-SVGs. Dadurch wird ein fehlerhaftes gespeichertes
+Ergebnis trotz bestandener globaler Pixelprüfung erneut bearbeitet.
+AC0140_L ist neu konvertiert und im Projekt gespeichert. Nach Abschluss laufender
+Hintergrundaufgaben den Webserver neu starten, damit auch die Beschriftungen alter
+Ergebnisse erneut geprüft werden. [Vergleich und Prüfbelege](artifacts/evaluation/hollow_cross_panel_2026-11-16/README.md).
+Die [Nachprüfung des Plan-B-Exports](artifacts/evaluation/hollow_cross_plan_b_2026-11-16/README.md)
+ergänzt verschobene Motive auf grösseren Zeichenflächen und die Wiederherstellung
+bereits archivierter Eingaben. Alle 17 unveränderten Fälle bestehen jetzt.
+
 In der **Konvertierungsqualität** öffnet ein Klick auf die Qualitätsbezeichnung
 (zum Beispiel **Rastergates verfehlt**) das betreffende Original mit seiner
 gespeicherten Beschreibung in der Einzelkonvertierung. Dort lässt sich ein neuer

@@ -137,6 +137,9 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    from src.iCCModules.imageCompositeConverterHollowCrossPanel import hollow_cross_contract
+    if hollow_cross_contract(normalized):
+        assertions['hollow_cross_panel'] = True
     # Global, positive claims only. Quoted labels and negative clauses must
     # never turn into an instruction to regularize the drawing.
     uniform = (r'\b(?:alle|sämtliche)\s+(?:linien|striche|konturen)\s+'
@@ -185,8 +188,14 @@ def gradient_direction(text: str, direction: str) -> bool:
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
                               or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')
-                              or assertions.get('dashed_spray_rays')):
+                              or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel')):
         return
+    if assertions.get('hollow_cross_panel'):
+        from src.iCCModules.imageCompositeConverterHollowCrossPanel import validate_hollow_cross_panel
+        try:
+            validate_hollow_cross_panel(svg)
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if assertions.get('dashed_spray_rays'):
         from src.iCCModules.imageCompositeConverterSprayPanel import validate_dashed_spray_rays
         try:

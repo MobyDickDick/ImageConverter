@@ -1,0 +1,22 @@
+{
+  "zip_sha256": "eb9feb90864ac3845edcd83e919b20d9938ed3650aa0f24f852195fc613ba3e9",
+  "seed": 3810862661596591357,
+  "source_svg_sha256": "8def4cc540ea4aed296721a716814b0425d4d4d7efbdc296bf929fabe3a75a10",
+  "input_hashes_unchanged": true,
+  "before_passed": 15,
+  "before_failed_cases": [
+    "probe_05",
+    "probe_08"
+  ],
+  "after_passed": 17,
+  "total": 17,
+  "renderer_checks_passed": 34,
+  "reference_svg_reads": 0,
+  "total_seconds": 152.628,
+  "max_case_seconds": 25.046,
+  "max_mupdf_mse": 0.00037923274794593453,
+  "min_mupdf_edge": 0.9014942049980164,
+  "max_librsvg_mse": 0.0006854975945316255,
+  "min_librsvg_edge": 0.8996454477310181,
+  "regression_tests_passed": 113
+}

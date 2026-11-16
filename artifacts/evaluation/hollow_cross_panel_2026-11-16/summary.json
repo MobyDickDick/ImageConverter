@@ -1,0 +1,78 @@
+{
+  "image": "AC0140_L.jpg",
+  "source_sha256": "7e6de60dfea0a172c6b5b6d8ed73f91a252f4df3dc2bd2d60650d1a8b2db8238",
+  "output_sha256": "dd0473a339b3af72457bc4f1d25b4d673679b7e01de57506dc7f1d92600bea55",
+  "before_metrics": {
+    "normalized_mse": 0.0029923184774816036,
+    "foreground_mse": 0.003053094958886504,
+    "edge_alignment": 0.7227356433868408,
+    "foreground_iou": 0.9052335698032392,
+    "foreground_iou_binary": 0.9052335698032392
+  },
+  "renderer_checks": {
+    "mupdf": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.00013745846808888018,
+        "foreground_mse": 0.0001232932845596224,
+        "edge_alignment": 0.943065881729126,
+        "foreground_iou": 0.9662379026412964,
+        "foreground_iou_binary": 0.9530477759472817
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    },
+    "librsvg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0003378074907232076,
+        "foreground_mse": 0.0002682303311303258,
+        "edge_alignment": 0.9429910182952881,
+        "foreground_iou": 0.9569787383079529,
+        "foreground_iou_binary": 0.9436568188054514
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 7,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    }
+  },
+  "old_rejected_by_new_detail_assertion": true,
+  "live_job_id": "556decd0ff4e4f0f8f0b1d325e11aec7",
+  "live_job_quality": "passed",
+  "project_save": "saved",
+  "mse_reduction_percent": 95.40628883177675,
+  "tests": {
+    "regression_passed": 166,
+    "gui_integration_passed": 2,
+    "final_focused_passed": 12
+  }
+}

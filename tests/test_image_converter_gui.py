@@ -222,6 +222,31 @@ def image_bytes(mode="RGB", color="white", size=(32, 24)):
     return buffer.getvalue()
 
 
+@pytest.mark.parametrize('reuse_sample',[False,True])
+def test_hollow_diagonal_and_diamond_survive_fresh_and_sample_gui_paths(jobs,reuse_sample):
+    from tests.test_hollow_cross_panel_runtime import DESCRIPTION,drawing
+    from src.iCCModules.imageCompositeConverterHollowCrossPanel import validate_hollow_cross_panel
+    from src.imageConverterSample import render_svg
+    from PIL import Image
+    buffer = io.BytesIO()
+    Image.fromarray(render_svg(drawing(),60,400)).save(buffer,format='PNG')
+    uploaded = jobs.upload('neutrales-diagonalmotiv.png',buffer.getvalue())
+    if reuse_sample:
+        jobs.attach_sample(uploaded['id'],'old.svg',drawing(diamond=False,slit=False).encode())
+    started = jobs.start(uploaded['id'],DESCRIPTION,'quick',seed=34,use_current_svg=reuse_sample)
+    jobs.threads[-1].join(timeout=60)
+    job = jobs.snapshot(started['id'])
+    assert job['status'] == 'done',job
+    assert job['quality'] == 'passed',job
+    folder = jobs.folder(job['id'])
+    validate_hollow_cross_panel((folder/'result.svg').read_text(encoding='utf-8'))
+    if reuse_sample:
+        assert job['recovery']
+        assert 'hollow_cross_panel' in job['sample_report']['description_error']
+    else:
+        assert job['search_summary']['satisfactory']
+
+
 @pytest.fixture
 def jobs(tmp_path, monkeypatch):
     monkeypatch.setattr(gui, "catalog_descriptions", lambda: {"AC1234": "Ein blauer Kreis."})
