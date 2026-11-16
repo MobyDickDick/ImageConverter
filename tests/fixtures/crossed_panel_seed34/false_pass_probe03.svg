@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42" height="84" viewBox="0 0 42 84">
+  <defs>
+    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="4.092" y1="6.111" x2="37.908" y2="6.111">
+      <stop offset="0%" stop-color="#cecece" />
+      <stop offset="40%" stop-color="#f5f5f5" />
+      <stop offset="100%" stop-color="#cecece" />
+    </linearGradient>
+  <clipPath id="innerRect"><rect x="4.0916" y="6.110799999999999" width="33.8168" height="71.7784" /></clipPath>
+  </defs>
+  <rect x="0" y="0" width="42" height="84" fill="#ffffff" stroke="none" />
+  <rect x="4.092" y="6.111" width="33.817" height="71.778" fill="url(#panelGradient)" stroke="none" />
+  <rect x="4.0916" y="6.110799999999999" width="33.8168" height="71.7784" fill="none" stroke="#828282" stroke-width="0.80" />
+  <line x1="34.7702" y1="12.7718" x2="7.2298" y2="71.2282" stroke="#787878" stroke-width="0.80" clip-path="url(#innerRect)" />
+  <line x1="7.2298" y1="12.7718" x2="34.7702" y2="71.2282" stroke="#787878" stroke-width="0.80" clip-path="url(#innerRect)" />
+  <line x1="3.99" y1="10.08" x2="9.45" y2="10.08" stroke="#969696" stroke-width="2.20" stroke-linecap="round" />
+  <line x1="6.72" y1="7.35" x2="6.72" y2="12.81" stroke="#969696" stroke-width="2.20" stroke-linecap="round" />
+  <line x1="3.99" y1="14.18" x2="9.45" y2="14.18" stroke="#969696" stroke-width="2.20" stroke-linecap="round" />
+<line x1="4.5" y1="79.5" x2="36.5" y2="13.5" stroke="#868686" stroke-width="2.3531689918577046" stroke-linecap="butt" /><line x1="38.5" y1="6.5" x2="39.5" y2="79.5" stroke="#a0a0a0" stroke-width="1.7667504530279958" stroke-linecap="butt" /><line x1="3.5" y1="77.5" x2="3.5" y2="6.5" stroke="#ffffff" stroke-width="1.0353535353535355" stroke-linecap="butt" /><line x1="8.5" y1="11.5" x2="36.5" y2="72.5" stroke="#868686" stroke-width="1.9545541930119823" stroke-linecap="butt" /><line x1="5.5" y1="79.5" x2="5.5" y2="16.5" stroke="#acacac" stroke-width="1.9740953947368418" stroke-linecap="butt" /><line x1="37.5" y1="71.5" x2="37.5" y2="14.5" stroke="#cbcbcb" stroke-width="1.0" stroke-linecap="butt" /><line x1="22.5" y1="40.5" x2="36.5" y2="10.5" stroke="#868686" stroke-width="2.2885381364861406" stroke-linecap="butt" /><line x1="4.5" y1="5.5" x2="37.5" y2="5.5" stroke="#ffffff" stroke-width="1.0091036414565826" stroke-linecap="butt" /><line x1="10.5" y1="77.5" x2="37.5" y2="79.5" stroke="#aeaeae" stroke-width="2.027318831622565" stroke-linecap="butt" /><line x1="7.5" y1="70.5" x2="18.5" y2="47.5" stroke="#d7d7d7" stroke-width="0.8143946152069431" stroke-linecap="butt" /><line x1="27.5" y1="58.5" x2="38.5" y2="79.5" stroke="#888888" stroke-width="1.249633776967643" stroke-linecap="butt" /><line x1="17.5" y1="77.5" x2="35.5" y2="77.5" stroke="#ececec" stroke-width="0.833616298811545" stroke-linecap="butt" /></svg>

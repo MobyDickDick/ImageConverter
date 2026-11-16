@@ -9,43 +9,13 @@ import xml.etree.ElementTree as ET
 import numpy as np
 
 
-def _protected_grays(palette, initial):
-    height,width = initial.shape[:2]
-    return {rgb for rgb in palette if max(rgb)-min(rgb) <= 2 and max(rgb) <= 140
-            and 0 < np.count_nonzero(np.max(abs(initial.astype(float)-rgb),axis=2) <= 8)
-            <= width*height*.03}
+def lightened_sample_details(*args,**kwargs):
+    """Compatibility for a running older GUI; lighter paint is not a defect.
 
-
-def lightened_sample_details(sample, candidate, width, height, render_fn):
-    """Compare retained small identity marks when the same template IDs exist."""
-    from PIL import ImageColor
-    old,new = ET.fromstring(sample),ET.fromstring(candidate)
-    paints = {}
-    for node in old.iter():
-        if not node.get('id'):
-            continue
-        for attribute in ('fill','stroke'):
-            try:
-                rgb = ImageColor.getrgb(node.get(attribute,''))
-            except ValueError:
-                continue
-            if len(rgb)==3:
-                paints.setdefault(rgb,[]).append((node.get('id'),attribute))
-    protected = _protected_grays(paints,render_fn(sample,width,height))
-    by_id = {node.get('id'):node for node in new.iter() if node.get('id')}
-    changed = []
-    for rgb in protected:
-        for identifier,attribute in paints[rgb]:
-            node = by_id.get(identifier)
-            if node is None:
-                continue
-            try:
-                color = ImageColor.getrgb(node.get(attribute,''))
-            except ValueError:
-                continue
-            if len(color)==3 and np.mean(color)>np.mean(rgb)+.5:
-                changed.append(identifier)
-    return changed
+    Current selection compares independently rendered pixels against the raster
+    source instead of assigning a penalty for departing from template shades.
+    """
+    return []
 
 
 def align_sample(root, target, render_fn, *, deadline, initial, assertions=None):
@@ -69,9 +39,6 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None)
             if len(rgb) == 3:
                 paints.setdefault(rgb, []).append((index, attribute))
     palette = list(paints)
-    # Small dark identity marks (for example +/-) must not be washed out to
-    # compensate for residual alignment error in the much larger assembly.
-    protected_gray = _protected_grays(palette,initial)
     paint_indices, values = [], [0., 0., 100., 100.]
     shared_width = bool(assertions and assertions.get('equal_stroke_width'))
     bindings = width_bindings(root) if shared_width else []
@@ -126,8 +93,6 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None)
             return False
         for rgb, (offset, gray) in zip(palette, paint_indices):
             color = np.repeat(p[offset], 3) if gray else p[offset:offset+3]
-            if rgb in protected_gray and np.mean(color) > np.mean(rgb)+.5:
-                return False
             contrast = float(np.max(abs(np.array(rgb)-background)))
             # Paint refinement must not hide an existing dark detail in the
             # background to reduce a globally averaged error.

@@ -103,7 +103,7 @@ def recover_case_output(conversion_dir: Path, cli_args: list[str], deadline: flo
     if len(candidates) > 1:
         return False
     candidate = candidates[0] if candidates else None
-    old = measure_quality(image, candidate.read_text(encoding='utf-8')) if candidate else None
+    old = measure_quality(image, candidate.read_text(encoding='utf-8'),description=description) if candidate else None
     if old and old['satisfactory']:
         try:
             validate_svg_assertions(candidate.read_text(encoding='utf-8'), description_assertions(description))
@@ -121,7 +121,7 @@ def recover_case_output(conversion_dir: Path, cli_args: list[str], deadline: flo
     report = recover(source, output, description, seconds, seed=seed, candidate=candidate)
     if not output.is_file():
         return False
-    measured = measure_quality(image, output.read_text(encoding='utf-8'))
+    measured = measure_quality(image, output.read_text(encoding='utf-8'),description=description)
     old_error = old['metrics'].get('normalized_mse', math.inf) if old else math.inf
     if (measured['satisfactory'] and report['passed']) or measured['metrics'].get('normalized_mse', math.inf) < old_error:
         if candidate is None:
@@ -348,7 +348,7 @@ def make_variations(svg: str, description: str, seed: int, *, expand_canvas=Fals
     return cases
 
 
-def measure_quality(reference, svg: str, limits: dict | None = None, *, render_fn=None) -> dict:
+def measure_quality(reference, svg: str, limits: dict | None = None, *, render_fn=None, description=None) -> dict:
     """Independent raster checks; foreground checks stop white backgrounds hiding errors."""
     from src.iCCModules.imageCompositeConverterRasterQuality import foreground_overlap
 
@@ -403,8 +403,21 @@ def measure_quality(reference, svg: str, limits: dict | None = None, *, render_f
         value = metrics[metric]
         if not math.isfinite(value) or (value < limits[limit] if higher else value > limits[limit]):
             failures.append(metric + "_outside_limit")
+    semantic = {}
+    if description is not None:
+        from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions,validate_svg_assertions
+        try:
+            validate_svg_assertions(svg,description_assertions(description))
+        except ValueError as exc:
+            failures.append('description_mismatch')
+            semantic['description_error'] = str(exc)
+        from tools.check_crossed_panel_scene import required,check_scene
+        if required(description):
+            semantic['scene'] = check_scene(svg,width,height,reference=reference,rendered=output)
+            if not semantic['scene']['passed']:
+                failures.append('scene_structure_mismatch')
     return {"satisfactory": not failures, "failures": failures,
-            "metrics": metrics, "limits": limits, "complexity": complexity}
+            "metrics": metrics, "limits": limits, "complexity": complexity,**semantic}
 
 
 def prepare_cases(svg: str, description: str, output: Path, seed: int) -> list[dict]:
@@ -519,7 +532,7 @@ def run_case(case: dict, output: Path, *, timeout: float, iterations: int,
         recovery_report = case_dir/'conversion/recovery'/(name+'.json')
         if recovery_report.is_file():
             result['recovery'] = json.loads(recovery_report.read_text(encoding='utf-8'))
-        result.update(measure_quality(reference, svg))
+        result.update(measure_quality(reference, svg,description=case['description']))
         if result.get('timed_out'):
             from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
             validate_svg_assertions(svg, description_assertions(case['description']))

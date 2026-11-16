@@ -14,6 +14,25 @@ from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_
 from src.iCCModules.imageCompositeConverterFilledSymbols import _register
 
 
+def _description_parts(description):
+    text = ' '.join(normalize_description(description).casefold().split())
+    plus = bool(re.search(r'\bplus(?:zeichen)?\b|\+',text))
+    minus = bool(re.search(r'\bminus(?:zeichen)?\b|["„]\s*[-−]\s*["“]|(?<!\w)[-−]\s*zeichen\b',text))
+    stacked = plus and minus and bool(re.search(r'\bdarunter\b|\buntereinander\b',text))
+    crossed = ('kreuz' in text or bool(re.search(r'\b(?:zwei|beide[nr]?|2)\s+(?:\w+\s+){0,3}diagonalen\b',text))
+               or (stacked and 'diagonalen' in text))
+    return text,plus,minus,stacked,crossed
+
+
+def crossed_panel_contract(description,*,stacked_marks=False):
+    text,plus,minus,stacked,crossed = _description_parts(description)
+    return bool(crossed and minus and (not stacked_marks or stacked)
+            and all(t in text for t in ('grau','rechteck','diagonal','horizontal','verlauf'))
+            and any(t in text for t in ('rand','umrandung','rahmen'))
+            and any(t in text for t in ('abgeschnitten','beschnitten','begrenzt'))
+            and not any(t in text for t in ('kreis','ohne minus','kein minus','ohne kreuz','vertikaler farbverlauf')))
+
+
 def _observe_marks(gray, darkness, region, axes, panel_width, stacked, plus):
     # At small sizes antialiasing can join a minus to a diagonal, or bridge
     # the one-pixel gap below a plus. Remove observed diagonal support and try
@@ -57,17 +76,8 @@ def _observe_marks(gray, darkness, region, axes, panel_width, stacked, plus):
 
 
 def fit_crossed_gradient_panel(width, height, *, description, image, render_fn, error_fn):
-    text = ' '.join(normalize_description(description).casefold().split())
-    plus = bool(re.search(r'\bplus(?:zeichen)?\b|\+', text))
-    minus = bool(re.search(r'\bminus(?:zeichen)?\b|["„]\s*[-−]\s*["“]|(?<!\w)[-−]\s*zeichen\b', text))
-    stacked = plus and minus and bool(re.search(r'\bdarunter\b|\buntereinander\b', text))
-    crossed = 'kreuz' in text or bool(re.search(r'\b(?:zwei|beide[nr]?|2)\s+(?:\w+\s+){0,3}diagonalen\b', text))
-    crossed = crossed or (stacked and 'diagonalen' in text)
-    if not (crossed and minus and all(t in text for t in ('grau', 'rechteck', 'diagonal', 'horizontal', 'verlauf'))
-            and any(t in text for t in ('rand', 'umrandung', 'rahmen'))
-            and any(t in text for t in ('abgeschnitten', 'begrenzt'))):
-        return None
-    if any(t in text for t in ('kreis', 'ohne minus', 'kein minus', 'ohne kreuz', 'vertikaler farbverlauf')):
+    text,plus,minus,stacked,crossed = _description_parts(description)
+    if not crossed_panel_contract(description):
         return None
     arr = np.asarray(image)
     if arr.shape != (height, width, 3) or min(width, height) < 16 or height <= width:

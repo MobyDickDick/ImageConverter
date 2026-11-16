@@ -1,0 +1,51 @@
+{
+  "schema": "current_svg_reuse_detail_contrast_v1",
+  "date": "2026-11-16",
+  "automatic_reuse_default": true,
+  "opt_out": "use_current_svg=false",
+  "checkbox": "Aktuelles SVG als Ausgangspunkt verwenden",
+  "automatic_save": true,
+  "description_validation_version": 5,
+  "project_save": {
+    "project_save": {
+      "status": "saved",
+      "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0130.svg",
+      "normalized_mse": 0.004456524737179279,
+      "quality": "passed",
+      "message": "Automatisch im Projekt gespeichert: C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0130.svg"
+    },
+    "before": {
+      "normalized_mse": 0.0026291972026228905,
+      "foreground_mse": 0.0033772450406104326,
+      "foreground_iou": 0.8768656716417911,
+      "foreground_iou_binary": 0.8768656716417911,
+      "edge_alignment": 0.8554726839065552,
+      "passed": true,
+      "observed_foreground_pixels": 1676,
+      "output_foreground_pixels": 1845
+    },
+    "after": {
+      "normalized_mse": 0.004456524737179279,
+      "foreground_mse": 0.007056849543005228,
+      "foreground_iou": 0.8667032364234778,
+      "foreground_iou_binary": 0.8667032364234778,
+      "edge_alignment": 0.8947536945343018,
+      "passed": true,
+      "observed_foreground_pixels": 1676,
+      "output_foreground_pixels": 1727
+    },
+    "previous_sha256": "fbcaeea245bd67ab57e4e6b0480c6e9bef2f79cec414e1168b81bc9e7ff0f141",
+    "saved_sha256": "303f722cc61f0b6bac33e8f577dc27573253207d33a476e4b294684c9fb80274"
+  },
+  "backup": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\gui_history\\AC0130\\fbcaeea245bd67ab57e4e6b0480c6e9bef2f79cec414e1168b81bc9e7ff0f141.svg",
+  "symbol_paint_before": "#696969",
+  "previous_faded_paint": "#a9a9a9",
+  "symbol_paint_after": "#696969",
+  "tests": {
+    "main_gui_http_sample_suite": 163,
+    "current_svg_suite": 10,
+    "javascript": 10,
+    "recovery_suite": "see recovery_tests.log"
+  },
+  "scope": "reported_AC0130_template_and_GUI_reuse_not_full_catalog_acceptance"
+}

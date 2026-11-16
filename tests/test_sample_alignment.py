@@ -6,9 +6,23 @@ import cv2
 import numpy as np
 from PIL import Image
 import pytest
+import time
 
 from src.imageConverterSample import prepare_sample, refine, render_svg
 from tools.run_plan_b_variations import measure_quality
+
+
+@pytest.mark.parametrize('before,after',[('#696969','#a9a9a9'),('#a9a9a9','#696969')])
+def test_small_mark_color_follows_raster_in_either_direction(before,after):
+    from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="80" viewBox="0 0 40 80">'
+           '<rect x="1" y="1" width="38" height="78" fill="#eeeeee"/>'
+           f'<rect id="mark" x="16" y="8" width="8" height="2" fill="{before}"/></svg>')
+    target = render_svg(svg.replace(before,after),40,80)
+    result = align_sample(ET.fromstring(svg),target,render_svg,deadline=time.monotonic()+5,
+                          initial=render_svg(svg,40,80))
+    assert result['error']<1e-8
+    assert ET.fromstring(result['svg']).find('.//{*}rect[@id="mark"]').get('fill')==after
 
 FIXTURES = Path(__file__).parent/'fixtures/sample_alignment'
 GEOMETRY = {'x', 'y', 'x1', 'y1', 'x2', 'y2', 'cx', 'cy', 'r', 'rx', 'ry',

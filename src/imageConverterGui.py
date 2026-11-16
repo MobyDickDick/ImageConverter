@@ -787,30 +787,14 @@ class Jobs:
             return
         target = self.project_svg(job)
         name = target.stem
-        def contrast_changes(path):
-            if not job.get('sample') or not job.get('use_current_svg',True):
-                return 0
-            from src.imageConverterSample import prepare_sample,render_svg
-            from src.iCCModules.imageCompositeConverterSampleAlignment import lightened_sample_details
-            reference = folder/'sample.svg'
-            if not reference.is_file():
-                return 0
-            try:
-                sample = prepare_sample(reference.read_bytes(),job['width'],job['height'])
-                candidate = prepare_sample(path.read_bytes(),job['width'],job['height'])
-                return len(lightened_sample_details(sample,candidate,job['width'],job['height'],render_svg))
-            except (OSError,ValueError,SyntaxError):
-                return 0
-        detail_changes = contrast_changes(folder/'result.svg')
         if target.exists():
             previous = saved_svg_quality(folder / 'source.png', target)
             if previous is None:
                 job['project_save'] = dict(status='skipped', message='Vorhandenes Projekt-SVG konnte nicht verglichen werden; es bleibt erhalten.')
                 return
             previous_error = result_description_error(target,job.get('description',''))
-            previous_details = contrast_changes(target)
-            if ((False,not quality['passed'],detail_changes,vector_comparison_score(quality)) >=
-                    (bool(previous_error),not previous['passed'],previous_details,vector_comparison_score(previous)-1e-12)):
+            if ((False,not quality['passed'],vector_comparison_score(quality)) >=
+                    (bool(previous_error),not previous['passed'],vector_comparison_score(previous)-1e-12)):
                 job['project_save'] = dict(status='unchanged', path=str(target), message='Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten.')
                 return
             old = target.read_bytes()
