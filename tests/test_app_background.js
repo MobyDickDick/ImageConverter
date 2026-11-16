@@ -139,7 +139,7 @@ for (const parallel of [false, true]) {
       fetch: async (url, options) => {
         calls.push([url, options]);
         let result;
-        if (url === '/api/config') result = {native_file_dialogs: false, editable_search_seed: true,
+        if (url === '/api/config') result = {native_file_dialogs: false, editable_search_seed: true, current_svg_reuse: true,
           ...(parallel ? {parallel_background_conversion: true} : {})};
         // An older server ignores scope=foreground and returns both lanes.
         else if (url === '/api/jobs?scope=foreground') result = [background, manual];
@@ -161,12 +161,15 @@ for (const parallel of [false, true]) {
       assert.equal(get('server-version-warning').hidden, false);
       assert.match(get('server-version-warning').textContent, /stopWebServer.cmd/);
     }
+    assert.equal(get('use-current-svg').checked, true);
+    get('use-current-svg').checked = false;
     await get('convert').listeners.click();
     assert.equal(opened.length, 1);
     assert.equal(opened[0][0], `/attempts?job=${manual.id}`);
     assert.match(opened[0][2], /popup=yes/);
     assert.equal(get('notice').textContent, '');
     assert.equal(calls.filter(([url]) => url.endsWith('/start')).length, 1);
+    assert.equal(JSON.parse(calls.find(([url]) => url.endsWith('/start'))[1].body).use_current_svg,false);
     assert.equal(get('convert').disabled, true);
     assert.equal(get('cancel').hidden, false);
     assert.equal(timers.length, 1);

@@ -597,15 +597,17 @@ def test_project_save_remeasures_versions_preserves_best_and_backs_up(jobs, job)
     assert target.read_text(encoding='utf-8') == svg
 
 
-def test_project_save_excludes_drafts_and_false_passes(jobs, job):
+def test_project_save_preserves_draft_label_and_rejects_blank_false_passes(jobs, job):
     finished_svg(jobs, job)
     job['quality'] = 'warning'
     jobs.publish_best(job['id'])
-    assert not jobs.project_directory.exists()
+    target = gui.Path(job['project_save']['path'])
+    saved = target.read_bytes()
+    assert job['project_save']['quality']=='warning'
     job['quality'] = 'passed'
     (jobs.folder(job['id']) / 'result.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
     jobs.publish_best(job['id'])
-    assert not jobs.project_directory.exists()
+    assert target.read_bytes()==saved
     assert job['project_save']['status'] == 'skipped'
 
 
@@ -846,7 +848,7 @@ def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, requ
     assert send(preview_path) == (b'200', live_svg)
     recovery_svg = live_svg.replace(b'10', b'12')
     (folder/'recovery.svg').write_bytes(recovery_svg)
-    assert send(preview_path) == (b'200', recovery_svg)
+    assert send(preview_path) == (b'200', live_svg)
     from src.imageConverterPreview import AttemptJournal
     journal = AttemptJournal(folder)
     journal.append(live_svg.decode(), 0)

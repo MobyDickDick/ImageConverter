@@ -1,6 +1,7 @@
 "use strict";
 let nativeFileDialogs = false, preparingPlanB = false, serverNeedsRestart = false;
 let editableSearchSeed = false;
+let currentSvgReuse = false;
 let imageRecognition = false;
 let descriptionCheck = false;
 let descriptionAutosave = false, descriptionDirty = false, descriptionSaveTimer, descriptionSaving = null;
@@ -31,6 +32,11 @@ $("show-intermediate").addEventListener("change", () => {
   if (!$("show-intermediate").checked) $("attempt-window-hint").hidden = true;
   if (current) renderJob(current);
 });
+try { $("use-current-svg").checked = localStorage.getItem("imageconverter.useCurrentSvg") !== "false"; }
+catch (_) { $("use-current-svg").checked = true; }
+$("use-current-svg").addEventListener("change", () => {
+  try { localStorage.setItem("imageconverter.useCurrentSvg",String($("use-current-svg").checked)); } catch (_) {}
+});
 
 async function request(path, options = {}) {
   const response = await fetch(path, options);
@@ -51,13 +57,14 @@ function notice(message = "") {
 }
 function controls() {
   const running = busy || Boolean(activeId);
-  $("convert").disabled = running || !current || !$("description").value.trim() || !editableSearchSeed;
+  $("convert").disabled = running || !current || !$("description").value.trim() || !editableSearchSeed || !currentSvgReuse;
   $("recognize").disabled = running || !current || !imageRecognition;
   $("check-description").disabled = running || !current || !descriptionCheck || !$("description").value.trim() || Boolean(descriptionSaving);
   $("save-description").disabled = running || !current || !descriptionAutosave || !descriptionDirty || Boolean(descriptionSaving);
   for (const button of $("recognition-results").querySelectorAll("button")) button.disabled = running;
   for (const id of ["seed", "random-seed"]) $(id).disabled = running || !current || !editableSearchSeed;
-  for (const id of ["description", "profile", "file", "remove-sample"]) $(id).disabled = running;
+  for (const id of ["description", "profile", "file", "remove-sample", "use-current-svg"]) $(id).disabled = running;
+  $("use-current-svg").disabled = running || !currentSvgReuse;
   $("sample-file").disabled = running || !current;
   $("drop-zone").classList.toggle("busy", running);
   $("drop-zone").tabIndex = running ? -1 : 0;
@@ -199,6 +206,7 @@ function renderJob(job, select = false) {
   if (select || current?.id !== job.id) {
     $("seed").value = job.search_seed ?? randomSeed();
     validateSeed();
+    if (job.status === 'running' && typeof job.use_current_svg === 'boolean') $("use-current-svg").checked = job.use_current_svg;
   }
   if (current?.id !== job.id && attemptWindow && !attemptWindow.closed) {
     attemptWindow.location.replace(`/attempts?job=${job.id}`);
@@ -225,11 +233,12 @@ function renderJob(job, select = false) {
   $("source-empty").hidden = true;
   $("file-info").textContent = `${job.name} · ${job.width} × ${job.height} px`;
   $("source-meta").textContent = `${job.width} × ${job.height} px`;
-  $("sample-figure").hidden = !job.sample;
-  $("sample-image").hidden = !job.sample;
-  $("sample-info").textContent = job.sample ? job.sample_name : "Gespeichertes SVG zusammen mit dem Original laden und weiter verbessern.";
+  const usingSample = job.sample && job.use_current_svg !== false;
+  $("sample-figure").hidden = !usingSample;
+  $("sample-image").hidden = !usingSample;
+  $("sample-info").textContent = job.sample ? `${job.sample_origin ? job.sample_origin + ': ' : ''}${job.sample_name}${job.use_current_svg === false ? ' · für diesen Versuch deaktiviert' : ''}` : "Ein vorhandenes SVG wird beim Start automatisch geladen. Eine eigene Vorlage kann zusätzlich gewählt werden.";
   $("remove-sample").hidden = !job.sample;
-  document.querySelector(".comparison").classList.toggle("with-sample", Boolean(job.sample));
+  document.querySelector(".comparison").classList.toggle("with-sample", Boolean(usingSample));
   const sampleUrl = `/api/jobs/${job.id}/sample`;
   if (job.sample && $("sample-image").getAttribute("src") !== sampleUrl) $("sample-image").src = sampleUrl;
   const running = job.status === "running";
@@ -446,11 +455,11 @@ for (const name of ["dragenter", "dragover", "dragleave", "drop"]) {
 window.addEventListener("dragover", (event) => event.preventDefault());
 window.addEventListener("drop", (event) => event.preventDefault());
 $("convert").addEventListener("click", () => {
-  if (!current || busy || activeId || !editableSearchSeed) return;
+  if (!current || busy || activeId || !editableSearchSeed || !currentSvgReuse) return;
   validateSeed();
   if (!$("seed").reportValidity()) return;
   if ($("show-intermediate").checked) openAttemptWindow();
-  return update(() => post(`/api/jobs/${current.id}/start`, { description: $("description").value, profile: $("profile").value, seed: $("seed").value }));
+  return update(() => post(`/api/jobs/${current.id}/start`, { description: $("description").value, profile: $("profile").value, seed: $("seed").value, use_current_svg: $("use-current-svg").checked }));
 });
 $("cancel").addEventListener("click", () => {
   if (!activeId || busy) return;
@@ -537,6 +546,12 @@ async function init() {
       imageRecognition = config.image_recognition === true;
       descriptionCheck = config.description_check === true;
       descriptionAutosave = config.description_autosave === true;
+      currentSvgReuse = config.current_svg_reuse === true;
+      if (!currentSvgReuse) {
+        serverNeedsRestart = true;
+        $("server-version-warning").textContent = "Für die automatische SVG-Wiederverwendung muss der Webserver neu gestartet werden. Lass laufende Konvertierungen fertig werden, führe stopWebServer.cmd und danach startWebServer.cmd aus und lade diese Seite neu.";
+        $("server-version-warning").hidden = false;
+      }
       if (!config.parallel_background_conversion) {
         serverNeedsRestart = true;
         $("server-version-warning").textContent = "Der laufende Webserver verwendet noch eine ältere Version, die manuelle Konvertierungen während des Hintergrunddienstes blockieren kann. Bitte stopWebServer.cmd und danach startWebServer.cmd ausführen und diese Seite neu laden. Anschliessend den Hintergrunddienst bei Bedarf wieder starten.";

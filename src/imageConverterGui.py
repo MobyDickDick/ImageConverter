@@ -398,11 +398,13 @@ class Jobs:
             return self.snapshot(job_id)
 
     def start(self, job_id: str, description: str, profile: str, *, background: bool = False,
-              seed: str | int | None = None) -> dict:
+              seed: str | int | None = None, use_current_svg: bool = True) -> dict:
         if not isinstance(description, str) or not description.strip() or len(description) > 12000:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
+        if type(use_current_svg) is not bool:
+            raise RequestError('Die SVG-Wiederverwendung muss ein Wahrheitswert sein.')
         if seed is not None:
             if (type(seed) not in (str, int) or not re.fullmatch(r'[0-9]{1,20}', str(seed))
                     or not 0 <= int(seed) < 2**64):
@@ -425,10 +427,13 @@ class Jobs:
             job = self.editable(job_id)
             job_id = job["id"]
             job.update(description=description.strip(), profile=profile, status="running",
+                       use_current_svg=use_current_svg,
                        catalog_background=background,
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
+            if use_current_svg:
+                self.use_best_svg(job)
             self._check_description(job)
             if origin == 'user' and not background:
                 self._persist_description(job)
@@ -437,6 +442,65 @@ class Jobs:
             self.threads.append(thread)
             thread.start()
             return self.snapshot(job_id)
+
+    def project_svg(self, job: dict) -> Path:
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', Path(job['name']).stem).rstrip('. ') or 'Bild'
+        if re.fullmatch(r'(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])',name,re.I):
+            name = '_'+name
+        return self.project_directory/'converted_svgs'/(name+'.svg')
+
+    def use_best_svg(self, job: dict) -> None:
+        """Seed from this image's current native vector, never a stale name alone."""
+        from src.imageConverterSample import prepare_sample
+        folder = self.folder(job['id'])
+        if job.get('sample_pending') and job.get('sample') and (folder/'sample.svg').is_file():
+            job.update(sample_pending=False,sample_origin='Geladene Vorlage',
+                       message='Geladene Vorlage wird am Original weiter verbessert …')
+            return
+        project = self.project_svg(job)
+        if project.is_file():
+            try:
+                prepare_sample(project.read_bytes(),job['width'],job['height'])
+                quality = saved_svg_quality(folder/'source.png',project)
+                if quality and (not quality['observed_foreground_pixels'] or quality['output_foreground_pixels']):
+                    shutil.copyfile(project,folder/'sample.svg')
+                    job.update(sample=True,sample_name=project.name,sample_origin='Gespeichertes Projekt-SVG',
+                               starting_svg_quality=quality,message='Aktuelles Projekt-SVG wird am Original weiter verbessert …')
+                    return
+            except (OSError,ValueError,SyntaxError):
+                pass
+        candidates = []
+        if job.get('sample') and (folder/'sample.svg').is_file():
+            candidates.append((folder/'sample.svg','Geladene Vorlage'))
+        candidates.extend([(self.project_svg(job),'Gespeichertes Projekt-SVG'),
+                           (ROOT/'artifacts/samples'/(Path(job['name']).stem+'.svg'),'Vorhandenes SVG')])
+        for previous in self.jobs.values():
+            if (job.get('source_sha256') and previous.get('result') and previous.get('source_sha256') == job.get('source_sha256')
+                    and previous['id'] != job['id']):
+                candidates.append((self.folder(previous['id'])/'result.svg','Bisheriges Ergebnis'))
+        best, seen = None, set()
+        for path,origin in candidates:
+            key = path.resolve()
+            if key in seen or not path.is_file():
+                continue
+            seen.add(key)
+            try:
+                prepare_sample(path.read_bytes(),job['width'],job['height'])
+            except (OSError,ValueError,SyntaxError):
+                continue
+            quality = saved_svg_quality(folder/'source.png',path)
+            if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
+                continue
+            error = result_description_error(path,job['description'])
+            rank = (bool(error),not quality['passed'],vector_comparison_score(quality))
+            if best is None or rank < best[0]:
+                best = rank,path,origin,quality
+        if best is not None:
+            _,path,origin,quality = best
+            if path.resolve() != (folder/'sample.svg').resolve():
+                shutil.copyfile(path,folder/'sample.svg')
+            job.update(sample=True,sample_name=path.name,sample_origin=origin,
+                       starting_svg_quality=quality,message='Aktuelles SVG wird am Original weiter verbessert …')
 
     def editable(self, job_id: str) -> dict:
         """Share retry/attachment preparation; completed results stay immutable."""
@@ -452,7 +516,9 @@ class Jobs:
                 job['recognition'] = previous['recognition']
             if previous.get("sample"):
                 shutil.copyfile(folder / "sample.svg", self.folder(job["id"]) / "sample.svg")
-                job.update(sample=True, sample_name=previous["sample_name"])
+                job.update(sample=True, sample_name=previous["sample_name"],
+                           sample_pending=previous.get('sample_pending',False),
+                           sample_origin=previous.get('sample_origin','Geladene Vorlage'))
             job['previous_job_id'] = previous['id']
             for key in ('collection_case_id','collection_image_sha256','collection_label','collection_next_case_id'):
                 if key in previous:
@@ -479,7 +545,7 @@ class Jobs:
                        "--search-seconds", str(seconds), "--search-max-seconds", str(maximum),
                        "--search-seed", str(job["search_seed"]),
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
-            if job.get("sample"):
+            if job.get("sample") and job.get('use_current_svg',True):
                 description_file = folder / "description.txt"
                 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
                 resolved = resolve_similarity_description(job["description"], catalog, base_name=getBaseNameFromFileImpl)
@@ -499,11 +565,11 @@ class Jobs:
             if not job.get('catalog_background'):
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
                                    ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'),
-                                   ICC_GUI_PREVIEW_PHASE='Sample-Anpassung' if job.get('sample') else 'Suche')
+                                   ICC_GUI_PREVIEW_PHASE='Sample-Anpassung' if job.get('sample') and job.get('use_current_svg',True) else 'Suche')
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
-                if job.get('sample') and resolved.references:
+                if job.get('sample') and job.get('use_current_svg',True) and resolved.references:
                     for reference in resolved.references:
                         aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
                         log.write(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}\n".encode('utf-8'))
@@ -530,7 +596,7 @@ class Jobs:
                 # Collect into a temporary snapshot: a failed first attempt
                 # must not appear terminal while Plan B still has search time.
                 collected = dict(job)
-                collect = collect_sample_result if job.get('sample') else collect_result
+                collect = collect_sample_result if job.get('sample') and job.get('use_current_svg',True) else collect_result
                 collect(folder, collected, process.returncode)
                 retain_best_preview(folder, collected)
                 needs_recovery = collected.get('quality') != 'passed' or not collected.get('result')
@@ -637,7 +703,8 @@ class Jobs:
             job = self.editable(job_id)
             job_id = job["id"]
             folder = self.folder(job_id)
-            job.update(sample=prepared is not None, sample_name=name.replace("\\", "/").rsplit("/", 1)[-1][:180] if prepared else "")
+            job.update(sample=prepared is not None, sample_name=name.replace("\\", "/").rsplit("/", 1)[-1][:180] if prepared else "",
+                       sample_pending=prepared is not None,sample_origin='Geladene Vorlage' if prepared else '')
             if prepared:
                 (folder / "sample.svg").write_text(prepared, encoding="utf-8")
                 job["message"] = "Original und Sample geladen. Vorhandene SVG-Formen werden am Original optimiert."
@@ -704,30 +771,46 @@ class Jobs:
             self.save_lock.release()
 
     def publish_best(self, job_id: str) -> None:
-        """Re-measure both versions against this source; never replace with a draft."""
+        """Save an independently better native result, preserving its quality label."""
         job = self.jobs[job_id]
         if job.get('catalog_background'):
             return  # The background service keeps candidates for both catalog renderers.
-        if job.get('status') != 'done' or not job.get('result') or job.get('quality') != 'passed':
+        if job.get('status') != 'done' or not job.get('result'):
             return
         folder = self.folder(job_id)
         if result_description_error(folder/'result.svg', job.get('description', '')):
             job['project_save'] = dict(status='skipped', message='Keine Projektablage: Beschreibungsprüfung nicht bestanden.')
             return
         quality = saved_svg_quality(folder / 'source.png', folder / 'result.svg')
-        if not quality or not quality['passed']:
-            job['project_save'] = dict(status='skipped', message='Keine Projektablage: erneute Pixelprüfung nicht bestanden.')
+        if not quality or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
+            job['project_save'] = dict(status='skipped', message='Keine Projektablage: kein prüfbares Vektorergebnis.')
             return
-        name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', Path(job['name']).stem).rstrip('. ') or 'Bild'
-        if re.fullmatch(r'(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])', name, re.I):
-            name = '_' + name
-        target = self.project_directory / 'converted_svgs' / (name + '.svg')
+        target = self.project_svg(job)
+        name = target.stem
+        def contrast_changes(path):
+            if not job.get('sample') or not job.get('use_current_svg',True):
+                return 0
+            from src.imageConverterSample import prepare_sample,render_svg
+            from src.iCCModules.imageCompositeConverterSampleAlignment import lightened_sample_details
+            reference = folder/'sample.svg'
+            if not reference.is_file():
+                return 0
+            try:
+                sample = prepare_sample(reference.read_bytes(),job['width'],job['height'])
+                candidate = prepare_sample(path.read_bytes(),job['width'],job['height'])
+                return len(lightened_sample_details(sample,candidate,job['width'],job['height'],render_svg))
+            except (OSError,ValueError,SyntaxError):
+                return 0
+        detail_changes = contrast_changes(folder/'result.svg')
         if target.exists():
             previous = saved_svg_quality(folder / 'source.png', target)
             if previous is None:
                 job['project_save'] = dict(status='skipped', message='Vorhandenes Projekt-SVG konnte nicht verglichen werden; es bleibt erhalten.')
                 return
-            if quality['normalized_mse'] >= previous['normalized_mse'] - 1e-12:
+            previous_error = result_description_error(target,job.get('description',''))
+            previous_details = contrast_changes(target)
+            if ((False,not quality['passed'],detail_changes,vector_comparison_score(quality)) >=
+                    (bool(previous_error),not previous['passed'],previous_details,vector_comparison_score(previous)-1e-12)):
                 job['project_save'] = dict(status='unchanged', path=str(target), message='Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten.')
                 return
             old = target.read_bytes()
@@ -739,6 +822,7 @@ class Jobs:
         temporary.write_bytes((folder / 'result.svg').read_bytes())
         temporary.replace(target)
         job['project_save'] = dict(status='saved', path=str(target), normalized_mse=quality['normalized_mse'],
+                                   quality=job.get('quality','warning'),
                                    message=f'Automatisch im Projekt gespeichert: {target}')
 
     def close(self) -> None:
@@ -967,6 +1051,13 @@ def search_summary(output: Path) -> dict | None:
             except (ValueError, AttributeError):
                 continue
     return result if result and isinstance(result['candidate_evaluations'], int) else None
+
+
+def vector_comparison_score(quality: dict) -> float:
+    # A smaller global pixel error alone rewards the broken crossing/contour
+    # seen in the reported retry. Compare visible edges and foreground too.
+    return (quality['normalized_mse']+.2*(1-quality['edge_alignment'])
+            +.1*(1-quality['foreground_iou']))
 
 
 def saved_svg_quality(source: Path, svg: Path) -> dict | None:
@@ -1318,6 +1409,7 @@ class Handler(BaseHTTPRequestHandler):
                         image_recognition=True,
                         description_check=True,
                         description_autosave=True,
+                        current_svg_reuse=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]
@@ -1452,7 +1544,8 @@ class Handler(BaseHTTPRequestHandler):
                             if self.server.workbench.busy():
                                 raise RequestError('In der Workbench läuft eine Konvertierung.', 409)
                             return self.json(jobs.start(job_id, payload.get("description", ""),
-                                                        payload.get("profile", "normal"), seed=payload.get('seed')))
+                                                        payload.get("profile", "normal"), seed=payload.get('seed'),
+                                                        use_current_svg=payload.get('use_current_svg',True)))
                     if not remove and action == 'recognize':
                         return self.json(jobs.recognize(job_id))
                     if not remove and action == 'description':
