@@ -845,7 +845,10 @@ def render_svg_to_numpy_inprocess(
         page = None
         pix = None
         try:
-            with fitz_module.open("pdf", candidate_svg.encode("utf-8")) as doc:
+            # This is SVG, including valid roots such as <ns0:svg>. PDF-mode
+            # content sniffing happens to accept plain <svg> but rejects the
+            # prefixed equivalent before any geometry can be evaluated.
+            with fitz_module.open("svg", candidate_svg.encode("utf-8")) as doc:
                 page = doc.load_page(0)
                 zoom_x = size_w / page.rect.width if page.rect.width > 0 else 1
                 zoom_y = size_h / page.rect.height if page.rect.height > 0 else 1

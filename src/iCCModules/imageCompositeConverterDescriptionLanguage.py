@@ -37,6 +37,7 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
             (r'\b(spitze\s+nach\s+)u+n+t+e+n+\b', r'\1unten'),
             (r'\b(spitze\s+nach\s+)o+b+e+n+\b', r'\1oben'),
             (r'\bminnus\b', 'Minus'),
+            (r'\b(?:linen|lininen)\b', 'Linien'),
             (r'\bminzuszeichen\b', 'Minuszeichen'),
             (r'\bhorizonal(e|er|en|em|es)?\b', r'horizontal\1'),
             (r'\bwaagrecht(e|er|en|em|es)?\b', r'waagerecht\1'),
@@ -137,6 +138,13 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    from src.iCCModules.imageCompositeConverterRelations import anchor_relations
+    try:
+        relations = anchor_relations(normalized)
+    except ValueError as exc:
+        raise DescriptionRejected(str(exc)) from exc
+    if relations:
+        assertions['anchor_relations'] = relations
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits, complete_object_list
     objects = description_object_limits(normalized)
     if arrow_pair:
@@ -156,6 +164,12 @@ def description_assertions(description: str) -> dict:
     from src.iCCModules.imageCompositeConverterHollowCrossPanel import hollow_cross_contract
     if hollow_cross_contract(normalized):
         assertions['hollow_cross_panel'] = True
+        # These are owned parts of the two logical diagonals: one diagonal
+        # consists of two rails. Its visible-structure validator checks both
+        # rails and the other axis; a flat SVG-wide count would count three
+        # strokes as three diagonals or confuse the rails with all scene lines.
+        for kind in ('line', 'diagonal'):
+            assertions.get('objects', {}).pop(kind, None)
     # Global, positive claims only. Quoted labels and negative clauses must
     # never turn into an instruction to regularize the drawing.
     uniform = (r'\b(?:alle|sämtliche)\s+(?:linien|striche|konturen)\s+'
@@ -214,8 +228,15 @@ def draft_assertions(assertions):
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
                               or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')
-                              or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel') or assertions.get('objects')):
+                              or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel')
+                              or assertions.get('anchor_relations') or assertions.get('objects')):
         return
+    if assertions.get('anchor_relations'):
+        from src.iCCModules.imageCompositeConverterRelations import validate_anchor_relations
+        try:
+            validate_anchor_relations(svg, assertions['anchor_relations'])
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if assertions.get('hollow_cross_panel'):
         from src.iCCModules.imageCompositeConverterHollowCrossPanel import validate_hollow_cross_panel
         try:

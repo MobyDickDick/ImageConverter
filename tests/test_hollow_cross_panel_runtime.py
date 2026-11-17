@@ -50,16 +50,93 @@ def test_missing_or_filled_details_cannot_receive_semantic_acceptance(damage):
         validate_svg_assertions(svg,description_assertions(DESCRIPTION))
 
 
-def test_real_jpeg_and_unedited_user_description():
-    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0140_L.jpg'))
+@pytest.mark.parametrize('filename', ['AC0140_L.jpg', 'AC0140_M.jpg'])
+def test_real_jpeg_and_unedited_user_description(filename):
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert'/filename))
+    height,width = image.shape[:2]
     description = ET.parse(ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml').find(
-        ".//bild[.='AC0140_L.jpg']").get('beschreibung')
-    result = fit_hollow_cross_panel(60,400,description=description,image=image,
+        f".//bild[.='{filename}']").get('beschreibung')
+    result = fit_hollow_cross_panel(width,height,description=description,image=image,
         render_fn=render,error_fn=lambda a,b: float(((a.astype(float)-b.astype(float))**2).mean()/255**2))
     assert result is not None
     assert result['quality']['normalized_mse'] < .001
     assert result['quality']['edge_alignment'] > .9
     validate_svg_assertions(result['svg'],description_assertions(description))
+
+
+@pytest.mark.parametrize('width,height', [(50,230), (68,315)])
+def test_occluded_vertices_do_not_define_the_outline_center(width,height):
+    # Independent twin strokes, rather than a thick diagonal with a painted
+    # middle. Their overlap hides the top and bottom of the small diamond.
+    cx,cy,radius = width*.5,height*.5,width*.43
+    dx = width/height
+    body = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'
+            '<defs><linearGradient id="p"><stop stop-color="#c5c5c5"/>'
+            '<stop offset=".4" stop-color="#fafafa"/><stop offset="1" stop-color="#c5c5c5"/></linearGradient></defs>'
+            f'<rect width="{width}" height="{height}" fill="url(#p)"/>')
+    for offset in (-width*.055,width*.055):
+        body += (f'<line x1="{width+offset+dx*10}" y1="-10" x2="{offset-dx*10}" '
+                 f'y2="{height+10}" stroke="#888888" stroke-width="{width*.05}"/>')
+    body += (f'<line x1="{-dx*10}" y1="-10" x2="{width+dx*10}" y2="{height+10}" '
+             f'stroke="#888888" stroke-width="{width*.12}"/>'
+             f'<polyline points="{cx},{cy-radius} {cx+radius},{cy} {cx},{cy+radius} {cx-radius},{cy} {cx},{cy-radius}" '
+             f'fill="none" stroke="#888888" stroke-width="{width*.045}"/>'
+             f'<rect x=".5" y=".5" width="{width-1}" height="{height-1}" fill="none" stroke="#aaaaaa"/></svg>')
+    observed = observe_hollow_cross(render(body,width,height))
+    assert observed is not None
+    assert np.max(abs(np.asarray(observed['diamond'])-[cx,cy,radius,radius])) < 1.1
+
+
+@pytest.mark.parametrize('spelling', ['Linien', 'Linen'])
+def test_parallel_pair_wording_and_cutout_wording_have_the_same_structure(spelling):
+    parallel = DESCRIPTION.replace('Bei der Diagonale von oben rechts nach unten links ist die Mitte ausgeschnitten.',
+        f'Die Diagonale von oben rechts nach unten links wird durch zwei parallele {spelling} gebildet.')
+    claims = description_assertions(parallel)
+    assert claims.get('hollow_cross_panel')
+    validate_svg_assertions(drawing(),claims)
+    with pytest.raises(ValueError,match='hollow_cross_panel'):
+        validate_svg_assertions(drawing(slit=False),claims)
+
+
+def test_parallel_diagonal_uses_two_clipped_strokes_without_a_background_patch():
+    image = render(drawing(50,230),50,230)
+    fitted = fit_hollow_cross_panel(50,230,description=DESCRIPTION,image=image,
+        render_fn=render,error_fn=lambda a,b: float(((a.astype(float)-b.astype(float))**2).mean()/255**2))
+    assert fitted is not None
+    root = ET.fromstring(fitted['svg'])
+    filled = [node for node in root if node.tag.endswith('polygon') and node.get('fill') != 'none']
+    assert len(filled) == 3  # two rails and the other diagonal
+    bounds = observe_hollow_cross(image)['bounds']
+    for node in filled:
+        assert 'url(' not in node.get('fill','')
+        points = np.fromstring(node.get('points').replace(',',' '),sep=' ').reshape(-1,2)
+        assert np.all(points >= np.array(bounds[:2])-.01)
+        assert np.all(points <= np.array(bounds[2:])+.01)
+
+
+def test_wrong_template_can_switch_to_a_fresh_construction_from_its_own_raster(tmp_path):
+    from src.imageConverterSample import refine
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+    source = ROOT/'artifacts/images_to_convert/AC0140_M.jpg'
+    image = cv2.imread(str(source)); height,width = image.shape[:2]
+    description = ET.parse(ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml').find(
+        ".//bild[.='AC0140_M.jpg']").get('beschreibung')
+    neutral = tmp_path/'unrelated.png'
+    cv2.imwrite(str(neutral),image)
+    # Wrong aspect ratio is a construction error; moving its existing parts
+    # together cannot recover the central square's independent proportions.
+    template = tmp_path/'old.svg'
+    template.write_text(drawing(50,230),encoding='utf-8')
+    output = tmp_path/'new.svg'
+    before = pixel_quality(image,render(template.read_text(),width,height))
+    report = refine(neutral,template,output,description,15.,seed=17)
+    assert report['passed'] and report['continuation']
+    final = render(output.read_text(),width,height)
+    assert pixel_quality(image,final)['normalized_mse'] < before['normalized_mse']*.6
+    observed = observe_hollow_cross(final)
+    assert observed is not None
+    _,_,rx,ry = observed['diamond']
+    assert abs(rx-ry) < 2.
 
 
 def test_bad_renderer_and_error_are_rejected():

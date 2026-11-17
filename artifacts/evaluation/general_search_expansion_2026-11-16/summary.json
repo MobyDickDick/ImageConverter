@@ -1,0 +1,40 @@
+{
+  "scope": "shared_standard_conversion_search",
+  "regression_tests_passed": 240,
+  "generic_tests_passed": 13,
+  "unique_relevant_tests_passed": 241,
+  "real_probe": {
+    "passed": true,
+    "model_confirmed": false,
+    "stop_reason": "time_limit",
+    "evaluations": 1410,
+    "revision": 20,
+    "pixel_quality": {
+      "normalized_mse": 0.002430929336696863,
+      "foreground_mse": 0.0025348402559757233,
+      "foreground_iou": 0.9266401590457256,
+      "foreground_iou_binary": 0.9266401590457256,
+      "edge_alignment": 0.8261322975158691,
+      "passed": true
+    },
+    "description_error": "",
+    "normalized_mse": 0.0024309294641414393,
+    "selection_score": 0.04454045392895048,
+    "candidate_evaluations": 1395,
+    "elapsed_seconds": 20.0,
+    "search_control": {
+      "stop_reason": "time_limit",
+      "exploration_level": 3,
+      "construction_turns": 13,
+      "distinct_states": 12,
+      "elapsed_seconds": 20.0,
+      "limit_seconds": 20.0,
+      "minimum_seconds": 20.0,
+      "max_seconds": 20.0,
+      "time_extensions": 0,
+      "candidate_evaluations": 1395,
+      "render_cache_hits": 125
+    }
+  },
+  "real_probe_is_visual_approval": false
+}

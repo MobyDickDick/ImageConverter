@@ -113,6 +113,10 @@ def _local_quality(reference, output):
 
 
 def fit_primitive_scene(width, height, *, description, image, render_fn, error_fn):
+    from src.iCCModules.imageCompositeConverterRelations import anchor_relations, fit_relational_scene
+    if anchor_relations(description):
+        return fit_relational_scene(width,height,description=description,image=image,
+                                    render_fn=render_fn,error_fn=error_fn)
     from src.iCCModules.imageCompositeConverterMixedGradientScene import requested as mixed_requested, fit_mixed_gradient_scene
     if mixed_requested(description):
         return fit_mixed_gradient_scene(width, height, description=description, image=image,

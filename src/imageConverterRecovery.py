@@ -141,6 +141,7 @@ def recover(source: Path, output: Path, description: str, seconds: float, *, see
             fitted = None
             if not search_done() and not session.time_reason():
                 fitted = continue_native_search(svg, image, render, assertions=partial_assertions,
+                    description=description,
                     stop_fn=search_done,
                     acceptance_fn=lambda candidate: bool(search_done() and best and candidate == best['svg']),
                     on_candidate=lambda candidate: publish(candidate['svg'], candidate['rendered'], candidate['error']))

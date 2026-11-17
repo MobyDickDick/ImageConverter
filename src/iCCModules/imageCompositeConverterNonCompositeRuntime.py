@@ -61,6 +61,56 @@ from src.iCCModules.imageCompositeConverterHeatPanel import fit_heat_panel
 from src.iCCModules.imageCompositeConverterDiagonalCrossPanel import fit_diagonal_cross_panel
 from src.iCCModules.imageCompositeConverterCrossedGradientPanel import fit_crossed_gradient_panel
 from src.iCCModules.imageCompositeConverterHollowCrossPanel import fit_hollow_cross_panel, hollow_cross_contract
+from src.iCCModules.imageCompositeConverterRelations import anchor_relations
+
+
+def scene_reconstruction_fitters():
+    """One registry for fresh conversion and rebuilding an unsuitable SVG.
+
+    Models remain proposals; source pixels and description checks decide.
+    Keep this separate from local edits so templates can change topology.
+    """
+    return (
+        (fit_piecewise_scene, "non_composite_raster_piecewise_scene"),
+        (fit_inset_panel, "non_composite_raster_inset_panel"),
+        (fit_gradient_tube, "non_composite_raster_gradient_tube"),
+        (fit_spray_panel, "non_composite_raster_spray_panel"),
+        (fit_hollow_cross_panel, "non_composite_raster_hollow_cross_panel"),
+        (fit_crossed_gradient_panel, "non_composite_raster_crossed_gradient_panel"),
+        (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
+        (fit_heat_panel, "non_composite_raster_heat_panel"),
+        (fit_paired_line_panel, "non_composite_raster_paired_line_panel"),
+        (fit_ruled_panel, "non_composite_raster_ruled_panel"),
+        (fit_framed_panel, "non_composite_raster_framed_panel"),
+        (fit_axial_panel, "non_composite_raster_axial_panel"),
+        (fit_short_label_disk, "non_composite_raster_short_label_disk"),
+        (fit_primitive_scene, "non_composite_raster_primitive_scene"),
+        (fit_plain_disk, "non_composite_raster_plain_disk"),
+        (fit_stem_disk, "non_composite_raster_stem_disk"),
+        (fit_circle_linework, "non_composite_raster_circle_linework"),
+        (fit_arc_shaft, "non_composite_raster_arc_shaft"),
+        (fit_gradient_junction, "non_composite_raster_gradient_junction"),
+        (fit_disk_bar, "non_composite_raster_disk_bar"),
+        (fit_disk_arrow, "non_composite_raster_disk_arrow"),
+        (fit_cross_panel_disk, "non_composite_raster_cross_panel_disk"),
+        (fit_flame_disk, "non_composite_raster_flame_disk"),
+        (fit_spiral_disk, "non_composite_raster_spiral_disk"),
+        (fit_striped_panel_disk, "non_composite_raster_striped_panel_disk"),
+        (fit_house_disk, "non_composite_raster_house_disk"),
+        (fit_diagonal_cross_disk, "non_composite_raster_diagonal_cross_disk"),
+        (fit_warning_disk, "non_composite_raster_warning_disk"),
+        (fit_solid_arrow, "non_composite_raster_solid_arrow"),
+        (fit_alarm_bell, "non_composite_raster_alarm_bell"),
+        (fit_zigzag_panel, "non_composite_raster_zigzag_panel"),
+        (fit_checkbox_checkmark, "non_composite_raster_checkbox_checkmark"),
+        (fit_three_way_valve, "non_composite_raster_three_way_valve"),
+        (fit_motor_valve, "non_composite_raster_motor_valve"),
+        (fit_chevron_panel, "non_composite_raster_chevron_panel"),
+        (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
+        (fit_step_diagram, "non_composite_raster_step_diagram"),
+        (fit_sine_diagram, "non_composite_raster_sine_diagram"),
+        (fit_radial_disk, "non_composite_raster_radial_disk"),
+    )
 
 
 def _output_variation_rng() -> random.Random | None:
@@ -1457,7 +1507,7 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode in {"non_composite", "auto"} or (
-        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description) or piecewise_contract(description) or hollow_cross_contract(description))
+        mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description) or piecewise_contract(description) or hollow_cross_contract(description) or anchor_relations(description))
     ):
         # A complete raster-backed gradient contract can describe its frame
         # implicitly. A missing rectangle noun must not bypass its fitter.
@@ -1496,47 +1546,7 @@ def runNonCompositeIterationImpl(
             write_validation_log_fn(['status=non_composite_raster_square_stem'])
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
-        for fit_fn, status in (
-            (fit_piecewise_scene, "non_composite_raster_piecewise_scene"),
-            (fit_inset_panel, "non_composite_raster_inset_panel"),
-            (fit_gradient_tube, "non_composite_raster_gradient_tube"),
-            (fit_spray_panel, "non_composite_raster_spray_panel"),
-            (fit_hollow_cross_panel, "non_composite_raster_hollow_cross_panel"),
-            (fit_crossed_gradient_panel, "non_composite_raster_crossed_gradient_panel"),
-            (fit_diagonal_cross_panel, "non_composite_raster_diagonal_cross_panel"),
-            (fit_heat_panel, "non_composite_raster_heat_panel"),
-            (fit_paired_line_panel, "non_composite_raster_paired_line_panel"),
-            (fit_ruled_panel, "non_composite_raster_ruled_panel"),
-            (fit_framed_panel, "non_composite_raster_framed_panel"),
-            (fit_axial_panel, "non_composite_raster_axial_panel"),
-            (fit_short_label_disk, "non_composite_raster_short_label_disk"),
-            (fit_primitive_scene, "non_composite_raster_primitive_scene"),
-            (fit_plain_disk, "non_composite_raster_plain_disk"),
-            (fit_stem_disk, "non_composite_raster_stem_disk"),
-            (fit_circle_linework, "non_composite_raster_circle_linework"),
-            (fit_arc_shaft, "non_composite_raster_arc_shaft"),
-            (fit_gradient_junction, "non_composite_raster_gradient_junction"),
-            (fit_disk_bar, "non_composite_raster_disk_bar"),
-            (fit_disk_arrow, "non_composite_raster_disk_arrow"),
-            (fit_cross_panel_disk, "non_composite_raster_cross_panel_disk"),
-            (fit_flame_disk, "non_composite_raster_flame_disk"),
-            (fit_spiral_disk, "non_composite_raster_spiral_disk"),
-            (fit_striped_panel_disk, "non_composite_raster_striped_panel_disk"),
-            (fit_house_disk, "non_composite_raster_house_disk"),
-            (fit_diagonal_cross_disk, "non_composite_raster_diagonal_cross_disk"),
-            (fit_warning_disk, "non_composite_raster_warning_disk"),
-            (fit_solid_arrow, "non_composite_raster_solid_arrow"),
-            (fit_alarm_bell, "non_composite_raster_alarm_bell"),
-            (fit_zigzag_panel, "non_composite_raster_zigzag_panel"),
-            (fit_checkbox_checkmark, "non_composite_raster_checkbox_checkmark"),
-            (fit_three_way_valve, "non_composite_raster_three_way_valve"),
-            (fit_motor_valve, "non_composite_raster_motor_valve"),
-            (fit_chevron_panel, "non_composite_raster_chevron_panel"),
-            (fit_gradient_arrow, "non_composite_raster_gradient_arrow"),
-            (fit_step_diagram, "non_composite_raster_step_diagram"),
-            (fit_sine_diagram, "non_composite_raster_sine_diagram"),
-            (fit_radial_disk, "non_composite_raster_radial_disk"),
-        ):
+        for fit_fn, status in scene_reconstruction_fitters():
             fit_description = description
             if fit_fn is fit_short_label_disk:
                 # Dispatch is case-insensitive; labels are not. Recover the

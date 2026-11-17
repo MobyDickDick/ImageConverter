@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 7
+DESCRIPTION_VALIDATION_VERSION = 9
 
 
 class RequestError(ValueError):
@@ -1013,9 +1013,12 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
             job.update(status='error', result=False, quality='warning',
                        message='Das SVG ist leer oder liegt ausserhalb der Zeichenfläche. Bitte die Beschreibung prüfen oder ein Sample-SVG laden.')
             return
+        description_error = result_description_error(result, job.get('description', ''))
         passed = (returncode == 0 and not has_failures and result == candidates[0]
-                  and quality is not None and quality['passed'])
+                  and quality is not None and quality['passed'] and not description_error)
         job.update(status="done", result=True, quality="passed" if passed else "warning",
+                   description_error=description_error,
+                   description_validation_version=DESCRIPTION_VALIDATION_VERSION,
                    message=("SVG erstellt. Qualitätsprüfung bestanden." if passed else
                             "Entwurf erstellt. Die Qualitätsprüfung wurde nicht bestanden; bitte das Ergebnis prüfen."))
         summary = search_summary(output)

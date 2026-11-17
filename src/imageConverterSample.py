@@ -306,7 +306,8 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
                 seed=effective_seed, seconds=remaining, max_seconds=remaining, minimum_seconds=remaining)):
             with (nullcontext() if session else configured_image_search(str(source.resolve()))):
                 result = continue_native_search(final_svg, target, render_svg, assertions=partial,
-                    color_order='RGB', acceptance_fn=search_target, on_candidate=save_checkpoint)
+                    color_order='RGB', acceptance_fn=search_target, on_candidate=save_checkpoint,
+                    description=description)
         if result:
             continuation = result['search_control']
             evaluations += result['evaluations']

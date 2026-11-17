@@ -18,10 +18,12 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _register
 def hollow_cross_contract(description):
     text = re.sub(r'"[^"\n]*"|„[^“\n]*“','',normalize_description(description)).casefold()
     text = ' '.join(text.split())
+    split_axis = (re.search(r'(?:mitte|mittellinie|inneres).*?(?:ausgeschnitten|ausgespart|hohl)', text)
+                  or re.search(r'diagonal\w*[^.;]*?(?:durch|aus)\s+(?:zwei|2)\s+parallele[nrms]?\s+linien\b', text))
     return bool(all(t in text for t in ('rechteck', 'grau', 'diagonal', 'verlauf', 'horizontal'))
                 and re.search(r'(?:beiden?|zwei) diagonalen', text)
                 and re.search(r'oben rechts.*unten links',text)
-                and re.search(r'(?:mitte|mittellinie|inneres).*?(?:ausgeschnitten|ausgespart|hohl)', text)
+                and split_axis
                 and re.search(r'(?:zentrum|mitte|mittig).*?(?:quadrat|raute)', text)
                 and 'rand' in text and ('keinen hintergrund' in text or 'ohne füllung' in text
                                          or 'ohne fuellung' in text)
@@ -85,13 +87,19 @@ def _observe_local_hollow_cross(image):
     points = np.column_stack((xx[residual], yy[residual]))
     if len(points) < width*.5:
         return None
-    cx,cy = (points.min(axis=0)+points.max(axis=0))/2
-    # A diamond is four straight edges in this coordinate system, not just
-    # a dark spot at the axes' crossing. Fit its two independent half sizes.
-    coefficients = np.linalg.lstsq(abs(points-[cx,cy]),np.ones(len(points)),rcond=None)[0]
-    if np.min(coefficients) <= 0:
-        return None
-    rx,ry = 1/coefficients
+    # Diagonals can hide the vertices. The bounds of the *visible* outline
+    # then have a biased centre; keeping that centre fixed rejected valid
+    # smaller panels before any search. Fit all four sides and the centre
+    # jointly, without requiring the hidden tips to supply extrema.
+    cx,cy = width/2,height/2
+    for _ in range(6):
+        signs = np.where(points >= [cx,cy],1.,-1.)
+        matrix = np.c_[signs*points,-signs]
+        coefficients,_,rank,_ = np.linalg.lstsq(matrix,np.ones(len(points)),rcond=None)
+        if rank < 4 or not np.isfinite(coefficients).all() or np.min(coefficients[:2]) <= 0:
+            return None
+        cx,cy = coefficients[2:]/coefficients[:2]
+    rx,ry = 1/coefficients[:2]
     distance = abs(abs(xx-cx)/rx+abs(yy-cy)/ry-1)/np.hypot(1/rx,1/ry)
     if not (.25*width < rx < .6*width and .55 < rx/ry < 1.8
             and abs(cx-width/2) < width*.15 and abs(cy-height/2) < height*.12):
@@ -181,20 +189,20 @@ def fit_hollow_cross_panel(width, height, *, description, image, render_fn, erro
         stops = ''.join(f'<stop offset="{offset:.8f}" stop-color="{color(c)}"/>'
                         for offset,c in zip((0,(peak-l)/(r-l),1),v[18:21]))
         # Explicit intersection avoids depending on renderer clipPath support.
-        def band(top,bottom,thickness,fill):
+        def band(top,bottom,thickness,fill,offset=0.):
             dx = bottom-top
-            nx,ny = height*thickness/(2*np.hypot(dx,height)),-dx*thickness/(2*np.hypot(dx,height))
-            polygon = [(top+nx,ny),(top-nx,-ny),(bottom-nx,height-ny),(bottom+nx,height+ny)]
-            for axis,bound,sign in ((0,l,1),(0,r,-1),(1,t,1),(1,b,-1)):
-                clipped = []
-                for start,end in zip(polygon,polygon[1:]+polygon[:1]):
-                    ins,ine = sign*(start[axis]-bound)>=0,sign*(end[axis]-bound)>=0
-                    if ins != ine:
-                        f = (bound-start[axis])/(end[axis]-start[axis])
-                        clipped.append(tuple(start[j]+f*(end[j]-start[j]) for j in (0,1)))
-                    if ine:
-                        clipped.append(end)
-                polygon = clipped
+            length = np.hypot(dx,height)
+            top,bottom = top+height*offset/length,bottom+height*offset/length
+            shift_y = -dx*offset/length
+            nx,ny = height*thickness/(2*length),-dx*thickness/(2*length)
+            # Extend through the panel before intersecting its four bounds.
+            # Each rail is a complete stroke, not an opaque central repaint.
+            extension = max(abs(offset),thickness)+2
+            ex,ey = dx*extension/length,height*extension/length
+            polygon = [(top+nx-ex,shift_y+ny-ey),(top-nx-ex,shift_y-ny-ey),
+                       (bottom-nx+ex,height+shift_y-ny+ey),(bottom+nx+ex,height+shift_y+ny+ey)]
+            from src.iCCModules.imageCompositeConverterRelations import clip_polygon
+            polygon = clip_polygon(polygon,(l,t,r,b))
             points = ' '.join(f'{x:.6f},{y:.6f}' for x,y in polygon)
             return f'<polygon points="{points}" fill="{fill}"/>'
         # Repeat the first point explicitly: MuPDF omits the closing polygon
@@ -204,7 +212,8 @@ def fit_hollow_cross_panel(width, height, *, description, image, render_fn, erro
                 f'<defs><linearGradient id="panelPaint" gradientUnits="userSpaceOnUse" x1="{l:.6f}" x2="{r:.6f}" y1="0" y2="0">{stops}</linearGradient></defs>'
                 f'<rect width="{width}" height="{height}" fill="white"/>'
                 f'<rect x="{l:.6f}" y="{t:.6f}" width="{r-l:.6f}" height="{b-t:.6f}" fill="url(#panelPaint)"/>'
-                +band(b0,b1,bw,color(v[23]))+band(b0,b1,slit,'url(#panelPaint)')
+                +band(b0,b1,(bw-slit)/2,color(v[23]),-(bw+slit)/4)
+                +band(b0,b1,(bw-slit)/2,color(v[23]),(bw+slit)/4)
                 +band(a0,a1,aw,color(v[22]))
                 +f'<polygon points="{diamond}" fill="none" stroke="{color(v[24])}" stroke-width="{dw:.6f}"/>'
                 f'<rect x="{l:.6f}" y="{t:.6f}" width="{r-l:.6f}" height="{b-t:.6f}" fill="none" stroke="{color(v[21])}" stroke-width="{rim:.6f}"/></svg>')

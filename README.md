@@ -1,5 +1,16 @@
 # ImageConverter
 
+Explizite Randmittelpunkte werden jetzt als gemeinsame geometrische Bezüge
+ausgewertet. Verlauf und Linienausrichtung können unabhängig kombiniert werden;
+gemeinsame Endpunkte und verlangte Symmetrie bleiben auch nach der Nachbesserung
+verbindlich. [AC0150_1: Ursache, neuer GUI-Lauf und Grenzen](docs/anchor_relations_2026-11-17.md).
+
+Vorlagen können jetzt dieselben vollständigen Rasterrekonstruktionen wie eine
+frische Konvertierung ausprobieren. Verdeckte Rautenspitzen werden aus ihren
+Seiten rekonstruiert; parallele Diagonalstriche werden einzeln am Rechteck
+begrenzt. Ein realer M-Vorlagenlauf verbessert den Pixelfehler von 0.00243 auf
+0.00045. [Ursachen, Vergleich und verbleibende Grenzen](docs/structural_reconstruction_2026-11-17.md).
+
 Der gewählte Seed steuert jetzt auch die Vorlagensuche, frühe Parameterprüfungen
 und neue Geometrievorschläge. Eine Vorlage erhält die volle Profilzeit und sichert
 verbesserte Zwischenstände während der Suche. Die gemeinsame Auswahl bevorzugt

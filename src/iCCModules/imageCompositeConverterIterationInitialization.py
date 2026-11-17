@@ -99,6 +99,9 @@ def prepareIterationRuntimeImpl(
                     return accepted(candidate) and preferred_quality(
                         pixel_quality(target_img, render_svg_to_numpy_fn(candidate, width, height)))
                 fitted = continue_native_search(svg_content, target_img, render_svg_to_numpy_fn,
+                    description=params.get('effective_description') or ' '.join(
+                        str(part.get('text', '')) for part in params.get('description_fragments', [])
+                        if isinstance(part, dict)),
                     assertions=partial if kwargs.get('failed', False) else checked_assertions,
                     acceptance_fn=search_target)
                 if fitted is not None:

@@ -187,10 +187,16 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     # Recheck explicit assertions on the selected draft too, including timeouts.
     try:
         validate_svg_assertions(result['svg'], assertions)
-    except ValueError:
+    except ValueError as exc:
         if not (assertions and assertions.get('objects_partial')):
-            raise
-        result['draft_constraint_error'] = 'logical_object_limits'
+            # A bad parameter trial must not discard an already valid
+            # construction or abort the entire conversion. Revert only to
+            # a baseline that independently passes the same full assertions.
+            validate_svg_assertions(svg, assertions)
+            result.update(svg=svg, rendered=initial, error=error(initial),
+                          refinement_reverted_for_description=str(exc))
+        else:
+            result['draft_constraint_error'] = 'logical_object_limits'
     # Search losses can differ, but the returned error must describe the actual
     # pixels. A parameter stage may never undo a better structural result.
     result['error'] = error(result['rendered'])

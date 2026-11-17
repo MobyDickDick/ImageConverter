@@ -4,6 +4,29 @@ from src.iCCModules import imageCompositeConverterRendering as rendering
 import pytest
 
 
+@pytest.mark.parametrize('body', [
+    '<rect x="4" y="5" width="20" height="18" fill="#337799"/>',
+    '<circle cx="18" cy="18" r="12" fill="#337799"/>',
+    '<path d="M 5 5 L 27 20 L 10 30 Z" fill="#337799"/>',
+])
+def test_svg_namespace_prefix_does_not_change_renderability_or_pixels(body):
+    import cv2
+    import fitz
+    import numpy as np
+    svg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">'+body+'</svg>'
+    # Prefixes are XML syntax, not a different image type. Candidate builders
+    # must work independently of ElementTree's process-global namespace setup.
+    prefixed = (svg.replace('xmlns=', 'xmlns:native=')
+                .replace('<svg ', '<native:svg ').replace('</svg>', '</native:svg>'))
+    for tag in ('rect', 'circle', 'path'):
+        prefixed = prefixed.replace('<'+tag+' ', '<native:'+tag+' ')
+    render = lambda content: rendering.render_svg_to_numpy_inprocess(content,40,40,
+        fitz_module=fitz,np_module=np,cv2_module=cv2)
+    expected, actual = render(svg), render(prefixed)
+    assert expected is not None and actual is not None
+    assert np.array_equal(actual,expected)
+
+
 @pytest.mark.parametrize('transform', ['', 'translate(4 5) scale(1.5)'])
 @pytest.mark.parametrize('reverse', [False, True])
 def test_diagonal_gradient_matches_independent_vector_projection(transform, reverse):

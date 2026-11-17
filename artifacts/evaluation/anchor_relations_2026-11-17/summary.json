@@ -1,0 +1,28 @@
+{
+  "source": "AC0150_1.jpg",
+  "neutral_upload": "unrelated.jpg",
+  "status": "done",
+  "quality": "passed",
+  "pixel_quality": {
+    "normalized_mse": 0.006145722698420286,
+    "foreground_mse": 0.007342696655541658,
+    "foreground_iou": 0.9562238294632661,
+    "foreground_iou_binary": 0.9562238294632661,
+    "edge_alignment": 0.8298404812812805,
+    "passed": true,
+    "representation_penalty": 0.000302,
+    "representation_complexity": {
+      "elements": 5,
+      "coordinates": 26,
+      "penalty": 0.000302
+    },
+    "observed_foreground_pixels": 2514,
+    "output_foreground_pixels": 2625
+  },
+  "elapsed": 36.6,
+  "description_error": "",
+  "description_validation_version": 9,
+  "source_sha256": "4d93f69294fd2c1d368361f26353bdc8c455302d6ca49663547c25a39af1d37e",
+  "description_sha256": "05449e6a980c972e4d0a98bbb58b617504f57ffb876dd9d859af1eea0b418074",
+  "result_sha256": "080034322af30309a5e44ec44c374fdb2e0ffc5d247d9b57681ced109438ec6b"
+}
