@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="checkmark-green-vertical-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="2.069720%" stop-color="#207c2c" />
+      <stop offset="55.038916%" stop-color="#41aa49" />
+      <stop offset="99.978755%" stop-color="#cdced0" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(0.158325 -0.038592) scale(0.997778)"><rect id="checkmark_background" x="-9.9" y="2.4" width="43.8" height="24" fill="#ffffff" stroke="none" fill-opacity="0.981" />
+  <path id="checkmark_shadow_outline" d="M 1.269 15.84 L 11.562 21.12 L 27.768 2.52" stroke="#6cd38c" stroke-width="5.644000" fill="none" stroke-linejoin="round" stroke-linecap="round" />
+  <path id="checkmark_green_stroke" d="M 2.583 15 L 12.438 19.44 L 26.673 2.4" stroke="url(#checkmark-green-vertical-gradient)" stroke-width="3.395044" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-opacity="0.65" />
+</g></svg>

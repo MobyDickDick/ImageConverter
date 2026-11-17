@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="75" viewBox="0 0 50 75">
+  <defs>
+  <linearGradient id="valveHeadGradient" x1="1" y1="0" x2="0" y2="1">
+    <stop offset="1.271592%" stop-color="#c8c6c0" />
+    <stop offset="99.861339%" stop-color="#dce4e5" />
+  </linearGradient>
+  </defs>
+  <g transform="translate(2.249975 4.112354) scale(0.921217)"><line x1="25.0000" y1="39.5000" x2="25.0000" y2="25.1530" stroke="#6c6978" stroke-width="3.062619" stroke-linecap="round" />
+  <circle cx="25.0000" cy="56.5000" r="17.0000" fill="#f4f5f5" stroke="#868785" stroke-width="3.062619" />
+  <g transform="translate(0.000000 0.000000) scale(1.000000 1.000000)">
+    <path d="M 36.492188 3.0410156 L 13.505859 3.1347656 L 23.417969 22.871094 A 2.5 2.500001 0 0 0 22.748047 23.722656 L 2.0195312 13.308594 L 2.1113281 36.294922 L 22.75 25.882812 A 2.5 2.500001 0 0 0 25 27.300781 A 2.5 2.500001 0 0 0 27.207031 25.962891 L 47.78125 36.294922 L 47.873047 13.308594 L 27.212891 23.640625 A 2.5 2.500001 0 0 0 26.580078 22.863281 L 36.492188 3.0410156 z" fill="url(#valveHeadGradient)" stroke="none" />
+    <polygon points="36.492188,2.6959677 25,25 47.87305,12.963546 47.78125,35.949874 25,25 2.1132824,35.949874 2.0195324,12.963546 25,25 13.50586,2.7897177" fill="url(#valveHeadGradient)" stroke="#c3bec0" stroke-width="2.000000" />
+    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="#7a7f7e" stroke="#c3bec0" stroke-width="2.000000" />
+  </g>
+</g></svg>

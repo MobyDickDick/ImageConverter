@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="30" viewBox="0 0 10 30" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="triangle_stem-stem-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="1.500000%" stop-color="#2369b1" />
+      <stop offset="50.500000%" stop-color="#ebdee8" />
+      <stop offset="100.000000%" stop-color="#1464ad" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(0.025450 0.000000) scale(1.000000)"><polygon id="triangle_stem_triangle" points="5,-0.273 -0.138,10 10.138,10" fill="#116faf" stroke="#57a8d3" stroke-width="0.050000" stroke-linejoin="miter" />
+  <rect id="triangle_stem_stem" x="2.5" y="11.25" width="5" height="18.75" fill="url(#triangle_stem-stem-gradient)" stroke="none" />
+</g></svg>

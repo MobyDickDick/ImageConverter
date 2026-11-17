@@ -1,1 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="50" height="230" viewBox="0 0 50 230"><defs><linearGradient id="panelPaint" gradientUnits="userSpaceOnUse" x1="0.500000" x2="49.500000" y1="0" y2="0"><stop offset="0.00000000" stop-color="#c3c3c3"/><stop offset="0.39795918" stop-color="#fefefe"/><stop offset="1.00000000" stop-color="#c1c1c1"/></linearGradient></defs><rect width="50" height="230" fill="white"/><rect x="0.500000" y="-0.500000" width="49.000000" height="230.000000" fill="url(#panelPaint)"/><polygon points="48.593020,-0.500000 45.271862,-0.500000 0.500000,212.291650 0.500000,228.076447" fill="#8c8c8c"/><polygon points="4.543534,229.500000 49.500000,15.830964 49.500000,0.046167 1.222376,229.500000" fill="#8c8c8c"/><polygon points="49.500000,229.500000 49.500000,214.063870 3.392673,-0.500000 0.500000,-0.500000 0.500000,14.597567 46.680080,229.500000" fill="#878787"/><polygon points="24.757332,92.958031 45.799137,114.236851 24.757332,135.515671 3.715526,114.236851 24.757332,92.958031" fill="none" stroke="#828282" stroke-width="2.000000"/><rect x="0.500000" y="-0.500000" width="49.000000" height="230.000000" fill="none" stroke="#ababab" stroke-width="0.800000"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="50"
+   height="230"
+   viewBox="0 0 50 230"
+   version="1.1"
+   id="svg8"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3">
+    <linearGradient
+       id="panelPaint"
+       gradientUnits="userSpaceOnUse"
+       x1="0.500000"
+       x2="49.500000"
+       y1="0"
+       y2="0"
+       gradientTransform="matrix(1.09856,0,0,1.20208,-2.464,-23.2392)">
+      <stop
+         offset="1.000000%"
+         stop-color="#c3c7c3"
+         id="stop1" />
+      <stop
+         offset="38.795918%"
+         stop-color="#fefefe"
+         id="stop2" />
+      <stop
+         offset="100.000000%"
+         stop-color="#c1c1c1"
+         id="stop3" />
+    </linearGradient>
+  </defs>
+  <g
+     transform="translate(0.000000 0.000000) scale(1.000000)"
+     id="g8">
+    <rect
+       x="0.20660026"
+       y="-0.15216292"
+       width="49.958122"
+       height="230.19934"
+       fill="url(#panelPaint)"
+       id="rect3"
+       style="fill:url(#panelPaint);stroke-width:1.14915" />
+    <polygon
+       points="0.5,212.29165 0.5,228.07645 48.59302,-0.5 45.271862,-0.5 "
+       fill="#848888"
+       transform="translate(-0.00800166,0.561288)"
+       id="polygon3" />
+    <polygon
+       points="49.5,0.046167 1.222376,229.5 4.543534,229.5 49.5,15.830964 "
+       fill="#848888"
+       id="polygon4" />
+    <polygon
+       points="3.392673,-0.5 0.5,-0.5 0.5,14.597567 46.68008,229.5 49.5,229.5 49.5,214.06387 "
+       fill="#838387"
+       id="polygon5" />
+    <polygon
+       points="24.757332,135.51567 3.715526,114.23685 24.757332,92.958031 45.799137,114.23685 "
+       fill="none"
+       stroke="#828282"
+       stroke-width="2"
+       id="polygon6" />
+    <rect
+       x="0.5"
+       y="-0.5"
+       width="49"
+       height="230"
+       fill="none"
+       stroke="#a3a3a7"
+       stroke-width="0.8"
+       id="rect6" />
+  </g>
+</svg>
