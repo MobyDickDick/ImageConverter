@@ -212,7 +212,10 @@ def test_a_later_model_cannot_restart_an_exhausted_image_budget():
     with image_search(session):
         first=fit()
         count=len(calls)
-        assert first['search_control']['stop_reason']=='time_limit'
+        assert first['search_control']['stop_reason']=='structure_reconsideration'
+        # The first construction now yields before monopolizing the deadline.
+        # Once the shared deadline expires, no later model can restart it.
+        clock.now = session.policy.max_seconds
         assert fit() is None and len(calls)==count
 
 

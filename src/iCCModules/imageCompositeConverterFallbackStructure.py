@@ -170,7 +170,7 @@ def _line_proposals(image, rendered, session):
 
 
 def explore_structures(svg, image, initial, render_fn, session, assertions, *, mode='combined', max_probes=32,
-                       stop_fn=None):
+                       stop_fn=None, level=0, on_alternative=None):
     """Compare native complete constructions and residual add operations.
 
     No acceptance gates are weakened: explicit assertions are checked before
@@ -185,12 +185,12 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
     error = lambda raster: float(np.square(reference-raster.astype(float)).mean()/255**2)
     best = dict(svg=svg, rendered=initial, error=error(initial), origin='incumbent')
     report = dict(mode=mode, max_probes=max_probes, proposals=[], selected_origin='incumbent',
-                  model_confirmed=False, stop_reason='proposals_exhausted', render_evaluations=0)
+                  model_confirmed=False, stop_reason='proposals_exhausted', render_evaluations=0,
+                  exploration_level=level, duplicate_proposals=0)
     starting_evaluations=session.evaluations
-    if max(image.shape[:2]) > 512:
-        report['stop_reason'] = 'raster_size_limit'
-        return best, report
     h, w = image.shape[:2]
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity, raster_identity
+    trial_context = (raster_identity(image), repr(assertions), mode)
     def finished():
         return session.time_reason() or (stop_fn is not None and stop_fn())
 
@@ -198,18 +198,34 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         nonlocal best
         if finished() or len(report['proposals']) >= max_probes:
             return None
-        row = dict(origin=origin, inventory=inventory(candidate), accepted=False)
-        report['proposals'].append(row)
-        if sum(row['inventory'].values()) > 48:
-            row['rejection'] = 'element_limit'
-            return None
         try:
             from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width
             candidate = constrain_stroke_width(candidate, assertions)
+            identity = (*trial_context, candidate_identity(parent['svg']), candidate_identity(candidate))
+            if identity in session.structural_trials:
+                report['duplicate_proposals'] += 1
+                return None
+            session.structural_trials.add(identity)
+            row = dict(origin=origin, inventory=inventory(candidate), accepted=False)
+            report['proposals'].append(row)
+            if sum(row['inventory'].values()) > 48:
+                row['rejection'] = 'element_limit'
+                return None
             validate_svg_assertions(candidate, assertions)
         except ValueError:
-            row['rejection'] = 'description_assertions'
-            return None
+            if 'row' not in locals():
+                return None
+            repairing = False
+            if assertions and assertions.get('objects_partial'):
+                from src.iCCModules.imageCompositeConverterRepresentation import object_limit_excess, representation_cost
+                limits, complete = assertions['objects'], assertions.get('objects_complete', False)
+                symbols = assertions.get('symbol_strokes', 0)
+                repairing = (object_limit_excess(candidate, limits, complete, symbols) < object_limit_excess(parent['svg'], limits, complete, symbols)
+                             and representation_cost(candidate)['penalty'] < representation_cost(parent['svg'])['penalty'])
+            if not repairing:
+                row['rejection'] = 'description_assertions'
+                return None
+            row['partial_object_repair'] = True
         if residual_line is not None and mode == 'combined':
             from src.iCCModules.imageCompositeConverterFallbackComposition import residual_line_owner
             owner = residual_line_owner(parent['svg'], residual_line)
@@ -217,9 +233,9 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
                 row.update(rejection='existing_group_edge', owner=owner)
                 progress('native_svg_structure', event='structure_probe', **row)
                 return None
-        report['render_evaluations'] += 1
-        raster = render_fn(candidate, w, h)
-        session.evaluations += 1
+        raster, new = session.render_candidate(image, candidate, render_fn, w, h)
+        report['render_evaluations'] += int(new)
+        session.evaluations += int(new)
         if raster is None:
             row['rejection'] = 'render_failed'
             return None
@@ -237,6 +253,9 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         support = float((after[changed] < before[changed]).mean()) if changed.any() else 0.
         row['improved_fraction'] = support
         accepted = measured < parent['error']-1e-8 and local_gain > 1e-6 and support >= .6
+        if origin.startswith('simplify:') and measured <= parent['error']+1e-10:
+            from src.iCCModules.imageCompositeConverterRepresentation import representation_cost
+            accepted = representation_cost(candidate)['penalty'] < representation_cost(parent['svg'])['penalty']
         if mode in {'groups', 'combined'}:
             from src.iCCModules.imageCompositeConverterFallbackComposition import retained_paint
             if not retained_paint(image, parent['rendered'], raster):
@@ -260,13 +279,33 @@ def explore_structures(svg, image, initial, render_fn, session, assertions, *, m
         if not accepted:
             row.setdefault('rejection', 'local_or_global_error')
         result = dict(svg=candidate, rendered=raster, error=measured, origin=origin)
-        if accepted and measured < best['error']-1e-8:
+        if on_alternative is not None:
+            on_alternative(result, row)
+        from src.iCCModules.imageCompositeConverterRepresentation import representation_cost
+        if accepted and (measured+representation_cost(candidate)['penalty'] <
+                         best['error']+representation_cost(best['svg'])['penalty']-1e-10):
             best = result
             session.observe(measured, evaluation=False)
         progress('native_svg_structure', event='structure_probe', **row)
         return result if accepted else None
 
     bases = [best]
+    from src.iCCModules.imageCompositeConverterRepresentation import simplification_proposals
+    for candidate, origin in simplification_proposals(svg):
+        probe(candidate, origin, bases[0])
+        if finished() or len(report['proposals']) >= max_probes:
+            break
+    if mode == 'combined' and level >= 1:
+        from src.iCCModules.imageCompositeConverterNativeEdits import native_edits
+        # Reserve capacity for entirely new constructions and observed groups.
+        edit_limit = max_probes//2
+        for candidate, operation in native_edits(svg, w, h, level=level):
+            parent = best
+            # Edits were generated from the input scene, never apply an old
+            # deletion over a newer accepted scene (which would restore atoms).
+            probe(candidate, 'native_edit:'+operation, bases[0])
+            if best is not parent or finished() or len(report['proposals']) >= edit_limit:
+                break
     if mode == 'combined' and max_probes > 0 and not pixel_quality(image, initial)['passed']:
         from src.iCCModules.imageCompositeConverterConstructionVariants import construction_variants
         for candidate, origin in construction_variants(svg, image, initial, session):

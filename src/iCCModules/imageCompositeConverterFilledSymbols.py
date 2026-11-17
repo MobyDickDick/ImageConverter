@@ -38,6 +38,9 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     evaluations = 0
     render_cache = {}
     session = current_search()
+    if session and reconsider_after is None:
+        reconsider_after = session.policy.patience
+    registration_seconds = 0.
     if session:
         from src.iCCModules.imageCompositeConverterAdaptiveSearch import raster_identity
         raster_key = raster_identity(image)
@@ -46,33 +49,47 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     progress(source, event='registration_started', evaluations=0)
 
     def reconsider():
+        # A construction cannot monopolize the image deadline while making
+        # tiny gains. Leave time for another topology and independent objects.
+        if (session and reconsider_after and
+                registration_seconds >= min(2., session.policy.seconds*.15)):
+            return 'structure_reconsideration'
         if (reconsider_after
                 and (evaluations-progress_evaluation >= reconsider_after or evaluations >= reconsider_after*3)
-                and not pixel_quality(image, best[3])['passed']):
+                and not (pixel_quality(image, best[3])['passed'] and
+                         (satisfactory_fn is None or satisfactory_fn(parameters, best)))):
             return 'structure_reconsideration'
         return None
 
     def measure(p):
-        nonlocal evaluations, progress_error, progress_evaluation
+        nonlocal evaluations, progress_error, progress_evaluation, registration_seconds
         if not valid(p):
             return None
         svg = build(p)
         if svg in render_cache:
             return render_cache[svg]
+        measured_started = session.elapsed if session else 0.
         shared_key = (raster_key, svg) if session else None
         rendered_new = not session or shared_key not in session.registration_rasters
         if not rendered_new:
             raster = session.registration_rasters[shared_key]
         else:
             evaluations += 1
-            raster = render_fn(svg, width, height)
+            if session:
+                raster, rendered_new = session.render_candidate(image, svg, render_fn, width, height)
+                if not rendered_new:
+                    evaluations -= 1
+            else:
+                raster = render_fn(svg, width, height)
             if session:
                 if len(session.registration_rasters) >= 256:
                     session.registration_rasters.pop(next(iter(session.registration_rasters)))
                 session.registration_rasters[shared_key] = raster
-                session.evaluations += 1
+                session.evaluations += int(rendered_new)
         if raster is None:
             render_cache[svg] = None
+            if session:
+                registration_seconds += session.elapsed-measured_started
             return None
         error = float(error_fn(image, raster))
         loss = float(loss_fn(image, raster) if loss_fn else
@@ -87,6 +104,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         if session and len(render_cache) >= 256:
             render_cache.clear()
         render_cache[svg] = measured
+        if session:
+            registration_seconds += session.elapsed-measured_started
         return measured
 
     parameters = np.asarray(parameters, dtype=float)
@@ -100,16 +119,25 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     if not np.isfinite(initial_error) or initial_error < 0:
         return None
     accepted = (parameters.copy(), best)
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import proposal_rng
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity
+    rng = proposal_rng('registration_order', [source, candidate_identity(best[2]), parameters.tolist()]) if allow_portfolio else None
+    coordinate_order = list(range(len(parameters)))
+    signs = [-1., 1.]
+    if rng is not None:
+        rng.shuffle(coordinate_order)
+        rng.shuffle(signs)
     if session and best[1] <= initial_error+1e-9:
         session.observe(best[1],evaluation=False)
     satisfactory_cache = {}
     semantic_incumbent = None
 
     def satisfactory(p, measured):
-        nonlocal semantic_incumbent
+        nonlocal semantic_incumbent, registration_seconds
         if not session or satisfactory_fn is None or measured[1] > initial_error+1e-9:
             return False
         from src.iCCModules.imageCompositeConverterAdaptiveSearch import preferred_quality
+        checked_started = session.elapsed
         if measured[2] not in satisfactory_cache:
             quality = pixel_quality(image,measured[3])
             passed = bool(quality and quality['passed'] and satisfactory_fn(p,measured))
@@ -117,7 +145,10 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         passed, preferred = satisfactory_cache[measured[2]]
         if passed and (semantic_incumbent is None or measured[1] < semantic_incumbent[1][1]-1e-9):
             semantic_incumbent = p.copy(), measured
-        return passed and (not session.minimum_pending or preferred)
+        registration_seconds += session.elapsed-checked_started
+        # A minimum exploration time is no reason to keep changing a result
+        # that already passes the caller's semantics and the pixel gates.
+        return passed
 
     # Raster-derived alternate seeds share this registration's cache, counters,
     # error bound and image deadline; yield between them for the fair scheduler.
@@ -149,10 +180,10 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
             if stop_reason:
                 break
             improved = False
-            for index in range(len(parameters)):
+            for index in coordinate_order:
                 if stop_reason:
                     break
-                for sign in (-1., 1.):
+                for sign in signs:
                     if session:
                         stop_reason = session.time_reason() or reconsider()
                         if not stop_reason and session.finish_model_searches and not session.minimum_pending:

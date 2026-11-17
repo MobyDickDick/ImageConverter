@@ -41,7 +41,7 @@ def residual_line_owner(svg, line):
         if any(key in node.attrib for key in effects):
             return
         group = node.get('data-fallback-group', group)
-        if group and tag in {'line', 'rect', 'polygon'}:
+        if tag in {'line', 'rect', 'polygon'}:
             edges = []
             if tag == 'line' and node.get('stroke', 'none') != 'none':
                 edges = [(point(node, '1'), point(node, '2'))]
@@ -67,7 +67,7 @@ def residual_line_owner(svg, line):
                 # stroke extents supply the remaining geometric neighbourhood.
                 coverage = float((distance <= (width+proposed_width)/2+.5).mean())
                 if coverage >= .9:
-                    yield dict(group=group, primitive=tag, part=node.get('data-part'),
+                    yield dict(group=group or node.get('id') or 'native_geometry', primitive=tag, part=node.get('data-part'),
                                coverage=coverage, edge=[p.tolist(), q.tolist()])
         for child in node:
             if child.tag.rsplit('}', 1)[-1] != 'svg':

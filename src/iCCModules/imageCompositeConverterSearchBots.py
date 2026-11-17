@@ -157,17 +157,10 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
     while board.reason is None and (session.minimum_pending or board.generated < monitor.maximum*8):
         active = [bot for bot in board.bots if bot.active]
         if not active:
-            if session.minimum_pending and len(parameters) and board.bots:
-                for bot in board.bots:
-                    bot.epoch += 1
-                    bot.active, bot.stop_reason, bot.stale = True, None, 0
-                    bot.parameters, bot.best = board.best_p.copy(), board.best
-                active = list(board.bots)
-                emit(source, event='search_restarted', restart=max(b.epoch for b in active),
-                     **session.report())
-            else:
-                board.reason = 'all_bots_inactive'
-                break
+            # Minimum exploration is spent on another construction, never on
+            # resurrecting the same exhausted parameter strategies.
+            board.reason = 'all_bots_inactive'
+            break
         selected = board.selector.choose([bot.name for bot in active])
         bot = next(bot for bot in active if bot.name == selected)
         board.reason = (reconsider() if reconsider else None) or monitor.reason(alternatives_tried=all(b.proposals or not b.active for b in board.bots))

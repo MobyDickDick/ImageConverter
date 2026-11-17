@@ -69,15 +69,20 @@ def test_bad_renderer_and_error_are_rejected():
     assert fit_hollow_cross_panel(60,400,**kwargs,render_fn=render,error_fn=lambda a,b:float('nan')) is None
 
 
-def test_globally_passing_sample_must_fail_the_detail_check(tmp_path):
+def test_globally_passing_sample_requires_real_detail_repair_before_acceptance(tmp_path):
     from src.imageConverterSample import refine
     source,sample,output = (tmp_path/name for name in ('source.png','old.svg','result.svg'))
     cv2.imwrite(str(source),render(drawing(),60,400))
     sample.write_text(drawing(diamond=False,slit=False),encoding='utf-8')
     report = refine(source,sample,output,DESCRIPTION,1.)
     assert report['initial_quality']['passed']
-    assert not report['passed']
-    assert 'hollow_cross_panel' in report['description_error']
+    with pytest.raises(ValueError, match='hollow_cross_panel'):
+        validate_svg_assertions(sample.read_text(), description_assertions(DESCRIPTION))
+    if report['passed']:
+        assert report['improved'] and report['continuation']
+        validate_svg_assertions(output.read_text(), description_assertions(DESCRIPTION))
+    else:
+        assert 'hollow_cross_panel' in report['description_error']
 
 
 @pytest.mark.parametrize('width,height,dx,dy',[(48,320,3,17),(75,450,21,31)])

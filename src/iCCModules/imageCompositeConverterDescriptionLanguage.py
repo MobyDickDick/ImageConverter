@@ -137,6 +137,22 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits, complete_object_list
+    objects = description_object_limits(normalized)
+    if arrow_pair:
+        objects['triangle'] = 2
+    if objects:
+        assertions['objects'] = objects
+        assertions['objects_complete'] = complete_object_list(normalized)
+        # Plus/minus are composite symbols, not additional full scene lines.
+        # Their short native bars need not be encoded as opaque generic paths.
+        symbol_strokes = 0
+        for symbol, bars in (('plus', 2), ('minus', 1)):
+            mentions = list(re.finditer(r'\b'+symbol+r'(?:zeichen)?\b', words))
+            if any(not re.search(r'\b(?:kein[enrms]?|ohne)\s*$', words[:m.start()]) for m in mentions):
+                symbol_strokes += bars
+        if symbol_strokes:
+            assertions['symbol_strokes'] = symbol_strokes
     from src.iCCModules.imageCompositeConverterHollowCrossPanel import hollow_cross_contract
     if hollow_cross_contract(normalized):
         assertions['hollow_cross_panel'] = True
@@ -185,10 +201,20 @@ def gradient_direction(text: str, direction: str) -> bool:
     return axes == {direction}
 
 
+def draft_assertions(assertions):
+    result = dict(counts=[], no_text=assertions.get('no_text', False))
+    for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes'):
+        if assertions.get(key):
+            result[key] = assertions[key]
+    if result.get('objects'):
+        result['objects_partial'] = True
+    return result
+
+
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
                               or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')
-                              or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel')):
+                              or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel') or assertions.get('objects')):
         return
     if assertions.get('hollow_cross_panel'):
         from src.iCCModules.imageCompositeConverterHollowCrossPanel import validate_hollow_cross_panel
@@ -285,3 +311,10 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
 
         if not horizontal_bar(root):
             raise DescriptionRejected('missing_described_horizontal_bar')
+    if assertions.get('objects'):
+        from src.iCCModules.imageCompositeConverterRepresentation import validate_object_limits
+        try:
+            validate_object_limits(svg, assertions['objects'], partial=assertions.get('objects_partial', False),
+                                   complete=assertions.get('objects_complete', False), symbol_strokes=assertions.get('symbol_strokes', 0))
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc

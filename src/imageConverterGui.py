@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 6
+DESCRIPTION_VALIDATION_VERSION = 7
 
 
 class RequestError(ValueError):
@@ -553,7 +553,8 @@ class Jobs:
                 command = [sys.executable, "-u", "-m", "src.imageConverterSample",
                            "--source", str(folder / "source.png"), "--sample", str(folder / "sample.svg"),
                            "--output", str(output / "refined.svg"), "--description", str(description_file),
-                           "--seconds", str(seconds)]
+                           "--seconds", str(maximum), '--seed', str(job['search_seed']),
+                           '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
             environment = os.environ.copy()
             environment.update(PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8",
                                ICC_MAX_QUALITY_PASSES="0", ICC_CONVERSION_TIMEOUT_SEC=str(maximum))
@@ -563,8 +564,11 @@ class Jobs:
             environment.setdefault("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "0")
             environment.setdefault("IMAGE_CONVERTER_REUSE_RENDER_WORKER", "1")
             if not job.get('catalog_background'):
+                preview_description = folder/'preview-description.txt'
+                preview_description.write_text(resolve_similarity_description(job['description'], catalog).text, encoding='utf-8')
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
                                    ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'),
+                                   ICC_GUI_PREVIEW_DESCRIPTION_FILE=str(preview_description),
                                    ICC_GUI_PREVIEW_PHASE='Sample-Anpassung' if job.get('sample') and job.get('use_current_svg',True) else 'Suche')
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
@@ -850,8 +854,8 @@ def retain_best_preview(folder: Path, job: dict) -> None:
             continue
         error = result_description_error(candidate, job.get('description', ''))
         # Prefer a valid deliverable over a numerically closer contradiction.
-        rank = (bool(error), not quality['passed'], quality['normalized_mse'])
-        old_rank = ((bool(previous_error), not previous['passed'], previous['normalized_mse'])
+        rank = (bool(error), not quality['passed'], vector_comparison_score(quality))
+        old_rank = ((bool(previous_error), not previous['passed'], vector_comparison_score(previous))
                     if previous else (True, True, float('inf')))
         if previous and rank >= old_rank:
             continue
@@ -884,9 +888,15 @@ def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> Non
     quality = saved_svg_quality(folder/'source.png', result)
     if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
         return
-    previous_quality = job.get('pixel_quality') or {}
-    if (job.get('result') and previous_quality.get('normalized_mse', float('inf'))
-            < quality['normalized_mse']):
+    previous_result = folder/'result.svg'
+    previous_quality = saved_svg_quality(folder/'source.png', previous_result) if job.get('result') else None
+    candidate_error = result_description_error(result, job.get('description', ''))
+    candidate_passed = bool(quality['passed'] and not candidate_error)
+    previous_passed = bool(previous_quality and previous_quality.get('passed') and
+        not result_description_error(previous_result, job.get('description', '')))
+    if (previous_quality and
+            (not previous_passed, vector_comparison_score(previous_quality)) <=
+            (not candidate_passed, vector_comparison_score(quality))):
         result = folder/'result.svg'
         quality = saved_svg_quality(folder/'source.png', result)
         if quality is None:
@@ -907,21 +917,26 @@ def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> Non
                description_validation_version=DESCRIPTION_VALIDATION_VERSION)
     job.pop('result_rejection', None)
     report.update(passed=passed, description_error=error, pixel_quality=quality)
-    if not (passed and report.get('stop_reason') == 'quality_target_reached'):
+    if not ((passed and report.get('stop_reason') == 'quality_target_reached') or
+            report.get('stop_reason') in {'search_space_exhausted', 'construction_frontier_exhausted', 'time_limit'}):
         report['stop_reason'] = stop_reason
     job['recovery_report'] = report
     if not passed:
-        job['message'] += (' Das Zeitbudget wurde ausgeschöpft.' if stop_reason == 'time_limit'
+        job['message'] += (' Die geprüften unterschiedlichen Konstruktionen sind ausgeschöpft.'
+                           if report.get('stop_reason') in {'search_space_exhausted', 'construction_frontier_exhausted'} else
+                           ' Das Zeitbudget wurde ausgeschöpft.' if stop_reason == 'time_limit'
                            else ' Die elementweise Suche ist beendet.')
 
 
 def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     result = folder / "output" / "refined.svg"
     report_path = result.with_suffix(".json")
-    if returncode != 0 or not result.is_file() or not report_path.is_file():
+    if not result.is_file() or not report_path.is_file():
         job.update(status="error", result=False, quality="unknown", message="Sample konnte nicht verbessert werden. Details stehen im Protokoll.")
         return
     report = json.loads(report_path.read_text(encoding="utf-8"))
+    if returncode != 0:
+        report['stop_reason'] = 'interrupted'
     if reject_raster_result(result, job):
         return
     # Recheck the actual deliverable, including old worker reports. A low
@@ -936,7 +951,13 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         message = 'Das Sample erfüllt die Pixelprüfung bereits; seine Formen bleiben erhalten.'
     elif report.get('stop_reason') == 'sample_alignment_accepted':
         message = 'Sample als Ganzes skaliert und ausgerichtet; vorhandene Formen bleiben erhalten.'
+    elif report.get('stop_reason') == 'native_search_accepted':
+        message = 'Vorlagenaufbau neu bearbeitet; Bildvergleich und Beschreibungsprüfung bestanden.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
+    if report.get('continuation'):
+        message += f" {report['evaluations']} Bildkandidaten geprüft."
+        if not report.get('search_goal_reached'):
+            message += ' Das strengere Suchziel wurde noch nicht erreicht.'
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
                message=message, sample_report=report, pixel_quality=quality,
                description_validation_version=DESCRIPTION_VALIDATION_VERSION)
@@ -1040,22 +1061,22 @@ def search_summary(output: Path) -> dict | None:
 def vector_comparison_score(quality: dict) -> float:
     # A smaller global pixel error alone rewards the broken crossing/contour
     # seen in the reported retry. Compare visible edges and foreground too.
-    return (quality['normalized_mse']+.2*(1-quality['edge_alignment'])
-            +.1*(1-quality['foreground_iou']))
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import vector_quality_score
+    return vector_quality_score(quality)
 
 
 def saved_svg_quality(source: Path, svg: Path) -> dict | None:
     from PIL import Image
     import numpy as np
     from src.imageConverterSample import prepare_sample, render_svg
-    from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import vector_candidate_quality
     try:
         with Image.open(source) as image:
             target = np.asarray(image.convert('RGB'))
         h, w = target.shape[:2]
         prepared = prepare_sample(svg.read_bytes(), w, h)
         rendered = render_svg(prepared, w, h)
-        quality = pixel_quality(target, rendered)
+        quality = vector_candidate_quality(target, rendered, prepared)
         border = np.concatenate((target[0], target[-1], target[:, 0], target[:, -1]))
         background = np.median(border.astype(float), axis=0)
         quality.update(observed_foreground_pixels=int(np.count_nonzero(
@@ -1390,6 +1411,8 @@ class Handler(BaseHTTPRequestHandler):
                         workbench_description_updates=True,
                         parallel_background_conversion=True,
                         editable_search_seed=True,
+                        seeded_template_search=True,
+                        simple_native_forms=True,
                         image_recognition=True,
                         description_check=True,
                         description_autosave=True,

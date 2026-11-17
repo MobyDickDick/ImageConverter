@@ -11,14 +11,14 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search,
 
 
 def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mode=None, color_order='BGR',
-                         acceptance_fn=None, stop_fn=None):
+                         acceptance_fn=None, stop_fn=None, exploration_level=0, on_alternative=None):
     structure_mode = structure_mode or os.environ.get('ICC_FALLBACK_STRUCTURE_MODE', 'combined')
     if structure_mode not in {'off', 'primitives', 'lines', 'combined', 'legacy_combined', 'groups'}:
         raise ValueError('Unknown fallback structure mode')
     if color_order not in {'BGR', 'RGB'}:
         raise ValueError('Unknown raster color order')
     session = current_search()
-    if session is None or not session.minimum_pending or session.time_reason():
+    if session is None or session.time_reason():
         return None
     from src.imageConverterSample import prepare_sample, NUMBER, SVG_NS
     from src.iCCModules.imageCompositeConverterFilledSymbols import _register
@@ -31,10 +31,13 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     try:
         svg = constrain_stroke_width(svg, assertions)
         root = ET.fromstring(prepare_sample(svg.encode('utf-8'), w, h))
-        validate_svg_assertions(svg, assertions)
+        # A fragmented or over-complete seed is a search input, not an
+        # accepted output. Its described object limits must be repairable.
+        validate_svg_assertions(svg, {k: v for k, v in (assertions or {}).items()
+            if k not in {'objects', 'objects_partial'}})
     except (ValueError, SyntaxError):
         return None
-    initial = render_fn(svg, w, h)
+    initial, _ = session.render_candidate(image, svg, render_fn, w, h)
     if initial is None:
         return None
     original_svg, original_raster = svg, initial
@@ -42,9 +45,11 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     structure = None
     # Even a tiny globally cheap missing line needs exploration. Exact/near-exact
     # incumbents retain their bytes and the established inexpensive early exit.
+    from src.iCCModules.imageCompositeConverterRepresentation import simplification_proposals, representation_cost
     if (preferred_quality(pixel_quality(image, initial))
             and (acceptance_fn is None or acceptance_fn(svg))
-            and (structure_mode == 'off' or np.max(abs(image.astype(float)-initial)) < 35)):
+            and (structure_mode == 'off' or (np.max(abs(image.astype(float)-initial)) < 35
+                 and next(simplification_proposals(svg), None) is None))):
         return None
     if structure_mode != 'off':
         from src.iCCModules.imageCompositeConverterFallbackStructure import explore_structures
@@ -54,7 +59,8 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
             raster = render_fn(candidate, width, height)
             return raster if raster is None or color_order == 'BGR' else raster[:, :, ::-1].copy()
         selected, structure = explore_structures(svg, structure_image, structure_initial, render_structure, session, assertions,
-                                                 mode=structure_mode, stop_fn=stop_fn)
+                                                 mode=structure_mode, stop_fn=stop_fn, level=exploration_level,
+                                                 on_alternative=on_alternative, max_probes=32*(1+exploration_level))
         svg, initial = selected['svg'], selected['rendered']
         if color_order == 'RGB':
             initial = initial[:, :, ::-1].copy()
@@ -153,9 +159,25 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
         except ValueError:
             return False
 
-    result = _register(seed, geometry, build, valid, image, render_fn, lambda a, b: error(b),
-                       'native_svg_continuation', loss_fn=lambda a, b: loss(b), satisfactory_fn=satisfactory,
-                       preserve_initial_error=True, reconsider_after=96)
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity, raster_identity
+    tried = getattr(session, 'native_parameter_trials', None)
+    if tried is None:
+        tried = session.native_parameter_trials = set()
+    key = (raster_identity(image), candidate_identity(svg), repr(assertions))
+    from src.iCCModules.imageCompositeConverterFallbackStructure import inventory
+    families = getattr(session, 'native_parameter_families', None)
+    if families is None:
+        families = session.native_parameter_families = {}
+    family = (raster_identity(image), tuple(sorted(inventory(svg).items())), repr(assertions))
+    remaining = max(0, 288-families.get(family, 0))
+    result = None
+    if key not in tried and remaining >= 3:
+        tried.add(key)
+        result = _register(seed, geometry, build, valid, image, render_fn, lambda a, b: error(b),
+                           'native_svg_continuation', loss_fn=lambda a, b: loss(b), satisfactory_fn=satisfactory,
+                           preserve_initial_error=True, reconsider_after=min(96, remaining//3))
+        if result is not None:
+            families[family] = families.get(family, 0)+result['evaluations']
     if result is None:
         if structure is None:
             return None
@@ -163,7 +185,18 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
                       source='native_svg_continuation', search_control=dict(
                           stop_reason=session.time_reason() or 'schedule_exhausted', **session.report()))
     # Recheck explicit assertions on the selected draft too, including timeouts.
-    validate_svg_assertions(result['svg'], assertions)
+    try:
+        validate_svg_assertions(result['svg'], assertions)
+    except ValueError:
+        if not (assertions and assertions.get('objects_partial')):
+            raise
+        result['draft_constraint_error'] = 'logical_object_limits'
+    # Search losses can differ, but the returned error must describe the actual
+    # pixels. A parameter stage may never undo a better structural result.
+    result['error'] = error(result['rendered'])
+    if structure and result['error'] > error(initial)+1e-10:
+        result.update(svg=svg, rendered=initial, error=error(initial))
+        structure['refinement_reverted_for_local_detail'] = True
     # Parameter polish must not erase a small newly added feature to improve a
     # much larger background. Preserve the already measured structural draft.
     if structure and structure['selected_origin'] != 'incumbent':
@@ -193,7 +226,9 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
                 continue
             before = np.square(image[y:Y, x:X].astype(float)-initial[y:Y, x:X]).mean()
             after = np.square(image[y:Y, x:X].astype(float)-result['rendered'][y:Y, x:X]).mean()
-            if after > before+1:
+            # A historically drawn line has no claim to permanence. Protect
+            # it only when the source pixels already verify the local result.
+            if before <= 4 and after > before+1:
                 result.update(svg=svg, rendered=initial, error=error(initial))
                 structure['refinement_reverted_for_local_detail'] = True
                 break
@@ -201,7 +236,9 @@ def polish_generated_svg(svg, image, render_fn, *, assertions=None, structure_mo
     if structure is not None:
         result['structure_search'] = structure
         result['evaluations'] += structure['render_evaluations']
-    improved = result['error'] < original_error-1e-10
+    improved = (result['error'] < original_error-1e-10 or
+                (result['error'] <= original_error+1e-10 and
+                 representation_cost(result['svg'])['penalty'] < representation_cost(original_svg)['penalty']))
     result['improved'] = improved
     if not improved:
         result.update(svg=original_svg, rendered=original_raster, error=original_error)

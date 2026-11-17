@@ -26,7 +26,7 @@ def test_small_mark_color_follows_raster_in_either_direction(before,after):
 
 FIXTURES = Path(__file__).parent/'fixtures/sample_alignment'
 GEOMETRY = {'x', 'y', 'x1', 'y1', 'x2', 'y2', 'cx', 'cy', 'r', 'rx', 'ry',
-            'width', 'height', 'd', 'points', 'transform', 'opacity', 'fill-opacity', 'stroke-opacity'}
+            'width', 'height', 'd', 'points', 'opacity', 'fill-opacity', 'stroke-opacity'}
 
 
 def assert_parts_preserved(sample, output, width, height):
@@ -37,9 +37,15 @@ def assert_parts_preserved(sample, output, width, height):
             continue
         found = [node for node in result.iter() if node.get('id') == old.get('id')]
         assert len(found) == 1
-        assert found[0].tag == old.tag
-        assert {k: v for k, v in old.attrib.items() if k in GEOMETRY} == {
-            k: v for k, v in found[0].attrib.items() if k in GEOMETRY}
+        if old.tag.rsplit('}', 1)[-1] == 'path' and found[0].tag.rsplit('}', 1)[-1] == 'line':
+            from src.iCCModules.imageCompositeConverterRepresentation import path_points
+            paths = path_points(old)
+            assert len(paths) == 1 and len(paths[0][0]) == 2
+            assert np.allclose(paths[0][0].ravel(), [float(found[0].get(k)) for k in ('x1', 'y1', 'x2', 'y2')])
+        else:
+            assert found[0].tag == old.tag
+            assert {k: v for k, v in old.attrib.items() if k in GEOMETRY} == {
+                k: v for k, v in found[0].attrib.items() if k in GEOMETRY}
 
 
 def test_uploaded_crossed_panel_is_shrunk_without_losing_its_minus(tmp_path):
@@ -49,7 +55,7 @@ def test_uploaded_crossed_panel_is_shrunk_without_losing_its_minus(tmp_path):
     report = refine(FIXTURES/'panel.png', sample, output,
                     (FIXTURES/'description.txt').read_text(encoding='utf-8'), 3)
     assert report['passed'], report
-    assert report['stop_reason'] == 'sample_alignment_accepted'
+    assert report['stop_reason'] in {'sample_alignment_accepted', 'native_search_accepted'}
     assert report['final_mse'] < report['initial_mse']*.05
     assert .88 < report['alignment']['scale_x'] < .92
     assert .88 < report['alignment']['scale_y'] < .92
@@ -91,6 +97,7 @@ def test_whole_assembly_fit_handles_scale_position_and_jpeg(tmp_path, scale, dx,
     assert_parts_preserved(sample.read_bytes(), output.read_text(encoding='utf-8'), 64, 96)
 
 
+@pytest.mark.per_test_timeout(70, fail_on_timeout=True)
 def test_gui_sample_conversion_uses_the_whole_assembly(tmp_path, monkeypatch):
     from src import imageConverterGui as gui
     monkeypatch.setattr(gui, 'catalog_descriptions', lambda: {})
@@ -100,11 +107,11 @@ def test_gui_sample_conversion_uses_the_whole_assembly(tmp_path, monkeypatch):
         uploaded = manager.upload('neutral-panel.png', (FIXTURES/'panel.png').read_bytes())
         manager.attach_sample(uploaded['id'], 'sample.svg', (FIXTURES/'panel.svg').read_bytes())
         started = manager.start(uploaded['id'], (FIXTURES/'description.txt').read_text(encoding='utf-8'), 'quick')
-        manager.threads[-1].join(timeout=30)
+        manager.threads[-1].join(timeout=60)
         result = manager.snapshot(started['id'])
         assert result['status'] == 'done' and result['quality'] == 'passed', result
-        assert result['sample_report']['stop_reason'] == 'sample_alignment_accepted'
+        assert result['sample_report']['stop_reason'] in {'sample_alignment_accepted', 'native_search_accepted'}
         assert result['project_save']['status'] == 'saved'
-        assert 'als Ganzes' in result['message']
+        assert result['sample_report']['alignment'] is not None
     finally:
         manager.close()

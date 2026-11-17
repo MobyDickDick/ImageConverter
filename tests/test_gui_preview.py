@@ -124,6 +124,41 @@ def test_recovery_publisher_does_not_reset_previous_phase_best(tmp_path):
     assert preview.AttemptJournal(tmp_path).count == 2
 
 
+def test_preview_and_journal_can_replace_lower_mse_with_better_contours(tmp_path):
+    fixture = Path(__file__).parent/'fixtures/sample_contrast'
+    source, output = tmp_path/'source.png', tmp_path/'live-preview.svg'
+    shutil.copyfile(fixture/'source.png', source)
+    simpler = (fixture/'faded.svg').read_text()
+    fragmented = (fixture/'without_template.svg').read_text()
+    publisher = preview.PreviewPublisher(source, output)
+    target = np.array(Image.open(source).convert('RGB'))
+    h, w = target.shape[:2]
+    a, b = render_svg(fragmented, w, h), render_svg(simpler, w, h)
+    assert np.square(target.astype(float)-a).mean() < np.square(target.astype(float)-b).mean()
+    publisher.consider(fragmented, a, bgr=False)
+    publisher.consider(simpler, b, bgr=False)
+    assert output.read_text() == simpler
+    assert preview.AttemptJournal(tmp_path).best()['svg'] == simpler
+    publisher.close()
+
+
+def test_preview_prefers_one_native_form_and_checks_description(tmp_path):
+    target = render_svg(SVG, 32, 24)
+    source, output = tmp_path/'source.png', tmp_path/'live-preview.svg'
+    Image.fromarray(target).save(source)
+    body = '<rect x="5" y="4" width="12" height="16" fill="#225599"/>'
+    fragmented = SVG.replace(body, body*20)
+    pixels = render_svg(fragmented, 32, 24)
+    assert np.array_equal(target, pixels)
+    publisher = preview.PreviewPublisher(source, output, description='Ein Rechteck.')
+    assert publisher.rank(fragmented, pixels)[0] is True
+    publisher.consider(fragmented, pixels, bgr=False)
+    publisher.consider(SVG, target, bgr=False)
+    assert output.read_text() == SVG
+    assert preview.AttemptJournal(tmp_path).best()['svg'] == SVG
+    publisher.close()
+
+
 def test_final_selection_recovers_better_observation_lost_between_phases(tmp_path,monkeypatch):
     monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
     Image.fromarray(render_svg(SVG,32,24)).save(tmp_path/'source.png')

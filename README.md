@@ -1,5 +1,22 @@
 # ImageConverter
 
+Der gewählte Seed steuert jetzt auch die Vorlagensuche, frühe Parameterprüfungen
+und neue Geometrievorschläge. Eine Vorlage erhält die volle Profilzeit und sichert
+verbesserte Zwischenstände während der Suche. Die gemeinsame Auswahl bevorzugt
+einfache native Formen und kann Fragmentgruppen zusammenführen; klar beschriebene
+Formanzahlen begrenzen zusätzliche Stückelung.
+[Seeds, Suchintensität und einfache Formen](docs/seed_and_simple_forms_2026-11-17.md).
+
+Die Standardsuche erweitert jetzt motivunabhängig ihren Konstruktionsraum:
+Sie kann Objekte entfernen, einzeln verschieben und skalieren, Überlagerungen
+gemeinsam verwerfen, die Zeichenreihenfolge ändern und neu aufbauen.
+Stagnierende Parameterstrategien werden nicht mehr zum Füllen der Mindestzeit
+reaktiviert. Das Kandidatengedächtnis gilt über Suchrunden hinweg. CLI,
+Stapelverarbeitung, Vorlagenanpassung und GUI-/Plan-B-Nachbesserung verwenden
+dieselbe Fortsetzung. Ein nur knapp bestandener Bildvergleich friert die Suche
+nicht mehr sofort ein. Nach Abschluss laufender Aufgaben den Webserver neu
+starten. [Verhalten, Grenzen und Prüfungen](docs/general_search_expansion_2026-11-16.md).
+
 Schmale graue Verlaufspanels mit einer innen ausgesparten Diagonale und einem
 umrandeten Quadrat im Zentrum werden aus dem Originalraster rekonstruiert.
 Die vollständige Raute und der helle Innenstreifen werden zusätzlich geprüft,

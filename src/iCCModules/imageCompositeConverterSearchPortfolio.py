@@ -52,12 +52,29 @@ def settings():
     return _SETTINGS.get()
 
 
+def proposal_rng(context, identity, *, seed=None):
+    """Stable independent random streams; never depend on global RNG or paths.
+
+    A missing portfolio preserves fixed-policy callers. An explicit seed also
+    supports generators outside a configured search (including regression QA).
+    """
+    config = settings()
+    if seed is None:
+        if not config or config['mode'] != 'portfolio':
+            return None
+        seed = config['seed']
+    digest = hashlib.sha256(json.dumps([int(seed), context, identity],
+        ensure_ascii=False, separators=(',', ':')).encode('utf-8')).digest()
+    return random.Random(int.from_bytes(digest, 'big'))
+
+
 def configured_image_search(identity):
     config = settings()
     if not config or not config['adaptive']:
         return image_search(None)
     session = config['images'].setdefault(str(identity),ImageSearch(config['policy'],
         emit=lambda **values: progress(str(identity),**values)))
+    session.search_seed = config['seed']
     return image_search(session)
 
 

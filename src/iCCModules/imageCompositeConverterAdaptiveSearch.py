@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from contextvars import ContextVar
+from collections import OrderedDict
 from dataclasses import dataclass
 import hashlib
 import math
@@ -52,6 +53,13 @@ class ImageSearch:
         self.scheduler_history = []
         self.registration_rasters = {}
         self.structure_rejections = {}
+        self.native_frontiers = {}
+        self.structural_trials = set()
+        self.render_memo = OrderedDict()
+        self.render_memo_bytes = 0
+        self.render_cache_hits = 0
+        self.search_seed = None
+        self.render_sequence_sha256 = '00'*32
         self.finish_model_searches = False
         self.on_progress = None
         self.on_validated = None
@@ -131,7 +139,50 @@ class ImageSearch:
     def report(self):
         return dict(elapsed_seconds=round(self.elapsed,6),limit_seconds=self.limit,
             minimum_seconds=self.policy.minimum_seconds,
-            max_seconds=self.policy.max_seconds,time_extensions=self.extensions,candidate_evaluations=self.evaluations)
+            max_seconds=self.policy.max_seconds,time_extensions=self.extensions,candidate_evaluations=self.evaluations,
+            render_cache_hits=self.render_cache_hits,
+            search_seed=str(self.search_seed) if self.search_seed is not None else None,
+            render_sequence_sha256=self.render_sequence_sha256)
+
+    def render_candidate(self, image, svg, render_fn, width, height):
+        """Image-local render evidence survives model and structure re-entry.
+
+        Compress pixels instead of retaining hundreds of full-size rasters.
+        Canonical XML avoids new work for attribute order, namespace prefixes,
+        insignificant whitespace and identity wrappers. Objectives and semantic
+        checks still belong to the caller and are always recomputed.
+        """
+        import numpy as np
+        import zlib
+        key = (raster_identity(image), candidate_identity(svg))
+        if key in self.render_memo:
+            self.render_cache_hits += 1
+            self.render_memo.move_to_end(key)
+            entry = self.render_memo[key]
+            if entry is None:
+                return None, False
+            shape, payload = entry
+            return np.frombuffer(zlib.decompress(payload), dtype=np.uint8).reshape(shape).copy(), False
+        # Hash actual render requests, never the seed itself. This distinguishes
+        # real exploration from changing metadata on identical proposals.
+        self.render_sequence_sha256 = hashlib.sha256(bytes.fromhex(self.render_sequence_sha256)
+            +bytes.fromhex(key[0])+bytes.fromhex(key[1])).hexdigest()
+        raster = render_fn(svg, width, height)
+        if raster is None:
+            entry, size = None, 0
+        else:
+            pixels = np.asarray(raster, dtype=np.uint8)
+            payload = zlib.compress(pixels.tobytes(), 1)
+            entry, size = (pixels.shape, payload), len(payload)
+        # Trial identities survive pixel-cache eviction in the frontier.
+        while self.render_memo and (len(self.render_memo) >= 8192 or self.render_memo_bytes+size > 32*1024*1024):
+            _, old = self.render_memo.popitem(last=False)
+            if old is not None:
+                self.render_memo_bytes -= len(old[1])
+        if size <= 32*1024*1024:
+            self.render_memo[key] = entry
+            self.render_memo_bytes += size
+        return raster, True
 
 
 class SearchRun:
@@ -162,8 +213,6 @@ class SearchRun:
         reason = self.session.time_reason()
         if reason:
             return reason
-        if self.session.minimum_pending:
-            return None
         if self.session.finish_model_searches:
             return 'candidate_comparison'
         if self.proposals >= self.maximum:
@@ -188,6 +237,34 @@ class SearchRun:
 
 def svg_identity(svg):
     return hashlib.sha256(svg.strip().encode('utf-8')).hexdigest()
+
+
+def candidate_identity(svg):
+    """Search identity only; validation proofs continue to use exact SVG bytes."""
+    from xml.etree import ElementTree as ET
+    try:
+        root = ET.fromstring(svg)
+    except ET.ParseError:
+        return svg_identity(svg)
+    identities = {'translate(0 0)', 'translate(0.000000 0.000000) scale(1.000000)',
+                  'matrix(1 0 0 1 0 0)', 'scale(1)', 'scale(1.000000)'}
+    def normalize(node, in_text=False):
+        # Namespace URIs remain part of tags, independent of textual prefixes.
+        if node.get('transform', '').strip() in identities:
+            node.attrib.pop('transform')
+        children = []
+        in_text = in_text or node.tag.rsplit('}', 1)[-1] in {'text', 'tspan'}
+        for child in node:
+            normalized = normalize(child, in_text)
+            if child.tag.rsplit('}', 1)[-1] == 'g' and not child.attrib:
+                children.extend(normalized[3])
+            else:
+                children.append(normalized)
+        text = node.text or ''
+        tail = node.tail or ''
+        return (node.tag, tuple(sorted(node.attrib.items())), text if in_text else text.strip(), tuple(children),
+                tail if in_text or tail.strip() else '')
+    return hashlib.sha256(repr(normalize(root)).encode()).hexdigest()
 
 
 def raster_identity(image):
@@ -239,6 +316,19 @@ def preferred_quality(quality):
     return bool(quality and quality['passed'] and quality['normalized_mse'] <= .0005
                 and quality['foreground_mse'] <= .005 and quality['foreground_iou'] >= .97
                 and quality['edge_alignment'] >= .90)
+
+
+def vector_quality_score(quality):
+    """Shared selection score; acceptance limits and model proofs are separate."""
+    return (quality['normalized_mse']+.2*(1-quality['edge_alignment'])
+            +.1*(1-quality['foreground_iou'])+quality.get('representation_penalty', 0.))
+
+
+def vector_candidate_quality(reference, output, svg):
+    from src.iCCModules.imageCompositeConverterRepresentation import representation_cost
+    quality = pixel_quality(reference, output)
+    cost = representation_cost(svg)
+    return dict(quality, representation_penalty=cost['penalty'], representation_complexity=cost)
 
 
 def current_search():

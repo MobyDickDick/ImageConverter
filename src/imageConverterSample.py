@@ -174,14 +174,24 @@ def render_svg(svg, width, height):
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
-def refine(source: Path, sample: Path, output: Path, description: str, seconds: float) -> dict:
+def refine(source: Path, sample: Path, output: Path, description: str, seconds: float, *, seed=None, deadline=None) -> dict:
+    started = time.monotonic()
+    hard_deadline = started+seconds
+    if deadline is not None:
+        hard_deadline = min(hard_deadline, started+max(0., deadline-time.time()-.25))
     import numpy as np
     from PIL import Image
-    from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality, preferred_quality, vector_candidate_quality, vector_quality_score
+    from src.iCCModules.imageCompositeConverterRepresentation import simplification_proposals
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
     from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width
 
+    config = settings()
+    effective_seed = (config['seed'] if config else 0) if seed is None else seed
+    if type(effective_seed) is not int or not 0 <= effective_seed < 2**64:
+        raise ValueError('Seed muss eine ganze Zahl zwischen 0 und 2^64-1 sein.')
     description = resolve_catalog_similarity_description(description, Path(__file__).resolve().parents[1]).text
 
     with Image.open(source) as image:
@@ -190,6 +200,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     root = ET.fromstring(prepare_sample(sample.read_bytes(), width, height))
     prepared = ET.tostring(root, encoding="unicode")
     rendered = render_svg(prepared, width, height)
+    initial_rendered = rendered.copy()
     initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     initial_quality = pixel_quality(target, rendered)
     assertions = description_assertions(description)
@@ -197,7 +208,6 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     if constrained != prepared:
         root = ET.fromstring(constrained)
         rendered = render_svg(constrained, width, height)
-    started = time.monotonic()
     accepted_input = bool(pixel_quality(target, rendered)['passed'])
     final_svg = constrained
     best_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
@@ -205,7 +215,9 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     print(f"Sample geladen: mittlerer Pixelfehler={initial_mse:.8f}", flush=True)
     if not accepted_input:
         from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
-        fitted = align_sample(root, target, render_svg, deadline=started+seconds, initial=rendered,
+        # Reserve the remaining budget for changing the construction when
+        # whole-assembly alignment cannot explain the source.
+        fitted = align_sample(root, target, render_svg, deadline=min(hard_deadline, started+min(5., seconds*.25)), initial=rendered,
                               assertions=assertions)
         final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
         evaluations += fitted['evaluations']
@@ -219,18 +231,117 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         validate_svg_assertions(final_svg, assertions)
     except ValueError as exc:
         description_error = str(exc)
-    report = dict(initial_mse=initial_mse, final_mse=best_mse,
+    from src.imageConverterRecovery import atomic_svg
+    from src.imageConverterCatalog import atomic_json
+    output.parent.mkdir(parents=True, exist_ok=True)
+    def ordering(candidate_svg, pixels, error):
+        measured = vector_candidate_quality(target, pixels, candidate_svg)
+        return (bool(error), not measured['passed'], vector_quality_score(measured)), measured
+    initial_order, measured = ordering(final_svg, rendered, description_error)
+    deliverable = dict(svg=final_svg, rendered=rendered, error=description_error, quality=measured, rank=initial_order)
+    def save_checkpoint(candidate=None):
+        nonlocal deliverable
+        if candidate is not None:
+            candidate_svg, pixels = candidate['svg'], candidate['rendered']
+            error = ''
+            try:
+                validate_svg_assertions(candidate_svg, assertions)
+            except ValueError as exc:
+                error = str(exc)
+            rank, measured = ordering(candidate_svg, pixels, error)
+            if rank >= deliverable['rank']:
+                return
+            deliverable = dict(svg=candidate_svg, rendered=pixels, error=error, quality=measured, rank=rank)
+        actual = float(np.square(target.astype(float)-deliverable['rendered'].astype(float)).mean()/255**2)
+        progress = dict(search_seed=str(effective_seed), search_budget_seconds=seconds,
+            initial_mse=initial_mse, initial_quality=initial_quality, final_mse=actual,
+            final_quality=deliverable['quality'], improved=actual < initial_mse-1e-10,
+            evaluations=evaluations, accepted=accepted, description_error=deliverable['error'],
+            stop_reason='searching', alignment=alignment, continuation=None,
+            passed=bool(deliverable['quality']['passed'] and not deliverable['error']))
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+        active = current_search()
+        if active is not None:
+            progress['continuation'] = active.report()
+            progress['evaluations'] += active.evaluations
+        atomic_svg(output, deliverable['svg'])
+        atomic_json(output.with_suffix('.json'), progress)
+    save_checkpoint()
+    continuation = None
+    remaining = hard_deadline-time.monotonic()
+    simpler = next(simplification_proposals(final_svg), None) is not None
+    if ((not preferred_quality(quality) or description_error or simpler) and remaining > .01
+            and (best_mse > 1e-12 or simpler or description_error.startswith('logical_object_count:'))):
+        from src.iCCModules.imageCompositeConverterNativeSearch import continue_native_search
+        from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, preferred_quality
+        from contextlib import nullcontext
+        session = current_search()
+        if session is not None and config and effective_seed != config['seed']:
+            raise ValueError('Seed stimmt nicht mit der aktiven Bildsuche überein.')
+        # Partial drafts may omit an object; only full checks can accept the
+        # final result. Explicit no-text and equal-width requirements persist.
+        from src.iCCModules.imageCompositeConverterDescriptionLanguage import draft_assertions
+        partial = draft_assertions(assertions)
+        checked = {}
+        def check_candidate(candidate):
+            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity, current_search
+            key = candidate_identity(candidate)
+            if key not in checked:
+                try:
+                    validate_svg_assertions(candidate, assertions)
+                    active = current_search()
+                    pixels, _ = active.render_candidate(target, candidate, render_svg, width, height) if active else (render_svg(candidate, width, height), True)
+                    measured = pixel_quality(target, pixels)
+                    checked[key] = (bool(measured['passed']), measured)
+                except ValueError:
+                    checked[key] = (False, None)
+            return checked[key]
+        def accept_native(candidate):
+            return check_candidate(candidate)[0]
+        def search_target(candidate):
+            accepted, measured = check_candidate(candidate)
+            return accepted and preferred_quality(measured)
+        with (nullcontext() if session else search_configuration(mode='portfolio', adaptive=True,
+                seed=effective_seed, seconds=remaining, max_seconds=remaining, minimum_seconds=remaining)):
+            with (nullcontext() if session else configured_image_search(str(source.resolve()))):
+                result = continue_native_search(final_svg, target, render_svg, assertions=partial,
+                    color_order='RGB', acceptance_fn=search_target, on_candidate=save_checkpoint)
+        if result:
+            continuation = result['search_control']
+            evaluations += result['evaluations']
+            valid_candidate = accept_native(result['svg'])
+            valid_previous = bool(quality['passed'] and not description_error)
+            if (result['improved'] or valid_candidate) and (valid_candidate or not valid_previous):
+                final_svg, rendered, best_mse = result['svg'], result['rendered'], result['error']
+                quality = pixel_quality(target, rendered)
+                description_error = ''
+                try:
+                    validate_svg_assertions(final_svg, assertions)
+                except ValueError as exc:
+                    description_error = str(exc)
+    if deliverable['rank'] < ordering(final_svg, rendered, description_error)[0]:
+        final_svg, rendered, description_error = deliverable['svg'], deliverable['rendered'], deliverable['error']
+        quality = deliverable['quality']
+        best_mse = float(np.square(target.astype(float)-rendered.astype(float)).mean()/255**2)
+    selection_improved = vector_quality_score(vector_candidate_quality(target, rendered, final_svg)) < vector_quality_score(
+        vector_candidate_quality(target, initial_rendered, prepared))-1e-10
+    report = dict(search_seed=str(effective_seed), search_budget_seconds=seconds,
+                  initial_mse=initial_mse, final_mse=best_mse,
                   initial_quality=initial_quality, final_quality=quality,
-                  improved=best_mse < initial_mse - 1e-10, evaluations=evaluations,
+                  improved=selection_improved, evaluations=evaluations,
                   accepted=accepted, description_error=description_error,
-                  stop_reason=('quality_target_reached' if accepted_input else
+                  stop_reason=('description_conflict' if best_mse <= 1e-12 and description_error else
+                               'native_search_accepted' if continuation and quality['passed'] and not description_error else
+                               'quality_target_reached' if accepted_input and not description_error else
                                'sample_alignment_accepted' if quality and quality['passed'] else 'search_complete'),
-                  continuation=None, alignment=alignment,
+                  continuation=continuation, alignment=alignment,
+                  search_goal_reached=bool(preferred_quality(quality) and not description_error),
                   passed=bool(quality and quality["passed"] and not description_error),
                   elapsed=round(time.monotonic() - started, 2))
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(final_svg, encoding="utf-8")
-    output.with_suffix(".json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    atomic_svg(output, final_svg)
+    atomic_json(output.with_suffix('.json'), report)
     print(json.dumps(report, ensure_ascii=False), flush=True)
     return report
 
@@ -244,10 +355,17 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--description", type=Path, required=True)
     parser.add_argument("--seconds", type=float, default=60)
+    parser.add_argument('--seed', type=int, default=0)
+    parser.add_argument('--deadline', type=float)
     args = parser.parse_args()
     if not math.isfinite(args.seconds) or not 0 < args.seconds <= 240:
         parser.error("--seconds muss zwischen 0 und 240 liegen")
-    refine(args.source, args.sample, args.output, args.description.read_text(encoding="utf-8"), args.seconds)
+    if not 0 <= args.seed < 2**64:
+        parser.error('--seed muss zwischen 0 und 2^64-1 liegen')
+    if args.deadline is not None and not math.isfinite(args.deadline):
+        parser.error('--deadline muss endlich sein')
+    refine(args.source, args.sample, args.output, args.description.read_text(encoding="utf-8"), args.seconds,
+           seed=args.seed, deadline=args.deadline)
 
 
 if __name__ == "__main__":

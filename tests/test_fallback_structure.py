@@ -76,7 +76,9 @@ def test_arrow_description_blocks_wrong_fallback_shapes_before_rendering(monkeyp
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     left = '<polygon points="10,60 5,72 15,72" fill="red"/>'
     bar = '<line x1="10" y1="52" x2="60" y2="52" stroke="red"/>'
-    seed = scene(left+'<polygon points="60,72 55,60 65,60" fill="blue"/>'+bar)
+    shafts = ('<line x1="10" y1="0" x2="10" y2="72" stroke="red"/>'
+              '<line x1="60" y1="0" x2="60" y2="72" stroke="blue"/>')
+    seed = scene(shafts+left+'<polygon points="60,72 55,60 65,60" fill="blue"/>'+bar)
     candidate = seed
     if damage == 'circle_head':
         candidate = seed.replace(left, '<circle cx="10" cy="66" r="6" fill="red"/>')

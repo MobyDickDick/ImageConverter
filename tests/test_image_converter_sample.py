@@ -142,7 +142,7 @@ def test_matching_sample_never_gets_worse_and_reports_description_conflict(tmp_p
     assert report["description_error"]
     assert not report["passed"]
     assert report['evaluations'] == 1
-    assert report['stop_reason'] == 'quality_target_reached'
+    assert report['stop_reason'] == 'description_conflict'
 
 
 def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
@@ -156,8 +156,15 @@ def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
     source = root/'artifacts/images_to_convert/AC0501_S_sia.jpg'
     output = tmp_path/'result.svg'
     report = refine(source, sample, output, 'Quadratische Kelle mit beiden Diagonalen und rundem Gelenk.', 2)
-    assert report['passed'] and report['evaluations'] == 1
-    assert output.read_text() == prepare_sample(sample.read_bytes(), 20, 40)
+    assert report['passed']
+    from xml.etree import ElementTree as ET
+    nodes = list(ET.parse(output).getroot().iter())
+    for identity in ('square', 'square_diagonals', 'stem', 'damper', 'joint'):
+        assert len([n for n in nodes if n.get('id') == identity]) == 1
+    # The shared search can replace a straight path by an analytic line,
+    # while retaining the actual square, crossed diagonals and connected joint.
+    assert next(n for n in nodes if n.get('id') == 'square').tag.endswith('rect')
+    assert next(n for n in nodes if n.get('id') == 'joint').tag.endswith('circle')
 
 
 def test_gui_attaches_sample_and_carries_it_into_retry(tmp_path, monkeypatch):

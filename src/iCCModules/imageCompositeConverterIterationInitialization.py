@@ -66,7 +66,7 @@ def prepareIterationRuntimeImpl(
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
     session = current_search()
     if (any(assertions.get(key) for key in ('counts', 'no_text', 'horizontal_bar', 'arrow_heads', 'equal_stroke_width'))
-            or (session and session.policy.minimum_seconds)):
+            or session):
         write_artifacts = artifact_callbacks['write_attempt_artifacts']
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
@@ -84,36 +84,49 @@ def prepareIterationRuntimeImpl(
                 validate_svg_assertions(svg_content, dict(counts=[], no_text=assertions.get('no_text')))
             if not kwargs.get('failed', False):
                 validate_svg_assertions(svg_content, checked_assertions)
-                if session and session.minimum_pending:
-                    from src.iCCModules.imageCompositeConverterVectorPolish import polish_generated_svg
-                    fitted = polish_generated_svg(svg_content, target_img, render_svg_to_numpy_fn,
-                                                  assertions=checked_assertions)
-                    if fitted is not None:
-                        params['vector_continuation'] = {key: fitted[key] for key in
-                            ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}
-                        if fitted.get('structure_search') is not None:
-                            params['vector_continuation']['structure_search'] = fitted['structure_search']
-                        model_passed = True
-                        if fitted['improved'] and params.get('gradient_tube_registration'):
-                            from src.iCCModules.imageCompositeConverterGradientTube import validate_tube_refinement
-                            model_passed = validate_tube_refinement(fitted, target_img, params['gradient_tube_registration'])
-                            params['vector_continuation']['tube_model_passed'] = model_passed
-                            if model_passed:
-                                from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
-                                validated_result(fitted, target_img)
-                        if fitted['improved'] and params.get('piecewise_scene_registration'):
-                            from src.iCCModules.imageCompositeConverterPiecewiseScene import validate_piecewise_refinement
-                            model_passed = validate_piecewise_refinement(
-                                fitted, target_img, params['piecewise_scene_registration'], render_svg_to_numpy_fn)
-                            params['vector_continuation']['piecewise_model_passed'] = model_passed
-                            if model_passed:
-                                from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
-                                validated_result(fitted, target_img)
-                        if fitted['improved'] and model_passed:
-                            svg_content = fitted['svg']
-                            # Supplied render/diff belong to the previous vector.
-                            args = ()
-                            kwargs.update(rendered_img=fitted['rendered'], diff_img=None)
+            if session and not session.time_reason() and 'data:image/' not in svg_content.lower():
+                from src.iCCModules.imageCompositeConverterNativeSearch import continue_native_search
+                from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality, preferred_quality
+                from src.iCCModules.imageCompositeConverterDescriptionLanguage import draft_assertions
+                partial = draft_assertions(assertions)
+                def accepted(candidate):
+                    try:
+                        validate_svg_assertions(candidate, checked_assertions)
+                        return pixel_quality(target_img, render_svg_to_numpy_fn(candidate, width, height))['passed']
+                    except ValueError:
+                        return False
+                def search_target(candidate):
+                    return accepted(candidate) and preferred_quality(
+                        pixel_quality(target_img, render_svg_to_numpy_fn(candidate, width, height)))
+                fitted = continue_native_search(svg_content, target_img, render_svg_to_numpy_fn,
+                    assertions=partial if kwargs.get('failed', False) else checked_assertions,
+                    acceptance_fn=search_target)
+                if fitted is not None:
+                    params['vector_continuation'] = {key: fitted[key] for key in
+                        ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}
+                    if fitted.get('structure_search') is not None:
+                        params['vector_continuation']['structure_search'] = fitted['structure_search']
+                    model_passed = True
+                    if fitted['improved'] and params.get('gradient_tube_registration'):
+                        from src.iCCModules.imageCompositeConverterGradientTube import validate_tube_refinement
+                        model_passed = validate_tube_refinement(fitted, target_img, params['gradient_tube_registration'])
+                        params['vector_continuation']['tube_model_passed'] = model_passed
+                        if model_passed:
+                            from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
+                            validated_result(fitted, target_img)
+                    if fitted['improved'] and params.get('piecewise_scene_registration'):
+                        from src.iCCModules.imageCompositeConverterPiecewiseScene import validate_piecewise_refinement
+                        model_passed = validate_piecewise_refinement(
+                            fitted, target_img, params['piecewise_scene_registration'], render_svg_to_numpy_fn)
+                        params['vector_continuation']['piecewise_model_passed'] = model_passed
+                        if model_passed:
+                            from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
+                            validated_result(fitted, target_img)
+                    if fitted['improved'] and model_passed and (kwargs.get('failed', False) or accepted(fitted['svg'])):
+                        svg_content = fitted['svg']
+                        # Supplied render/diff belong to the previous vector.
+                        args = ()
+                        kwargs.update(rendered_img=fitted['rendered'], diff_img=None)
             return write_artifacts(svg_content, *args, **kwargs)
 
         artifact_callbacks['write_attempt_artifacts'] = write_checked_artifacts
