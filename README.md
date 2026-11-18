@@ -1,5 +1,14 @@
 # ImageConverter
 
+Beschriebene Grundformen werden jetzt mit numerischer Geometrietoleranz geprüft:
+Geraden dürfen keine Knicke oder Anhängsel besitzen, Rechtecke brauchen rechte
+Winkel, Quadrate zusätzlich gleiche Seiten und Rauten gleiche Seiten. Gestreckte
+Kreise gelten als Ellipsen. Die gemeinsame Prüfung gilt auch für Vorlagen und
+Nachbesserungen. Das gemeldete schmale Verlaufspanel wird mit einem echten,
+ungefüllten Kreis rekonstruiert; Quadratvarianten behalten einen gemeinsamen
+Grössenparameter für beide Diagonalen des Quadrats.
+[Ursache, Ergebnisvergleich und Grenzen](docs/exact_geometric_forms_2026-11-18.md).
+
 Explizite Randmittelpunkte werden jetzt als gemeinsame geometrische Bezüge
 ausgewertet. Verlauf und Linienausrichtung können unabhängig kombiniert werden;
 gemeinsame Endpunkte und verlangte Symmetrie bleiben auch nach der Nachbesserung

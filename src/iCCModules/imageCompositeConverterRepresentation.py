@@ -15,6 +15,29 @@ import numpy as np
 DRAW = {'line', 'rect', 'circle', 'ellipse', 'polygon', 'polyline', 'path', 'text'}
 EXCLUDED = {'defs', 'clipPath', 'mask', 'marker', 'pattern', 'symbol', 'metadata'}
 NUMBER = r'[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?'
+# SVG coordinates may be rounded when serialized. This is a numerical
+# tolerance, not permission to deform a named geometric primitive.
+FORM_TOLERANCE = 1e-5
+
+
+def straight_strip(vertices):
+    """A clipped straight band has two parallel sides and straight end cuts."""
+    if not cv2.isContourConvex(vertices.astype(np.float32)):
+        return False
+    edges = np.roll(vertices, -1, axis=0)-vertices
+    lengths = np.linalg.norm(edges, axis=1)
+    if min(lengths) <= 0:
+        return False
+    directions = edges/lengths[:, None]
+    longest = np.argsort(lengths)[-2:]
+    cross = lambda a, b: a[..., 0]*b[..., 1]-a[..., 1]*b[..., 0]
+    if abs(cross(*directions[longest])) > FORM_TOLERANCE:
+        return False
+    # Caps follow the two orthogonal axes of a clipping rectangle, including
+    # a rotated one. An unclipped band's two caps are parallel as well.
+    other = np.delete(directions, longest, axis=0)
+    return bool(np.all((abs(cross(other,other[0])) < FORM_TOLERANCE)
+                       | (abs(other @ other[0]) < FORM_TOLERANCE)))
 
 
 def drawing_nodes(root, path=()):
@@ -63,7 +86,7 @@ def description_object_limits(text):
         kind = ('circle' if form.startswith('kreis') else 'rect' if form.startswith('rechteck')
                 else 'square' if form.startswith('quadrat') else 'diagonal' if form.startswith('diagonale')
                 else 'ellipse' if form.startswith('ellipse') else 'triangle' if form.startswith('dreieck')
-                else 'polygon' if form.startswith('raute') else 'line')
+                else 'rhombus' if form.startswith('raute') else 'line')
         value = int(number) if number.isdigit() else numbers[number]
         if number in {'beide', 'beiden'} or re.search(r'\b(?:die|diese)\s*$', words[:match.start()]):
             limits[kind] = max(limits.get(kind, 0), value)
@@ -81,7 +104,7 @@ def description_object_limits(text):
         kind = ('circle' if form.startswith('kreis') else 'rect' if form.startswith('rechteck')
                 else 'square' if form.startswith('quadrat') else 'diagonal' if form.startswith('diagonale')
                 else 'ellipse' if form.startswith('ellipse') else 'triangle' if form.startswith('dreieck')
-                else 'polygon' if form.startswith('raute') else 'line')
+                else 'rhombus' if form.startswith('raute') else 'line')
         limits[kind] = limits.get(kind, 0)+1
         seen.add(match[0])
     if not limits and words.strip(' .\n') in {'gerade', 'linie', 'kreis', 'rechteck', 'ellipse', 'dreieck'}:
@@ -166,9 +189,24 @@ def _vertices(points, closed, epsilon=.01):
 def logical_inventory(svg, limits, symbol_strokes=0):
     root = ET.fromstring(svg)
     inventory = dict.fromkeys(limits, 0)
+    viewport_matrix = np.eye(2)
     try:
         view = list(map(float, re.split(r'[\s,]+', root.get('viewBox', '').strip()))) if root.get('viewBox') else [0., 0., float(root.get('width', 0)), float(root.get('height', 0))]
         vx, vy, vw, vh = view
+        if root.get('preserveAspectRatio','').strip() == 'none' and root.get('viewBox'):
+            def viewport_length(key, default):
+                value = root.get(key,str(default))
+                if not re.fullmatch(NUMBER+r'(?:px)?',value.strip()):
+                    raise ValueError('unsupported viewport length')
+                return float(value.removesuffix('px'))
+            w,h = viewport_length('width',vw),viewport_length('height',vh)
+            if not np.isfinite([w,h,vw,vh]).all() or min(w,h,vw,vh) <= 0:
+                raise ValueError('invalid viewport')
+            # Only the anisotropy matters to form identity. Keeping unit area
+            # also preserves the inventory's existing paint-area comparisons.
+            ratio = np.sqrt((w/vw)/(h/vh))
+            viewport_matrix = np.diag([ratio,1/ratio])
+            vx,vy,vw,vh = vx*ratio,vy/ratio,vw*ratio,vh/ratio
         area, narrow = vw*vh, max(3., max(vw, vh)*.025)
     except ValueError:
         vx, vy, vw, vh, area, narrow = 0., 0., 0., 0., 0., 3.
@@ -202,7 +240,7 @@ def logical_inventory(svg, limits, symbol_strokes=0):
         for value in transforms+[node.get('transform', '')]:
             matrix = _compose(matrix, _transform(value))
         a, b, c, d, tx, ty = matrix
-        return np.array([[a, c], [b, d]]), np.array([tx, ty])
+        return viewport_matrix @ np.array([[a, c], [b, d]]), viewport_matrix @ np.array([tx, ty])
     for location, node in drawing_nodes(root):
         tag = node.tag.rsplit('}', 1)[-1]
         kind = tag
@@ -211,24 +249,33 @@ def logical_inventory(svg, limits, symbol_strokes=0):
             try:
                 radii = ([float(node.get('r', 0))]*2 if tag == 'circle'
                          else [float(node.get('rx', 0)), float(node.get('ry', 0))])
+                center = [float(node.get('cx',0)),float(node.get('cy',0))]
+                if not np.isfinite(radii+center).all() or min(radii) <= 0:
+                    continue
                 axes = np.linalg.svd(matrix @ np.diag(radii), compute_uv=False)
-                kind = 'circle' if min(axes) > 0 and max(axes)-min(axes) < max(axes)*.03 else 'ellipse'
+                if not np.isfinite(axes).all() or min(axes) <= 0:
+                    continue
+                kind = 'circle' if min(axes) > 0 and max(axes)-min(axes) < max(axes)*FORM_TOLERANCE else 'ellipse'
             except ValueError:
-                pass
+                continue
         if tag == 'line':
             try:
                 direction = np.array([float(node.get('x2', 0))-float(node.get('x1', 0)),
                                       float(node.get('y2', 0))-float(node.get('y1', 0))])
                 direction = matrix @ direction
+                if not np.isfinite(direction).all() or np.linalg.norm(direction) <= 0:
+                    continue
                 if symbol_strokes and np.linalg.norm(direction) <= max(vw, vh)*.25:
                     symbol_strokes -= 1
                     continue
                 kind = stroke_kind(direction)
             except ValueError:
-                pass
+                continue
         if tag == 'rect':
             try:
                 width, height = float(node.get('width', 0)), float(node.get('height', 0))
+                if not np.isfinite([width,height]).all() or min(width,height) <= 0:
+                    continue
                 if symbol_strokes and 0 < min(width, height) <= narrow and max(width, height) > 3*min(width, height) and max(width, height) <= max(vw, vh)*.25:
                     symbol_strokes -= 1
                     continue
@@ -236,6 +283,8 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                 corners = np.array([[x, y], [x+width, y], [x+width, y+height], [x, y+height]]) @ matrix.T+translation
                 edges = np.array([[width, 0], [0, height]]) @ matrix.T
                 width, height = np.linalg.norm(edges, axis=1)
+                if not np.isfinite(corners).all() or min(width, height) <= 0:
+                    continue
                 rectangle_key = (*corners[np.lexsort((corners[:, 1], corners[:, 0]))].ravel(), node.get('rx', '0'), node.get('ry', '0'))
                 outline = node.get('fill', 'black') == 'none'
                 # The neutral full-canvas backing is not another described rectangle.
@@ -256,16 +305,20 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                         and 0 < min(width, height) <= narrow
                         and max(width, height) > 3*min(width, height)):
                     kind = 'line'
-                elif ('square' in limits and min(width, height) > 0 and abs(width-height) < max(width, height)*.03
-                      and abs(np.dot(*edges)) < width*height*.03):
-                    kind = 'square'
+                elif abs(np.dot(*edges)) > width*height*FORM_TOLERANCE:
+                    kind = 'polygon'
+                elif (('square' in limits or 'rhombus' in limits) and min(width, height) > 0 and abs(width-height) < max(width, height)*FORM_TOLERANCE
+                      and float(node.get('rx', 0)) == 0 and float(node.get('ry', 0)) == 0):
+                    kind = 'square' if 'square' in limits else 'rhombus'
             except ValueError:
-                pass
+                continue
         if tag in {'polygon', 'polyline', 'path'}:
             paths = path_points(node)
             for points, closed in paths:
                 points = points @ matrix.T+translation
-                vertices = _vertices(points, closed)
+                if not np.isfinite(points).all():
+                    continue
+                vertices = _vertices(points, closed, epsilon=max(1e-7, float(np.ptp(points, axis=0).max())*1e-7))
                 if not closed:
                     # A bent polyline cannot certify one straight object.
                     for a, b in zip(vertices, vertices[1:]):
@@ -280,7 +333,8 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                         # width exceeds three pixels. Long, thin geometry is
                         # scale-independent evidence; the absolute threshold
                         # remains useful for short marks.
-                        if 0 < min(spans) <= max(narrow,max(spans)*.1) and max(spans) > 3*min(spans):
+                        if (0 < min(spans) <= max(narrow,max(spans)*.1) and max(spans) > 3*min(spans)
+                                and straight_strip(vertices)):
                             # A strip repainted with the surrounding field is
                             # negative geometry inside a hollow stroke.
                             if fields.get(node.get('fill', 'none'), 0) < cv2.contourArea(vertices.astype(np.float32))*4:
@@ -293,9 +347,13 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                         edges = np.roll(vertices, -1, axis=0)-vertices
                         lengths = np.linalg.norm(edges, axis=1)
                         rectangle = bool(min(lengths) > 0 and np.max(abs(np.sum(edges*np.roll(edges, -1, axis=0), axis=1))
-                            /np.maximum(1e-9, lengths*np.roll(lengths, -1))) < .15)
-                    if rectangle and 'square' in limits and max(lengths)-min(lengths) < max(lengths)*.15:
+                            /np.maximum(1e-9, lengths*np.roll(lengths, -1))) < FORM_TOLERANCE)
+                    if rectangle and 'square' in limits and max(lengths)-min(lengths) < max(lengths)*FORM_TOLERANCE:
                         kind = 'square'
+                    elif (len(vertices) == 4 and 'rhombus' in limits and min(lengths) > 0
+                          and max(lengths)-min(lengths) < max(lengths)*FORM_TOLERANCE
+                          and cv2.isContourConvex(vertices.astype(np.float32))):
+                        kind = 'rhombus'
                     else:
                         kind = 'rect' if rectangle and 'polygon' not in limits else 'polygon'
                     inventory[kind] = inventory.get(kind, 0)+1

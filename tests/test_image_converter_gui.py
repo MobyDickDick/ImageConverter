@@ -240,11 +240,12 @@ def test_hollow_diagonal_and_diamond_survive_fresh_and_sample_gui_paths(jobs,reu
     assert job['quality'] == 'passed',job
     folder = jobs.folder(job['id'])
     validate_hollow_cross_panel((folder/'result.svg').read_text(encoding='utf-8'))
+    assert job['pixel_quality']['passed']
     if reuse_sample:
-        assert job['recovery']
-        assert 'hollow_cross_panel' in job['sample_report']['description_error']
-    else:
-        assert job['search_summary']['satisfactory']
+        # The sample worker can now reconstruct the whole native scene itself;
+        # a second recovery worker is no longer necessary to prove the result.
+        assert job['sample_report']['passed']
+        assert not job['sample_report']['description_error']
 
 
 @pytest.fixture

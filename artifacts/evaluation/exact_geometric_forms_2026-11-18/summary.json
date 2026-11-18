@@ -1,0 +1,86 @@
+[
+  {
+    "source": "artifacts\\images_to_convert\\AC0150_L.jpg",
+    "source_sha256": "8bf8041a5dcf49a304595c7492d1a5779fc98cda7f03f1603dcd5b525b4f3ecb",
+    "description": "Das Bild ist  ein ganz schmales Rechteck, welches hochkant steht.\nDer Rand ist grau und sehr schmal.\nIm Hintergrund ist ein horizontaler Farbverlauf abgebilder, von grau nach hell. Der hellste Ort liegt bei ca. 40 % von links Es gibt Diagonale, welche so beschnittten sind, dass sie nicht über das Rechteck hinausragen. Die beiden Diagonalen sind gleich breit. Bei der Diagonalen von oben rechts nach unten links ist die Mitte ausgeschnitten. Es gibt im Zentrum einen Kreis, welches jedoch nur einen grauen Rand und keinen Hintergrund besitzt.",
+    "quality": {
+      "normalized_mse": 8.446836727671325e-05,
+      "foreground_mse": 7.146570715121925e-05,
+      "foreground_iou": 0.9716141223907471,
+      "foreground_iou_binary": 0.959139487746453,
+      "edge_alignment": 0.9639179706573486,
+      "passed": true
+    },
+    "details": {
+      "diagonal_mse": [
+        0.00010137298442367272,
+        0.00014060093699360245
+      ],
+      "passed": true,
+      "outline_mse": 0.00012734987160818153
+    },
+    "evaluations": 375,
+    "description_passed": true,
+    "inventory": {
+      "rect": 1,
+      "circle": 1,
+      "diagonal": 3
+    }
+  },
+  {
+    "source": "artifacts\\images_to_convert\\AC0140_L.jpg",
+    "source_sha256": "7e6de60dfea0a172c6b5b6d8ed73f91a252f4df3dc2bd2d60650d1a8b2db8238",
+    "description": "Das Bild ist  ein ganz schmales Rechteck, welches hochkant steht.\nDer Rand ist grau und sehr schmal.\nIm Hintergrund ist ein horizontaler Farbverlauf abgebilder, von grau nach hell. Der hellste Ort liegt bei ca. 40 % von links Es gibt Diagonale, welche so beschnittten sind, dass sie nicht über das Rechteck hinausragen. Die beiden Diagonalen sind gleich breit. Bei der Diagonalen von oben rechts nach unten links ist die Mitte ausgeschnitten. Es gibt im Zentrum ein Quadrat, welches jedoch nur einen grauen Rand und keinen Hintergrund besitzt.",
+    "quality": {
+      "normalized_mse": 7.250117050716653e-05,
+      "foreground_mse": 6.072607357054949e-05,
+      "foreground_iou": 0.9737555384635925,
+      "foreground_iou_binary": 0.9605675327068361,
+      "edge_alignment": 0.9425598978996277,
+      "passed": true
+    },
+    "details": {
+      "diagonal_mse": [
+        9.404727801359598e-05,
+        0.0001304839778534027
+      ],
+      "passed": true,
+      "outline_mse": 0.00014464577313109514
+    },
+    "evaluations": 382,
+    "description_passed": true,
+    "inventory": {
+      "rect": 1,
+      "square": 1,
+      "diagonal": 3
+    }
+  },
+  {
+    "source": "artifacts\\images_to_convert\\AC0140_M.jpg",
+    "source_sha256": "9f955b4d128101ac70a368867a0d5f141d1431857a549cc7fa3bf03b5e72d4df",
+    "description": "Das Bild ist  ein ganz schmales Rechteck, welches hochkant steht.\nDer Rand ist grau und sehr schmal.\nIm Hintergrund ist ein horizontaler Farbverlauf abgebilder, von grau nach hell. Der hellste Ort liegt bei ca. 40 % von links Es gibt Diagonale, welche so beschnittten sind, dass sie nicht über das Rechteck hinausragen. Die beiden Diagonalen sind gleich breit. Die Diagonale von oben rechts nach unten links wird durch zwei parallele Linen gebildet, welche am Rand des Rechtecks abgeschnitten werden. Es gibt im Zentrum ein Quadrat, welches jedoch nur einen grauen Rand und keinen Hintergrund besitzt. Das Quadrat ist mit einer Spitze nach unten.",
+    "quality": {
+      "normalized_mse": 0.0001608973107067868,
+      "foreground_mse": 0.0001507092674728483,
+      "foreground_iou": 0.9725762009620667,
+      "foreground_iou_binary": 0.972518457752256,
+      "edge_alignment": 0.9315219521522522,
+      "passed": true
+    },
+    "details": {
+      "diagonal_mse": [
+        0.00011895037309665636,
+        0.0001509442507101941
+      ],
+      "passed": true,
+      "outline_mse": 0.00043579877164245164
+    },
+    "evaluations": 392,
+    "description_passed": true,
+    "inventory": {
+      "rect": 1,
+      "square": 1,
+      "diagonal": 3
+    }
+  }
+]

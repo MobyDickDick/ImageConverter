@@ -17,6 +17,9 @@ DESCRIPTION = ('Graues Rechteck hochkant mit grauem Rand und horizontalem Farbve
 
 
 def drawing(width=60,height=400,*,diamond=True,slit=True,filled=False,open_edge=False):
+    # Keep the square square in displayed coordinates, also on nonuniform
+    # canvases. The previous fixture silently stretched the named square.
+    ry = 26*(width/60)/(height/400)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 60 400" preserveAspectRatio="none">'
             '<defs><linearGradient id="p" gradientUnits="userSpaceOnUse" x1="0" x2="60" y1="0" y2="0">'
             '<stop stop-color="#c4c4c4"/><stop offset=".38" stop-color="#f9f9f9"/>'
@@ -25,7 +28,7 @@ def drawing(width=60,height=400,*,diamond=True,slit=True,filled=False,open_edge=
             '<path d="M 60 0 L 0 400" stroke="#898989" stroke-width="8"/>'
             +('<polygon points="59.2,0 60,0 60,5.333333 .8,400 0,400 0,394.666667" fill="url(#p)"/>' if slit else '')
             +'<path d="M 0 0 L 60 400" stroke="#868686" stroke-width="7"/>'
-            +(f'<path d="M 30 174 L 56 200 L 30 226 L 4 200 {"" if open_edge else "Z"}" '
+            +(f'<path d="M 30 {200-ry} L 56 200 L 30 {200+ry} L 4 200 {"" if open_edge else "Z"}" '
               f'fill="{"#888888" if filled else "none"}" stroke="#888888" stroke-width="2.6"/>' if diamond else '')
             +'<rect x=".5" y=".5" width="59" height="399" fill="none" stroke="#aaaaaa" stroke-width=".8"/></svg>')
 

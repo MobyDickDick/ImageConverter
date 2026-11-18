@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 9
+DESCRIPTION_VALIDATION_VERSION = 10
 
 
 class RequestError(ValueError):

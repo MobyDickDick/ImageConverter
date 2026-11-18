@@ -161,9 +161,10 @@ def description_assertions(description: str) -> dict:
                 symbol_strokes += bars
         if symbol_strokes:
             assertions['symbol_strokes'] = symbol_strokes
-    from src.iCCModules.imageCompositeConverterHollowCrossPanel import hollow_cross_contract
+    from src.iCCModules.imageCompositeConverterHollowCrossPanel import hollow_cross_contract, central_outline
     if hollow_cross_contract(normalized):
         assertions['hollow_cross_panel'] = True
+        assertions['hollow_cross_outline'] = central_outline(normalized)
         # These are owned parts of the two logical diagonals: one diagonal
         # consists of two rails. Its visible-structure validator checks both
         # rails and the other axis; a flat SVG-wide count would count three
@@ -240,7 +241,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if assertions.get('hollow_cross_panel'):
         from src.iCCModules.imageCompositeConverterHollowCrossPanel import validate_hollow_cross_panel
         try:
-            validate_hollow_cross_panel(svg)
+            validate_hollow_cross_panel(svg,assertions.get('hollow_cross_outline','diamond'))
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     if assertions.get('dashed_spray_rays'):
