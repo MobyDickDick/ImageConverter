@@ -214,6 +214,8 @@ def register_description_ir(geometry_ir, *, image, description, svg_fn, render_f
             calibrate(best['geometry_ir'])
     if best and preferred_quality(best['quality']):
         stop_reason = 'quality_target_reached'
+    elif best is None and not stopped():
+        stop_reason = 'no_valid_candidate'
     elif not stopped():
         stop_reason = 'parameter_stagnation'
     report = dict(mode='description_geometry_ir_multistart', evaluations=evaluations,

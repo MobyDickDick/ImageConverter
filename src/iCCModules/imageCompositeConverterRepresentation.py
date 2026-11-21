@@ -63,9 +63,11 @@ def representation_cost(svg):
 
 
 def description_object_limits(text):
-    from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract
-    if two_way_valve_contract(text):
-        return dict(circle=1, line=1, triangle=2)
+    from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
+    valve = two_way_valve_spec(text)
+    if valve:
+        return (dict(square=1, diagonal=2, line=1, triangle=2) if valve['motor']=='square'
+                else dict(circle=1, line=1, triangle=2))
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', text).casefold()
     numbers = dict(ein=1, eine=1, einen=1, einem=1, einer=1, eins=1, zwei=2, drei=3, vier=4,
                    fünf=5, sechs=6, sieben=7, acht=8, neun=9, zehn=10, beide=2, beiden=2)

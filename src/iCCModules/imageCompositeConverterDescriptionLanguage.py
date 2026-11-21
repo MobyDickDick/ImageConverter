@@ -145,9 +145,10 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
-    from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract
-    if two_way_valve_contract(normalized):
-        assertions['two_way_valve'] = True
+    from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
+    valve = two_way_valve_spec(normalized)
+    if valve:
+        assertions['two_way_valve'] = valve
     from src.iCCModules.imageCompositeConverterRelations import anchor_relations
     try:
         relations = anchor_relations(normalized)
@@ -267,7 +268,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if assertions and assertions.get('two_way_valve'):
         from src.iCCModules.imageCompositeConverterTwoWayValve import validate_two_way_valve
         try:
-            validate_two_way_valve(svg)
+            validate_two_way_valve(svg, assertions['two_way_valve'])
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')

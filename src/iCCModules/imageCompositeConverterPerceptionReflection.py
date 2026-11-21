@@ -154,7 +154,7 @@ class Reflection:
             params["label"] = ""
             params["contract_status"] = "ok"
             params["description_contract"]["status"] = "ok"
-            params["elements"].append("GEOMETRIE: Kreis, Griff und zwei verbundene Ventildreiecke mit gemeinsamem Verlauf")
+            params["elements"].append("GEOMETRIE: Beschriebener Motor, Griff und zwei verbundene Ventildreiecke mit gemeinsamem Verlauf")
             return desc, params
 
         compact_reference_badge = "AR" + "0100"

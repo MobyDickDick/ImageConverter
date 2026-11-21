@@ -107,6 +107,7 @@ def test_missing_inventory_cannot_be_filled_by_extra_raster_objects():
     image, ir = impossible()
     result, calls, _ = run(image, ir, 'Ein Rechteck und ein Kreis.')
     assert result['no_valid_candidate'] and calls == []
+    assert result['stop_reason']=='no_valid_candidate'
 
 
 @pytest.mark.parametrize('seed',[17,18])

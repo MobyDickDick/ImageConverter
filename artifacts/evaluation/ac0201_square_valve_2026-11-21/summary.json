@@ -1,0 +1,77 @@
+{
+  "input": "AC0201_S_sia.jpg",
+  "description_unchanged": true,
+  "worker": {
+    "status": "done",
+    "quality": "passed",
+    "elapsed": 9.9,
+    "message": "Unpassende Vorlage verworfen. SVG neu aus der Bildbeschreibung erstellt. Pixelprüfung bestanden."
+  },
+  "http": {
+    "id": "c343dc3533054497a0e668aebbbfbfa6",
+    "name": "AC0201_S_sia.jpg",
+    "status": "done",
+    "quality": "passed",
+    "elapsed": 7.5,
+    "message": "SVG erstellt. Qualitätsprüfung bestanden.",
+    "pixel_quality": {
+      "normalized_mse": 0.0006671075243502855,
+      "foreground_mse": 0.001280322321690619,
+      "foreground_iou": 0.9802371541501976,
+      "foreground_iou_binary": 0.9802371541501976,
+      "edge_alignment": 0.8897430300712585,
+      "passed": true,
+      "representation_penalty": 0.00042,
+      "representation_complexity": {
+        "elements": 7,
+        "coordinates": 30,
+        "penalty": 0.00042
+      },
+      "within_canvas": true,
+      "observed_foreground_pixels": 252,
+      "output_foreground_pixels": 249
+    },
+    "project_save": {
+      "status": "unchanged",
+      "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0201_S_sia.svg",
+      "message": "Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten."
+    },
+    "search_summary": {
+      "candidate_evaluations": 399,
+      "stop_reason": "satisfactory",
+      "satisfactory": true,
+      "elapsed_seconds": 3.673,
+      "minimum_seconds": 30.0,
+      "limit_seconds": 35.0
+    },
+    "description_unchanged": true
+  },
+  "saved_quality": {
+    "normalized_mse": 0.0006671075243502855,
+    "foreground_mse": 0.001280322321690619,
+    "foreground_iou": 0.9802371541501976,
+    "foreground_iou_binary": 0.9802371541501976,
+    "edge_alignment": 0.8897430300712585,
+    "passed": true,
+    "representation_penalty": 0.00042,
+    "representation_complexity": {
+      "elements": 7,
+      "coordinates": 30,
+      "penalty": 0.00042
+    },
+    "within_canvas": true,
+    "observed_foreground_pixels": 252,
+    "output_foreground_pixels": 249,
+    "inventory": {
+      "square": 1,
+      "diagonal": 2,
+      "line": 1,
+      "triangle": 2
+    }
+  },
+  "tests": {
+    "passed": 149,
+    "additional_stop_reason_check": "passed"
+  },
+  "no_image_id_hardcoding": "passed"
+}

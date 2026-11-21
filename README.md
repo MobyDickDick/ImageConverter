@@ -1,5 +1,12 @@
 # ImageConverter
 
+`AC0201_S_sia.jpg` wird mit unveränderter Beschreibung wieder erfolgreich
+konvertiert. Die bestehende Zweiwegventil-Auswertung unterstützt jetzt auch
+den quadratischen Motor samt beiden Diagonalen, Griff und verbundenen
+Ventilflächen mit gemeinsamem Verlauf. Ungültige Konstruktionen ohne ein
+einziges Rendering werden nicht mehr als Parameterstagnation gemeldet.
+[Ursache, Worker-Prüfung und Grenzen](artifacts/evaluation/ac0201_square_valve_2026-11-21/README.md).
+
 Die [Untersuchung der produktiven Suchpfade](artifacts/evaluation/search_routes_2026-11-21/README.md)
 erfasst 60 Einstiegsfunktionen und unterscheidet gemeinsame Suchkerne von
 19 eigenen Spezialoptimierern. Seed-Verbindungen für alte semantische Suchen,

@@ -1,4 +1,4 @@
-"""A description-declared disk, handle and two joined gradient valve wings.
+"""A description-declared motor, handle and two joined gradient valve wings.
 
 The bounded language contract declares every primitive before pixels are read.
 Raster observations register that fixed construction; no residual shapes,
@@ -15,7 +15,7 @@ from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _r
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 
 
-def two_way_valve_contract(description):
+def two_way_valve_spec(description):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
     words = ' '.join(normalize_description(description).casefold().split())
     # Consume the whole description: an unrecognized addition must never
@@ -23,25 +23,42 @@ def two_way_valve_contract(description):
     clauses = (
         r'(?:es ist ein |ein )?motorgetriebenes (?:zweiwegventil|2-wege-ventil)',
         r'die beiden ventile sind (?:horizontal|waagerecht) angeordnet',
-        r'der motor ist (?:als )?kelle mit griff nach unten realisiert',
-        r'bei den ventilen werden die beiden formen zusammengehängt und ein farbverlauf gezeichnet',
+        r'der motor ist (?:als )?(?:ein )?(?P<motor>kelle|quadrat) mit (?:einem )?griff nach unten realisiert',
     )
     rest = words
+    motor = None
     for clause in clauses:
         match = re.match(clause+r'(?:[.;]\s*|\s+|$)', rest)
         if match is None:
-            return False
+            return None
+        if 'motor' in match.groupdict():
+            motor = 'square' if match['motor'] == 'quadrat' else 'circle'
         rest = rest[match.end():]
-    return not rest.strip(' .;')
+    clauses = (
+        *((r'die (?:beiden )?diagonalen des quadrats sind dunkelgrau, genau gleich wie der rand des quadrats',)
+          if motor == 'square' else ()),
+        r'bei den ventilen werden die beiden formen zusammengehängt und ein farbverlauf gezeichnet',
+    )
+    for clause in clauses:
+        match = re.match(clause+r'(?:[.;]\s*|\s+|$)', rest)
+        if match is None:
+            return None
+        rest = rest[match.end():]
+    return dict(motor=motor) if not rest.strip(' .;') else None
 
 
-def validate_two_way_valve(svg):
+def two_way_valve_contract(description):
+    return two_way_valve_spec(description) is not None
+
+
+def validate_two_way_valve(svg, spec=None):
     """Also constrain template edits: shared apex, axial handle and shared paint."""
     from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
     from src.iCCModules.imageCompositeConverterRepresentation import path_points, EXCLUDED
     from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
     root = ET.fromstring(inline_simple_svg_styles(svg))
-    circles, lines, triangles = [], [], []
+    square = isinstance(spec,dict) and spec.get('motor') == 'square'
+    circles, squares, lines, triangles = [], [], [], []
 
     def visit(node, parent=(1.,0.,0.,1.,0.,0.), fill='black'):
         kind = node.tag.rsplit('}',1)[-1]
@@ -57,9 +74,17 @@ def validate_two_way_valve(svg):
             if not np.isclose(sx,sy) or not np.isclose(a*c+b*d,0.):
                 raise ValueError('two_way_valve_deformed_motor')
             circles.append((mapped([[float(node.get('cx','0')),float(node.get('cy','0'))]])[0],float(node.get('r','0'))*sx))
+        elif kind=='rect' and node.get('stroke','none') != 'none':
+            x,y,w,h = (float(node.get(k,'0')) for k in ('x','y','width','height'))
+            points = mapped([[x,y],[x+w,y],[x+w,y+h],[x,y+h]])
+            edges = np.roll(points,-1,axis=0)-points
+            lengths = np.linalg.norm(edges,axis=1)
+            if min(lengths)<=0 or not np.allclose(lengths,lengths[0]) or abs(edges[0]@edges[1])>1e-5:
+                raise ValueError('two_way_valve_deformed_motor')
+            squares.append((points,node.get('stroke')))
         elif kind=='line':
-            lines.append(mapped([[float(node.get('x1','0')),float(node.get('y1','0'))],
-                                 [float(node.get('x2','0')),float(node.get('y2','0'))]]))
+            lines.append((mapped([[float(node.get('x1','0')),float(node.get('y1','0'))],
+                                  [float(node.get('x2','0')),float(node.get('y2','0'))]]),node.get('stroke')))
         elif kind in {'path','polygon'}:
             paths=path_points(node)
             if len(paths)==1 and paths[0][1]:
@@ -71,7 +96,8 @@ def validate_two_way_valve(svg):
         for child in node:
             visit(child,matrix,fill)
     visit(root)
-    if len(circles)!=1 or len(lines)!=1 or len(triangles)!=2:
+    if (len(circles)!=int(not square) or len(squares)!=int(square)
+            or len(lines)!=(3 if square else 1) or len(triangles)!=2):
         raise ValueError('two_way_valve_incomplete')
     (first,paint,matrix),(second,other_paint,other_matrix)=triangles
     pairs=np.argwhere(np.linalg.norm(first[:,None]-second[None,:],axis=2)<1e-4)
@@ -84,8 +110,22 @@ def validate_two_way_valve(svg):
             or not min(base[0,0] for base in bases)<apex[0]<max(base[0,0] for base in bases)
             or any(not min(base[:,1])<apex[1]<max(base[:,1]) for base in bases)):
         raise ValueError('two_way_valve_wing_orientation')
-    center,radius=circles[0]
-    line=lines[0]
+    if square:
+        corners,ink = squares[0]
+        center = corners.mean(axis=0)
+        radius = (corners[:,1].max()-corners[:,1].min())/2
+        remaining = list(lines)
+        for endpoints in (corners[[0,2]],corners[[1,3]]):
+            found = next((i for i,(points,color) in enumerate(remaining)
+                          if color==ink and (np.allclose(points,endpoints,atol=1e-4)
+                                             or np.allclose(points[::-1],endpoints,atol=1e-4))),None)
+            if found is None:
+                raise ValueError('two_way_valve_motor_diagonals')
+            remaining.pop(found)
+        line = remaining[0][0]
+    else:
+        center,radius=circles[0]
+        line=lines[0][0]
     if (np.max(abs(line[:,0]-apex[0]))>1e-4 or abs(center[0]-apex[0])>1e-4
             or center[1]+radius>=min(base[:,1].min() for base in bases)
             or min(line[:,1])>center[1]+radius or max(line[:,1])<apex[1]-1e-4):
@@ -100,8 +140,10 @@ def validate_two_way_valve(svg):
 
 
 def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn):
-    if not two_way_valve_contract(description):
+    spec = two_way_valve_spec(description)
+    if spec is None:
         return None
+    square = spec['motor'] == 'square'
     pixels = _image(width, height, image)
     if pixels is None:
         return None
@@ -112,7 +154,7 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
         return None
     top, bottom = rows[[0, -1]]
     spans = np.array([np.ptp(np.flatnonzero(row))+1 if row.any() else 0 for row in mask])
-    # A narrow neck separates the top circular actuator and the bottom wings.
+    # A narrow neck separates the declared actuator and the bottom wings.
     candidates = np.arange(int(top+(bottom-top)*.35), int(top+(bottom-top)*.8))
     if not len(candidates):
         return None
@@ -126,14 +168,18 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
         return None
     contour = max(contours, key=cv2.contourArea)[:, 0].astype(float)+.5
     x, y, w, h = cv2.boundingRect(contour.astype('float32'))
-    arc = contour[contour[:, 1] < y+h*.8]
-    if len(arc) < 10:
-        return None
-    coef = np.linalg.lstsq(np.c_[2*arc, np.ones(len(arc))], (arc**2).sum(axis=1), rcond=None)[0]
-    cx, cy = coef[:2]
-    outer = float(np.sqrt(max(0, coef[2]+cx*cx+cy*cy)))
-    if outer < 3 or np.mean(abs(np.linalg.norm(arc-[cx,cy], axis=1)-outer)) > max(.7, outer*.06):
-        return None
+    if square:
+        cx,cy = contour.min(axis=0)+np.ptp(contour,axis=0)/2
+        outer = np.ptp(contour,axis=0).mean()/2
+    else:
+        arc = contour[contour[:, 1] < y+h*.8]
+        if len(arc) < 10:
+            return None
+        coef = np.linalg.lstsq(np.c_[2*arc, np.ones(len(arc))], (arc**2).sum(axis=1), rcond=None)[0]
+        cx, cy = coef[:2]
+        outer = float(np.sqrt(max(0, coef[2]+cx*cx+cy*cy)))
+        if outer < 3 or np.mean(abs(np.linalg.norm(arc-[cx,cy], axis=1)-outer)) > max(.7, outer*.06):
+            return None
     wing_rows = np.flatnonzero((np.arange(height)>neck) & (spans > width*.6))
     if len(wing_rows) < 4:
         return None
@@ -145,6 +191,11 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
     radial = np.hypot(xx+.5-cx, yy+.5-cy)
     fill = np.median(pixels[radial < outer*.65], axis=0)
     rim = np.percentile(pixels[(radial > outer*.8)&(radial < outer+1)], 12, axis=0)
+    if square:
+        interior = (abs(xx+.5-cx)<outer*.75)&(abs(yy+.5-cy)<outer*.75)
+        fill = np.percentile(pixels[interior],85,axis=0)
+        edge_distance = np.maximum(abs(xx+.5-cx),abs(yy+.5-cy))
+        rim = np.percentile(pixels[(edge_distance>outer-.6)&(edge_distance<outer+.6)],15,axis=0)
     stem = np.percentile(pixels[neck:neck+1, max(0,int(cx)-1):int(cx)+2].reshape(-1,3), 10, axis=0)
     wing = np.zeros(mask.shape, dtype='uint8')
     for points in (((left,wt),(left,wb),(cx,apex_y)), ((right,wt),(right,wb),(cx,apex_y))):
@@ -163,7 +214,7 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
     start, end = center+direction*(lo-center@direction), center+direction*(hi-center@direction)
     colors = np.c_[np.array([start,end]), np.ones(2)]@plane
     edge = np.percentile(pixels[mask & wing.astype(bool)], 12, axis=0)
-    # Native geometry, then BGR paint. Circle and connector share an axis;
+    # Native geometry, then BGR paint. Motor and connector share an axis;
     # both triangles share exactly one apex and one gradient coordinate space.
     p = np.r_[cx,cy,outer-.45,1.,left,right,wt,wb,apex_y,1.,max(1.,spans[neck]-.3),angle,
               fill,rim,stem,colors.ravel(),edge,background]
@@ -180,13 +231,21 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
         wings = ''.join(f'<path d="M {x:.5f} {ty:.5f} L {x:.5f} {by:.5f} L {cx:.5f} {ay:.5f} Z" '
                         f'fill="url(#valve)" stroke="{_hex(edge)}" stroke-width="{bw:.5f}" stroke-linejoin="round"/>'
                         for x in (lx,rx))
+        if square:
+            motor = (f'<rect x="{cx-r:.5f}" y="{cy-r:.5f}" width="{2*r:.5f}" height="{2*r:.5f}" '
+                     f'fill="{_hex(fill)}" stroke="{_hex(rim)}" stroke-width="{sw:.5f}"/>'
+                     + ''.join(f'<line x1="{cx-r:.5f}" y1="{a:.5f}" x2="{cx+r:.5f}" y2="{b:.5f}" '
+                               f'stroke="{_hex(rim)}" stroke-width="{sw:.5f}"/>'
+                               for a,b in ((cy-r,cy+r),(cy+r,cy-r))))
+        else:
+            motor = f'<circle cx="{cx:.5f}" cy="{cy:.5f}" r="{r:.5f}" fill="{_hex(fill)}" stroke="{_hex(rim)}" stroke-width="{sw:.5f}"/>'
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 f'<defs><linearGradient id="valve" gradientUnits="userSpaceOnUse" x1="{start[0]:.5f}" y1="{start[1]:.5f}" '
                 f'x2="{end[0]:.5f}" y2="{end[1]:.5f}"><stop offset="0" stop-color="{_hex(low)}"/>'
                 f'<stop offset="1" stop-color="{_hex(high)}"/></linearGradient></defs>'
                 f'<rect width="{width}" height="{height}" fill="{_hex(bg)}"/>'
                 f'<line x1="{cx:.5f}" y1="{cy:.5f}" x2="{cx:.5f}" y2="{ay:.5f}" stroke="{_hex(stem)}" stroke-width="{cw:.5f}"/>'
-                +wings+f'<circle cx="{cx:.5f}" cy="{cy:.5f}" r="{r:.5f}" fill="{_hex(fill)}" stroke="{_hex(rim)}" stroke-width="{sw:.5f}"/></svg>')
+                +wings+motor+'</svg>')
 
     def valid(v):
         cx,cy,r,sw,lx,rx,ty,by,ay,bw,cw,angle = v[:12]
@@ -203,6 +262,6 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
     quality = pixel_quality(image,result['rendered'])
     if not quality or not quality['passed']:
         return None
-    validate_two_way_valve(result['svg'])
+    validate_two_way_valve(result['svg'],spec)
     result['quality'] = quality
     return result
