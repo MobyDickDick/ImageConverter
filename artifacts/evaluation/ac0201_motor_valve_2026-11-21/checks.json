@@ -1,0 +1,7 @@
+{
+  "tests_passed": 122,
+  "tests_failed": 0,
+  "command": "python -m pytest tests/test_two_way_valve_description.py tests/test_description_language.py tests/test_sample_start_regression.py tests/test_simple_form_representation.py tests/test_canvas_containment.py -q",
+  "runtime_image_id_occurrences": 0,
+  "git_diff_check": true
+}

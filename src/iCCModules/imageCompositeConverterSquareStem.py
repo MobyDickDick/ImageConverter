@@ -72,7 +72,7 @@ def _observe_slash_and_dot(interior, x0, y0):
             x0+dx, y0+dy, float(dw), float(dh), *mark_color]
 
 
-def _fit_vertical_stem_square(geometry_ir, *, image, render_fn, error_fn, description):
+def _fit_vertical_stem_square(geometry_ir, *, image, render_fn, error_fn, description, exact_square=False):
     """Rotate the observed body/handle contract while retaining mark direction."""
     original = geometry_ir[0]
     bottom = original['kind'] == 'UprightSquareKelleGlyph'
@@ -101,7 +101,7 @@ def _fit_vertical_stem_square(geometry_ir, *, image, render_fn, error_fn, descri
     fitted = fit_square_stem(canonical, image=cv2.rotate(image,to_canonical),
         description=description, render_fn=render,
         error_fn=lambda raster:error_fn(cv2.rotate(raster,to_original)),
-        _marks_in_original='bottom' if bottom else 'top')
+        _marks_in_original='bottom' if bottom else 'top', _exact_square=exact_square)
     if fitted is None:
         return None
     fitted['geometry_ir'] = restore(fitted['geometry_ir'])
@@ -141,7 +141,8 @@ def _fit_left_stem_square(geometry_ir, *, image, render_fn, error_fn, descriptio
     return fitted
 
 
-def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', _marks_in_original=False):
+def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', _marks_in_original=False,
+                    _exact_square=False):
     desc = description.casefold()
     marked = ('punkt' in desc and any(word in desc for word in ('schräg', 'schraeg', 'diagonal'))
               and not any(word in desc for word in ('ohne markierung', 'ohne innenmarkierung', 'ohne punkt')))
@@ -153,12 +154,12 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
         return _fit_left_stem_square(geometry_ir, image=arr, render_fn=render_fn,
             error_fn=error_fn, description=description)
     if (len(geometry_ir) == 1 and geometry_ir[0].get('kind') in {'Rotated180SquareKelleGlyph', 'UprightSquareKelleGlyph'}
-            and not geometry_ir[0].get('label')
-            and marked):
+            and not geometry_ir[0].get('label')):
         arr = np.asarray(image)
         if arr.ndim != 3 or arr.shape[2] != 3 or not arr.size or not np.isfinite(arr).all():
             return None
-        return _fit_vertical_stem_square(geometry_ir,image=arr,render_fn=render_fn,error_fn=error_fn,description=description)
+        return _fit_vertical_stem_square(geometry_ir,image=arr,render_fn=render_fn,error_fn=error_fn,
+                                        description=description,exact_square=not marked)
     if len(geometry_ir) != 1 or geometry_ir[0].get('kind') != 'RightStemSquareKelleGlyph':
         return None
     arr = np.asarray(image)
@@ -223,6 +224,14 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
     line = np.percentile(arr[:,right+2:][outside],10,axis=0)
     p = np.array([left+.5,top+.5,right-left,bottom-top,cy,
                   right+2+xs.max()+1.,1.,1.,*fill,*border,*line],dtype=float)
+    if _exact_square:
+        # The raster's two axis estimates can differ by a pixel. Keep one
+        # side length and one centered handle for the declared square, rather
+        # than optimizing a rectangle and failing the final shape assertion.
+        side = (p[2]+p[3])/2
+        p[0] += (p[2]-side)/2
+        p[1] += (p[3]-side)/2
+        p[2:4] = side
     if marks is not None:
         p = np.concatenate((p, marks))
     evaluations = 0
@@ -233,6 +242,8 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
     def evaluate(values):
         nonlocal evaluations
         x,y,bw,bh,hy,end,bs,ls = values[:8]
+        if _exact_square:
+            bh,hy = bw,y+bw/2
         if not (0 <= x < x+bw < end <= w and 0 <= y < y+bh <= h
                 and .7 < bw/bh < 1.3 and abs(hy-y-bh/2) <= bh*.1
                 and .2 <= bs <= min(bw,bh)*.2 and .2 <= ls <= bh*.25):
@@ -313,6 +324,8 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
                 if result is not None and result[0] < best[0]-1e-9:
                     p,best = probe,result
             for i in range(len(p)):
+                if _exact_square and i in (3,4):
+                    continue
                 for sign in (-1,1):
                     probe = p.copy()
                     probe[i] += sign*(step if i<8 or 17<=i<26 else shade)
@@ -325,4 +338,5 @@ def fit_square_stem(geometry_ir, *, image, render_fn, error_fn, description='', 
     if not math.isfinite(final) or final >= initial-1e-9:
         return None
     return {'geometry_ir':best[1],'rendered':best[2],'initial_error':initial,
-            'final_error':final,'evaluations':evaluations,'source':'square_and_handle_raster_profiles_v1'}
+            'final_error':final,'evaluations':evaluations,'source':'square_and_handle_raster_profiles_v1',
+            'exact_square':_exact_square}

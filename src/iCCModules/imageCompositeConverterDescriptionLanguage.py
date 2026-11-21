@@ -145,6 +145,9 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract
+    if two_way_valve_contract(normalized):
+        assertions['two_way_valve'] = True
     from src.iCCModules.imageCompositeConverterRelations import anchor_relations
     try:
         relations = anchor_relations(normalized)
@@ -246,7 +249,7 @@ def gradient_direction(text: str, direction: str) -> bool:
 def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
     for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
-                'svg_component_description'):
+                'svg_component_description', 'two_way_valve'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -261,6 +264,12 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         return
     if assertions and assertions.get('inventory_error'):
         raise DescriptionRejected(assertions['inventory_error'])
+    if assertions and assertions.get('two_way_valve'):
+        from src.iCCModules.imageCompositeConverterTwoWayValve import validate_two_way_valve
+        try:
+            validate_two_way_valve(svg)
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
                               or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')
                               or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel')

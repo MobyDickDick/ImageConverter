@@ -1,0 +1,46 @@
+{
+  "case": "AC0201_M.jpg",
+  "description": "Es ist ein motorgetriebenes Zweiwegventil. Die beiden Ventile sind horizontal angeordnet. Der Motor ist als Kelle mit Griff nach unten realisiert Bei den Ventilen werden die beiden Formen zusammengehängt und ein Farbübergang gezeichnet.",
+  "description_unchanged": true,
+  "initial_quality": {
+    "normalized_mse": 0.03543055057525635,
+    "foreground_mse": 0.055681969970464706,
+    "foreground_iou": 0.22955145118733508,
+    "foreground_iou_binary": 0.22955145118733508,
+    "edge_alignment": 0.32924342155456543,
+    "passed": false
+  },
+  "final_quality": {
+    "normalized_mse": 0.0003651715232990682,
+    "foreground_mse": 0.0008730117115192115,
+    "foreground_iou": 0.9579707980155945,
+    "foreground_iou_binary": 0.9472477064220184,
+    "edge_alignment": 0.940331220626831,
+    "passed": true,
+    "representation_penalty": 0.000302,
+    "representation_complexity": {
+      "elements": 5,
+      "coordinates": 21,
+      "penalty": 0.000302
+    },
+    "within_canvas": true,
+    "observed_foreground_pixels": 422,
+    "output_foreground_pixels": 427,
+    "inventory": {
+      "circle": 1,
+      "line": 1,
+      "triangle": 2
+    }
+  },
+  "stale_template_rejected": "logical_object_count:line:1:0",
+  "gui_status": "done",
+  "gui_quality": "passed",
+  "project_save": {
+    "status": "saved",
+    "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0201_M.svg",
+    "normalized_mse": 0.0003651715232990682,
+    "quality": "passed",
+    "message": "Automatisch im Projekt gespeichert: C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0201_M.svg"
+  },
+  "server_restart": "deferred: another background conversion was running"
+}

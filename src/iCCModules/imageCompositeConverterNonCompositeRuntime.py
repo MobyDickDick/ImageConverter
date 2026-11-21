@@ -1402,6 +1402,20 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract, fit_two_way_valve
+    if two_way_valve_contract(description):
+        # This first description fit has a closed, declared inventory. Keep it
+        # separate from the removed post-fit raster reconstruction path.
+        fitted = fit_two_way_valve(width, height, description=description, image=perc_img,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+        if fitted is None:
+            write_validation_log_fn(['status=description_two_way_valve_fit_failed'])
+            return None
+        validated_result(fitted, perc_img)
+        params['two_way_valve_registration'] = {k:v for k,v in fitted.items() if k not in {'svg','rendered'}}
+        write_validation_log_fn(['status=description_two_way_valve'])
+        write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+        return base_name, description, params, 1, fitted['error']
     if mode in {"non_composite", "auto"} or (
         mode == "insufficient_description" and (panel_contract(description) is not None or tube_contract(description) or inset_panel_contract(description) or piecewise_contract(description) or hollow_cross_contract(description) or anchor_relations(description))
     ):
@@ -1439,6 +1453,11 @@ def runNonCompositeIterationImpl(
                 key: value for key, value in square_stem.items() if key not in {'geometry_ir', 'rendered'}
             }
             svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, square_stem['geometry_ir'])
+            if square_stem.get('exact_square'):
+                checked = dict(svg=svg, rendered=square_stem['rendered'],
+                               error=square_stem['final_error'], source=square_stem['source'])
+                validated_result(checked, perc_img)
+                svg, square_stem['rendered'] = checked['svg'], checked['rendered']
             write_validation_log_fn(['status=non_composite_raster_square_stem'])
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
@@ -1715,8 +1734,16 @@ def runNonCompositeIterationImpl(
                                 height,
                             ),
                             error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+                            image=perc_img,
+                            description=glyph_description,
+                            svg_fn=lambda ir: geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, ir),
+                            svg_render_fn=render_svg_to_numpy_fn,
                         )
-                        if float(optimizer_result["final_error"]) < float(description_error):
+                        if optimizer_result.get('no_valid_candidate'):
+                            write_validation_log_fn(['status=description_geometry_ir_no_valid_candidate'])
+                            return None
+                        if (optimizer_result.get('mode') == 'description_geometry_ir_multistart'
+                                or float(optimizer_result["final_error"]) < float(description_error)):
                             description_geometry_ir = optimizer_result["geometry_ir"]
                             description_rendered = optimizer_result["rendered"]
                             description_error = float(optimizer_result["final_error"])
@@ -1724,6 +1751,11 @@ def runNonCompositeIterationImpl(
                                 width, height, description_geometry_ir
                             )
                             params["optimized_geometry_ir"] = description_geometry_ir
+                            if optimizer_result.get('mode') == 'description_geometry_ir_multistart':
+                                checked = dict(svg=geometry_ir_svg, rendered=description_rendered,
+                                    error=description_error, source='description_ir_registration')
+                                validated_result(checked, perc_img)
+                                geometry_ir_svg, description_rendered = checked['svg'], checked['rendered']
                         params["geometry_ir_optimizer_result"] = {
                             key: value
                             for key, value in optimizer_result.items()

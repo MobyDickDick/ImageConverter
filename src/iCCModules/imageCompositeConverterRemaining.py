@@ -1228,7 +1228,7 @@ def convertRange(
         )
         return out_root
     rng = _conversionRandom()
-    run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
+    run_seed = random_helpers.conversionSeedImpl(rng,deterministic_order=deterministic_order)
     Action.STOCHASTIC_RUN_SEED = int(run_seed)
     process_files = list(files)
     if not deterministic_order:

@@ -1,0 +1,809 @@
+{
+  "schema_version": "search_route_audit_v1",
+  "method": "Static function/import references; callback resolution and branch execution are not proven.",
+  "entry_points": [
+    "GUI jobs/CLI/batch via IterationDispatch",
+    "GUI uploaded/current SVG via imageConverterSample.refine",
+    "Explicit SVG components via SvgComponents.compose_components"
+  ],
+  "route_count": 60,
+  "mechanisms": {
+    "custom_fitter": 19,
+    "analytic_registration": 32,
+    "composite": 1,
+    "description_multistart": 1,
+    "form_model_competition": 2,
+    "semantic_element_validation": 1,
+    "semantic_parameter_sampling": 1,
+    "template_alignment": 2,
+    "svg_components": 1,
+    "legacy_template_transfer": 1
+  },
+  "routes": [
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterAlarmBell.fit_alarm_bell",
+      "path": "src/iCCModules/imageCompositeConverterAlarmBell.py",
+      "line": 94,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterArcShaft.fit_arc_shaft",
+      "path": "src/iCCModules/imageCompositeConverterArcShaft.py",
+      "line": 71,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 8,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterArrowPair.fit_arrow_pair",
+      "path": "src/iCCModules/imageCompositeConverterArrowPair.py",
+      "line": 24,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 26,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterAxialPanel.fit_axial_panel",
+      "path": "src/iCCModules/imageCompositeConverterAxialPanel.py",
+      "line": 68,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 8,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterCheckboxCheckmark.fit_checkbox_checkmark",
+      "path": "src/iCCModules/imageCompositeConverterCheckboxCheckmark.py",
+      "line": 8,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 1,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterCheckmark.fit_checkmark_disk",
+      "path": "src/iCCModules/imageCompositeConverterCheckmark.py",
+      "line": 15,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 2,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterChevronPanel.fit_chevron_panel",
+      "path": "src/iCCModules/imageCompositeConverterChevronPanel.py",
+      "line": 26,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 6,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterCircleLinework.fit_circle_linework",
+      "path": "src/iCCModules/imageCompositeConverterCircleLinework.py",
+      "line": 18,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 6,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterConversionComposite.runCompositeIterationImpl",
+      "path": "src/iCCModules/imageCompositeConverterConversionComposite.py",
+      "line": 8,
+      "mechanism": [
+        "composite"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 1,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterCrossPanelDisk.fit_cross_panel_disk",
+      "path": "src/iCCModules/imageCompositeConverterCrossPanelDisk.py",
+      "line": 13,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 6,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterCrossedGradientPanel.fit_crossed_gradient_panel",
+      "path": "src/iCCModules/imageCompositeConverterCrossedGradientPanel.py",
+      "line": 78,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 8,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterDescriptionRegistration.register_description_ir",
+      "path": "src/iCCModules/imageCompositeConverterDescriptionRegistration.py",
+      "line": 23,
+      "mechanism": [
+        "description_multistart"
+      ],
+      "direct_seed": true,
+      "direct_render_tracking": true,
+      "portfolio_disabled": false,
+      "reference_closure_size": 92,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterDiagonalCrossDisk.fit_diagonal_cross_disk",
+      "path": "src/iCCModules/imageCompositeConverterDiagonalCrossDisk.py",
+      "line": 13,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 5,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterDiagonalCrossPanel.fit_diagonal_cross_panel",
+      "path": "src/iCCModules/imageCompositeConverterDiagonalCrossPanel.py",
+      "line": 15,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 5,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterDiskArrow.fit_disk_arrow",
+      "path": "src/iCCModules/imageCompositeConverterDiskArrow.py",
+      "line": 81,
+      "mechanism": [
+        "form_model_competition"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 83,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterElementValidation.validateBadgeByElementsImpl",
+      "path": "src/iCCModules/imageCompositeConverterElementValidation.py",
+      "line": 259,
+      "mechanism": [
+        "semantic_element_validation"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 3,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFilledSymbols._register",
+      "path": "src/iCCModules/imageCompositeConverterFilledSymbols.py",
+      "line": 15,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 3,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFilledSymbols._register_steps",
+      "path": "src/iCCModules/imageCompositeConverterFilledSymbols.py",
+      "line": 26,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": true,
+      "direct_render_tracking": true,
+      "portfolio_disabled": false,
+      "reference_closure_size": 18,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFilledSymbols.fit_disk_bar",
+      "path": "src/iCCModules/imageCompositeConverterFilledSymbols.py",
+      "line": 273,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFilledSymbols.fit_solid_arrow",
+      "path": "src/iCCModules/imageCompositeConverterFilledSymbols.py",
+      "line": 384,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFlameDisk.fit_flame_disk",
+      "path": "src/iCCModules/imageCompositeConverterFlameDisk.py",
+      "line": 146,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 10,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFormModels.compare_form_models",
+      "path": "src/iCCModules/imageCompositeConverterFormModels.py",
+      "line": 20,
+      "mechanism": [
+        "analytic_registration",
+        "form_model_competition"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": true,
+      "reference_closure_size": 12,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterFramedPanel.fit_framed_panel",
+      "path": "src/iCCModules/imageCompositeConverterFramedPanel.py",
+      "line": 73,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 9,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterGradientArrow.fit_gradient_arrow",
+      "path": "src/iCCModules/imageCompositeConverterGradientArrow.py",
+      "line": 216,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 3,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterGradientJunction.fit_gradient_junction",
+      "path": "src/iCCModules/imageCompositeConverterGradientJunction.py",
+      "line": 12,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 5,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterGradientTube.fit_gradient_tube",
+      "path": "src/iCCModules/imageCompositeConverterGradientTube.py",
+      "line": 97,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 9,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterHeatPanel.fit_heat_panel",
+      "path": "src/iCCModules/imageCompositeConverterHeatPanel.py",
+      "line": 11,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 5,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterHollowCrossPanel.fit_hollow_cross_panel",
+      "path": "src/iCCModules/imageCompositeConverterHollowCrossPanel.py",
+      "line": 181,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 10,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterHouseDisk.fit_house_disk",
+      "path": "src/iCCModules/imageCompositeConverterHouseDisk.py",
+      "line": 13,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 6,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterInsetPanel.fit_inset_panel",
+      "path": "src/iCCModules/imageCompositeConverterInsetPanel.py",
+      "line": 67,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 9,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterInteriorMark.fit_rectilinear_interior_mark",
+      "path": "src/iCCModules/imageCompositeConverterInteriorMark.py",
+      "line": 10,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 1,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterLabeledDisk.fit_labeled_disk",
+      "path": "src/iCCModules/imageCompositeConverterLabeledDisk.py",
+      "line": 11,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterLabeledSquare.fit_labeled_square",
+      "path": "src/iCCModules/imageCompositeConverterLabeledSquare.py",
+      "line": 143,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 5,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterMotorValve.fit_motor_valve",
+      "path": "src/iCCModules/imageCompositeConverterMotorValve.py",
+      "line": 16,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterNestedPanel.fit_nested_panel",
+      "path": "src/iCCModules/imageCompositeConverterNestedPanel.py",
+      "line": 10,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 2,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterOptimizationGlobalSearch.optimizeGlobalParameterVectorSamplingImpl",
+      "path": "src/iCCModules/imageCompositeConverterOptimizationGlobalSearch.py",
+      "line": 35,
+      "mechanism": [
+        "semantic_parameter_sampling"
+      ],
+      "direct_seed": true,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 3,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterPairedLinePanel.fit_paired_line_panel",
+      "path": "src/iCCModules/imageCompositeConverterPairedLinePanel.py",
+      "line": 25,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 5,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterPiecewiseScene.fit_piecewise_scene",
+      "path": "src/iCCModules/imageCompositeConverterPiecewiseScene.py",
+      "line": 210,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": true,
+      "reference_closure_size": 15,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterPlainDisk.fit_plain_disk",
+      "path": "src/iCCModules/imageCompositeConverterPlainDisk.py",
+      "line": 36,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 7,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterPrimitiveScene.fit_primitive_scene",
+      "path": "src/iCCModules/imageCompositeConverterPrimitiveScene.py",
+      "line": 115,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 162,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterPump.fit_pump_geometry",
+      "path": "src/iCCModules/imageCompositeConverterPump.py",
+      "line": 15,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 2,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterRadialDisk.fit_radial_disk",
+      "path": "src/iCCModules/imageCompositeConverterRadialDisk.py",
+      "line": 10,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 1,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterRuledPanel.fit_ruled_panel",
+      "path": "src/iCCModules/imageCompositeConverterRuledPanel.py",
+      "line": 127,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 8,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterSampleAlignment.align_sample",
+      "path": "src/iCCModules/imageCompositeConverterSampleAlignment.py",
+      "line": 21,
+      "mechanism": [
+        "template_alignment"
+      ],
+      "direct_seed": true,
+      "direct_render_tracking": true,
+      "portfolio_disabled": false,
+      "reference_closure_size": 68,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterShortLabelDisk.fit_short_label_disk",
+      "path": "src/iCCModules/imageCompositeConverterShortLabelDisk.py",
+      "line": 20,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 84,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterSineDiagram.fit_sine_diagram",
+      "path": "src/iCCModules/imageCompositeConverterSineDiagram.py",
+      "line": 10,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 2,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterSpiralDisk.fit_spiral_disk",
+      "path": "src/iCCModules/imageCompositeConverterSpiralDisk.py",
+      "line": 91,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 10,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterSprayPanel.fit_spray_panel",
+      "path": "src/iCCModules/imageCompositeConverterSprayPanel.py",
+      "line": 106,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 11,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterSquareStem.fit_square_stem",
+      "path": "src/iCCModules/imageCompositeConverterSquareStem.py",
+      "line": 144,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterStemDisk.fit_stem_disk",
+      "path": "src/iCCModules/imageCompositeConverterStemDisk.py",
+      "line": 24,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 7,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterStepDiagram.fit_step_diagram",
+      "path": "src/iCCModules/imageCompositeConverterStepDiagram.py",
+      "line": 12,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 1,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterStripedPanelDisk.fit_striped_panel_disk",
+      "path": "src/iCCModules/imageCompositeConverterStripedPanelDisk.py",
+      "line": 13,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 6,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterSvgComponents.compose_components",
+      "path": "src/iCCModules/imageCompositeConverterSvgComponents.py",
+      "line": 383,
+      "mechanism": [
+        "svg_components"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 25,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterTemplateTransfer.tryTemplateTransferImpl",
+      "path": "src/iCCModules/imageCompositeConverterTemplateTransfer.py",
+      "line": 235,
+      "mechanism": [
+        "legacy_template_transfer"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 2,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterThreeWayValve.fit_three_way_valve",
+      "path": "src/iCCModules/imageCompositeConverterThreeWayValve.py",
+      "line": 12,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 1,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterTriangleStem.fit_triangle_stem",
+      "path": "src/iCCModules/imageCompositeConverterTriangleStem.py",
+      "line": 15,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 2,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterTwoWayValve.fit_two_way_valve",
+      "path": "src/iCCModules/imageCompositeConverterTwoWayValve.py",
+      "line": 102,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": true,
+      "reference_closure_size": 13,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterWarningDisk.fit_warning_disk",
+      "path": "src/iCCModules/imageCompositeConverterWarningDisk.py",
+      "line": 38,
+      "mechanism": [
+        "analytic_registration"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 7,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.iCCModules.imageCompositeConverterZigzagPanel.fit_zigzag_panel",
+      "path": "src/iCCModules/imageCompositeConverterZigzagPanel.py",
+      "line": 10,
+      "mechanism": [
+        "custom_fitter"
+      ],
+      "direct_seed": false,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 4,
+      "behavior_verified": false
+    },
+    {
+      "symbol": "src.imageConverterSample.refine",
+      "path": "src/imageConverterSample.py",
+      "line": 276,
+      "mechanism": [
+        "template_alignment"
+      ],
+      "direct_seed": true,
+      "direct_render_tracking": false,
+      "portfolio_disabled": false,
+      "reference_closure_size": 116,
+      "behavior_verified": false
+    }
+  ],
+  "excluded_productive_recovery": [
+    "src.imageConverterRecovery.recover (explicit description-only no-op)",
+    "NativeSearch/StructureSearch/Fallback* research helpers (no productive continuation call)"
+  ]
+}

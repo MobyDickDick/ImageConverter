@@ -148,6 +148,15 @@ class Reflection:
         contract_status = str(params["description_contract"].get("status", "ok"))
         params["contract_status"] = contract_status
 
+        from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract
+        if two_way_valve_contract(desc_raw):
+            params["mode"] = "non_composite"
+            params["label"] = ""
+            params["contract_status"] = "ok"
+            params["description_contract"]["status"] = "ok"
+            params["elements"].append("GEOMETRIE: Kreis, Griff und zwei verbundene Ventildreiecke mit gemeinsamem Verlauf")
+            return desc, params
+
         compact_reference_badge = "AR" + "0100"
         semantic_symbol = not similarity.references and (symbol_upper.startswith("AC08") or symbol_upper == compact_reference_badge)
         if semantic_symbol:

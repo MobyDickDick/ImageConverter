@@ -1289,14 +1289,26 @@ def optimizeGeometryIrRegistrationImpl(
     render_fn: RenderFn,
     error_fn: ErrorFn,
     min_improvement: float = 1e-9,
+    image=None,
+    description: str | None = None,
+    svg_fn=None,
+    svg_render_fn=None,
 ) -> dict[str, Any]:
     """Fit semantic vector geometry to its source raster without changing meaning.
 
-    A deterministic coarse-to-fine coordinate descent calibrates horizontal and
+    Production callers supply the image, description and SVG renderer for
+    seeded multistart registration with paint fitting and inventory validation.
+    Renderer-agnostic callers retain the deterministic coordinate descent below.
+    A coarse-to-fine coordinate descent calibrates horizontal and
     vertical placement, scale, and line weight.  Every accepted probe must lower
     the caller-provided image error, making this safe for all Geometry-IR
     families rather than relying on family-specific coordinates.
     """
+
+    if image is not None and description is not None and svg_fn is not None and svg_render_fn is not None:
+        from src.iCCModules.imageCompositeConverterDescriptionRegistration import register_description_ir
+        return register_description_ir(geometry_ir, image=image, description=description,
+            svg_fn=svg_fn, render_fn=svg_render_fn, error_fn=error_fn)
 
     parameter_names = (
         "translate_x",

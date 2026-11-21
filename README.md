@@ -1,5 +1,36 @@
 # ImageConverter
 
+Die [Untersuchung der produktiven Suchpfade](artifacts/evaluation/search_routes_2026-11-21/README.md)
+erfasst 60 Einstiegsfunktionen und unterscheidet gemeinsame Suchkerne von
+19 eigenen Spezialoptimierern. Seed-Verbindungen für alte semantische Suchen,
+Registrierungen ohne Portfolio und die Vorlagenausrichtung sind korrigiert.
+Vorlagen protokollieren echte Renderfolgen und prüfen zusätzliche zulässige
+Platzierungen. Der Bericht beschreibt die noch nötigen Adapter für eine
+vollständige Umstellung; sämtliche Suchpfade sind damit noch nicht migriert.
+
+Die allgemeine Beschreibungsanpassung untersucht jetzt mehrere vom Seed
+abhängige Startpunkte und misst die Farben der beschriebenen Formen am Original.
+Ein geschrumpftes falsches Motiv kann nicht mehr allein durch den weissen
+Hintergrund gewinnen. Der bisherige deterministische Pfad reproduzierte trotz
+verschiedener Seeds dasselbe rote Rechteck. Der neue Vergleich prüft echte
+Renderfolgen, Wiederholbarkeit und korrekt fehlgeschlagene GUI-Versuche.
+[Ursache, Vergleichsbilder und Prüfstand](artifacts/evaluation/description_registration_search_2026-11-21/README.md).
+
+`AC0701_L.jpg` wird mit unveränderter Beschreibung wieder erfolgreich konvertiert.
+Quadrate mit Griff nach unten werden mit einer gemeinsamen Seitenlänge und
+mittigem Griff angepasst. Der echte Lauf über den bereits laufenden Webserver
+besteht die Qualitätsprüfung; das SVG ist im Projekt gespeichert.
+[Ursache und Prüfungen](artifacts/evaluation/ac0701_square_handle_2026-11-21/README.md).
+
+Das motorgetriebene Zweiwegventil mit horizontalen Ventilflächen und einer Kelle
+mit Griff nach unten wird jetzt als vollständige Beschreibung ausgewertet:
+ein Kreis, ein Griff und zwei an einer gemeinsamen Spitze verbundene Dreiecke.
+Beide Ventilflächen teilen denselben Farbverlauf. Die Einzelkonvertierung von
+`AC0201_M.jpg` besteht mit unverändertem Beschreibungstext die Qualitätsprüfung;
+die bisherige unvollständige Kreisvorlage wird verworfen. Der laufende Webserver
+muss nach Abschluss anderer Arbeiten neu gestartet werden.
+[Ursache, Ergebnis und Prüfungen](artifacts/evaluation/ac0201_motor_valve_2026-11-21/README.md).
+
 Vorhandene SVGs lassen sich in der Einzelkonvertierung jetzt als Bauteile
 zusammensetzen: je eine Zeile `SVG-Bauteil: DATEINAME.svg` im Beschreibungsfeld.
 Position und proportionale Skalierung werden automatisch gesucht oder explizit

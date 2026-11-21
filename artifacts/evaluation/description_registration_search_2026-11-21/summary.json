@@ -1,0 +1,132 @@
+{
+  "description": "Quadrat mit dunkelgrauem Rand und hellgrauem Hintergrund. Unten am Quadrat graue Linie. Gesamthatf eine Kelle mit Stil nach unten. Die graue Linie ist in der horizontalen Mittelachse des Quadrats.",
+  "note": "Generic registration only; the specialized square fitter is not called.",
+  "baseline": [
+    {
+      "seed": 17,
+      "render_calls": 152,
+      "unique_candidates": 135,
+      "sequence_sha256": "1736c261ba966a07e6d699a0c66c33146be640cb0eb4f44460faf3c7e5ece546",
+      "svg_sha256": "e659b0283454b852165b409d75e277001872821daa0dc41c1c35ea8f1f699c42",
+      "quality": {
+        "normalized_mse": 0.02786683477461338,
+        "foreground_mse": 0.12024112045764923,
+        "foreground_iou": 0.21031746031746032,
+        "foreground_iou_binary": 0.21031746031746032,
+        "edge_alignment": 0.6157232522964478,
+        "passed": false
+      },
+      "description_error": "logical_object_count:square:1:0"
+    },
+    {
+      "seed": 18,
+      "render_calls": 152,
+      "unique_candidates": 135,
+      "sequence_sha256": "1736c261ba966a07e6d699a0c66c33146be640cb0eb4f44460faf3c7e5ece546",
+      "svg_sha256": "e659b0283454b852165b409d75e277001872821daa0dc41c1c35ea8f1f699c42",
+      "quality": {
+        "normalized_mse": 0.02786683477461338,
+        "foreground_mse": 0.12024112045764923,
+        "foreground_iou": 0.21031746031746032,
+        "foreground_iou_binary": 0.21031746031746032,
+        "edge_alignment": 0.6157232522964478,
+        "passed": false
+      },
+      "description_error": "logical_object_count:square:1:0"
+    }
+  ],
+  "current": [
+    {
+      "seed": 17,
+      "evaluations": 384,
+      "restarts": 8,
+      "stop_reason": "proposal_limit",
+      "quality": {
+        "normalized_mse": 0.006242439616471529,
+        "foreground_mse": 0.026130879297852516,
+        "foreground_iou": 0.9826839826839827,
+        "foreground_iou_binary": 0.9826839826839827,
+        "edge_alignment": 0.7927204370498657,
+        "passed": true
+      },
+      "sequence_sha256": "162764993ac3549c66f39f221991794cda7f7cee2890651853a9ecd7aad6fa0c",
+      "unique_candidates": 384
+    },
+    {
+      "seed": 18,
+      "evaluations": 384,
+      "restarts": 8,
+      "stop_reason": "proposal_limit",
+      "quality": {
+        "normalized_mse": 0.002523036440834403,
+        "foreground_mse": 0.008016163483262062,
+        "foreground_iou": 0.9783549783549783,
+        "foreground_iou_binary": 0.9783549783549783,
+        "edge_alignment": 0.9783310890197754,
+        "passed": true
+      },
+      "sequence_sha256": "7f94efdf168605159ca61b35cec045cab5b66f6253b86d0f412b5a545803fd4f",
+      "unique_candidates": 384
+    },
+    {
+      "seed": 19,
+      "evaluations": 384,
+      "restarts": 8,
+      "stop_reason": "proposal_limit",
+      "quality": {
+        "normalized_mse": 0.00606814818456769,
+        "foreground_mse": 0.028067857027053833,
+        "foreground_iou": 0.987012987012987,
+        "foreground_iou_binary": 0.987012987012987,
+        "edge_alignment": 0.7916060090065002,
+        "passed": true
+      },
+      "sequence_sha256": "7e9c118b6669ab715b2bbd110f077d4e1e34554210dcfdab45a23b0894feee86",
+      "unique_candidates": 384
+    }
+  ],
+  "impossible": [
+    {
+      "seed": 17,
+      "evaluations": 160,
+      "restarts": 8,
+      "quality": {
+        "normalized_mse": 0.0554327629506588,
+        "foreground_mse": 0.10843506455421448,
+        "foreground_iou": 0.18867924528301888,
+        "foreground_iou_binary": 0.18867924528301888,
+        "edge_alignment": 0.09386347234249115,
+        "passed": false
+      },
+      "sequence_sha256": "7c5526f7a1a44c519a09084eeb466c5f17010aa9aed94faa221040a8a23607f6"
+    },
+    {
+      "seed": 18,
+      "evaluations": 160,
+      "restarts": 8,
+      "quality": {
+        "normalized_mse": 0.048938971012830734,
+        "foreground_mse": 0.06055177375674248,
+        "foreground_iou": 0.21792966815255077,
+        "foreground_iou_binary": 0.21792966815255077,
+        "edge_alignment": 0.29358983039855957,
+        "passed": false
+      },
+      "sequence_sha256": "a37b1f210febf2e3a39fdfe3a9dcb66bd848a04763bb3ec764356045ef4f1e78"
+    },
+    {
+      "seed": 17,
+      "evaluations": 160,
+      "restarts": 8,
+      "quality": {
+        "normalized_mse": 0.0554327629506588,
+        "foreground_mse": 0.10843506455421448,
+        "foreground_iou": 0.18867924528301888,
+        "foreground_iou_binary": 0.18867924528301888,
+        "edge_alignment": 0.09386347234249115,
+        "passed": false
+      },
+      "sequence_sha256": "7c5526f7a1a44c519a09084eeb466c5f17010aa9aed94faa221040a8a23607f6"
+    }
+  ]
+}

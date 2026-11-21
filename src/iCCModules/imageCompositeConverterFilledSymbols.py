@@ -132,7 +132,9 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     accepted = (parameters.copy(), best)
     from src.iCCModules.imageCompositeConverterSearchPortfolio import proposal_rng
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity
-    rng = proposal_rng('registration_order', [source, candidate_identity(best[2]), parameters.tolist()]) if allow_portfolio else None
+    # Disabling late portfolio workers does not disable the selected seed.
+    # Intermediate/masked fits still retain their own objective and checks.
+    rng = proposal_rng('registration_order', [source, candidate_identity(best[2]), parameters.tolist()])
     coordinate_order = list(range(len(parameters)))
     signs = [-1., 1.]
     if rng is not None:

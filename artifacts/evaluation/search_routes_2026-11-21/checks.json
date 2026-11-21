@@ -1,0 +1,33 @@
+{
+  "schema_version": "search_route_checks_v1",
+  "migration_status": "partial",
+  "static_entry_functions": 60,
+  "custom_fit_entries_without_shared_kernel": 19,
+  "registered_scene_fitters_checked_against_inventory": 39,
+  "all_routes_behavior_verified": false,
+  "checks": [
+    {
+      "tests": ["test_search_route_contracts.py", "test_sample_alignment.py", "test_seed_search_effect.py", "test_two_way_valve_description.py"],
+      "passed": 40,
+      "failed": 0
+    },
+    {
+      "tests": ["detailtests/test_cli_helpers.py", "detailtests/test_conversion_random_helpers.py", "test_description_language.py", "test_svg_components.py", "test_conversion_persistence.py"],
+      "passed": 167,
+      "failed": 0
+    },
+    {
+      "tests": ["detailtests/test_conversion_random_helpers.py", "test_conversion_search_scheduler.py", "test_conversion_search_bots.py", "test_description_registration_search.py"],
+      "passed": 32,
+      "failed": 0
+    },
+    {
+      "tests": ["test_search_route_contracts.py"],
+      "passed": 7,
+      "failed": 0,
+      "note": "Final repeat after report fields and static inventory were updated."
+    }
+  ],
+  "seed_plumbing_fixed": ["shared analytic registration with disabled portfolio", "legacy search configuration", "semantic/composite run seed", "uploaded/current SVG alignment"],
+  "pending_migrations": ["typed draft/passed dispatch outcomes", "19 custom fit entries", "full/intermediate scope adapters", "semantic and composite hypothesis adapters", "joint top-k SVG component placements"]
+}

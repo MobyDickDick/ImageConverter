@@ -320,17 +320,19 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     final_svg = constrained
     best_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     evaluations, accepted, alignment = (2 if constrained != prepared else 1), 0, None
+    alignment_search = None
     print(f"Sample geladen: mittlerer Pixelfehler={initial_mse:.8f}", flush=True)
     if not accepted_input:
         from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
         # Reserve the remaining budget for changing the construction when
         # whole-assembly alignment cannot explain the source.
         fitted = align_sample(root, target, render_svg, deadline=min(hard_deadline, started+min(5., seconds*.25)), initial=rendered,
-                              assertions=assertions)
+                              assertions=assertions,seed=effective_seed)
         final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
         evaluations += fitted['evaluations']
         accepted = fitted['accepted']
         alignment = fitted['transform']
+        alignment_search = fitted.get('search_control')
         print(f"Sample gemeinsam ausgerichtet: Prüfungen={evaluations}, "
               f"Pixelfehler={best_mse:.8f}", flush=True)
     final_svg = contain_svg(final_svg, width, height)
@@ -393,6 +395,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
                                'quality_target_reached' if accepted_input and not description_error else
                                'sample_alignment_accepted' if quality and quality['passed'] else 'search_complete'),
                   continuation=continuation, alignment=alignment,
+                  alignment_search=alignment_search,
                   search_goal_reached=bool(preferred_quality(quality) and not description_error),
                   passed=bool(quality and quality["passed"] and not description_error),
                   elapsed=round(time.monotonic() - started, 2))

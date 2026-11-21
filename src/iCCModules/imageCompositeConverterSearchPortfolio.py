@@ -55,12 +55,12 @@ def settings():
 def proposal_rng(context, identity, *, seed=None):
     """Stable independent random streams; never depend on global RNG or paths.
 
-    A missing portfolio preserves fixed-policy callers. An explicit seed also
+    A missing search configuration preserves fixed-policy callers. An explicit seed also
     supports generators outside a configured search (including regression QA).
     """
     config = settings()
     if seed is None:
-        if not config or config['mode'] != 'portfolio':
+        if not config:
             return None
         seed = config['seed']
     digest = hashlib.sha256(json.dumps([int(seed), context, identity],
