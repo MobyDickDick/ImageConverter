@@ -1,0 +1,31 @@
+{
+  "id": "6980f51907424c93a04c8b44e3ab1191",
+  "status": "done",
+  "quality": "warning",
+  "elapsed": 11.3,
+  "message": "Bester vorhandener Vektorentwurf aus der Suche erhalten. Die vollständige Modellprüfung ist noch offen; bitte den Entwurf prüfen.",
+  "sample_report": null,
+  "pixel_quality": {
+    "normalized_mse": 0.0004553940671030432,
+    "foreground_mse": 0.0012811168562620878,
+    "foreground_iou": 0.8361344537815126,
+    "foreground_iou_binary": 0.8361344537815126,
+    "edge_alignment": 0.9756267070770264,
+    "passed": false,
+    "representation_penalty": 0.00022600000000000002,
+    "representation_complexity": {
+      "elements": 4,
+      "coordinates": 13,
+      "penalty": 0.00022600000000000002
+    },
+    "within_canvas": true,
+    "observed_foreground_pixels": 464,
+    "output_foreground_pixels": 410
+  },
+  "project_save": {
+    "status": "unchanged",
+    "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0201.svg",
+    "message": "Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten."
+  },
+  "description": "Es ist ein grauer Kreis mit grauem Rand. Im Kreis sind zwei dunkelgraue Linien enthalten, welche symmetrisch in bezug auf die senkrechte Symmetrieachse des Kreises sind."
+}

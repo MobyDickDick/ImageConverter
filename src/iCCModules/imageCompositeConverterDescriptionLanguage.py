@@ -38,6 +38,7 @@ def normalize_description(description: str, *, orientations: bool = False) -> st
             (r'\b(spitze\s+nach\s+)o+b+e+n+\b', r'\1oben'),
             (r'\bminnus\b', 'Minus'),
             (r'\b(?:linen|lininen)\b', 'Linien'),
+            (r'\bdunelgrau([enrms]*)\b', r'dunkelgrau\1'),
             (r'\bminzuszeichen\b', 'Minuszeichen'),
             (r'\bhorizonal(e|er|en|em|es)?\b', r'horizontal\1'),
             (r'\bwaagrecht(e|er|en|em|es)?\b', r'waagerecht\1'),
@@ -149,6 +150,10 @@ def description_assertions(description: str) -> dict:
     valve = two_way_valve_spec(normalized)
     if valve:
         assertions['two_way_valve'] = valve
+    from src.iCCModules.imageCompositeConverterSymmetricCircleLines import symmetric_circle_lines_spec
+    symmetric_lines = symmetric_circle_lines_spec(normalized)
+    if symmetric_lines:
+        assertions['symmetric_circle_lines'] = symmetric_lines
     from src.iCCModules.imageCompositeConverterRelations import anchor_relations
     try:
         relations = anchor_relations(normalized)
@@ -269,6 +274,12 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         from src.iCCModules.imageCompositeConverterTwoWayValve import validate_two_way_valve
         try:
             validate_two_way_valve(svg, assertions['two_way_valve'])
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
+    if assertions and assertions.get('symmetric_circle_lines'):
+        from src.iCCModules.imageCompositeConverterSymmetricCircleLines import validate_symmetric_circle_lines
+        try:
+            validate_symmetric_circle_lines(svg, assertions['symmetric_circle_lines'])
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')

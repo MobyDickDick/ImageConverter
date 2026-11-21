@@ -1407,6 +1407,18 @@ def runNonCompositeIterationImpl(
     session = current_search()
     if session is not None:
         session.bind_reference(perc_img)
+    from src.iCCModules.imageCompositeConverterSymmetricCircleLines import symmetric_circle_lines_spec, fit_symmetric_circle_lines
+    if symmetric_circle_lines_spec(description):
+        fitted = fit_symmetric_circle_lines(width, height, description=description, image=perc_img,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+        if fitted is None:
+            write_validation_log_fn(['status=description_symmetric_circle_lines_fit_failed'])
+            return None
+        validated_result(fitted, perc_img)
+        params['symmetric_circle_lines_registration'] = {k:v for k,v in fitted.items() if k not in {'svg','rendered'}}
+        write_validation_log_fn(['status=description_symmetric_circle_lines'])
+        write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+        return base_name, description, params, 1, fitted['error']
     if two_way_valve_contract(description):
         # This first description fit has a closed, declared inventory. Keep it
         # separate from the removed post-fit raster reconstruction path.

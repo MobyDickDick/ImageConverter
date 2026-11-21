@@ -1,5 +1,12 @@
 # ImageConverter
 
+Der Startabbruch für `AC0201.jpg` ist behoben: Ein Kreis mit zwei symmetrischen
+Innenlinien wird als vollständige Beschreibung ausgewertet. Die Beschreibung
+wurde nach Zustimmung auf die senkrechte Symmetrieachse korrigiert. Ein echtes
+Worker-Ergebnis ist gespeichert, bleibt aber wegen Vordergrund-IoU 0,836 statt
+mindestens 0,85 als Entwurf mit Warnung eingestuft. Die Qualitätsgrenzen bleiben
+unverändert. [Nachweis und offene Qualitätsgrenze](artifacts/evaluation/ac0201_circle_lines_2026-11-21/README.md).
+
 Die gemeinsame Suchsteuerung **SEARCH-ROUTES-01** ist umgesetzt: Bildseed,
 Deadline, tatsächliche Renderzahl und Rastercache bleiben über Modellwechsel,
 Worker und Vorlagenneustart erhalten. Zwischenprüfungen bestätigen keinen
