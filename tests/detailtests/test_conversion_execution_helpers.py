@@ -4,11 +4,26 @@ import binascii
 import json
 import struct
 import time
+from xml.etree import ElementTree as ET
 from pathlib import Path
 
 import pytest
 
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
+
+
+def assert_bounded_parts(path, expected):
+    """Canvas metadata/assembly transforms may change; copied parts must not."""
+    from src.iCCModules.imageCompositeConverterCanvas import within_canvas
+    actual = ET.parse(path).getroot()
+    original = ET.fromstring(expected)
+    def parts(root):
+        return [(node.tag.rsplit('}', 1)[-1], node.attrib) for node in root.iter()
+                if node.tag.rsplit('}', 1)[-1] not in {'svg', 'g'}]
+    assert parts(actual) == parts(original)
+    assert (actual.text or '').strip() == (original.text or '').strip()
+    assert actual.get('overflow') == 'hidden'
+    assert within_canvas(path.read_text(encoding='utf-8'), 3, 4)
 
 
 class _Cv2Stub:
@@ -674,7 +689,7 @@ def test_convert_one_impl_keeps_existing_svg_when_new_is_not_better(tmp_path: Pa
 
     assert failed is False
     assert row is not None
-    assert (svg_out / "AC0801_S.svg").read_text(encoding="utf-8") == "<svg>old</svg>"
+    assert_bounded_parts(svg_out / "AC0801_S.svg", "<svg>old</svg>")
 
 
 def test_convert_one_impl_keeps_poor_existing_svg_when_quality_retry_is_not_better(
@@ -721,7 +736,7 @@ def test_convert_one_impl_keeps_poor_existing_svg_when_quality_retry_is_not_bett
     assert failed is False
     assert row is not None
     assert row["mean_delta2"] == 3000.0
-    assert (svg_out / "AC0224_M.svg").read_text(encoding="utf-8") == "<svg>old-ac0224</svg>"
+    assert_bounded_parts(svg_out / "AC0224_M.svg", "<svg>old-ac0224</svg>")
 
 
 def test_convert_one_impl_prefers_new_vector_svg_over_existing_embedded_raster_even_when_delta2_is_worse(tmp_path: Path) -> None:
@@ -767,7 +782,8 @@ def test_convert_one_impl_prefers_new_vector_svg_over_existing_embedded_raster_e
 
     assert failed is False
     assert row is not None
-    assert (svg_out / "AC0011.svg").read_text(encoding="utf-8") == "<svg><rect width='10' height='10'/></svg>"
+    # AC0011 is the pipeline's intermediate alias; AC9911 is the deliverable.
+    assert_bounded_parts(svg_out / "AC9911.svg", "<svg><rect width='10' height='10'/></svg>")
 
 
 def test_convert_one_impl_uses_logged_sample_svg_for_non_composite_plan_b_status(tmp_path: Path) -> None:
@@ -819,7 +835,7 @@ def test_convert_one_impl_uses_logged_sample_svg_for_non_composite_plan_b_status
 
     assert failed is False
     assert row is not None
-    assert (svg_out / "AC0011.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+    assert_bounded_parts(svg_out / "AC0011.svg", sample_svg.read_text(encoding="utf-8"))
     assert not (svg_out / "Failed_AC0011.svg").exists()
     assert not (reports / "converted_svgs" / "Failed_AC0011.svg").exists()
 
@@ -871,7 +887,7 @@ def test_convert_one_impl_uses_logged_sample_svg_for_manual_review_plan_b_status
 
     assert failed is False
     assert row is not None
-    assert (svg_out / "AC0VR2_AB_M.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+    assert_bounded_parts(svg_out / "AC0VR2_AB_M.svg", sample_svg.read_text(encoding="utf-8"))
 
 def test_convert_one_impl_resolves_relative_logged_sample_svg_path(tmp_path: Path) -> None:
     folder = tmp_path / "images"
@@ -918,7 +934,7 @@ def test_convert_one_impl_resolves_relative_logged_sample_svg_path(tmp_path: Pat
 
     assert failed is False
     assert row is not None
-    assert (svg_out / "AC9911.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+    assert_bounded_parts(svg_out / "AC9911.svg", sample_svg.read_text(encoding="utf-8"))
 
 
 def test_convert_one_impl_uses_implicit_sample_svg_for_non_composite_placeholder_status(tmp_path: Path) -> None:
@@ -966,7 +982,7 @@ def test_convert_one_impl_uses_implicit_sample_svg_for_non_composite_placeholder
 
     assert failed is False
     assert row is not None
-    assert (svg_out / "AC0030_L.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+    assert_bounded_parts(svg_out / "AC0030_L.svg", sample_svg.read_text(encoding="utf-8"))
     assert not (svg_out / "Failed_AC0030_L.svg").exists()
 
 

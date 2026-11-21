@@ -56,7 +56,9 @@ def test_uploaded_crossed_panel_is_shrunk_without_losing_its_minus(tmp_path):
                     (FIXTURES/'description.txt').read_text(encoding='utf-8'), 3)
     assert report['passed'], report
     assert report['stop_reason'] in {'sample_alignment_accepted', 'native_search_accepted'}
-    assert report['final_mse'] < report['initial_mse']*.05
+    # The initial template is now already constrained to the canvas. Require
+    # a strong improvement and the same independent quality gates below.
+    assert report['final_mse'] < min(.002, report['initial_mse']*.1)
     assert .88 < report['alignment']['scale_x'] < .92
     assert .88 < report['alignment']['scale_y'] < .92
     assert_parts_preserved(before, output.read_text(encoding='utf-8'), 40, 80)

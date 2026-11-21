@@ -57,6 +57,10 @@
             <p>Du kannst auf hinterlegte Katalogbeschreibungen verweisen: <strong>Form ähnlich wie BILDNAME</strong>, <strong>Farben ähnlich wie BILDNAME</strong> oder <strong>Farbverlauf ähnlich wie BILDNAME</strong>. Ersetze BILDNAME durch die Kennung des Katalogbildes; auch eine genaue Grössenvariante ist möglich.</p>
             <p>Form und Farben lassen sich aus verschiedenen Bildern kombinieren. Ergänze Unterschiede, zum Beispiel „aber ohne Anschluss“ oder „ohne Text“. Die Referenzen geben Hinweise aus den Beschreibungen; die genaue Anpassung und Qualitätsprüfung erfolgen am aktuellen Bild. Die aufgelöste Beschreibung steht im Konvertierungsprotokoll.</p>
           </details>
+          <details class="hint"><summary>Vorhandene SVG-Bauteile zusammensetzen</summary>
+            <p>Ersetze die Beschreibung durch eine Bauteilliste, je eine Zeile: <strong>SVG-Bauteil: AC0151_L.svg</strong>. Weitere SVGs in weiteren Zeilen ergänzen. Der Konverter sucht Position und einheitliche Skalierung im Originalbild automatisch.</p>
+            <p>Du kannst die Platzierung in Bildpixeln vorgeben: <strong>SVG-Bauteil: NAME.svg bei 80 165 skaliert 2.5</strong>. Die Reihenfolge bestimmt die Überlagerung. Verwendet werden exakte Dateinamen aus den gespeicherten Projekt-SVGs, Samples oder zufriedenstellenden Konvertierungen. Formen, Farben und Text bleiben erhalten; das zusammengesetzte Ergebnis muss die Bildprüfung bestehen.</p>
+          </details>
           <label class="field-label" for="profile">Suchbudget</label>
           <select id="profile"><option value="quick">Schnell · bis zu 45 Sekunden</option><option value="normal" selected>Normal · bis zu 2 Minuten</option><option value="thorough">Gründlich · bis zu 4 Minuten</option></select>
           <p class="hint">Bei ungenügender Qualität sucht der Konverter mindestens 30 Sekunden nach besseren Kandidaten, sofern ein bearbeitbares Vektormodell vorliegt. Sehr genaue Ergebnisse können früher fertig sein. Bei spätem Fortschritt sucht er bis zur Obergrenze weiter. Start und Abschluss kommen hinzu.</p>

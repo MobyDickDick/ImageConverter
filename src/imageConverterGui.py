@@ -414,7 +414,13 @@ class Jobs:
         try:
             from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
             resolve_similarity_description(description, catalog_descriptions(), base_name=getBaseNameFromFileImpl)
+            from src.iCCModules.imageCompositeConverterSvgComponents import parse_components, load_component
+            components = parse_components(description)
+            for index, component in enumerate(components):
+                load_component(component['name'], index)
         except SimilarityReferenceError as exc:
+            raise RequestError(str(exc)) from exc
+        except (OSError, ValueError, SyntaxError) as exc:
             raise RequestError(str(exc)) from exc
         with self.lock:
             if self.closed or self.busy(background=background):
@@ -433,7 +439,7 @@ class Jobs:
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
-            if use_current_svg:
+            if use_current_svg and not components:
                 self.use_best_svg(job)
             self._check_description(job)
             if origin == 'user' and not background:
@@ -541,13 +547,23 @@ class Jobs:
             write_description_table(descriptions, job["description"], catalog)
             output = folder / "output"
             seconds, maximum = PROFILES[job["profile"]]
+            from src.iCCModules.imageCompositeConverterSvgComponents import parse_components
+            component_mode = bool(parse_components(job['description']))
             command = [sys.executable, "-u", "-m", "src.imageCompositeConverter", str(input_dir),
                        "--descriptions-path", str(descriptions), "--output-dir", str(output),
                        "--start", "UPLOAD", "--end", "UPLOAD", "--execution-mode", "semantic-only",
                        "--search-seconds", str(seconds), "--search-max-seconds", str(maximum),
                        "--search-seed", str(job["search_seed"]),
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
-            if job.get("sample") and job.get('use_current_svg',True):
+            if component_mode:
+                description_file = folder / 'description.txt'
+                description_file.write_text(job['description'], encoding='utf-8')
+                command = [sys.executable, '-u', '-m', 'src.imageConverterComponents',
+                           '--source', str(folder / 'source.png'),
+                           '--output', str(output / 'refined.svg'),
+                           '--description', str(description_file),
+                           '--seconds', str(max(0.01, deadline-time.monotonic()-1))]
+            elif job.get("sample") and job.get('use_current_svg',True):
                 description_file = folder / "description.txt"
                 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
                 resolved = resolve_similarity_description(job["description"], catalog, base_name=getBaseNameFromFileImpl)
@@ -575,7 +591,7 @@ class Jobs:
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
-                if job.get('sample') and job.get('use_current_svg',True) and resolved.references:
+                if not component_mode and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
                     for reference in resolved.references:
                         aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
                         log.write(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}\n".encode('utf-8'))
@@ -602,7 +618,7 @@ class Jobs:
                 # Collect into a temporary snapshot: a failed first attempt
                 # must not appear terminal while Plan B still has search time.
                 collected = dict(job)
-                collect = collect_sample_result if job.get('sample') and job.get('use_current_svg',True) else collect_result
+                collect = collect_sample_result if component_mode or (job.get('sample') and job.get('use_current_svg',True)) else collect_result
                 collect(folder, collected, process.returncode)
                 retain_best_preview(folder, collected)
             retain_best_preview(folder, collected)
@@ -958,6 +974,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         message = 'Sample als Ganzes skaliert und ausgerichtet; vorhandene Formen bleiben erhalten.'
     elif report.get('stop_reason') == 'native_search_accepted':
         message = 'Vorlagenaufbau neu bearbeitet; Bildvergleich und Beschreibungsprüfung bestanden.'
+    elif report.get('stop_reason') == 'svg_components_composed':
+        message = 'Referenzierte SVG-Bauteile zusammengesetzt und am Original platziert.'
     elif report.get('restarted_from_description'):
         message = 'Unpassende Vorlage verworfen. SVG neu aus der Bildbeschreibung erstellt.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
@@ -982,6 +1000,11 @@ def result_description_error(svg: Path, description: str) -> str:
 
 def contain_result(path: Path, job: dict) -> None:
     """Normalize only a newly generated job artifact, never its uploaded sample."""
+    from src.iCCModules.imageCompositeConverterSvgComponents import parse_components
+    if parse_components(job.get('description', '')):
+        # Components already have independently bounded viewports and a strict
+        # placement contract; another wrapper would change that assembly.
+        return
     from src.iCCModules.imageCompositeConverterCanvas import contain_svg
     try:
         original = path.read_text(encoding='utf-8')

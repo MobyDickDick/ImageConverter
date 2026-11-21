@@ -100,6 +100,11 @@ def arrow_side_colors(description: str, side: str) -> set[str]:
 
 
 def description_assertions(description: str) -> dict:
+    from src.iCCModules.imageCompositeConverterSvgComponents import parse_components
+    if parse_components(description):
+        # An explicit SVG list names the complete inventory directly. Geometry
+        # is checked against every donor, including its paint and internal IDs.
+        return dict(svg_component_description=description)
     normalized = normalize_description(description)
     labels = re.findall(r'["„]([^"“\n]+)["“]', normalized)
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalized).casefold()
@@ -233,7 +238,8 @@ def gradient_direction(text: str, direction: str) -> bool:
 
 def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
-    for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error'):
+    for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
+                'svg_component_description'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -242,6 +248,10 @@ def draft_assertions(assertions):
 
 
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
+    if assertions and assertions.get('svg_component_description'):
+        from src.iCCModules.imageCompositeConverterSvgComponents import validate_components
+        validate_components(svg, assertions['svg_component_description'])
+        return
     if assertions and assertions.get('inventory_error'):
         raise DescriptionRejected(assertions['inventory_error'])
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')

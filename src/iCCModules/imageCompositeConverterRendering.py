@@ -825,6 +825,12 @@ def render_svg_to_numpy_inprocess(
     if re.search(r"(?<![A-Za-z])(nan|inf)(?![A-Za-z])", svg_string, flags=re.IGNORECASE):
         return None
 
+    if 'data-svg-component=' in svg_string:
+        # Native donor gradients and viewport clips need the same faithful
+        # renderer during matching, final export and GUI revalidation.
+        from src.iCCModules.imageCompositeConverterSvgComponents import render_components
+        return cv2_module.cvtColor(render_components(svg_string, size_w, size_h), cv2_module.COLOR_RGB2BGR)
+
     from src.iCCModules.imageCompositeConverterCanvas import contain_svg
     try:
         # size_w/size_h may be a supersampled render, not the source canvas.

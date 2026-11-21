@@ -1,5 +1,19 @@
 # ImageConverter
 
+Vorhandene SVGs lassen sich in der Einzelkonvertierung jetzt als Bauteile
+zusammensetzen: je eine Zeile `SVG-Bauteil: DATEINAME.svg` im Beschreibungsfeld.
+Position und proportionale Skalierung werden automatisch gesucht oder explizit
+vorgegeben. Die Bildprüfung bleibt verbindlich; die Bauteilauswahl bleibt manuell.
+AC0152_L besteht mit der vorhandenen fehlerhaften M-Vorlage noch nicht.
+[Bedienung, Prüfungen und Grenzen](docs/svg_component_reuse.md).
+
+Die ursprüngliche Bildgrösse ist jetzt eine feste Grenze für die SVG-Ausgabe.
+Überstehende Flächen und Konturen werden vor dem Abschneiden gemessen; das
+gesamte Motiv wird bei Bedarf verschoben oder proportional eingepasst.
+Vorschau, Pixelprüfung und Export verwenden dieselbe begrenzte Geometrie.
+Es werden dafür keine beschriebenen Elemente ergänzt oder entfernt.
+[Nachweis am gemeldeten Pumpensymbol und Prüfungen](artifacts/evaluation/canvas_bounds_2026-11-21/README.md).
+
 Ein unpassendes vorhandenes SVG blockiert den Konvertierungsstart nicht mehr:
 Die Vorlage wird verworfen und das Bild mit der normalen Beschreibungssuche neu
 konvertiert. Formnennungen mit mehreren Adjektiven (etwa „kontrastierendes

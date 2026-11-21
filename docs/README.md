@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Vorhandene SVG-Bauteile kombinieren: explizite Verweise, automatische Platzierung und AC0152_L-Grenze](svg_component_reuse.md)
+
 - [P0: native sichtbare Kurvenvorschläge, zwei Renderer und verbleibende enge Geometrieabnahme (2026-11-15)](next_arbeitspaket_2026-11-15_curve_proposals.md)
 
 - [P0: unabhängiger Kurven-/Bogenprüfer, 285 Gegenproben und produktive Vorschlagsgrenze (2026-11-15)](next_arbeitspaket_2026-11-15_curve_checker.md)

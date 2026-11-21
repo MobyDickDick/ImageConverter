@@ -1,0 +1,43 @@
+{
+  "source_name": "AC0253_2.jpg",
+  "source_job": "74b82f6a7f6340fabd62b664039400a3",
+  "canvas": [
+    31,
+    31
+  ],
+  "original_svg_sha256": "6b6417a1a9941ffa55c96cf3c0c618df285f8334196f85f6fd8b808d109c80c3",
+  "painted_bounds_before": [
+    0.25,
+    -0.5,
+    31.25,
+    30.5
+  ],
+  "painted_bounds_after": [
+    0.0,
+    0.0,
+    31.0,
+    31.0
+  ],
+  "within_canvas": true,
+  "idempotent": true,
+  "inventory_before": {
+    "circle": 1,
+    "triangle": 1
+  },
+  "inventory_after": {
+    "circle": 1,
+    "triangle": 1
+  },
+  "modifies_original_source": false,
+  "modifies_original_result": false,
+  "tests": {
+    "passed": 256,
+    "exit_code": 0,
+    "elapsed_seconds": 31.54,
+    "log_sha256": "d62d1988f703c142bdd11f1c6c76a5b40f5912ae76d1cd02fdafa67e442238ca"
+  },
+  "checks": {
+    "diff_check": "passed",
+    "image_id_guard": "passed"
+  }
+}
