@@ -1,0 +1,36 @@
+{
+  "case": "AC0253_2.jpg",
+  "tests": {
+    "passed": 172,
+    "exit_code": 0,
+    "elapsed_seconds": 14.98
+  },
+  "reproduction": {
+    "result": true,
+    "passed": false,
+    "template_rejection": "logical_object_count:all:2:4",
+    "reconstructed_inventory": {
+      "circle": 1,
+      "triangle": 1
+    },
+    "first_stage_returncode": 0,
+    "native_continuation": null,
+    "pixel_quality": {
+      "normalized_mse": 0.0015415827510878444,
+      "foreground_mse": 0.001710865763016045,
+      "foreground_iou": 0.8347107438016529,
+      "foreground_iou_binary": 0.8347107438016529,
+      "edge_alignment": 0.938865602016449,
+      "passed": false
+    }
+  },
+  "original_source_sha256": "9f7b26b73469df0915e464bb90bc59ec6569602cea7b9cceef3f57c730d3d1b3",
+  "original_template_sha256": "9b433120fd91bb1233cb510d9b98d22d186d83dbfcadcef369891d472a8a3127",
+  "fixture_matches_original": true,
+  "source_image_id_guard": "passed",
+  "diff_check": "passed",
+  "known_remaining_checks": [
+    "sample_contrast compound curve paths are not recognized as two diagonals",
+    "property-only line-width validator probes still encounter missing inventory guard"
+  ]
+}

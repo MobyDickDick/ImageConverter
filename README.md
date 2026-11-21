@@ -1,5 +1,13 @@
 # ImageConverter
 
+Ein unpassendes vorhandenes SVG blockiert den Konvertierungsstart nicht mehr:
+Die Vorlage wird verworfen und das Bild mit der normalen Beschreibungssuche neu
+konvertiert. Formnennungen mit mehreren Adjektiven (etwa „kontrastierendes
+gefülltes Dreieck“) werden vollständig gezählt. Erwartbare Eingabefehler liefern
+eine verständliche Diagnose statt eines Python-Tracebacks. Die entfernte zweite
+Rasterrekonstruktion bleibt ausgeschaltet.
+[Ursache und Prüfung des gemeldeten Startabbruchs](artifacts/evaluation/template_start_regression_2026-11-21/README.md).
+
 Seit 21. November 2026 gilt die **Beschreibung als vollständige Elementliste**.
 Die zweite Rasterrekonstruktion ist aus Einzelkonvertierung, CLI, Vorlagenanpassung
 und Plan-B-Prüfläufen entfernt. Es gibt keine zusätzlichen Restlinien,

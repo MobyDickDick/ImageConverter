@@ -70,7 +70,8 @@ def description_object_limits(text):
     adjective = (r'(?:(?:gerad|horizontal|vertikal|waagerecht|waagrecht|senkrecht|diagonal|'
                  r'grau|dunkelgrau|hellgrau|rot|blau|grün|gelb|weiss|weiß|schwarz|'
                  r'durchgehend|gestrichelt|dünn|schmal|breit|klein|gross|groß|ungefüllt|gefüllt|'
-                 r'ganz|sehr|hochkantig|hoh|lang)[enrms]*[,\s]+)*')
+                 r'ganz|sehr|hochkantig|hoh|lang)[enrms]*[,\s]+|'
+                 r'[a-zäöüß-]+(?:en|er|es|em|e)[,\s]+){0,6}')
     noun = r'(kreise?|rechtecke?|quadrate?|rauten?|ellipsen?|dreiecke?|geraden?|linien?|diagonalen?|striche?)'
     limits, covered = {}, []
     for match in re.finditer(r'\b'+count+r'\s+'+adjective+noun+r'\b', words):
@@ -98,6 +99,7 @@ def description_object_limits(text):
     for match in re.finditer(bare, words):
         if any(start <= match.start() < end for start, end in covered) or match[0] in seen:
             continue
+        covered.append(match.span())
         if re.search(r'\b(?:ohne|kein[enrms]?)\s*$', words[:match.start()]):
             continue
         form = match[1]
@@ -107,8 +109,27 @@ def description_object_limits(text):
                 else 'rhombus' if form.startswith('raute') else 'line')
         limits[kind] = limits.get(kind, 0)+1
         seen.add(match[0])
+    # A singular noun also declares an instance without an article, e.g.
+    # "Pumpensymbol: Kreis mit einem gefüllten Dreieck". Later references to
+    # the same singular shape do not create additional objects.
+    for form, kind in (('kreis', 'circle'), ('rechteck', 'rect'), ('quadrat', 'square'),
+                       ('raute', 'rhombus'), ('ellipse', 'ellipse'), ('dreieck', 'triangle'),
+                       ('gerade', 'line'), ('linie', 'line')):
+        for match in re.finditer(r'\b'+form+r'\b', words):
+            if any(start <= match.start() < end for start, end in covered):
+                continue
+            if re.search(r'\b(?:ohne|kein[enrms]?)\s+'+adjective+r'$', words[:match.start()]):
+                continue
+            if form == 'gerade' and re.match(r'\s+(?:rand|kanten?|seiten?|linien?)\b', words[match.end():]):
+                continue
+            limits.setdefault(kind, 1)
     if not limits and words.strip(' .\n') in {'gerade', 'linie', 'kreis', 'rechteck', 'ellipse', 'dreieck'}:
         limits[dict(gerade='line', linie='line', kreis='circle', rechteck='rect', ellipse='ellipse', dreieck='triangle')[words.strip(' .\n')]] = 1
+    # Rectangles and their special cases have two diagonals. "mit Diagonalen"
+    # is a complete component claim even without spelling out "zwei".
+    if any(limits.get(kind) for kind in ('rect', 'square', 'rhombus')) and 'diagonal' not in limits:
+        if re.search(r'\bmit\s+(?:beiden\s+|den\s+)?diagonalen\b', words):
+            limits['diagonal'] = 2
     return limits
 
 

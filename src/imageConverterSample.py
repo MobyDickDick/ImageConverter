@@ -174,6 +174,104 @@ def render_svg(svg, width, height):
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 
+def refit_description(source, output, description, *, seed, hard_deadline, initial_mse,
+                      initial_quality, template_error, started):
+    """Discard an incompatible template and run the ordinary first-stage CLI.
+
+    This is description-based construction, never the removed raster recovery.
+    The caller's deadline includes process startup and all fitting work.
+    """
+    import csv
+    import os
+    import shutil
+    import subprocess
+    import sys
+    import tempfile
+    import numpy as np
+    from PIL import Image
+    from src.imageConverterCatalog import atomic_json
+    from src.imageConverterRecovery import atomic_svg
+    from src.imageConverterGui import catalog_descriptions, search_summary
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    folder = Path(tempfile.mkdtemp(prefix='description-fit-', dir=output.parent))
+    inputs = folder/'input'
+    inputs.mkdir()
+    shutil.copyfile(source, inputs/'UPLOAD.png')
+    table = folder/'description.csv'
+    with table.open('w', encoding='utf-8', newline='') as stream:
+        writer = csv.writer(stream)
+        writer.writerow(['Wurzelform', 'Beschreibung'])
+        writer.writerows(catalog_descriptions().items())
+        writer.writerow(['UPLOAD', description])
+    remaining = max(0., hard_deadline-time.monotonic())
+    report = dict(passed=False, result=False, improved=False, evaluations=0, accepted=0,
+        continuation=None, alignment=None, search_seed=str(seed),
+        initial_mse=initial_mse, initial_quality=initial_quality,
+        template_rejection=template_error, restarted_from_description=True,
+        description_fit_directory=str(folder), stop_reason='description_fit_failed',
+        description_error='', message='Die Vorlage passt nicht zur Beschreibung. '
+        'Auch die neue Konvertierung aus der Beschreibung hat noch kein passendes SVG ergeben.')
+    print('Vorlage verworfen: '+template_error+'. Starte neue Konvertierung aus der Bildbeschreibung.', flush=True)
+    command = [sys.executable, '-u', '-m', 'src.imageCompositeConverter', str(inputs.resolve()),
+        '--descriptions-path', str(table.resolve()), '--output-dir', str((folder/'output').resolve()),
+        '--start', 'UPLOAD', '--end', 'UPLOAD', '--execution-mode', 'semantic-only',
+        '--no-isolate-conversion', '--search-seconds', str(max(.01, remaining)),
+        '--search-max-seconds', str(max(.01, remaining)), '--search-min-seconds', '0',
+        '--search-seed', str(seed), '--fail-on-batch-failures',
+        '--log-file', str((folder/'converter.log').resolve())]
+    environment = dict(os.environ, PYTHONIOENCODING='utf-8', ICC_MAX_QUALITY_PASSES='0',
+        IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', IMAGE_CONVERTER_REUSE_RENDER_WORKER='0',
+        ICC_GUI_PREVIEW_PHASE='Beschreibungskonvertierung')
+    options = {'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {'start_new_session': True}
+    if remaining > .1:
+        try:
+            with (folder/'console.log').open('wb') as log:
+                completed = subprocess.run(command, cwd=Path(__file__).resolve().parents[1], env=environment,
+                    stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
+                    timeout=remaining, **options)
+            report['description_fit_returncode'] = completed.returncode
+        except subprocess.TimeoutExpired:
+            report['stop_reason'] = 'time_limit'
+    else:
+        report['stop_reason'] = 'time_limit'
+    summary = search_summary(folder/'output')
+    if summary:
+        report['description_search_summary'] = summary
+        report['evaluations'] = summary['candidate_evaluations']
+    assertions = description_assertions(description)
+    with Image.open(source) as image:
+        target = np.asarray(image.convert('RGB'))
+    h, w = target.shape[:2]
+    candidates = []
+    paths = [path for name in ('converted_svgs', 'converted_svg_failed')
+             for path in (folder/'output'/name).glob('*.svg')]
+    for path in paths:
+        try:
+            svg = path.read_text(encoding='utf-8')
+            validate_svg_assertions(svg, assertions)
+            pixels = render_svg(svg, w, h)
+            quality = pixel_quality(target, pixels)
+            error = float(np.square(target.astype(float)-pixels.astype(float)).mean()/255**2)
+            passed = bool(quality['passed'] and report.get('description_fit_returncode') == 0
+                          and path.parent.name == 'converted_svgs' and not path.name.startswith('Failed_'))
+            candidates.append((not passed, error, svg, quality))
+        except (ValueError, OSError, SyntaxError):
+            continue
+    if candidates:
+        failed, error, svg, quality = min(candidates, key=lambda item: item[:2])
+        atomic_svg(output, svg)
+        report.update(result=True, passed=not failed, final_mse=error, final_quality=quality,
+            improved=error < initial_mse-1e-10, stop_reason='description_fit_complete',
+            message='Unpassende Vorlage verworfen; SVG neu aus der Bildbeschreibung erstellt.')
+    report['elapsed'] = round(time.monotonic()-started, 2)
+    atomic_json(output.with_suffix('.json'), report)
+    print(json.dumps(report, ensure_ascii=False), flush=True)
+    return report
+
+
 def refine(source: Path, sample: Path, output: Path, description: str, seconds: float, *, seed=None, deadline=None) -> dict:
     started = time.monotonic()
     hard_deadline = started+seconds
@@ -199,14 +297,19 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     root = ET.fromstring(prepare_sample(sample.read_bytes(), width, height))
     prepared = ET.tostring(root, encoding="unicode")
     assertions = description_assertions(description)
-    # An uploaded template does not authorize additions or missing objects.
-    # Reject it before alignment; the removed second stage must not rebuild it.
-    validate_svg_assertions(prepared, assertions)
     rendered = render_svg(prepared, width, height)
     initial_rendered = rendered.copy()
     initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     initial_quality = pixel_quality(target, rendered)
     constrained = constrain_stroke_width(prepared, assertions)
+    try:
+        validate_svg_assertions(constrained, assertions)
+    except ValueError as exc:
+        # A stale current SVG is optional input, never a prerequisite for
+        # conversion. Reject the template, not the user's conversion request.
+        return refit_description(source, output, description, seed=effective_seed,
+            hard_deadline=hard_deadline, initial_mse=initial_mse, initial_quality=initial_quality,
+            template_error=str(exc), started=started)
     if constrained != prepared:
         root = ET.fromstring(constrained)
         rendered = render_svg(constrained, width, height)
@@ -314,9 +417,19 @@ def main():
         parser.error('--seed muss zwischen 0 und 2^64-1 liegen')
     if args.deadline is not None and not math.isfinite(args.deadline):
         parser.error('--deadline muss endlich sein')
-    refine(args.source, args.sample, args.output, args.description.read_text(encoding="utf-8"), args.seconds,
-           seed=args.seed, deadline=args.deadline)
+    try:
+        report = refine(args.source, args.sample, args.output, args.description.read_text(encoding="utf-8"), args.seconds,
+                        seed=args.seed, deadline=args.deadline)
+    except (ValueError, OSError) as exc:
+        from src.imageConverterCatalog import atomic_json
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        message = 'Konvertierung konnte nicht ausgeführt werden: '+str(exc)
+        atomic_json(args.output.with_suffix('.json'), dict(passed=False, result=False,
+            stop_reason='invalid_input', description_error=str(exc), message=message))
+        print(message, flush=True)
+        return 1
+    return 1 if report.get('result') is False else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -110,8 +110,10 @@ def test_fragmented_template_is_rejected_without_rebuilding(case):
     _, _, folder = case
     sample, output = folder/'sample.svg', folder/'refined.svg'
     sample.write_text(SVG.replace('</svg>', '<circle cx="4" cy="4" r="2"/></svg>'))
-    with pytest.raises(ValueError, match='logical_object_count'):
-        refine(folder/'source.png', sample, output, 'Ein Kreis.', .2)
+    report = refine(folder/'source.png', sample, output, 'Ein Kreis.', .01)
+    assert report['restarted_from_description']
+    assert report['template_rejection'].startswith('logical_object_count')
+    assert not report['result']
     assert not output.exists()
 
 

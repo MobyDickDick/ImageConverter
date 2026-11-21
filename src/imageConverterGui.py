@@ -855,6 +855,8 @@ def retain_best_preview(folder: Path, job: dict) -> None:
                    description_validation_version=DESCRIPTION_VALIDATION_VERSION,
                    message='Bester vorhandener Vektorentwurf aus der Suche erhalten. '
                            'Die vollständige Modellprüfung ist noch offen; bitte den Entwurf prüfen.')
+        if (job.get('sample_report') or {}).get('restarted_from_description'):
+            job['message'] = 'Unpassende Vorlage verworfen; neu aus der Bildbeschreibung konvertiert. '+job['message']
 
 
 def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> None:
@@ -921,10 +923,15 @@ def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> Non
 def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     result = folder / "output" / "refined.svg"
     report_path = result.with_suffix(".json")
-    if not result.is_file() or not report_path.is_file():
+    if not report_path.is_file():
         job.update(status="error", result=False, quality="unknown", message="Sample konnte nicht verbessert werden. Details stehen im Protokoll.")
         return
     report = json.loads(report_path.read_text(encoding="utf-8"))
+    if not result.is_file() or report.get('result') is False:
+        job.update(status='error', result=False, quality='warning', sample_report=report,
+                   description_error=report.get('description_error', ''),
+                   message=report.get('message') or 'Kein passendes SVG aus der Beschreibung erzeugt. Details stehen im Protokoll.')
+        return
     if returncode != 0:
         report['stop_reason'] = 'interrupted'
     if reject_raster_result(result, job) or reject_description_result(result, job):
@@ -943,6 +950,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         message = 'Sample als Ganzes skaliert und ausgerichtet; vorhandene Formen bleiben erhalten.'
     elif report.get('stop_reason') == 'native_search_accepted':
         message = 'Vorlagenaufbau neu bearbeitet; Bildvergleich und Beschreibungsprüfung bestanden.'
+    elif report.get('restarted_from_description'):
+        message = 'Unpassende Vorlage verworfen. SVG neu aus der Bildbeschreibung erstellt.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
     if report.get('continuation'):
         message += f" {report['evaluations']} Bildkandidaten geprüft."

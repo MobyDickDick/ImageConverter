@@ -325,3 +325,23 @@ def test_described_label_is_checked_as_content_not_only_as_an_element_count():
     validate_svg_assertions('<svg><circle r="5"/><text>R</text></svg>', assertions)
     with pytest.raises(DescriptionRejected, match='wrong_described_labels'):
         validate_svg_assertions('<svg><circle r="5"/><text>M</text></svg>', assertions)
+
+
+@pytest.mark.parametrize('description', [
+    'Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck.',
+    'Pumpensymbol: Kreis mit einem gefüllten Dreieck.',
+    'Ein gefüllter Kreis mit einem kontrastierenden gefüllten Dreieck.',
+])
+def test_pump_description_counts_both_primitives_despite_adjectives(description):
+    assertions = description_assertions(description)
+    assert assertions['objects'] == {'circle': 1, 'triangle': 1}
+    svg = '<svg><circle r="10"/><polygon points="0,0 8,0 4,8"/></svg>'
+    validate_svg_assertions(svg, assertions)
+    with pytest.raises(DescriptionRejected, match='logical_object_count:all:2:3'):
+        validate_svg_assertions(svg.replace('</svg>', '<line x2="10"/></svg>'), assertions)
+
+
+@pytest.mark.parametrize('phrase', ['kein gefüllter Kreis', 'kein blauer Kreis', 'ohne einen Kreis'])
+def test_unquantified_nouns_do_not_reintroduce_negated_shapes(phrase):
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
+    assert description_object_limits('Ein Dreieck, '+phrase+'.') == {'triangle': 1}

@@ -102,8 +102,10 @@ def test_fragmented_template_is_rejected_without_a_second_reconstruction(tmp_pat
     source, sample, output = (tmp_path/name for name in ('neutral.png', 'template.svg', 'result.svg'))
     Image.fromarray(render_svg(source_svg, 80, 80)).save(source)
     sample.write_text(seed)
-    with pytest.raises(ValueError, match='logical_object_count'):
-        refine(source, sample, output, 'Ein Rechteck.', 3., seed=17)
+    report = refine(source, sample, output, 'Ein Rechteck.', .01, seed=17)
+    assert report['restarted_from_description']
+    assert report['template_rejection'].startswith('logical_object_count')
+    assert not report['result']
     assert not output.exists()
 
 

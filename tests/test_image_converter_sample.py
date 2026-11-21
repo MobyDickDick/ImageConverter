@@ -126,8 +126,10 @@ def test_pixel_passing_deformed_sample_is_rejected_by_its_head_contract(tmp_path
     sample = root/'tests/fixtures/arrow_pair_deformed_sample.svg'
     description = (root/'tests/fixtures/descriptions/arrow_pair_bottom_user.txt').read_text(encoding='utf-8-sig')
     source = root/'artifacts/images_to_convert/AC0030_L.jpg'
-    with pytest.raises(ValueError, match='invalid_described_arrow_head'):
-        refine(source, sample, tmp_path/'result.svg', description, .01)
+    report = refine(source, sample, tmp_path/'result.svg', description, .01)
+    assert report['restarted_from_description']
+    assert report['template_rejection'] == 'invalid_described_arrow_head'
+    assert not report['result']
     assert not (tmp_path/'result.svg').exists()
     with pytest.raises(ValueError, match='invalid_described_arrow_head'):
         validate_svg_assertions(sample.read_text(encoding='utf-8'), description_assertions(description))
@@ -137,9 +139,9 @@ def test_matching_sample_never_gets_worse_and_reports_description_conflict(tmp_p
     source, sample, output = (tmp_path / name for name in ("source.png", "sample.svg", "result.svg"))
     sample.write_bytes(SAMPLE)
     Image.fromarray(render_svg(SAMPLE.decode(), 64, 64)).save(source)
-    with pytest.raises(ValueError, match='object_count:circle:2:1'):
-        refine(source, sample, output, "Das Motiv enthält genau zwei Kreise, ohne Text.", 1)
-    assert not output.exists()
+    report = refine(source, sample, output, "Das Motiv enthält genau zwei Kreise, ohne Text.", .01)
+    assert report['template_rejection'] == 'object_count:circle:2:1'
+    assert not report['result'] and not output.exists()
 
 
 def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
