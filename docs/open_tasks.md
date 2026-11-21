@@ -4,6 +4,16 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
+## Aktueller Suchausbau (2026-11-21)
+
+- [x] **ADAPTIVE-FORMMODELS-AP1:** Beschreibungsgebundener früher Vergleich mehrerer Farbmodelle, produktiv für Kreis/Pfeil: zwei oder drei Farbstopps, gemeinsame Rendergrenze und Bilddeadline, vollständige Formprüfung, protokollierte Proben und Verfeinerungen. Baseline vor Runtimeänderung eingefroren. Die fünf bestehenden Kreis-Pfeil-Pässe bleiben erhalten; ein späterer Verlauf kann gewinnen. Keine allgemeine Erfolgs- oder Laufzeitsteigerung nachgewiesen. [Umsetzung und Grenzen](next_arbeitspakete_2026-11-21_adaptive_formmodelle.md).
+- [ ] **ADAPTIVE-FORMMODELS-AP2 (nächstes Paket):** Das gemeinsame Budget anhand Qualität und Fortschritt verteilen; zusätzliche Modellproben effizienter nutzen. Die feste Vergleichsmenge wiederholen, unveränderte Form-/Pixelgates erhalten und fehlgeschlagene Versuche sichtbar lassen. [Arbeitspakete AP 2–4](next_arbeitspakete_2026-11-21_adaptive_formmodelle.md).
+
+Die nachfolgende Reihenfolge dokumentiert den früheren Strukturausbau. Seit der
+Beschreibung-als-Elementliste-Umstellung vom 21.11.2026 werden keine zusätzlichen
+Restbildobjekte ohne Beschreibung erzeugt; ältere Raster-Fallback-Pakete sind
+unter dieser Vorgabe zu lesen.
+
 ## Neue Ausführungsreihenfolge (2026-10-23)
 
 - [x] **SPRAY-PANEL-DASHES-02 (Nutzerpräzisierung 2026-11-14):** Jeden der 15 Sprühstrahlen als fein gestrichelte native Linie mit einzeln angepasster Länge, Lücke, Phase, Breite und Farbe rekonstruieren; Bildbeschreibung in beiden Katalogen präzisieren. Gehäuse, Balken, Rahmen, Düsen und Strahlkoordinaten bleiben bytegleich. Frische CLI besteht beide Renderer, unveränderte Bild-/Teilregionsgates und einen zusätzlichen separaten Strichelungsvertrag; 48 Gegenproben abgelehnt, v1-Prüfer und Belege unverändert erhalten. [Neue SVG, Vergleich und Grenzen](spray_panel_dashed_mist_2026-11-14.md).

@@ -327,6 +327,10 @@ def vector_quality_score(quality):
 def vector_candidate_quality(reference, output, svg):
     from src.iCCModules.imageCompositeConverterRepresentation import representation_cost
     quality = pixel_quality(reference, output)
+    if 'data-svg-component=' in svg:
+        from src.iCCModules.imageCompositeConverterSvgComponents import component_overlap_quality
+        quality.update(component_overlap_quality(reference, output, svg))
+        quality['passed'] = bool(quality['passed'] and quality['overlap_passed'])
     cost = representation_cost(svg)
     return dict(quality, representation_penalty=cost['penalty'], representation_complexity=cost)
 

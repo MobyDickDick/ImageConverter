@@ -130,3 +130,20 @@ def test_semantic_contract_requires_supported_direction():
     assert symbol_semantics(INDEPENDENT, 'right') == 1
     assert symbol_semantics(INDEPENDENT, 'left') == 0
     assert symbol_semantics(INDEPENDENT, 'unknown') == 0
+
+
+def test_ge0037_disk_arrow_survives_description_routing_and_validation():
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import (
+        DescriptionRejected, validate_svg_assertions,
+    )
+    from src.iCCModules.imageCompositeConverterPerceptionReflection import Reflection
+
+    image = cv2.imread(str(ROOT/'artifacts/images_to_convert/GE0037_S.jpg'))
+    description, params = Reflection({'GE0037_S': DESCRIPTION}).parseDescription('GE0037', 'GE0037_S.jpg')
+    assert params['mode'] == 'non_composite'
+    result = fit(image, description)
+    assert result is not None
+    assert measure_quality(image, result['svg'])['satisfactory']
+    validate_svg_assertions(result['svg'], params['language_assertions'])
+    with pytest.raises(DescriptionRejected, match='missing_described_disk_arrow'):
+        validate_svg_assertions(result['svg'], dict(params['language_assertions'], disk_arrow_direction='links'))

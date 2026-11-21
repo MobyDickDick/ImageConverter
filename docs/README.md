@@ -1,5 +1,7 @@
 # Dokumentationsindex
 
+- [Adaptive Formmodelle: früher Vergleich umgesetzt, feste Baseline und nächstes Budgetpaket (2026-11-21)](next_arbeitspakete_2026-11-21_adaptive_formmodelle.md)
+
 - [Vorhandene SVG-Bauteile kombinieren: explizite Verweise, automatische Platzierung und AC0152_L-Grenze](svg_component_reuse.md)
 
 - [P0: native sichtbare Kurvenvorschläge, zwei Renderer und verbleibende enge Geometrieabnahme (2026-11-15)](next_arbeitspaket_2026-11-15_curve_proposals.md)

@@ -6,6 +6,7 @@ Only placement and uniform scale may change; donor geometry and paint survive.
 from __future__ import annotations
 
 import copy
+from functools import lru_cache
 import math
 from pathlib import Path
 import re
@@ -15,9 +16,11 @@ from xml.etree import ElementTree as ET
 ROOT = Path(__file__).resolve().parents[2]
 NS = 'http://www.w3.org/2000/svg'
 NUM = r'(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+-]?\d+)?'
+COORD = r'[+-]?'+NUM
 DIRECTIVE = re.compile(
     r'SVG-Bauteil:\s*([\w-]+\.svg)'
-    r'(?:\s+bei\s+('+NUM+r')\s+('+NUM+r')\s+skaliert\s+('+NUM+r'))?\s*', re.I)
+    r'(?:\s+bei\s+('+COORD+r')\s+('+COORD+r')\s+skaliert\s+('+NUM+r'))?'
+    r'(?:\s+(hinter|vor)\s+([\w-]+\.svg))?\s*', re.I)
 
 
 def parse_components(description):
@@ -31,15 +34,51 @@ def parse_components(description):
         if not match:
             raise ValueError('Bauteilbeschreibung: pro Zeile „SVG-Bauteil: NAME.svg“ '
                              'oder „SVG-Bauteil: NAME.svg bei X Y skaliert FAKTOR“. '
+                             'Optional folgt „hinter NAME.svg“ oder „vor NAME.svg“. '
                              'Die Bauteilliste ersetzt den Freitext vollständig.')
-        name, *placement = match.groups()
+        name, *placement, relation, relative_to = match.groups()
         position = tuple(map(float, placement)) if placement[0] is not None else None
         if position and (not all(math.isfinite(v) for v in position) or position[2] <= 0):
             raise ValueError('Bauteilposition und Skalierung müssen endlich und die Skalierung positiv sein.')
-        result.append(dict(name=name, placement=position))
+        spec = dict(name=name, placement=position)
+        if relation:
+            spec.update(relation=relation.lower(), relative_to=relative_to)
+        result.append(spec)
     if not 1 <= len(result) <= 12:
         raise ValueError('Bitte ein bis zwölf SVG-Bauteile angeben.')
+    _ordered_indices(result)  # Reject missing/ambiguous references and cycles before starting.
     return result
+
+
+def _layer_edges(specs):
+    edges = []
+    for index, spec in enumerate(specs):
+        if not spec.get('relation'):
+            continue
+        matches = [i for i, other in enumerate(specs)
+                   if other['name'].casefold() == spec['relative_to'].casefold()]
+        if len(matches) != 1:
+            raise ValueError(f'Die Ebenenreferenz „{spec["relative_to"]}“ muss genau einmal in der Bauteilliste stehen.')
+        other = matches[0]
+        edges.append((index, other) if spec['relation'] == 'hinter' else (other, index))
+    return edges
+
+
+def _ordered_indices(specs):
+    edges = _layer_edges(specs)
+    remaining, ordered = list(range(len(specs))), []
+    while remaining:
+        ready = next((i for i in remaining if not any(b == i and a in remaining for a, b in edges)), None)
+        if ready is None:
+            raise ValueError('Widersprüchliche Ebenenangaben: Bauteile können nicht gegenseitig vor oder hintereinander liegen.')
+        ordered.append(ready)
+        remaining.remove(ready)
+    return ordered
+
+
+def _allows_order(order, specs):
+    positions = {index: layer for layer, index in enumerate(order)}
+    return all(positions[a] < positions[b] for a, b in _layer_edges(specs))
 
 
 def load_component(name, index, root=None):
@@ -135,13 +174,12 @@ def _canonical(node):
             tuple(_canonical(child) for child in node))
 
 
-def render_components(svg, width, height):
-    """Use the clip/gradient-aware renderer for composed donor viewports."""
+def _render_rgba(svg, width, height):
+    """Retain alpha for measuring the donor's clipped, painted footprint."""
     import io
     import os
     import shutil
     import subprocess
-    import numpy as np
     from PIL import Image
     executable = shutil.which('rsvg-convert')
     if not executable and Path('C:/msys64/ucrt64/bin/rsvg-convert.exe').is_file():
@@ -156,10 +194,68 @@ def render_components(svg, width, height):
     except (OSError, subprocess.SubprocessError) as exc:
         raise ValueError('Das zusammengesetzte SVG konnte nicht gerendert werden.') from exc
     with Image.open(io.BytesIO(result.stdout)) as image:
-        rgba = image.convert('RGBA')
-        background = Image.new('RGBA', rgba.size, 'white')
-        background.alpha_composite(rgba)
-        return np.asarray(background.convert('RGB'))
+        return image.convert('RGBA')
+
+
+def render_components(svg, width, height):
+    """Use the clip/gradient-aware renderer for composed donor viewports."""
+    import numpy as np
+    from PIL import Image
+    rgba = _render_rgba(svg, width, height)
+    background = Image.new('RGBA', rgba.size, 'white')
+    background.alpha_composite(rgba)
+    return np.asarray(background.convert('RGB'))
+
+
+@lru_cache(maxsize=256)
+def _painted_bounds(svg, width, height):
+    # Measure alpha, including white paint, with the donor viewport clipped.
+    # Empty viewport margins may leave the target; painted content may not.
+    zoom = min(4., 4096/max(width, height), math.sqrt(2_000_000/(width*height)))
+    w, h = max(1, math.ceil(width*zoom)), max(1, math.ceil(height*zoom))
+    box = _render_rgba(svg, w, h).getchannel('A').getbbox()
+    if box is None:
+        raise ValueError('Ein leeres SVG kann nicht als Bauteil platziert werden.')
+    return box[0]*width/w, box[1]*height/h, box[2]*width/w, box[3]*height/h
+
+
+def component_bounds(component):
+    node, width, height, _ = component
+    return _painted_bounds(ET.tostring(node, encoding='unicode'), width, height)
+
+
+@lru_cache(maxsize=32)
+def _cached_alpha(svg, width, height):
+    import numpy as np
+    return np.asarray(_render_rgba(svg, width, height))[:, :, 3] > 64
+
+
+def component_overlap_quality(reference, output, svg):
+    """Check each painted overlap locally, so a small intrusion cannot hide in a large canvas."""
+    import numpy as np
+    drawing = ET.fromstring(svg)
+    height, width = reference.shape[:2]
+    masks = []
+    for child in drawing:
+        wrapper = ET.Element(f'{{{NS}}}svg', width=str(width), height=str(height),
+                             viewBox=f'0 0 {width} {height}')
+        wrapper.append(child)
+        serialized = ET.tostring(wrapper, encoding='unicode')
+        if width*height <= 1_000_000:
+            masks.append(_cached_alpha(serialized, width, height))
+        else:
+            masks.append(np.asarray(_render_rgba(serialized, width, height))[:, :, 3] > 64)
+    error = np.square(reference.astype(np.float32)-output.astype(np.float32)).mean(axis=2)/255**2
+    regions = []
+    for front in range(len(masks)):
+        for back in range(front):
+            overlap = masks[front] & masks[back]
+            count = int(np.count_nonzero(overlap))
+            if count:
+                regions.append(dict(back=back, front=front, pixels=count,
+                                    normalized_mse=float(error[overlap].mean())))
+    worst = max((region['normalized_mse'] for region in regions), default=0.)
+    return dict(overlap_regions=regions, overlap_mse=worst, overlap_passed=worst <= .01)
 
 
 def validate_components(svg, description, root=None):
@@ -178,17 +274,29 @@ def validate_components(svg, description, root=None):
         raise ValueError('Ungültige Bauteil-Zeichenfläche.')
     if drawing.get('viewBox') != f'0 0 {width:g} {height:g}':
         raise ValueError('Unerwartete Änderung des Bauteil-Koordinatensystems.')
-    for index, (spec, actual) in enumerate(zip(specs, drawing)):
+    order = []
+    for actual in drawing:
+        markers = [node.get('data-svg-component-index') for node in actual.iter()
+                   if node.get('data-svg-component')]
+        if len(markers) != 1 or not re.fullmatch(r'\d+', markers[0] or ''):
+            raise ValueError('Ungültige Bauteilinstanz.')
+        index = int(markers[0])
+        if index >= len(specs) or index in order:
+            raise ValueError('Die SVG-Bauteilliste enthält fehlende oder doppelte Instanzen.')
+        order.append(index)
+        spec = specs[index]
         component = load_component(spec['name'], index, root)
         _, cw, ch, _ = component
-        matrix = re.fullmatch(r'translate\(('+NUM+r') ('+NUM+r')\) scale\(('+NUM+r')\)',
+        matrix = re.fullmatch(r'translate\(('+COORD+r') ('+COORD+r')\) scale\(('+NUM+r')\)',
                               actual.get('transform', ''))
         if not matrix:
             raise ValueError('Ungültige Bauteiltransformation.')
         x, y, scale = map(float, matrix.groups())
         w, h = cw*scale, ch*scale
+        bx0, by0, bx1, by1 = component_bounds(component)
         if (not all(math.isfinite(v) for v in (x, y, w, h)) or scale <= 0
-                or min(x, y) < 0 or x+w > width+1e-6 or y+h > height+1e-6):
+                or x+bx0*scale < -1e-6 or y+by0*scale < -1e-6
+                or x+bx1*scale > width+1e-6 or y+by1*scale > height+1e-6):
             raise ValueError('Bauteile müssen unverzerrt innerhalb der Zeichenfläche liegen.')
         if spec['placement'] and any(not math.isclose(a, b, abs_tol=1e-6)
                                      for a, b in zip((x, y, scale), spec['placement'])):
@@ -196,16 +304,18 @@ def validate_components(svg, description, root=None):
         expected = placed_component(component, x, y, scale)
         if _canonical(actual) != _canonical(expected):
             raise ValueError(f'Das SVG-Bauteil „{spec["name"]}“ wurde verändert oder ersetzt.')
+    if not _allows_order(order, specs):
+        raise ValueError('Die vorgegebene Reihenfolge „vor/hinter“ der SVG-Bauteile wurde verletzt.')
 
 
 def locate_component(component, target, deadline):
     """Bounded multiscale template matching; no raster geometry is generated."""
     import cv2
     import numpy as np
-    from src.imageConverterSample import render_svg
-    node, width, height, _ = component
     th, tw = target.shape[:2]
-    max_scale = min(tw/width, th/height)
+    bx0, by0, bx1, by1 = component_bounds(component)
+    bw, bh = bx1-bx0, by1-by0
+    max_scale = min(tw/bw, th/bh)
     if max_scale <= 0:
         raise ValueError('Das SVG-Bauteil passt nicht auf die Zeichenfläche.')
     target = target.astype(np.float32)
@@ -218,15 +328,16 @@ def locate_component(component, target, deadline):
 
     def measure(scale):
         nonlocal best, evaluations
-        w, h = max(2, round(width*scale)), max(2, round(height*scale))
-        if ((w, h) in seen or min(w, h) < 12 or w > tw or h > th
+        w, h = max(2, math.ceil(bw*scale-1e-9)), max(2, math.ceil(bh*scale-1e-9))
+        key = round(scale, 9)
+        if (key in seen or min(w, h) < 12 or w > tw or h > th
                 or time.monotonic() >= deadline):
             return
-        seen.add((w, h))
-        template = copy.deepcopy(node)
-        template.set('width', str(w))
-        template.set('height', str(h))
-        pixels = render_svg(ET.tostring(template, encoding='unicode'), w, h).astype(np.float32)
+        seen.add(key)
+        template = ET.Element(f'{{{NS}}}svg', width=str(w), height=str(h),
+                              viewBox=f'0 0 {w} {h}')
+        template.append(placed_component(component, -bx0*scale, -by0*scale, scale))
+        pixels = render_components(ET.tostring(template, encoding='unicode'), w, h).astype(np.float32)
         # Include the neighbourhood of painted pixels, avoiding empty canvas
         # dominating placement while preserving interior/edge mismatches.
         foreground = (np.max(abs(pixels-255), axis=2) > 18).astype(np.uint8)
@@ -251,7 +362,7 @@ def locate_component(component, target, deadline):
         minimum, _, (x, y), _ = cv2.minMaxLoc(error)
         score = minimum
         evaluations += 1
-        candidate = (score, x, y, min(w/width, h/height))
+        candidate = (score, x-bx0*scale, y-by0*scale, scale)
         if best is None or candidate[0] < best[0]:
             best = candidate
 
@@ -271,6 +382,7 @@ def locate_component(component, target, deadline):
 
 def compose_components(description, target, *, seconds=30., root=None):
     import hashlib
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import vector_candidate_quality, vector_quality_score
     root = ROOT if root is None else root
     specs = parse_components(description)
     if not specs:
@@ -279,12 +391,15 @@ def compose_components(description, target, *, seconds=30., root=None):
     assembly = ET.Element(f'{{{NS}}}svg', width=str(width), height=str(height),
                           viewBox=f'0 0 {width} {height}', overflow='hidden')
     deadline = time.monotonic()+seconds
+    placement_deadline = time.monotonic()+seconds*.65
     references, evaluations = [], 0
+    components = []
     for index, spec in enumerate(specs):
         component = load_component(spec['name'], index, root)
+        components.append(component)
         placement = spec['placement']
         if placement is None:
-            share = time.monotonic()+max(0., deadline-time.monotonic())/(len(specs)-index)
+            share = time.monotonic()+max(0., placement_deadline-time.monotonic())/(len(specs)-index)
             placement, count = locate_component(component, target, share)
             evaluations += count
         assembly.append(placed_component(component, *placement))
@@ -292,6 +407,77 @@ def compose_components(description, target, *, seconds=30., root=None):
                                sha256=hashlib.sha256(component[3].read_bytes()).hexdigest(),
                                placement=list(placement), automatic=spec['placement'] is None))
     ET.register_namespace('', NS)
+    layer_order = _ordered_indices(specs)
+
+    def rebuild():
+        assembly[:] = [placed_component(components[i], *references[i]['placement']) for i in layer_order]
+
+    rebuild()
+    # Template matching locates each donor independently. Refine subpixel
+    # placement against the actual layered assembly and the final pixel gates.
+    def rank():
+        nonlocal evaluations
+        svg = ET.tostring(assembly, encoding='unicode')
+        quality = vector_candidate_quality(target, render_components(svg, width, height), svg)
+        evaluations += 1
+        return not quality['passed'], vector_quality_score(quality)+quality['overlap_mse']
+
+    if time.monotonic() < deadline:
+        best = rank()
+        # Compare permitted layer orders before accepting even a globally passing fit.
+        # Donor geometry and explicit placement remain unchanged.
+        for sweep in range(len(specs)):
+            changed = False
+            for first in range(len(specs)):
+                for second in range(first+1, len(specs)):
+                    if time.monotonic() >= deadline:
+                        break
+                    trial = list(layer_order)
+                    trial[first], trial[second] = trial[second], trial[first]
+                    if not _allows_order(trial, specs):
+                        continue
+                    previous = layer_order
+                    layer_order = trial
+                    rebuild()
+                    score = rank()
+                    if score < best:
+                        best, changed = score, True
+                    else:
+                        layer_order = previous
+                        rebuild()
+            if not changed or time.monotonic() >= deadline:
+                break
+        for fraction in (1., .5, .25):
+            if not best[0]:
+                break
+            for sweep in range(6):
+                changed = False
+                for index, (component, ref) in enumerate(zip(components, references)):
+                    if not ref['automatic']:
+                        continue
+                    bx0, by0, bx1, by1 = component_bounds(component)
+                    steps = (.5*fraction, .5*fraction, .5*fraction/max(bx1-bx0, by1-by0))
+                    for axis, step in enumerate(steps):
+                        for sign in (-1, 1):
+                            if time.monotonic() >= deadline or not best[0]:
+                                break
+                            trial = list(ref['placement'])
+                            trial[axis] += sign*step
+                            x, y, scale = trial
+                            if (scale <= 0 or x+bx0*scale < 0 or y+by0*scale < 0
+                                    or x+bx1*scale > width or y+by1*scale > height):
+                                continue
+                            layer = layer_order.index(index)
+                            assembly[layer] = placed_component(component, *trial)
+                            score = rank()
+                            if score < best:
+                                ref['placement'], best, changed = trial, score, True
+                            else:
+                                assembly[layer] = placed_component(component, *ref['placement'])
+                if not changed or not best[0] or time.monotonic() >= deadline:
+                    break
     svg = ET.tostring(assembly, encoding='unicode')
+    for index, ref in enumerate(references):
+        ref['layer'] = layer_order.index(index)
     validate_components(svg, description, root)
     return svg, references, evaluations

@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "scope": "analytic fitter comparison; known regression cohort, no unseen claim",
+  "seconds": 3.0,
+  "render_budget": 448,
+  "seed": 42,
+  "groups": [
+    [
+      "disk_arrow",
+      "development",
+      [
+        "GE0022",
+        "GE0037_S",
+        "GE0037_M",
+        "GE0037_L",
+        "GE0039_S",
+        "GE0039_M",
+        "GE0039_L"
+      ]
+    ],
+    [
+      "plain_disk",
+      "control",
+      [
+        "AC0800_S",
+        "AC0800_M"
+      ]
+    ],
+    [
+      "hollow_cross_panel",
+      "control",
+      [
+        "AC0140_L"
+      ]
+    ],
+    [
+      "component_composition",
+      "control",
+      [
+        "AC0152_L"
+      ]
+    ]
+  ],
+  "cases": [
+    {
+      "name": "GE0022",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0022.jpg",
+      "image_sha256": "c7bc67075e52b305b157aba28d4730d9696f03d9ff77f153b2f3abd17fc05280",
+      "description": "eine gefüllte kreisscheibe mit hellem rand und waagerechtem farbverlauf, links dunkler und rechts heller. mittig liegt ein dunkler gefüllter pfeil nach rechts: ein waagerechter rechteckiger schaft geht ohne lücke in eine breitere dreieckige spitze über. der pfeil hat eine helle randkontur und liegt vollständig innerhalb des kreises. weißer hintergrund, keine schriftzeichen. lage, abmessungen und farben ergeben sich aus dem bild.",
+      "description_sha256": "3b0ab19fddf7cdd1a73105a658ccfbdb690e21f946017acab91dc3516b850caf"
+    },
+    {
+      "name": "GE0037_S",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0037_S.jpg",
+      "image_sha256": "0db597188ace07dbbe8efc57b14f0551b3d4c8a12b15a9d893575741a7c19745",
+      "description": "eine gefüllte kreisscheibe mit hellem rand und waagerechtem farbverlauf, links dunkler und rechts heller. mittig liegt ein dunkler gefüllter pfeil nach rechts: ein waagerechter rechteckiger schaft geht ohne lücke in eine breitere dreieckige spitze über. der pfeil hat eine helle randkontur und liegt vollständig innerhalb des kreises. weißer hintergrund, keine schriftzeichen. lage, abmessungen und farben ergeben sich aus dem bild.",
+      "description_sha256": "3b0ab19fddf7cdd1a73105a658ccfbdb690e21f946017acab91dc3516b850caf"
+    },
+    {
+      "name": "GE0037_M",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0037_M.jpg",
+      "image_sha256": "ed9a6d6656490a89616b3fdd59d54e715921774c15ae7880fd820d9cc63ed598",
+      "description": "wie ge0028, aber ohne hintergrund abweichung: horizontal gespiegelt",
+      "description_sha256": "5b59aa93f1ec0926ac95adffe6bde90378dc7a4d44b21ea73f2fa65097474c79"
+    },
+    {
+      "name": "GE0037_L",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0037_L.jpg",
+      "image_sha256": "920ad4d21b42a51c6a322992cbdc184334bbe670f4bb64013246a349c8b58872",
+      "description": "wie ge0028, aber ohne hintergrund abweichung: horizontal gespiegelt",
+      "description_sha256": "5b59aa93f1ec0926ac95adffe6bde90378dc7a4d44b21ea73f2fa65097474c79"
+    },
+    {
+      "name": "GE0039_S",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0039_S.jpg",
+      "image_sha256": "df6b3897046d591af6a6301b0fa398c7693986e586e9cc1cfd9acee530f18a96",
+      "description": "eine gefüllte kreisscheibe mit hellem rand und waagerechtem farbverlauf, links heller und rechts dunkler. mittig liegt ein dunkler gefüllter pfeil nach links: ein waagerechter rechteckiger schaft geht ohne lücke in eine breitere dreieckige spitze über. der pfeil hat eine helle randkontur und liegt vollständig innerhalb des kreises. weißer hintergrund, keine schriftzeichen. lage, abmessungen und farben ergeben sich aus dem bild.",
+      "description_sha256": "78c85965b613016207b5233993149d6e5f9686079d4e4faf90ca36ad8d302297"
+    },
+    {
+      "name": "GE0039_M",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0039_M.jpg",
+      "image_sha256": "4920835127f819b5784f75fee1d6f3607326fc7c8444b3cb21e505d2086958ac",
+      "description": "eine gefüllte kreisscheibe mit hellem rand und waagerechtem farbverlauf, links heller und rechts dunkler. mittig liegt ein dunkler gefüllter pfeil nach links: ein waagerechter rechteckiger schaft geht ohne lücke in eine breitere dreieckige spitze über. der pfeil hat eine helle randkontur und liegt vollständig innerhalb des kreises. weißer hintergrund, keine schriftzeichen. lage, abmessungen und farben ergeben sich aus dem bild.",
+      "description_sha256": "78c85965b613016207b5233993149d6e5f9686079d4e4faf90ca36ad8d302297"
+    },
+    {
+      "name": "GE0039_L",
+      "family": "disk_arrow",
+      "split": "development",
+      "image": "artifacts/images_to_convert/GE0039_L.jpg",
+      "image_sha256": "e8a21e05cf1ba218fcd8ed53fd2d5e495e881853157a2b0a9ff9aa17ba563022",
+      "description": "eine gefüllte kreisscheibe mit hellem rand und waagerechtem farbverlauf, links heller und rechts dunkler. mittig liegt ein dunkler gefüllter pfeil nach links: ein waagerechter rechteckiger schaft geht ohne lücke in eine breitere dreieckige spitze über. der pfeil hat eine helle randkontur und liegt vollständig innerhalb des kreises. weißer hintergrund, keine schriftzeichen. lage, abmessungen und farben ergeben sich aus dem bild.",
+      "description_sha256": "78c85965b613016207b5233993149d6e5f9686079d4e4faf90ca36ad8d302297"
+    },
+    {
+      "name": "AC0800_S",
+      "family": "plain_disk",
+      "split": "control",
+      "image": "artifacts/images_to_convert/AC0800_S.jpg",
+      "image_sha256": "440062acb856fb9b0e4162fe7efcb032570d308c530fd12a006777d938260142",
+      "description": "grauer kreis mit grauem rand und hellgrauem hintergrund",
+      "description_sha256": "144b2df5a3cead46800e0049778b054f6328c68290394c1262ef51a6e33ec162"
+    },
+    {
+      "name": "AC0800_M",
+      "family": "plain_disk",
+      "split": "control",
+      "image": "artifacts/images_to_convert/AC0800_M.jpg",
+      "image_sha256": "87e678f9eba18756dccfb9e992990fd8335b43f729f323a1d960ba5f47dcb735",
+      "description": "grauer kreis mit grauem rand und hellgrauem hintergrund",
+      "description_sha256": "144b2df5a3cead46800e0049778b054f6328c68290394c1262ef51a6e33ec162"
+    },
+    {
+      "name": "AC0140_L",
+      "family": "hollow_cross_panel",
+      "split": "control",
+      "image": "artifacts/images_to_convert/AC0140_L.jpg",
+      "image_sha256": "7e6de60dfea0a172c6b5b6d8ed73f91a252f4df3dc2bd2d60650d1a8b2db8238",
+      "description": "das bild ist  ein ganz schmales rechteck, welches hochkant steht.\nder rand ist grau und sehr schmal.\nim hintergrund ist ein horizontaler farbverlauf abgebilder, von grau nach hell. der hellste ort liegt bei ca. 40 % von links es gibt diagonale, welche so beschnittten sind, dass sie nicht über das rechteck hinausragen. die beiden diagonalen sind gleich breit. bei der diagonalen von oben rechts nach unten links ist die mitte ausgeschnitten. es gibt im zentrum ein quadrat, welches jedoch nur einen grauen rand und keinen hintergrund besitzt.",
+      "description_sha256": "f236fa2c25fcfb33a73fb1d7a1b058c9ef20666c6aba7454e7c3d558bed38039"
+    },
+    {
+      "name": "AC0152_L",
+      "family": "component_composition",
+      "split": "control",
+      "image": "artifacts/images_to_convert/AC0152_L.jpg",
+      "image_sha256": "ac849f87db062ee1b35920a0b74bdb233e04cbe24ac1175d63343c5ada41698f",
+      "description": "svg-bauteil: ac0151_l.svg\nsvg-bauteil: ac1002_l.svg",
+      "description_sha256": "b457de6f415d9127566a97a6085c91b1b8ad754c094c3a6bc5a503e1b6d43b24"
+    }
+  ],
+  "baseline_sources": {
+    "src/iCCModules/imageCompositeConverterDiskArrow.py": "42f231bbeb7e361bc918465ce44468a43dc0243ab2b28131cab525d47d82a995",
+    "src/iCCModules/imageCompositeConverterFilledSymbols.py": "a25f58f0630093cba214e1c5234bc2ad4398aedfee63137945641aff66f4717e",
+    "src/iCCModules/imageCompositeConverterDescriptionLanguage.py": "efe4c30d50179f9e767e6af3b994256d6692563bf2c59308c5aa269ab09d0b1e"
+  }
+}

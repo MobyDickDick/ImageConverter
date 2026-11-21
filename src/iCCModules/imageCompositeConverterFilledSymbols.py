@@ -14,17 +14,20 @@ def _hex(bgr):
 
 def _register(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
-              refinement_steps=(1., .5, .25, .125), allow_portfolio=True, reconsider_after=None):
+              refinement_steps=(1., .5, .25, .125), allow_portfolio=True, reconsider_after=None,
+              max_evaluations=None):
     return drain(_register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
         preserve_initial_error=preserve_initial_error, loss_fn=loss_fn,
         initial_error_bound=initial_error_bound, satisfactory_fn=satisfactory_fn,
-        refinement_steps=refinement_steps, allow_portfolio=allow_portfolio, reconsider_after=reconsider_after))
+        refinement_steps=refinement_steps, allow_portfolio=allow_portfolio, reconsider_after=reconsider_after,
+        max_evaluations=max_evaluations))
 
 
 def _register_steps(parameters, geometry_count, build, valid, image, render_fn, error_fn, source,
               *, preserve_initial_error=False, loss_fn=None, initial_error_bound=None, satisfactory_fn=None,
               refinement_steps=(1., .5, .25, .125), initial_candidates=(), eager_satisfactory=False,
-              allow_portfolio=True, reconsider_after=None):
+              allow_portfolio=True, reconsider_after=None, max_evaluations=None,
+              on_candidate=None):
     """Bounded coordinate descent; optionally retain the best admissible iterate.
 
     A custom search loss does not override the caller's initial error bound.
@@ -33,9 +36,13 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     Contours and reference vectors are never emitted.
     Intermediate stages can disable the portfolio: their masked objective
     cannot satisfy the complete scene's quality contract yet.
+    ``on_candidate`` observes newly measured finite candidates without changing
+    the registration objective; a model comparison can retain its own checks.
     """
     height, width = image.shape[:2]
     evaluations = 0
+    if max_evaluations is not None and max_evaluations < 1:
+        return None
     render_cache = {}
     session = current_search()
     if session and reconsider_after is None:
@@ -68,6 +75,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         svg = build(p)
         if svg in render_cache:
             return render_cache[svg]
+        if max_evaluations is not None and evaluations >= max_evaluations:
+            return None
         measured_started = session.elapsed if session else 0.
         shared_key = (raster_key, svg) if session else None
         rendered_new = not session or shared_key not in session.registration_rasters
@@ -104,6 +113,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         if session and len(render_cache) >= 256:
             render_cache.clear()
         render_cache[svg] = measured
+        if measured is not None and on_candidate is not None:
+            on_candidate(p.copy(), measured)
         if session:
             registration_seconds += session.elapsed-measured_started
         return measured
@@ -184,6 +195,9 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                 if stop_reason:
                     break
                 for sign in signs:
+                    if max_evaluations is not None and evaluations >= max_evaluations:
+                        stop_reason = 'render_limit'
+                        break
                     if session:
                         stop_reason = session.time_reason() or reconsider()
                         if not stop_reason and session.finish_model_searches and not session.minimum_pending:

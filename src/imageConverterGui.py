@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 11
+DESCRIPTION_VALIDATION_VERSION = 12
 
 
 class RequestError(ValueError):
@@ -204,7 +204,10 @@ class Jobs:
                     collect_recovery_result(path.parent, job,
                         stop_reason=(job.get('recovery_report') or {}).get('stop_reason', 'worker_finished'))
                     self.save(job)
-                if job.get('quality') == 'passed' and job.get('result') and 'pixel_quality' not in job:
+                if (job.get('quality') == 'passed' and job.get('result')
+                        and ('pixel_quality' not in job or
+                             (job.get('description_validation_version') != DESCRIPTION_VALIDATION_VERSION
+                              and re.search(r'\bSVG-Bauteil\b', job.get('description', ''), re.I)))):
                     quality = saved_svg_quality(path.parent/'source.png', path.parent/'result.svg')
                     job['pixel_quality'] = quality
                     if quality and not quality['passed']:
@@ -979,6 +982,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     elif report.get('restarted_from_description'):
         message = 'Unpassende Vorlage verworfen. SVG neu aus der Bildbeschreibung erstellt.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
+    if quality and quality.get('overlap_passed') is False:
+        message += ' Im Überlappungsbereich weicht das SVG zu stark vom Original ab.'
     if report.get('continuation'):
         message += f" {report['evaluations']} Bildkandidaten geprüft."
         if not report.get('search_goal_reached'):

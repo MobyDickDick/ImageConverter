@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "manifest_sha256": "e1a7c2966c6fe1897d8a67037a77b87fade551c5728a1c391675e49a172a22ec",
+  "scope": "analytic fitter comparison; known regression cohort, no unseen claim",
+  "baseline": {
+    "passed": 6,
+    "selected_cases": 11,
+    "measured_cases": 10,
+    "seconds": 3.530999999959022,
+    "renderings": 411,
+    "cases": [
+      {
+        "name": "GE0022",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.48400000005494803,
+        "renderings": 41,
+        "error": 0.0022109948185265005,
+        "svg_sha256": "aac8ed381e11e46353078810b46eb4dd6f92008cc179906162a86aeeb6aea170",
+        "metrics": {
+          "normalized_mse": 0.002210994716733694,
+          "foreground_mse": 0.0027324703987687826,
+          "edge_alignment": 0.7549771070480347,
+          "foreground_iou": 0.9512523565849718,
+          "foreground_iou_binary": 0.9512523565849718
+        },
+        "comparison": null
+      },
+      {
+        "name": "GE0037_S",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.46799999999348074,
+        "renderings": 69,
+        "error": 0.002103039343842112,
+        "svg_sha256": "f71b969050c8904e3358148f0d1eb5ff30e0ed0b57368fc852aaec325f65039c",
+        "metrics": {
+          "normalized_mse": 0.0021030392963439226,
+          "foreground_mse": 0.002571052173152566,
+          "edge_alignment": 0.8215522766113281,
+          "foreground_iou": 0.9629421673217293,
+          "foreground_iou_binary": 0.9629421673217293
+        },
+        "comparison": null
+      },
+      {
+        "name": "GE0037_M",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.0,
+        "renderings": 0,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "GE0037_L",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.0,
+        "renderings": 0,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "GE0039_S",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.46899999992456287,
+        "renderings": 69,
+        "error": 0.001659775983596053,
+        "svg_sha256": "545e403682f0b1b6671fd8d971494f4aea782b313f5e84171d9cac48a9fbf73e",
+        "metrics": {
+          "normalized_mse": 0.0016597759677097201,
+          "foreground_mse": 0.0019592151511460543,
+          "edge_alignment": 0.8020331859588623,
+          "foreground_iou": 0.9711701526286037,
+          "foreground_iou_binary": 0.9711701526286037
+        },
+        "comparison": null
+      },
+      {
+        "name": "GE0039_M",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.45400000002700835,
+        "renderings": 55,
+        "error": 0.0012115938314323552,
+        "svg_sha256": "112b8efc07049ab5be2d27bbf00db435158ba7bf5dd5d04684a1835500903d69",
+        "metrics": {
+          "normalized_mse": 0.001211593858897686,
+          "foreground_mse": 0.001464416622184217,
+          "edge_alignment": 0.8311911821365356,
+          "foreground_iou": 0.9411987860394537,
+          "foreground_iou_binary": 0.9411987860394537
+        },
+        "comparison": null
+      },
+      {
+        "name": "GE0039_L",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.46799999999348074,
+        "renderings": 46,
+        "error": 0.0019039866927163022,
+        "svg_sha256": "4b468690b492727cd330ddc1e7cd0b7c7152c985f3bcb9e40b75dc464a337e2d",
+        "metrics": {
+          "normalized_mse": 0.00190398667473346,
+          "foreground_mse": 0.0024257544428110123,
+          "edge_alignment": 0.7484763264656067,
+          "foreground_iou": 0.945116802701942,
+          "foreground_iou_binary": 0.945116802701942
+        },
+        "comparison": null
+      },
+      {
+        "name": "AC0800_S",
+        "family": "plain_disk",
+        "split": "control",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.15700000000651926,
+        "renderings": 39,
+        "error": 0.0025662608398479216,
+        "svg_sha256": "bf4fe860f85f9568a8335853fc0d482b1817c77e0816001404728cb2de7c6805",
+        "metrics": {
+          "normalized_mse": 0.002566260751336813,
+          "foreground_mse": 0.007197910454124212,
+          "edge_alignment": 0.9249324798583984,
+          "foreground_iou": 0.9705882352941176,
+          "foreground_iou_binary": 0.9705882352941176
+        },
+        "comparison": null
+      },
+      {
+        "name": "AC0800_M",
+        "family": "plain_disk",
+        "split": "control",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.4690000000409782,
+        "renderings": 79,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "AC0140_L",
+        "family": "hollow_cross_panel",
+        "split": "control",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.5619999999180436,
+        "renderings": 13,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "AC0152_L",
+        "family": "component_composition",
+        "split": "control",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.0,
+        "renderings": 0,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      }
+    ]
+  },
+  "after": {
+    "passed": 7,
+    "selected_cases": 11,
+    "measured_cases": 10,
+    "seconds": 8.437999999849126,
+    "renderings": 833,
+    "cases": [
+      {
+        "name": "GE0022",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 1.5939999999245629,
+        "renderings": 126,
+        "error": 0.001624137758795611,
+        "svg_sha256": "d213d5e286f7cd6ce9e7e70394474d42918b4d5227fba30dcd2ff89697939874",
+        "metrics": {
+          "normalized_mse": 0.0016241377452388406,
+          "foreground_mse": 0.001890196930617094,
+          "edge_alignment": 0.759150505065918,
+          "foreground_iou": 0.9512523565849718,
+          "foreground_iou_binary": 0.9512523565849718
+        },
+        "comparison": {
+          "attempts": [
+            {
+              "model": "two_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.375,
+              "semantic_passed": true,
+              "pixel_passed": false,
+              "error": 0.0024643119420342174
+            },
+            {
+              "model": "three_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.25,
+              "semantic_passed": true,
+              "pixel_passed": false,
+              "error": 0.002470232746536396
+            },
+            {
+              "model": "two_stop",
+              "phase": "refine",
+              "renderings": 42,
+              "seconds": 0.46899999992456287,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.001624137758795611
+            },
+            {
+              "model": "three_stop",
+              "phase": "refine",
+              "renderings": 36,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.001679512431609237
+            }
+          ],
+          "selected_model": "two_stop",
+          "renderings": 126,
+          "render_budget": 417,
+          "seconds": 1.5469999999040738,
+          "stop_reason": "models_exhausted",
+          "satisfactory": true
+        }
+      },
+      {
+        "name": "GE0037_S",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 1.4059999999590218,
+        "renderings": 152,
+        "error": 0.0014574148404459823,
+        "svg_sha256": "855e16389e9d3071571e3ed78b765bedae8d143fd97cad0898420face0ab5558",
+        "metrics": {
+          "normalized_mse": 0.001457414822652936,
+          "foreground_mse": 0.0016673123463988304,
+          "edge_alignment": 0.8033332824707031,
+          "foreground_iou": 0.9629421673217293,
+          "foreground_iou_binary": 0.9629421673217293
+        },
+        "comparison": {
+          "attempts": [
+            {
+              "model": "two_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.25,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0015084454696911445
+            },
+            {
+              "model": "three_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.2339999999385327,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0015102704088171216
+            },
+            {
+              "model": "two_stop",
+              "phase": "refine",
+              "renderings": 53,
+              "seconds": 0.4690000000409782,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0014579828271177753
+            },
+            {
+              "model": "three_stop",
+              "phase": "refine",
+              "renderings": 51,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0014574148404459823
+            }
+          ],
+          "selected_model": "three_stop",
+          "renderings": 152,
+          "render_budget": 417,
+          "seconds": 1.4059999999590218,
+          "stop_reason": "models_exhausted",
+          "satisfactory": true
+        }
+      },
+      {
+        "name": "GE0037_M",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.0,
+        "renderings": 0,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "GE0037_L",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.0,
+        "renderings": 0,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "GE0039_S",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 1.375,
+        "renderings": 148,
+        "error": 0.001665761373830578,
+        "svg_sha256": "d8c8758066bb39fc3591bf03d319c1a7888669055ceb1627fb4369ab1e64a744",
+        "metrics": {
+          "normalized_mse": 0.0016657613450661302,
+          "foreground_mse": 0.0019665053114295006,
+          "edge_alignment": 0.7862926721572876,
+          "foreground_iou": 0.9706380575945793,
+          "foreground_iou_binary": 0.9706380575945793
+        },
+        "comparison": {
+          "attempts": [
+            {
+              "model": "two_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.23400000005494803,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0017109768037934128
+            },
+            {
+              "model": "three_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.21899999992456287,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0017100089709086248
+            },
+            {
+              "model": "two_stop",
+              "phase": "refine",
+              "renderings": 54,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.001665761373830578
+            },
+            {
+              "model": "three_stop",
+              "phase": "refine",
+              "renderings": 46,
+              "seconds": 0.4530000000959262,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0016686587210047418
+            }
+          ],
+          "selected_model": "two_stop",
+          "renderings": 148,
+          "render_budget": 417,
+          "seconds": 1.359000000054948,
+          "stop_reason": "models_exhausted",
+          "satisfactory": true
+        }
+      },
+      {
+        "name": "GE0039_M",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 1.3900000000139698,
+        "renderings": 126,
+        "error": 0.0012173181255072836,
+        "svg_sha256": "62aaf80fb2113f19370a9bc39b2245be4a5424117e6e5b41b560baa018f3f3d6",
+        "metrics": {
+          "normalized_mse": 0.0012173181166872382,
+          "foreground_mse": 0.0014722344931215048,
+          "edge_alignment": 0.8353129625320435,
+          "foreground_iou": 0.9411987860394537,
+          "foreground_iou_binary": 0.9411987860394537
+        },
+        "comparison": {
+          "attempts": [
+            {
+              "model": "two_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.25,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0012718057157503524
+            },
+            {
+              "model": "three_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.23400000005494803,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0012744998362453188
+            },
+            {
+              "model": "two_stop",
+              "phase": "refine",
+              "renderings": 43,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0012173181255072836
+            },
+            {
+              "model": "three_stop",
+              "phase": "refine",
+              "renderings": 35,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0012541871360018226
+            }
+          ],
+          "selected_model": "two_stop",
+          "renderings": 126,
+          "render_budget": 417,
+          "seconds": 1.3900000000139698,
+          "stop_reason": "models_exhausted",
+          "satisfactory": true
+        }
+      },
+      {
+        "name": "GE0039_L",
+        "family": "disk_arrow",
+        "split": "development",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 1.5,
+        "renderings": 127,
+        "error": 0.001047554185072722,
+        "svg_sha256": "34e56a466dcb691d5b9ac7fe10342b34d6076665a6f415d930a5512a2381d4f8",
+        "metrics": {
+          "normalized_mse": 0.0010475541930645704,
+          "foreground_mse": 0.0012446345062926412,
+          "edge_alignment": 0.8209934234619141,
+          "foreground_iou": 0.945116802701942,
+          "foreground_iou_binary": 0.945116802701942
+        },
+        "comparison": {
+          "attempts": [
+            {
+              "model": "two_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.28200000000651926,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0014051382644561094
+            },
+            {
+              "model": "three_stop",
+              "phase": "probe",
+              "renderings": 24,
+              "seconds": 0.2970000000204891,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0014056467031256948
+            },
+            {
+              "model": "two_stop",
+              "phase": "refine",
+              "renderings": 40,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.0010586352187933997
+            },
+            {
+              "model": "three_stop",
+              "phase": "refine",
+              "renderings": 39,
+              "seconds": 0.4529999999795109,
+              "semantic_passed": true,
+              "pixel_passed": true,
+              "error": 0.001047554185072722
+            }
+          ],
+          "selected_model": "three_stop",
+          "renderings": 127,
+          "render_budget": 417,
+          "seconds": 1.4849999999860302,
+          "stop_reason": "models_exhausted",
+          "satisfactory": true
+        }
+      },
+      {
+        "name": "AC0800_S",
+        "family": "plain_disk",
+        "split": "control",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.1720000000204891,
+        "renderings": 39,
+        "error": 0.0025662608398479216,
+        "svg_sha256": "bf4fe860f85f9568a8335853fc0d482b1817c77e0816001404728cb2de7c6805",
+        "metrics": {
+          "normalized_mse": 0.002566260751336813,
+          "foreground_mse": 0.007197910454124212,
+          "edge_alignment": 0.9249324798583984,
+          "foreground_iou": 0.9705882352941176,
+          "foreground_iou_binary": 0.9705882352941176
+        },
+        "comparison": null
+      },
+      {
+        "name": "AC0800_M",
+        "family": "plain_disk",
+        "split": "control",
+        "passed": true,
+        "reason": "passed",
+        "seconds": 0.46899999992456287,
+        "renderings": 98,
+        "error": 0.0009073048827374087,
+        "svg_sha256": "8ff9a85ebcff43ffee2d018f7c604001b589d7859465ff36468417718381081f",
+        "metrics": {
+          "normalized_mse": 0.0009073049295693636,
+          "foreground_mse": 0.0026423796080052853,
+          "edge_alignment": 0.9449183940887451,
+          "foreground_iou": 0.8867924528301887,
+          "foreground_iou_binary": 0.8867924528301887
+        },
+        "comparison": null
+      },
+      {
+        "name": "AC0140_L",
+        "family": "hollow_cross_panel",
+        "split": "control",
+        "passed": false,
+        "reason": "unsupported_description_or_evidence",
+        "seconds": 0.5320000000065193,
+        "renderings": 17,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      },
+      {
+        "name": "AC0152_L",
+        "family": "component_composition",
+        "split": "control",
+        "passed": false,
+        "reason": "outside_analytic_fitter_scope",
+        "seconds": 0.0,
+        "renderings": 0,
+        "error": null,
+        "svg_sha256": null,
+        "metrics": null,
+        "comparison": null
+      }
+    ]
+  },
+  "caveats": [
+    "AC0152_L is outside this analytic fitter study and was not executed as a component conversion.",
+    "AC0800_M pass variation belongs to unchanged time-sensitive registration; no gain attributed.",
+    "Disk-arrow success remains 5/7; this change increases runtime, not demonstrated throughput.",
+    "No unseen holdout was opened. All related arrow motifs remain in development."
+  ],
+  "current_sources": {
+    "src/iCCModules/imageCompositeConverterDiskArrow.py": "144e1c233a6b0d97bcb9f417e946e139327d6efa0e5c8cf4d7a2b61c4ef9a363",
+    "src/iCCModules/imageCompositeConverterFilledSymbols.py": "80db52888845410710031c060ec005198d1524ab2bd8a6b5859217ca74a2ee84",
+    "src/iCCModules/imageCompositeConverterFormModels.py": "84210168e5132cb8398f694262fc93a064c68a49c88b1a5cfaeb14b159a2bfbf",
+    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": "0020d7f849bf54ef2b5860250b504d80f4709e0d7b15b32494f197d5b5e2d6e3"
+  },
+  "measured_source_scope": "AP1 snapshot before concurrent AP2 edits; hashes do not assert the live workspace state",
+  "validation": {
+    "targeted_tests": 60,
+    "additional_regressions": 140,
+    "preexisting_minimum_effort_failures": 5,
+    "baseline_minimum_effort_failures": 5,
+    "cli": {
+      "image": "GE0037_S",
+      "successful": true,
+      "renderings": 322,
+      "render_budget": 384,
+      "process_seconds": 4.579,
+      "seconds_budget": 10,
+      "rgb_rmse_per_channel": 8.077442
+    }
+  }
+}

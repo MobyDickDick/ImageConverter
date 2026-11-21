@@ -7,10 +7,11 @@ import cv2
 import numpy as np
 import re
 
-from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image, _register
+from src.iCCModules.imageCompositeConverterFilledSymbols import _hex, _image
 
 
-def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
+def disk_arrow_direction(description):
+    """Recognize a disk containing one horizontal shaft-and-head arrow."""
     text = normalize_description(description, orientations=True).casefold()
     if not gradient_direction(text, 'waagerecht'):
         return None
@@ -19,8 +20,7 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
     directions = re.findall(r'pfeil\s+nach\s+(links|rechts|oben|unten)\b', text)
     if len(directions) != 1 or directions[0] not in ('links', 'rechts'):
         return None
-    rightward = directions[0] == 'rechts'
-    if not all(word in text for word in ('kreis', 'verlauf', 'waagerecht', 'pfeil',
+    if not all(word in text for word in ('kreis', 'verlauf', 'pfeil',
                                          'schaft', 'dreieck', 'ohne lücke')):
         return None
     if any(word in text for word in ('nach oben', 'nach unten', 'zwei',
@@ -28,8 +28,61 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
         return None
     # Reject conflicting directions while allowing the disk's color gradient
     # and the whole motif's placement to have their own spatial description.
-    if ('nach links' if rightward else 'nach rechts') in text:
+    if ('nach links' if directions[0] == 'rechts' else 'nach rechts') in text:
         return None
+    return directions[0]
+
+
+def validate_disk_arrow(root, direction):
+    from src.iCCModules.imageCompositeConverterRepresentation import path_points
+
+    disks = [node for node in root.iter() if node.tag.rsplit('}', 1)[-1] == 'circle']
+    arrows = [node for node in root.iter() if node.tag.rsplit('}', 1)[-1] == 'polygon']
+    if len(disks) != 1 or len(arrows) != 1:
+        return False
+    disk, arrow = disks[0], arrows[0]
+    paths = path_points(arrow)
+    if len(paths) != 1 or len(paths[0][0]) != 7:
+        return False
+    points = paths[0][0].copy()
+    try:
+        center = np.array([float(disk.get(axis, '0')) for axis in ('cx', 'cy')])
+        radius = float(disk.get('r', '0'))
+        rim_width = float(disk.get('stroke-width', '1'))
+        outline_width = float(arrow.get('stroke-width', '1'))
+    except ValueError:
+        return False
+    if (not np.isfinite(points).all() or not 0 < rim_width < radius
+            or not 0 < outline_width < radius
+            or disk.get('stroke', 'none') == 'none' or arrow.get('stroke', 'none') == 'none'
+            or arrow.get('fill', 'black') == 'none'
+            or not np.all(np.linalg.norm(points-center, axis=1) < radius)):
+        return False
+    if direction == 'rechts':
+        points[:, 0] *= -1
+    points = np.roll(points, -int(np.argmin(points[:, 0])), axis=0)
+    if points[1, 1] > points[-1, 1]:
+        points = points[[0, 6, 5, 4, 3, 2, 1]]
+    tip, upper, shoulder, tail, base, lower, heel = points
+    fill = disk.get('fill', '')
+    gradient = next((node for node in root.iter()
+                     if node.tag.rsplit('}', 1)[-1] == 'linearGradient'
+                     and fill == f"url(#{node.get('id')})"), None)
+    return bool(gradient is not None
+                and gradient.get('y1', '0') == gradient.get('y2', '0')
+                and gradient.get('x1', '0') != gradient.get('x2', '1')
+                and tip[0] < upper[0] < tail[0]
+                and np.allclose(points[[1, 2, 5, 6], 0], upper[0])
+                and np.isclose(tail[0], base[0])
+                and np.isclose(shoulder[1], tail[1]) and np.isclose(lower[1], base[1])
+                and upper[1] < shoulder[1] < tip[1] < lower[1] < heel[1])
+
+
+def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
+    direction = disk_arrow_direction(description)
+    if direction is None:
+        return None
+    rightward = direction == 'rechts'
     pixels = _image(width, height, image)
     if pixels is None:
         return None
@@ -66,6 +119,13 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
     if abs(colors[0].mean()-colors[1].mean()) <= 5:
         return None
     field = (1-t[..., None])*colors[0]+t[..., None]*colors[1]
+    # A horizontal gradient does not prescribe its colour interpolation.
+    # Estimate a second admissible fill from the same exposed original pixels.
+    basis = np.stack((np.maximum(1-2*t, 0), 1-np.abs(2*t-1), np.maximum(2*t-1, 0)), axis=-1)
+    three_colors = np.linalg.lstsq(basis[exposed], pixels[exposed], rcond=None)[0]
+    three_field = basis @ three_colors
+    if np.mean((three_field[exposed]-pixels[exposed])**2) < np.mean((field[exposed]-pixels[exposed])**2):
+        field = three_field
     arrow_mask = ((np.mean(field-pixels, axis=2) > 35) & (distance < radius*.9)).astype(np.uint8)
     contrast_mask = arrow_mask.copy()
     # Pale antialiased outlines can isolate a one-pixel strip of the shaft.
@@ -129,7 +189,7 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
 
     def build(p):
         cx, cy, r, sw = p[:4]
-        light, dark, rim, fill, outline = p[11:].reshape(-1, 3)
+        light, dark, rim, fill, outline = p[11:26].reshape(-1, 3)
         arrow_points = points(p)
         if rightward:
             cx = width-cx
@@ -137,7 +197,9 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
         start, end = ('1', '0') if rightward else ('0', '1')
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 f'<defs><linearGradient id="disk_color" x1="{start}" y1="0" x2="{end}" y2="0">'
-                f'<stop offset="0" stop-color="{_hex(light)}"/><stop offset="1" stop-color="{_hex(dark)}"/>'
+                f'<stop offset="0" stop-color="{_hex(light)}"/>'
+                +(f'<stop offset="0.5" stop-color="{_hex(p[26:29])}"/>' if len(p) == 29 else '')+
+                f'<stop offset="1" stop-color="{_hex(dark)}"/>'
                 '</linearGradient></defs>'
                 f'<rect width="{width}" height="{height}" fill="#ffffff"/>'
                 f'<circle cx="{cx:.4f}" cy="{cy:.4f}" r="{r:.4f}" fill="url(#disk_color)" stroke="{_hex(rim)}" stroke-width="{sw:.4f}"/>'
@@ -153,4 +215,24 @@ def fit_disk_arrow(width, height, *, description, image, render_fn, error_fn):
                 and abs(center-cy) < r*.18
                 and all((x-cx)**2+(y-cy)**2 < (r-sw/2-outline/2)**2 for x, y in points(p)))
 
-    return _register(p, 11, build, valid, image, render_fn, error_fn, 'raster_disk_arrow_v1')
+    from xml.etree import ElementTree as ET
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    from src.iCCModules.imageCompositeConverterFormModels import compare_form_models
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+
+    assertions = description_assertions(description)
+    def validate(svg):
+        try:
+            validate_svg_assertions(svg, assertions)
+            return validate_disk_arrow(ET.fromstring(svg), direction)
+        except ValueError:
+            return False
+
+    alternative = np.r_[p, three_colors[1]]
+    alternative[11:17] = three_colors[[0, 2]].ravel()
+    models = [dict(name=name, parameters=parameters, geometry_count=11, build=build, valid=valid)
+              for name, parameters in [('two_stop', p), ('three_stop', alternative)]]
+    config = settings()
+    return compare_form_models(models, image=image, render_fn=render_fn, error_fn=error_fn,
+        validate_fn=validate, source='raster_disk_arrow_v1',
+        render_budget=min(417, config['budget']) if config else 417)

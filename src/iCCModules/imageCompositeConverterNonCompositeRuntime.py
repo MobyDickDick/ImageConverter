@@ -1457,6 +1457,8 @@ def runNonCompositeIterationImpl(
             )
             if fitted is not None:
                 validated_result(fitted,perc_img)
+                if fitted.get('model_comparison'):
+                    params['form_model_comparison'] = fitted['model_comparison']
                 if fit_fn is fit_stem_disk:
                     params['stem_disk_registration'] = {key: value for key, value in fitted.items()
                                                        if key not in {'svg', 'rendered'}}

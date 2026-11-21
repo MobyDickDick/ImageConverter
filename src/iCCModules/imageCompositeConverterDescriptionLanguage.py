@@ -154,6 +154,13 @@ def description_assertions(description: str) -> dict:
         assertions['anchor_relations'] = relations
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     objects = description_object_limits(normalized)
+    from src.iCCModules.imageCompositeConverterDiskArrow import disk_arrow_direction
+    direction = disk_arrow_direction(normalized)
+    if direction:
+        assertions['disk_arrow_direction'] = direction
+        # The shaft and head share one painted outline.
+        objects.setdefault('circle', 1)
+        objects.setdefault('polygon', 1)
     if label_claim:
         objects['text'] = len(set(labels))
         assertions['labels'] = sorted(set(labels))
@@ -368,6 +375,10 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
 
         if not horizontal_bar(root):
             raise DescriptionRejected('missing_described_horizontal_bar')
+    if assertions.get('disk_arrow_direction'):
+        from src.iCCModules.imageCompositeConverterDiskArrow import validate_disk_arrow
+        if not validate_disk_arrow(root, assertions['disk_arrow_direction']):
+            raise DescriptionRejected('missing_described_disk_arrow')
     if assertions.get('objects'):
         from src.iCCModules.imageCompositeConverterRepresentation import validate_object_limits
         try:

@@ -4,7 +4,12 @@ Vorhandene SVGs lassen sich in der Einzelkonvertierung jetzt als Bauteile
 zusammensetzen: je eine Zeile `SVG-Bauteil: DATEINAME.svg` im Beschreibungsfeld.
 Position und proportionale Skalierung werden automatisch gesucht oder explizit
 vorgegeben. Die Bildprüfung bleibt verbindlich; die Bauteilauswahl bleibt manuell.
-AC0152_L besteht mit der vorhandenen fehlerhaften M-Vorlage noch nicht.
+AC0152_L besteht jetzt mit korrigiertem M-Bauteil, vermessenen sichtbaren
+Bauteilgrenzen und einer abschliessenden Feinplatzierung am Gesamtbild.
+`SVG-Bauteil: AC1002_L.svg hinter AC0151_L.svg` legt den Motor hinter die Röhre.
+Ohne Ebenenvorgabe vergleicht die Suche auch Zeichenreihenfolgen. Überlappende
+Stellen werden zusätzlich lokal geprüft; der übermalende Griff wird damit
+erkannt und durch die passende Überdeckung korrigiert.
 [Bedienung, Prüfungen und Grenzen](docs/svg_component_reuse.md).
 
 Die ursprüngliche Bildgrösse ist jetzt eine feste Grenze für die SVG-Ausgabe.

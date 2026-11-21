@@ -183,6 +183,10 @@ class Reflection:
             )
             return desc, params
 
+        if assertions.get("disk_arrow_direction"):
+            params["mode"] = "non_composite"
+            return desc, params
+
         if semantic_helpers.apply_semantic_badge_description_rules(desc=desc, params=params):
             return desc, params
 
