@@ -7,6 +7,8 @@ Registrierungen ohne Portfolio und die Vorlagenausrichtung sind korrigiert.
 Vorlagen protokollieren echte Renderfolgen und prüfen zusätzliche zulässige
 Platzierungen. Der Bericht beschreibt die noch nötigen Adapter für eine
 vollständige Umstellung; sämtliche Suchpfade sind damit noch nicht migriert.
+Die weitere Umsetzung ist in [drei offenen Arbeitspaketen mit Abnahmekriterien](docs/next_arbeitspakete_2026-11-21_gemeinsame_suchsteuerung.md)
+und in der Aufgabenliste dokumentiert.
 
 Die allgemeine Beschreibungsanpassung untersucht jetzt mehrere vom Seed
 abhängige Startpunkte und misst die Farben der beschriebenen Formen am Original.

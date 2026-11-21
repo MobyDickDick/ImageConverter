@@ -97,6 +97,11 @@ SearchOutcome:
 
 ## Umstellung der übrigen Pfade
 
+Die drei übergreifenden Umbauten sind als offene, aufeinander aufbauende
+[Arbeitspakete mit Abnahmekriterien](../../../docs/next_arbeitspakete_2026-11-21_gemeinsame_suchsteuerung.md)
+und als `SEARCH-ROUTES-01` bis `SEARCH-ROUTES-03` in der
+[Aufgabenliste](../../../docs/open_tasks.md) festgehalten.
+
 | Priorität | Konkreter Umbau | Verbindliche Abnahme |
 | --- | --- | --- |
 | 1 | Ergebniszustände und gemeinsamen Kontext an den produktiven Dispatch anbinden; frühe Returns bei blossen Entwürfen ersetzen | Ein schlechtes erstes Modell blockiert ein besseres zweites nicht. Ein früher guter Stand überlebt schlechtere spätere Zweige. Alle Arbeit bleibt im selben Budget. |

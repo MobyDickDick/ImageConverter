@@ -1,5 +1,8 @@
 # Dokumentationsindex
 
+- [Gemeinsame Suchsteuerung: drei offene Arbeitspakete für alle Suchfamilien mit Reihenfolge und Abnahmekriterien (2026-11-21)](next_arbeitspakete_2026-11-21_gemeinsame_suchsteuerung.md)
+- [Untersuchung der Suchpfade: Inventar, ausgeführte Korrekturen und verbleibende Umstellung (2026-11-21)](../artifacts/evaluation/search_routes_2026-11-21/README.md)
+
 - [Adaptive Formmodelle: früher Vergleich umgesetzt, feste Baseline und nächstes Budgetpaket (2026-11-21)](next_arbeitspakete_2026-11-21_adaptive_formmodelle.md)
 
 - [Vorhandene SVG-Bauteile kombinieren: explizite Verweise, automatische Platzierung und AC0152_L-Grenze](svg_component_reuse.md)
