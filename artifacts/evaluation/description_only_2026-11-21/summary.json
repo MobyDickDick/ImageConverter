@@ -1,0 +1,102 @@
+{
+  "scope": "All persisted GUI failures and all converted_svg_failed directories under artifacts; final artifacts, not every internal search candidate.",
+  "measurement": "Render at 96x96 RGB. Similarity = 1 - mean absolute RGB difference / 255 over the union of foreground pixels (<245). No quality or generalization claim.",
+  "records": 1157,
+  "rendered": 901,
+  "missing_result_jobs": 86,
+  "errors": [],
+  "repeat_pairs": 950,
+  "identical_repeat_pairs": 296,
+  "near_identical_repeat_pairs_99": 583,
+  "different_seed_repeat_pairs": 931,
+  "identical_different_seed_pairs": 287,
+  "universal_diversity_proven": false,
+  "universal_distinctness_disproved": true,
+  "interpretation": "Exact duplicates refute the claim that all failures differ. Nonidentical results alone do not establish useful independent reconstruction.",
+  "byte_identical_repeat_pairs": 291,
+  "byte_identical_different_seed_pairs": 283,
+  "raster_duplicate_group_count": 76,
+  "snapshot_report_sha256": "e383a0b473a67ee5c978dbc6476aac464bb0ed2c47b7716dea6c4b86234011bf",
+  "fresh_runs": [
+    {
+      "case": "independent_circle",
+      "seed": 17,
+      "description": "Ein grauer Kreis mit dunklem Rand.",
+      "returncode": 1,
+      "svgs": [],
+      "second_stage_events": 0
+    },
+    {
+      "case": "independent_circle",
+      "seed": 18,
+      "description": "Ein grauer Kreis mit dunklem Rand.",
+      "returncode": 1,
+      "svgs": [],
+      "second_stage_events": 0
+    },
+    {
+      "case": "supported_circle",
+      "seed": 17,
+      "description": "Ein grauer Kreis mit dunkelgrauem Rand.",
+      "returncode": 0,
+      "svgs": [
+        {
+          "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\description_only_2026-11-21\\final_runs\\supported_circle_seed_17\\output\\converted_svgs\\neutral.svg",
+          "inventory_error": ""
+        }
+      ],
+      "second_stage_events": 0
+    },
+    {
+      "case": "supported_circle",
+      "seed": 18,
+      "description": "Ein grauer Kreis mit dunkelgrauem Rand.",
+      "returncode": 0,
+      "svgs": [
+        {
+          "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\evaluation\\description_only_2026-11-21\\final_runs\\supported_circle_seed_18\\output\\converted_svgs\\neutral.svg",
+          "inventory_error": ""
+        }
+      ],
+      "second_stage_events": 0
+    },
+    {
+      "case": "reported_source_current_description",
+      "seed": 17,
+      "description": "Es ist ein motorgetriebenes Zweiwegventil. Die beiden Ventile sind horizontal angeordnet. Der Motor ist als Kelle mit einem Griff nach unten realisiert. Bei den Ventilen werden die beiden Formen zusammengehängt und ein Farbübergang gezeichnet.",
+      "returncode": 1,
+      "svgs": [],
+      "second_stage_events": 0
+    },
+    {
+      "case": "reported_source_current_description",
+      "seed": 18,
+      "description": "Es ist ein motorgetriebenes Zweiwegventil. Die beiden Ventile sind horizontal angeordnet. Der Motor ist als Kelle mit einem Griff nach unten realisiert. Bei den Ventilen werden die beiden Formen zusammengehängt und ein Farbübergang gezeichnet.",
+      "returncode": 1,
+      "svgs": [],
+      "second_stage_events": 0
+    },
+    {
+      "case": "reported_source_explicit_inventory",
+      "seed": 17,
+      "description": "Ein grauer Kreis, eine senkrechte Linie und zwei graue Dreiecke. Der Kreis liegt oben. Die Dreiecke liegen darunter links und rechts.",
+      "returncode": 1,
+      "svgs": [],
+      "second_stage_events": 0
+    },
+    {
+      "case": "reported_source_explicit_inventory",
+      "seed": 18,
+      "description": "Ein grauer Kreis, eine senkrechte Linie und zwei graue Dreiecke. Der Kreis liegt oben. Die Dreiecke liegen darunter links und rechts.",
+      "returncode": 1,
+      "svgs": [],
+      "second_stage_events": 0
+    }
+  ],
+  "limitations": [
+    "Historical final artifacts only; no proof about all internal candidates or erased history.",
+    "Raster comparisons at 96x96; byte identity reported independently.",
+    "Bounded language parser; unknown concepts and relations are not generally understood.",
+    "No evidence of useful generalization from output diversity alone."
+  ]
+}

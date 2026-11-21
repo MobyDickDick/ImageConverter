@@ -1,5 +1,25 @@
 # ImageConverter
 
+Seit 21. November 2026 gilt die **Beschreibung als vollständige Elementliste**.
+Die zweite Rasterrekonstruktion ist aus Einzelkonvertierung, CLI, Vorlagenanpassung
+und Plan-B-Prüfläufen entfernt. Es gibt keine zusätzlichen Restlinien,
+automatisch geladenen Ersatzvorlagen oder Platzhalter-SVGs mehr.
+Vorhandene Vorlagen dürfen nur mit passender Elementliste als Ganzes ausgerichtet
+werden. Fehlende oder zusätzliche erkannte Elemente verhindern auch die Ausgabe
+eines fehlgeschlagenen SVG-Entwurfs. Nicht auswertbare Beschreibungen bleiben
+ungenügend; der Parser unterstützt weiterhin nur einen begrenzten Wortschatz.
+
+Der historische Vergleich widerlegt eine allgemeine Verschiedenheit der
+Fehlversuche: Von 950 Paaren mit gleichen Eingabepixeln und gleichem
+Beschreibungstext sind 291 SVG-Paare byteidentisch, davon 283 trotz verschiedener
+Seeds. Neue Wiederholungen speichern zusätzlich einen Bildvergleich zum vorherigen
+Ergebnis. Unterschiedliche Resultate allein belegen keine Generalisierung.
+[Umstellung, Messverfahren, Nachweise und Grenzen](artifacts/evaluation/description_only_2026-11-21/README.md).
+Den laufenden Webserver nach Abschluss laufender Aufträge neu starten.
+
+Die nachfolgenden Einträge dokumentieren frühere Änderungen. Aussagen zur
+zusätzlichen Rasterrekonstruktion sind durch die obige Regel abgelöst.
+
 Beschriebene Grundformen werden jetzt mit numerischer Geometrietoleranz geprüft:
 Geraden dürfen keine Knicke oder Anhängsel besitzen, Rechtecke brauchen rechte
 Winkel, Quadrate zusätzlich gleiche Seiten und Rauten gleiche Seiten. Gestreckte

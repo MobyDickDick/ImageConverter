@@ -3,10 +3,8 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-import random
 import re
 from pathlib import Path
-import time
 import numpy as np
 
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
@@ -113,111 +111,9 @@ def scene_reconstruction_fitters():
     )
 
 
-def _output_variation_rng() -> random.Random | None:
-    """Return a per-conversion RNG for small output variations.
-
-    Set ``TINY_ICC_OUTPUT_VARIATION=1`` only for explicit visual experiments.
-    Search diversity is measured before acceptance; post-fit jitter is off.
-    """
-    if "PYTEST_CURRENT_TEST" in os.environ:
-        return None
-    flag = os.environ.get("TINY_ICC_OUTPUT_VARIATION", "0").strip().lower()
-    if flag in {"0", "false", "no", "off"}:
-        return None
-    return random.Random(time.time_ns() ^ os.getpid())
-
-
-def _jitter_number(
-    value: object,
-    rng: random.Random,
-    delta: float,
-    *,
-    low: float = 0.0,
-    high: float = 1.0,
-) -> object:
-    try:
-        numeric = float(value)
-    except (TypeError, ValueError):
-        return value
-    return max(low, min(high, numeric + rng.uniform(-abs(delta), abs(delta))))
-
-
-def _jitter_geometry_ir_for_output_variation(geometry_ir: object, rng: random.Random) -> object:
-    """Apply tiny visual differences so repeated conversions are not identical."""
-    if not isinstance(geometry_ir, list):
-        return geometry_ir
-    varied = json.loads(json.dumps(geometry_ir))
-    for element in varied:
-        if not isinstance(element, dict):
-            continue
-        bbox = element.get("bbox")
-        if isinstance(bbox, list) and len(bbox) == 4:
-            element["bbox"] = [
-                _jitter_number(bbox[0], rng, 0.003),
-                _jitter_number(bbox[1], rng, 0.003),
-                _jitter_number(bbox[2], rng, 0.002, low=0.01),
-                _jitter_number(bbox[3], rng, 0.002, low=0.01),
-            ]
-        for line_key in (
-            "left_line",
-            "right_line",
-            "upper_line",
-            "lower_line",
-            "stem_line",
-            "handle_line",
-        ):
-            line = element.get(line_key)
-            if isinstance(line, list):
-                varied_line = []
-                for point in line:
-                    if isinstance(point, list) and len(point) == 2:
-                        varied_line.append(
-                            [
-                                _jitter_number(point[0], rng, 0.003),
-                                _jitter_number(point[1], rng, 0.003),
-                            ]
-                        )
-                    else:
-                        varied_line.append(point)
-                element[line_key] = varied_line
-        if "stroke_width" in element:
-            element["stroke_width"] = _jitter_number(
-                element.get("stroke_width"),
-                rng,
-                0.0015,
-                low=0.001,
-                high=1.0,
-            )
-    return varied
-
-
-def _apply_svg_output_variation(svg_content: str, rng: random.Random, *, width: int, height: int) -> str:
-    """Wrap drawable SVG content in a tiny per-run transform."""
-    if "</svg>" not in svg_content:
-        return svg_content
-    dx = rng.uniform(-max(0.08, width * 0.0025), max(0.08, width * 0.0025))
-    dy = rng.uniform(-max(0.08, height * 0.0025), max(0.08, height * 0.0025))
-    angle = rng.uniform(-0.18, 0.18)
-    cx = width * 0.5
-    cy = height * 0.5
-    open_group = (
-        f'  <g data-output-variation="1" '
-        f'transform="translate({dx:.4f} {dy:.4f}) rotate({angle:.4f} {cx:.4f} {cy:.4f})">\n'
-    )
-    if "</defs>" in svg_content:
-        return svg_content.replace("</defs>", "</defs>\n" + open_group, 1).replace(
-            "</svg>",
-            "  </g>\n</svg>",
-            1,
-        )
-    first_newline = svg_content.find("\n")
-    if first_newline >= 0:
-        return (
-            svg_content[: first_newline + 1]
-            + open_group
-            + svg_content[first_newline + 1 :].replace("</svg>", "  </g>\n</svg>", 1)
-        )
-    return svg_content.replace(">", ">\n" + open_group, 1).replace("</svg>", "  </g>\n</svg>", 1)
+def _output_variation_rng():
+    """Compatibility hook: post-fit output jitter is no longer supported."""
+    return None
 
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
@@ -1620,166 +1516,28 @@ def runNonCompositeIterationImpl(
                 write_validation_log_fn([f"status={status}"])
                 write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
                 return base_name, description, params, 1, fitted['error']
-    algorithmic_description_available = mode != "manual_review" and _has_description_driven_symbol_algorithm(description)
-    sample_svg = (
-        None
-        if algorithmic_description_available
-        else _try_load_sample_svg(
-            img_path=img_path,
-            base_name=base_name,
-            description=description,
-            image_variant_name=image_variant_name,
-        )
-    )
-
-    if mode == "manual_review":
-        generated_svg_content = None
-        generated_rendered = None
-        generated_err = float("inf")
-        generated_status = "manual_review_generated_vector_placeholder"
-
-        if _description_requests_diagonal_band(description):
-            print_fn("  -> Plan B Grundsatz: Diagonalbreite wird iterativ bestimmt (kein Fixwert).")
-            best_diagonal = _fit_diagonal_band_iterative(
-                width=width,
-                height=height,
-                description=description,
-                perc_img=perc_img,
-                render_svg_to_numpy_fn=render_svg_to_numpy_fn,
-                calculate_error_fn=calculate_error_fn,
-            )
-            if best_diagonal is not None:
-                generated_err, generated_svg_content, generated_rendered, stroke_w = best_diagonal
-                generated_status = "manual_review_iterative_diagonal_band"
-                generated_log_lines = [
-                    "status=manual_review_iterative_diagonal_band",
-                    f"iterative_stroke_width={stroke_w:.6f}",
-                ]
-            else:
-                generated_log_lines = ["status=manual_review_iterative_diagonal_band_render_failed"]
-        else:
-            print_fn("  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.")
-            try:
-                best_structured = _fit_symbol_element_by_element(
-                    width=width,
-                    height=height,
-                    description=description,
-                    perc_img=perc_img,
-                    render_svg_to_numpy_fn=render_svg_to_numpy_fn,
-                    calculate_error_fn=calculate_error_fn,
-                )
-                if best_structured is not None:
-                    generated_err, generated_svg_content, generated_rendered, fitted_params, step_logs = best_structured
-                else:
-                    generated_rendered = None
-            except Exception:
-                generated_rendered = None
-            if generated_rendered is not None and generated_svg_content is not None:
-                generated_status = "manual_review_elementwise_symbol_fit"
-                generated_log_lines = [
-                    "status=manual_review_elementwise_symbol_fit",
-                    *step_logs,
-                    *[f"fit_{k}={v}" for k, v in sorted(fitted_params.items())],
-                ]
-            else:
-                generated_svg_content = _build_vector_placeholder_svg(width, height, description=description)
-                generated_rendered = render_svg_to_numpy_fn(generated_svg_content, width, height)
-                if generated_rendered is None:
-                    record_render_failure_fn(
-                        "manual_review_vector_placeholder_render_failed",
-                        svg_content=generated_svg_content,
-                        params_snapshot=params,
-                    )
-                else:
-                    generated_err = calculate_error_fn(perc_img, generated_rendered)
-                generated_log_lines = ["status=manual_review_generated_vector_placeholder"]
-
-        if sample_svg:
-            sample_svg_path, sample_svg_content = sample_svg
-            sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
-            if sample_rendered is None:
-                record_render_failure_fn(
-                    "manual_review_plan_b_render_failed",
-                    svg_content=sample_svg_content,
-                    params_snapshot=params,
-                )
-            else:
-                sample_err = calculate_error_fn(perc_img, sample_rendered)
-                sample_is_exact_variant = Path(sample_svg_path).stem.upper() == Path(str(image_variant_name or base_name)).stem.upper()
-                if sample_is_exact_variant or sample_err + 1e-6 < generated_err:
-                    print_fn(
-                        "  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG "
-                        f"{sample_svg_path} (sample={sample_err:.3f}, generated={generated_err:.3f})."
-                    )
-                    write_validation_log_fn(
-                        [
-                            "status=manual_review_plan_b_sample_svg",
-                            f"sample_svg_path={sample_svg_path}",
-                            f"sample_error={sample_err:.6f}",
-                            f"generated_error={generated_err:.6f}",
-                            f"generated_status={generated_status}",
-                        ]
-                    )
-                    write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
-                    return base_name, description, params, 1, sample_err
-
-        if generated_rendered is not None and generated_svg_content is not None:
-            print_fn(
-                "  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung "
-                f"(status={generated_status}, err={generated_err:.3f})."
-            )
-            write_validation_log_fn(generated_log_lines)
-            variation_rng = _output_variation_rng()
-            if variation_rng is not None:
-                varied_svg_content = _apply_svg_output_variation(
-                    generated_svg_content,
-                    variation_rng,
-                    width=width,
-                    height=height,
-                )
-                varied_rendered = render_svg_to_numpy_fn(varied_svg_content, width, height)
-                if varied_rendered is not None:
-                    generated_svg_content = varied_svg_content
-                    generated_rendered = varied_rendered
-                    generated_err = calculate_error_fn(perc_img, varied_rendered)
-            write_attempt_artifacts_fn(generated_svg_content, generated_rendered)
-            return base_name, description, params, 1, generated_err
-
-        reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
-        print_fn(f"  -> Überspringe Bild: {reason}")
-        write_validation_log_fn(
-            [
-                "status=skipped_manual_review",
-                f"manual_review_reason={reason}",
-            ]
-        )
+    # An unresolved description must remain unresolved. No template lookup,
+    # guessed panel, placeholder or raster-only scene can fill its gaps.
+    sample_svg = None
+    if mode == 'manual_review':
+        write_validation_log_fn(['status=insufficient_description_no_raster_fallback'])
         return None
 
     description_driven_algorithm_available = False
     resolved_variant_name = str(
         image_variant_name or params.get("variant_name") or Path(img_path).stem or base_name
     )
-    symmetric_valve_panel_svg = _try_build_symmetric_valve_panel_svg(
-        width,
-        height,
-        base_name=resolved_variant_name,
-        description=description,
-        perc_img=perc_img,
-    )
-    plain_panel_svg = _try_build_plain_framed_panel_svg(
-        width,
-        height,
-        description=description,
-        perc_img=perc_img,
-    )
+    symmetric_valve_panel_svg = None
+    plain_panel_svg = None
     selected_panel_status = ""
     selected_panel_trigger = ""
     selected_panel_print = ""
     selected_panel_locks_output_variation = False
-    nested_panel = fit_nested_panel(
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
+    nested_panel = (fit_nested_panel(
         width, height, description=description, image=perc_img,
         render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
-    )
+    ) if description_object_limits(description).get('rect', 0) >= 2 else None)
     if symmetric_valve_panel_svg is not None or plain_panel_svg is not None or nested_panel is not None:
         panel_candidates: list[dict[str, object]] = []
         if nested_panel is not None:
@@ -1878,10 +1636,8 @@ def runNonCompositeIterationImpl(
         print_fn(selected_panel_print)
         write_validation_log_fn([f"status={selected_panel_status}", selected_panel_trigger])
     else:
-        print_fn("  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.")
-        perception_seeded = _try_build_perception_seeded_geometry_ir_svg(
-            width, height, description=description, perc_img=perc_img
-        )
+        print_fn("  -> Rekonstruiere ausschliesslich die beschriebenen Elemente.")
+        perception_seeded = None  # the description alone declares the object inventory
         # Reflection normalizes matching prose, but text glyphs must retain case.
         glyph_description = params.get('effective_description') or " ".join(
             str(fragment.get("text", ""))
@@ -2058,31 +1814,6 @@ def runNonCompositeIterationImpl(
                             "optimizer_result": optimizer_result,
                         }
                     )
-            try:
-                best_structured = _fit_symbol_element_by_element(
-                    width=width,
-                    height=height,
-                    description=description,
-                    perc_img=perc_img,
-                    render_svg_to_numpy_fn=render_svg_to_numpy_fn,
-                    calculate_error_fn=calculate_error_fn,
-                )
-            except Exception:
-                best_structured = None
-            if best_structured is not None:
-                structured_err, structured_svg, structured_rendered, fitted_params, step_logs = best_structured
-                candidates.append(
-                    {
-                        "status": "non_composite_elementwise_symbol_fit",
-                        "svg": structured_svg,
-                        "rendered": structured_rendered,
-                        "error": structured_err,
-                        "geometry_ir": [],
-                        "perception_seed_count": 0,
-                        "fit_params": fitted_params,
-                        "step_logs": step_logs,
-                    }
-                )
             if not candidates:
                 return None
             semantic_description_candidate = next(
@@ -2149,23 +1880,6 @@ def runNonCompositeIterationImpl(
             perception_seed_count = int(best_geometry_candidate["perception_seed_count"])
             status = str(best_geometry_candidate["status"])
             log_lines = [f"status={status}"]
-            variation_rng = _output_variation_rng()
-            if variation_rng is not None and isinstance(geometry_ir, list):
-                varied_geometry_ir = _jitter_geometry_ir_for_output_variation(geometry_ir, variation_rng)
-                if varied_geometry_ir != geometry_ir:
-                    varied_svg_content = geometry_ir_helpers.renderGeometryIrToSvgImpl(
-                        width,
-                        height,
-                        varied_geometry_ir,
-                    )
-                    varied_rendered = render_svg_to_numpy_fn(varied_svg_content, width, height)
-                    if varied_rendered is not None:
-                        svg_content = varied_svg_content
-                        svg_rendered = varied_rendered
-                        svg_err = calculate_error_fn(perc_img, varied_rendered)
-                        geometry_ir = varied_geometry_ir
-                        params["optimized_geometry_ir"] = varied_geometry_ir
-                        log_lines.append("output_variation=1")
             if status == "non_composite_elementwise_symbol_fit":
                 log_lines.extend(str(line) for line in best_geometry_candidate.get("step_logs", []))
                 fit_params = best_geometry_candidate.get("fit_params", {})
@@ -2234,41 +1948,8 @@ def runNonCompositeIterationImpl(
                 )
             write_validation_log_fn(log_lines)
         else:
-            description_driven_algorithm_available = False
-            try:
-                best_structured = _fit_symbol_element_by_element(
-                    width=width,
-                    height=height,
-                    description=description,
-                    perc_img=perc_img,
-                    render_svg_to_numpy_fn=render_svg_to_numpy_fn,
-                    calculate_error_fn=calculate_error_fn,
-                )
-            except Exception:
-                best_structured = None
-            if best_structured is not None:
-                svg_err, svg_content, svg_rendered, fitted_params, step_logs = best_structured
-                write_validation_log_fn(
-                    [
-                        "status=non_composite_elementwise_symbol_fit",
-                        *step_logs,
-                        *[f"fit_{k}={v}" for k, v in sorted(fitted_params.items())],
-                    ]
-                )
-            else:
-                print_fn("  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).")
-                svg_content = _build_vector_placeholder_svg(width, height, description=description)
-                write_validation_log_fn(["status=non_composite_pure_svg_placeholder_vector"])
-                svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-                if svg_rendered is None:
-                    record_render_failure_fn(
-                        "non_composite_pure_svg_render_failed",
-                        svg_content=svg_content,
-                        params_snapshot=params,
-                    )
-                    return None
-                svg_err = calculate_error_fn(perc_img, svg_rendered)
-                # continue with plan-b sample comparison below using placeholder baseline
+            write_validation_log_fn(['status=insufficient_description_no_raster_fallback'])
+            return None
 
     if sample_svg and not description_driven_algorithm_available:
         sample_svg_path, sample_svg_content = sample_svg
@@ -2327,19 +2008,5 @@ def runNonCompositeIterationImpl(
                 write_attempt_artifacts_fn(sample_svg_content, None)
                 return base_name, description, params, 1, svg_err
 
-    variation_rng = None if selected_panel_locks_output_variation else _output_variation_rng()
-    if variation_rng is not None:
-        varied_svg_content = _apply_svg_output_variation(
-            svg_content,
-            variation_rng,
-            width=width,
-            height=height,
-        )
-        if varied_svg_content != svg_content:
-            varied_rendered = render_svg_to_numpy_fn(varied_svg_content, width, height)
-            if varied_rendered is not None:
-                svg_content = varied_svg_content
-                svg_rendered = varied_rendered
-                svg_err = calculate_error_fn(perc_img, varied_rendered)
     write_attempt_artifacts_fn(svg_content, svg_rendered)
     return base_name, description, params, 1, svg_err

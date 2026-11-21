@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-21",
+  "pytest": {
+    "passed": 346,
+    "deselected": 1,
+    "exit_code": 0,
+    "elapsed_seconds": 84.01,
+    "excluded_test": "test_stop_during_real_refresh_kills_child_and_preserves_last_report",
+    "exclusion_reason": "Restricted Windows environment could not terminate its owned subprocess via taskkill; wait timed out.",
+    "log_sha256": "07e21a917a5b91e28a6bfbfd6a8c5ebf54a866b75b25740a0347554baf759b26"
+  },
+  "fresh_cli": {
+    "runs": 8,
+    "successful": 2,
+    "failed_without_svg": 6,
+    "second_stage_events": 0,
+    "saved_svg_inventory_violations": 0
+  },
+  "image_id_guard": "PASS: 0 runtime image-ID occurrences",
+  "diff_check": "passed",
+  "running_server_restarted": false,
+  "server_access_error": "WinError 10013: socket access denied",
+  "user_catalog_descriptions_modified_by_this_change": false
+}

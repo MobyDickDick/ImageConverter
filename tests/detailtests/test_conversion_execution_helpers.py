@@ -214,7 +214,7 @@ def test_convert_one_impl_semantic_mismatch_is_reported_as_failure(tmp_path: Pat
     assert row is None
     assert failed is True
     assert batch_failures and batch_failures[0]["status"] == "semantic_mismatch"
-    assert (tmp_path / "Failed_AC0838_S.svg").read_text(encoding="utf-8") == "<svg/>"
+    assert not (tmp_path / "Failed_AC0838_S.svg").exists()
 
 
 def test_convert_one_impl_unknown_status_is_recorded_as_failure(tmp_path: Path) -> None:
@@ -248,7 +248,7 @@ def test_convert_one_impl_unknown_status_is_recorded_as_failure(tmp_path: Path) 
     assert row is None
     assert failed is True
     assert batch_failures and batch_failures[0]["status"] == "non_composite_embedded_svg"
-    assert (tmp_path / "Failed_AC0840_M.svg").read_text(encoding="utf-8") == "<svg/>"
+    assert not (tmp_path / "Failed_AC0840_M.svg").exists()
 
 
 def test_convert_one_impl_skipped_status_stays_non_failure(tmp_path: Path) -> None:
@@ -282,7 +282,7 @@ def test_convert_one_impl_skipped_status_stays_non_failure(tmp_path: Path) -> No
     assert row is None
     assert failed is False
     assert batch_failures == []
-    assert (tmp_path / "AC0999_X.svg").read_text(encoding="utf-8") == "<svg/>"
+    assert not (tmp_path / "AC0999_X.svg").exists()
 
 
 def test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix(tmp_path: Path) -> None:

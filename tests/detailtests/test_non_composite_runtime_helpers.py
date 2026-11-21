@@ -152,10 +152,10 @@ def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(t
         calculate_error_fn=lambda _target, rendered: 0.5 if rendered == "sample_rendered" else 0.9,
     )
 
-    assert result == ("AC0VR2_M", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.5)
-    assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
-    assert prints and "Plan B aktiv" in prints[0]
-    assert artifacts == [("<svg><circle r='1'/></svg>", "sample_rendered")]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_manual_review_uses_iterative_symbol_fit() -> None:
     logs: list[list[str]] = []
@@ -184,11 +184,10 @@ def test_run_non_composite_iteration_impl_manual_review_uses_iterative_symbol_fi
         calculate_error_fn=lambda _target, _rendered: 0.4,
     )
 
-    assert result == ("AC0120_L", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.4)
-    assert logs and logs[0][0] == "status=manual_review_elementwise_symbol_fit"
-    assert any("elementweise iterative Annäherung" in msg for msg in prints)
-    assert any(line.startswith("step_border_thickness=") for line in logs[0])
-    assert artifacts and "<svg" in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
@@ -216,8 +215,7 @@ def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> Non
     )
 
     assert result is None
-    assert logs == [["status=skipped_manual_review", "manual_review_reason=Bitte prüfen"]]
-    assert prints and prints[-1] == "  -> Überspringe Bild: Bitte prüfen"
+    assert logs == [["status=insufficient_description_no_raster_fallback"]]
 
 def test_run_non_composite_iteration_impl_manual_review_ignores_gradient_stripe_plan_b() -> None:
     logs: list[list[str]] = []
@@ -246,10 +244,10 @@ def test_run_non_composite_iteration_impl_manual_review_ignores_gradient_stripe_
         calculate_error_fn=lambda _target, _rendered: 0.9,
     )
 
-    assert result == ("Z_203", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.9)
-    assert logs == [["status=manual_review_generated_vector_placeholder"]]
-    assert artifacts and artifacts[0][0] != "<svg gradient/>"
-    assert prints and "elementweise iterative Annäherung" in prints[0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_prefers_exact_image_variant_sample_svg(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -283,10 +281,10 @@ def test_run_non_composite_iteration_impl_prefers_exact_image_variant_sample_svg
         image_variant_name="AC0VR2_AB_M",
     )
 
-    assert result == ("AC0VR2", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.9)
-    assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
-    assert "AC0VR2_AB_M.svg" in logs[0][1]
-    assert artifacts and "id='variant'" in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 
 def test_run_non_composite_iteration_impl_treats_filename_variant_sample_as_exact_even_if_generated_is_better(tmp_path) -> None:
@@ -326,10 +324,10 @@ def test_run_non_composite_iteration_impl_treats_filename_variant_sample_as_exac
         image_variant_name="AC0VR2_AB_M.jpg",
     )
 
-    assert result == ("AC0VR2", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 5.0)
-    assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
-    assert "AC0VR2_AB_M.svg" in logs[0][1]
-    assert artifacts and "id='exact-variant'" in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 
 def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() -> None:
@@ -365,17 +363,10 @@ def test_ac0vr2_plain_panel_fallback_preserves_frame_before_gradient_stripe() ->
         image_variant_name="AC0VR2_ZL_M",
     )
 
-    assert result == (
-        "AC0VR2",
-        "Unzugeordnete AC0VR2_ZL-Panelvariante.",
-        {"mode": "auto", "variant_name": "AC0VR2_ZL_M"},
-        1,
-        0.2,
-    )
-    assert logs and logs[0][0] == "status=non_composite_plain_framed_panel"
-    assert "gerahmtes AC0VR2-Panel" in prints[0]
-    assert artifacts and 'fill="#f0f0f0"' in artifacts[0][0]
-    assert 'stroke="#c5c5c5"' in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 
 
@@ -420,11 +411,10 @@ def test_ac0vr2_ab_panel_prefers_semantic_valve_over_plain_error_win() -> None:
         image_variant_name="AC0VR2_AB_M",
     )
 
-    assert result is not None
-    assert logs and logs[0][0] == "status=non_composite_symmetric_valve_panel"
-    assert artifacts and "ac0vr2SymmetricValveGradient" in artifacts[0][0]
-    assert 'path d="M 0.78 9.39 L 59.22 3.81"' in artifacts[0][0]
-    assert artifacts[0][0].count('<rect x="') <= 3
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 
 def test_ac0vr2_am_panel_prefers_smooth_semantic_valve_over_plain_panel() -> None:
@@ -468,11 +458,10 @@ def test_ac0vr2_am_panel_prefers_smooth_semantic_valve_over_plain_panel() -> Non
         image_variant_name="AC0VR2_AM_M",
     )
 
-    assert result is not None
-    assert logs and logs[0][0] == "status=non_composite_symmetric_valve_panel"
-    assert artifacts and "ac0vr2SymmetricValveGradient" in artifacts[0][0]
-    assert artifacts[0][0].count('<rect x="') <= 3
-    assert 'width="0.981"' not in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_ac0vr2_ab_symmetric_valve_panel_disables_output_variation(monkeypatch) -> None:
     monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
@@ -512,10 +501,10 @@ def test_ac0vr2_ab_symmetric_valve_panel_disables_output_variation(monkeypatch) 
         image_variant_name="AC0VR2_AB_M",
     )
 
-    assert result is not None
-    assert logs and logs[0][0] == "status=non_composite_symmetric_valve_panel"
-    assert artifacts and "ac0vr2SymmetricValveGradient" in artifacts[0][0]
-    assert 'data-output-variation="1"' not in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 
 def test_ac0vr2_symmetric_valve_panel_samples_line_colours_separately() -> None:
@@ -628,9 +617,10 @@ def test_run_non_composite_iteration_impl_ignores_gradient_stripe_strategy() -> 
         calculate_error_fn=lambda target, rendered: 1.25 if (target, rendered) == ("target", "rendered") else 99.0,
     )
 
-    assert result == ("Z_203", "desc", {"mode": "non_composite"}, 1, 1.25)
-    assert logs == [["status=non_composite_pure_svg_placeholder_vector"]]
-    assert artifacts and artifacts[0][0] != "<svg gradient/>"
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_prefers_sample_svg_when_better(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -663,10 +653,10 @@ def test_run_non_composite_iteration_impl_prefers_sample_svg_when_better(tmp_pat
         calculate_error_fn=lambda _target, rendered: 0.4 if rendered == "sample_rendered" else 1.1,
     )
 
-    assert result == ("AC0040_L", "desc", {"mode": "non_composite"}, 1, 0.4)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert prints and "Plan B Vergleich aktiv" in prints[-1]
-    assert artifacts == [("<svg sample/>", "sample_rendered")]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_keeps_algorithmic_svg_when_sample_error_is_worse(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -699,11 +689,10 @@ def test_run_non_composite_iteration_impl_keeps_algorithmic_svg_when_sample_erro
         calculate_error_fn=lambda _target, rendered: 1.7 if rendered == "sample_rendered" else 1.1,
     )
 
-    assert result == ("AC0011", "desc", {"mode": "non_composite"}, 1, 1.1)
-    assert logs[0][0] == "status=non_composite_pure_svg_placeholder_vector"
-    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
-    assert artifacts and artifacts[0][0].startswith("<svg")
-    assert artifacts[0][1] == "baseline_rendered"
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_prefers_documented_reference_sample_over_exact_alias(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -736,9 +725,10 @@ def test_run_non_composite_iteration_impl_prefers_documented_reference_sample_ov
         calculate_error_fn=lambda _target, rendered: 1.7 if rendered == "exact_rendered" else 1.1,
     )
 
-    assert result == ("AC0011", "Wie AC0010: geometrische Variante", {"mode": "non_composite"}, 1, 1.1)
-    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
-    assert artifacts and artifacts[0][1] == "other_rendered"
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forced_sample_render_fails(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -770,10 +760,10 @@ def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forc
         calculate_error_fn=lambda _target, _rendered: 1.1,
     )
 
-    assert result == ("AC0012", "desc", {"mode": "non_composite"}, 1, 1.1)
-    assert logs[0][0] == "status=non_composite_pure_svg_placeholder_vector"
-    assert not any("sample_render_failed=1" in line for row in logs for line in row)
-    assert artifacts and artifacts[0][1] == "baseline_rendered"
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 
 def test_run_non_composite_iteration_impl_prefers_perception_seeded_geometry_ir(monkeypatch) -> None:
@@ -821,13 +811,10 @@ def test_run_non_composite_iteration_impl_prefers_perception_seeded_geometry_ir(
         calculate_error_fn=lambda _target, _rendered: 0.25,
     )
 
-    assert result == ("ACPF4", "unbekannte Beschreibung", {"mode": "non_composite"}, 1, 0.25)
-    assert logs[0][:3] == [
-        "status=non_composite_perception_seeded_geometry_ir",
-        "perception_seeded_geometry_ir=1",
-        "perception_seed_count=1",
-    ]
-    assert 'id="seeded_rule"' in artifacts[0][0]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_vector_placeholder_has_no_embedded_image() -> None:
     logs: list[list[str]] = []
@@ -855,14 +842,10 @@ def test_run_non_composite_iteration_impl_vector_placeholder_has_no_embedded_ima
         calculate_error_fn=lambda _target, _rendered: 1.0,
     )
 
-    assert result == ("AC0030", "desc <unsafe> & marker", {"mode": "non_composite"}, 1, 1.0)
-    assert logs == [["status=non_composite_pure_svg_placeholder_vector"]]
-    assert artifacts and artifacts[0][1] == "rendered"
-    svg_content = artifacts[0][0].lower()
-    assert "<image" not in svg_content
-    assert "data:image/" not in svg_content
-    assert "&lt;unsafe&gt;" in svg_content
-    assert "&amp; marker" in svg_content
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_uses_same_root_sample_svg_when_exact_missing(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -895,11 +878,10 @@ def test_run_non_composite_iteration_impl_uses_same_root_sample_svg_when_exact_m
         calculate_error_fn=lambda _target, rendered: 0.3 if rendered == "sample_rendered" else 1.2,
     )
 
-    assert result == ("AC0212_S", "desc", {"mode": "non_composite"}, 1, 0.3)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert "sample_svg_path=" in logs[-1][1] and "AC0212_L.svg" in logs[-1][1]
-    assert prints and "Plan B Vergleich aktiv" in prints[-1]
-    assert artifacts == [("<svg same-root-sample/>", "sample_rendered")]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_uses_root_sample_svg_without_size_suffix(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -932,11 +914,10 @@ def test_run_non_composite_iteration_impl_uses_root_sample_svg_without_size_suff
         calculate_error_fn=lambda _target, rendered: 0.35 if rendered == "sample_rendered" else 1.4,
     )
 
-    assert result == ("AC0010", "desc", {"mode": "non_composite"}, 1, 0.35)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert "sample_svg_path=" in logs[-1][1] and "AC0010_L.svg" in logs[-1][1]
-    assert prints and "Plan B Vergleich aktiv" in prints[-1]
-    assert artifacts == [("<svg own-nosize-sample/>", "sample_rendered")]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_uses_plain_root_sample_when_size_variant_missing(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -969,11 +950,10 @@ def test_run_non_composite_iteration_impl_uses_plain_root_sample_when_size_varia
         calculate_error_fn=lambda _target, rendered: 0.25 if rendered == "sample_rendered" else 1.5,
     )
 
-    assert result == ("AC0010_S", "desc", {"mode": "non_composite"}, 1, 0.25)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert "sample_svg_path=" in logs[-1][1] and "AC0010.svg" in logs[-1][1]
-    assert prints and "Plan B Vergleich aktiv" in prints[-1]
-    assert artifacts == [("<svg plain-root-sample/>", "sample_rendered")]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_run_non_composite_iteration_impl_uses_own_size_sample_for_base_without_size_suffix(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -1006,11 +986,10 @@ def test_run_non_composite_iteration_impl_uses_own_size_sample_for_base_without_
         calculate_error_fn=lambda _target, rendered: 0.31 if rendered == "sample_rendered" else 1.5,
     )
 
-    assert result == ("AC0100", "desc", {"mode": "non_composite"}, 1, 0.31)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert "sample_svg_path=" in logs[-1][1] and "AC0100_L.svg" in logs[-1][1]
-    assert prints and "Plan B Vergleich aktiv" in prints[-1]
-    assert artifacts == [("<svg own-nosize-sample/>", "sample_rendered")]
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_try_load_sample_svg_does_not_fallback_to_standalone_size_suffix_file(tmp_path) -> None:
     image_dir = tmp_path / "images"
@@ -1065,9 +1044,10 @@ def test_run_non_composite_iteration_impl_rejects_sample_without_sufficient_gain
         calculate_error_fn=lambda _target, rendered: 160.0 if rendered == "sample_rendered" else 188.0,
     )
 
-    assert result == ("AC0130_L", "desc", {"mode": "non_composite"}, 1, 188.0)
-    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
-    assert artifacts and artifacts[0][1] == "baseline_rendered"
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_extract_reference_family_from_description() -> None:
     ref = non_composite_runtime_helpers._extract_reference_family_from_description(
@@ -1106,9 +1086,10 @@ def test_run_non_composite_iteration_impl_does_not_force_sample_for_known_proble
         calculate_error_fn=lambda _target, rendered: 200.0 if rendered == "sample_rendered" else 188.0,
     )
 
-    assert result == ("AC0120_L", "desc", {"mode": "non_composite"}, 1, 188.0)
-    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
-    assert artifacts and artifacts[0][1] == "baseline_rendered"
+    # The description is insufficient; none of the former raster/sample
+    # fallback paths may manufacture a deliverable.
+    assert result is None
+    assert not artifacts
 
 def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path) -> None:
     image_dir = tmp_path / "images"
@@ -2072,7 +2053,7 @@ def test_ac0224_sia_prefers_semantic_geometry_and_uses_crossed_square(monkeypatc
 
     assert result == ("AC0224_M_sia", description, {"mode": "non_composite"}, 1, 40.0)
     assert logs[-1][0] == "status=non_composite_description_geometry_ir"
-    assert "non_composite_selection=semantic_description_geometry" in logs[-1]
+    assert "description_driven_algorithm_available=1" in logs[-1]
     assert "geometry_ir_raster_registration=1" not in logs[-1]
     assert 'id="right_rotated_top_kelle_three_way_valve_square"' in artifacts[0][0]
     assert 'id="right_rotated_top_kelle_three_way_valve_circle"' not in artifacts[0][0]
@@ -2129,7 +2110,7 @@ def test_ac0010_rejects_deprecated_stripe_fit_even_when_pixel_error_is_lower(mon
 
     assert result == ("AC0010", description, {"mode": "non_composite"}, 1, 40.0)
     assert logs[-1][0] == "status=non_composite_description_geometry_ir"
-    assert "non_composite_selection=semantic_description_geometry" in logs[-1]
+    assert "description_driven_algorithm_available=1" in logs[-1]
     assert artifacts and artifacts[0][1] == "geometry_rendered"
     assert "generic-stripe-pixel-fit" not in artifacts[0][0]
     assert 'fill="url(#geometry-ir-horizontal-gradient)"' in artifacts[0][0]
@@ -2315,7 +2296,9 @@ def test_symbol_raster_estimation_preserves_bgr_source_colors_for_svg() -> None:
     assert params["gradient_mid"] == "#f24641"
 
 
-def test_description_geometry_candidate_yields_to_much_better_algorithmic_raster_fit() -> None:
+def test_description_geometry_is_not_replaced_by_a_better_raster_fallback(monkeypatch) -> None:
+    monkeypatch.setattr(non_composite_runtime_helpers, '_fit_symbol_element_by_element',
+                        lambda **kwargs: pytest.fail('retired raster fallback'))
     candidates = []
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -2352,14 +2335,13 @@ def test_description_geometry_candidate_yields_to_much_better_algorithmic_raster
         calculate_error_fn=lambda _target, rendered: 120.0 if rendered == "description_rendered" else 20.0,
     )
 
-    assert result == ("AC0010", description, {"mode": "non_composite", "variant_name": "AC0010"}, 1, 20.0)
-    assert logs[0][0] == "status=non_composite_elementwise_symbol_fit"
-    assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[0]
-    assert artifacts and artifacts[0][1] == "structured_rendered"
+    assert result == ("AC0010", description, {"mode": "non_composite", "variant_name": "AC0010"}, 1, 120.0)
+    assert logs[0][0] == "status=non_composite_description_geometry_ir"
+    assert artifacts and artifacts[0][1] == "description_rendered"
 
 
-def test_description_geometry_candidate_yields_to_any_better_algorithmic_raster_fit() -> None:
-    """Preview scores need no arbitrary 2x margin for the raster-driven algorithm."""
+def test_description_geometry_keeps_its_inventory_despite_a_lower_raster_score() -> None:
+    """A lower raster error does not authorize replacing the construction."""
     logs: list[list[str]] = []
     description = (
         "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
@@ -2391,9 +2373,8 @@ def test_description_geometry_candidate_yields_to_any_better_algorithmic_raster_
         calculate_error_fn=lambda _target, rendered: 120.0 if rendered == "description_rendered" else 100.0,
     )
 
-    assert result == ("NEUTRAL_HEAT_EXCHANGER", description, {"mode": "non_composite"}, 1, 100.0)
-    assert logs[0][0] == "status=non_composite_elementwise_symbol_fit"
-    assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[0]
+    assert result == ("NEUTRAL_HEAT_EXCHANGER", description, {"mode": "non_composite"}, 1, 120.0)
+    assert logs[0][0] == "status=non_composite_description_geometry_ir"
 
 
 def test_reference_heat_exchanger_variants_keep_description_contract_and_registration() -> None:

@@ -182,7 +182,6 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     import numpy as np
     from PIL import Image
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality, preferred_quality, vector_candidate_quality, vector_quality_score
-    from src.iCCModules.imageCompositeConverterRepresentation import simplification_proposals
     from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
@@ -199,11 +198,14 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     height, width = target.shape[:2]
     root = ET.fromstring(prepare_sample(sample.read_bytes(), width, height))
     prepared = ET.tostring(root, encoding="unicode")
+    assertions = description_assertions(description)
+    # An uploaded template does not authorize additions or missing objects.
+    # Reject it before alignment; the removed second stage must not rebuild it.
+    validate_svg_assertions(prepared, assertions)
     rendered = render_svg(prepared, width, height)
     initial_rendered = rendered.copy()
     initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     initial_quality = pixel_quality(target, rendered)
-    assertions = description_assertions(description)
     constrained = constrain_stroke_width(prepared, assertions)
     if constrained != prepared:
         root = ET.fromstring(constrained)
@@ -268,59 +270,6 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         atomic_json(output.with_suffix('.json'), progress)
     save_checkpoint()
     continuation = None
-    remaining = hard_deadline-time.monotonic()
-    simpler = next(simplification_proposals(final_svg), None) is not None
-    if ((not preferred_quality(quality) or description_error or simpler) and remaining > .01
-            and (best_mse > 1e-12 or simpler or description_error.startswith('logical_object_count:'))):
-        from src.iCCModules.imageCompositeConverterNativeSearch import continue_native_search
-        from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
-        from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, preferred_quality
-        from contextlib import nullcontext
-        session = current_search()
-        if session is not None and config and effective_seed != config['seed']:
-            raise ValueError('Seed stimmt nicht mit der aktiven Bildsuche überein.')
-        # Partial drafts may omit an object; only full checks can accept the
-        # final result. Explicit no-text and equal-width requirements persist.
-        from src.iCCModules.imageCompositeConverterDescriptionLanguage import draft_assertions
-        partial = draft_assertions(assertions)
-        checked = {}
-        def check_candidate(candidate):
-            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity, current_search
-            key = candidate_identity(candidate)
-            if key not in checked:
-                try:
-                    validate_svg_assertions(candidate, assertions)
-                    active = current_search()
-                    pixels, _ = active.render_candidate(target, candidate, render_svg, width, height) if active else (render_svg(candidate, width, height), True)
-                    measured = pixel_quality(target, pixels)
-                    checked[key] = (bool(measured['passed']), measured)
-                except ValueError:
-                    checked[key] = (False, None)
-            return checked[key]
-        def accept_native(candidate):
-            return check_candidate(candidate)[0]
-        def search_target(candidate):
-            accepted, measured = check_candidate(candidate)
-            return accepted and preferred_quality(measured)
-        with (nullcontext() if session else search_configuration(mode='portfolio', adaptive=True,
-                seed=effective_seed, seconds=remaining, max_seconds=remaining, minimum_seconds=remaining)):
-            with (nullcontext() if session else configured_image_search(str(source.resolve()))):
-                result = continue_native_search(final_svg, target, render_svg, assertions=partial,
-                    color_order='RGB', acceptance_fn=search_target, on_candidate=save_checkpoint,
-                    description=description)
-        if result:
-            continuation = result['search_control']
-            evaluations += result['evaluations']
-            valid_candidate = accept_native(result['svg'])
-            valid_previous = bool(quality['passed'] and not description_error)
-            if (result['improved'] or valid_candidate) and (valid_candidate or not valid_previous):
-                final_svg, rendered, best_mse = result['svg'], result['rendered'], result['error']
-                quality = pixel_quality(target, rendered)
-                description_error = ''
-                try:
-                    validate_svg_assertions(final_svg, assertions)
-                except ValueError as exc:
-                    description_error = str(exc)
     if deliverable['rank'] < ordering(final_svg, rendered, description_error)[0]:
         final_svg, rendered, description_error = deliverable['svg'], deliverable['rendered'], deliverable['error']
         quality = deliverable['quality']

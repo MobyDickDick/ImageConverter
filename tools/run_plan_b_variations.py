@@ -66,11 +66,6 @@ def converter_worker(argv: list[str]) -> int:
     try:
         from src.iCCModules.imageCompositeConverterCli import main as convert
         code = convert(cli_args)
-        deadline = float(os.environ.get('ICC_PLAN_B_DEADLINE', '0'))
-        if deadline > time.time():
-            recovered = recover_case_output(conversion_dir, cli_args, deadline)
-            if recovered:
-                code = 0
         return code
     finally:
         (conversion_dir.parent / "reference_access.json").write_text(
@@ -78,65 +73,8 @@ def converter_worker(argv: list[str]) -> int:
 
 
 def recover_case_output(conversion_dir: Path, cli_args: list[str], deadline: float) -> bool:
-    """Use the GUI's recovery inside the same audited, killable case worker.
-
-    Recovery receives only input pixels, wording and this case's own draft.
-    The parent still measures the delivered SVG with the frozen Plan-B gates.
-    """
-    from src.imageConverterRecovery import atomic_svg, recover
-    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
-    cv2 = import_with_vendored_fallback('cv2')
-    def option(name):
-        return cli_args[cli_args.index(name)+1]
-    name = option('--start')
-    inputs = Path(cli_args[0])
-    # The CLI archives rejected inputs before returning. Recovery must still
-    # see the same raster instead of silently skipping these very failures.
-    sources = [folder/(name+'.png') for folder in
-               (inputs,inputs/'nonconvertable',inputs/'succesessfulConvertedImages')]
-    sources = [path for path in sources if path.is_file()]
-    if len(sources) != 1:
-        return False
-    source = sources[0]
-    image = cv2.imread(str(source))
-    if image is None:
-        return False
-    mapping = loadDescriptionMappingImpl(option('--descriptions-path'), get_base_name_from_file_fn=getBaseNameFromFileImpl)
-    description = mapping.get(name, mapping.get(getBaseNameFromFileImpl(name), ''))
-    if not description:
-        return False
-    candidates = [p for folder in ('converted_svgs', 'converted_svg_failed')
-                  for p in (conversion_dir/folder).glob('*.svg')
-                  if p.stem.casefold() in {name.casefold(), 'failed_'+name.casefold()}]
-    if len(candidates) > 1:
-        return False
-    candidate = candidates[0] if candidates else None
-    old = measure_quality(image, candidate.read_text(encoding='utf-8'),description=description) if candidate else None
-    if old and old['satisfactory']:
-        try:
-            validate_svg_assertions(candidate.read_text(encoding='utf-8'), description_assertions(description))
-            return False
-        except ValueError:
-            pass
-    # Leave time to measure/publish the final vector and finish the worker.
-    # A quarter second can be consumed by renderer cleanup alone on Windows.
-    seconds = deadline-time.time()-2.
-    if seconds <= 0:
-        return False
-    print('[Plan B] Erster Versuch unvollständig; verbleibende Zeit für native Vektorsuche.', flush=True)
-    output = conversion_dir/'recovery'/(name+'.svg')
-    seed = int(option('--search-seed')) if '--search-seed' in cli_args else int(os.environ.get('ICC_SEARCH_SEED', '0'))
-    report = recover(source, output, description, seconds, seed=seed, candidate=candidate)
-    if not output.is_file():
-        return False
-    measured = measure_quality(image, output.read_text(encoding='utf-8'),description=description)
-    old_error = old['metrics'].get('normalized_mse', math.inf) if old else math.inf
-    if (measured['satisfactory'] and report['passed']) or measured['metrics'].get('normalized_mse', math.inf) < old_error:
-        if candidate is None:
-            candidate = conversion_dir/'converted_svg_failed'/('Failed_'+name+'.svg')
-            candidate.parent.mkdir(parents=True, exist_ok=True)
-        atomic_svg(candidate, output.read_text(encoding='utf-8'))
-    return bool(measured['satisfactory'] and report['passed'])
+    """Compatibility entry point; no second raster reconstruction is run."""
+    return False
 
 
 class TaskPoolExhausted(ValueError):

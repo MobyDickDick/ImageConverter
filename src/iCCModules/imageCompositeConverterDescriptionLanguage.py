@@ -108,6 +108,8 @@ def description_assertions(description: str) -> dict:
         r'\b(?:beschriftung|aufschrift|text|buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
         r'["“][^.?!]{0,100}\bals\b[^.?!]{0,40}\b(?:beschriftung|aufschrift|text|label)\b', normalized,
         flags=re.IGNORECASE))
+    unnamed_text = bool(not label_claim and re.search(
+        r'\b(?:mit\s+(?:einer?\s+)?|eine?\s+)(?:beschriftung|aufschrift|buchstabe|text|ziffer)\b', words))
     if no_text and (label_claim or re.search(r'\b(?:ausrufezeichen|fragezeichen)\b', words)):
         raise DescriptionRejected('text_present_and_absent')
     # Front/back selectors need a declared instance identity. They are not
@@ -145,13 +147,18 @@ def description_assertions(description: str) -> dict:
         raise DescriptionRejected(str(exc)) from exc
     if relations:
         assertions['anchor_relations'] = relations
-    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits, complete_object_list
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     objects = description_object_limits(normalized)
+    if label_claim:
+        objects['text'] = len(set(labels))
+        assertions['labels'] = sorted(set(labels))
     if arrow_pair:
         objects['triangle'] = 2
     if objects:
         assertions['objects'] = objects
-        assertions['objects_complete'] = complete_object_list(normalized)
+        # The description is always the complete inventory. Pixel evidence
+        # cannot authorize another object, even in a failed draft.
+        assertions['objects_complete'] = True
         # Plus/minus are composite symbols, not additional full scene lines.
         # Their short native bars need not be encoded as opaque generic paths.
         symbol_strokes = 0
@@ -205,6 +212,14 @@ def description_assertions(description: str) -> dict:
         ray_count = re.search(r'\b(\d+)\s+(?:sprüh)?strahlen\b', words)
         if ray_count and spray_contract(description) and _dashed_spray_rays(description):
             assertions['dashed_spray_rays'] = int(ray_count.group(1))
+    if not objects:
+        assertions['inventory_error'] = 'missing_described_object_inventory'
+    elif unnamed_text:
+        assertions['inventory_error'] = 'unresolved_described_label'
+    # Unbounded additions must never be silently treated as an optional detail.
+    if re.search(r'\b(?:weitere|zusätzliche|zusatzliche)\s+(?:objekte|elemente|formen)\b', words):
+        if not re.search(r'\b(?:keine|ohne)\s+(?:weiteren?|zusätzlichen?)\s+(?:objekte|elemente|formen)\b', words):
+            assertions['inventory_error'] = 'unresolved_described_object_inventory'
     return assertions
 
 
@@ -218,7 +233,7 @@ def gradient_direction(text: str, direction: str) -> bool:
 
 def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
-    for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes'):
+    for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -227,6 +242,8 @@ def draft_assertions(assertions):
 
 
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
+    if assertions and assertions.get('inventory_error'):
+        raise DescriptionRejected(assertions['inventory_error'])
     if not assertions or not (assertions.get('counts') or assertions.get('no_text') or assertions.get('horizontal_bar')
                               or assertions.get('arrow_heads') or assertions.get('equal_stroke_width')
                               or assertions.get('dashed_spray_rays') or assertions.get('hollow_cross_panel')
@@ -257,6 +274,14 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     root = ET.fromstring(svg)
+    if assertions.get('objects_complete'):
+        if any(node.tag.rsplit('}', 1)[-1] in {'image', 'use', 'foreignObject', 'script'} for node in root.iter()):
+            raise DescriptionRejected('unsupported_inventory_element')
+    if assertions.get('labels'):
+        actual_labels = sorted(''.join(node.itertext()).strip() for node in root.iter()
+                               if node.tag.rsplit('}', 1)[-1] == 'text')
+        if actual_labels != assertions['labels']:
+            raise DescriptionRejected('wrong_described_labels')
     excluded = {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}
     def visible_nodes(element):
         kind = element.tag.rsplit('}',1)[-1]

@@ -86,7 +86,7 @@ class AttemptJournal:
             items.append(record)
         return dict(total=total, attempts=items)
 
-    def best(self):
+    def best(self, validator=None):
         """Read committed records with bounded memory, across worker phases."""
         import math
         best = None
@@ -101,6 +101,8 @@ class AttemptJournal:
                 stream.seek(int.from_bytes(offset, 'little'))
                 try:
                     record = json.loads(stream.readline())
+                    if validator is not None and not validator(record.get('svg', '')):
+                        continue
                     error = float(record['mse'])
                     rank = record.get('selection_rank', (True, error))
                     if len(rank) != 2 or not math.isfinite(float(rank[1])):
@@ -181,6 +183,15 @@ class PreviewPublisher:
         # search seeds. Best-result selection below remains independent.
         rank = self.rank(svg, pixels)
         self.attempts.append(svg, error, selection_rank=rank)
+        # The attempt journal remains a diagnostic record. Only the full
+        # described inventory may become the displayed/downloadable draft.
+        from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+        if self.assertion_error:
+            return
+        try:
+            validate_svg_assertions(svg, self.assertions)
+        except ValueError:
+            return
         if self.target.min() < 220 and pixels.min() >= 245:
             return
         if rank >= self.best_rank:

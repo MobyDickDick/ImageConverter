@@ -203,6 +203,13 @@ class CatalogConversion:
             stored['catalog_background'] = True
             if stored.get('description_origin') != 'user':
                 stored.update(description=row['description'], description_origin='catalog')
+            previous = next((candidate for candidate in sorted(self.jobs.jobs.values(),
+                key=lambda item: item.get('created', 0), reverse=True)
+                if candidate['id'] != stored['id'] and candidate.get('result')
+                and candidate.get('source_sha256') == stored.get('source_sha256')
+                and candidate.get('description') == stored['description']), None)
+            if previous:
+                stored['previous_job_id'] = previous['id']
             self.jobs.save(stored)
             try:
                 result = self.jobs.start(job['id'], stored['description'], self.state['profile'], background=True)
@@ -301,6 +308,8 @@ class CatalogConversion:
                     result=bool(job.get('result')), message=job['message'],
                     round=self.state['round'], attempt=attempt, finished=time.time(),
                     passed=None, checking=True, accounted=False)
+                if job.get('attempt_comparison'):
+                    last['attempt_comparison'] = job['attempt_comparison']
                 if last['result']:
                     last['svg_sha256'] = hashlib.sha256((self.jobs.folder(job['id'])/'result.svg').read_bytes()).hexdigest()
                 self._update(last_attempt=last)

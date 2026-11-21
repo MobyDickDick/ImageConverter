@@ -67,15 +67,8 @@ def _ensureOutputArtifacts(
     create_svg_fallback: bool = True,
     create_diff_fallback: bool = True,
 ) -> None:
-    if create_svg_fallback and not os.path.exists(svg_path):
-        width = 1
-        height = 1
-        svg_fallback = (
-            f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
-            "<rect width='100%' height='100%' fill='#ffffff'/></svg>"
-        )
-        with open(svg_path, "w", encoding="utf-8") as svg_file:
-            svg_file.write(svg_fallback)
+    # A missing conversion remains missing. Never invent a white rectangle
+    # merely to satisfy a file-existence check.
     if create_diff_fallback and not os.path.exists(diff_path):
         with open(diff_path, "wb") as diff_file:
             diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
@@ -205,20 +198,9 @@ def _ensureEmbeddedSvgAtPath(
     render_embedded_raster_svg_fn,
     print_fn=print,
 ) -> bool:
-    if os.path.exists(svg_path) and not _svgIsTrivialFallbackArtifact(svg_path):
-        return True
-    try:
-        svg_content = render_embedded_raster_svg_fn(image_path)
-    except Exception as exc:  # noqa: BLE001 - skipped variants must not break the batch flow.
-        print_fn(f"[WARN] {os.path.basename(image_path)}: Konnte Embedded-SVG für Skip-Status nicht erzeugen ({type(exc).__name__}: {exc})")
-        return False
-    try:
-        with open(svg_path, "w", encoding="utf-8") as svg_file:
-            svg_file.write(svg_content)
-        return True
-    except OSError as exc:
-        print_fn(f"[WARN] {os.path.basename(image_path)}: Konnte Embedded-SVG für Skip-Status nicht schreiben ({type(exc).__name__}: {exc})")
-        return False
+    # Missing description/model evidence must not manufacture an SVG result.
+    return bool(os.path.exists(svg_path) and not _svgIsTrivialFallbackArtifact(svg_path)
+                and not _svgContainsEmbeddedRasterArtifact(svg_path))
 
 
 def _resolveFailureSvgPath(default_svg_path: str, failed_svg_path: str | None) -> str:
@@ -256,27 +238,9 @@ def _writeFailedEmbeddedSvgArtifact(
     render_embedded_raster_svg_fn,
     print_fn=print,
 ) -> str | None:
-    base = os.path.splitext(filename)[0]
-    failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
-    if os.path.exists(failed_svg_path):
-        try:
-            os.unlink(failed_svg_path)
-        except OSError:
-            pass
-    try:
-        svg_content = render_embedded_raster_svg_fn(image_path)
-    except Exception as exc:  # noqa: BLE001 - failure artifact should not break batch flow.
-        print_fn(
-            f"[WARN] {filename}: Konnte Failed-Embedded-SVG nicht erzeugen ({type(exc).__name__}: {exc})"
-        )
-        return None
-    try:
-        with open(failed_svg_path, "w", encoding="utf-8") as svg_file:
-            svg_file.write(svg_content)
-    except OSError as exc:
-        print_fn(f"[WARN] {filename}: Konnte Failed-SVG nicht schreiben ({type(exc).__name__}: {exc})")
-        return None
-    return failed_svg_path
+    # Retired: errors are recorded in logs/reports, never by embedding the
+    # original image as a purported conversion. Preserve historical files.
+    return None
 
 
 def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:

@@ -94,7 +94,7 @@ def test_many_same_paint_fragments_offer_one_complete_form(kind):
     assert min(representation_cost(s)['penalty'] for s in matching) < representation_cost(seed)['penalty']*.25
 
 
-def test_fragmented_template_can_be_rebuilt_without_publishing_more_fragments(tmp_path):
+def test_fragmented_template_is_rejected_without_a_second_reconstruction(tmp_path):
     from PIL import Image
     from src.imageConverterSample import refine
     source_svg = scene('<rect x="10" y="15" width="60" height="45" fill="#668899"/>')
@@ -102,10 +102,9 @@ def test_fragmented_template_can_be_rebuilt_without_publishing_more_fragments(tm
     source, sample, output = (tmp_path/name for name in ('neutral.png', 'template.svg', 'result.svg'))
     Image.fromarray(render_svg(source_svg, 80, 80)).save(source)
     sample.write_text(seed)
-    report = refine(source, sample, output, 'Ein Rechteck.', 3., seed=17)
-    assert report['passed'] and report['continuation']
-    validate_svg_assertions(output.read_text(), description_assertions('Ein Rechteck.'))
-    assert len(list(ET.parse(output).getroot())) == 2
+    with pytest.raises(ValueError, match='logical_object_count'):
+        refine(source, sample, output, 'Ein Rechteck.', 3., seed=17)
+    assert not output.exists()
 
 
 def test_overcomplete_seed_can_be_repaired_stepwise_without_claiming_acceptance():

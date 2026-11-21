@@ -314,6 +314,10 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                 continue
         if tag in {'polygon', 'polyline', 'path'}:
             paths = path_points(node)
+            if not paths:
+                # Curves and compound/unknown paths must not disappear from
+                # the closed inventory and hide additional painted objects.
+                inventory[tag] = inventory.get(tag, 0)+1
             for points, closed in paths:
                 points = points @ matrix.T+translation
                 if not np.isfinite(points).all():

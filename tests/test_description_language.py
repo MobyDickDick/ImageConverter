@@ -223,7 +223,7 @@ def test_quoted_geometry_is_not_an_object_count_assertion():
 
 def test_no_text_contract_is_checked_on_actual_svg():
     with pytest.raises(DescriptionRejected,match='unexpected_text_in_svg'):
-        validate_svg_assertions('<svg><text>F</text></svg>',description_assertions('Keine Schriftzeichen.'))
+        validate_svg_assertions('<svg><text>F</text></svg>',description_assertions('Ein Kreis. Keine Schriftzeichen.'))
 
 
 def test_count_violation_cannot_be_saved_as_deadline_checkpoint():
@@ -284,8 +284,9 @@ def test_direct_artifact_writer_rejects_counts_before_persisting():
         time_ns_fn=lambda:0,render_svg_to_numpy_fn=lambda *args:None,
         create_diff_image_fn=None,cv2_module=None)
     writer=result['artifact_callbacks']['write_attempt_artifacts']
-    with pytest.raises(DescriptionRejected):
-        writer('<svg><circle r="2"/></svg>')
+    for failed in (False, True):
+        with pytest.raises(DescriptionRejected):
+            writer('<svg><circle r="2"/></svg>', failed=failed)
     assert not saved
     writer('<svg><circle r="2"/><circle r="3"/></svg>')
     assert len(saved)==1
@@ -297,4 +298,30 @@ def test_reference_inheritance_retains_the_callers_explicit_counts():
     reflection._inherit_mode_from_reference=lambda **kw:('reference',dict(mode='non_composite',elements=[],
         language_assertions=dict(counts=[],no_text=True)))
     _,params=reflection.parse_description('neutral','neutral.png')
-    assert params['language_assertions']==dict(counts=[dict(kind='circle',count=2)],no_text=True)
+    assert params['language_assertions']==dict(counts=[dict(kind='circle',count=2)],no_text=True,
+                                             objects={'circle': 2}, objects_complete=True)
+
+
+def test_prose_does_not_authorize_undescribed_classes():
+    assertions = description_assertions('Ein grauer Kreis mit dunklem Rand liegt oben im Bild.')
+    validate_svg_assertions('<svg><circle cx="20" cy="20" r="5"/></svg>', assertions)
+    with pytest.raises(DescriptionRejected, match='logical_object_count:all'):
+        validate_svg_assertions('<svg><circle r="5"/><line x2="10" y2="20"/></svg>', assertions)
+
+
+def test_unresolved_inventory_cannot_certify_any_drawing():
+    with pytest.raises(DescriptionRejected, match='missing_described_object_inventory'):
+        validate_svg_assertions('<svg><circle r="5"/></svg>', description_assertions('Ein technisches Motiv.'))
+
+
+def test_svg_reference_cannot_hide_undescribed_shapes():
+    with pytest.raises(DescriptionRejected, match='unsupported_inventory_element'):
+        validate_svg_assertions('<svg><circle r="5"/><defs><rect id="extra" width="5" height="5"/></defs>'
+                                '<use href="#extra"/></svg>', description_assertions('Ein Kreis.'))
+
+
+def test_described_label_is_checked_as_content_not_only_as_an_element_count():
+    assertions = description_assertions('Ein Kreis mit Beschriftung "R".')
+    validate_svg_assertions('<svg><circle r="5"/><text>R</text></svg>', assertions)
+    with pytest.raises(DescriptionRejected, match='wrong_described_labels'):
+        validate_svg_assertions('<svg><circle r="5"/><text>M</text></svg>', assertions)

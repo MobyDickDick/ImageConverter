@@ -41,7 +41,7 @@ def test_publishes_only_improving_native_candidates(tmp_path):
     target = render_svg(SVG, 32, 24)
     source, output = tmp_path/'source.png', tmp_path/'preview.svg'
     Image.fromarray(target).save(source)
-    publisher = preview.PreviewPublisher(source, output)
+    publisher = preview.PreviewPublisher(source, output, description='Ein Rechteck.')
     publisher.consider(SVG, np.full_like(target, 255))
     assert not output.exists()  # Empty search seed.
     publisher.consider('<svg><image href="source.png"/></svg>', target, bgr=False)
@@ -60,6 +60,7 @@ def test_publishes_only_improving_native_candidates(tmp_path):
     assert journal.read(3)['svg'] == SVG.replace('#225599', '#ff0000')
     assert journal.read(4)['svg'] == SVG
     assert all('svg' not in item for item in journal.page()['attempts'])
+    publisher.close()
 
 
 def test_attempt_journal_continues_after_worker_restart_and_partial_write(tmp_path, monkeypatch):
@@ -84,6 +85,9 @@ def test_sample_renderer_publishes_without_a_second_render(tmp_path, monkeypatch
     Image.fromarray(render_svg(SVG, 32, 24)).save(source)
     monkeypatch.setenv('ICC_GUI_PREVIEW_SOURCE', str(source))
     monkeypatch.setenv('ICC_GUI_PREVIEW_OUTPUT', str(output))
+    description = tmp_path/'description.txt'
+    description.write_text('Ein Rechteck.', encoding='utf-8')
+    monkeypatch.setenv('ICC_GUI_PREVIEW_DESCRIPTION_FILE', str(description))
     rendered = render_svg(SVG, 32, 24)
     assert rendered.shape == (24, 32, 3)
     assert output.read_text(encoding='utf-8') == SVG
@@ -116,30 +120,34 @@ def test_recovery_publisher_does_not_reset_previous_phase_best(tmp_path):
     source, output = tmp_path/'source.png', tmp_path/'live-preview.svg'
     target = render_svg(SVG,32,24)
     Image.fromarray(target).save(source)
-    preview.PreviewPublisher(source,output).consider(SVG,target,bgr=False)
+    first = preview.PreviewPublisher(source,output,description='Ein Rechteck.')
+    first.consider(SVG,target,bgr=False)
+    first.close()
     worse = SVG.replace('#225599','#ff0000')
-    restarted = preview.PreviewPublisher(source,output)
+    restarted = preview.PreviewPublisher(source,output,description='Ein Rechteck.')
     restarted.consider(worse,render_svg(worse,32,24),bgr=False)
     assert output.read_text(encoding='utf-8') == SVG
     assert preview.AttemptJournal(tmp_path).count == 2
+    restarted.close()
 
 
-def test_preview_and_journal_can_replace_lower_mse_with_better_contours(tmp_path):
+def test_better_contours_cannot_publish_an_unverified_inventory(tmp_path):
     fixture = Path(__file__).parent/'fixtures/sample_contrast'
     source, output = tmp_path/'source.png', tmp_path/'live-preview.svg'
     shutil.copyfile(fixture/'source.png', source)
     simpler = (fixture/'faded.svg').read_text()
     fragmented = (fixture/'without_template.svg').read_text()
-    publisher = preview.PreviewPublisher(source, output)
+    publisher = preview.PreviewPublisher(source, output,
+        description=(fixture/'description.txt').read_text(encoding='utf-8'))
     target = np.array(Image.open(source).convert('RGB'))
     h, w = target.shape[:2]
     a, b = render_svg(fragmented, w, h), render_svg(simpler, w, h)
     assert np.square(target.astype(float)-a).mean() < np.square(target.astype(float)-b).mean()
     publisher.consider(fragmented, a, bgr=False)
     publisher.consider(simpler, b, bgr=False)
-    assert output.read_text() == simpler
-    assert preview.AttemptJournal(tmp_path).best()['svg'] == simpler
     publisher.close()
+    assert not output.exists()
+    assert preview.AttemptJournal(tmp_path).count == 2  # diagnostic evidence is kept
 
 
 def test_preview_prefers_one_native_form_and_checks_description(tmp_path):
@@ -168,7 +176,7 @@ def test_final_selection_recovers_better_observation_lost_between_phases(tmp_pat
     journal = preview.AttemptJournal(tmp_path)
     journal.append(SVG,0.)
     journal.append(worse,1000.)
-    job = dict(width=32,height=24,description='Keine Schriftzeichen.',result=True,quality='warning')
+    job = dict(width=32,height=24,description='Ein Rechteck. Keine Schriftzeichen.',result=True,quality='warning')
     gui.retain_best_preview(tmp_path,job)
     assert (tmp_path/'result.svg').read_text(encoding='utf-8') == SVG
     assert job['retained_preview'] and job['pixel_quality']['passed']
@@ -187,7 +195,7 @@ def test_best_observation_cannot_override_an_explicit_description_check(tmp_path
     assert job['quality'] == 'passed' and not job.get('retained_preview')
 
 
-def test_reported_humidifier_final_keeps_early_structure_and_reports_missing_dashes(tmp_path,monkeypatch):
+def test_reported_humidifier_cannot_publish_a_draft_with_missing_described_dashes(tmp_path,monkeypatch):
     monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
     fixture = Path(__file__).parent/'fixtures/gui_preview_selection'
     shutil.copyfile(fixture/'source.png',tmp_path/'source.png')
@@ -198,8 +206,6 @@ def test_reported_humidifier_final_keeps_early_structure_and_reports_missing_das
     job = dict(width=40,height=80,result=True,quality='warning',
                description=(fixture/'description.txt').read_text(encoding='utf-8'))
     gui.retain_best_preview(tmp_path,job)
-    assert (tmp_path/'result.svg').read_text(encoding='utf-8') == early
-    assert job['pixel_quality']['normalized_mse'] < .001
-    assert job['pixel_quality']['edge_alignment'] > .88
+    assert (tmp_path/'result.svg').read_bytes() == (fixture/'late.svg').read_bytes()
+    assert not job.get('retained_preview')
     assert job['quality'] == 'warning'
-    assert job['description_error'].startswith('missing_described_dashed_spray_rays:')

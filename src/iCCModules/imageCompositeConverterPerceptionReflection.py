@@ -216,7 +216,7 @@ class Reflection:
                 inherited_params["variant_name"] = os.path.splitext(str(img_filename))[0].upper()
                 parent_assertions = inherited_params.get('language_assertions') or {}
                 child_kinds = {c['kind'] for c in assertions['counts']}
-                inherited_params['language_assertions'] = dict(
+                inherited_params['language_assertions'] = dict(assertions,
                     counts=[c for c in parent_assertions.get('counts', []) if c['kind'] not in child_kinds]
                            + assertions['counts'],
                     no_text=bool(parent_assertions.get('no_text') or assertions['no_text']))

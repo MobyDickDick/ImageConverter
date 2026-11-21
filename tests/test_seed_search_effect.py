@@ -99,7 +99,7 @@ def test_trace_does_not_change_when_only_seed_metadata_changes():
     assert traces[0] == traces[1]
 
 
-def test_weak_pixel_pass_template_enters_search_with_selected_full_width_seed(tmp_path, monkeypatch):
+def test_weak_pixel_pass_template_keeps_selected_seed_without_second_search(tmp_path, monkeypatch):
     from src.iCCModules import imageCompositeConverterNativeSearch as search
     original = SVG.replace('<rect x="7" y="20" width="12" height="35" fill="#448855"/>', '')
     sample_svg = original.replace('cx="32"', 'cx="32.4"')
@@ -115,8 +115,8 @@ def test_weak_pixel_pass_template_enters_search_with_selected_full_width_seed(tm
         return None
     monkeypatch.setattr(search, 'continue_native_search', inspect)
     seed = 2**64-1
-    report = refine(source, sample, tmp_path/'result.svg', 'Ein geometrisches Motiv.', 1., seed=seed)
-    assert seen == [seed] and report['search_seed'] == str(seed)
+    report = refine(source, sample, tmp_path/'result.svg', 'Ein Kreis.', 1., seed=seed)
+    assert seen == [] and report['search_seed'] == str(seed)
 
 
 def test_gui_template_worker_receives_selected_seed_and_keeps_exact_result(tmp_path, monkeypatch):
@@ -130,7 +130,7 @@ def test_gui_template_worker_receives_selected_seed_and_keeps_exact_result(tmp_p
         uploaded = jobs.upload('neutral.png', buffer.getvalue())
         jobs.attach_sample(uploaded['id'], 'template.svg', SVG.encode())
         seed = 2**64-1
-        started = jobs.start(uploaded['id'], 'Ein geometrisches Motiv.', 'quick', seed=str(seed))
+        started = jobs.start(uploaded['id'], 'Ein Kreis und ein Rechteck.', 'quick', seed=str(seed))
         jobs.threads[-1].join(timeout=20)
         result = jobs.snapshot(started['id'])
         assert result['status'] == 'done' and result['quality'] == 'passed', result
@@ -143,7 +143,7 @@ def test_gui_template_worker_receives_selected_seed_and_keeps_exact_result(tmp_p
         jobs.close()
 
 
-def test_interrupted_template_search_retains_independently_checked_best_checkpoint(tmp_path, monkeypatch):
+def test_completed_template_checkpoint_survives_worker_exit_without_reconstruction(tmp_path, monkeypatch):
     from src.iCCModules import imageCompositeConverterNativeSearch as search
     from src import imageConverterGui as gui
     monkeypatch.setattr(gui, 'catalog_descriptions', lambda: {})
@@ -154,16 +154,14 @@ def test_interrupted_template_search_retains_independently_checked_best_checkpoi
     folder = tmp_path/'output'
     folder.mkdir()
     def interrupted(*args, **kwargs):
-        kwargs['on_candidate'](dict(svg=original, rendered=render_svg(original, 64, 80), error=0.))
-        raise RuntimeError('worker interrupted')
+        pytest.fail('retired native search was invoked')
     monkeypatch.setattr(search, 'continue_native_search', interrupted)
-    with pytest.raises(RuntimeError, match='interrupted'):
-        refine(tmp_path/'source.png', tmp_path/'sample.svg', folder/'refined.svg', 'Ein geometrisches Motiv.', 2., seed=17)
-    job = dict(width=64, height=80, description='Ein geometrisches Motiv.', result=False)
+    refine(tmp_path/'source.png', tmp_path/'sample.svg', folder/'refined.svg', 'Ein Kreis.', 2., seed=17)
+    job = dict(width=64, height=80, description='Ein Kreis.', result=False)
     gui.collect_sample_result(tmp_path, job, -9)
     assert job['result'] and job['quality'] == 'passed'
     assert job['sample_report']['stop_reason'] == 'interrupted'
-    assert np.array_equal(render_svg((tmp_path/'result.svg').read_text(), 64, 80), render_svg(original, 64, 80))
+    assert np.array_equal(render_svg((tmp_path/'result.svg').read_text(), 64, 80), render_svg(sample_svg, 64, 80))
 
 
 @pytest.mark.parametrize('seed', [-1, 2**64, True])

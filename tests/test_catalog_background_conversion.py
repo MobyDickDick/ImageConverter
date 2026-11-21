@@ -75,6 +75,16 @@ def service(tmp_path, monkeypatch):
     jobs.close()
 
 
+def test_background_retry_links_same_input_for_visual_comparison(service):
+    manager, rows, _ = service
+    manager._update(profile='quick')
+    first = manager._launch(rows[0])
+    manager.jobs.threads[-1].join(5)
+    second = manager._launch(rows[0])
+    manager.jobs.threads[-1].join(5)
+    assert manager.jobs.jobs[second['id']]['previous_job_id'] == first['id']
+
+
 def test_defers_after_three_failures_then_resets_all_marks_and_repeats(service, monkeypatch):
     manager, rows, refreshes = service
     selections = []

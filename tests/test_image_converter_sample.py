@@ -126,9 +126,9 @@ def test_pixel_passing_deformed_sample_is_rejected_by_its_head_contract(tmp_path
     sample = root/'tests/fixtures/arrow_pair_deformed_sample.svg'
     description = (root/'tests/fixtures/descriptions/arrow_pair_bottom_user.txt').read_text(encoding='utf-8-sig')
     source = root/'artifacts/images_to_convert/AC0030_L.jpg'
-    report = refine(source, sample, tmp_path/'result.svg', description, .01)
-    assert report['initial_quality']['passed']  # The old global score missed the lost head.
-    assert not report['passed'] and report['description_error'] == 'invalid_described_arrow_head'
+    with pytest.raises(ValueError, match='invalid_described_arrow_head'):
+        refine(source, sample, tmp_path/'result.svg', description, .01)
+    assert not (tmp_path/'result.svg').exists()
     with pytest.raises(ValueError, match='invalid_described_arrow_head'):
         validate_svg_assertions(sample.read_text(encoding='utf-8'), description_assertions(description))
 
@@ -137,12 +137,9 @@ def test_matching_sample_never_gets_worse_and_reports_description_conflict(tmp_p
     source, sample, output = (tmp_path / name for name in ("source.png", "sample.svg", "result.svg"))
     sample.write_bytes(SAMPLE)
     Image.fromarray(render_svg(SAMPLE.decode(), 64, 64)).save(source)
-    report = refine(source, sample, output, "Das Motiv enthält genau zwei Kreise, ohne Text.", 1)
-    assert report["final_mse"] <= report["initial_mse"]
-    assert report["description_error"]
-    assert not report["passed"]
-    assert report['evaluations'] == 1
-    assert report['stop_reason'] == 'description_conflict'
+    with pytest.raises(ValueError, match='object_count:circle:2:1'):
+        refine(source, sample, output, "Das Motiv enthält genau zwei Kreise, ohne Text.", 1)
+    assert not output.exists()
 
 
 def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
@@ -155,7 +152,7 @@ def test_accepted_redraw_keeps_its_square_and_connected_geometry(tmp_path):
     assert hashlib.sha256(sample.read_bytes()).hexdigest() == '29f5662c7bfa6e1aa5bc8a1d2b44acc2fdbf9afbb94790847a4e954069252eab'
     source = root/'artifacts/images_to_convert/AC0501_S_sia.jpg'
     output = tmp_path/'result.svg'
-    report = refine(source, sample, output, 'Quadratische Kelle mit beiden Diagonalen und rundem Gelenk.', 2)
+    report = refine(source, sample, output, 'Ein Quadrat, vier Linien und ein Kreis.', 2)
     assert report['passed']
     from xml.etree import ElementTree as ET
     nodes = list(ET.parse(output).getroot().iter())

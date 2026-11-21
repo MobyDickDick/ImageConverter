@@ -63,76 +63,30 @@ def prepareIterationRuntimeImpl(
         cv2_module=cv2_module,
     )
     assertions = params.get('language_assertions') or {}
-    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
-    session = current_search()
-    if (any(assertions.get(key) for key in ('counts', 'no_text', 'horizontal_bar', 'arrow_heads', 'equal_stroke_width'))
-            or session):
+    if assertions and 'write_attempt_artifacts' in artifact_callbacks:
         write_artifacts = artifact_callbacks['write_attempt_artifacts']
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
             from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
-            checked_assertions = assertions
-            if params.get('stem_disk_registration'):
-                # The raster-backed model proves one circle and one axial
-                # handle. Residual rim pixels cannot become extra objects.
-                checked_assertions = dict(assertions, counts=[*assertions.get('counts', []),
-                    dict(kind='circle', count=1), dict(kind='line', count=1)])
-            # Failed drafts are displayed and downloadable in the GUI too.
-            # Preserve incomplete geometry for diagnosis, but never add text
-            # when the description explicitly excludes it.
-            if kwargs.get('failed', False):
-                validate_svg_assertions(svg_content, dict(counts=[], no_text=assertions.get('no_text')))
-            if not kwargs.get('failed', False):
-                validate_svg_assertions(svg_content, checked_assertions)
-            if session and not session.time_reason() and 'data:image/' not in svg_content.lower():
-                from src.iCCModules.imageCompositeConverterNativeSearch import continue_native_search
-                from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality, preferred_quality
-                from src.iCCModules.imageCompositeConverterDescriptionLanguage import draft_assertions
-                partial = draft_assertions(assertions)
-                def accepted(candidate):
-                    try:
-                        validate_svg_assertions(candidate, checked_assertions)
-                        return pixel_quality(target_img, render_svg_to_numpy_fn(candidate, width, height))['passed']
-                    except ValueError:
-                        return False
-                def search_target(candidate):
-                    return accepted(candidate) and preferred_quality(
-                        pixel_quality(target_img, render_svg_to_numpy_fn(candidate, width, height)))
-                fitted = continue_native_search(svg_content, target_img, render_svg_to_numpy_fn,
-                    description=params.get('effective_description') or ' '.join(
-                        str(part.get('text', '')) for part in params.get('description_fragments', [])
-                        if isinstance(part, dict)),
-                    assertions=partial if kwargs.get('failed', False) else checked_assertions,
-                    acceptance_fn=search_target)
-                if fitted is not None:
-                    params['vector_continuation'] = {key: fitted[key] for key in
-                        ('improved', 'error', 'initial_error', 'evaluations', 'search_control')}
-                    if fitted.get('structure_search') is not None:
-                        params['vector_continuation']['structure_search'] = fitted['structure_search']
-                    model_passed = True
-                    if fitted['improved'] and params.get('gradient_tube_registration'):
-                        from src.iCCModules.imageCompositeConverterGradientTube import validate_tube_refinement
-                        model_passed = validate_tube_refinement(fitted, target_img, params['gradient_tube_registration'])
-                        params['vector_continuation']['tube_model_passed'] = model_passed
-                        if model_passed:
-                            from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
-                            validated_result(fitted, target_img)
-                    if fitted['improved'] and params.get('piecewise_scene_registration'):
-                        from src.iCCModules.imageCompositeConverterPiecewiseScene import validate_piecewise_refinement
-                        model_passed = validate_piecewise_refinement(
-                            fitted, target_img, params['piecewise_scene_registration'], render_svg_to_numpy_fn)
-                        params['vector_continuation']['piecewise_model_passed'] = model_passed
-                        if model_passed:
-                            from src.iCCModules.imageCompositeConverterSearchPortfolio import validated_result
-                            validated_result(fitted, target_img)
-                    if fitted['improved'] and model_passed and (kwargs.get('failed', False) or accepted(fitted['svg'])):
-                        svg_content = fitted['svg']
-                        # Supplied render/diff belong to the previous vector.
-                        args = ()
-                        kwargs.update(rendered_img=fitted['rendered'], diff_img=None)
+            # Failed files are deliverables too: no partial inventory and
+            # no raster reconstruction after the description-based fit.
+            validate_svg_assertions(svg_content, assertions)
             return write_artifacts(svg_content, *args, **kwargs)
 
         artifact_callbacks['write_attempt_artifacts'] = write_checked_artifacts
+        if 'record_render_failure' in artifact_callbacks:
+            record_failure = artifact_callbacks['record_render_failure']
+
+            def record_checked_failure(reason, *, svg_content=None, **kwargs):
+                from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+                if svg_content:
+                    try:
+                        validate_svg_assertions(svg_content, assertions)
+                    except ValueError:
+                        svg_content = None  # preserve the log, not an invalid deliverable
+                return record_failure(reason, svg_content=svg_content, **kwargs)
+
+            artifact_callbacks['record_render_failure'] = record_checked_failure
     return IterationInitializationResult(
         base_name=base_name,
         log_path=log_path,

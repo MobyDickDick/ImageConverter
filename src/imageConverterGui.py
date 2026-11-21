@@ -42,7 +42,7 @@ MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
-DESCRIPTION_VALIDATION_VERSION = 10
+DESCRIPTION_VALIDATION_VERSION = 11
 
 
 class RequestError(ValueError):
@@ -532,6 +532,7 @@ class Jobs:
         deadline = time.monotonic() + PROFILES[job['profile']][1]
         try:
             input_dir = folder / "input"
+            job['conversion_policy'] = 'description_only_v1'
             input_dir.mkdir()
             shutil.copyfile(folder / "source.png", input_dir / "UPLOAD.png")
             descriptions = folder / "description.csv"
@@ -603,9 +604,6 @@ class Jobs:
                 collect = collect_sample_result if job.get('sample') and job.get('use_current_svg',True) else collect_result
                 collect(folder, collected, process.returncode)
                 retain_best_preview(folder, collected)
-                needs_recovery = collected.get('quality') != 'passed' or not collected.get('result')
-            if needs_recovery and deadline-time.monotonic() > .1:
-                self.recover_result(job_id, collected, deadline, environment, options)
             retain_best_preview(folder, collected)
             with self.lock:
                 if job["status"] == "running":
@@ -615,6 +613,19 @@ class Jobs:
                         same = ((folder / 'result.svg').read_bytes() ==
                                 (self.folder(previous['id']) / 'result.svg').read_bytes())
                         job['same_as_previous'] = same
+                        from src.imageConverterDiversity import compare_results
+                        try:
+                            comparison = compare_results((folder/'result.svg').read_text(encoding='utf-8'),
+                                (self.folder(previous['id'])/'result.svg').read_text(encoding='utf-8'))
+                            job['attempt_comparison'] = dict(comparison, previous_job_id=previous['id'],
+                                seed=str(job.get('search_seed')), previous_seed=str(previous.get('search_seed')),
+                                same_description=previous['description'] == job['description'])
+                            if job['quality'] == 'warning' and comparison['raster_identical']:
+                                job['message'] += ' Der Bildvergleich mit dem vorherigen Versuch ist exakt identisch.'
+                            elif job['quality'] == 'warning' and comparison['foreground_similarity'] >= .99:
+                                job['message'] += ' Der Bildvergleich mit dem vorherigen Versuch zeigt mindestens 99 % Ähnlichkeit.'
+                        except (OSError, ValueError, SyntaxError):
+                            job['attempt_comparison'] = dict(error='comparison_unavailable')
                         if same and job['quality'] == 'warning':
                             job['message'] += (' Trotz geänderter Beschreibung hat die Suche denselben Entwurf ergeben.'
                                                if previous['description'] != job['description'] else
@@ -639,45 +650,8 @@ class Jobs:
                 self.on_result(job_id)
 
     def recover_result(self, job_id: str, collected: dict, deadline: float, environment: dict, options: dict) -> None:
-        folder = self.folder(job_id)
-        job = self.jobs[job_id]
-        description = folder / 'recovery-description.txt'
-        from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
-        resolved = resolve_similarity_description(job['description'], catalog_descriptions(), base_name=getBaseNameFromFileImpl)
-        description.write_text(resolved.text, encoding='utf-8')
-        command = [sys.executable, '-u', '-m', 'src.imageConverterRecovery',
-                   '--source', str(folder/'source.png'), '--output', str(folder/'recovery.svg'),
-                   '--description', str(description), '--seed', str(job['search_seed']),
-                   '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
-        if collected.get('result'):
-            command += ['--candidate', str(folder/'result.svg')]
-        with (folder/'console.log').open('ab') as log:
-            with self.lock:
-                if job['status'] != 'running':
-                    return
-                job.update(message='Erster Versuch unvollständig. Verbleibende Zeit wird für den elementweisen Vektoraufbau genutzt.',
-                           recovery=True, quality='warning')
-                self.save(job)
-                process = subprocess.Popen(command, cwd=ROOT, env=dict(environment, ICC_GUI_PREVIEW_PHASE='Vektoraufbau'),
-                    stdout=log, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, **options)
-                self.processes[job_id] = process
-            try:
-                process.wait(timeout=max(.01, deadline-time.monotonic()))
-            except subprocess.TimeoutExpired:
-                stop_process_tree(process)
-            except Exception:
-                stop_process_tree(process)
-                raise
-            finally:
-                # The worker atomically publishes improvements before the
-                # deadline. Keep them even after cancellation or termination.
-                collect_recovery_result(folder, collected,
-                    stop_reason='time_limit' if time.monotonic() >= deadline else 'worker_finished')
-                retain_best_preview(folder, collected)
-                with self.lock:
-                    if job['status'] == 'cancelled' and collected.get('result'):
-                        job.update(collected)
-                        job.update(status='cancelled', message='Konvertierung abgebrochen. Der beste vorhandene Vektorentwurf bleibt erhalten.')
+        """Compatibility entry point: raster reconstruction has been removed."""
+        return None
 
     def cancel(self, job_id: str) -> dict:
         with self.lock:
@@ -833,7 +807,19 @@ def retain_best_preview(folder: Path, job: dict) -> None:
     from src.imageConverterSample import prepare_sample
     result = folder/'result.svg'
     candidates = [folder/'live-preview.svg']
-    best = AttemptJournal(folder).best()
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
+    try:
+        assertions = description_assertions(resolve_similarity_description(
+            job.get('description', ''), catalog_descriptions()).text)
+    except ValueError:
+        return
+    def valid_inventory(svg):
+        try:
+            validate_svg_assertions(svg, assertions)
+            return True
+        except (ValueError, SyntaxError):
+            return False
+    best = AttemptJournal(folder).best(validator=valid_inventory)
     if best is not None:
         observed = folder/'best-observed.svg'
         observed.write_text(best['svg'], encoding='utf-8')
@@ -853,6 +839,8 @@ def retain_best_preview(folder: Path, job: dict) -> None:
         if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
             continue
         error = result_description_error(candidate, job.get('description', ''))
+        if error:
+            continue
         # Prefer a valid deliverable over a numerically closer contradiction.
         rank = (bool(error), not quality['passed'], vector_comparison_score(quality))
         old_rank = ((bool(previous_error), not previous['passed'], vector_comparison_score(previous))
@@ -891,6 +879,8 @@ def collect_recovery_result(folder: Path, job: dict, *, stop_reason: str) -> Non
     previous_result = folder/'result.svg'
     previous_quality = saved_svg_quality(folder/'source.png', previous_result) if job.get('result') else None
     candidate_error = result_description_error(result, job.get('description', ''))
+    if candidate_error:
+        return  # historical recovery artifacts cannot bypass the closed inventory
     candidate_passed = bool(quality['passed'] and not candidate_error)
     previous_passed = bool(previous_quality and previous_quality.get('passed') and
         not result_description_error(previous_result, job.get('description', '')))
@@ -937,7 +927,7 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     report = json.loads(report_path.read_text(encoding="utf-8"))
     if returncode != 0:
         report['stop_reason'] = 'interrupted'
-    if reject_raster_result(result, job):
+    if reject_raster_result(result, job) or reject_description_result(result, job):
         return
     # Recheck the actual deliverable, including old worker reports. A low
     # global pixel error cannot certify a described but collapsed arrow head.
@@ -973,6 +963,18 @@ def result_description_error(svg: Path, description: str) -> str:
     return ''
 
 
+def reject_description_result(result: Path, job: dict) -> bool:
+    error = result_description_error(result, job.get('description', ''))
+    if not error:
+        return False
+    job.update(status='error', result=False, quality='warning',
+               result_rejection='description_inventory', description_error=error,
+               description_validation_version=DESCRIPTION_VALIDATION_VERSION,
+               message='Konvertierung ungenügend: Die beschriebenen Elemente konnten nicht exakt '
+                       'umgesetzt werden. Bitte die Bildbeschreibung präzisieren. Details stehen im Protokoll.')
+    return True
+
+
 def reject_raster_result(result: Path, job: dict) -> bool:
     """Keep raster failure diagnostics out of previews, downloads and history."""
     from xml.etree import ElementTree as ET
@@ -1002,7 +1004,7 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         with failures.open(encoding="utf-8-sig", newline="") as stream:
             has_failures = bool(list(csv.DictReader(stream, delimiter=";")))
     if result:
-        if reject_raster_result(result, job):
+        if reject_raster_result(result, job) or reject_description_result(result, job):
             return
         shutil.copyfile(result, folder / "result.svg")
         # A model can be shifted off-canvas and still receive a successful CLI
