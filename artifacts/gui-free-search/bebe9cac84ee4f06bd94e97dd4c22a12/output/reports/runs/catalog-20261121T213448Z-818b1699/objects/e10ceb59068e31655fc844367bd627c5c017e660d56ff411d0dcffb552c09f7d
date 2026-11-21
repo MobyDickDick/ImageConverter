@@ -1,0 +1,21 @@
+{
+  "elapsed_seconds": 1.015,
+  "limit_seconds": 300.0,
+  "minimum_seconds": 30.0,
+  "max_seconds": 300.0,
+  "time_extensions": 0,
+  "candidate_evaluations": 2,
+  "model_evaluations": 1,
+  "render_cache_hits": 1,
+  "renderings": 2,
+  "render_budget": 1000000,
+  "render_failures": 0,
+  "global_stop_reason": null,
+  "full_scene_validations": 1,
+  "search_seed": "42",
+  "render_sequence_sha256": "8de4c7ca2d127c1318b049a80fc2473245211ab6c0c69d006feb6241e3c3a3f8",
+  "isolated": true,
+  "timing_trace": "UPLOAD_timing.jsonl",
+  "observation_interruptions": [],
+  "stop_reason": "completed"
+}

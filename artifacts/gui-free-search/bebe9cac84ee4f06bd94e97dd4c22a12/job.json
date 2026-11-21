@@ -1,0 +1,75 @@
+{
+  "id": "bebe9cac84ee4f06bd94e97dd4c22a12",
+  "name": "AC0204_L.jpg",
+  "width": 65,
+  "height": 50,
+  "description": "Links: Kelle mit Griff rechts. Rechts: Zweiwegventil (zwei gleichschenklige Dreiecke mit den zwei Spitzen an am gleichen Punkt). Die Spitze des Griffs und der Mittelpunkt der zwei gleichschnkligen Dreiek befinden sind am gleichen Punkt",
+  "status": "done",
+  "created": 1795296887.4767032,
+  "message": "SVG erstellt. Qualitätsprüfung bestanden.",
+  "result": true,
+  "quality": "passed",
+  "profile": "explore5",
+  "elapsed": 3.0,
+  "source_sha256": "e73fc6a1b4e512673b2aeed95aa9e9a52d55bfb188231652ac1d540c37a8f671",
+  "description_origin": "catalog",
+  "description_check": {
+    "version": "raster_description_check_v1",
+    "description": "Links: Kelle mit Griff rechts. Rechts: Zweiwegventil (zwei gleichschenklige Dreiecke mit den zwei Spitzen an am gleichen Punkt). Die Spitze des Griffs und der Mittelpunkt der zwei gleichschnkligen Dreiek befinden sind am gleichen Punkt",
+    "image_sha256": "e73fc6a1b4e512673b2aeed95aa9e9a52d55bfb188231652ac1d540c37a8f671",
+    "status": "unknown",
+    "checks": [],
+    "observations": null,
+    "limitations": "Geprüft werden einzelne deutsche Angaben zu einfachen Grundformen, Flächenfarbe, Rand und Hintergrund. Freitext, Schriftinhalt, Anordnung und komplexe Motive sind nicht vollständig prüfbar. Keine Konvertierungsfreigabe.",
+    "message": "Nicht sicher prüfbar: Das Motiv liegt ausserhalb der lokalen Grundformerkennung."
+  },
+  "search_seed": 42,
+  "use_current_svg": false,
+  "catalog_background": false,
+  "started": 1795296887.6432602,
+  "conversion_policy": "description_only_v1",
+  "primitive_search_memory": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\gui-free-search\\primitive-search-memory",
+  "pixel_quality": {
+    "normalized_mse": 0.004684493876993656,
+    "foreground_mse": 0.013019025325775146,
+    "foreground_iou": 0.9019264448336253,
+    "foreground_iou_binary": 0.9019264448336253,
+    "edge_alignment": 0.72858726978302,
+    "passed": true,
+    "representation_penalty": 0.000292,
+    "representation_complexity": {
+      "elements": 5,
+      "coordinates": 21,
+      "penalty": 0.000292
+    },
+    "within_canvas": true,
+    "observed_foreground_pixels": 1089,
+    "output_foreground_pixels": 1083
+  },
+  "description_error": "",
+  "description_validation_version": 12,
+  "search_summary": {
+    "candidate_evaluations": 2,
+    "stop_reason": "satisfactory",
+    "satisfactory": true,
+    "elapsed_seconds": 0.984,
+    "minimum_seconds": 30.0,
+    "limit_seconds": 300.0,
+    "renderings": 2,
+    "render_budget": 1000000,
+    "render_cache_hits": 1,
+    "render_sequence_sha256": "8de4c7ca2d127c1318b049a80fc2473245211ab6c0c69d006feb6241e3c3a3f8",
+    "search_seed": "42",
+    "global_stop_reason": null
+  },
+  "project_save": {
+    "status": "unchanged",
+    "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0204_L.svg",
+    "message": "Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten."
+  },
+  "catalog_update": {
+    "status": "done",
+    "catalog_status": "pixel_fail",
+    "message": "Qualitätsliste aktualisiert: Ergebnis nachgetragen; Rasterprüfung noch nicht bestanden."
+  }
+}

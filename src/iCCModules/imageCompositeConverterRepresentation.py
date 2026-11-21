@@ -94,7 +94,7 @@ def description_object_limits(text):
                 else 'ellipse' if form.startswith('ellipse') else 'triangle' if form.startswith('dreieck')
                 else 'rhombus' if form.startswith('raute') else 'line')
         value = int(number) if number.isdigit() else numbers[number]
-        if number in {'beide', 'beiden'} or re.search(r'\b(?:die|diese)\s*$', words[:match.start()]):
+        if number in {'beide', 'beiden'} or re.search(r'\b(?:die|diese|der|den|des|dieser|diesen)\s*$', words[:match.start()]):
             limits[kind] = max(limits.get(kind, 0), value)
         else:
             limits[kind] = limits.get(kind, 0)+value
@@ -135,6 +135,11 @@ def description_object_limits(text):
     if any(limits.get(kind) for kind in ('rect', 'square', 'rhombus')) and 'diagonal' not in limits:
         if re.search(r'\bmit\s+(?:beiden\s+|den\s+)?diagonalen\b', words):
             limits['diagonal'] = 2
+    # Composite vocabulary expands once; references to the same handle are not
+    # additional scene objects. A Kelle is a circular head and a straight stem.
+    if re.search(r'\bkelle\b', words) and re.search(r'\bgriff\b', words):
+        limits['circle'] = max(1, limits.get('circle', 0))
+        limits['line'] = max(1, limits.get('line', 0))
     return limits
 
 

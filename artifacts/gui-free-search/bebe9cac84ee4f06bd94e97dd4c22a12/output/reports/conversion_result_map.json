@@ -1,0 +1,367 @@
+{
+  "UPLOAD.png": {
+    "actual_iterations": 64,
+    "base": "UPLOAD",
+    "best_error": 0.004684493876993656,
+    "best_error_metric": "optimizer_objective",
+    "best_iter": 1,
+    "convergence": "",
+    "current_svg_mae": 8.752410256410256,
+    "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+    "diff_error_distribution_status": "structured",
+    "elapsed_seconds": 1.0150000000139698,
+    "error_per_pixel": 1.4413827313826635e-06,
+    "error_pixel_cluster_count": 70.0,
+    "error_pixel_cluster_excess": 0.30773559520327587,
+    "error_pixel_count": 526.0,
+    "filename": "UPLOAD.png",
+    "h": 50,
+    "largest_error_pixel_cluster_fraction": 0.4695817490494297,
+    "localized_error_fraction": 0.7527455100103032,
+    "mean_delta2": 913.8276977539062,
+    "optimization_render_telemetry": {
+      "render_errors": 0,
+      "render_timeouts": 0
+    },
+    "optimizer_best_error": 0.004684493876993656,
+    "params": {
+      "adaptive_search": {
+        "candidate_evaluations": 2,
+        "elapsed_seconds": 1.015,
+        "external_max_seconds": 315.0,
+        "full_scene_validations": 1,
+        "global_stop_reason": null,
+        "isolated": true,
+        "limit_seconds": 300.0,
+        "max_seconds": 300.0,
+        "minimum_seconds": 30.0,
+        "model_evaluations": 1,
+        "render_budget": 1000000,
+        "render_cache_hits": 1,
+        "render_failures": 0,
+        "render_sequence_sha256": "8de4c7ca2d127c1318b049a80fc2473245211ab6c0c69d006feb6241e3c3a3f8",
+        "renderings": 2,
+        "search_seed": "42",
+        "stop_reason": "satisfactory",
+        "time_extensions": 0
+      },
+      "bottom_shape": null,
+      "contract_status": "ok",
+      "description_constraints": {
+        "elements": [],
+        "relations": [],
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "uncertainty": {
+          "confidence": 0.0,
+          "reasons": [
+            "no_supported_geometry_constraint"
+          ],
+          "status": "needs_review"
+        }
+      },
+      "description_contract": {
+        "deficits": [],
+        "has_conditions": true,
+        "has_geometry_terms": true,
+        "has_reference": false,
+        "status": "ok"
+      },
+      "description_fragments": [
+        {
+          "key": "UPLOAD",
+          "source": "base_name",
+          "text": "Links: Kelle mit Griff rechts. Rechts: Zweiwegventil (zwei gleichschenklige Dreiecke mit den zwei Spitzen an am gleichen Punkt). Die Spitze des Griffs und der Mittelpunkt der zwei gleichschnkligen Dreiek befinden sind am gleichen Punkt"
+        }
+      ],
+      "documented_alias_refs": [],
+      "effective_description": "",
+      "elements": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ],
+      "geometry_ir": [],
+      "label": "M",
+      "language_assertions": {
+        "counts": [],
+        "no_text": false,
+        "objects": {
+          "circle": 1,
+          "line": 1,
+          "triangle": 2
+        },
+        "objects_complete": true,
+        "primitive_program": {
+          "isosceles": true,
+          "no_gradient": false,
+          "objects": [
+            {
+              "id": "circle_0",
+              "kind": "circle",
+              "side": "links"
+            },
+            {
+              "id": "triangle_0",
+              "kind": "triangle",
+              "side": "rechts"
+            },
+            {
+              "id": "triangle_1",
+              "kind": "triangle",
+              "side": "rechts"
+            },
+            {
+              "id": "line_0",
+              "kind": "line",
+              "side": "links"
+            }
+          ],
+          "outline": false,
+          "relations": [
+            {
+              "direction": 0.0,
+              "kind": "attached",
+              "objects": [
+                "circle_0",
+                "line_0"
+              ]
+            },
+            {
+              "anchors": [
+                "apex",
+                "apex"
+              ],
+              "kind": "coincident",
+              "objects": [
+                "triangle_0",
+                "triangle_1"
+              ]
+            },
+            {
+              "anchors": [
+                "end",
+                "apex"
+              ],
+              "kind": "coincident",
+              "objects": [
+                "line_0",
+                "triangle_0"
+              ]
+            }
+          ],
+          "schema": "primitive_scene_program_v1"
+        }
+      },
+      "mode": "semantic_badge",
+      "primitive_evolution": {
+        "checkpoint": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\gui-free-search\\primitive-search-memory\\3a31333af045635adc8360f04993bbd472a70ac0a08cc6361bdecc126fc1592c",
+        "distinct_geometries": 9357,
+        "elapsed_seconds": 0.125,
+        "evaluations": 1,
+        "operators": {
+          "checkpoint_validation": 2,
+          "differential_mutation": 1925,
+          "join_declared_anchors": 539,
+          "large_mutation": 2553,
+          "local_mutation": 2135,
+          "object_crossover": 1101,
+          "random_layout": 876,
+          "replace_object": 1322,
+          "swap_object_poses": 824
+        },
+        "parameters": [
+          0.28778271485319823,
+          0.49684000877938567,
+          0.4855001794988577,
+          0.631150233348515,
+          0.3443646945409604,
+          0.5309195171867688,
+          0.9292305711242989,
+          0.9292305711242989,
+          0.9292305711242989,
+          0.5172811820967516,
+          0.5172811820967516,
+          0.5172811820967516,
+          0.9626512586363803,
+          0.9626512586363803,
+          0.9626512586363803,
+          0.8519372461250765,
+          0.26923223792913387,
+          0.7785284102322705,
+          0.7427161352438472,
+          0.37840918189610606,
+          0.5111977114075771,
+          0.7543017977028685,
+          0.0016900223240488897,
+          0.69746467294766,
+          0.69746467294766,
+          0.69746467294766,
+          0.2944085372516361,
+          0.2944085372516361,
+          0.2944085372516361,
+          0.33532443975721815,
+          0.33532443975721815,
+          0.33532443975721815,
+          0.4143754954648193,
+          0.7864947296162903,
+          0.7882370224085111,
+          0.2823291108061116,
+          0.3301447111540362,
+          0.4333799549978143,
+          0.2544310710454523,
+          0.9557424326885755,
+          0.7754378809405641,
+          0.7754378809405641,
+          0.7754378809405641,
+          0.6746745247462943,
+          0.6746745247462943,
+          0.6746745247462943,
+          0.38435193876026186,
+          0.38435193876026186,
+          0.38435193876026186,
+          0.2524285573110465,
+          0.03739280430319905,
+          0.6570873007842029,
+          0.49684000877938567,
+          0.2531089923631517,
+          0.21923504648319458,
+          0.0,
+          0.6647066327395948,
+          0.28468239246674515,
+          0.28468239246674515,
+          0.28468239246674515,
+          0.47691972363726753,
+          0.47691972363726753,
+          0.47691972363726753,
+          0.06737933565117173,
+          0.06737933565117173,
+          0.06737933565117173,
+          0.14890559985400048,
+          0.32340258384845566
+        ],
+        "program": {
+          "isosceles": true,
+          "no_gradient": false,
+          "objects": [
+            {
+              "id": "circle_0",
+              "kind": "circle",
+              "side": "links"
+            },
+            {
+              "id": "triangle_0",
+              "kind": "triangle",
+              "side": "rechts"
+            },
+            {
+              "id": "triangle_1",
+              "kind": "triangle",
+              "side": "rechts"
+            },
+            {
+              "id": "line_0",
+              "kind": "line",
+              "side": "links"
+            }
+          ],
+          "outline": false,
+          "relations": [
+            {
+              "direction": 0.0,
+              "kind": "attached",
+              "objects": [
+                "circle_0",
+                "line_0"
+              ]
+            },
+            {
+              "anchors": [
+                "apex",
+                "apex"
+              ],
+              "kind": "coincident",
+              "objects": [
+                "triangle_0",
+                "triangle_1"
+              ]
+            },
+            {
+              "anchors": [
+                "end",
+                "apex"
+              ],
+              "kind": "coincident",
+              "objects": [
+                "line_0",
+                "triangle_0"
+              ]
+            }
+          ],
+          "schema": "primitive_scene_program_v1"
+        },
+        "quality": {
+          "edge_alignment": 0.72858726978302,
+          "foreground_iou": 0.9019264448336253,
+          "foreground_iou_binary": 0.9019264448336253,
+          "foreground_mse": 0.013019025325775146,
+          "normalized_mse": 0.004684493876993656,
+          "passed": true
+        },
+        "restarts": 844,
+        "resumed": true,
+        "schema": "primitive_evolution_v1",
+        "stop_reason": "satisfactory",
+        "total_evaluations": 11277,
+        "trace_hash": "beeabf22c83718507e88b7d01e56d0990504af2f8f50f3755f71379da8fc05fd",
+        "valid": true
+      },
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {
+        "description_heuristic": [
+          "SEMANTIC: Kreis + Buchstabe"
+        ]
+      },
+      "similarity_references": [],
+      "top_source_ref": null,
+      "variant_name": "UPLOAD"
+    },
+    "reference_access": {
+      "blocked_svg_reads": []
+    },
+    "requested_iterations": 64,
+    "rgb_rmse_per_channel": 17.453057972304894,
+    "search_control": {
+      "candidate_evaluations": 2,
+      "elapsed_seconds": 1.015,
+      "external_max_seconds": 315.0,
+      "full_scene_validations": 1,
+      "global_stop_reason": null,
+      "isolated": true,
+      "limit_seconds": 300.0,
+      "max_seconds": 300.0,
+      "minimum_seconds": 30.0,
+      "model_evaluations": 1,
+      "render_budget": 1000000,
+      "render_cache_hits": 1,
+      "render_failures": 0,
+      "render_sequence_sha256": "8de4c7ca2d127c1318b049a80fc2473245211ab6c0c69d006feb6241e3c3a3f8",
+      "renderings": 2,
+      "search_seed": "42",
+      "stop_reason": "satisfactory",
+      "time_extensions": 0
+    },
+    "search_satisfactory": true,
+    "source_file_sha256": "6a6e18112ef4fa134f87fb807a09295deffb203e22b72958574bcdb2176beff2",
+    "spatial_quality_score": 2774.792416199879,
+    "status": "validated",
+    "std_delta2": 2988.09326171875,
+    "svg_sha256": "b9034de170b80f4bdabfc31d1812028ae516ea6ae4854e7eab21af670f8eb8ee",
+    "tile_std_delta2": 1436.2891231304895,
+    "variant": "UPLOAD",
+    "w": 65
+  }
+}

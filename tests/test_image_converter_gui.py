@@ -547,6 +547,30 @@ def test_reference_descriptions_reload_at_worker_start(jobs,job,monkeypatch):
     assert 'Captured converter input' in jobs.snapshot(job['id'])['message']
 
 
+@pytest.mark.parametrize('profile,seconds',[('explore5',300),('explore10',600)])
+def test_free_search_profiles_reach_cli_with_durable_memory_and_skip_samples(jobs,job,monkeypatch,profile,seconds):
+    monkeypatch.setattr(gui,'catalog_descriptions',lambda:{})
+    job.update(description='Ein Kreis.',profile=profile,status='running',started=0,search_seed=123,
+               sample=True,use_current_svg=True)
+    commands=[]
+    def capture(command,**kwargs):
+        commands.append(command)
+        assert command[command.index('-m')+1]=='src.imageCompositeConverter'
+        assert '--primitive-exploration' in command
+        assert command[command.index('--search-seconds')+1]==str(seconds)
+        assert command[command.index('--search-budget')+1]=='1000000'
+        assert gui.Path(command[command.index('--primitive-memory')+1])==jobs.directory/'primitive-search-memory'
+        raise OSError('Captured population search')
+    monkeypatch.setattr(gui.subprocess,'Popen',capture)
+    jobs.run(job['id'])
+    assert commands and 'Captured population search' in jobs.snapshot(job['id'])['message']
+
+
+def test_free_search_rejects_unsupported_claim_before_launch(jobs,job):
+    with pytest.raises(gui.RequestError,match='noch nicht vollständig'):
+        jobs.start(job['id'],'Ein Kreis mit Schrift "M".','explore5')
+
+
 def test_no_svg_is_an_error_even_with_zero_cli_exit(jobs, job):
     gui.collect_result(jobs.folder(job["id"]), job, 0)
     assert job["status"] == "error"

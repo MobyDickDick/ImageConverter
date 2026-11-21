@@ -83,6 +83,10 @@ def parseArgsImpl(
                         help='Seed für wiederholbare alternative Suchwege')
     parser.add_argument('--search-budget', type=int, default=4096,
                         help='Gemeinsame Obergrenze tatsächlicher Renderkandidaten je Bild (32..10000), einschließlich Zwischenstufen')
+    parser.add_argument('--primitive-exploration', action='store_true',
+                        help='Freie Population aus beschriebenen Grundformen statt vorbereiteten Motivmodellen suchen')
+    parser.add_argument('--primitive-memory', type=Path,
+                        help='Suchpopulation und Lösungen hier speichern; gleicher Seed setzt dieselbe Bild-/Beschreibungssuche fort')
     from src.iCCModules.imageCompositeConverterComponents import BOT_NAMES
     parser.add_argument('--disable-search-bot', action='append', default=[], choices=BOT_NAMES,
                         help='Komponentenvergleich: Bot in der adaptiven Parametersuche abschalten; wiederholbar')
@@ -106,8 +110,8 @@ def parseArgsImpl(
         default="semantic-only",
         help=(
             "semantic-only (Default)=erzeugt jede Ausgabe ausschließlich aus dem jeweiligen Bild "
-            "und seiner sprachlichen Beschreibung (keine Wiederverwendung, Checkpoints "
-            "oder Template-Donoren); standard=expliziter Kompatibilitätsmodus mit "
+            "und seiner sprachlichen Beschreibung (keine automatischen SVG-Donoren; "
+            "die explizite freie Grundformensuche darf ihre Population speichern); standard=Kompatibilitätsmodus mit "
             "vorhandenen Ergebnisartefakten."
         ),
     )
@@ -265,8 +269,8 @@ def parseArgsImpl(
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument('--search-context', type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
-    if not 32 <= args.search_budget <= 10000:
-        parser.error('--search-budget muss zwischen 32 und 10000 liegen')
+    if not 32 <= args.search_budget <= (1000000 if args.primitive_exploration else 10000):
+        parser.error('--search-budget muss zwischen 32 und 10000 liegen (freie Grundformensuche: bis 1000000)')
     if args.disable_search_bot and (args.search_mode != 'portfolio' or args.search_policy != 'adaptive'):
         parser.error('--disable-search-bot benötigt --search-mode portfolio --search-policy adaptive')
     if args.neural_elements_model and not Path(args.neural_elements_model).is_file():
@@ -593,6 +597,8 @@ def runMainImpl(
         component_observation=getattr(args,'component_observation', True),
         neural_model=getattr(args, 'neural_elements_model', None),
         handoff=getattr(args, 'search_context', None),
+        primitive_exploration=getattr(args, 'primitive_exploration', False),
+        primitive_memory=getattr(args, 'primitive_memory', None),
     ):
         try:
             if args.ac08_regression_set:

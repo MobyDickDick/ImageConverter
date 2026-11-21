@@ -101,13 +101,17 @@ class AttemptJournal:
                 stream.seek(int.from_bytes(offset, 'little'))
                 try:
                     record = json.loads(stream.readline())
-                    if validator is not None and not validator(record.get('svg', '')):
-                        continue
                     error = float(record['mse'])
                     rank = record.get('selection_rank', (True, error))
                     if len(rank) != 2 or not math.isfinite(float(rank[1])):
                         continue
                     rank = (bool(rank[0]), float(rank[1]))
+                    # Long searches can journal tens of thousands of variants.
+                    # Only a better-ranked record can replace the validated best.
+                    if best is not None and rank >= best_rank:
+                        continue
+                    if validator is not None and not validator(record.get('svg', '')):
+                        continue
                     if (isinstance(record.get('svg'),str) and math.isfinite(error) and error >= 0
                             and (best is None or rank < best_rank)):
                         best = dict(record, mse=error)

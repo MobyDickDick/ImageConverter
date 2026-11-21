@@ -1,0 +1,32 @@
+{
+  "active_filename": "",
+  "attempt_reports_path": "runs/catalog-20261121T213448Z-818b1699/revisions/2d1a09c2997443cf817a85582e7d0319/attempt_reports.json",
+  "batch_failure_count": 0,
+  "bestlist_count": 1,
+  "completion_manifest_path": "runs/catalog-20261121T213448Z-818b1699/revisions/2d1a09c2997443cf817a85582e7d0319/conversion_run_manifest.json",
+  "draft_count": 0,
+  "failures_path": "runs/catalog-20261121T213448Z-818b1699/revisions/2d1a09c2997443cf817a85582e7d0319/failures.json",
+  "filename": "UPLOAD.png",
+  "input_count": 1,
+  "last_event": {
+    "filename": "UPLOAD.png",
+    "stage": "initial_pass",
+    "state": "completed",
+    "variant": "UPLOAD",
+    "variant_index": 1
+  },
+  "pass_seed_offset": 1,
+  "processed_result_count": 1,
+  "reports_path": "runs/catalog-20261121T213448Z-818b1699/revisions/2d1a09c2997443cf817a85582e7d0319/reports.json",
+  "result_map_path": "runs/catalog-20261121T213448Z-818b1699/objects/0c71f6bd182d2cdab9b5703f2e3c5f19fe2d502ef2c7ca74616bea9eb85a2923",
+  "result_map_sha256": "0c71f6bd182d2cdab9b5703f2e3c5f19fe2d502ef2c7ca74616bea9eb85a2923",
+  "run_id": "catalog-20261121T213448Z-818b1699",
+  "run_seed": 42,
+  "schema_version": "conversion_checkpoint_v2",
+  "stage": "initial_pass",
+  "started_at": "2026-11-21T21:34:48.368438Z",
+  "state": "completed",
+  "updated_at": "2026-11-21T21:34:49.686285Z",
+  "validated_count": 1,
+  "variant": "UPLOAD"
+}

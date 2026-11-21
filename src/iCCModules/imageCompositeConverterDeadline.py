@@ -197,7 +197,9 @@ def conversion_worker(connection, payload):
     settings.update(minimum_seconds=config['policy'].minimum_seconds)
     settings.update(disabled_bots=config.get('disabled_bots', ()),
                     component_observation=config.get('component_observation', True),
-                    neural_model=config.get('neural_model'))
+                    neural_model=config.get('neural_model'),
+                    primitive_exploration=config.get('primitive_exploration', False),
+                    primitive_memory=config.get('primitive_memory'))
     failures = []
     log_path = Path(spec['reports_out_dir'])/(Path(spec['filename']).stem+'_worker.log')
     with app._optionalLogCapture(str(log_path)), portfolio.search_configuration(**settings):

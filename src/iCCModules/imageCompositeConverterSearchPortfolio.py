@@ -1,7 +1,9 @@
 """Bounded alternative searches, live evidence, and reusable strategy statistics.
 
 History changes strategy ordering only. Saved SVGs/parameters are evidence, never
-templates; semantic-only runs do not read history. Pixel passes are explicitly
+templates; semantic-only runs do not read strategy history. The explicitly
+selected primitive population search may resume its own source-bound frontier.
+Pixel passes are explicitly
 provisional until the caller's semantic checks have completed.
 """
 from __future__ import annotations
@@ -28,8 +30,8 @@ _SETTINGS = ContextVar('conversion_search_settings', default=None)
 def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
                          adaptive=False, seconds=60., max_seconds=120., isolate=False,
                          disabled_bots=(), component_observation=True, neural_model=None, minimum_seconds=0.,
-                         handoff=None):
-    if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
+                         handoff=None, primitive_exploration=False, primitive_memory=None):
+    if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= (1000000 if primitive_exploration else 10000):
         raise ValueError('Search mode or render budget is invalid')
     policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds,minimum_seconds=min(minimum_seconds,seconds))
     from src.iCCModules.imageCompositeConverterComponents import registry
@@ -45,7 +47,9 @@ def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, a
                                disabled_bots=tuple(sorted(set(disabled_bots))),
                                component_observation=bool(component_observation),
                                neural_model=str(Path(neural_model).resolve()) if neural_model else None,
-                               neural_observations=[], handoff=handoff)
+                               neural_observations=[], handoff=handoff,
+                               primitive_exploration=bool(primitive_exploration),
+                               primitive_memory=Path(primitive_memory) if primitive_memory else None)
     token = _SETTINGS.set(config)
     try:
         yield

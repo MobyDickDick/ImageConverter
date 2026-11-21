@@ -547,6 +547,9 @@ async function init() {
       descriptionCheck = config.description_check === true;
       descriptionAutosave = config.description_autosave === true;
       currentSvgReuse = config.current_svg_reuse === true;
+      for (const option of $("profile").querySelectorAll("option")) {
+        if (["explore5", "explore10"].includes(option.value)) option.disabled = config.primitive_exploration !== true;
+      }
       if (!currentSvgReuse) {
         serverNeedsRestart = true;
         $("server-version-warning").textContent = "Für die automatische SVG-Wiederverwendung muss der Webserver neu gestartet werden. Lass laufende Konvertierungen fertig werden, führe stopWebServer.cmd und danach startWebServer.cmd aus und lade diese Seite neu.";

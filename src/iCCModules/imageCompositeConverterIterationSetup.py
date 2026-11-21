@@ -53,7 +53,9 @@ def emitIterationDescriptionHeaderImpl(
         print_fn(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}")
     if params.get('effective_description'):
         print_fn(f"Aufgelöste Bildbeschreibung: {params['effective_description']}")
-    raw_elements = params.get("elements", [])
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+    raw_elements = (["Freie Grundformensuche: zufällige Population, Variation und Selektion"]
+                    if (settings() or {}).get('primitive_exploration') else params.get("elements", []))
     elements = ", ".join(raw_elements) if raw_elements else None
     if elements:
         print_fn(f"Befehl erkannt: {elements}")

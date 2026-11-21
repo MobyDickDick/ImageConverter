@@ -31,6 +31,9 @@ def runPreparedIterationModeImpl(
     calculate_error_fn,
     print_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+    if (settings() or {}).get('primitive_exploration'):
+        mode = 'non_composite'
     if mode == "semantic_badge":
         semantic_result = run_semantic_badge_iteration_fn(
             width=width,

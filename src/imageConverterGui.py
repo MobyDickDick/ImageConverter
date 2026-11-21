@@ -41,7 +41,8 @@ WEB = ROOT / "web"
 MAX_UPLOAD = 25 * 1024 * 1024
 MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
-PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240)}
+PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240),
+            "explore5": (300, 315), "explore10": (600, 615)}
 DESCRIPTION_VALIDATION_VERSION = 12
 
 
@@ -407,6 +408,12 @@ class Jobs:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
+        if profile in {'explore5', 'explore10'}:
+            from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+            if scene_program(description) is None:
+                raise RequestError('Die freie Suche unterstützt derzeit einfache Listen aus Kreis, Ellipse, Rechteck, '
+                                   'Quadrat, Dreieck und Linie sowie Kelle mit Griff und gemeinsame Spitzen. '
+                                   'Weitere Angaben in dieser Beschreibung kann sie noch nicht vollständig auswerten.')
         if type(use_current_svg) is not bool:
             raise RequestError('Die SVG-Wiederverwendung muss ein Wahrheitswert sein.')
         if seed is not None:
@@ -442,8 +449,10 @@ class Jobs:
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
-            if use_current_svg and not components:
+            if use_current_svg and not components and profile not in {'explore5', 'explore10'}:
                 self.use_best_svg(job)
+            if profile in {'explore5', 'explore10'}:
+                job['message'] = 'Freie Grundformensuche: Population erzeugen oder gespeicherten Suchstand fortsetzen …'
             self._check_description(job)
             if origin == 'user' and not background:
                 self._persist_description(job)
@@ -558,6 +567,12 @@ class Jobs:
                        "--search-seconds", str(seconds), "--search-max-seconds", str(maximum),
                        "--search-seed", str(job["search_seed"]),
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
+            exploring = job['profile'] in {'explore5', 'explore10'}
+            if exploring:
+                memory = self.directory / 'primitive-search-memory'
+                job['primitive_search_memory'] = str(memory)
+                command += ['--primitive-exploration', '--primitive-memory', str(memory),
+                            '--search-budget', '1000000', '--search-max-seconds', str(seconds)]
             if component_mode:
                 description_file = folder / 'description.txt'
                 description_file.write_text(job['description'], encoding='utf-8')
@@ -567,7 +582,7 @@ class Jobs:
                            '--description', str(description_file),
                            '--seed', str(job['search_seed']),
                            '--seconds', str(max(0.01, deadline-time.monotonic()-1))]
-            elif job.get("sample") and job.get('use_current_svg',True):
+            elif not exploring and job.get("sample") and job.get('use_current_svg',True):
                 description_file = folder / "description.txt"
                 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
                 resolved = resolve_similarity_description(job["description"], catalog, base_name=getBaseNameFromFileImpl)
@@ -591,11 +606,11 @@ class Jobs:
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
                                    ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'),
                                    ICC_GUI_PREVIEW_DESCRIPTION_FILE=str(preview_description),
-                                   ICC_GUI_PREVIEW_PHASE='Sample-Anpassung' if job.get('sample') and job.get('use_current_svg',True) else 'Suche')
+                                   ICC_GUI_PREVIEW_PHASE='Freie Grundformensuche' if exploring else 'Sample-Anpassung' if job.get('sample') and job.get('use_current_svg',True) else 'Suche')
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
-                if not component_mode and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
+                if not component_mode and not exploring and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
                     for reference in resolved.references:
                         aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
                         log.write(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}\n".encode('utf-8'))
@@ -622,7 +637,7 @@ class Jobs:
                 # Collect into a temporary snapshot: a failed first attempt
                 # must not appear terminal while Plan B still has search time.
                 collected = dict(job)
-                collect = collect_sample_result if component_mode or (job.get('sample') and job.get('use_current_svg',True)) else collect_result
+                collect = collect_sample_result if component_mode or (not exploring and job.get('sample') and job.get('use_current_svg',True)) else collect_result
                 collect(folder, collected, process.returncode)
                 retain_best_preview(folder, collected)
             retain_best_preview(folder, collected)
@@ -1488,6 +1503,7 @@ class Handler(BaseHTTPRequestHandler):
                         description_check=True,
                         description_autosave=True,
                         current_svg_reuse=True,
+                        primitive_exploration=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]

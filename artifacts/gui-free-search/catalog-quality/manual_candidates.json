@@ -1,0 +1,71 @@
+{
+  "b9034de170b80f4bdabfc31d1812028ae516ea6ae4854e7eab21af670f8eb8ee:AC0204_L.jpg": {
+    "filename": "AC0204_L.jpg",
+    "candidate": "artifacts/converted_images/catalog_manual_svgs/bebe9cac84ee4f06bd94e97dd4c22a12/AC0204_L.svg",
+    "image_sha256": "bee24073bced00ce1039733ab49f1cbee90135f8f3f25c999aaf15d6dc07f856",
+    "svg_sha256": "b9034de170b80f4bdabfc31d1812028ae516ea6ae4854e7eab21af670f8eb8ee",
+    "measurement": {
+      "measured_at": "2026-11-21T21:34:51.685829+00:00",
+      "renderers": {
+        "mupdf": {
+          "satisfactory": true,
+          "failures": [],
+          "metrics": {
+            "normalized_mse": 0.004684493876993656,
+            "foreground_mse": 0.013019025325775146,
+            "edge_alignment": 0.72858726978302,
+            "foreground_iou": 0.9019264448336253,
+            "foreground_iou_binary": 0.9019264448336253
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        },
+        "librsvg": {
+          "satisfactory": false,
+          "failures": [
+            "edge_alignment_outside_limit"
+          ],
+          "metrics": {
+            "normalized_mse": 0.005716005805879831,
+            "foreground_mse": 0.015167506411671638,
+            "edge_alignment": 0.6907832622528076,
+            "foreground_iou": 0.8684429641965029,
+            "foreground_iou_binary": 0.8684429641965029
+          },
+          "limits": {
+            "max_normalized_mse": 0.01,
+            "max_foreground_mse": 0.04,
+            "min_edge_alignment": 0.72,
+            "min_foreground_iou": 0.85,
+            "max_svg_elements": 80,
+            "max_path_commands": 160
+          },
+          "complexity": {
+            "parse_error": null,
+            "embedded_raster_count": 0,
+            "vector_element_count": 5,
+            "path_count": 0,
+            "path_command_count": 0,
+            "path_complexity_ratio": 0.0
+          }
+        }
+      },
+      "width": 65,
+      "height": 50
+    }
+  }
+}

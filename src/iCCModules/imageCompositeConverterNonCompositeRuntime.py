@@ -1407,6 +1407,23 @@ def runNonCompositeIterationImpl(
     session = current_search()
     if session is not None:
         session.bind_reference(perc_img)
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
+    if (settings() or {}).get('primitive_exploration'):
+        from src.iCCModules.imageCompositeConverterPrimitiveEvolution import evolve_primitives
+        from src.imageConverterPreview import publish_preview
+        fitted = evolve_primitives(perc_img, description, render_svg_to_numpy_fn,
+                                  on_improvement=publish_preview)
+        if fitted is None:
+            return None
+        params['primitive_evolution'] = fitted['search_report']
+        write_validation_log_fn(['status=primitive_evolution',
+                                 'stop_reason='+fitted['search_report']['stop_reason']])
+        if not fitted['valid']:
+            raise ValueError('Die freie Suche hat noch keine Konstruktion mit allen beschriebenen Verbindungen gefunden. '
+                             'Der Suchstand ist gespeichert; mit gleichem Seed und Profil fortsetzen.')
+        validated_result(fitted, perc_img)
+        write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+        return base_name, description, params, 1, fitted['error']
     from src.iCCModules.imageCompositeConverterSymmetricCircleLines import symmetric_circle_lines_spec, fit_symmetric_circle_lines
     if symmetric_circle_lines_spec(description):
         fitted = fit_symmetric_circle_lines(width, height, description=description, image=perc_img,

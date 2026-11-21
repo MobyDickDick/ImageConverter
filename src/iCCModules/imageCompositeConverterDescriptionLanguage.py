@@ -241,6 +241,10 @@ def description_assertions(description: str) -> dict:
     if re.search(r'\b(?:weitere|zusätzliche|zusatzliche)\s+(?:objekte|elemente|formen)\b', words):
         if not re.search(r'\b(?:keine|ohne)\s+(?:weiteren?|zusätzlichen?)\s+(?:objekte|elemente|formen)\b', words):
             assertions['inventory_error'] = 'unresolved_described_object_inventory'
+    from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+    program = scene_program(normalized)
+    if program is not None and program['relations']:
+        assertions['primitive_program'] = program
     return assertions
 
 
@@ -255,7 +259,7 @@ def gradient_direction(text: str, direction: str) -> bool:
 def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
     for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
-                'svg_component_description', 'two_way_valve'):
+                'svg_component_description', 'two_way_valve', 'primitive_program'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -312,6 +316,12 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     root = ET.fromstring(svg)
+    if root.get('data-primitive-scene') == '1' and assertions.get('primitive_program'):
+        from src.iCCModules.imageCompositeConverterSceneProgram import validate_program_svg
+        try:
+            validate_program_svg(svg, assertions['primitive_program'])
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if assertions.get('objects_complete'):
         if any(node.tag.rsplit('}', 1)[-1] in {'image', 'use', 'foreignObject', 'script'} for node in root.iter()):
             raise DescriptionRejected('unsupported_inventory_element')

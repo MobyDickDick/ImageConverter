@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="0.880" y1="1.460" x2="0.880" y2="23.540">
-      <stop offset="0.000000%" stop-color="#bbb8b9" />
-      <stop offset="17.168437%" stop-color="#fefefe" />
-      <stop offset="97.857752%" stop-color="#bbb8b9" />
-    </linearGradient>
-  <clipPath id="innerRect"><rect x="0.88" y="1.46" width="18.24" height="22.080000000000002" /></clipPath>
-  </defs>
-  <g transform="translate(-0.032297 -0.328073) scale(1.009785)"><rect x="0" y="0" width="20" height="25" fill="#ffffff" stroke="none" />
-  <rect x="0.880" y="1.460" width="18.240" height="22.080" fill="url(#panelGradient)" stroke="none" />
-  <rect x="0.88" y="1.46" width="18.24" height="22.080000000000002" fill="none" stroke="#b5bcbe" stroke-width="0.538871" />
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25" overflow="hidden"><defs><linearGradient id="valve" gradientUnits="userSpaceOnUse" x1="1.64302" y1="25.42777" x2="18.48198" y2="14.44723"><stop offset="0" stop-color="#bdbdbc" /><stop offset="1" stop-color="#d8d8d8" /></linearGradient></defs><rect width="20" height="25" fill="#fcfcfc" /><line x1="9.94837" y1="7.54413" x2="9.94837" y2="19.87500" stroke="#939393" stroke-width="1.70000" /><path d="M 0.87500 15.62500 L 0.87500 24.25000 L 9.94837 19.87500 Z" fill="url(#valve)" stroke="#a2a1a2" stroke-width="1.25000" stroke-linejoin="round" /><path d="M 19.25000 15.62500 L 19.25000 24.25000 L 9.94837 19.87500 Z" fill="url(#valve)" stroke="#a2a1a2" stroke-width="1.25000" stroke-linejoin="round" /><circle cx="9.94837" cy="7.54413" r="6.31849" fill="#f3f3f3" stroke="#818181" stroke-width="1.12500" /></svg>
