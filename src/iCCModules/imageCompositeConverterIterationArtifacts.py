@@ -58,6 +58,12 @@ def writeAttemptArtifactsImpl(
     commented_diff_out_dir: str | None = None,
     create_commented_diff: bool = True,
 ) -> None:
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+    dimensions = (target_img.shape[1], target_img.shape[0]) if hasattr(target_img, 'shape') else (None, None)
+    bounded = contain_svg(svg_content, *dimensions)
+    if bounded != svg_content:
+        svg_content = bounded
+        rendered_img = diff_img = None  # quality artifacts must describe the delivered vector
     suffix = "_failed" if failed else ""
     svg_path = os.path.join(svg_out_dir, f"{base_name}{suffix}.svg")
     with open(svg_path, "w", encoding="utf-8") as handle:

@@ -293,10 +293,11 @@ class Jobs:
             with warnings.catch_warnings():
                 warnings.simplefilter("error", Image.DecompressionBombWarning)
                 with Image.open(io.BytesIO(data)) as original:
-                    if original.format not in {"PNG", "JPEG", "BMP", "WEBP", "TIFF"}:
-                        raise RequestError("Bitte ein PNG-, JPEG-, BMP-, WebP- oder TIFF-Bild wählen.")
+                    if original.format not in {"PNG", "JPEG", "BMP", "GIF", "WEBP", "TIFF"}:
+                        raise RequestError("Bitte ein PNG-, JPEG-, BMP-, GIF-, WebP- oder TIFF-Bild wählen.")
                     if original.width * original.height > MAX_PIXELS:
                         raise RequestError("Das Bild ist zu gross (maximal 20 Megapixel).")
+                    # Multi-frame images use their first frame, just like catalog recognition.
                     image = ImageOps.exif_transpose(original).convert("RGBA")
                     background = Image.new("RGB", image.size, "white")
                     background.paste(image, mask=image.getchannel("A"))
@@ -770,7 +771,8 @@ class Jobs:
             if previous is None:
                 job['project_save'] = dict(status='skipped', message='Vorhandenes Projekt-SVG konnte nicht verglichen werden; es bleibt erhalten.')
                 return
-            previous_error = result_description_error(target,job.get('description',''))
+            previous_error = (result_description_error(target,job.get('description',''))
+                              or not previous.get('within_canvas', True))
             if ((False,not quality['passed'],vector_comparison_score(quality)) >=
                     (bool(previous_error),not previous['passed'],vector_comparison_score(previous)-1e-12)):
                 job['project_save'] = dict(status='unchanged', path=str(target), message='Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten.')
@@ -805,6 +807,7 @@ def retain_best_preview(folder: Path, job: dict) -> None:
     """
     from src.imageConverterPreview import AttemptJournal
     from src.imageConverterSample import prepare_sample
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
     result = folder/'result.svg'
     candidates = [folder/'live-preview.svg']
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
@@ -815,6 +818,7 @@ def retain_best_preview(folder: Path, job: dict) -> None:
         return
     def valid_inventory(svg):
         try:
+            svg = contain_svg(svg, job['width'], job['height'])
             validate_svg_assertions(svg, assertions)
             return True
         except (ValueError, SyntaxError):
@@ -822,8 +826,10 @@ def retain_best_preview(folder: Path, job: dict) -> None:
     best = AttemptJournal(folder).best(validator=valid_inventory)
     if best is not None:
         observed = folder/'best-observed.svg'
-        observed.write_text(best['svg'], encoding='utf-8')
+        observed.write_text(contain_svg(best['svg'], job['width'], job['height']), encoding='utf-8')
         candidates.append(observed)
+    if job.get('result') and result.is_file():
+        contain_result(result, job)
     previous = saved_svg_quality(folder/'source.png', result) if job.get('result') else None
     previous_error = result_description_error(result, job.get('description', '')) if previous else ''
     if job.get('quality') == 'passed' and previous and previous['passed'] and not previous_error:
@@ -831,6 +837,7 @@ def retain_best_preview(folder: Path, job: dict) -> None:
     for candidate in candidates:
         if not candidate.is_file():
             continue
+        contain_result(candidate, job)
         try:
             prepare_sample(candidate.read_bytes(), job['width'], job['height'])
         except (OSError, ValueError, SyntaxError):
@@ -934,6 +941,7 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         return
     if returncode != 0:
         report['stop_reason'] = 'interrupted'
+    contain_result(result, job)
     if reject_raster_result(result, job) or reject_description_result(result, job):
         return
     # Recheck the actual deliverable, including old worker reports. A low
@@ -970,6 +978,20 @@ def result_description_error(svg: Path, description: str) -> str:
     except (OSError, ValueError, SyntaxError) as exc:
         return str(exc)
     return ''
+
+
+def contain_result(path: Path, job: dict) -> None:
+    """Normalize only a newly generated job artifact, never its uploaded sample."""
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+    try:
+        original = path.read_text(encoding='utf-8')
+        bounded = contain_svg(original, job.get('width'), job.get('height'))
+        if bounded != original:
+            temporary = path.with_suffix('.svg.tmp')
+            temporary.write_text(bounded, encoding='utf-8')
+            temporary.replace(path)
+    except (ValueError, OSError, SyntaxError):
+        pass  # normal SVG/quality rejection below handles invalid artifacts
 
 
 def reject_description_result(result: Path, job: dict) -> bool:
@@ -1013,6 +1035,7 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         with failures.open(encoding="utf-8-sig", newline="") as stream:
             has_failures = bool(list(csv.DictReader(stream, delimiter=";")))
     if result:
+        contain_result(result, job)
         if reject_raster_result(result, job) or reject_description_result(result, job):
             return
         shutil.copyfile(result, folder / "result.svg")
@@ -1084,6 +1107,7 @@ def saved_svg_quality(source: Path, svg: Path) -> dict | None:
     import numpy as np
     from src.imageConverterSample import prepare_sample, render_svg
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import vector_candidate_quality
+    from src.iCCModules.imageCompositeConverterCanvas import within_canvas
     try:
         with Image.open(source) as image:
             target = np.asarray(image.convert('RGB'))
@@ -1091,6 +1115,8 @@ def saved_svg_quality(source: Path, svg: Path) -> dict | None:
         prepared = prepare_sample(svg.read_bytes(), w, h)
         rendered = render_svg(prepared, w, h)
         quality = vector_candidate_quality(target, rendered, prepared)
+        quality['within_canvas'] = within_canvas(prepared, w, h)
+        quality['passed'] = bool(quality['passed'] and quality['within_canvas'])
         border = np.concatenate((target[0], target[-1], target[:, 0], target[:, -1]))
         background = np.median(border.astype(float), axis=0)
         quality.update(observed_foreground_pixels=int(np.count_nonzero(

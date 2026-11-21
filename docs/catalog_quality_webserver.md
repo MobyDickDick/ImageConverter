@@ -36,6 +36,12 @@ und Plan-B-Aufgaben teilen sich weiterhin einen Platz. Jeder Lauf lässt sich
 einzeln abbrechen. Hintergrundversuche erscheinen in der Katalogansicht und
 verdrängen keine manuellen Aufträge im Konverterverlauf.
 
+GIF-Katalogbilder werden wie PNG, JPEG, BMP, WebP und TIFF importiert. Bei
+mehreren Frames wird der erste verwendet; transparente Flächen werden weiss
+hinterlegt. Damit bricht der Dienst bei einem GIF an der Spitze der Rangliste
+nicht mehr beim Bildimport ab (gemeldeter Fall: `bottom.gif`). Auch die
+Einzelkonvertierung und beide Dateiauswahldialoge unterstützen GIF.
+
 Erfolgreiche manuelle Bild- und Sample-Konvertierungen werden automatisch in
 die Qualitätsliste übernommen. Dazu wird das neue SVG unveränderlich unter
 `artifacts/converted_images/catalog_manual_svgs/<Auftrag>/` abgelegt und am

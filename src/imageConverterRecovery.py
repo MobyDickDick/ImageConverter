@@ -9,6 +9,8 @@ import time
 
 
 def atomic_svg(path, svg):
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+    svg = contain_svg(svg)
     temporary = path.with_suffix('.svg.tmp')
     temporary.write_text(svg, encoding='utf-8')
     temporary.replace(path)

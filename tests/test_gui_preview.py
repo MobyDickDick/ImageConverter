@@ -11,7 +11,7 @@ from src import imageConverterGui as gui
 from src import imageConverterPreview as preview
 from src.imageConverterSample import render_svg
 
-SVG = ('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24">'
+SVG = ('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" overflow="hidden">'
        '<rect x="5" y="4" width="12" height="16" fill="#225599"/></svg>')
 
 
@@ -206,6 +206,13 @@ def test_reported_humidifier_cannot_publish_a_draft_with_missing_described_dashe
     job = dict(width=40,height=80,result=True,quality='warning',
                description=(fixture/'description.txt').read_text(encoding='utf-8'))
     gui.retain_best_preview(tmp_path,job)
-    assert (tmp_path/'result.svg').read_bytes() == (fixture/'late.svg').read_bytes()
+    from xml.etree import ElementTree as ET
+    expected = ET.parse(fixture/'late.svg').getroot()
+    actual = ET.parse(tmp_path/'result.svg').getroot()
+    def parts(root):
+        return [(node.tag, node.attrib) for node in root.iter()
+                if node.tag.rsplit('}', 1)[-1] not in {'svg', 'g'}]
+    assert parts(actual) == parts(expected)
+    assert actual.get('overflow') == 'hidden'
     assert not job.get('retained_preview')
     assert job['quality'] == 'warning'

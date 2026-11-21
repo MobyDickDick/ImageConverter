@@ -68,6 +68,8 @@ def prepareIterationRuntimeImpl(
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
             from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+            from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+            svg_content = contain_svg(svg_content, width, height)
             # Failed files are deliverables too: no partial inventory and
             # no raster reconstruction after the description-based fit.
             validate_svg_assertions(svg_content, assertions)

@@ -141,12 +141,19 @@ class PreviewPublisher:
                 import cv2
                 import fitz
                 from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+                from src.iCCModules.imageCompositeConverterCanvas import contain_svg
                 h, w = self.target.shape[:2]
-                raster = render_svg_to_numpy_inprocess(output.read_text(encoding='utf-8'), w, h,
+                previous = output.read_text(encoding='utf-8')
+                bounded = contain_svg(previous, w, h)
+                if bounded != previous:
+                    temporary = output.with_suffix('.svg.tmp')
+                    temporary.write_text(bounded, encoding='utf-8')
+                    temporary.replace(output)
+                raster = render_svg_to_numpy_inprocess(bounded, w, h,
                     fitz_module=fitz, np_module=np, cv2_module=cv2)
                 if raster is not None and raster.shape == self.target.shape:
                     self.best_error = float(np.square(self.target-raster[:, :, ::-1].astype(np.float32)).mean())
-                    self.best_rank = self.rank(output.read_text(encoding='utf-8'), raster[:, :, ::-1])
+                    self.best_rank = self.rank(bounded, raster[:, :, ::-1])
             except (OSError, ValueError, TypeError):
                 pass
 
@@ -179,6 +186,8 @@ class PreviewPublisher:
                 node.tag.rsplit('}', 1)[-1] in {'image', 'foreignObject', 'script'}
                 for node in root.iter()):
             return
+        from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+        svg = contain_svg(svg, self.target.shape[1], self.target.shape[0])
         # Keep every rendered native attempt, including worse/duplicate/blank
         # search seeds. Best-result selection below remains independent.
         rank = self.rank(svg, pixels)

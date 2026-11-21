@@ -862,6 +862,7 @@ def convertOneImpl(
     spatial_quality_score = float("inf")
     current_svg_mae = float("inf")
     optimizer_best_error = float(best_error)
+    canvas_fitted = False
     if img is not None:
         height, width = img.shape[:2]
         pixel_count = float(max(1, width * height))
@@ -872,6 +873,12 @@ def convertOneImpl(
             except OSError:
                 svg_content = ""
             if svg_content:
+                from src.iCCModules.imageCompositeConverterCanvas import contain_svg, within_canvas
+                canvas_fitted = not within_canvas(svg_content, width, height)
+                bounded = contain_svg(svg_content, width, height)
+                if bounded != svg_content:
+                    Path(svg_path).write_text(bounded, encoding='utf-8')
+                    svg_content = bounded
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
                 # Fits use several different objectives. Retain the original
@@ -905,7 +912,7 @@ def convertOneImpl(
         actual_iterations = int(details.get("actual_iterations", iteration_budget))
     except (TypeError, ValueError):
         actual_iterations = int(iteration_budget)
-    replaced_svg = restored_previous_svg or bool((params.get("vector_continuation") or {}).get("improved"))
+    replaced_svg = canvas_fitted or restored_previous_svg or bool((params.get("vector_continuation") or {}).get("improved"))
     if replaced_svg:
         best_error = current_svg_mae
     row = {

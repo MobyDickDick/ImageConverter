@@ -825,6 +825,17 @@ def render_svg_to_numpy_inprocess(
     if re.search(r"(?<![A-Za-z])(nan|inf)(?![A-Za-z])", svg_string, flags=re.IGNORECASE):
         return None
 
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+    try:
+        # size_w/size_h may be a supersampled render, not the source canvas.
+        # Constrain intrinsic SVG coordinates before choosing raster resolution.
+        svg_string = contain_svg(svg_string)
+    except (ValueError, ET.ParseError):
+        try:
+            svg_string = contain_svg(svg_string, size_w, size_h)
+        except (ValueError, ET.ParseError):
+            return None
+
     renderer_svg = inline_simple_svg_styles(svg_string)
     renderer_svg = normalize_dashed_rectangles(renderer_svg)
     renderer_svg = normalize_dashed_lines(renderer_svg)

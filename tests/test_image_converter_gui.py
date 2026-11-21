@@ -286,6 +286,24 @@ def test_rejects_corrupt_unsupported_and_oversized_inputs(jobs, monkeypatch):
     assert jobs.jobs == {}
 
 
+@pytest.mark.parametrize('animated', [False, True])
+def test_gif_upload_uses_first_frame_and_white_transparency(jobs, animated):
+    buffer = io.BytesIO()
+    first = Image.new('RGBA', (32, 24), (0, 0, 0, 0))
+    first.paste((255, 0, 0, 255), (8, 6, 24, 18))
+    first.save(buffer, 'GIF', save_all=animated,
+               append_images=[Image.new('RGBA', first.size, 'blue')] if animated else [])
+    job = jobs.upload('catalog.gif', buffer.getvalue())
+    assert job['name'] == 'catalog.gif'
+    assert job['status'] == 'ready'
+    with Image.open(jobs.folder(job['id'])/'source.png') as image:
+        assert image.format == 'PNG'
+        assert image.mode == 'RGB'
+        assert image.size == first.size
+        assert image.getpixel((0, 0)) == (255, 255, 255)
+        assert image.getpixel((16, 12)) == (255, 0, 0)
+
+
 def test_exif_orientation_is_applied(jobs):
     buffer = io.BytesIO()
     image = Image.new("RGB", (12, 8), "blue")

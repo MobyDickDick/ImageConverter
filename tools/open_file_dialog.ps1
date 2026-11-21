@@ -7,7 +7,7 @@ $owner = New-Object System.Windows.Forms.Form
 try {
     if ($env:ICC_GUI_PICKER_KIND -eq 'image') {
         $dialog.Title = 'Rasterbild auswählen'
-        $dialog.Filter = 'Rasterbilder (*.png;*.jpg;*.jpeg;*.bmp;*.webp;*.tif;*.tiff)|*.png;*.jpg;*.jpeg;*.bmp;*.webp;*.tif;*.tiff'
+        $dialog.Filter = 'Rasterbilder (*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp;*.tif;*.tiff)|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp;*.tif;*.tiff'
     } else {
         $dialog.Title = if ($env:ICC_GUI_PICKER_KIND -eq 'sample') { 'Sample-SVG auswählen' } else { 'Plan-B-Referenz auswählen' }
         $dialog.Filter = 'SVG-Vektorgrafik (*.svg)|*.svg'

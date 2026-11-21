@@ -83,6 +83,22 @@ def validated_result(result, image):
     session = current_search()
     if session is None:
         return False
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg, within_canvas
+    original = result['svg']
+    height, width = image.shape[:2]
+    result['svg'] = contain_svg(original, width, height)
+    if not within_canvas(original, width, height):
+        # Most model renderers already enforce the boundary. Recheck an
+        # adjusted model before binding a validation proof to the saved bytes.
+        import cv2
+        import fitz
+        import numpy as np
+        from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+        raster = render_svg_to_numpy_inprocess(result['svg'], width, height,
+            fitz_module=fitz, np_module=np, cv2_module=cv2)
+        if raster is None:
+            return False
+        result['rendered'] = raster
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
     validate_svg_assertions(result['svg'], getattr(session, 'description_assertions', None))
     quality = pixel_quality(image,result['rendered'])

@@ -194,6 +194,7 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
     from src.imageConverterGui import catalog_descriptions, search_summary
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
 
     output.parent.mkdir(parents=True, exist_ok=True)
     folder = Path(tempfile.mkdtemp(prefix='description-fit-', dir=output.parent))
@@ -250,7 +251,7 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
              for path in (folder/'output'/name).glob('*.svg')]
     for path in paths:
         try:
-            svg = path.read_text(encoding='utf-8')
+            svg = contain_svg(path.read_text(encoding='utf-8'), w, h)
             validate_svg_assertions(svg, assertions)
             pixels = render_svg(svg, w, h)
             quality = pixel_quality(target, pixels)
@@ -284,6 +285,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     from src.iCCModules.imageCompositeConverterSimilarity import resolve_catalog_similarity_description
     from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width
+    from src.iCCModules.imageCompositeConverterCanvas import contain_svg
 
     config = settings()
     effective_seed = (config['seed'] if config else 0) if seed is None else seed
@@ -295,13 +297,14 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         target = np.asarray(image.convert("RGB"))
     height, width = target.shape[:2]
     root = ET.fromstring(prepare_sample(sample.read_bytes(), width, height))
-    prepared = ET.tostring(root, encoding="unicode")
+    prepared = contain_svg(ET.tostring(root, encoding="unicode"), width, height)
+    root = ET.fromstring(prepared)
     assertions = description_assertions(description)
     rendered = render_svg(prepared, width, height)
     initial_rendered = rendered.copy()
     initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     initial_quality = pixel_quality(target, rendered)
-    constrained = constrain_stroke_width(prepared, assertions)
+    constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
     try:
         validate_svg_assertions(constrained, assertions)
     except ValueError as exc:
@@ -330,6 +333,7 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         alignment = fitted['transform']
         print(f"Sample gemeinsam ausgerichtet: Prüfungen={evaluations}, "
               f"Pixelfehler={best_mse:.8f}", flush=True)
+    final_svg = contain_svg(final_svg, width, height)
     quality = pixel_quality(target, rendered)
     description_error = ""
     try:

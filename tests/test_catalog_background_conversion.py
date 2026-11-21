@@ -146,6 +146,25 @@ def test_internal_color_comparison_does_not_abort_background_service(service):
     assert result['history'][0]['status'] == 'done'
 
 
+def test_gif_at_head_of_worklist_converts_and_other_images_continue(service):
+    manager, rows, _ = service
+    item = rows[1]
+    path = (manager.catalog.root/item['image']).with_suffix('.gif')
+    Image.new('RGB', (40, 40), 'white').save(path)
+    item.update(filename=path.name, image=path.relative_to(manager.catalog.root).as_posix(),
+                image_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    assert manager.snapshot()['next']['filename'] == 'AA0011.gif'
+    manager.start()
+    manager.thread.join(5)
+    result = manager.snapshot()
+    assert result['status'] == 'done', result
+    assert result['completed'] == 9
+    assert result['history'][0]['filename'] == 'AA0011.gif'
+    assert result['history'][0]['status'] == 'done'
+    assert all(item['status'] == 'pixel_pass' for item in rows[:3])
+    assert manager.catalog.conversion_owner is None
+
+
 def test_invalid_reference_is_recorded_once_and_other_images_continue(service):
     manager, rows, _ = service
     rows[1]['description'] = 'Form ähnlich wie MISSING.'
