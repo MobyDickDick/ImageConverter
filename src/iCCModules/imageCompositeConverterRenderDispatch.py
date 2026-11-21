@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import OrderedDict
 import re
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, tracked_renderer
 
 _RENDER_CACHE_MAX_ENTRIES = 512
 _RENDER_CACHE: OrderedDict[tuple[bool, int, int, str], object] = OrderedDict()
@@ -25,6 +26,7 @@ def _is_small_simple_svg(svg_string: str, size_w: int, size_h: int) -> bool:
     ) is None
 
 
+@tracked_renderer
 def renderSvgToNumpyImpl(
     svg_string: str,
     size_w: int,
@@ -42,7 +44,9 @@ def renderSvgToNumpyImpl(
 ):
     """Render an SVG with optional isolated subprocess fallback semantics."""
     cache_key = (bool(svg_render_subprocess_enabled), int(size_w), int(size_h), svg_string)
-    cached = _RENDER_CACHE.get(cache_key)
+    # Configured searches own their image-local cache and actual render count.
+    # A previous image's process cache must not disguise work as a new render.
+    cached = _RENDER_CACHE.get(cache_key) if current_search() is None else None
     if cached is not None:
         _RENDER_CACHE.move_to_end(cache_key)
         return cached.copy() if hasattr(cached, "copy") else cached

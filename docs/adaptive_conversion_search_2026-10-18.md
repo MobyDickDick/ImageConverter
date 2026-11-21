@@ -103,10 +103,11 @@ Gespeicherte Bestresultate und Qualitätsgrenzen bleiben erhalten.
 .venv/Scripts/python.exe -m src.imageCompositeConverter EINGABE --descriptions-path BESCHREIBUNGEN.xml --output-dir AUSGABE --start ERSTES --end LETZTES --search-policy adaptive --search-seconds 60 --search-max-seconds 120 --search-budget 384 --search-seed 42
 ```
 
-`--search-budget` bezeichnet im adaptiven Modus die Basis **zusätzlicher**
-Vorschläge pro Modell. Ursprüngliche Koordinatenregistrierung und Prüfungen
-kommen hinzu. Bei spätem Fortschritt können bis zu vier Basisbudgets genutzt
-werden; ohne Fortschritt endet die Suche früher. Die drei vorhandenen
+Seit SEARCH-ROUTES-01 bezeichnet `--search-budget` die gemeinsame harte Grenze
+tatsächlicher Renderkandidaten je Bild, einschließlich Koordinatenregistrierung,
+Initialisierung und Prüfungen. CLI-Standard: 4.096; das Beispiel setzt die
+kleinere Gesamtgrenze 384. Lokale Kontingente dürfen bei Fortschritt wachsen,
+aber diese gemeinsame Grenze nicht überschreiten. Die drei vorhandenen
 Suchverfahren erhalten abwechselnd kleine Abschnitte. Neue gekoppelte
 Vorschläge sind über einen einzigen festen Durchlauf hinaus möglich;
 identische Parameter werden nicht mehrfach geprüft.
@@ -115,9 +116,9 @@ identische Parameter werden nicht mehrfach geprüft.
 `proposal_budget_extended`, `search_finished`, `candidate_satisfactory` und
 `image_search_finished`. Die Ergebniszeilen enthalten `search_control` mit
 verbrauchter aktiver Zeit, Grenzen, Verlängerungen und Abbruchgrund.
-`candidate_evaluations` zählt die vermessenen Optimierungskandidaten;
-Schrift-Initialisierung und zusätzliche semantische Prüf-Renderings sind darin
-nicht als Parameterkandidaten enthalten. Die Registrierung berichtet ihre
+`candidate_evaluations` und `renderings` zählen nun auch Schrift-Initialisierung
+und semantische Prüf-Renderings. Cachetreffer zählen nicht erneut. Frühere
+lokale Modellzähler stehen separat unter `model_evaluations`. Die Registrierung berichtet ihre
 Renderaufrufe gesondert.
 
 **Die Zeitsteuerung ist kooperativ.** Sie ist an `_register`, die zusätzliche

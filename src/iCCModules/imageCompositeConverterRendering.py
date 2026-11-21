@@ -15,6 +15,7 @@ import time
 import xml.etree.ElementTree as ET
 
 from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import tracked_renderer
 from src.iCCModules.imageCompositeConverterDashedRectangles import normalize_dashed_rectangles, normalize_dashed_lines
 
 _INPROCESS_RENDER_COUNT = 0
@@ -809,6 +810,7 @@ def _expand_centered_radial_gradients_for_fitz(svg_string: str) -> str:
     return ET.tostring(root, encoding='unicode') if changed else svg_string
 
 
+@tracked_renderer
 def render_svg_to_numpy_inprocess(
     svg_string: str,
     size_w: int,
@@ -891,6 +893,7 @@ def render_svg_to_numpy_inprocess(
     return None
 
 
+@tracked_renderer
 def render_svg_to_numpy_via_subprocess(
     svg_string: str,
     size_w: int,

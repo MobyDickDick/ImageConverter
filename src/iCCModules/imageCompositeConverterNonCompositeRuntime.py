@@ -1403,6 +1403,10 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract, fit_two_way_valve
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+    session = current_search()
+    if session is not None:
+        session.bind_reference(perc_img)
     if two_way_valve_contract(description):
         # This first description fit has a closed, declared inventory. Keep it
         # separate from the removed post-fit raster reconstruction path.
@@ -1747,7 +1751,7 @@ def runNonCompositeIterationImpl(
                             description_geometry_ir = optimizer_result["geometry_ir"]
                             description_rendered = optimizer_result["rendered"]
                             description_error = float(optimizer_result["final_error"])
-                            geometry_ir_svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(
+                            geometry_ir_svg = optimizer_result.get('svg') or geometry_ir_helpers.renderGeometryIrToSvgImpl(
                                 width, height, description_geometry_ir
                             )
                             params["optimized_geometry_ir"] = description_geometry_ir

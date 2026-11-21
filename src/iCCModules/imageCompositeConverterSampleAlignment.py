@@ -19,11 +19,19 @@ def lightened_sample_details(*args,**kwargs):
 
 
 def align_sample(root, target, render_fn, *, deadline, initial, assertions=None, seed=0):
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import standalone_image_search
+    with standalone_image_search('template_alignment', seconds=max(.001, deadline-time.monotonic()), seed=seed) as session:
+        session.bind_reference(target)
+        return _align_sample(root, target, render_fn, deadline=deadline, initial=initial, assertions=assertions,
+                             seed=session.search_seed)
+
+
+def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None, seed=0):
     from PIL import ImageColor
     from src.imageConverterSample import NUMBER, SVG_NS
     from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width, width_bindings
     from src.iCCModules.imageCompositeConverterSearchPortfolio import proposal_rng
-    from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, SearchPolicy, pixel_quality
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
 
     height, width = target.shape[:2]
@@ -33,9 +41,7 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None,
     weights = 1 + 4*(np.max(abs(reference-background), axis=2) > 25)
     nodes = list(root.iter())
     rng = proposal_rng('sample_alignment', ET.tostring(root,encoding='unicode'), seed=seed)
-    remaining = max(.001,deadline-time.monotonic())
-    audit = ImageSearch(SearchPolicy(seconds=remaining,max_seconds=remaining))
-    audit.search_seed = seed
+    audit = current_search()
     paints = {}
     for index, node in enumerate(nodes):
         for attribute in ('fill', 'stroke', 'stop-color'):
@@ -123,7 +129,7 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None,
 
     def consider(p):
         nonlocal parameters, best, mse, pixels, svg, evaluations, accepted, rejected
-        if time.monotonic() >= deadline or not valid(p):
+        if time.monotonic() >= deadline or audit.reason() or not valid(p):
             return False
         key = tuple(p)
         if key in cache:
@@ -139,6 +145,7 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None,
         if raster is None:
             return False
         loss, error = measure(raster)
+        audit.measured(candidate, error, source='template_alignment', scope='full_scene', valid=True)
         cache[key] = loss
         if loss < best-1e-10 and error <= mse+1e-12:
             parameters, best, mse, pixels, svg = p.copy(), loss, error, raster, candidate
@@ -251,9 +258,8 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None,
     return dict(svg=svg, rendered=pixels, error=mse, weighted_error=best,
                 evaluations=evaluations, accepted=accepted,
                 search_control=dict(seed=str(seed),restarts=restarts,rejected_candidates=rejected,
-                    candidate_evaluations=evaluations,scope='whole_assembly',
-                    render_sequence_sha256=audit.report()['render_sequence_sha256'],
+                    **audit.report(),scope='whole_assembly',
                     stop_reason=('quality_target_reached' if pixel_quality(target,pixels)['passed'] else
-                                 'time_limit' if time.monotonic()>=deadline else 'schedule_exhausted')),
+                                 audit.reason() or ('time_limit' if time.monotonic()>=deadline else 'schedule_exhausted'))),
                 transform=dict(translate_x=float(parameters[0]), translate_y=float(parameters[1]),
                                scale_x=float(parameters[2]/100), scale_y=float(parameters[3]/100)))

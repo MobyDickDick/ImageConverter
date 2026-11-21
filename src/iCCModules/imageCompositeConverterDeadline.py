@@ -162,6 +162,8 @@ def conversion_worker(connection, payload):
     app.SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = payload['render_timeout']
     config = payload['config']
     session = pickle.loads(payload['session'])
+    session.search_seed = config['seed']
+    session.render_budget = config['budget']
     session.spent += max(0., time.monotonic()-payload['started'])
     session.active_since = None
     session.on_progress = lambda error: connection.send(('progress', (time.monotonic(), error)))
@@ -201,7 +203,11 @@ def conversion_worker(connection, payload):
     with app._optionalLogCapture(str(log_path)), portfolio.search_configuration(**settings):
         identity = os.path.abspath(os.path.join(spec['folder_path'], spec['filename']))
         portfolio.settings()['images'][identity] = session
-        session.emit = lambda **values: portfolio.progress(identity, **values)
+        def emit_search(**values):
+            portfolio.progress(identity, **values)
+            if values.get('event') in {'candidate_rendered', 'candidate_skipped'}:
+                connection.send(('search_snapshot', session.report()))
+        session.emit = emit_search
         # Also supervise legacy/fixed searches; their optimizers need no hooks.
         if not portfolio.settings()['adaptive']:
             session.on_validated = None
@@ -298,7 +304,8 @@ class ImageDeadline:
                 for key in ('spent', 'limit', 'last_progress', 'best_error', 'progress_anchor', 'extensions'):
                     setattr(child_session, key, getattr(self.session, key))
                 child_session.active_since = None
-                payload = dict(spec=staged, stage=str(stage), config=config, action=action,
+                worker_config = {key: value for key, value in config.items() if key not in {'images', 'journal'}}
+                payload = dict(spec=staged, stage=str(stage), config=worker_config, action=action,
                                session=pickle.dumps(child_session), started=started,
                                render_isolated=render_isolated, render_timeout=render_timeout,
                                source_file_hash=current_hash)
@@ -334,6 +341,11 @@ class ImageDeadline:
                                     self.session.observe(error, evaluation=False)
                                     if self.session.last_progress is not None:
                                         self.session.last_progress = self.session.spent+max(0., sent-started)
+                            elif event == 'search_snapshot':
+                                for name in ('renderings', 'render_budget', 'render_failures', 'render_cache_hits',
+                                             'render_sequence_sha256', 'search_seed'):
+                                    if name in value:
+                                        setattr(self.session, name, value[name])
                             elif event == 'reference_read_blocked':
                                 blocked_reads.append(value)
                             elif event == 'checkpoint' and not self._reason():
@@ -379,7 +391,10 @@ class ImageDeadline:
                     self.best_row = None
                     self.closed = True
                     return self._expired(spec, 'source_changed')
-                self.session.evaluations = completed['session'].evaluations
+                for name in ('evaluations', 'renderings', 'render_budget', 'render_failures',
+                             'render_cache_hits', 'render_sequence_sha256', 'search_seed',
+                             'stop_reason', 'validated'):
+                    setattr(self.session, name, getattr(completed['session'], name))
                 self.state = pickle.dumps(completed['session'])
                 row, failed = completed['result']
                 # Completed unsupported inputs may have no result row. Preserve

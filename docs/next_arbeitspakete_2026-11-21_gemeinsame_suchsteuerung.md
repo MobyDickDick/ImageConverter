@@ -1,8 +1,9 @@
 # Arbeitspakete für eine gemeinsame Suchsteuerung
 
 Stand: 21. November 2026. Die drei folgenden Umbauten erweitern die Korrektur der
-wiederholten roten Rechtecke auf die übrigen produktiven Suchfamilien. Ihre
-Umsetzung ist offen. Bereits korrigierte Seed-Verbindungen und die erweiterte
+wiederholten roten Rechtecke auf die übrigen produktiven Suchfamilien. Der
+gemeinsame Kontext ist mit AP 1 umgesetzt; AP 2 und AP 3 sind offen.
+Bereits korrigierte Seed-Verbindungen und die erweiterte
 Vorlagenausrichtung sind im
 [Untersuchungsbericht](../artifacts/evaluation/search_routes_2026-11-21/README.md)
 getrennt dokumentiert.
@@ -20,7 +21,9 @@ abgestimmt, damit nicht zwei voneinander unabhängige Suchbudgets entstehen.
 
 ## AP 1 · Gemeinsame Suchsteuerung
 
-**Kennung:** SEARCH-ROUTES-01. **Status:** Offen.
+**Kennung:** SEARCH-ROUTES-01. **Status:** Umgesetzt am 21.11.2026; Infrastruktur und repräsentative Einstiege abgenommen. Die modellspezifische Migration bleibt AP 3.
+
+[Umsetzung, frische Worker-/CLI-/Workbench-Belege und Prüfgrenzen](../artifacts/evaluation/shared_search_context_2026-11-21/README.md).
 
 Ein Suchkontext pro Bild führt den vollständigen 64-Bit-Seed, die ursprüngliche
 Deadline, das Renderbudget, den Kandidatenspeicher und das Versuchsprotokoll.
@@ -106,7 +109,7 @@ Beschreibung bestimmt weiterhin die vollständige erlaubte Elementliste.
 
 ## Nachführung
 
-Die drei offenen Kennungen stehen auch in der [Aufgabenliste](open_tasks.md).
+Die Kennungen und der nächste Schritt SEARCH-ROUTES-02 stehen auch in der [Aufgabenliste](open_tasks.md).
 Bei Umsetzung werden dort und hier Status und Prüfbelege aktualisiert.
 Der Untersuchungsbericht bleibt der Nachweis des Ausgangsbefunds; neue Abnahmen
 werden als neue Prüfstände ergänzt.

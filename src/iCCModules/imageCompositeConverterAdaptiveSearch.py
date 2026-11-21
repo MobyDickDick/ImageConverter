@@ -8,12 +8,15 @@ from __future__ import annotations
 from contextlib import contextmanager
 from contextvars import ContextVar
 from collections import OrderedDict
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
+from functools import wraps
 import hashlib
 import math
 import time
 
 _SESSION = ContextVar('adaptive_conversion_search', default=None)
+_RENDERING = ContextVar('conversion_render_in_progress', default=False)
+_SCOPE = ContextVar('conversion_candidate_scope', default=('intermediate', 'model'))
 
 
 @dataclass(frozen=True)
@@ -34,7 +37,11 @@ class SearchPolicy:
 
 
 class ImageSearch:
-    def __init__(self, policy, *, clock=None, emit=None):
+    def __init__(self, policy, *, clock=None, emit=None, seed=None, render_budget=10000):
+        if type(render_budget) is not int or render_budget < 1:
+            raise ValueError('Positive image render budget required')
+        if seed is not None and (type(seed) is not int or not 0 <= seed < 2**64):
+            raise ValueError('Seed must be an unsigned 64-bit integer')
         self.policy = policy
         self.clock = clock or time.monotonic
         self.emit = emit or (lambda **values: None)
@@ -58,7 +65,15 @@ class ImageSearch:
         self.render_memo = OrderedDict()
         self.render_memo_bytes = 0
         self.render_cache_hits = 0
-        self.search_seed = None
+        self.search_seed = seed
+        self.render_budget = render_budget
+        self.renderings = 0
+        self.render_failures = 0
+        self.stop_reason = None
+        self.reference_identity = None
+        self.attempts = []
+        self.candidates = OrderedDict()
+        self.objectives = {}
         self.render_sequence_sha256 = '00'*32
         self.finish_model_searches = False
         self.on_progress = None
@@ -74,6 +89,46 @@ class ImageSearch:
         self.clock = time.monotonic
         self.emit = lambda **values: None
         self.on_progress = self.on_validated = None
+
+    def handoff(self, *, deadline):
+        """JSON-only transport for the optional-template -> CLI process boundary."""
+        import base64
+        return dict(schema='image_search_context_v1', policy=asdict(self.policy),
+            spent=self.elapsed, transferred_at=time.monotonic(), deadline=deadline, limit=self.limit,
+            seed=self.search_seed, render_budget=self.render_budget, renderings=self.renderings,
+            render_failures=self.render_failures, render_cache_hits=self.render_cache_hits,
+            render_sequence_sha256=self.render_sequence_sha256,
+            candidates=[(key, value) for key, value in self.candidates.items()],
+            rasters=[(key, None if value is None else
+                (value[0], base64.b64encode(value[1]).decode('ascii'))) for key, value in self.render_memo.items()])
+
+    @classmethod
+    def from_handoff(cls, state, *, emit=None):
+        import base64
+        if state.get('schema') != 'image_search_context_v1':
+            raise ValueError('Invalid search context handoff')
+        policy = state['policy'].copy()
+        spent = float(state['spent'])+max(0., time.monotonic()-state['transferred_at'])
+        cap = max(.001, spent+max(0., state['deadline']-time.monotonic()))
+        policy['max_seconds'] = min(policy['max_seconds'], cap)
+        policy['seconds'] = min(policy['seconds'], policy['max_seconds'])
+        policy['minimum_seconds'] = min(policy['minimum_seconds'], policy['seconds'])
+        session = cls(SearchPolicy(**policy), seed=state['seed'], render_budget=state['render_budget'], emit=emit)
+        if (type(state['renderings']) is not int or not 0 <= state['renderings'] <= session.render_budget
+                or not math.isfinite(spent) or spent < 0
+                or not isinstance(state['render_sequence_sha256'], str)
+                or len(bytes.fromhex(state['render_sequence_sha256'])) != 32):
+            raise ValueError('Invalid search context counters')
+        session.spent, session.limit = spent, min(state['limit'], session.policy.max_seconds)
+        for key in ('renderings', 'render_failures', 'render_cache_hits', 'render_sequence_sha256'):
+            setattr(session, key, state[key])
+        session.candidates = OrderedDict((tuple(key), value) for key, value in state['candidates'])
+        for key, value in state['rasters']:
+            entry = None if value is None else (tuple(value[0]), base64.b64decode(value[1]))
+            session.render_memo[tuple(key)] = entry
+            if entry:
+                session.render_memo_bytes += len(entry[1])
+        return session
 
     @property
     def elapsed(self):
@@ -121,12 +176,60 @@ class ImageSearch:
         return 'time_limit'
 
     def validate(self, result, image):
+        scope, _ = _SCOPE.get()
+        if scope != 'full_scene' or not self.is_reference(image):
+            return False
         self.validated.add((svg_identity(result['svg']),raster_identity(image)))
+        return True
+
+    def bind_reference(self, image):
+        identity = raster_identity(image)
+        if self.reference_identity is not None and self.reference_identity != identity:
+            raise ValueError('A search context belongs to one source image')
+        self.reference_identity = identity
+
+    def is_reference(self, image):
+        return self.reference_identity == raster_identity(image)
+
+    def reason(self):
+        reason = self.time_reason()
+        if reason is None and self.renderings >= self.render_budget:
+            reason = 'render_limit'
+        if reason:
+            self.stop_reason = reason
+        return reason
+
+    def record(self, **values):
+        record = dict(scope=_SCOPE.get()[0], candidate_source=_SCOPE.get()[1])
+        record.update(values)
+        # Bound in-memory evidence; the live journal retains every event.
+        if len(self.attempts) < max(1024, self.render_budget*4):
+            self.attempts.append(record)
+        self.emit(**record)
+
+    def measured(self, svg, error, *, source, scope='intermediate', valid=False, passed=False):
+        """Keep objectives separate: a masked loss cannot advance scene quality."""
+        if not math.isfinite(error):
+            return
+        key = (source, scope)
+        previous = self.objectives.get(key, math.inf)
+        self.objectives[key] = min(previous, error)
+        identity = candidate_identity(svg)
+        self.candidates[(identity, source, scope)] = dict(svg=svg, error=error,
+            valid=valid, passed=bool(passed and valid and scope == 'full_scene'))
+        while len(self.candidates) > 256:
+            self.candidates.popitem(last=False)
+        if scope == 'full_scene' and valid:
+            self.observe(error, evaluation=False)
+        self.record(event='candidate_measured', candidate=identity, objective=source,
+            scope=scope, candidate_source=source,
+            validation_scope=scope, error=error, improved=error < previous,
+            valid=valid, passed=bool(passed and valid and scope == 'full_scene'))
 
     def output_reason(self, error, *, satisfactory):
         if satisfactory:
             return 'satisfactory'
-        reason = self.time_reason()
+        reason = self.reason()
         if reason:
             return reason
         old = self.previous_output_error
@@ -139,12 +242,16 @@ class ImageSearch:
     def report(self):
         return dict(elapsed_seconds=round(self.elapsed,6),limit_seconds=self.limit,
             minimum_seconds=self.policy.minimum_seconds,
-            max_seconds=self.policy.max_seconds,time_extensions=self.extensions,candidate_evaluations=self.evaluations,
+            max_seconds=self.policy.max_seconds,time_extensions=self.extensions,candidate_evaluations=self.renderings,
+            model_evaluations=self.evaluations,
             render_cache_hits=self.render_cache_hits,
+            renderings=self.renderings, render_budget=self.render_budget,
+            render_failures=self.render_failures, global_stop_reason=self.stop_reason,
+            full_scene_validations=len(self.validated),
             search_seed=str(self.search_seed) if self.search_seed is not None else None,
             render_sequence_sha256=self.render_sequence_sha256)
 
-    def render_candidate(self, image, svg, render_fn, width, height):
+    def render_candidate(self, image, svg, render_fn, width, height, *, renderer=None):
         """Image-local render evidence survives model and structure re-entry.
 
         Compress pixels instead of retaining hundreds of full-size rasters.
@@ -154,20 +261,44 @@ class ImageSearch:
         """
         import numpy as np
         import zlib
-        key = (raster_identity(image), candidate_identity(svg))
+        renderer = renderer or getattr(render_fn, 'search_renderer',
+            render_fn.__module__+'.'+getattr(render_fn, '__qualname__', type(render_fn).__name__))
+        key = (str(renderer), int(width), int(height), candidate_identity(svg))
         if key in self.render_memo:
             self.render_cache_hits += 1
             self.render_memo.move_to_end(key)
+            self.record(event='candidate_cache_hit', candidate=key[-1], renderer=renderer,
+                        width=int(width), height=int(height))
             entry = self.render_memo[key]
             if entry is None:
                 return None, False
             shape, payload = entry
             return np.frombuffer(zlib.decompress(payload), dtype=np.uint8).reshape(shape).copy(), False
+        reason = self.reason()
+        if reason:
+            self.record(event='candidate_skipped', candidate=key[-1], reason=reason)
+            return None, False
         # Hash actual render requests, never the seed itself. This distinguishes
         # real exploration from changing metadata on identical proposals.
         self.render_sequence_sha256 = hashlib.sha256(bytes.fromhex(self.render_sequence_sha256)
-            +bytes.fromhex(key[0])+bytes.fromhex(key[1])).hexdigest()
-        raster = render_fn(svg, width, height)
+            +repr(key).encode()).hexdigest()
+        self.renderings += 1
+        began = self.clock()
+        token = _RENDERING.set(True)
+        try:
+            raster = render_fn(svg, width, height)
+        except Exception:
+            self.render_failures += 1
+            self.record(event='candidate_rendered', candidate=key[-1], renderer=renderer,
+                rendering=self.renderings, seconds=max(0., self.clock()-began), status='error')
+            raise
+        finally:
+            _RENDERING.reset(token)
+        if raster is None:
+            self.render_failures += 1
+        self.record(event='candidate_rendered', candidate=key[-1], renderer=renderer,
+            width=int(width), height=int(height), rendering=self.renderings,
+            seconds=max(0., self.clock()-began), status='rendered' if raster is not None else 'failed')
         if raster is None:
             entry, size = None, 0
         else:
@@ -210,7 +341,7 @@ class SearchRun:
             self.last_progress = self.proposals
 
     def reason(self, *, alternatives_tried):
-        reason = self.session.time_reason()
+        reason = self.session.reason()
         if reason:
             return reason
         if self.session.finish_model_searches:
@@ -337,6 +468,37 @@ def vector_candidate_quality(reference, output, svg):
 
 def current_search():
     return _SESSION.get()
+
+
+@contextmanager
+def candidate_scope(scope, source='model'):
+    if scope not in {'intermediate', 'full_scene'}:
+        raise ValueError('Unknown candidate scope')
+    token = _SCOPE.set((scope, source))
+    try:
+        yield
+    finally:
+        _SCOPE.reset(token)
+
+
+def tracked_renderer(function):
+    """Track the outermost renderer, including custom fitters and masked stages.
+
+    Nested private adapters are one request; color-space/backend names and
+    dimensions separate caches. Cached pixels never carry a validation proof.
+    """
+    namespace = function.__module__+'.'+function.__qualname__
+    @wraps(function)
+    def render(svg, width, height, *args, **kwargs):
+        session = current_search()
+        if session is None or _RENDERING.get():
+            return function(svg, width, height, *args, **kwargs)
+        pixels, _ = session.render_candidate(None, svg,
+            lambda s, w, h: function(s, w, h, *args, **kwargs), width, height,
+            renderer=namespace)
+        return pixels
+    render.search_renderer = namespace
+    return render
 
 
 @contextmanager

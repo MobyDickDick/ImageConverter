@@ -1,5 +1,14 @@
 # ImageConverter
 
+Die gemeinsame Suchsteuerung **SEARCH-ROUTES-01** ist umgesetzt: Bildseed,
+Deadline, tatsächliche Renderzahl und Rastercache bleiben über Modellwechsel,
+Worker und Vorlagenneustart erhalten. Zwischenprüfungen bestätigen keinen
+Gesamterfolg. `--search-budget` begrenzt jetzt alle Renderkandidaten je Bild;
+der CLI-Standard beträgt 4.096 statt bisher 384 zusätzlichen Vorschlägen je
+Modell. [Abnahme, Belege und verbleibende Grenzen](artifacts/evaluation/shared_search_context_2026-11-21/README.md).
+Als nächstes folgt SEARCH-ROUTES-02: nach schlechten Entwürfen weitere passende
+Modelle prüfen. Den Webserver nach Abschluss laufender Aufträge neu starten.
+
 `AC0201_S_sia.jpg` wird mit unveränderter Beschreibung wieder erfolgreich
 konvertiert. Die bestehende Zweiwegventil-Auswertung unterstützt jetzt auch
 den quadratischen Motor samt beiden Diagonalen, Griff und verbundenen
@@ -14,7 +23,7 @@ Registrierungen ohne Portfolio und die Vorlagenausrichtung sind korrigiert.
 Vorlagen protokollieren echte Renderfolgen und prüfen zusätzliche zulässige
 Platzierungen. Der Bericht beschreibt die noch nötigen Adapter für eine
 vollständige Umstellung; sämtliche Suchpfade sind damit noch nicht migriert.
-Die weitere Umsetzung ist in [drei offenen Arbeitspaketen mit Abnahmekriterien](docs/next_arbeitspakete_2026-11-21_gemeinsame_suchsteuerung.md)
+Die weitere Umsetzung ist in [zwei offenen Folgepaketen mit Abnahmekriterien](docs/next_arbeitspakete_2026-11-21_gemeinsame_suchsteuerung.md)
 und in der Aufgabenliste dokumentiert.
 
 Die allgemeine Beschreibungsanpassung untersucht jetzt mehrere vom Seed

@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import time
 import xml.etree.ElementTree as ET
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import tracked_renderer
 
 SVG_NS = "http://www.w3.org/2000/svg"
 MAX_SAMPLE_BYTES = 2 * 1024 * 1024
@@ -155,6 +156,7 @@ def adjusted(value, kind, index, delta, attribute):
     return value[:match.start()] + f"{number:.5f}".rstrip("0").rstrip(".") + value[match.end():]
 
 
+@tracked_renderer
 def render_svg(svg, width, height):
     import fitz
     import numpy as np
@@ -216,12 +218,20 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
         description_error='', message='Die Vorlage passt nicht zur Beschreibung. '
         'Auch die neue Konvertierung aus der Beschreibung hat noch kein passendes SVG ergeben.')
     print('Vorlage verworfen: '+template_error+'. Starte neue Konvertierung aus der Bildbeschreibung.', flush=True)
+    import hashlib
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+    session = current_search()
+    state = session.handoff(deadline=hard_deadline)
+    state['source_sha256'] = hashlib.sha256(source.read_bytes()).hexdigest()
+    handoff_path = folder/'search-context.json'
+    atomic_json(handoff_path, state)
     command = [sys.executable, '-u', '-m', 'src.imageCompositeConverter', str(inputs.resolve()),
         '--descriptions-path', str(table.resolve()), '--output-dir', str((folder/'output').resolve()),
         '--start', 'UPLOAD', '--end', 'UPLOAD', '--execution-mode', 'semantic-only',
         '--no-isolate-conversion', '--search-seconds', str(max(.01, remaining)),
         '--search-max-seconds', str(max(.01, remaining)), '--search-min-seconds', '0',
         '--search-seed', str(seed), '--fail-on-batch-failures',
+        '--search-budget', str(session.render_budget), '--search-context', str(handoff_path.resolve()),
         '--log-file', str((folder/'converter.log').resolve())]
     environment = dict(os.environ, PYTHONIOENCODING='utf-8', ICC_MAX_QUALITY_PASSES='0',
         IMAGE_CONVERTER_ISOLATE_SVG_RENDER='0', IMAGE_CONVERTER_REUSE_RENDER_WORKER='0',
@@ -239,9 +249,20 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
     else:
         report['stop_reason'] = 'time_limit'
     summary = search_summary(folder/'output')
+    completed_context = Path(str(handoff_path)+'.completed.json')
+    if completed_context.is_file():
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch
+        returned = ImageSearch.from_handoff(json.loads(completed_context.read_text(encoding='utf-8')))
+        for name in ('renderings', 'render_failures', 'render_cache_hits', 'render_sequence_sha256',
+                     'render_memo', 'render_memo_bytes', 'candidates'):
+            setattr(session, name, getattr(returned, name))
     if summary:
         report['description_search_summary'] = summary
         report['evaluations'] = summary['candidate_evaluations']
+        # The child journal includes the inherited prefix, not another budget.
+        session.renderings = summary.get('renderings', session.renderings)
+        session.render_cache_hits = summary.get('render_cache_hits', session.render_cache_hits)
+        session.render_sequence_sha256 = summary.get('render_sequence_sha256', session.render_sequence_sha256)
     assertions = description_assertions(description)
     with Image.open(source) as image:
         target = np.asarray(image.convert('RGB'))
@@ -253,7 +274,19 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
         try:
             svg = contain_svg(path.read_text(encoding='utf-8'), w, h)
             validate_svg_assertions(svg, assertions)
-            pixels = render_svg(svg, w, h)
+            # Reuse the exact child render, including when its final proposal
+            # spent the remaining budget. The CLI cache uses BGR pixels.
+            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity
+            renderer = 'src.imageCompositeConverter.Action.renderSvgToNumpy'
+            key = (renderer, w, h, candidate_identity(svg))
+            if key in session.render_memo:
+                import cv2
+                bgr, _ = session.render_candidate(target, svg, lambda *a: None, w, h, renderer=renderer)
+                pixels = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB) if bgr is not None else None
+            else:
+                pixels = render_svg(svg, w, h)
+            if pixels is None:
+                continue
             quality = pixel_quality(target, pixels)
             error = float(np.square(target.astype(float)-pixels.astype(float)).mean()/255**2)
             passed = bool(quality['passed'] and report.get('description_fit_returncode') == 0
@@ -265,7 +298,7 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
         failed, error, svg, quality = min(candidates, key=lambda item: item[:2])
         atomic_svg(output, svg)
         report.update(result=True, passed=not failed, final_mse=error, final_quality=quality,
-            improved=error < initial_mse-1e-10, stop_reason='description_fit_complete',
+            improved=initial_mse is not None and error < initial_mse-1e-10, stop_reason='description_fit_complete',
             message='Unpassende Vorlage verworfen; SVG neu aus der Bildbeschreibung erstellt.')
     report['elapsed'] = round(time.monotonic()-started, 2)
     atomic_json(output.with_suffix('.json'), report)
@@ -274,6 +307,18 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
 
 
 def refine(source: Path, sample: Path, output: Path, description: str, seconds: float, *, seed=None, deadline=None) -> dict:
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import standalone_image_search
+    with standalone_image_search(str(source.resolve()), seconds=seconds, seed=seed,
+                                 directory=output.parent/'search') as session:
+        report = _refine(source, sample, output, description, seconds, seed=seed, deadline=deadline)
+        report['search_context'] = session.report()
+        report['evaluations'] = session.renderings
+        from src.imageConverterCatalog import atomic_json
+        atomic_json(output.with_suffix('.json'), report)
+        return report
+
+
+def _refine(source: Path, sample: Path, output: Path, description: str, seconds: float, *, seed=None, deadline=None) -> dict:
     started = time.monotonic()
     hard_deadline = started+seconds
     if deadline is not None:
@@ -295,15 +340,13 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
 
     with Image.open(source) as image:
         target = np.asarray(image.convert("RGB"))
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+    current_search().bind_reference(target)
     height, width = target.shape[:2]
     root = ET.fromstring(prepare_sample(sample.read_bytes(), width, height))
     prepared = contain_svg(ET.tostring(root, encoding="unicode"), width, height)
     root = ET.fromstring(prepared)
     assertions = description_assertions(description)
-    rendered = render_svg(prepared, width, height)
-    initial_rendered = rendered.copy()
-    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
-    initial_quality = pixel_quality(target, rendered)
     constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
     try:
         validate_svg_assertions(constrained, assertions)
@@ -311,11 +354,21 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         # A stale current SVG is optional input, never a prerequisite for
         # conversion. Reject the template, not the user's conversion request.
         return refit_description(source, output, description, seed=effective_seed,
-            hard_deadline=hard_deadline, initial_mse=initial_mse, initial_quality=initial_quality,
+            hard_deadline=hard_deadline, initial_mse=None, initial_quality=None,
             template_error=str(exc), started=started)
+    rendered = render_svg(prepared, width, height)
+    if rendered is None:
+        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
+                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
+    initial_rendered = rendered.copy()
+    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
+    initial_quality = pixel_quality(target, rendered)
     if constrained != prepared:
         root = ET.fromstring(constrained)
         rendered = render_svg(constrained, width, height)
+        if rendered is None:
+            return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
+                        description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
     accepted_input = bool(pixel_quality(target, rendered)['passed'])
     final_svg = constrained
     best_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
@@ -324,9 +377,9 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
     print(f"Sample geladen: mittlerer Pixelfehler={initial_mse:.8f}", flush=True)
     if not accepted_input:
         from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
-        # Reserve the remaining budget for changing the construction when
-        # whole-assembly alignment cannot explain the source.
-        fitted = align_sample(root, target, render_svg, deadline=min(hard_deadline, started+min(5., seconds*.25)), initial=rendered,
+        # Description-only conversion has no second raster reconstruction.
+        # Alignment uses the original image deadline, including initial work.
+        fitted = align_sample(root, target, render_svg, deadline=hard_deadline, initial=rendered,
                               assertions=assertions,seed=effective_seed)
         final_svg, rendered, best_mse = fitted['svg'], fitted['rendered'], fitted['error']
         evaluations += fitted['evaluations']
@@ -342,6 +395,13 @@ def refine(source: Path, sample: Path, output: Path, description: str, seconds: 
         validate_svg_assertions(final_svg, assertions)
     except ValueError as exc:
         description_error = str(exc)
+    active = current_search()
+    active.measured(final_svg, float(quality['normalized_mse']), source='template_final',
+                    scope='full_scene', valid=not description_error, passed=quality['passed'])
+    if quality['passed'] and not description_error:
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope
+        with candidate_scope('full_scene', 'template_final'):
+            active.validate(dict(svg=final_svg), target)
     from src.imageConverterRecovery import atomic_svg
     from src.imageConverterCatalog import atomic_json
     output.parent.mkdir(parents=True, exist_ok=True)

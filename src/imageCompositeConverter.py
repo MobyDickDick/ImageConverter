@@ -25,6 +25,7 @@ from pathlib import Path
 import importlib
 import struct
 import statistics
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import tracked_renderer
 _DEFAULT_RANGE_START_REF = "AR" + "0102"
 _DEFAULT_RANGE_END_REF = "AR" + "0104"
 
@@ -1318,6 +1319,7 @@ class Action:
         )
 
     @staticmethod
+    @tracked_renderer
     def renderSvgToNumpy(
         svg_string: str,
         size_w: int,

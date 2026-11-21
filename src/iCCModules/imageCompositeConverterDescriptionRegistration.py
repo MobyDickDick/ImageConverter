@@ -28,7 +28,8 @@ def register_description_ir(geometry_ir, *, image, description, svg_fn, render_f
     assertions = description_assertions(description)
     session, config = current_search(), settings()
     budget = max_evaluations if max_evaluations is not None else (config or {}).get('budget', 384)
-    effective_seed = seed if seed is not None else (config or {}).get('seed', 0)
+    effective_seed = seed if seed is not None else (session.search_seed if session and session.search_seed is not None
+                                                  else (config or {}).get('seed', 0))
     rng = proposal_rng('description_ir_registration', geometry_ir, seed=effective_seed)
     cache = {}
     evaluations, rejections, cache_hits, restarts, accepted = 0, 0, 0, 0, 0
@@ -41,8 +42,8 @@ def register_description_ir(geometry_ir, *, image, description, svg_fn, render_f
         if evaluations >= budget:
             stop_reason = 'proposal_limit'
             return True
-        if session and session.time_reason():
-            stop_reason = 'time_limit'
+        if session and session.reason():
+            stop_reason = session.reason()
             return True
         return False
 
@@ -90,7 +91,10 @@ def register_description_ir(geometry_ir, *, image, description, svg_fn, render_f
         if initial_error is None:
             initial_error = error
         if session:
-            session.observe(score, evaluation=fresh)
+            session.evaluations += int(fresh)
+            session.measured(svg, float(quality['normalized_mse']), source='description_registration',
+                scope='full_scene' if session.is_reference(image) else 'intermediate', valid=True,
+                passed=quality['passed'])
         if best is None or rank < best['rank']:
             best, accepted = result, accepted+1
         return result

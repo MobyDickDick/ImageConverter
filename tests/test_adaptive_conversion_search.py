@@ -223,7 +223,10 @@ def test_validation_proof_is_bound_to_source_pixels_and_exact_selected_svg():
     session=ImageSearch(SearchPolicy())
     image=np.zeros((3,3,3),dtype=np.uint8)
     result={'svg':'<svg/>'}
-    session.validate(result,image)
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope
+    session.bind_reference(image)
+    with candidate_scope('full_scene'):
+        session.validate(result,image)
     assert (svg_identity(result['svg']),raster_identity(image)) in session.validated
     image[0,0]=255
     assert (svg_identity(result['svg']),raster_identity(image)) not in session.validated
@@ -254,6 +257,7 @@ def test_adaptive_short_label_stops_after_a_checked_model():
     description='Eine einfarbige Kreisscheibe mit dunkler Randkontur. Serifenlose Beschriftung "AB". Keine Anschlüsse.'
     with search_configuration(mode='portfolio',adaptive=True,seed=13):
         with configured_image_search('label') as session:
+            session.bind_reference(image)
             result=fit_short_label_disk(64,64,description=description,image=image,render_fn=render,
                 error_fn=lambda a,b:float(np.mean((a.astype(float)-b)**2)))
             assert session.validated

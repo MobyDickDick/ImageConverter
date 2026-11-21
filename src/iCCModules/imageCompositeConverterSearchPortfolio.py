@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from contextvars import ContextVar
+from functools import wraps
 import hashlib
 import json
 import math
@@ -26,7 +27,8 @@ _SETTINGS = ContextVar('conversion_search_settings', default=None)
 @contextmanager
 def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, allow_memory=False,
                          adaptive=False, seconds=60., max_seconds=120., isolate=False,
-                         disabled_bots=(), component_observation=True, neural_model=None, minimum_seconds=0.):
+                         disabled_bots=(), component_observation=True, neural_model=None, minimum_seconds=0.,
+                         handoff=None):
     if mode not in {'legacy', 'portfolio'} or not 32 <= budget <= 10000:
         raise ValueError('Search mode or render budget is invalid')
     policy = SearchPolicy(seconds=seconds,max_seconds=max_seconds,minimum_seconds=min(minimum_seconds,seconds))
@@ -34,17 +36,22 @@ def search_configuration(*, mode='legacy', seed=0, budget=384, directory=None, a
     registry(disabled_bots)
     if disabled_bots and (mode != 'portfolio' or not adaptive):
         raise ValueError('Bot switches require the adaptive portfolio')
-    token = _SETTINGS.set(dict(mode=mode, seed=int(seed), budget=int(budget),
+    if type(seed) is not int or not 0 <= seed < 2**64:
+        raise ValueError('Seed must be an unsigned 64-bit integer')
+    config = dict(mode=mode, seed=seed, budget=int(budget),
                                directory=Path(directory) if directory else None,
                                allow_memory=allow_memory,adaptive=adaptive and mode=='portfolio',
                                policy=policy,images={},isolate=isolate,
                                disabled_bots=tuple(sorted(set(disabled_bots))),
                                component_observation=bool(component_observation),
                                neural_model=str(Path(neural_model).resolve()) if neural_model else None,
-                               neural_observations=[]))
+                               neural_observations=[], handoff=handoff)
+    token = _SETTINGS.set(config)
     try:
         yield
     finally:
+        if config.get('journal'):
+            config['journal'].close()
         _SETTINGS.reset(token)
 
 
@@ -60,28 +67,105 @@ def proposal_rng(context, identity, *, seed=None):
     """
     config = settings()
     if seed is None:
-        if not config:
+        session = current_search()
+        if session is not None and session.search_seed is not None:
+            seed = session.search_seed
+        elif config:
+            seed = config['seed']
+        else:
             return None
-        seed = config['seed']
     digest = hashlib.sha256(json.dumps([int(seed), context, identity],
         ensure_ascii=False, separators=(',', ':')).encode('utf-8')).digest()
     return random.Random(int.from_bytes(digest, 'big'))
 
 
+@contextmanager
 def configured_image_search(identity):
     config = settings()
-    if not config or not config['adaptive']:
-        return image_search(None)
-    session = config['images'].setdefault(str(identity),ImageSearch(config['policy'],
+    if not config:
+        with image_search(current_search()) as session:
+            yield session
+        return
+    session = config['images'].get(str(identity))
+    if session is None and config.get('handoff'):
+        state = json.loads(Path(config['handoff']).read_text(encoding='utf-8'))
+        if hashlib.sha256(Path(identity).read_bytes()).hexdigest() != state['source_sha256']:
+            raise ValueError('Search context source changed')
+        if config['seed'] != state['seed'] or config['budget'] != state['render_budget']:
+            raise ValueError('Search context settings changed')
+        session = ImageSearch.from_handoff(state, emit=lambda **values: progress(str(identity), **values))
+        config['return_handoff'] = Path(str(config['handoff'])+'.completed.json')
+        config['handoff'] = None
+    session = config['images'].setdefault(str(identity),session or ImageSearch(config['policy'],
+        seed=config['seed'], render_budget=config['budget'],
         emit=lambda **values: progress(str(identity),**values)))
     session.search_seed = config['seed']
-    return image_search(session)
+    if current_search() is session:
+        yield session
+        return
+    with image_search(session):
+        failed = False
+        try:
+            yield session
+        except BaseException:
+            failed = True
+            raise
+        finally:
+            session.record(event='image_search_context_finished', satisfactory=bool(session.validated),
+                stop_reason=('satisfactory' if session.validated else session.reason()
+                             or ('execution_error' if failed else 'models_exhausted')), **session.report())
+            if config.get('return_handoff'):
+                from src.imageConverterCatalog import atomic_json
+                atomic_json(config['return_handoff'], session.handoff(
+                    deadline=time.monotonic()+max(0., session.policy.max_seconds-session.elapsed)))
 
 
-def validated_result(result, image):
+def conversion_search_context(function):
+    """Include result rechecks and PNG export in the original image budget."""
+    @wraps(function)
+    def convert(*args, **kwargs):
+        import os
+        identity = os.path.abspath(os.path.join(kwargs['folder_path'], kwargs['filename']))
+        with configured_image_search(identity) as session:
+            result = function(*args, **kwargs)
+            if session is not None and result and isinstance(result[0], dict):
+                row = result[0]
+                row['search_control'] = dict(row.get('search_control', {}), **session.report())
+                row.setdefault('params', {})['adaptive_search'] = row['search_control']
+            return result
+    return convert
+
+
+@contextmanager
+def standalone_image_search(identity, *, seconds, seed=None, directory=None, render_budget=384):
+    """Public template/component workers share an existing context when nested."""
+    active = current_search()
+    if active is not None:
+        yield active
+        return
+    config = settings()
+    if config is not None:
+        with configured_image_search(identity) as session:
+            yield session
+        return
+    with search_configuration(mode='portfolio', adaptive=True, seed=0 if seed is None else seed,
+            budget=render_budget, seconds=max(.001, seconds), max_seconds=max(.001, seconds),
+            directory=directory):
+        with configured_image_search(identity) as session:
+            yield session
+
+
+def validated_result(result, image, *, scope='full_scene'):
     """Call only after the model's full semantic checks have accepted its SVG."""
     session = current_search()
     if session is None:
+        return False
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope
+    # Public entry points bind the unmodified source before any subfit. A
+    # masked/copied stage cannot certify the full conversion, even at zero loss.
+    if scope != 'full_scene' or not session.is_reference(image):
+        session.measured(result['svg'], result.get('error', 0.), source=result.get('source', 'model'),
+                         scope='intermediate')
         return False
     from src.iCCModules.imageCompositeConverterCanvas import contain_svg, within_canvas
     original = result['svg']
@@ -102,11 +186,15 @@ def validated_result(result, image):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
     validate_svg_assertions(result['svg'], getattr(session, 'description_assertions', None))
     quality = pixel_quality(image,result['rendered'])
+    if quality:
+        session.measured(result['svg'], float(quality['normalized_mse']),
+            source=result.get('source', 'model'), scope='full_scene', valid=True, passed=quality['passed'])
     if not quality or not quality['passed']:
         return False
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import svg_identity,raster_identity
     if (svg_identity(result['svg']),raster_identity(image)) not in session.validated:
-        session.validate(result,image)
+        with candidate_scope('full_scene', result.get('source', 'model')):
+            session.validate(result,image)
         if session.on_validated:
             session.on_validated(result, image, quality)
         progress(result.get('source','model'),event='candidate_satisfactory',**session.report())
@@ -115,14 +203,16 @@ def validated_result(result, image):
 
 def progress(source, **values):
     config = settings()
-    if not config or config['mode'] != 'portfolio':
+    if not config:
         return
     record = dict(source=source, **values)
-    print('[Search] '+json.dumps(record, ensure_ascii=False, allow_nan=False), flush=True)
+    if config['mode'] == 'portfolio' and not values.get('event', '').startswith('candidate_'):
+        print('[Search] '+json.dumps(record, ensure_ascii=False, allow_nan=False), flush=True)
     if config['directory']:
         config['directory'].mkdir(parents=True, exist_ok=True)
-        with (config['directory']/'progress.jsonl').open('a', encoding='utf-8') as handle:
-            handle.write(json.dumps(record, ensure_ascii=False, allow_nan=False)+'\n')
+        if not config.get('journal'):
+            config['journal'] = (config['directory']/'progress.jsonl').open('a', encoding='utf-8', buffering=1)
+        config['journal'].write(json.dumps(record, ensure_ascii=False, allow_nan=False)+'\n')
 
 
 def _read_memory(directory):

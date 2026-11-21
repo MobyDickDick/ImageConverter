@@ -105,10 +105,14 @@ python -m src.imageCompositeConverter EINGABE --descriptions-path BESCHREIBUNGEN
 Ohne expliziten Seed wird pro Aufruf ein neuer erzeugt. `--deterministic-order`
 allein fixiert nur die Dateireihenfolge; für die neue Suche zusätzlich
 `--search-seed` angeben. Zeitabhängige Abbrüche können je nach Rechner und Last
-an anderer Stelle eintreten. Das Vorschlagsbudget gilt je Modell: im festen
-Modus als Grenze, im adaptiven Modus als Basis mit höchstens vierfacher
-Verlängerung bei spätem Fortschritt. Identische SVGs werden innerhalb eines Fits aus
-einem Rendercache bewertet. `[Search]` und `AUSGABE/search/progress.jsonl`
+an anderer Stelle eintreten. Seit SEARCH-ROUTES-01 gilt `--search-budget` als
+gemeinsame harte Rendergrenze je Bild einschließlich Initialisierung,
+Zwischenprüfungen und Export; der CLI-Standard beträgt 4.096. Das Beispiel
+setzt ausdrücklich die kleinere Gesamtgrenze 384. Lokale Modellkontingente und
+deren Verlängerungen bleiben dieser Grenze untergeordnet. Modellwechsel und
+Vorlagenneustart erhalten Seed, Restzeit und inhaltsgebundenen Rastercache.
+`intermediate`-Prüfungen bestätigen keinen vollständigen Erfolg.
+`[Search]` und `AUSGABE/search/progress.jsonl`
 zeigen Suchweg, Vorschläge, tatsächliche Renderprüfungen und Fehlerwerte.
 
 Unterschiedliche Seeds können zum gleichen besten SVG führen. Sichtbare Abweichung

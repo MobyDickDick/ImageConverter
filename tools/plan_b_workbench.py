@@ -89,9 +89,9 @@ def prepare(svg: str, description: str, folder: Path, *, seed: int | None = None
     if not isinstance(description, str) or not 1 <= len(description.strip()) <= 12000:
         raise ValueError('Bitte eine eigenständige Bildbeschreibung mit 1 bis 12\'000 Zeichen eingeben.')
     if seed is None:
-        seed = secrets.randbits(63)
-    if type(seed) is not int or not 0 <= seed < 2**63:
-        raise ValueError('Der Seed muss eine ganze Zahl zwischen 0 und 2^63−1 sein.')
+        seed = secrets.randbits(64)
+    if type(seed) is not int or not 0 <= seed < 2**64:
+        raise ValueError('Der Seed muss eine ganze Zahl zwischen 0 und 2^64−1 sein.')
     # Validate resources before opening the SVG in a renderer. Retain the exact
     # uploaded bytes as evidence; prepare_sample is used only for validation.
     inspect_svg(svg)

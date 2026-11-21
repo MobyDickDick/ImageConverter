@@ -94,7 +94,7 @@ def test_tight_ac0022_source_keeps_all_transformed_viewports_inside_canvas(tmp_p
     (SVG.replace('<circle ', '<script/><circle '), DESCRIPTION, 42),
     (SVG.replace('<circle ', '<image href="https://example.org/x.png"/><circle '), DESCRIPTION, 42),
     (SVG.replace('width="80" height="80"', 'width="100000" height="80"', 1), DESCRIPTION, 42),
-    (SVG, '', 42), (SVG, DESCRIPTION, -1), (SVG, DESCRIPTION, 2**63),
+    (SVG, '', 42), (SVG, DESCRIPTION, -1), (SVG, DESCRIPTION, 2**64),
 ])
 def test_rejects_unsafe_or_unbounded_inputs_before_creating_a_run(tmp_path, svg, description, seed):
     folder = tmp_path / 'bad'

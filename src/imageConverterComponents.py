@@ -6,19 +6,47 @@ import json
 from pathlib import Path
 
 
-def convert(source, output, description, seconds):
+def convert(source, output, description, seconds, *, seed=0):
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import standalone_image_search
+    with standalone_image_search(str(source.resolve()), seconds=seconds, seed=seed,
+                                 directory=output.parent/'search') as session:
+        try:
+            report = _convert(source, output, description, seconds)
+        except ValueError as exc:
+            if not session.reason():
+                raise
+            report = dict(passed=False, result=False, stop_reason=session.reason(), message=str(exc))
+        report['search_context'] = session.report()
+        report['evaluations'] = session.renderings
+        from src.imageConverterCatalog import atomic_json
+        atomic_json(output.with_suffix('.json'), report)
+        return report
+
+
+def _convert(source, output, description, seconds):
     import numpy as np
     from PIL import Image
-    from src.imageConverterSample import render_svg
     from src.imageConverterRecovery import atomic_svg
     from src.imageConverterCatalog import atomic_json
-    from src.iCCModules.imageCompositeConverterSvgComponents import compose_components
+    from src.iCCModules.imageCompositeConverterSvgComponents import compose_components, render_components
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import vector_candidate_quality
     with Image.open(source) as image:
         target = np.asarray(image.convert('RGB'))
     svg, references, evaluations = compose_components(description, target, seconds=seconds)
     height, width = target.shape[:2]
-    quality = vector_candidate_quality(target, render_svg(svg, width, height), svg)
+    # Composition already uses the faithful RGB component renderer. Reuse its
+    # measured candidate instead of routing the same raster through BGR/RGB.
+    pixels = render_components(svg, width, height)
+    if pixels is None:
+        raise ValueError('Das Bildbudget endete vor der vollständigen Bauteilprüfung.')
+    quality = vector_candidate_quality(target, pixels, svg)
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope, current_search
+    session = current_search()
+    session.measured(svg, float(quality['normalized_mse']), source='component_final',
+                     scope='full_scene', valid=True, passed=quality['passed'])
+    if quality['passed']:
+        with candidate_scope('full_scene', 'component_final'):
+            session.validate(dict(svg=svg), target)
     report = dict(passed=bool(quality['passed']), improved=False, evaluations=evaluations,
                   stop_reason='svg_components_composed', components=references,
                   final_quality=quality, description_error='')
@@ -37,11 +65,12 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--description', type=Path, required=True)
     parser.add_argument('--seconds', type=float, default=30.)
+    parser.add_argument('--seed', type=int, default=0)
     args = parser.parse_args()
     if not 0 < args.seconds <= 240:
         parser.error('--seconds muss zwischen 0 und 240 liegen')
     try:
-        convert(args.source, args.output, args.description.read_text(encoding='utf-8'), args.seconds)
+        convert(args.source, args.output, args.description.read_text(encoding='utf-8'), args.seconds, seed=args.seed)
     except (OSError, ValueError, SyntaxError) as exc:
         from src.imageConverterCatalog import atomic_json
         args.output.parent.mkdir(parents=True, exist_ok=True)

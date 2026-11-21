@@ -106,6 +106,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         if rendered_new and evaluations % 64 == 0 and np.isfinite(error):
             progress(source, event='registering', evaluations=evaluations, current_error=error)
         measured = (loss, error, svg, raster) if np.isfinite(error) and np.isfinite(loss) else None
+        if session and measured is not None:
+            session.measured(svg, error, source=source)
         if reconsider_after and measured is not None:
             gain = max(1e-9, abs(progress_error)*.01) if np.isfinite(progress_error) else 0.
             if error < progress_error-gain:
@@ -120,8 +122,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         return measured
 
     parameters = np.asarray(parameters, dtype=float)
-    if session and session.time_reason():
-        progress(source,event='registration_skipped',stop_reason='time_limit')
+    if session and session.reason():
+        progress(source,event='registration_skipped',stop_reason=session.reason())
         return None
     best = measure(parameters)
     if best is None:
@@ -140,8 +142,6 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     if rng is not None:
         rng.shuffle(coordinate_order)
         rng.shuffle(signs)
-    if session and best[1] <= initial_error+1e-9:
-        session.observe(best[1],evaluation=False)
     satisfactory_cache = {}
     semantic_incumbent = None
 
@@ -168,7 +168,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     if eager_satisfactory and satisfactory(parameters, best):
         stop_reason = 'satisfactory'
     for candidate in (() if stop_reason else initial_candidates):
-        if session and session.time_reason():
+        if session and session.reason():
+            stop_reason = session.reason()
             break
         candidate = np.asarray(candidate, dtype=float)
         measured = measure(candidate)
@@ -177,8 +178,6 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
             parameters, best = candidate, measured
             if best[1] <= initial_error+1e-9:
                 accepted = (parameters.copy(), best)
-                if session:
-                    session.observe(best[1], evaluation=False)
         yield best[0] if best[1] <= initial_error+1e-9 else None
         if checked:
             stop_reason = 'satisfactory'
@@ -201,7 +200,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                         stop_reason = 'render_limit'
                         break
                     if session:
-                        stop_reason = session.time_reason() or reconsider()
+                        stop_reason = session.reason() or reconsider()
                         if not stop_reason and session.finish_model_searches and not session.minimum_pending:
                             stop_reason = 'candidate_comparison'
                         if stop_reason:
@@ -214,8 +213,6 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
                         parameters, best, improved = candidate, measured, True
                         if best[1] <= initial_error+1e-9:
                             accepted = (parameters.copy(), best)
-                            if session:
-                                session.observe(best[1],evaluation=False)
                         if checked:
                             stop_reason = 'satisfactory'
                     yield best[0] if best[1] <= initial_error+1e-9 else None
@@ -237,7 +234,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         if quality is None or not quality['passed'] or (session and session.minimum_pending
                 and (not preferred_quality(quality) or needs_semantics)):
             rendered_before_search = evaluations
-            if session:
+            if session and settings().get('adaptive'):
                 from src.iCCModules.imageCompositeConverterSearchBots import explore_bots_steps
                 parameters, best, search = yield from explore_bots_steps(
                     parameters, geometry_count, measure, best, source=source, image=image,

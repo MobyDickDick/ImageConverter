@@ -12,6 +12,7 @@ from pathlib import Path
 import re
 import time
 from xml.etree import ElementTree as ET
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import tracked_renderer
 
 ROOT = Path(__file__).resolve().parents[2]
 NS = 'http://www.w3.org/2000/svg'
@@ -175,28 +176,43 @@ def _canonical(node):
 
 
 def _render_rgba(svg, width, height):
+    from PIL import Image
+    pixels = _render_rgba_pixels(svg, width, height)
+    if pixels is None:
+        from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+        raise ValueError('SVG-Bauteilsuche beendet: '+str(current_search().reason()))
+    return Image.fromarray(pixels)
+
+
+@tracked_renderer
+def _render_rgba_pixels(svg, width, height):
     """Retain alpha for measuring the donor's clipped, painted footprint."""
     import io
     import os
     import shutil
     import subprocess
     from PIL import Image
+    import numpy as np
     executable = shutil.which('rsvg-convert')
     if not executable and Path('C:/msys64/ucrt64/bin/rsvg-convert.exe').is_file():
         executable = 'C:/msys64/ucrt64/bin/rsvg-convert.exe'
     if not executable:
         raise ValueError('SVG-Bauteile benötigen den vorhandenen SVG-Renderer rsvg-convert.')
     options = {'creationflags': subprocess.CREATE_NO_WINDOW} if os.name == 'nt' else {}
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
+    session = current_search()
+    timeout = min(10., max(.001, session.limit-session.elapsed)) if session else 10.
     try:
         result = subprocess.run([executable, '--format', 'png', '--width', str(width),
                                  '--height', str(height), '-'], input=svg.encode('utf-8'),
-                                capture_output=True, timeout=10, check=True, **options)
+                                capture_output=True, timeout=timeout, check=True, **options)
     except (OSError, subprocess.SubprocessError) as exc:
         raise ValueError('Das zusammengesetzte SVG konnte nicht gerendert werden.') from exc
     with Image.open(io.BytesIO(result.stdout)) as image:
-        return image.convert('RGBA')
+        return np.asarray(image.convert('RGBA'))
 
 
+@tracked_renderer
 def render_components(svg, width, height):
     """Use the clip/gradient-aware renderer for composed donor viewports."""
     import numpy as np
@@ -381,6 +397,13 @@ def locate_component(component, target, deadline):
 
 
 def compose_components(description, target, *, seconds=30., root=None):
+    from src.iCCModules.imageCompositeConverterSearchPortfolio import standalone_image_search
+    with standalone_image_search('svg_components', seconds=seconds) as session:
+        session.bind_reference(target)
+        return _compose_components(description, target, seconds=seconds, root=root)
+
+
+def _compose_components(description, target, *, seconds=30., root=None):
     import hashlib
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import vector_candidate_quality, vector_quality_score
     root = ROOT if root is None else root

@@ -16,6 +16,7 @@ from contextlib import contextmanager
 from src.iCCModules.imageCompositeConverterValidationRounds import (
     clampBadgeValidationRoundsImpl,
 )
+from src.iCCModules.imageCompositeConverterSearchPortfolio import conversion_search_context
 
 _ONE_BY_ONE_TRANSPARENT_PNG = (
     b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01"
@@ -439,6 +440,7 @@ def _emitVariantDebugDump(
         print_fn(f"[WARN] {variant_name}: Debug-Dump konnte nicht geschrieben werden ({type(exc).__name__}: {exc})")
 
 
+@conversion_search_context
 def convertOneImpl(
     *,
     filename: str,
@@ -506,6 +508,10 @@ def convertOneImpl(
     try:
         from src.iCCModules.imageCompositeConverterSearchPortfolio import configured_image_search
         with configured_image_search(os.path.abspath(image_path)) as search_session, _wallClockTimeout(run_timeout_sec):
+            if search_session is not None:
+                source_pixels = cv2_module.imread(image_path)
+                if source_pixels is not None:
+                    search_session.bind_reference(source_pixels)
             from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
             config = settings()
             if config and config.get('neural_model'):
@@ -524,6 +530,8 @@ def convertOneImpl(
                 debug_element_diff_dir,
                 badge_validation_rounds=effective_badge_rounds,
             )
+            if search_session is not None:
+                search_session.record(event='image_search_work_finished', **search_session.report())
     except Exception as exc:  # noqa: BLE001 - keeps batch execution resilient per image.
         from src.iCCModules.imageCompositeConverterDescriptionLanguage import DescriptionRejected
         rejected_description = isinstance(exc, DescriptionRejected)

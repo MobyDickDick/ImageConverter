@@ -565,6 +565,7 @@ class Jobs:
                            '--source', str(folder / 'source.png'),
                            '--output', str(output / 'refined.svg'),
                            '--description', str(description_file),
+                           '--seed', str(job['search_seed']),
                            '--seconds', str(max(0.01, deadline-time.monotonic()-1))]
             elif job.get("sample") and job.get('use_current_svg',True):
                 description_file = folder / "description.txt"
@@ -989,7 +990,7 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         if not report.get('search_goal_reached'):
             message += ' Das strengere Suchziel wurde noch nicht erreicht.'
     job.update(status="done", result=True, quality="passed" if report["passed"] else "warning",
-               message=message, sample_report=report, pixel_quality=quality,
+               message=message, sample_report=report, pixel_quality=quality, description_error=report['description_error'],
                description_validation_version=DESCRIPTION_VALIDATION_VERSION)
 
 
@@ -1114,10 +1115,12 @@ def search_summary(output: Path) -> dict | None:
         for line in stream:
             try:
                 event = json.loads(line)
-                if event.get('event') == 'image_search_finished':
+                if event.get('event') in {'image_search_finished', 'image_search_context_finished'}:
                     result = {key: event.get(key) for key in
                               ('candidate_evaluations', 'stop_reason', 'satisfactory',
-                               'elapsed_seconds', 'minimum_seconds', 'limit_seconds')}
+                               'elapsed_seconds', 'minimum_seconds', 'limit_seconds',
+                               'renderings', 'render_budget', 'render_cache_hits',
+                               'render_sequence_sha256', 'search_seed', 'global_stop_reason')}
             except (ValueError, AttributeError):
                 continue
     return result if result and isinstance(result['candidate_evaluations'], int) else None
@@ -1208,7 +1211,7 @@ class Workbench:
                 seed = payload.get('seed')
                 if isinstance(seed, str):
                     if not re.fullmatch(r'[0-9]{1,19}', seed):
-                        raise ValueError('Bitte einen ganzzahligen Seed zwischen 0 und 2^63−1 eingeben.')
+                        raise ValueError('Bitte einen ganzzahligen Seed zwischen 0 und 2^64−1 eingeben.')
                     seed = int(seed)
                 prepare(payload.get('svg', ''), payload.get('description', ''), self.directory / run_id,
                         seed=seed, name=payload.get('name', 'Motiv.svg'))

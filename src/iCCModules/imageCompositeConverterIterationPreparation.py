@@ -30,6 +30,7 @@ def prepareIterationInputsImpl(
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
     session = current_search()
     if session is not None:
+        session.bind_reference(perception.img)
         session.description_assertions = params.get('language_assertions', {})
     stripe_strategy = detect_gradient_stripe_strategy_fn(
         perception.img,

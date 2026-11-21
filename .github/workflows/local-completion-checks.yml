@@ -10,6 +10,34 @@ on:
   workflow_dispatch:
 
 jobs:
+  shared-search-context:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify shared render budget, scopes, seed replay and handoffs
+        run: >-
+          python -m pytest -q
+          tests/test_unified_search_context.py tests/test_search_route_contracts.py
+          tests/test_sample_alignment.py tests/test_search_portfolio.py
+          tests/test_form_model_comparison.py tests/test_adaptive_conversion_search.py
+          tests/test_description_registration_search.py tests/test_seed_search_effect.py
+          tests/test_image_converter_sample.py tests/test_svg_components.py
+          tests/test_sample_start_regression.py
+      - name: Exercise GUI workers, CLI batch, components and Workbench Plan B
+        run: python -m tools.evaluate_shared_search_context --output .tmp/shared-search-context-ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shared-search-context
+          path: .tmp/shared-search-context-ci/
+          retention-days: 7
+
   fallback-structure:
     runs-on: ubuntu-latest
     timeout-minutes: 12

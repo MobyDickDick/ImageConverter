@@ -40,7 +40,7 @@ def compare_form_models(models, *, image, render_fn, error_fn, validate_fn,
     turn = 0
 
     def expired():
-        return session is not None and session.time_reason() is not None
+        return session is not None and session.reason() is not None
 
     def rank(result, quality):
         return (bool(quality['passed']), -result['error'])
@@ -102,6 +102,9 @@ def compare_form_models(models, *, image, render_fn, error_fn, validate_fn,
             raster = render_fn(svg, width, height)
             rasters[key] = raster
             return raster
+
+        counted.search_renderer = getattr(render_fn, 'search_renderer',
+            render_fn.__module__+'.'+render_fn.__qualname__)
 
         return _register_steps(model['parameters'], model['geometry_count'],
             model['build'], model['valid'], image, counted, error_fn, source+'_'+name,
@@ -198,7 +201,7 @@ def compare_form_models(models, *, image, render_fn, error_fn, validate_fn,
             job.close()
     if stop != 'satisfactory':
         if expired():
-            stop = 'time_limit'
+            stop = session.reason()
         elif rendered >= render_budget:
             stop = 'render_limit'
     report = dict(attempts=attempts, selected_model=best['model'] if best else None,

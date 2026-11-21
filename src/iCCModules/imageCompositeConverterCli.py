@@ -81,8 +81,8 @@ def parseArgsImpl(
                         help='portfolio: bei schlechtem Fit verschiedene Suchwege mit Zwischenständen prüfen')
     parser.add_argument('--search-seed', type=int, default=int(os.environ['ICC_SEARCH_SEED']) if 'ICC_SEARCH_SEED' in os.environ else None,
                         help='Seed für wiederholbare alternative Suchwege')
-    parser.add_argument('--search-budget', type=int, default=384,
-                        help='Basis zusätzlicher Prüfungen je Modell (32..10000); adaptiv bei spätem Fortschritt bis zum Vierfachen')
+    parser.add_argument('--search-budget', type=int, default=4096,
+                        help='Gemeinsame Obergrenze tatsächlicher Renderkandidaten je Bild (32..10000), einschließlich Zwischenstufen')
     from src.iCCModules.imageCompositeConverterComponents import BOT_NAMES
     parser.add_argument('--disable-search-bot', action='append', default=[], choices=BOT_NAMES,
                         help='Komponentenvergleich: Bot in der adaptiven Parametersuche abschalten; wiederholbar')
@@ -263,6 +263,7 @@ def parseArgsImpl(
         ),
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument('--search-context', type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if not 32 <= args.search_budget <= 10000:
         parser.error('--search-budget muss zwischen 32 und 10000 liegen')
@@ -591,6 +592,7 @@ def runMainImpl(
         disabled_bots=getattr(args,'disable_search_bot', ()),
         component_observation=getattr(args,'component_observation', True),
         neural_model=getattr(args, 'neural_elements_model', None),
+        handoff=getattr(args, 'search_context', None),
     ):
         try:
             if args.ac08_regression_set:
