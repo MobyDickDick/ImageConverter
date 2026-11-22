@@ -151,7 +151,8 @@ class Reflection:
         # A scene inventory must reach the multi-instance fitters before a
         # single-circle badge heuristic consumes its first shape noun.
         objects = assertions.get('objects', {})
-        if (sum(objects.values()) > 1 and set(objects) <= {'circle', 'rect', 'square'}):
+        if (sum(objects.values()) > 1 and set(objects) <= {'circle', 'rect', 'square'}
+                and not Reflection._extract_reference_symbol(desc_raw)):
             params.update(mode='non_composite', label='', geometry_ir=[], contract_status='ok')
             params['description_contract']['status'] = 'ok'
             params['elements'].append('GEOMETRIE: Vollständige beschriebene Szene mit mehreren Formen')

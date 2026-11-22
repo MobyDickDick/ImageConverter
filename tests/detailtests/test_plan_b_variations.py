@@ -673,7 +673,7 @@ def test_real_worker_preserves_parent_toolchain_with_incompatible_pythonpath(tmp
     result = battery.run_case(case, output, timeout=30, iterations=1)
     assert result['returncode'] == 0
     assert result['blocked_svg_reads'] == []
-    assert 'metrics' in result, result
+    assert 'metrics' in result, json.dumps(result, indent=2)
     assert (output / result['output_svg']).is_file()
     assert '\\' not in case['reference_svg']
     assert '\\' not in result['output_svg']

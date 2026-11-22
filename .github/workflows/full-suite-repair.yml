@@ -13,6 +13,33 @@ permissions:
   contents: read
 
 jobs:
+  fitter-diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Record observed geometry at fitter rejection sites
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: >-
+          python -m tools.trace_fit_failures
+          tests/test_gradient_arrow_runtime.py::test_arrow_fits_all_colors_and_sizes_from_pixels
+          tests/test_hollow_cross_panel_runtime.py::test_independent_native_scenes_keep_four_edges_and_light_slit
+          tests/test_rotated_square_kelle_runtime.py
+          tests/test_diagonal_square_kelle_runtime.py
+          --basetemp=ci-suite/fitter-diagnostics
+          --junitxml=ci-suite/fitter-diagnostics.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: suite-fitter-diagnostics
+          path: ci-suite/
   diagnosed-regressions:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -32,6 +59,7 @@ jobs:
           tests/test_search_minimum_effort.py tests/test_arrow_pair_runtime.py
           tests/detailtests/test_plan_b_variations.py tests/test_description_language.py
           tests/test_conversion_deadline.py tests/test_stem_disk_runtime.py
+          --basetemp=ci-suite/diagnosed
           --junitxml=ci-suite/diagnosed.xml
       - uses: actions/upload-artifact@v4
         if: always()

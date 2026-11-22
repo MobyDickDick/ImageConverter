@@ -161,7 +161,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         registration_seconds += session.elapsed-checked_started
         # A minimum exploration time is no reason to keep changing a result
         # that already passes the caller's semantics and the pixel gates.
-        return passed
+        return passed and (not session.minimum_pending or preferred)
 
     # Raster-derived alternate seeds share this registration's cache, counters,
     # error bound and image deadline; yield between them for the fair scheduler.
