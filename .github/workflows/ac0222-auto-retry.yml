@@ -54,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ matrix.revision == 'base' && '9f7aeb1d2af1dfdeb53f21fb8f51ba7802e3054e' || github.sha }}
+          ref: ${{ matrix.revision == 'base' && '80453dc9096324101a0b2b560aa2b7607e9f5580' || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
