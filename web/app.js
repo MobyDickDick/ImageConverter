@@ -236,7 +236,7 @@ function renderJob(job, select = false) {
   const usingSample = job.sample && job.use_current_svg !== false;
   $("sample-figure").hidden = !usingSample;
   $("sample-image").hidden = !usingSample;
-  $("sample-info").textContent = job.sample ? `${job.sample_origin ? job.sample_origin + ': ' : ''}${job.sample_name}${job.use_current_svg === false ? ' · für diesen Versuch deaktiviert' : ''}` : "Ein vorhandenes SVG wird beim Start automatisch geladen. Eine eigene Vorlage kann zusätzlich gewählt werden.";
+  $("sample-info").textContent = job.sample ? `${job.sample_origin ? job.sample_origin + ': ' : ''}${job.sample_name}${job.use_current_svg === false ? ' · für diesen Versuch deaktiviert' : ' · Drehung und Spiegelung werden automatisch geprüft'}` : "Ein vorhandenes SVG wird beim Start automatisch geladen. Eigene Vorlagen dürfen auch gedreht oder gespiegelt sein.";
   $("remove-sample").hidden = !job.sample;
   document.querySelector(".comparison").classList.toggle("with-sample", Boolean(usingSample));
   const sampleUrl = `/api/jobs/${job.id}/sample`;

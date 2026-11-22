@@ -1,5 +1,13 @@
 # ImageConverter
 
+Sample-SVGs dürfen jetzt auch gedreht oder gespiegelt zum Original vorliegen.
+Die gemeinsame Vorlagensuche prüft Drehungen über den ganzen Kreis, horizontale
+und vertikale Spiegelungen sowie deren Kombination mit Skalierung und Verschiebung.
+Freie Winkel werden nach einer groben Suche fein angepasst; alle Motivteile
+bleiben zusammen. Beschreibung und Qualitätsgrenzen gelten auch nach der
+Transformation. [Bedienung und Grenzen](docs/seed_and_simple_forms_2026-11-17.md#gedrehte-und-gespiegelte-samples).
+Zum Aktivieren den Webserver nach Abschluss laufender Aufträge neu starten.
+
 Die Einzelkonvertierung bietet jetzt eine **freie Grundformensuche mit fünf oder
 zehn Minuten Budget**: zufällige Populationen, grosse Änderungen, Austausch und
 Vertauschen ganzer Elemente sowie lokale Verfeinerung. Suchstände werden

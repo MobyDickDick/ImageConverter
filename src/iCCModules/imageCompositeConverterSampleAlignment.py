@@ -9,6 +9,125 @@ import xml.etree.ElementTree as ET
 import numpy as np
 
 
+def orientation_angles(root, width, height, *, mirrored=False):
+    """Include exact axis alignments, so strict direction claims can be met."""
+    from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
+    from src.iCCModules.imageCompositeConverterRepresentation import path_points
+    from src.iCCModules.imageCompositeConverterCanvas import _dimensions, _mapping
+
+    _, _, view = _dimensions(root, width, height)
+    ax, ay, _, _ = _mapping(root, width, height, view)
+    angles = [0., 90., 180., 270., 45., 135., 225., 315.]
+    def add(direction):
+        direction = np.array(direction, dtype=float)*[ax, ay]
+        if mirrored:
+            direction[0] *= -1
+        if not np.isfinite(direction).all() or np.linalg.norm(direction) < 1e-9:
+            return
+        angle = math.degrees(math.atan2(direction[1], direction[0]))
+        for axis in (0., 90., 180., 270.):
+            value = round((axis-angle) % 360, 8)
+            if value not in angles and len(angles) < 72:
+                angles.append(value)
+    def visit(node, parent=(1., 0., 0., 1., 0., 0.)):
+        tag = node.tag.rsplit('}', 1)[-1]
+        if tag in {'defs', 'clipPath', 'mask', 'pattern', 'metadata', 'style'}:
+            return
+        matrix = _compose(parent, _transform(node.get('transform', '')))
+        a, b, c, d, _, _ = matrix
+        if tag in {'line', 'rect', 'circle', 'ellipse', 'polygon', 'polyline', 'path'}:
+            add([a, b])
+            add([c, d])
+            paths = path_points(node)
+            if tag == 'line':
+                paths = [(np.array([[float(node.get('x1', 0)), float(node.get('y1', 0))],
+                                    [float(node.get('x2', 0)), float(node.get('y2', 0))]]), False)]
+            for points, closed in paths:
+                differences = np.diff(np.vstack((points, points[:1])) if closed else points, axis=0)
+                for x, y in differences:
+                    add([a*x+c*y, b*x+d*y])
+        for child in node:
+            visit(child, matrix)
+    try:
+        visit(root)
+    except ValueError:
+        pass  # Unsupported geometry still receives the bounded coarse search.
+    return angles+[float(a) for a in range(15, 360, 15) if a not in angles]
+
+
+def orient_assembly(root, width, height, *, dx=0., dy=0., sx=1., sy=1., angle=0., mirrored=False):
+    """Apply a screen-space pose to all content, retaining its local geometry."""
+    from src.imageConverterSample import NUMBER, SVG_NS
+
+    candidate = copy.deepcopy(root)
+    vx, vy, vw, vh = map(float, NUMBER.findall(root.get('viewBox')))
+    aspect = root.get('preserveAspectRatio', 'xMidYMid meet').split()
+    if aspect and aspect[0] == 'defer':
+        aspect = aspect[1:]
+    ax, ay = width/vw, height/vh
+    fx = fy = 0.
+    if not aspect or aspect[0] != 'none':
+        ax = ay = max(ax, ay) if 'slice' in aspect else min(ax, ay)
+        alignment = aspect[0] if aspect else 'xMidYMid'
+        fx = 0. if 'xMin' in alignment else 1. if 'xMax' in alignment else .5
+        fy = 0. if 'YMin' in alignment else 1. if 'YMax' in alignment else .5
+    offset = np.array([-vx*ax+(width-vw*ax)*fx, -vy*ay+(height-vh*ay)*fy])
+    center = np.array([width/2, height/2])
+    radians = math.radians(angle)
+    c, s = math.cos(radians), math.sin(radians)
+    rotation = np.array([[c, -s], [s, c]])
+    screen = rotation @ np.diag([sx*(-1 if mirrored else 1), sy])
+    viewport = np.diag([ax, ay])
+    local = np.diag([1/ax, 1/ay]) @ screen @ viewport
+    translation = (center+np.array([dx, dy])-screen @ center+(screen-np.eye(2)) @ offset)/[ax, ay]
+    a, c, b, d = local.ravel()
+    tx, ty = translation
+    group = ET.Element(f'{{{SVG_NS}}}g', transform=(
+        f'matrix({a:.10f} {b:.10f} {c:.10f} {d:.10f} {tx:.10f} {ty:.10f})'))
+    # A root transform belongs to the original assembly, inside the new pose.
+    original_transform = candidate.attrib.pop('transform', None)
+    content = ET.SubElement(group, f'{{{SVG_NS}}}g', transform=original_transform) if original_transform else group
+    first_shape = True
+    for child in list(candidate):
+        if child.tag.rsplit('}', 1)[-1] not in {'defs', 'style', 'title', 'desc', 'metadata'}:
+            # A leading white canvas backing is canvas paint, not motif
+            # geometry. Rotating it would create overflow and shrink the fit.
+            backdrop = False
+            if (first_shape and original_transform is None and child.tag.rsplit('}', 1)[-1] == 'rect'
+                    and not child.get('transform') and child.get('fill', '').lower() in {'white', '#fff', '#ffffff'}
+                    and child.get('stroke', 'none') == 'none'
+                    and child.get('opacity', '1') == child.get('fill-opacity', '1') == '1'):
+                try:
+                    x, y = (float(child.get(key, '0')) for key in ('x', 'y'))
+                    w, h = (float(child.get(key, '0')) for key in ('width', 'height'))
+                    backdrop = x <= vx and y <= vy and x+w >= vx+vw and y+h >= vy+vh
+                except ValueError:
+                    pass
+            first_shape = False
+            if backdrop:
+                continue
+            candidate.remove(child)
+            content.append(child)
+    candidate.append(group)
+    return candidate
+
+
+def compatible_sample_pose(root, width, height, assertions, *, deadline):
+    """Check whether orientation alone can satisfy the complete description."""
+    from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
+    for mirrored in (False, True):
+        for angle in orientation_angles(root, width, height, mirrored=mirrored):
+            if time.monotonic() >= deadline:
+                return False
+            candidate = orient_assembly(root, width, height, angle=angle, mirrored=mirrored)
+            try:
+                validate_svg_assertions(ET.tostring(candidate, encoding='unicode'), assertions)
+            except ValueError:
+                continue
+            return True
+    return False
+
+
 def lightened_sample_details(*args,**kwargs):
     """Compatibility for a running older GUI; lighter paint is not a defect.
 
@@ -28,10 +147,9 @@ def align_sample(root, target, render_fn, *, deadline, initial, assertions=None,
 
 def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None, seed=0):
     from PIL import ImageColor
-    from src.imageConverterSample import NUMBER, SVG_NS
     from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width, width_bindings
     from src.iCCModules.imageCompositeConverterSearchPortfolio import proposal_rng
-    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality, preferred_quality
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
 
     height, width = target.shape[:2]
@@ -52,7 +170,7 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
             if len(rgb) == 3:
                 paints.setdefault(rgb, []).append((index, attribute))
     palette = list(paints)
-    paint_indices, values = [], [0., 0., 100., 100.]
+    paint_indices, values = [], [0., 0., 100., 100., 0., 1.]
     shared_width = bool(assertions and assertions.get('equal_stroke_width'))
     equal_axes = shared_width or any((assertions or {}).get('objects',{}).get(kind)
                                     for kind in ('square','circle','rhombus'))
@@ -64,19 +182,6 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
         paint_indices.append((len(values), gray))
         values.extend([float(np.mean(rgb))] if gray else rgb)
     parameters = np.array(values, dtype=float)
-    vx, vy, vw, vh = map(float, NUMBER.findall(root.get('viewBox')))
-    aspect = root.get('preserveAspectRatio', 'xMidYMid meet').split()
-    if aspect and aspect[0] == 'defer':
-        aspect = aspect[1:]
-    ax, ay = width/vw, height/vh
-    if not aspect or aspect[0] != 'none':
-        ax = ay = max(ax, ay) if 'slice' in aspect else min(ax, ay)
-        alignment = aspect[0] if aspect else 'xMidYMid'
-        fx = 0. if 'xMin' in alignment else 1. if 'xMax' in alignment else .5
-        fy = 0. if 'YMin' in alignment else 1. if 'YMax' in alignment else .5
-    else:
-        fx = fy = 0.
-    ox, oy = -vx*ax+(width-vw*ax)*fx, -vy*ay+(height-vh*ay)*fy
 
     def build(p):
         candidate = copy.deepcopy(root)
@@ -86,24 +191,17 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
             color = '#%02x%02x%02x' % tuple(np.rint(color).astype(int))
             for index, attribute in paints[rgb]:
                 elements[index].set(attribute, color)
-        sx, sy = p[2:4]/100
-        tx = ((sx-1)*(ox-width/2)+p[0])/ax
-        ty = ((sy-1)*(oy-height/2)+p[1])/ay
-        group = ET.Element(f'{{{SVG_NS}}}g', transform=(
-            f'matrix({sx:.8f} 0 0 {sy:.8f} {tx:.8f} {ty:.8f})'))
-        for child in list(candidate):
-            if child.tag.rsplit('}', 1)[-1] not in {'defs', 'style', 'title', 'desc', 'metadata'}:
-                candidate.remove(child)
-                group.append(child)
-        candidate.append(group)
+        candidate = orient_assembly(candidate, width, height, dx=p[0], dy=p[1],
+                                    sx=p[2]/100, sy=p[3]/100, angle=p[4], mirrored=p[5] < 0)
         return constrain_stroke_width(ET.tostring(candidate, encoding='unicode'), assertions,
-                                      width=p[4] if bindings else None)
+                                      width=p[6] if bindings else None)
 
     def valid(p):
         if (not np.isfinite(p).all() or not (10 <= p[2] <= 400 and 10 <= p[3] <= 400)
                 or abs(p[0]) > width*2 or abs(p[1]) > height*2
-                or np.any(p[4:] < 0) or np.any(p[4:] > 255)
-                or (bindings and p[4] <= 0)
+                or p[5] not in (-1., 1.)
+                or np.any(p[6:] < 0) or np.any(p[6:] > 255)
+                or (bindings and p[6] <= 0)
                 or (equal_axes and not math.isclose(p[2], p[3], abs_tol=1e-8))):
             return False
         for rgb, (offset, gray) in zip(palette, paint_indices):
@@ -123,6 +221,11 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
 
     best, mse = measure(initial)
     pixels, svg = initial, ET.tostring(root, encoding='unicode')
+    try:
+        validate_svg_assertions(svg, assertions)
+    except ValueError:
+        # An invalid initial orientation must not outrank valid alternatives.
+        best = mse = float('inf')
     evaluations = accepted = 0
     cache = {}
     rejected, restarts = 0, 0
@@ -134,8 +237,8 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
         key = tuple(p)
         if key in cache:
             return False
-        candidate = build(p)
         try:
+            candidate = build(p)
             validate_svg_assertions(candidate, assertions)
             raster, fresh = audit.render_candidate(target,candidate,render_fn,width,height)
         except ValueError:
@@ -171,8 +274,8 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
         for value in (0.,255.):
             probe = anchor.copy()
             probe[offset:offset+(1 if gray else 3)] = value
-            candidate = build(probe)
             try:
+                candidate = build(probe)
                 validate_svg_assertions(candidate,assertions)
                 raster,fresh = audit.render_candidate(target,candidate,render_fn,width,height)
             except ValueError:
@@ -217,6 +320,30 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
                      - (np.array([width, height])/2
                         + ((predicted[:2]+predicted[2:])/2-np.array([width, height])/2)*scales))
             consider(p)
+    # Search rotations and reflections before local fitting. Foreground pixel
+    # centers provide pose-dependent bounds without rendering clipped probes.
+    # Rotation plus one reflection covers both horizontal and vertical mirrors.
+    if observed is not None and predicted is not None and (not math.isfinite(best) or not preferred_quality(pixel_quality(target, initial))):
+        ys, xs = np.where(np.max(abs(initial.astype(float)-background), axis=2) > 35)
+        center = np.array([width/2, height/2])
+        points = np.column_stack((xs+.5, ys+.5))-center
+        anchor = np.array(values, dtype=float)
+        for mirrored in (False, True):
+            for angle in orientation_angles(root, width, height, mirrored=mirrored):
+                if time.monotonic() >= deadline or audit.reason() or mse <= 1e-12:
+                    break
+                radians = math.radians(angle)
+                c, s = math.cos(radians), math.sin(radians)
+                rotation = np.array([[c, -s], [s, c]])
+                oriented = points @ (rotation @ np.diag([-1 if mirrored else 1, 1])).T
+                lo, hi = oriented.min(axis=0)-.5, oriented.max(axis=0)+.5
+                sizes = (observed[2:]-observed[:2])/(hi-lo)
+                # Uniform scaling preserves right angles, circles and symbols.
+                scale = float(np.mean(sizes))
+                probe = anchor.copy()
+                probe[2:6] = [scale*100, scale*100, angle, -1 if mirrored else 1]
+                probe[:2] = (observed[:2]+observed[2:])/2-center-(lo+hi)/2*scale
+                consider(probe)
     # Correlated jumps explore another placement/scale even when no individual
     # coordinate improves. Keep exact, already passing assemblies untouched.
     if not pixel_quality(target,pixels)['passed']:
@@ -231,8 +358,9 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
             restarts += 1
     # Alternate common geometry with shared paint. Individual paths, polygon
     # vertices, opacities and small-symbol dimensions are never edited here.
-    for step, paint_step in [(2., 32.), (1., 16.), (.5, 8.), (.25, 4.), (.125, 2.), (.0625, 1.)]:
-        steps = [step, step, 100*step/width, 100*step/height] + ([step] if bindings else [])
+    for step, paint_step, angle_step in [(2., 32., 7.5), (1., 16., 3.), (.5, 8., 1.5),
+                                       (.25, 4., .5), (.125, 2., .125), (.0625, 1., .03125)]:
+        steps = [step, step, 100*step/width, 100*step/height, angle_step, 0.] + ([step] if bindings else [])
         steps += [paint_step]*(len(values)-len(steps))
         for _ in range(4):
             changed = False
@@ -241,7 +369,7 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
             signs = [-1,1]
             rng.shuffle(signs)
             for index, delta in order:
-                if equal_axes and index == 3:
+                if index == 5 or (equal_axes and index == 3):
                     continue
                 for sign in signs:
                     candidate = parameters.copy()
@@ -262,4 +390,6 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
                     stop_reason=('quality_target_reached' if pixel_quality(target,pixels)['passed'] else
                                  audit.reason() or ('time_limit' if time.monotonic()>=deadline else 'schedule_exhausted'))),
                 transform=dict(translate_x=float(parameters[0]), translate_y=float(parameters[1]),
-                               scale_x=float(parameters[2]/100), scale_y=float(parameters[3]/100)))
+                               scale_x=float(parameters[2]/100), scale_y=float(parameters[3]/100),
+                               rotation_degrees=float(parameters[4] % 360), mirrored=bool(parameters[5] < 0),
+                               mirror_axis='x' if parameters[5] < 0 else None))

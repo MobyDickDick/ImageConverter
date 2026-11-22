@@ -348,14 +348,18 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
     root = ET.fromstring(prepared)
     assertions = description_assertions(description)
     constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
+    initial_description_error = ''
     try:
         validate_svg_assertions(constrained, assertions)
     except ValueError as exc:
+        initial_description_error = str(exc)
+        from src.iCCModules.imageCompositeConverterSampleAlignment import compatible_sample_pose
         # A stale current SVG is optional input, never a prerequisite for
-        # conversion. Reject the template, not the user's conversion request.
-        return refit_description(source, output, description, seed=effective_seed,
-            hard_deadline=hard_deadline, initial_mse=None, initial_quality=None,
-            template_error=str(exc), started=started)
+        # conversion. First allow orientation to satisfy directional claims.
+        if not compatible_sample_pose(ET.fromstring(constrained), width, height, assertions, deadline=hard_deadline):
+            return refit_description(source, output, description, seed=effective_seed,
+                hard_deadline=hard_deadline, initial_mse=None, initial_quality=None,
+                template_error=str(exc), started=started)
     rendered = render_svg(prepared, width, height)
     if rendered is None:
         return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
@@ -369,13 +373,13 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
         if rendered is None:
             return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
                         description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
-    accepted_input = bool(pixel_quality(target, rendered)['passed'])
+    accepted_input = bool(not initial_description_error and pixel_quality(target, rendered)['passed'])
     final_svg = constrained
     best_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
     evaluations, accepted, alignment = (2 if constrained != prepared else 1), 0, None
     alignment_search = None
     print(f"Sample geladen: mittlerer Pixelfehler={initial_mse:.8f}", flush=True)
-    if not accepted_input:
+    if not accepted_input or not preferred_quality(pixel_quality(target, rendered)):
         from src.iCCModules.imageCompositeConverterSampleAlignment import align_sample
         # Description-only conversion has no second raster reconstruction.
         # Alignment uses the original image deadline, including initial work.
@@ -388,13 +392,24 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
         alignment_search = fitted.get('search_control')
         print(f"Sample gemeinsam ausgerichtet: Prüfungen={evaluations}, "
               f"Pixelfehler={best_mse:.8f}", flush=True)
-    final_svg = contain_svg(final_svg, width, height)
+    contained = contain_svg(final_svg, width, height)
+    if contained != final_svg:
+        rendered = render_svg(contained, width, height)
+        if rendered is None:
+            return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
+                        description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
+        best_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
+    final_svg = contained
     quality = pixel_quality(target, rendered)
     description_error = ""
     try:
         validate_svg_assertions(final_svg, assertions)
     except ValueError as exc:
         description_error = str(exc)
+    if description_error and initial_description_error:
+        return refit_description(source, output, description, seed=effective_seed,
+            hard_deadline=hard_deadline, initial_mse=initial_mse, initial_quality=initial_quality,
+            template_error=description_error, started=started)
     active = current_search()
     active.measured(final_svg, float(quality['normalized_mse']), source='template_final',
                     scope='full_scene', valid=not description_error, passed=quality['passed'])

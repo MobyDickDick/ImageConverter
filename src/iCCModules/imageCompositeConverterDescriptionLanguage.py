@@ -368,30 +368,34 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         validate_arrow_heads(root, assertions['arrow_heads'])
     if assertions.get('horizontal_bar'):
         from PIL import ImageColor
-        from src.iCCModules.imageCompositeConverterRendering import _axis_svg_transform
+        from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
 
-        def horizontal_bar(node, sx=1., sy=1., fill='black', stroke='none'):
+        def horizontal_bar(node, parent=(1., 0., 0., 1., 0., 0.), fill='black', stroke='none'):
             kind = node.tag.rsplit('}', 1)[-1]
             if kind in excluded:
                 return False
-            # Translation and axis scaling preserve horizontality. Other
-            # transforms cannot certify it from local coordinates alone.
             try:
-                ax, ay, _, _ = _axis_svg_transform(node.get('transform', ''))
-                sx, sy = sx*ax, sy*ay
+                matrix = _compose(parent, _transform(node.get('transform', '')))
             except ValueError:
                 return False
+            a, b, c, d, _, _ = matrix
             fill, stroke = node.get('fill', fill), node.get('stroke', stroke)
             try:
                 if kind == 'line':
-                    dx = abs(float(node.get('x2', '0'))-float(node.get('x1', '0')))*sx
-                    dy = abs(float(node.get('y2', '0'))-float(node.get('y1', '0')))*sy
+                    x = float(node.get('x2', '0'))-float(node.get('x1', '0'))
+                    y = float(node.get('y2', '0'))-float(node.get('y1', '0'))
+                    dx, dy = abs(a*x+c*y), abs(b*x+d*y)
                     horizontal = math.isfinite(dx+dy) and dx > 0 and dy <= 1e-6
                     color = stroke
                 elif kind == 'rect':
-                    width = float(node.get('width', '0'))*sx
-                    height = float(node.get('height', '0'))*sy
-                    horizontal = math.isfinite(width+height) and width > 3*height > 0
+                    width = float(node.get('width', '0'))
+                    height = float(node.get('height', '0'))
+                    edges = [(a*width, b*width), (c*height, d*height)]
+                    lengths = [math.hypot(x, y) for x, y in edges]
+                    longest = 0 if lengths[0] >= lengths[1] else 1
+                    dx, dy = map(abs, edges[longest])
+                    horizontal = (math.isfinite(sum(lengths)) and min(width, height) > 0
+                                  and dx > 3*lengths[1-longest] > 0 and dy <= 1e-6)
                     color = fill
                 else:
                     horizontal, color = False, 'none'
@@ -402,7 +406,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
                     return True
             except (ValueError, TypeError):
                 pass
-            return any(horizontal_bar(child, sx, sy, fill, stroke) for child in node)
+            return any(horizontal_bar(child, matrix, fill, stroke) for child in node)
 
         if not horizontal_bar(root):
             raise DescriptionRejected('missing_described_horizontal_bar')

@@ -25,6 +25,34 @@ Gute Endergebnisse dürfen auch mit unterschiedlichen Seeds identisch sein.
 
 ## Gleiche Intensität bei Vorlagen
 
+### Gedrehte und gespiegelte Samples
+
+Seit 22. November 2026 kann ein Sample-SVG auch in einer anderen Ausrichtung
+als das Original hochgeladen werden. Die Ausrichtung wird automatisch gesucht;
+es ist keine zusätzliche Einstellung nötig. Die Suche prüft den ganzen Kreis
+in 15-Grad-Schritten, ergänzt exakte Ausrichtungen aus vorhandenen Kanten
+und passt den besten Winkel anschliessend feiner an.
+Horizontale und vertikale Spiegelungen sowie Kombinationen aus Spiegelung,
+Drehung, Verschiebung und Skalierung sind enthalten.
+
+Die Transformation gilt gemeinsam für das Motiv einschliesslich Schrift und
+Farbverläufen. Einzelne Teile werden dabei nicht unabhängig gedreht oder
+gespiegelt. Ein führendes weisses Rechteck über der gesamten Zeichenfläche
+bleibt als Hintergrund auf der Zeichenfläche. Lokale Formkoordinaten und die
+hochgeladene Datei bleiben erhalten; gekoppelte Farben und eine ausdrücklich
+verlangte gemeinsame Strichbreite können weiterhin angepasst werden.
+
+Richtungsangaben der Beschreibung werden nach der Transformation geprüft.
+Eine zunächst anders ausgerichtete Vorlage wird dafür vor dem Verwerfen auf
+zulässige Ausrichtungen geprüft. Fehlende oder zusätzliche Elemente bleiben
+Ablehnungsgründe. Die Suche verwendet dasselbe Zeit- und Renderbudget wie die
+bisherige Vorlagenanpassung. Stark abweichende Formen, abgeschnittene Vorlagen
+oder knappe Budgets können weiterhin zu einem ungenügenden Ergebnis führen.
+
+Die Regression in `tests/test_sample_orientation.py` deckt Vierteldrehungen,
+freie Winkel, Spiegelungen, Farben, Zeichenflächen mit versetztem Ursprung,
+Hintergründe, Richtungsprüfungen und einen echten GUI-Worker-Lauf ab.
+
 Die Vorlage erhält die volle maximale Profilzeit: 45, 120 oder 240 Sekunden.
 Die gemeinsame Ausrichtung ist nur der erste Abschnitt. Ein bestandener
 allgemeiner Rastertest beendet die weitere Suche nicht, wenn das strengere

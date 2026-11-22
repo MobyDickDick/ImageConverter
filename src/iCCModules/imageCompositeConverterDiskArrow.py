@@ -35,6 +35,26 @@ def disk_arrow_direction(description):
 
 def validate_disk_arrow(root, direction):
     from src.iCCModules.imageCompositeConverterRepresentation import path_points
+    from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
+
+    matrices = {}
+    def visit(node, parent=(1., 0., 0., 1., 0., 0.)):
+        matrix = _compose(parent, _transform(node.get('transform', '')))
+        matrices[node] = matrix
+        for child in node:
+            visit(child, matrix)
+    try:
+        visit(root)
+    except ValueError:
+        return False
+
+    def displayed(node):
+        a, b, c, d, tx, ty = matrices[node]
+        linear = np.array([[a, c], [b, d]])
+        axes = np.linalg.svd(linear, compute_uv=False)
+        if not np.isclose(axes[0], axes[1], rtol=1e-7) or axes[1] <= 0:
+            raise ValueError('nonuniform_disk_arrow_transform')
+        return linear, np.array([tx, ty]), float(axes[0])
 
     disks = [node for node in root.iter() if node.tag.rsplit('}', 1)[-1] == 'circle']
     arrows = [node for node in root.iter() if node.tag.rsplit('}', 1)[-1] == 'polygon']
@@ -44,12 +64,15 @@ def validate_disk_arrow(root, direction):
     paths = path_points(arrow)
     if len(paths) != 1 or len(paths[0][0]) != 7:
         return False
-    points = paths[0][0].copy()
     try:
+        disk_matrix, disk_offset, disk_scale = displayed(disk)
+        arrow_matrix, arrow_offset, arrow_scale = displayed(arrow)
+        points = paths[0][0] @ arrow_matrix.T+arrow_offset
         center = np.array([float(disk.get(axis, '0')) for axis in ('cx', 'cy')])
-        radius = float(disk.get('r', '0'))
-        rim_width = float(disk.get('stroke-width', '1'))
-        outline_width = float(arrow.get('stroke-width', '1'))
+        center = disk_matrix @ center+disk_offset
+        radius = float(disk.get('r', '0'))*disk_scale
+        rim_width = float(disk.get('stroke-width', '1'))*disk_scale
+        outline_width = float(arrow.get('stroke-width', '1'))*arrow_scale
     except ValueError:
         return False
     if (not np.isfinite(points).all() or not 0 < rim_width < radius
@@ -68,7 +91,15 @@ def validate_disk_arrow(root, direction):
     gradient = next((node for node in root.iter()
                      if node.tag.rsplit('}', 1)[-1] == 'linearGradient'
                      and fill == f"url(#{node.get('id')})"), None)
+    if gradient is None:
+        return False
+    try:
+        ga, gb, gc, gd, _, _ = _transform(gradient.get('gradientTransform', ''))
+        gradient_axis = disk_matrix @ np.array([ga, gb])
+    except ValueError:
+        return False
     return bool(gradient is not None
+                and abs(gradient_axis[1]) <= 1e-7 and abs(gradient_axis[0]) > 1e-7
                 and gradient.get('y1', '0') == gradient.get('y2', '0')
                 and gradient.get('x1', '0') != gradient.get('x2', '1')
                 and tip[0] < upper[0] < tail[0]
