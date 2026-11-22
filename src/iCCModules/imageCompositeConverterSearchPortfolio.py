@@ -165,12 +165,6 @@ def validated_result(result, image, *, scope='full_scene'):
     if session is None:
         return False
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope
-    if scope == 'full_scene' and session.reference_identity is None:
-        # An unbound helper may reject invalid semantics, but must not adopt
-        # its own intermediate raster as the full-scene reference or mutate
-        # the caller's SVG during a provisional check.
-        from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
-        validate_svg_assertions(result['svg'], getattr(session, 'description_assertions', None))
     # Public entry points bind the unmodified source before any subfit. A
     # masked/copied stage cannot certify the full conversion, even at zero loss.
     if scope != 'full_scene' or not session.is_reference(image):

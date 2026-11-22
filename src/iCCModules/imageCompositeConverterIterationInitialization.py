@@ -73,6 +73,9 @@ def prepareIterationRuntimeImpl(
             # Failed files are deliverables too: no partial inventory and
             # no raster reconstruction after the description-based fit.
             validate_svg_assertions(svg_content, assertions)
+            if params.get('stem_disk_registration'):
+                validate_svg_assertions(svg_content, dict(no_text=True, counts=[
+                    dict(kind='circle', count=1), dict(kind='line', count=1)]))
             return write_artifacts(svg_content, *args, **kwargs)
 
         artifact_callbacks['write_attempt_artifacts'] = write_checked_artifacts

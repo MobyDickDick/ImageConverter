@@ -148,6 +148,15 @@ class Reflection:
         contract_status = str(params["description_contract"].get("status", "ok"))
         params["contract_status"] = contract_status
 
+        # A scene inventory must reach the multi-instance fitters before a
+        # single-circle badge heuristic consumes its first shape noun.
+        objects = assertions.get('objects', {})
+        if (sum(objects.values()) > 1 and set(objects) <= {'circle', 'rect', 'square'}):
+            params.update(mode='non_composite', label='', geometry_ir=[], contract_status='ok')
+            params['description_contract']['status'] = 'ok'
+            params['elements'].append('GEOMETRIE: Vollständige beschriebene Szene mit mehreren Formen')
+            return desc, params
+
         if assertions.get('partitioned_rhombus'):
             params.update(mode='non_composite', label='', geometry_ir=[], contract_status='ok')
             params['description_contract']['status'] = 'ok'

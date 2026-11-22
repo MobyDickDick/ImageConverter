@@ -416,8 +416,10 @@ def logical_inventory(svg, limits, symbol_strokes=0):
     return inventory
 
 
-def validate_object_limits(svg, limits, *, partial=False, complete=False, symbol_strokes=0):
+def validate_object_limits(svg, limits, *, partial=False, complete=False, symbol_strokes=0, text_count=None):
     actual = logical_inventory(svg, limits, symbol_strokes)
+    if text_count is not None:
+        actual['text'] = text_count
     for kind, expected in limits.items():
         count = actual.get(kind, 0)
         if count > expected or (not partial and count != expected):

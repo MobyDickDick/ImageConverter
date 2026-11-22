@@ -15,6 +15,74 @@ class DescriptionRejected(ValueError):
     pass
 
 
+def _validate_labels(root, expected):
+    """Match native text runs by content and adjacent, transformed typography.
+
+    Separate glyph positioning and a smaller raised/lowered index remain one
+    logical label. Arbitrary distant text runs cannot satisfy that label.
+    """
+    from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
+    runs = []
+    def visit(node, parent=(1., 0., 0., 1., 0., 0.), size=16.):
+        kind = node.tag.rsplit('}', 1)[-1]
+        if kind in {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}:
+            return
+        matrix = _compose(parent, _transform(node.get('transform', '')))
+        size = float(node.get('font-size', str(size)).removesuffix('px'))
+        if kind == 'text':
+            text = ''.join(node.itertext()).strip()
+            if text:
+                a,b,c,d,tx,ty = matrix
+                x, y = float(node.get('x', '0')), float(node.get('y', '0'))
+                runs.append((text, a*x+c*y+tx, b*x+d*y+ty, size*math.hypot(c,d)))
+            return
+        for child in node:
+            visit(child, matrix, size)
+    try:
+        visit(root)
+    except (ValueError, TypeError):
+        raise DescriptionRejected('unsupported_label_typography')
+
+    def matches(group, label):
+        script = re.fullmatch(r'(.+?)([\^_])([0-9]+)', label)
+        content = script[1]+script[3] if script else label
+        if ''.join(run[0] for run in group) != content:
+            return False
+        if len(group) == 1:
+            return not script
+        for previous, current in zip(group, group[1:]):
+            _, px, py, ps = previous
+            _, cx, cy, cs = current
+            if not all(math.isfinite(v) for v in (px, py, ps, cx, cy, cs)) or min(ps,cs) <= 0:
+                return False
+            if not 0 < cx-px <= max(ps,cs)*(len(previous[0])+1):
+                return False
+            if not script and abs(cy-py) > max(ps,cs)*.35:
+                return False
+        if script:
+            base, index = group[:-1], group[-1]
+            if ''.join(run[0] for run in base) != script[1] or index[0] != script[3]:
+                return False
+            _, _, by, bs = base[-1]
+            _, _, iy, ins = index
+            return ins < bs*.9 and (iy < by if script[2] == '^' else iy > by)
+        return True
+
+    def consume(offset, remaining):
+        if offset == len(runs):
+            return not remaining
+        for label in remaining:
+            rest = list(remaining)
+            rest.remove(label)
+            for end in range(offset+1, len(runs)+1):
+                if matches(runs[offset:end], label) and consume(end, rest):
+                    return True
+        return False
+    if not consume(0, expected):
+        raise DescriptionRejected('wrong_described_labels')
+    return len(expected)
+
+
 def normalize_description(description: str, *, orientations: bool = False) -> str:
     """Normalize equivalent vocabulary, keeping polarity and quoted text.
 
@@ -358,10 +426,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         if any(node.tag.rsplit('}', 1)[-1] in {'image', 'use', 'foreignObject', 'script'} for node in root.iter()):
             raise DescriptionRejected('unsupported_inventory_element')
     if assertions.get('labels'):
-        actual_labels = sorted(''.join(node.itertext()).strip() for node in root.iter()
-                               if node.tag.rsplit('}', 1)[-1] == 'text')
-        if actual_labels != assertions['labels']:
-            raise DescriptionRejected('wrong_described_labels')
+        _validate_labels(root, assertions['labels'])
     excluded = {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}
     def visible_nodes(element):
         kind = element.tag.rsplit('}',1)[-1]
@@ -450,6 +515,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         from src.iCCModules.imageCompositeConverterRepresentation import validate_object_limits
         try:
             validate_object_limits(svg, assertions['objects'], partial=assertions.get('objects_partial', False),
-                                   complete=assertions.get('objects_complete', False), symbol_strokes=assertions.get('symbol_strokes', 0))
+                                   complete=assertions.get('objects_complete', False), symbol_strokes=assertions.get('symbol_strokes', 0),
+                                   text_count=len(assertions['labels']) if assertions.get('labels') else None)
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
