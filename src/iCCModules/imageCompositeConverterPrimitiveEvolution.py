@@ -131,7 +131,19 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                      if target_edges.any() else np.zeros((h,w),dtype='float32'))
     count=len(program['objects']); dimension=count*STRIDE
     constrained_paint=bool(program.get('paint_claims'))
-    structured=constrained_paint or any(o['kind']=='text' for o in program['objects'])
+    has_label=any(o['kind']=='text' for o in program['objects'])
+    structured=constrained_paint or has_label
+
+    def search_goal(quality):
+        if constrained_paint:
+            return preferred_quality(quality)
+        if has_label:
+            # A marginal MuPDF pass can fail the same limits in a browser or
+            # librsvg because of glyph/edge antialiasing. Keep refining with
+            # headroom; the final absolute acceptance limits stay unchanged.
+            return bool(quality and quality['passed'] and quality['foreground_iou']>=.92
+                        and quality['edge_alignment']>=.82)
+        return bool(quality and quality['passed'])
     active=[]
     for i,obj in enumerate(program['objects']):
         fields=[0,1,2,5,9]
@@ -408,8 +420,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                 population.append(initial)
         # At least 32 independent layouts, none derived from measured contours.
         while evaluations<budget and time.monotonic()-started<seconds and not (session and session.reason()):
-            if best and best.get('valid') and (preferred_quality(best.get('quality')) if constrained_paint
-                                              else best.get('quality',{}).get('passed')):
+            if best and best.get('valid') and search_goal(best.get('quality')):
                 reason='satisfactory'; break
             if len(population)<32:
                 child=random_layout(); operator='random_layout'; parent=None
