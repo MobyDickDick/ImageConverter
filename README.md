@@ -1,5 +1,19 @@
 # ImageConverter
 
+Die Einzelkonvertierung bietet **Automatisch mit neuen Seeds fortsetzen**:
+Jedes Suchende startet einen neuen Versuch; ein erneuter Klick stoppt den Lauf.
+Das beste Ergebnis aller Versuche bleibt sichtbar und speicherbar, auch nach
+einem schlechteren Versuch. Der Ablauf läuft bei geschlossenem Browser weiter
+und endet beim Beenden des Servers. Zum Aktivieren nach Abschluss laufender
+Aufträge den Webserver neu starten und die Seite neu laden.
+
+`AC0222_L.jpg` wird mit unveränderter Beschreibung vollständig konvertiert:
+drei gleichschenklige Dreiecke mit eigenen Verläufen, gemeinsamer Spitze und
+Griff zum leeren Kreis. Die tatsächlichen GUI-Läufe mit Seeds 17/18 und den
+Profilen quick/normal bestehen auch den unabhängigen librsvg-Vergleich
+(Vordergrund-IoU 0,9646). SVG und Messwerte liegen im Projekt.
+[GitHub-Prüfungen und echter automatischer Mehrfachlauf](https://github.com/MobyDickDick/ImageConverter/actions/runs/45060595171).
+
 Seit 22. November 2026 erhält jede Aufgabe einen eigenen Branch. Tests,
 Testkonvertierungen und Benchmarks laufen ausschliesslich auf GitHub Actions.
 Die Untersuchung von `AC0233_L.jpg` erklärt die unvollständige Modellauswahl,

@@ -61,7 +61,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
       - run: python -m pip install -r requirements-dev.txt
       - run: mkdir -p ci-evidence
-      - name: Record complete existing GUI suite on the base and current code with the same seed
+      - name: Record two complete GUI runs per revision with the same seed
         env:
           OPENBLAS_NUM_THREADS: '1'
           IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
@@ -70,8 +70,10 @@ jobs:
           import pytest
           from src import imageConverterGui as gui
           gui.secrets.randbits = lambda bits: 17
-          raise SystemExit(pytest.main(['-q', 'tests/test_image_converter_gui.py',
-              '--basetemp=ci-evidence/gui', '--junitxml=ci-evidence/gui.xml']))
+          codes = [pytest.main(['-q', 'tests/test_image_converter_gui.py',
+              f'--basetemp=ci-evidence/gui-{trial}', f'--junitxml=ci-evidence/gui-{trial}.xml'])
+              for trial in (1, 2)]
+          raise SystemExit(max(codes))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -95,12 +97,13 @@ jobs:
           from pathlib import Path
           from xml.etree import ElementTree as ET
           def failures(label):
-              root = ET.parse(Path('baseline-comparison')/f'existing-gui-{label}'/'gui.xml')
-              return {t.get('name') for t in root.iter('testcase')
+              paths = list((Path('baseline-comparison')/f'existing-gui-{label}').glob('gui-*.xml'))
+              assert len(paths)==2, paths
+              return {t.get('name') for path in paths for t in ET.parse(path).iter('testcase')
                       if t.find('failure') is not None or t.find('error') is not None}
           base, current = failures('base'), failures('current')
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
-              stream.write(f'Existing GUI suite: base {len(base)} failures, current {len(current)} failures.\n\n')
+              stream.write(f'Existing GUI suite (union of two seeded runs): base {len(base)} failing cases, current {len(current)} failing cases.\n\n')
               stream.write('\n'.join('- '+name for name in sorted(current)))
           assert not current-base, f'New failures: {sorted(current-base)}'
           PY
