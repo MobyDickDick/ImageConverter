@@ -67,10 +67,13 @@ def fit_plain_disk(width, height, *, description, image, render_fn, error_fn):
         return None
     annulus = (radial > outer_radius*.8) & (radial < outer_radius+1)
     rim = np.percentile(pixels[annulus], 10, axis=0)
-    if np.mean(fill-rim) < 15:
+    outlined = np.mean(fill-rim) >= 15
+    if not outlined and any(word in text for word in ('rand', 'kontur', 'umrandung')):
         return None
-    radius = outer_radius-.4
-    stroke_width = max(.7, outer_radius*.07)
+    radius = outer_radius-.4 if outlined else outer_radius
+    stroke_width = max(.7, outer_radius*.07) if outlined else 0.
+    if not outlined:
+        rim = fill.copy()
     parameters = np.r_[center, radius, stroke_width, fill, rim, background]
 
     def build(p):
@@ -83,7 +86,7 @@ def fit_plain_disk(width, height, *, description, image, render_fn, error_fn):
 
     def valid(p):
         cx, cy, r, sw = p[:4]
-        return (r >= 3 and .4 <= sw <= r*.3
+        return (r >= 3 and (sw == 0 or .4 <= sw <= r*.3)
                 and r+sw/2 <= min(cx, cy, width-cx, height-cy)+.5
                 and np.linalg.norm(p[:2]-center) <= 2
                 and abs(r-radius) <= 2 and np.all((p[4:] >= 0) & (p[4:] <= 255)))

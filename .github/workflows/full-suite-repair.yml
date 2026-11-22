@@ -23,6 +23,7 @@ jobs:
           python-version: '3.10'
       - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
       - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-suite
       - name: Record observed geometry at fitter rejection sites
         env:
           OPENBLAS_NUM_THREADS: '1'
@@ -50,6 +51,7 @@ jobs:
           python-version: '3.10'
       - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
       - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-suite
       - name: Verify shared causes before the complete suite
         env:
           OPENBLAS_NUM_THREADS: '1'

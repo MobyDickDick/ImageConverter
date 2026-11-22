@@ -229,7 +229,7 @@ def _vertices(points, closed, epsilon=.01):
     return cv2.approxPolyDP(points.astype(np.float32).reshape(-1, 1, 2), epsilon, closed)[:, 0].astype(float)
 
 
-def logical_inventory(svg, limits, symbol_strokes=0):
+def logical_inventory(svg, limits, symbol_strokes=0, diagonal_rails=False):
     root = ET.fromstring(svg)
     inventory = dict.fromkeys(limits, 0)
     viewport_matrix = np.eye(2)
@@ -261,6 +261,7 @@ def logical_inventory(svg, limits, symbol_strokes=0):
             except ValueError:
                 pass
     rectangles = {}
+    rails = []
     visible = list(drawing_nodes(root))
     substantial_rectangles = 0
     for _, n in visible:
@@ -364,6 +365,18 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                 continue
         if tag in {'polygon', 'polyline', 'path'}:
             paths = path_points(node)
+            if diagonal_rails and len(paths) == 1 and paths[0][1]:
+                points = paths[0][0] @ matrix.T+translation
+                if len(points) >= 4:
+                    box = cv2.boxPoints(cv2.minAreaRect(points.astype(np.float32)))
+                    edges = np.roll(box, -1, axis=0)-box
+                    lengths = np.linalg.norm(edges, axis=1)
+                    direction = edges[int(np.argmax(lengths))]
+                    if (min(lengths) > 0 and max(lengths) > 8*min(lengths)
+                            and np.ptp(points[:, 0]) > vw*.5 and np.ptp(points[:, 1]) > vh*.6):
+                        if fields.get(node.get('fill', 'none'), 0) < cv2.contourArea(points.astype(np.float32))*4:
+                            rails.append(bool(direction[0]*direction[1] > 0))
+                        continue
             if not paths:
                 # Curves and compound/unknown paths must not disappear from
                 # the closed inventory and hide additional painted objects.
@@ -413,11 +426,16 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                     inventory[kind] = inventory.get(kind, 0)+1
             continue
         inventory[kind] = inventory.get(kind, 0)+1
+    if rails:
+        # Exactly one split diagonal (two rails) and one solid diagonal.
+        # Extra long strokes remain extra inventory rather than disappearing.
+        count = 2 if len(rails) == 3 and len(set(rails)) == 2 else len(rails)
+        inventory['diagonal'] = inventory.get('diagonal', 0)+count
     return inventory
 
 
-def validate_object_limits(svg, limits, *, partial=False, complete=False, symbol_strokes=0, text_count=None):
-    actual = logical_inventory(svg, limits, symbol_strokes)
+def validate_object_limits(svg, limits, *, partial=False, complete=False, symbol_strokes=0, text_count=None, diagonal_rails=False):
+    actual = logical_inventory(svg, limits, symbol_strokes, diagonal_rails)
     if text_count is not None:
         actual['text'] = text_count
     for kind, expected in limits.items():

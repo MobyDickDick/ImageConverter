@@ -278,8 +278,9 @@ def description_assertions(description: str) -> dict:
         # consists of two rails. Its visible-structure validator checks both
         # rails and the other axis; a flat SVG-wide count would count three
         # strokes as three diagonals or confuse the rails with all scene lines.
-        for kind in ('line', 'diagonal'):
+        for kind in ('line',):
             assertions.get('objects', {}).pop(kind, None)
+        assertions.setdefault('objects', {})['diagonal'] = 2
     # Global, positive claims only. Quoted labels and negative clauses must
     # never turn into an instruction to regularize the drawing.
     uniform = (r'\b(?:alle|sämtliche)\s+(?:linien|striche|konturen)\s+'
@@ -516,6 +517,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         try:
             validate_object_limits(svg, assertions['objects'], partial=assertions.get('objects_partial', False),
                                    complete=assertions.get('objects_complete', False), symbol_strokes=assertions.get('symbol_strokes', 0),
-                                   text_count=len(assertions['labels']) if assertions.get('labels') else None)
+                                   text_count=len(assertions['labels']) if assertions.get('labels') else None,
+                                   diagonal_rails=bool(assertions.get('hollow_cross_panel')))
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc

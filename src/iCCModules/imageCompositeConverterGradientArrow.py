@@ -117,11 +117,14 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
         score = float(quality_fn(raster)) if quality_fn is not None else error
         return (error, content, raster, score) if np.isfinite(score) else None
 
+    original_parameters = [tip_x, tip_y, lx, rx, float(base), float(sx), float(start),
+                           float(ex-sx), float(bottom-start), 0., 0., 0.]
+    original = measure(original_parameters)
     best = measure(parameters)
     if best is None:
         return None
-    initial_error = best[0]
-    evaluations = 1
+    initial_error = original[0] if original is not None else best[0]
+    evaluations = 2
     for step in refinement_steps:
         for index in range(len(parameters)):
             for sign in (-1., 1.):
