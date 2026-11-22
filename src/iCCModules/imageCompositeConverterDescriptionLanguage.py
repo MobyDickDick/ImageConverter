@@ -318,7 +318,10 @@ def description_assertions(description: str) -> dict:
         ray_count = re.search(r'\b(\d+)\s+(?:sprüh)?strahlen\b', words)
         if ray_count and spray_contract(description) and _dashed_spray_rays(description):
             assertions['dashed_spray_rays'] = int(ray_count.group(1))
-    if not objects:
+    # A global width condition can constrain an explicitly supplied SVG
+    # without declaring a new scene. Fresh generation still has no objects
+    # to construct; existing native geometry must satisfy the condition.
+    if not objects and not assertions.get('equal_stroke_width'):
         assertions['inventory_error'] = 'missing_described_object_inventory'
     elif unnamed_text:
         assertions['inventory_error'] = 'unresolved_described_label'

@@ -263,7 +263,7 @@ class ImageSearch:
         import zlib
         renderer = renderer or getattr(render_fn, 'search_renderer',
             render_fn.__module__+'.'+getattr(render_fn, '__qualname__', type(render_fn).__name__))
-        key = (str(renderer), int(width), int(height), candidate_identity(svg))
+        key = (raster_identity(image), str(renderer), int(width), int(height), candidate_identity(svg))
         if key in self.render_memo:
             self.render_cache_hits += 1
             self.render_memo.move_to_end(key)

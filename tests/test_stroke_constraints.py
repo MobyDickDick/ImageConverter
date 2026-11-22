@@ -122,6 +122,7 @@ def test_width_violation_cannot_become_a_pixel_perfect_checkpoint():
     session.description_assertions = description_assertions(CONDITION)
     svg = linework(1, 3)
     image = render_svg(svg, 64, 64)
+    session.bind_reference(image)
     saved = []
     session.on_validated = lambda *args: saved.append(args)
     with image_search(session), pytest.raises(DescriptionRejected, match='unequal_line_widths'):

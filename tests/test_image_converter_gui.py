@@ -424,6 +424,7 @@ def test_slot_stays_reserved_until_process_cleanup(jobs, monkeypatch, background
     ("converted_svgs/UPLOAD.svg", 1, False, "warning"),
 ])
 def test_result_quality_uses_cli_failures_and_failed_svg_names(jobs, job, filename, returncode, failures, quality):
+    job['description'] = 'Ein Kreis.'
     folder = jobs.folder(job["id"])
     svg = folder / "output" / filename
     svg.parent.mkdir(parents=True)
@@ -442,6 +443,7 @@ def test_result_quality_uses_cli_failures_and_failed_svg_names(jobs, job, filena
 
 
 def test_pixel_pass_without_model_confirmation_remains_a_draft(jobs, job):
+    job['description'] = 'Ein Kreis.'
     folder = jobs.folder(job['id'])
     output = folder/'output'
     (output/'converted_svgs').mkdir(parents=True)
@@ -958,10 +960,12 @@ def test_legacy_ready_job_gets_one_persistent_seed(jobs):
 
 @pytest.mark.parametrize('evaluations', [0, 123])
 def test_draft_reports_whether_additional_model_search_actually_ran(jobs, job, monkeypatch, evaluations):
+    job['description'] = 'Ein Kreis.'
     folder = jobs.folder(job['id'])
     output = folder/'output'
     (output/'converted_svgs').mkdir(parents=True)
-    (output/'converted_svgs'/'UPLOAD.svg').write_text('<svg/>')
+    (output/'converted_svgs'/'UPLOAD.svg').write_text(
+        '<svg width="32" height="24"><circle cx="16" cy="12" r="7"/></svg>')
     (output/'search').mkdir()
     event = dict(event='image_search_finished', candidate_evaluations=evaluations,
                  stop_reason='supported_models_exhausted', satisfactory=False)

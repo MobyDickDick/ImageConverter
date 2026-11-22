@@ -1057,7 +1057,11 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     if reject_raster_result(result, job):
         return
     contain_result(result, job)
+    quality = saved_svg_quality(folder/'source.png', result)
+    job['pixel_quality'] = quality
     if reject_description_result(result, job):
+        report.update(passed=False, description_error=job['description_error'], pixel_quality=quality)
+        job['sample_report'] = report
         return
     # Recheck the actual deliverable, including old worker reports. A low
     # global pixel error cannot certify a described but collapsed arrow head.
@@ -1150,6 +1154,9 @@ def reject_raster_result(result: Path, job: dict) -> bool:
 def collect_result(folder: Path, job: dict, returncode: int) -> None:
     """Never equate a zero CLI exit code or an existing SVG with passed quality."""
     output = folder / "output"
+    summary = search_summary(output)
+    if summary is not None:
+        job['search_summary'] = summary
     candidates = [output / "converted_svgs" / "UPLOAD.svg"]
     for subdirectory in ("converted_svg_failed", "converted_svgs"):
         candidates.append(output / subdirectory / "Failed_UPLOAD.svg")
@@ -1164,6 +1171,8 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         if reject_raster_result(result, job):
             return
         contain_result(result, job)
+        quality = saved_svg_quality(folder / 'source.png', result)
+        job['pixel_quality'] = quality
         if reject_description_result(result, job):
             return
         shutil.copyfile(result, folder / "result.svg")
