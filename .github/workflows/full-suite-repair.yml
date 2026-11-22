@@ -1,0 +1,63 @@
+name: Full suite repair
+
+on:
+  push:
+    branches: ['codex/green-full-suite']
+  workflow_dispatch:
+
+concurrency:
+  group: full-suite-repair-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  platform-foundations:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify imports, persistence and mandatory semantic validation
+        run: >-
+          python -m pytest -q tests/detailtests/test_dependency_helpers.py
+          tests/test_description_language.py tests/test_conversion_persistence.py
+          tests/test_conversion_power.py --junitxml=ci-suite/platform.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: suite-platform-${{ matrix.os }}
+          path: ci-suite/
+  ordinary-suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Run every ordinary pytest module
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: python -m tools.run_suite_shard --shard ${{ matrix.shard }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-suite-shard-${{ matrix.shard }}
+          path: ci-suite/
+          retention-days: 7

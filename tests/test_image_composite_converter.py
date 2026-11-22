@@ -29,6 +29,8 @@ def test_vendored_site_packages_dirs_discovers_repo_bundle(monkeypatch: pytest.M
     """Repo-local bundled site-packages should be discoverable for optional imports."""
     windows_venv_dir = tmp_path / ".venv" / "Lib" / "site-packages"
     windows_venv_dir.mkdir(parents=True)
+    from types import SimpleNamespace
+    monkeypatch.setattr(dependency_helpers, 'os', SimpleNamespace(name='nt'))
     monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
 
     dirs = image_composite_converter._vendored_site_packages_dirs()
@@ -38,8 +40,10 @@ def test_vendored_site_packages_dirs_discovers_repo_bundle(monkeypatch: pytest.M
 
 def test_vendored_site_packages_dirs_discovers_vendor_linux_bundle(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     """Dedicated vendor/linux-py310 bundles should be discoverable without using .venv."""
-    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    vendor_dir = tmp_path / "vendor" / f"linux-py{sys.version_info.major}{sys.version_info.minor}" / "site-packages"
     vendor_dir.mkdir(parents=True)
+    from types import SimpleNamespace
+    monkeypatch.setattr(dependency_helpers, 'os', SimpleNamespace(name='posix'))
 
     monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
 
@@ -50,7 +54,7 @@ def test_vendored_site_packages_dirs_discovers_vendor_linux_bundle(monkeypatch: 
 
 def test_vendored_site_packages_dirs_prefers_linux_vendor_on_linux(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     """Linux vendor bundles should be attempted before Windows-style repo environments."""
-    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    vendor_dir = tmp_path / "vendor" / f"linux-py{sys.version_info.major}{sys.version_info.minor}" / "site-packages"
     venv_dir = tmp_path / ".venv" / "Lib" / "site-packages"
     vendor_dir.mkdir(parents=True)
     venv_dir.mkdir(parents=True)
@@ -61,11 +65,12 @@ def test_vendored_site_packages_dirs_prefers_linux_vendor_on_linux(monkeypatch: 
     from types import SimpleNamespace
     monkeypatch.setattr(dependency_helpers, "os", SimpleNamespace(name="posix"))
     dirs = image_composite_converter._vendored_site_packages_dirs()
-    assert dirs.index(vendor_dir) < dirs.index(venv_dir)
+    assert vendor_dir in dirs
+    assert venv_dir not in dirs  # Windows binaries are not a Linux fallback.
 
 
-def test_activate_vendored_site_packages_prepends_repo_bundles(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    """Eager converter imports should see vendored packages before submodule imports run."""
+def test_activate_vendored_site_packages_keeps_environment_before_repo_bundles(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Fallbacks stay available without shadowing the installed environment."""
     first_vendor = tmp_path / "vendor" / "linux-py310" / "site-packages"
     second_vendor = tmp_path / ".venv" / "lib" / "python3.10" / "site-packages"
     first_vendor.mkdir(parents=True)
@@ -78,7 +83,8 @@ def test_activate_vendored_site_packages_prepends_repo_bundles(monkeypatch: pyte
     )
 
     assert activated == [first_vendor, second_vendor]
-    assert sys.path[:2] == [str(first_vendor), str(second_vendor)]
+    assert sys.path[0] == 'existing-entry'
+    assert sys.path[-2:] == [str(first_vendor), str(second_vendor)]
     assert sys.path.count(str(second_vendor)) == 1
 
 

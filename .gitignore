@@ -56,6 +56,7 @@ htmlcov/
 /.tmp/
 /ci-evidence/
 
+
 # Default for EVERY evaluation, including newly named studies: only compact
 # review/replay metadata is added to Git. Raw CLI trees, rasters, vectors and
 # logs remain disposable, without needing another rule for each experiment.
@@ -131,3 +132,14 @@ htmlcov/
 !/artifacts/evaluation/neural_real_regions_v*/models/
 # Local recycle bin for originals removed through the catalog UI.
 /artifacts/deleted_samples/
+
+# Seals and immutable independent-oracle inputs are test fixtures, not output.
+!/artifacts/evaluation/fallback_checker_v1/seal.json
+!/artifacts/evaluation/fallback_checker_v1/checker.py
+!/artifacts/evaluation/fallback_checker_v1/evaluator.py
+!/artifacts/evaluation/fallback_checker_v1/historical/
+!/artifacts/evaluation/fallback_checker_v1/historical/*.svg
+!/artifacts/evaluation/segment_checker_v1/seal.json
+!/artifacts/evaluation/segment_checker_v1/checker.py
+!/artifacts/evaluation/segment_checker_v1/strict_checker.py
+!/artifacts/evaluation/segment_checker_v1/evaluator.py

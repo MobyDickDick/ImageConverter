@@ -165,6 +165,8 @@ def validated_result(result, image, *, scope='full_scene'):
     if session is None:
         return False
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope
+    if scope == 'full_scene' and session.reference_identity is None:
+        session.bind_reference(image)
     # Public entry points bind the unmodified source before any subfit. A
     # masked/copied stage cannot certify the full conversion, even at zero loss.
     if scope != 'full_scene' or not session.is_reference(image):
