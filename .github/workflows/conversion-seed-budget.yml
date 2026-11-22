@@ -28,6 +28,8 @@ jobs:
           python -m pytest -q tests/test_joined_triangle_badge.py
           tests/test_primitive_evolution.py tests/test_seed_search_effect.py
           tests/test_description_registration_search.py tests/test_unified_search_context.py
+          tests/test_polygon_renderer_closure.py tests/detailtests/test_rendering_gradient_compatibility.py
+          tests/detailtests/test_svg_gradient_references.py tests/test_scoped_paint.py
           --junitxml=ci-evidence/seed-budget.xml
       - uses: actions/upload-artifact@v4
         if: always()
@@ -63,3 +65,37 @@ jobs:
           name: conversion-${{ matrix.profile }}-seed-${{ matrix.seed }}
           path: .tmp/profile-evidence/
           retention-days: 7
+  compare-profiles:
+    needs: [contracts, gui-profiles]
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: conversion-*
+          path: profile-results
+      - name: Require real seed effects across all five profiles
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          rows=[json.loads(p.read_text()) for p in Path('profile-results').glob('*/summary.json')]
+          assert len(rows)==10, len(rows)
+          limits=dict(quick=45,normal=120,thorough=240,explore5=300,explore10=600)
+          table=['| Profile | Seed | Renderings | Seconds | IoU (librsvg) | Render trace |',
+                 '|---|---:|---:|---:|---:|---|']
+          for row in sorted(rows,key=lambda r:(limits[r['profile']],r['seed'])):
+              search=row['search_summary']
+              assert row['independent_quality']['passed']
+              assert search['limit_seconds']==limits[row['profile']], row
+              assert search['render_budget']==1000000, row
+              assert search['satisfactory'], row
+              table.append(f"| {row['profile']} | {row['seed']} | {search['renderings']} | "
+                           f"{row['elapsed']} | {row['independent_quality']['foreground_iou']:.4f} | "
+                           f"{search['render_sequence_sha256'][:16]} |")
+          for profile in limits:
+              paired=[r['search_summary']['render_sequence_sha256'] for r in rows if r['profile']==profile]
+              assert len(set(paired))==2, (profile,'Seeds produced identical render sequences')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as stream:
+              stream.write('\n'.join(table)+'\n')
+          PY

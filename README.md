@@ -1,5 +1,11 @@
 # ImageConverter
 
+Seit 22. November 2026 erhält jede Aufgabe einen eigenen Branch. Tests,
+Testkonvertierungen und Benchmarks laufen ausschliesslich auf GitHub Actions.
+Die Untersuchung von `AC0233_L.jpg` erklärt die unvollständige Modellauswahl,
+die identische Suchfolge trotz verschiedener Seeds und einen Rendererfehler
+bei diagonalen Farbverläufen. [Ursachen, Änderungen und GitHub-Prüfungen](docs/ac0233_seed_budget_2026-11-22.md).
+
 `AC0160_M.jpg` wird mit unveränderter Beschreibung vollständig konvertiert:
 eine unterteilte Raute mit parallelen Trennstrichen, Plus/Minus und Hintergrund-X.
 Teilflächen gehören jetzt zum gemeinsamen Umriss; die Anpassung bestimmt
@@ -914,6 +920,11 @@ python -m src.imageCompositeConverter \
 ```
 
 ## Tests and checks
+
+**Aktuelle Arbeitsregel:** Alle nachfolgenden Testbefehle werden in GitHub
+Actions ausgeführt. Historische Hinweise auf lokale Testläufe sind damit
+abgelöst. Für jede Aufgabe einen eigenen Branch erstellen und die zugehörigen
+Checks und Artefakte auf GitHub prüfen; siehe `AGENTS.md`.
 
 ### Lokale Arbeitskopie bereinigen
 

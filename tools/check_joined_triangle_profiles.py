@@ -7,9 +7,14 @@ import shutil
 import time
 from xml.etree import ElementTree as ET
 
+import cv2
+from PIL import Image,ImageDraw
+
 from src.imageConverterGui import Jobs, ROOT, PROFILES
 from src.iCCModules.imageCompositeConverterSceneProgram import scene_program, validate_program_svg
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions,validate_svg_assertions
+from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
+from tools.evaluate_svg_text_baseline import render_librsvg
 
 
 def main():
@@ -38,7 +43,7 @@ def main():
         result=next((p for p in candidates if p.parent.name=='converted_svgs'),None)
     report=dict(profile=args.profile,seed=str(args.seed),status=final.get('status'),
                 message=final.get('message'),elapsed=final.get('elapsed'),
-                pixel_quality=final.get('pixel_quality'),search_control=final.get('search_control'))
+                pixel_quality=final.get('pixel_quality'),search_summary=final.get('search_summary'))
     (args.output/'summary.json').write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
     assert final.get('result'),report
     assert result is not None and result.is_file(),report
@@ -48,6 +53,23 @@ def main():
     shutil.copyfile(result,args.output/'result.svg')
     shutil.copyfile(source,args.output/'original.jpg')
     assert final.get('pixel_quality',{}).get('passed'),report
+    reference=cv2.imread(str(source))
+    independent=render_librsvg(svg,reference.shape[1],reference.shape[0])
+    quality=pixel_quality(reference,independent)
+    report['independent_quality']=quality
+    cv2.imwrite(str(args.output/'result-librsvg.png'),independent)
+    (args.output/'summary.json').write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
+    assert quality['passed'],report
+    assert report['search_summary'] is not None,report
+    assert report['search_summary']['search_seed']==str(args.seed),report
+    # Rendered by GitHub only, retained as a reviewable original/SVG comparison.
+    comparison=Image.new('RGB',(440,335),'white')
+    draw=ImageDraw.Draw(comparison)
+    for x,label,raster in ((10,'Original',reference),(230,'SVG (librsvg)',independent)):
+        draw.text((x,5),label,fill='black')
+        picture=Image.fromarray(cv2.cvtColor(raster,cv2.COLOR_BGR2RGB)).resize((200,300),Image.Resampling.NEAREST)
+        comparison.paste(picture,(x,25))
+    comparison.save(args.output/'comparison.png')
 
 
 if __name__=='__main__':

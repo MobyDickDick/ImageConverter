@@ -116,7 +116,8 @@ def test_labels_and_three_shared_apices_are_checked_on_the_output():
         validate_program_svg(ET.tostring(root,encoding='unicode'),program)
 
 
-def test_failed_population_replays_real_candidates_and_uses_larger_work_budget(tmp_path):
+@pytest.mark.parametrize('text',['Ein Kreis.',None])
+def test_failed_population_replays_real_candidates_and_uses_larger_work_budget(tmp_path,text):
     # This independent raster cannot be explained by a single circle. A larger
     # work budget must continue the search, even when the incumbent stays equal.
     raster=(np.indices((20,24)).sum(axis=0)%4<2).astype('uint8')*180+40
@@ -126,7 +127,7 @@ def test_failed_population_replays_real_candidates_and_uses_larger_work_budget(t
         def observed(svg,w,h):
             calls.append(svg)
             return render(svg,w,h)
-        result=evolve_primitives(image,'Ein Kreis.',observed,seed=seed,seconds=10,
+        result=evolve_primitives(image,text or description(),observed,seed=seed,seconds=10,
                                   max_evaluations=budget)
         return result,calls
     first,a=run(17,64); replay,b=run(17,64); other,c=run(18,64); longer,d=run(17,128)
