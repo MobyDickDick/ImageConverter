@@ -1,5 +1,6 @@
 """The unmodified circle-valve description must produce complete native geometry."""
 from pathlib import Path
+import threading
 from xml.etree import ElementTree as ET
 
 import cv2
@@ -69,10 +70,40 @@ def test_real_worker_and_independent_renderer(tmp_path, monkeypatch, profile, se
             wing = next(e for e in root if e.tag.rsplit('}',1)[-1]=='path')
             if fault=='missing_wing': root.remove(wing)
             elif fault=='filled_circle': circle.set('fill','gray')
-            elif fault=='unequal_sides': wing.set('transform','translate(.5 0)')
+            elif fault=='unequal_sides':
+                coordinates = wing.get('d').split()
+                coordinates[5] = str(float(coordinates[5])+1)
+                wing.set('d', ' '.join(coordinates))
             else: wing.set('fill','gray')
             for assertions in (description_assertions(DESCRIPTION), draft_assertions(description_assertions(DESCRIPTION))):
                 with pytest.raises(DescriptionRejected):
                     validate_svg_assertions(ET.tostring(root,encoding='unicode'), assertions)
+    finally:
+        jobs.close()
+
+
+def test_real_server_loop_runs_new_seeds_and_keeps_the_winner_on_stop(tmp_path, monkeypatch):
+    monkeypatch.setattr(gui, 'catalog_descriptions', lambda: {})
+    jobs = gui.Jobs(tmp_path/'jobs')
+    jobs.project_directory = tmp_path/'project'
+    completed, stopped = [], threading.Event()
+    def on_result(job_id):
+        completed.append(job_id)
+        if len(completed)>=2 and not stopped.is_set():
+            jobs.seed_retry.stop(job_id)
+            stopped.set()
+    jobs.on_result = on_result
+    try:
+        uploaded = jobs.upload('neutral-loop.jpg', (ROOT/'artifacts/images_to_convert/AC0222_L.jpg').read_bytes())
+        first = jobs.seed_retry.toggle(uploaded['id'], DESCRIPTION, 'quick', seed=17, use_current_svg=False)
+        assert stopped.wait(2*gui.PROFILES['quick'][1]+35)
+        session = jobs.seed_retry.session(first['id'])
+        assert not session['active'] and session['attempts']>=2
+        assert len({jobs.jobs[job_id]['search_seed'] for job_id in completed[:2]})==2
+        assert all(jobs.jobs[job_id]['result'] for job_id in completed[:2])
+        winner = jobs.folder(first['id'])/'seed-best.svg'
+        assert winner.is_file() and jobs.export_file(first['id'])==winner
+        validate_svg_assertions(winner.read_text(encoding='utf-8'), description_assertions(DESCRIPTION))
+        assert session['best_quality']['passed'] and not session['best_description_error']
     finally:
         jobs.close()

@@ -245,6 +245,11 @@ def fit_three_wing_valve(width, height, *, description, image, render_fn, error_
 
     def valid(v):
         ax,ay,lx,lt,lb,tl,tr,ty,bl,br,by,cx,r,sw,bw,cw=v[:16]
+        if circular:
+            if (min(ay-(lb-lt)/2-bw/2, ax-(tr-tl)/2-bw/2, ax-(br-bl)/2-bw/2)<0
+                    or ay+(lb-lt)/2+bw/2>height
+                    or max(ax+(tr-tl)/2+bw/2,ax+(br-bl)/2+bw/2)>width):
+                return False
         return (np.isfinite(v).all() and r>3 and lx<ax<cx-r and tl<ax<tr and bl<ax<br
                 and ty<ay<by and lt<ay<lb and .3<=min(sw,bw,cw) and max(sw,bw,cw)<r*.5
                 and min(lx-bw/2,tl-bw/2,bl-bw/2,ty-bw/2)>=0

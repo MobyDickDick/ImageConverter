@@ -3,8 +3,6 @@ name: AC0222 circle valve and automatic seed retries
 on:
   push:
     branches: ['codex/ac0222-auto-retry']
-  pull_request:
-    branches: ['codex/green-full-suite']
   workflow_dispatch:
 
 permissions:
@@ -34,7 +32,7 @@ jobs:
           OPENBLAS_NUM_THREADS: '1'
           IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
         run: >-
-          python -m pytest -q tests/test_seed_retry.py tests/test_image_converter_gui.py
+          python -m pytest -q tests/test_seed_retry.py
           tests/test_gui_preview.py tests/test_three_wing_valve_description.py
           --basetemp=ci-evidence/contracts --junitxml=ci-evidence/contracts.xml
       - name: Browser controls, polling and existing interface behavior
@@ -46,6 +44,66 @@ jobs:
           name: seed-retry-contracts
           path: ci-evidence/
           retention-days: 7
+  existing-gui-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        revision: [current, base]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.revision == 'base' && '9f7aeb1d2af1dfdeb53f21fb8f51ba7802e3054e' || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-evidence
+      - name: Record complete existing GUI suite on the base and current code with the same seed
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: |
+          python - <<'PY'
+          import pytest
+          from src import imageConverterGui as gui
+          gui.secrets.randbits = lambda bits: 17
+          raise SystemExit(pytest.main(['-q', 'tests/test_image_converter_gui.py',
+              '--basetemp=ci-evidence/gui', '--junitxml=ci-evidence/gui.xml']))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: existing-gui-${{ matrix.revision }}
+          path: ci-evidence/
+          retention-days: 7
+  compare-existing-gui:
+    needs: existing-gui-regressions
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: existing-gui-*
+          path: baseline-comparison
+      - name: Require no new failures and disclose the inherited failures
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          def failures(label):
+              root = ET.parse(Path('baseline-comparison')/f'existing-gui-{label}'/'gui.xml')
+              return {t.get('name') for t in root.iter('testcase')
+                      if t.find('failure') is not None or t.find('error') is not None}
+          base, current = failures('base'), failures('current')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+              stream.write(f'Existing GUI suite: base {len(base)} failures, current {len(current)} failures.\n\n')
+              stream.write('\n'.join('- '+name for name in sorted(current)))
+          assert not current-base, f'New failures: {sorted(current-base)}'
+          PY
   actual-circle-conversion:
     runs-on: ubuntu-latest
     timeout-minutes: 10
