@@ -9,6 +9,10 @@ on:
       - work
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   shared-search-context:
     runs-on: ubuntu-latest
