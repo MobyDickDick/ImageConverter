@@ -1,0 +1,3 @@
+*.py text eol=lf
+# Independent evidence uses byte hashes, including the historical line endings.
+artifacts/evaluation/** -text whitespace=cr-at-eol

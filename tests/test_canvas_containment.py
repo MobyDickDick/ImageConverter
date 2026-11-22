@@ -138,6 +138,7 @@ def test_model_validation_binds_the_bounded_svg_not_the_overflowing_candidate():
     image = render_svg(PUMP, 31, 31)[:, :, ::-1].copy()
     session = ImageSearch(SearchPolicy())
     session.description_assertions = description_assertions('Ein Kreis und ein Dreieck.')
+    session.bind_reference(image)
     result = dict(svg=PUMP, rendered=image)
     with image_search(session):
         assert validated_result(result, image)

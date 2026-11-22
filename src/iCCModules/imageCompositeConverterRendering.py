@@ -861,6 +861,7 @@ def render_svg_to_numpy_inprocess(
     fitz_module,
     np_module,
     cv2_module,
+    constrain_canvas=True,
 ):
     if fitz_module is None or np_module is None or cv2_module is None:
         return None
@@ -879,7 +880,8 @@ def render_svg_to_numpy_inprocess(
     try:
         # size_w/size_h may be a supersampled render, not the source canvas.
         # Constrain intrinsic SVG coordinates before choosing raster resolution.
-        svg_string = contain_svg(svg_string)
+        if constrain_canvas:
+            svg_string = contain_svg(svg_string)
     except (ValueError, ET.ParseError):
         try:
             svg_string = contain_svg(svg_string, size_w, size_h)
