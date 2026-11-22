@@ -8,6 +8,9 @@ import numpy as np
 import pytest
 import json
 import shutil
+import subprocess
+import io
+from PIL import Image
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
@@ -27,6 +30,24 @@ def description():
 
 def render(svg,w,h):
     return render_svg_to_numpy_inprocess(svg,w,h,fitz_module=fitz,np_module=np,cv2_module=cv2)
+
+
+@pytest.mark.parametrize('axis',[('0','0','1','1'),('1','0','0','1'),('0','.2','1','.8')])
+def test_diagonal_polygon_paint_matches_independent_renderer(axis):
+    svg=('<svg xmlns="http://www.w3.org/2000/svg" width="60" height="50">'
+        '<defs><linearGradient id="g" x1="%s" y1="%s" x2="%s" y2="%s">'%axis+
+        '<stop offset="0" stop-color="#aaaaaa"/><stop offset="1" stop-color="#eeeeee"/>'
+        '</linearGradient></defs><rect width="60" height="50" fill="white"/>'
+        '<polygon points="5,5 55,5 30,45" fill="url(#g)" stroke="#888888" stroke-width="1.5"/></svg>')
+    actual=render(svg,60,50)
+    converter=shutil.which('rsvg-convert')
+    if converter is None:
+        pytest.fail('Independent SVG renderer is required for this CI check')
+    raw=subprocess.run([converter,'-'],input=svg.encode(),capture_output=True,check=True).stdout
+    reference=cv2.cvtColor(np.asarray(Image.open(io.BytesIO(raw)).convert('RGB')),cv2.COLOR_RGB2BGR)
+    quality=pixel_quality(reference,actual)
+    assert quality['passed'],quality
+    assert actual[20,30].mean()>150  # Solid black is never a valid interpolation.
 
 
 def test_catalog_description_keeps_all_objects_and_original_label():

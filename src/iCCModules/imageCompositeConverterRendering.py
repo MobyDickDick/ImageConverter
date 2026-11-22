@@ -890,6 +890,10 @@ def render_svg_to_numpy_inprocess(
     renderer_svg = normalize_dashed_rectangles(renderer_svg)
     renderer_svg = normalize_dashed_lines(renderer_svg)
     renderer_svg = _resolve_local_gradient_references(renderer_svg)
+    # Route native polygons through the same closed-path paint adapter before
+    # measuring candidates. The polygon-only adapter handles axis-aligned
+    # gradients; diagonal gradients otherwise reach MuPDF as solid black.
+    renderer_svg = _close_polygons_for_fitz(renderer_svg)
     renderer_svg = _expand_rect_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)
     renderer_svg = _expand_axis_aligned_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_bezier_linear_gradients_for_fitz(renderer_svg,fitz_module=fitz_module,size_w=size_w,size_h=size_h)

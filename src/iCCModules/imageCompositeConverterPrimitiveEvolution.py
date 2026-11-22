@@ -111,7 +111,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     if session:
         # Finish the durable checkpoint and hand it back before the supervising
         # process enforces the same hard image deadline.
-        seconds=min(seconds,max(.001,session.limit-session.elapsed-min(2.,seconds*.02)))
+        seconds=min(seconds,max(.001,session.limit-session.elapsed-min(5.,seconds*.10)))
     started=time.monotonic()
     rng=np.random.default_rng(seed)
     binding=search_binding(image,description,program,color_order)
@@ -370,9 +370,12 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         score=float(mse+.035*(1-overlap)+.04*chamfer+.12*relations)
         item=dict(parameters=p,score=score,candidate=identity)
         improved=best is None or score<best['score']
-        if improved or score<.025 or operator=='join_declared_anchors':
+        if structured or improved or score<.025 or operator=='join_declared_anchors':
             quality,valid=check(svg,raster)
             item.update(quality=quality,valid=valid)
+            if structured:
+                improved=(best is None or (not valid,not quality['passed'],score)<
+                          (not best.get('valid'),not best.get('quality',{}).get('passed'),best['score']))
             if valid and (best_valid is None or score<best_valid['score']):
                 best_valid=item; valid_raster=raster.copy()
             if valid and quality['passed'] and (best_passed is None or score<best_passed['score']):
