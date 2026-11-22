@@ -217,5 +217,251 @@
     "total_evaluations": 11275,
     "trace_hash": "beeabf22c83718507e88b7d01e56d0990504af2f8f50f3755f71379da8fc05fd",
     "valid": true
+  },
+  "direct_final_implementation": {
+    "schema": "primitive_evolution_v1",
+    "program": {
+      "schema": "primitive_scene_program_v1",
+      "objects": [
+        {
+          "id": "circle_0",
+          "kind": "circle",
+          "side": "links"
+        },
+        {
+          "id": "triangle_0",
+          "kind": "triangle",
+          "side": "rechts"
+        },
+        {
+          "id": "triangle_1",
+          "kind": "triangle",
+          "side": "rechts"
+        },
+        {
+          "id": "line_0",
+          "kind": "line",
+          "side": "links"
+        }
+      ],
+      "relations": [
+        {
+          "kind": "attached",
+          "objects": [
+            "circle_0",
+            "line_0"
+          ],
+          "direction": 0.0
+        },
+        {
+          "kind": "coincident",
+          "objects": [
+            "triangle_0",
+            "triangle_1"
+          ],
+          "anchors": [
+            "apex",
+            "apex"
+          ]
+        },
+        {
+          "kind": "coincident",
+          "objects": [
+            "line_0",
+            "triangle_0"
+          ],
+          "anchors": [
+            "end",
+            "apex"
+          ]
+        }
+      ],
+      "isosceles": true,
+      "outline": false,
+      "no_gradient": false
+    },
+    "parameters": [
+      0.2895457740500255,
+      0.5017643892395907,
+      0.4847844846366071,
+      0.6302198300275892,
+      0.5696331412823276,
+      0.5635095350213364,
+      0.9535105492881839,
+      0.9535105492881839,
+      0.9535105492881839,
+      0.5583850884238487,
+      0.5583850884238487,
+      0.5583850884238487,
+      0.37477723391490286,
+      0.37477723391490286,
+      0.37477723391490286,
+      0.543463999802351,
+      0.7152859411033049,
+      0.7817580040287201,
+      0.7421893955248704,
+      0.36990015225340034,
+      0.5052780327650883,
+      0.7485417198814108,
+      0.21857674233824223,
+      0.7167748400737274,
+      0.7167748400737274,
+      0.7167748400737274,
+      0.6124748697725881,
+      0.6124748697725881,
+      0.6124748697725881,
+      0.4965401558420453,
+      0.4965401558420453,
+      0.4965401558420453,
+      0.38107876334617513,
+      0.8002881299562057,
+      0.7896772403114627,
+      0.27596754982890453,
+      0.3479114783424831,
+      0.47615883596793157,
+      0.25880034672296354,
+      0.4346406663768524,
+      0.715873525994691,
+      0.715873525994691,
+      0.715873525994691,
+      0.5310467402571706,
+      0.5310467402571706,
+      0.5310467402571706,
+      0.24383564482782139,
+      0.24383564482782139,
+      0.24383564482782139,
+      0.361099028992489,
+      1.0,
+      0.6560007061818766,
+      0.5017643892395907,
+      0.24812537962709524,
+      0.2732665947762413,
+      0.0,
+      0.8138550593381916,
+      0.7851901311810913,
+      0.7851901311810913,
+      0.7851901311810913,
+      0.5657444772636974,
+      0.5657444772636974,
+      0.5657444772636974,
+      0.25359463101127355,
+      0.25359463101127355,
+      0.25359463101127355,
+      0.390723901523122,
+      0.10043653527441754
+    ],
+    "evaluations": 20216,
+    "total_evaluations": 20216,
+    "distinct_geometries": 18492,
+    "restarts": 1474,
+    "operators": {
+      "random_layout": 1506,
+      "differential_mutation": 3322,
+      "local_mutation": 4738,
+      "replace_object": 2179,
+      "join_declared_anchors": 696,
+      "object_crossover": 1883,
+      "large_mutation": 4468,
+      "swap_object_poses": 1424
+    },
+    "stop_reason": "satisfactory",
+    "resumed": false,
+    "trace_hash": "55ce87eb54b74d976ee705624543c9a7a106d270ef0abe0367138b465b8796e6",
+    "checkpoint": "artifacts\\evaluation\\primitive_evolution_2026-11-21\\gui-jobs\\primitive-search-memory\\f2ff0d6b31528aa2a9ef6dc571c57a91b998efae6f6c8103af4d7120bd4014e2",
+    "elapsed_seconds": 172.891,
+    "quality": {
+      "normalized_mse": 0.006376269273459911,
+      "foreground_mse": 0.01760934479534626,
+      "foreground_iou": 0.8687392055267703,
+      "foreground_iou_binary": 0.8687392055267703,
+      "edge_alignment": 0.7205014228820801,
+      "passed": true
+    },
+    "valid": true
+  },
+  "live_url": "http://127.0.0.1:8767/?job=bebe9cac84ee4f06bd94e97dd4c22a12",
+  "independent_control": {
+    "schema": "primitive_evolution_v1",
+    "program": {
+      "schema": "primitive_scene_program_v1",
+      "objects": [
+        {
+          "id": "circle_0",
+          "kind": "circle"
+        },
+        {
+          "id": "rect_0",
+          "kind": "rect"
+        }
+      ],
+      "relations": [],
+      "isosceles": false,
+      "outline": false,
+      "no_gradient": false
+    },
+    "parameters": [
+      0.28872445593179125,
+      0.4931676179129443,
+      0.5049397218601778,
+      0.6885541661729696,
+      0.46047874389686383,
+      0.9842162273191567,
+      0.8680850238251279,
+      0.8680850238251279,
+      0.8680850238251279,
+      0.5552768838461373,
+      0.5552768838461373,
+      0.5552768838461373,
+      0.958747670351274,
+      0.958747670351274,
+      0.958747670351274,
+      0.656728652532998,
+      0.7814366302756036,
+      0.6442800783647883,
+      0.5191855880166899,
+      0.5230390251355547,
+      0.5168634545583518,
+      0.004546467819715497,
+      0.5872405342997836,
+      0.8028441680114828,
+      0.8028441680114828,
+      0.8028441680114828,
+      0.5052760032042428,
+      0.5052760032042428,
+      0.5052760032042428,
+      0.3289318394402056,
+      0.3289318394402056,
+      0.3289318394402056,
+      0.18246624329668737,
+      0.15080212536136667
+    ],
+    "evaluations": 9306,
+    "total_evaluations": 33144,
+    "distinct_geometries": 27029,
+    "restarts": 2733,
+    "operators": {
+      "random_layout": 2765,
+      "local_mutation": 8594,
+      "differential_mutation": 6066,
+      "large_mutation": 9434,
+      "replace_object": 4202,
+      "object_crossover": 1630,
+      "checkpoint_validation": 2,
+      "swap_object_poses": 451
+    },
+    "stop_reason": "time_limit",
+    "resumed": true,
+    "trace_hash": "5aacd099e88feaa9d12e58aaf1f2a4e91ccf0a0c20d28bfb019ff43ed45eba2e",
+    "checkpoint": "artifacts\\evaluation\\primitive_evolution_2026-11-21\\independent\\memory\\4dfb4a0d7db1c54f53f50d0bd684324e81cd7b7e54fbc8de1c840d45cfe1466f",
+    "elapsed_seconds": 90.047,
+    "quality": {
+      "normalized_mse": 0.03444701060652733,
+      "foreground_mse": 0.05713188275694847,
+      "foreground_iou": 0.5229415461973601,
+      "foreground_iou_binary": 0.5229415461973601,
+      "edge_alignment": 0.518780529499054,
+      "passed": false
+    },
+    "valid": true
   }
 }

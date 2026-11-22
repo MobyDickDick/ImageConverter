@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-22",
+  "focused_suite": {
+    "passed": 67,
+    "failed": 0
+  },
+  "larger_suite": {
+    "passed": 171,
+    "deselected_known_failures": 4
+  },
+  "additional_suite": {
+    "passed": 75,
+    "known_failures": 8
+  },
+  "javascript": {
+    "passed": 10,
+    "known_failures": 3
+  },
+  "known_failures_reproduced_with_HEAD": true,
+  "runtime_image_id_check": "passed",
+  "source_hashes": {
+    "src/iCCModules/imageCompositeConverterPrimitiveEvolution.py": "0005319d54f7c6b64c355f9bcbd608fb04a78367d74f7f3a52fa66a7e20a19c4",
+    "src/iCCModules/imageCompositeConverterSceneProgram.py": "7bf47e26002c5e5a049305922effc8f6eb2e17bb96e38f8ea2c6a162e2e4179d",
+    "src/imageConverterGui.py": "643c528213ae01d89788ff912d2d3a748cf848617487eb27877f68890f1e57f8",
+    "src/imageConverterPreview.py": "1bcc4f2bcca287dbd6fc435e8b5d8c1603cee0d495e45b1dad8c5ad80cc993bc",
+    "tests/test_primitive_evolution.py": "7c250cd6b1cb2a9e97bb3a0eafaefe37cd75c777492896779fb81230b74e8f39",
+    "tests/test_image_converter_gui.py": "43a3bcb9c01391a046c5c30fb64a50b314b25333db2a9423db302b9b6a7eac97"
+  }
+}

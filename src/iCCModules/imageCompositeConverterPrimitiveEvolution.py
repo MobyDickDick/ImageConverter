@@ -105,6 +105,10 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     seed=seed if seed is not None else config.get('seed',0)
     budget=max_evaluations if max_evaluations is not None else config.get('budget',1000000)
     seconds=seconds if seconds is not None else config.get('policy',None).seconds if config.get('policy') else 300.
+    if session:
+        # Finish the durable checkpoint and hand it back before the supervising
+        # process enforces the same hard image deadline.
+        seconds=min(seconds,max(.001,session.limit-session.elapsed-min(2.,seconds*.02)))
     started=time.monotonic()
     rng=np.random.default_rng(seed)
     binding=search_binding(image,description,program)

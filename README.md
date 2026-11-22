@@ -1,5 +1,15 @@
 # ImageConverter
 
+Die Einzelkonvertierung bietet jetzt eine **freie Grundformensuche mit fünf oder
+zehn Minuten Budget**: zufällige Populationen, grosse Änderungen, Austausch und
+Vertauschen ganzer Elemente sowie lokale Verfeinerung. Suchstände werden
+automatisch gespeichert und mit gleichem Bild, Beschreibung und Seed fortgesetzt.
+AC0204_L besteht damit die vollständige Prüfung; die gefundene Konstruktion ist
+im Projekt gespeichert. Der neue Pfad hat einen begrenzten Sprachumfang und
+garantiert keinen Erfolg bei jedem Motiv.
+[Bedienung und Grenzen](docs/free_primitive_search_2026-11-22.md),
+[Messungen und Tests](artifacts/evaluation/primitive_evolution_2026-11-21/README.md).
+
 Der Startabbruch für `AC0201.jpg` ist behoben: Ein Kreis mit zwei symmetrischen
 Innenlinien wird als vollständige Beschreibung ausgewertet. Die Beschreibung
 wurde nach Zustimmung auf die senkrechte Symmetrieachse korrigiert. Ein echtes

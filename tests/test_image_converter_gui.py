@@ -571,6 +571,15 @@ def test_free_search_rejects_unsupported_claim_before_launch(jobs,job):
         jobs.start(job['id'],'Ein Kreis mit Schrift "M".','explore5')
 
 
+def test_free_search_completion_does_not_rescan_every_rendered_attempt(jobs,job,monkeypatch):
+    from src.imageConverterPreview import AttemptJournal
+    job.update(profile='explore5',description='Ein Kreis.')
+    def forbidden(*args,**kwargs):
+        pytest.fail('The population engine already retains its best valid draft')
+    monkeypatch.setattr(AttemptJournal,'best',forbidden)
+    gui.retain_best_preview(jobs.folder(job['id']),job)
+
+
 def test_no_svg_is_an_error_even_with_zero_cli_exit(jobs, job):
     gui.collect_result(jobs.folder(job["id"]), job, 0)
     assert job["status"] == "error"

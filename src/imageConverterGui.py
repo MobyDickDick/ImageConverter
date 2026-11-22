@@ -858,7 +858,11 @@ def retain_best_preview(folder: Path, job: dict) -> None:
             return True
         except (ValueError, SyntaxError):
             return False
-    best = AttemptJournal(folder).best(validator=valid_inventory)
+    # The population engine and its live publisher already retain their best
+    # valid candidates. Rescanning tens of thousands of rejected observations
+    # here can otherwise add minutes after a five-minute search has finished.
+    best = (None if job.get('profile') in {'explore5', 'explore10'}
+            else AttemptJournal(folder).best(validator=valid_inventory))
     if best is not None:
         observed = folder/'best-observed.svg'
         observed.write_text(contain_svg(best['svg'], job['width'], job['height']), encoding='utf-8')
