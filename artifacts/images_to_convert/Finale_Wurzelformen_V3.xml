@@ -91,7 +91,7 @@
     <entry kind="einzelbild" key="z_201">
       <wurzelform>z_201</wurzelform>
       <beschreibung>Ein einzelnes waagerechtes, sehr flaches Rechteck ohne Kontur. Die rosa Füllung hat einen vertikalen Farbverlauf: oben gedämpftes Rosa, darunter ein hellerer rosafarbener Glanz, im unteren Bereich dunkleres Altrosa und am unteren Rand wieder ein kräftigeres Rosa.</beschreibung>
-      <bilder><bild>z_201.jpg</bild></bilder>
+      <bilder><bild beschreibung="Ein einzelnes waagerechtes, sehr flaches Rechteck ohne Kontur. Die rosa Füllung hat einen vertikalen Farbverlauf: oben gedämpftes Rosa, darunter ein hellerer rosafarbener Glanz, im unteren Bereich dunkleres Altrosa und am unteren Rand wieder ein kräftigeres Rosa." beschreibung_modus="ersetzen">z_201.jpg</bild></bilder>
     </entry>
     <entry kind="unzugeordnet" key="AC0241_L">
       <source_rows>158</source_rows>
@@ -410,7 +410,7 @@
       <wurzelform />
       <beschreibung>Eine gefüllte Kreisscheibe mit dünnem Rand auf hellem Hintergrund. Zwei schräge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen läuft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichstärken und Farben ergeben sich aus dem Bild.</beschreibung>
       <bilder>
-        <bild>AC0421_1_L.jpg</bild>
+        <bild beschreibung="Eine gefüllte Kreisscheibe mit dünnem Rand auf hellem Hintergrund. Zwei schräge Linien durchqueren den Kreis von nahe dem oberen Rand zu den seitlichen unteren Randbereichen und laufen nach oben aufeinander zu. Im Kreisinneren liegt eine offene Spirale mit nach innen abnehmendem Radius, die vom oberen Bereich gegen den Uhrzeigersinn nach innen läuft. Keine Schriftzeichen und kein Griff. Lage, Abmessungen, Strichstärken und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0421_1_L.jpg</bild>
       </bilder>
     </entry>
     <entry kind="unzugeordnet" key="AC0421_1_M">
@@ -2614,7 +2614,7 @@
       <beschreibung>Kompressor grau nach rechts</beschreibung>
       <bilder>
         <bild>AC0202.jpg</bild>
-        <bild beschreibung="Zuhinterst ist ein Kreis mit einem grauen Rand und einem roten Hintergrund. Bezüglich der horizontalen Symmetrieachse sind zwei gleich lange weisse Striche gezeichnet. Zuforderst ist ein gauer Kreisrand, welcher gleich gross und am gleichen Ort wie der Kreisrand des roten Kreises zuhinterst ist. Die Enden der zwei weissen Linien verschwindaben hinter dem grauen Kreisrand, berühren den grauen Kreisrand aber.. Die Endern der weissen Linien werden am Kreisrand abgeschitten." beschreibung_modus="ersetzen">AC0202_1.jpg</bild>
+        <bild beschreibung="Form wie AC0202_2.svg&#10;Hintergrundfarbe des Kreises ist rot." beschreibung_modus="ersetzen">AC0202_1.jpg</bild>
         <bild>AC0202_2.jpg</bild>
         <bild>AC0202_L.jpg</bild>
         <bild>AC0202_L_sia.jpg</bild>
@@ -2716,7 +2716,7 @@
       <beschreibung>Kompressor grauer Hintergrund nach oben.</beschreibung>
       <bilder>
         <bild>AC0222.jpg</bild>
-        <bild>AC0222_L.jpg</bild>
+        <bild beschreibung="Links: drei je gleichschenklige Dreiecke, welche sich in einem Punkt berühren.&#10;Das Innere der Dreieck hat jeweils einen Farbübergang.&#10;Rechts ist eine Kelle mit einem leeren Kreis und einem Griff nach links vorhanden." beschreibung_modus="ersetzen">AC0222_L.jpg</bild>
         <bild beschreibung="Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einem hellen Quadrat mit dunkler Randkontur. Die Diagonalen des Quadrats sind dunkelgrau gezeichnet. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0222_L_sia.jpg</bild>
         <bild>AC0222_M.jpg</bild>
         <bild beschreibung="Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einem hellen Quadrat mit dunkler Randkontur. Die Diagonalen des Quadrats sind dunkelgrau. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0222_M_sia.jpg</bild>
@@ -3377,7 +3377,7 @@
       <bilder>
         <bild>AC0704_1_L.jpg</bild>
         <bild>AC0704_1_M.jpg</bild>
-        <bild>AC0704_1_S.jpg</bild>
+        <bild beschreibung="Links Quadrat mit grauem Rand und rotem Hintergrund.&#10;Rechts: graue Linie&#10;&#10;Die Linie und das Quadrat sind symmetrisch in Bezug auf die Höhe. Die Linie berührt das Quadrat, ist aber hinter dem Quadrat." beschreibung_modus="ersetzen">AC0704_1_S.jpg</bild>
         <bild>AC0704_L.jpg</bild>
         <bild>AC0704_M.jpg</bild>
         <bild>AC0704_S.jpg</bild>
@@ -4316,7 +4316,7 @@
       <wurzelform>DLG0050</wurzelform>
       <beschreibung>Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.</beschreibung>
       <bilder>
-        <bild>DLG0050.jpg</bild>
+        <bild beschreibung="Es gibt zwe schwarze Linien, welche sich im Punkt unten links berühren.&#10;&#10;Wweiter gibt es eine geschwungene rote Linie oben rechts." beschreibung_modus="ersetzen">DLG0050.jpg</bild>
       </bilder>
     </entry>
     <entry kind="wurzelform" key="DLG0051">
@@ -4324,7 +4324,7 @@
       <wurzelform>DLG0051</wurzelform>
       <beschreibung>Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.</beschreibung>
       <bilder>
-        <bild>DLG0051.jpg</bild>
+        <bild beschreibung="WEE" beschreibung_modus="ersetzen">DLG0051.jpg</bild>
       </bilder>
     </entry>
     <entry kind="wurzelform" key="DLG0060">
