@@ -865,8 +865,13 @@ def render_svg_to_numpy_inprocess(
     fitz_module,
     np_module,
     cv2_module,
-    constrain_canvas=True,
+    constrain_canvas=False,
 ):
+    """Render the declared SVG viewport without changing candidate geometry.
+
+    Publication boundaries fit overflowing paint explicitly, then measure the
+    fitted vector. A model renderer must preserve the coordinates it scores.
+    """
     if fitz_module is None or np_module is None or cv2_module is None:
         return None
 

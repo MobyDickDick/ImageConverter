@@ -165,7 +165,7 @@ def render_svg(svg, width, height):
     # Use the same private gradient adapters as the converter: this PyMuPDF
     # build otherwise paints native SVG gradients black during GUI validation.
     image = render_svg_to_numpy_inprocess(svg, width, height,
-        fitz_module=fitz, np_module=np, cv2_module=cv2)
+        fitz_module=fitz, np_module=np, cv2_module=cv2, constrain_canvas=True)
     if image is None:
         raise ValueError("Das SVG konnte nicht gerendert werden.")
     if image.shape[:2] != (height, width):
@@ -276,12 +276,13 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
             validate_svg_assertions(svg, assertions)
             # Reuse the exact child render, including when its final proposal
             # spent the remaining budget. The CLI cache uses BGR pixels.
-            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity
+            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity, raster_identity
             renderer = 'src.imageCompositeConverter.Action.renderSvgToNumpy'
-            key = (renderer, w, h, candidate_identity(svg))
+            bgr_target = target[:, :, ::-1].copy()
+            key = (raster_identity(bgr_target), renderer, w, h, candidate_identity(svg))
             if key in session.render_memo:
                 import cv2
-                bgr, _ = session.render_candidate(target, svg, lambda *a: None, w, h, renderer=renderer)
+                bgr, _ = session.render_candidate(bgr_target, svg, lambda *a: None, w, h, renderer=renderer)
                 pixels = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB) if bgr is not None else None
             else:
                 pixels = render_svg(svg, w, h)

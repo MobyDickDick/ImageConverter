@@ -52,6 +52,18 @@ def test_containment_preserves_the_colored_canvas_backing():
     validate_svg_assertions(bounded, description_assertions('Ein Kreis auf grauem Hintergrund.'))
 
 
+def test_search_renderer_does_not_move_off_canvas_shapes_into_the_viewport():
+    import cv2
+    import fitz
+    from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+    svg = scene('<rect x="-20" y="4" width="5" height="5" fill="black"/>')
+    native = render_svg_to_numpy_inprocess(svg, 31, 31, fitz_module=fitz, np_module=np, cv2_module=cv2)
+    assert native is not None and native.min() == 255
+    bounded = render_svg_to_numpy_inprocess(contain_svg(svg), 31, 31,
+        fitz_module=fitz, np_module=np, cv2_module=cv2)
+    assert bounded is not None and bounded.min() == 0
+
+
 @pytest.mark.parametrize('body', [
     '<circle cx="15" cy="15" r="16" fill="green" stroke="gray" stroke-width="2"/>',
     '<g transform="translate(-8 12) rotate(25)"><rect width="40" height="12" stroke="black" stroke-width="4"/></g>',

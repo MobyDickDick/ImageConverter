@@ -69,21 +69,21 @@ def test_two_compensating_overlays_can_be_removed_together():
     assert any(p['origin'] == 'native_edit:remove_pair' and p['accepted'] for p in report['proposals'])
 
 
-def test_flat_parameter_strategies_retire_even_during_minimum_exploration():
+def test_flat_parameter_strategies_use_distinct_restarts_until_requested_minimum():
     clock = [0.]
     def measure(p):
         clock[0] += .001
         return 10., 10., str(tuple(p)), np.zeros((1, 1, 3), dtype=np.uint8)
     seed = np.zeros(5)
-    with search_configuration(mode='portfolio', adaptive=True, minimum_seconds=30):
+    with search_configuration(mode='portfolio', adaptive=True, minimum_seconds=.5):
         with configured_image_search('any motif') as session:
             session.clock, session.active_since = lambda: clock[0], 0.
             _, _, report = explore_parameters(seed, 3, measure, measure(seed), source='generic',
                 image=np.zeros((1, 1, 3)), satisfactory_fn=lambda *_: False)
-            assert session.minimum_pending
-    assert report['total_evaluations'] <= 128
-    assert report['stop_reason'] in {'all_bots_inactive', 'stagnation'}
-    assert all(worker['restarts'] == 0 for worker in report['attempts'])
+            assert not session.minimum_pending
+    assert clock[0] >= .5
+    assert report['total_evaluations'] > 128
+    assert any(worker['restarts'] > 0 for worker in report['attempts'])
 
 
 def test_small_changes_to_same_construction_cannot_reset_parameter_allowance():
@@ -220,7 +220,7 @@ def test_rejected_protected_detail_cannot_be_adopted_through_frontier_callback(m
     assert result['svg'] == seed
 
 
-def test_cli_artifact_path_uses_shared_search_even_without_minimum_time():
+def test_cli_artifact_writer_does_not_start_an_unrequested_search():
     from src.iCCModules.imageCompositeConverterIterationInitialization import prepareIterationRuntimeImpl
     target_svg = scene('<circle cx="32" cy="40" r="23" fill="#663344"/>')
     target = render(target_svg)
@@ -241,8 +241,9 @@ def test_cli_artifact_path_uses_shared_search_even_without_minimum_time():
             cv2_module=None, print_fn=lambda _: None)
         state['artifact_callbacks']['write_attempt_artifacts'](seed, failed=True)
     assert saved and saved[0][1]['failed'] is True  # no invented model approval
-    assert np.square(render(saved[0][0]).astype(float)-target).mean() < 1
-    assert params['vector_continuation']['improved']
+    assert saved[0][0] == seed
+    assert 'vector_continuation' not in params
+    assert session.renderings == 0
 
 
 def test_uploaded_template_enters_the_same_search_after_alignment_fails(tmp_path):
@@ -254,7 +255,7 @@ def test_uploaded_template_enters_the_same_search_after_alignment_fails(tmp_path
     source, sample, output = (tmp_path/name for name in ('neutral.png', 'template.svg', 'output.svg'))
     Image.fromarray(target[:, :, ::-1]).save(source)
     sample.write_text(seed, encoding='utf-8')
-    report = refine(source, sample, output, 'Ein geometrisches Motiv.', 3.)
-    assert report['continuation'] and report['passed']
+    report = refine(source, sample, output, 'Ein Kreis auf grauem Hintergrund.', 3.)
+    assert report['restarted_from_description'] and report['passed'], report
     assert report['final_mse'] < report['initial_mse']*.1
     assert not any(n.tag.endswith('image') for n in ET.parse(output).getroot().iter())
