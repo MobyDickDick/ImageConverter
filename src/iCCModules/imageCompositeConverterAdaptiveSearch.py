@@ -344,6 +344,8 @@ class SearchRun:
         reason = self.session.reason()
         if reason:
             return reason
+        if self.session.minimum_pending:
+            return None
         if self.session.finish_model_searches:
             return 'candidate_comparison'
         if self.proposals >= self.maximum:

@@ -9,10 +9,6 @@ TIMEOUT_SECONDS="${RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS:-240}"
 INPUT_DIR="${RC_GATE_AC08_INPUT_DIR:-artifacts/images_to_convert}"
 DESCRIPTIONS_PATH="${RC_GATE_AC08_DESCRIPTIONS_PATH:-artifacts/images_to_convert/Finale_Wurzelformen_V3.xml}"
 ITERATIONS="${RC_GATE_AC08_ITERATIONS:-32}"
-VENDOR_SITE_PACKAGES="vendor/linux-py310/site-packages"
-if [[ -d "$VENDOR_SITE_PACKAGES" ]]; then
-  export PYTHONPATH="${VENDOR_SITE_PACKAGES}:${PYTHONPATH:-}"
-fi
 STATUS_PATH="${EVIDENCE_DIR}/ac08_segment_status.csv"
 
 mkdir -p "$EVIDENCE_DIR"

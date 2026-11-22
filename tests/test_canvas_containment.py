@@ -40,6 +40,18 @@ def test_reported_pump_stroke_is_fitted_inside_original_canvas_without_cutting()
     assert within_canvas(result) and contain_svg(result) == result
 
 
+def test_containment_preserves_the_colored_canvas_backing():
+    original = scene('<rect width="31" height="31" fill="#d0d0d0"/>'
+                     '<circle cx="15" cy="15" r="16" fill="green"/>')
+    bounded = contain_svg(original)
+    root = ET.fromstring(bounded)
+    assert root[0].tag.rsplit('}', 1)[-1] == 'rect'
+    assert root[0].get('width') == root[0].get('height') == '31'
+    assert root.find('{*}g/{*}circle') is not None
+    assert within_canvas(bounded)
+    validate_svg_assertions(bounded, description_assertions('Ein Kreis auf grauem Hintergrund.'))
+
+
 @pytest.mark.parametrize('body', [
     '<circle cx="15" cy="15" r="16" fill="green" stroke="gray" stroke-width="2"/>',
     '<g transform="translate(-8 12) rotate(25)"><rect width="40" height="12" stroke="black" stroke-width="4"/></g>',

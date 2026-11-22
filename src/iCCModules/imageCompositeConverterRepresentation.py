@@ -119,6 +119,10 @@ def description_object_limits(text):
                 else 'square' if form.startswith('quadrat') else 'diagonal' if form.startswith('diagonale')
                 else 'ellipse' if form.startswith('ellipse') else 'triangle' if form.startswith('dreieck')
                 else 'rhombus' if form.startswith('raute') else 'line')
+        if kind in limits and re.search(
+                r'\b(?:(?:die|der|das|diese[nrms]?)\s+(?:(?:link|recht|ober|unter|vertikal|horizontal)[enrms]*\s+)*|(?:link|recht|ober|unter)[enrms]+\s+)$',
+                words[:match.start()]):
+            continue  # a definite reference describes an already counted instance
         limits[kind] = limits.get(kind, 0)+1
         seen.add(match[0])
     # A singular noun also declares an instance without an article, e.g.
@@ -144,7 +148,8 @@ def description_object_limits(text):
             limits['diagonal'] = 2
     # Composite vocabulary expands once; references to the same handle are not
     # additional scene objects. A Kelle is a circular head and a straight stem.
-    if re.search(r'\bkelle\b', words) and re.search(r'\bgriff\b', words):
+    if (re.search(r'(?<!keine )\bkelle\b', words) and re.search(r'\bgriff\b', words)
+            and not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:eine?\s+)?kelle\b', words)):
         limits['circle'] = max(1, limits.get('circle', 0))
         limits['line'] = max(1, limits.get('line', 0))
     return limits
@@ -281,6 +286,13 @@ def logical_inventory(svg, limits, symbol_strokes=0):
         return viewport_matrix @ np.array([[a, c], [b, d]]), viewport_matrix @ np.array([tx, ty])
     for location, node in drawing_nodes(root):
         tag = node.tag.rsplit('}', 1)[-1]
+        # A leading neutral backing cannot paint anything on the white canvas,
+        # even when a reference variation transforms it away from the edges.
+        # Later white rectangles can mask foreground and remain real objects.
+        if (visible and node is visible[0][1] and tag == 'rect'
+                and node.get('fill', '').lower() in {'white', '#fff', '#ffffff'}
+                and node.get('stroke', 'none') == 'none'):
+            continue
         kind = tag
         matrix, translation = displayed_matrix(location, node)
         if tag in {'circle', 'ellipse'}:

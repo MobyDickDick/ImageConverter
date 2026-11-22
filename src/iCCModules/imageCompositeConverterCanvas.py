@@ -204,8 +204,25 @@ def contain_svg(svg, width=None, height=None):
         group = ET.Element(f'{{{NS}}}g', transform=f'matrix({scale:.12g} 0 0 {scale:.12g} {local_x:.12g} {local_y:.12g})')
         original_transform = root.attrib.pop('transform', None)
         content = ET.SubElement(group, f'{{{NS}}}g', transform=original_transform) if original_transform else group
+        first_paint = True
         for child in list(root):
             if child.tag.rsplit('}', 1)[-1] not in NON_DRAWING:
+                # The viewport backing belongs to the canvas. Fitting it with
+                # an overflowing foreground exposes an unintended white rim.
+                backing = False
+                if first_paint and not original_transform and child.tag.rsplit('}', 1)[-1] == 'rect':
+                    try:
+                        backing = (not child.get('transform') and not child.get('style')
+                            and child.get('stroke', 'none') == 'none'
+                            and child.get('fill', 'black') != 'none'
+                            and not float(child.get('rx', '0')) and not float(child.get('ry', '0'))
+                            and all(abs(float(child.get(k, '0'))-v) < 1e-7
+                                    for k, v in zip(('x', 'y', 'width', 'height'), view)))
+                    except ValueError:
+                        pass
+                first_paint = False
+                if backing:
+                    continue
                 root.remove(child)
                 content.append(child)
         root.append(group)

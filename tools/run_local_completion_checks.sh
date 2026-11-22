@@ -6,10 +6,6 @@ REPORTS_DIR="artifacts/converted_images/reports"
 REQUIRE_DRIFT_SUMMARY=0
 REQUIRE_REPORT_CONSISTENCY=0
 PYTHON_BIN="${PYTHON:-python}"
-VENDOR_SITE_PACKAGES="vendor/linux-py310/site-packages"
-if [[ -d "$VENDOR_SITE_PACKAGES" ]]; then
-  export PYTHONPATH="${VENDOR_SITE_PACKAGES}:${PYTHONPATH:-}"
-fi
 
 usage() {
   cat <<'USAGE'
@@ -24,8 +20,8 @@ Runs the standard local completion profile:
   5. the report-consistency gate when conversion reports are present
   6. the chain-telemetry drift gate when a summary artifact is present
 
-The repo vendor path is prepended to PYTHONPATH when available so CLI smoke
-checks can resolve bundled runtime dependencies. By default both report gates
+The active Python environment supplies runtime dependencies. Compatible bundled
+packages are fallbacks managed by the application. By default both report gates
 are advisory: historical or partial checked-in artifacts must not fail a
 code-only completion profile. Use --require-report-consistency or
 --require-drift-summary to make the respective gate fatal.

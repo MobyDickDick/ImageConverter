@@ -151,6 +151,14 @@ def explore_bots_steps(parameters, geometry_count, measure, incumbent, *, source
         board.reason = None
 
     def retire(bot, reason):
+        if session.minimum_pending and reason in {'stagnation', 'duplicate_exhaustion'}:
+            # Spend the requested exploration floor on a distinct trust region.
+            # The shared cache still prevents replaying prior measurements.
+            bot.epoch += 1
+            bot.cursor = bot.stale = 0
+            bot.parameters, bot.best = board.best_p.copy(), board.best
+            emit(source, event='bot_restarted', **bot.record())
+            return
         bot.active, bot.stop_reason = False, reason
         emit(source, event='bot_deactivated', **bot.record())
 
