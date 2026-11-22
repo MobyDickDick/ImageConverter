@@ -20,7 +20,7 @@ def three_wing_valve_spec(description):
     words = ' '.join(normalize_description(description).casefold().split())
     circle = (
         r'links: drei je gleichschenklige dreiecke, welche sich in einem punkt berühren[.;] '
-        r'das innere der dreieck(?:e)? hat jeweils einen farbübergang[.;] '
+        r'das innere der dreieck(?:e)? hat jeweils einen farbverlauf[.;] '
         r'rechts ist eine kelle mit einem leeren kreis und einem griff nach links vorhanden[.]?'
     )
     if re.fullmatch(circle, words):
