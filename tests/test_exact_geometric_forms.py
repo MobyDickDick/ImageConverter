@@ -131,6 +131,6 @@ def test_wrong_square_template_is_reconstructed_as_circle_from_a_neutral_source(
     sample.write_text(drawing(),encoding='utf-8')
     description = DESCRIPTION.replace('ein Quadrat','einen Kreis')
     report = refine(source,sample,output,description,15.,seed=17)
-    assert report['passed'] and report['continuation']
+    assert report['passed'] and report['restarted_from_description']
     validate_svg_assertions(output.read_text(),description_assertions(description))
     assert ET.parse(output).find('.//{*}circle') is not None

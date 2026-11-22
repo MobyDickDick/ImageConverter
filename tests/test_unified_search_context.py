@@ -51,15 +51,17 @@ def test_raster_cache_is_independent_of_masked_objectives_but_not_backend():
     with image_search(session):
         session.bind_reference(target)
         first, fresh = session.render_candidate(target, SVG, render, 16, 16)
-        second, again = session.render_candidate(target+1, SVG, render, 16, 16)
+        second, again = session.render_candidate(target, SVG, render, 16, 16)
         assert fresh and not again and np.array_equal(first, second)
+        _, different_source = session.render_candidate(target+1, SVG, render, 16, 16)
+        assert different_source
         session.measured(SVG, 0., source='masked', scope='intermediate')
         session.measured(SVG, 9., source='whole', scope='full_scene', valid=True)
         assert session.objectives[('masked', 'intermediate')] == 0.
         assert session.objectives[('whole', 'full_scene')] == 9.
         assert session.best_error == 9. and not session.validated
         session.render_candidate(target, SVG, render, 16, 16, renderer='other_color_space')
-    assert len(calls) == session.renderings == 2
+    assert len(calls) == session.renderings == 3
 
 
 @pytest.mark.parametrize('mode,adaptive', [('legacy', False), ('portfolio', False), ('portfolio', True)])

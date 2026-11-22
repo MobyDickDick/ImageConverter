@@ -68,9 +68,9 @@ def prepareIterationRuntimeImpl(
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
             from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
-            from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+            from src.iCCModules.imageCompositeConverterCanvas import contain_svg, within_canvas
             bounded = contain_svg(svg_content, width, height)
-            if bounded != svg_content:
+            if bounded != svg_content and not within_canvas(svg_content, width, height):
                 # Positional arguments are the supplied render and diff. They
                 # describe the old geometry and cannot certify the saved SVG.
                 args = (None,)*len(args)

@@ -255,7 +255,8 @@ def test_uploaded_template_enters_the_same_search_after_alignment_fails(tmp_path
     source, sample, output = (tmp_path/name for name in ('neutral.png', 'template.svg', 'output.svg'))
     Image.fromarray(target[:, :, ::-1]).save(source)
     sample.write_text(seed, encoding='utf-8')
+    initial_mse = np.square(render(seed).astype(float)-target).mean()/255**2
     report = refine(source, sample, output, 'Ein Kreis auf grauem Hintergrund.', 3.)
     assert report['restarted_from_description'] and report['passed'], report
-    assert report['final_mse'] < report['initial_mse']*.1
+    assert report['final_mse'] < initial_mse*.1
     assert not any(n.tag.endswith('image') for n in ET.parse(output).getroot().iter())

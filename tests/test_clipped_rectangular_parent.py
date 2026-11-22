@@ -68,9 +68,10 @@ def test_expired_budget_starts_no_boundary_measurement(monkeypatch):
     session.spent = 2
     monkeypatch.setattr(mixed, '_clipped_rectangular_context', lambda *a: pytest.fail('Expired budget'))
     case = make_cases()[0]
+    image = render(case['svg'], case['width'], case['height'])
     with image_search(session):
         assert fit_primitive_scene(case['width'], case['height'], description=case['description'],
-            image=render(case['svg'], case['width'], case['height']), render_fn=render,
+            image=image, render_fn=render,
             error_fn=lambda a, b: float(abs(a.astype(float)-b).mean())) is None
 
 

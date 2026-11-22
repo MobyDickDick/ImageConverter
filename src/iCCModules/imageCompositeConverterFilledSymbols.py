@@ -252,7 +252,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         parameters, best = semantic_incumbent
     if best[1] > initial_error+1e-9:
         return None
-    progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1])
+    progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1],
+             quality=pixel_quality(image, best[3]))
     control = dict(stop_reason=stop_reason or (search or {}).get('stop_reason','schedule_exhausted'),
                    **session.report()) if session else None
     return {'svg': best[2], 'rendered': best[3], 'error': best[1],

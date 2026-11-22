@@ -81,10 +81,11 @@ def test_missing_or_unexplained_objects_are_rejected(damage):
 
 
 def test_expired_budget_never_renders():
+    image = synthetic()
     session = ImageSearch(SearchPolicy(seconds=1, max_seconds=1))
     session.spent = 2
     with image_search(session):
-        assert fit(synthetic(), render_fn=lambda *a: pytest.fail('expired budget')) is None
+        assert fit(image, render_fn=lambda *a: pytest.fail('expired budget')) is None
 
 
 @pytest.mark.parametrize('seed', [42, 314159])

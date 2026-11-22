@@ -256,9 +256,10 @@ def description_assertions(description: str) -> dict:
         assertions['labels'] = sorted(set(labels))
     if arrow_pair:
         objects['triangle'] = 2
-        # Each directed arrow owns a shaft. Side/direction wording declares
-        # those two instances even when prose calls them tubes or shafts.
-        objects['line'] = max(objects.get('line', 0), 2 + bool(horizontal_bar_colors(normalized)))
+        # Directed triangles alone do not imply shafts. Arrow/tube vocabulary
+        # does, including prose that calls the shafts Rohre rather than Linien.
+        if re.search(r'\b(?:pfeil\w*|rohr\w*|röhr\w*|schaft\w*|schäft\w*|lini\w*)\b', words):
+            objects['line'] = max(objects.get('line', 0), 2 + bool(horizontal_bar_colors(normalized)))
     if objects:
         assertions['objects'] = objects
         # The description is always the complete inventory. Pixel evidence

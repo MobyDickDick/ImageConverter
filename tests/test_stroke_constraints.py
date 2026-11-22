@@ -146,31 +146,29 @@ def test_sample_search_fits_one_common_width_and_preserves_uploaded_file(tmp_pat
     assert report['final_mse'] == pytest.approx(mse)
 
 
-def test_recovery_renders_and_saves_the_constrained_candidate(tmp_path):
-    from src.imageConverterRecovery import recover
+def test_sample_refinement_renders_and_saves_the_constrained_candidate(tmp_path):
     source, candidate, output = [tmp_path/name for name in ('source.png', 'candidate.svg', 'result.svg')]
     target = render_svg(linework(2, 2), 64, 64)
     Image.fromarray(target).save(source)
     candidate.write_text(linework(1, 3), encoding='utf-8')
-    report = recover(source, output, 'Zwei horizontale Linien. '+CONDITION, .5, candidate=candidate)
+    report = refine(source, candidate, output, 'Zwei horizontale Linien. '+CONDITION, .5)
     assert report['passed'], report
     validate_svg_assertions(output.read_text(encoding='utf-8'), description_assertions(CONDITION))
     np.testing.assert_array_equal(render_svg(output.read_text(encoding='utf-8'), 64, 64), target)
 
 
 def test_vector_search_fits_one_width_instead_of_separate_lines(tmp_path):
-    from src.imageConverterRecovery import recover
     source, candidate, output = [tmp_path/name for name in ('source.png', 'candidate.svg', 'result.svg')]
     target = render_svg(linework(3, 3), 64, 64)
     Image.fromarray(target).save(source)
     candidate.write_text(linework(1, 2), encoding='utf-8')
-    report = recover(source, output, 'Zwei horizontale Linien. '+CONDITION, 1., candidate=candidate)
+    report = refine(source, candidate, output, 'Zwei horizontale Linien. '+CONDITION, 1.)
     assert report['passed'], report
-    assert report['revision'] > 1
+    assert report['evaluations'] > 1
     actual = output.read_text(encoding='utf-8')
     validate_svg_assertions(actual, description_assertions(CONDITION))
     mse = np.square(target.astype(float)-render_svg(actual, 64, 64).astype(float)).mean()/255**2
-    assert mse == pytest.approx(report['normalized_mse'])
+    assert mse == pytest.approx(report['final_mse'])
     initial = render_svg(linework(1.5, 1.5), 64, 64)
     initial_mse = np.square(target.astype(float)-initial.astype(float)).mean()/255**2
     assert mse < initial_mse*.3

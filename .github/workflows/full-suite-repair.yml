@@ -30,10 +30,10 @@ jobs:
           IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
         run: >-
           python -m tools.trace_fit_failures
-          tests/test_gradient_arrow_runtime.py::test_arrow_fits_all_colors_and_sizes_from_pixels
-          tests/test_hollow_cross_panel_runtime.py::test_independent_native_scenes_keep_four_edges_and_light_slit
-          tests/test_rotated_square_kelle_runtime.py
           tests/test_diagonal_square_kelle_runtime.py
+          tests/test_axial_panel_runtime.py
+          tests/test_nested_panel_runtime.py
+          tests/test_paired_line_panel_runtime.py
           --basetemp=ci-suite/fitter-diagnostics
           --junitxml=ci-suite/fitter-diagnostics.xml
       - uses: actions/upload-artifact@v4
