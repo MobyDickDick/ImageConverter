@@ -1412,11 +1412,14 @@ def runNonCompositeIterationImpl(
     from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
     program = scene_program(description)
     if ((settings() or {}).get('primitive_exploration')
-            or (program is not None and program.get('paint_claims'))):
+            or (program is not None and (program.get('paint_claims')
+                or any(o['kind']=='text' for o in program['objects'])))):
         from src.iCCModules.imageCompositeConverterPrimitiveEvolution import evolve_primitives
         from src.imageConverterPreview import publish_preview
+        from src.iCCModules.imageCompositeConverterSceneInitialization import observed_scene_parameters
+        initial = observed_scene_parameters(program, perc_img) if program else None
         fitted = evolve_primitives(perc_img, description, render_svg_to_numpy_fn,
-                                  on_improvement=publish_preview)
+                                  initial_parameters=initial, on_improvement=publish_preview)
         if fitted is None:
             return None
         params['primitive_evolution'] = fitted['search_report']

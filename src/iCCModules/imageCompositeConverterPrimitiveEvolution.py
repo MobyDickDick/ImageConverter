@@ -27,7 +27,7 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import (
 )
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, settings
 
-SCHEMA='primitive_evolution_v3'
+SCHEMA='primitive_evolution_v4'
 
 
 def search_binding(image,description,program,color_order='BGR'):
@@ -131,9 +131,13 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                      if target_edges.any() else np.zeros((h,w),dtype='float32'))
     count=len(program['objects']); dimension=count*STRIDE
     constrained_paint=bool(program.get('paint_claims'))
+    structured=constrained_paint or any(o['kind']=='text' for o in program['objects'])
     active=[]
     for i,obj in enumerate(program['objects']):
         fields=[0,1,2,5,9]
+        if obj['kind']=='text':
+            active.extend(i*STRIDE+field for field in (2,3,6,7,8))
+            continue
         if obj['kind']!='circle':
             fields.append(4)
         if obj['kind'] not in {'circle','square','line'}:
@@ -221,7 +225,11 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         for rel in ordered*max(1,len(ordered)):
             shapes=geometry(program,p,w,h)
             aid,bid=rel['objects']; a,b=shapes[aid],shapes[bid]
-            if rel['kind']=='attached':
+            if rel['kind']=='inside':
+                p[indices[bid],:2]=a['center']/[w,h]
+                extent=np.linalg.norm(p[indices[bid],2:4]*[w,h])
+                p[indices[bid],2:4]*=min(1.,a['size'][0]*.92/max(extent,1e-8))
+            elif rel['kind']=='attached':
                 angle=rel['direction'] if rel['direction'] is not None else b['angle']
                 unit=np.array([math.cos(angle),math.sin(angle)])
                 p[indices[bid],4]=(angle/(2*math.pi))%1
@@ -325,7 +333,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     def measure(p,operator):
         nonlocal evaluations,total,best,best_raster,best_valid,valid_raster,trace_hash,best_passed,passed_raster
         p=repair(p)
-        if constrained_paint and program['relations']:
+        if structured and program['relations']:
             # Keep declared connections on the search manifold. Otherwise a
             # harmless paint mutation can lose its valid connected branch.
             p=repair(join(p))
@@ -414,7 +422,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                     parent=min(range(len(population)),key=lambda i:population[i]['score'])
                 child=population[parent]['parameters'].copy()
                 choice=rng.random(); obj=int(rng.integers(count))
-                if constrained_paint and rng.random()<.45:
+                if structured and rng.random()<.45:
                     # Complete signed coordinate sweeps refine the incumbent,
                     # while the remaining operators continue exploring basins.
                     child=best['parameters'].copy()

@@ -1,0 +1,61 @@
+name: Conversion seed and time budget
+
+on:
+  push:
+    branches: ['codex/ac0233-seed-budget']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Check complete inventory, seed replay and continued search
+        run: >-
+          python -m pytest -q tests/test_joined_triangle_badge.py
+          tests/test_primitive_evolution.py tests/test_seed_search_effect.py
+          tests/test_description_registration_search.py tests/test_unified_search_context.py
+          --junitxml=.tmp/seed-budget.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seed-budget-contracts
+          path: .tmp/
+          retention-days: 7
+  gui-profiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [quick, normal, thorough, explore5, explore10]
+        seed: [17, 18]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Convert original through the production GUI worker
+        env:
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+          OPENBLAS_NUM_THREADS: '1'
+        run: >-
+          python -m tools.check_joined_triangle_profiles --profile ${{ matrix.profile }}
+          --seed ${{ matrix.seed }} --output .tmp/profile-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conversion-${{ matrix.profile }}-seed-${{ matrix.seed }}
+          path: .tmp/profile-evidence/
+          retention-days: 7

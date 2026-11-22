@@ -627,11 +627,19 @@ class Jobs:
                        "--search-seed", str(job["search_seed"]),
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
             exploring = job['profile'] in {'explore5', 'explore10'}
-            if exploring:
+            from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+            program = scene_program(job['description'])
+            complete_scene = program is not None and any(o['kind']=='text' for o in program['objects'])
+            if exploring or complete_scene:
                 memory = self.directory / 'primitive-search-memory'
                 job['primitive_search_memory'] = str(memory)
+                # These profiles specify a maximum time. A failed population
+                # keeps exploring instead of stopping at the old 4096-render
+                # ceiling or at the normal profile's shorter initial slice.
+                search_seconds = seconds if exploring else maximum
                 command += ['--primitive-exploration', '--primitive-memory', str(memory),
-                            '--search-budget', '1000000', '--search-max-seconds', str(seconds)]
+                            '--search-budget', '1000000', '--search-seconds', str(search_seconds),
+                            '--search-max-seconds', str(search_seconds)]
             if component_mode:
                 description_file = folder / 'description.txt'
                 description_file.write_text(job['description'], encoding='utf-8')

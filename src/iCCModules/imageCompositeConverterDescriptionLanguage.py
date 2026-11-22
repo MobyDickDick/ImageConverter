@@ -113,7 +113,9 @@ def description_assertions(description: str) -> dict:
     label_claim = bool(labels and re.search(
         r'\b(?:beschriftung|aufschrift|text|buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
         r'["“][^.?!]{0,100}\bals\b[^.?!]{0,40}\b(?:beschriftung|aufschrift|text|label)\b', normalized,
-        flags=re.IGNORECASE))
+        flags=re.IGNORECASE) or re.search(
+            r'\bin der (?:kelle|kreisscheibe) ist ein ["„][^"“\n]+["“] geschrieben',
+            normalized, re.IGNORECASE))
     unnamed_text = bool(not label_claim and re.search(
         r'\b(?:mit\s+(?:einer?\s+)?|eine?\s+)(?:beschriftung|aufschrift|buchstabe|text|ziffer)\b', words))
     if no_text and (label_claim or re.search(r'\b(?:ausrufezeichen|fragezeichen)\b', words)):
