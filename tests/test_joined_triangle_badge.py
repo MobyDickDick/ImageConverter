@@ -6,6 +6,8 @@ import cv2
 import fitz
 import numpy as np
 import pytest
+import json
+import shutil
 
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
@@ -44,9 +46,13 @@ def test_initializer_proposes_the_complete_source_scene():
     p=observed_scene_parameters(program,image)
     assert p is not None and p.shape==(len(program['objects'])*STRIDE,)
     svg=program_svg(program,p,image.shape[1],image.shape[0])
-    (ROOT/'.tmp').mkdir(exist_ok=True)
-    (ROOT/'.tmp/ac0233-initial.svg').write_text(svg,encoding='utf-8')
-    assert pixel_quality(image,render(svg,image.shape[1],image.shape[0]))['foreground_iou']>.65
+    evidence=ROOT/'ci-evidence'; evidence.mkdir(exist_ok=True)
+    (evidence/'ac0233-initial.svg').write_text(svg,encoding='utf-8')
+    raster=render(svg,image.shape[1],image.shape[0])
+    cv2.imwrite(str(evidence/'ac0233-initial.png'),raster)
+    quality=pixel_quality(image,raster)
+    (evidence/'initial-quality.json').write_text(json.dumps(quality),encoding='utf-8')
+    assert quality['foreground_iou']>.65
 
 
 @pytest.mark.parametrize('seed',[17,18])
@@ -57,6 +63,11 @@ def test_real_scene_search_checks_exported_geometry_and_paint(tmp_path,seed):
     result=evolve_primitives(image,text,render,seed=seed,directory=tmp_path,
         initial_parameters=observed_scene_parameters(program,image),seconds=35,max_evaluations=8000)
     assert result is not None
+    evidence=ROOT/'ci-evidence'; evidence.mkdir(exist_ok=True)
+    (evidence/f'result-{seed}.svg').write_text(result['svg'],encoding='utf-8')
+    cv2.imwrite(str(evidence/f'result-{seed}.png'),result['rendered'])
+    (evidence/f'report-{seed}.json').write_text(json.dumps(result['search_report']),encoding='utf-8')
+    shutil.copyfile(next(tmp_path.rglob('candidates.jsonl')),evidence/f'candidates-{seed}.jsonl')
     validate_program_svg(result['svg'],program)
     validate_svg_assertions(result['svg'],description_assertions(text))
     assert result['valid']

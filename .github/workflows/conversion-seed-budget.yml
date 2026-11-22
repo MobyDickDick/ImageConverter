@@ -24,12 +24,12 @@ jobs:
           python -m pytest -q tests/test_joined_triangle_badge.py
           tests/test_primitive_evolution.py tests/test_seed_search_effect.py
           tests/test_description_registration_search.py tests/test_unified_search_context.py
-          --junitxml=.tmp/seed-budget.xml
+          --junitxml=ci-evidence/seed-budget.xml
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: seed-budget-contracts
-          path: .tmp/
+          path: ci-evidence/
           retention-days: 7
   gui-profiles:
     runs-on: ubuntu-latest

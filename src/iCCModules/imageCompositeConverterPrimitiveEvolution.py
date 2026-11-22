@@ -391,7 +391,8 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
             session.evaluations+=int(fresh)
         if journal:
             journal.write(json.dumps(dict(evaluation=total,operator=operator,candidate=identity,geometry=geometry_id,
-                           score=score,parameters=np.round(p,8).tolist(),improved=improved),allow_nan=False)+'\n')
+                           score=score,mse=mse,overlap=overlap,chamfer=chamfer,relations=relations,
+                           parameters=np.round(p,8).tolist(),improved=improved),allow_nan=False)+'\n')
         return item
 
     reason='evaluation_limit'
