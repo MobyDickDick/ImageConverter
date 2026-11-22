@@ -380,3 +380,8 @@ def test_disk_and_quoted_capital_letter_are_both_declared_objects():
         'Darin steht der einzelne dunkle Großbuchstabe "M".')
     assert assertions['labels'] == ['M']
     assert assertions['objects'] == {'line': 1, 'circle': 1, 'text': 1}
+
+
+def test_diagonal_gradient_does_not_declare_a_diagonal_stroke():
+    assertions = description_assertions('Ein Dreieck mit einem diagonalen Grauverlauf.')
+    assert assertions['objects'] == {'triangle': 1}

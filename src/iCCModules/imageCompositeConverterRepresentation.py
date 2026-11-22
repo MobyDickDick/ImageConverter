@@ -97,6 +97,8 @@ def description_object_limits(text):
         # "geraden Rand" is an adjective, not a described straight object.
         if form.startswith('gerad') and re.match(r'\s+(?:rand|kanten?|seiten?|linien?)\b', words[match.end():]):
             continue
+        if form.startswith('diagonal') and re.match(r'\s+(?:grau(?:stufen)?|farb|helligkeits)?verlauf\b', words[match.end():]):
+            continue  # the gradient direction is an adjective, not another line
         if number in {'beide', 'beiden'} and re.search(r'\bmit\s*$', words[:match.start()]):
             continue  # a referenced component of an unnamed composite, not all scene strokes
         kind = ('circle' if form.startswith('kreis') else 'rect' if form.startswith('rechteck')
@@ -153,7 +155,7 @@ def description_object_limits(text):
     # additional scene objects. A Kelle is a circular head and a straight stem.
     if (re.search(r'\bkelle\b', words)
             and not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:eine?\s+)?kelle\b', words)):
-        head = 'square' if square_head else 'circle'
+        head = 'square' if square_head or ('square' in limits and 'circle' not in limits) else 'circle'
         limits[head] = max(1, limits.get(head, 0))
         if not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:einen?\s+)?griff\b', words):
             limits['line'] = max(1, limits.get('line', 0))

@@ -56,6 +56,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     progress(source, event='registration_started', evaluations=0)
 
     def reconsider():
+        if session and session.minimum_pending and semantic_incumbent is not None:
+            return None
         # A construction cannot monopolize the image deadline while making
         # tiny gains. Leave time for another topology and independent objects.
         if (session and reconsider_after and

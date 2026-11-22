@@ -2031,8 +2031,8 @@ def runNonCompositeIterationImpl(
                         ),
                     ]
                 )
+            log_lines.append(f"non_composite_selection={selection_reason}")
             if len(candidates) > 1:
-                log_lines.append(f"non_composite_selection={selection_reason}")
                 for candidate in candidates:
                     log_lines.append(
                         f"non_composite_candidate_error_{candidate['status']}={float(candidate['error']):.6f}"

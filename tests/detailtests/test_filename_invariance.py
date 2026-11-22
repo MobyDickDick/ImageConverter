@@ -26,7 +26,7 @@ def test_identical_pixels_and_description_are_filename_invariant(monkeypatch) ->
 
     monkeypatch.setattr(runtime_helpers, "_try_build_perception_seeded_geometry_ir_svg", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(runtime_helpers, "_fit_symbol_element_by_element", lambda **_kwargs: None)
-    def record_optimization_input(geometry_ir, *, render_fn, error_fn):
+    def record_optimization_input(geometry_ir, *, render_fn, error_fn, **registration_context):
         optimized_inputs.append(copy.deepcopy(geometry_ir))
         return {
             "geometry_ir": copy.deepcopy(geometry_ir),

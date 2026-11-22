@@ -61,6 +61,8 @@ jobs:
           tests/test_search_minimum_effort.py tests/test_arrow_pair_runtime.py
           tests/detailtests/test_plan_b_variations.py tests/test_description_language.py
           tests/test_conversion_deadline.py tests/test_stem_disk_runtime.py
+          tests/test_arrow_pair_conditions.py tests/test_plain_vertical_square_stem.py
+          tests/test_pump_runtime.py
           --basetemp=ci-suite/diagnosed
           --junitxml=ci-suite/diagnosed.xml
       - uses: actions/upload-artifact@v4
