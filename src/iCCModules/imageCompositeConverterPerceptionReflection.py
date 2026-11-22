@@ -171,7 +171,7 @@ class Reflection:
             params["geometry_ir"] = []
             params["contract_status"] = "ok"
             params["description_contract"]["status"] = "ok"
-            params["elements"].append("GEOMETRIE: Drei verbundene Ventildreiecke, waagerechter Griff und Quadrat mit beiden Diagonalen")
+            params["elements"].append("GEOMETRIE: Drei verbundene Ventildreiecke mit beschriebenem Griff und Antrieb")
             return desc, params
 
         from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract

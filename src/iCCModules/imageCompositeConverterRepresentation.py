@@ -68,14 +68,18 @@ def description_object_limits(text):
     if partition:
         return partition_inventory(partition)
     from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
-    if three_wing_valve_spec(text):
-        return dict(triangle=3, line=1, square=1, diagonal=2)
+    three_wing = three_wing_valve_spec(text)
+    if three_wing:
+        return (dict(triangle=3, line=1, circle=1) if three_wing['motor']=='circle'
+                else dict(triangle=3, line=1, square=1, diagonal=2))
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
     valve = two_way_valve_spec(text)
     if valve:
         return (dict(square=1, diagonal=2, line=1, triangle=2) if valve['motor']=='square'
                 else dict(circle=1, line=1, triangle=2))
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', text).casefold()
+    # Keep the fitter's original wording intact; this is an inventory synonym.
+    words = re.sub(r'\brechteckig[enrms]*\s+feld\b', 'rechteck', words)
     square_head = bool(re.search(r'\bquadrat\s+(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', words))
     if square_head:
         words = re.sub(r'\b(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', '', words)

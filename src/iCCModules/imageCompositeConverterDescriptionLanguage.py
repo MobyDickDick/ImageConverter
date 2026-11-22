@@ -221,8 +221,9 @@ def description_assertions(description: str) -> dict:
     if partition:
         assertions['partitioned_rhombus'] = partition
     from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
-    if three_wing_valve_spec(normalized):
-        assertions['three_wing_valve'] = True
+    three_wing = three_wing_valve_spec(normalized)
+    if three_wing:
+        assertions['three_wing_valve'] = three_wing
     from src.iCCModules.imageCompositeConverterScopedPaint import scoped_paint_claims
     paint_claims, _ = scoped_paint_claims(words)
     if paint_claims:
@@ -366,7 +367,8 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if assertions and assertions.get('three_wing_valve'):
         from src.iCCModules.imageCompositeConverterThreeWingValve import validate_three_wing_valve
         try:
-            validate_three_wing_valve(svg)
+            spec = assertions['three_wing_valve']
+            validate_three_wing_valve(svg, spec if isinstance(spec, dict) else None)
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     if assertions and assertions.get('svg_component_description'):

@@ -97,6 +97,51 @@ test('incremental native previews refresh while conversion remains active', () =
   assert.equal(get('save-actions').hidden, false);
 });
 
+test('automatic retry follows the current worker and keeps the winner visible until stopped', async () => {
+  const elements = new Map(), calls = [];
+  const get = id => {
+    if (!elements.has(id)) elements.set(id, element());
+    return elements.get(id);
+  };
+  const root = 'a'.repeat(32), next = 'b'.repeat(32);
+  const session = {active:true, root_id:root, current_job_id:next, best_job_id:root,
+    attempts:2, best_seed:'9007199254740993', best_quality:{passed:false}, message:'Automatische Fortsetzung aktiv.'};
+  const job = {id:root, name:'neutral.png', status:'done', description:'Ein Kreis.',
+    profile:'quick', width:32, height:24, seed_retry:session,
+    export_available:true, export_revision:7, search_seed:'17'};
+  const context = vm.createContext({
+    crypto: require('node:crypto').webcrypto,
+    document:{getElementById:get, createElement:element, querySelector:element},
+    window:{location:{search:''}, addEventListener() {}}, URLSearchParams,
+    setTimeout() {}, clearTimeout() {},
+    fetch: async (url, options) => {
+      if (url==='/api/config') return new Promise(() => {});
+      calls.push([url, options]);
+      const result = url.endsWith('/repeat') ? {...job, seed_retry:{...session,active:false}} : [];
+      return {ok:true, json:async () => result};
+    },
+  });
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '../web/app.js'), 'utf8'), context);
+  context.job=job;
+  vm.runInContext('automaticSeedRetry=true; renderJob(job, true)',context);
+  assert.equal(vm.runInContext('activeId', context), next);
+  assert.equal(get('repeat').textContent,'Automatische Fortsetzung beenden');
+  assert.equal(get('repeat').attributes['aria-pressed'],'true');
+  assert.equal(get('repeat').disabled,false);
+  get('show-intermediate').checked=false;
+  get('show-intermediate').listeners.change();
+  assert.equal(get('result-image').hidden,false);
+  assert.match(get('result-image').src,/\/export\?v=7$/);
+  assert.match(get('result-meta').textContent,/Bestes Ergebnis/);
+  assert.match(get('quality').textContent,/Entwurf/);
+  assert.match(get('status').textContent,/9007199254740993/);
+  await get('repeat').listeners.click();
+  assert.equal(calls[0][0],`/api/jobs/${root}/repeat`);
+  assert.equal(vm.runInContext('activeId',context),null);
+  assert.equal(get('repeat').textContent,'Automatisch mit neuen Seeds fortsetzen');
+  assert.equal(get('result-image').hidden,false);
+});
+
 test('intermediate display preference survives a reload', () => {
   const storage = new Map([['imageconverter.showIntermediate', 'false']]);
   const elements = new Map();

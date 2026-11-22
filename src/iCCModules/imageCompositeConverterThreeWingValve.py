@@ -18,6 +18,13 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 def three_wing_valve_spec(description):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
     words = ' '.join(normalize_description(description).casefold().split())
+    circle = (
+        r'links: drei je gleichschenklige dreiecke, welche sich in einem punkt berühren[.;] '
+        r'das innere der dreieck(?:e)? hat jeweils einen farbübergang[.;] '
+        r'rechts ist eine kelle mit einem leeren kreis und einem griff nach links vorhanden[.]?'
+    )
+    if re.fullmatch(circle, words):
+        return dict(motor='circle', handle='right', isosceles=True)
     clauses = (
         r'(?:ein )?(?:3-wege-ventil|dreiwegeventil) mit drei spitzen dreiecken links, oben und unten, die sich in einer gemeinsamen spitze treffen',
         r'die dreiecke haben einen diagonalen (?:grau|graustufen|farb)verlauf von dunkel links unten nach hell rechts oben und eine graue randkontur',
@@ -34,13 +41,14 @@ def three_wing_valve_spec(description):
     return dict(motor='square', handle='right') if not words else None
 
 
-def validate_three_wing_valve(svg):
+def validate_three_wing_valve(svg, spec=None):
     from PIL import ImageColor
     from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
     from src.iCCModules.imageCompositeConverterRepresentation import path_points, EXCLUDED
     from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
     root = ET.fromstring(inline_simple_svg_styles(svg))
-    triangles, squares, lines = [], [], []
+    circular = bool(spec and spec['motor'] == 'circle')
+    triangles, squares, lines, circles = [], [], [], []
 
     def visit(node, parent=(1., 0., 0., 1., 0., 0.), inherited=None):
         kind = node.tag.rsplit('}', 1)[-1]
@@ -60,6 +68,12 @@ def validate_three_wing_valve(svg):
             if min(lengths) <= 0 or not np.allclose(lengths, lengths[0]) or abs(edges[0]@edges[1]) > 1e-5:
                 raise ValueError('three_wing_valve_deformed_square')
             squares.append((points,style['fill'],style['stroke']))
+        elif kind == 'circle':
+            center = mapped([[float(node.get('cx', '0')), float(node.get('cy', '0'))]])[0]
+            scale = np.hypot(a, b)
+            if not np.isclose(scale, np.hypot(c, d)) or abs(a*c+b*d)>1e-6:
+                raise ValueError('three_wing_valve_deformed_circle')
+            circles.append((center, float(node.get('r', '0'))*scale, style['fill'], style['stroke']))
         elif kind == 'line':
             lines.append((mapped([[float(node.get(k, '0')) for k in ('x1','y1')],
                                   [float(node.get(k, '0')) for k in ('x2','y2')]]),style['stroke']))
@@ -74,7 +88,8 @@ def validate_three_wing_valve(svg):
         for child in node:
             visit(child, matrix, style)
     visit(root)
-    if len(triangles)!=3 or len(squares)!=1 or len(lines)!=3:
+    if (len(triangles)!=3 or len(squares)!=(0 if circular else 1)
+            or len(lines)!=(1 if circular else 3) or len(circles)!=(1 if circular else 0)):
         raise ValueError('three_wing_valve_incomplete')
     shared = [point for point in triangles[0][0]
               if all(np.min(np.linalg.norm(points-point,axis=1))<1e-4 for points,_,_ in triangles[1:])]
@@ -92,6 +107,8 @@ def validate_three_wing_valve(svg):
         if len(base)!=2 or stroke=='none':
             raise ValueError('three_wing_valve_wing_border')
         gray(stroke)
+        if circular and not np.isclose(np.linalg.norm(base[0]-apex), np.linalg.norm(base[1]-apex), atol=1e-4):
+            raise ValueError('three_wing_valve_not_isosceles')
         if (np.all(base[:,0]<apex[0]) and abs(base[0,0]-base[1,0])<1e-4
                 and min(base[:,1])<apex[1]<max(base[:,1])):
             directions.append('left')
@@ -105,7 +122,7 @@ def validate_three_wing_valve(svg):
         def number(key, default):
             value = gradient.get(key,default)
             return float(value.rstrip('%'))/(100 if value.endswith('%') else 1)
-        if not (number('x2','1')>number('x1','0') and number('y2','0')<number('y1','0')):
+        if not circular and not (number('x2','1')>number('x1','0') and number('y2','0')<number('y1','0')):
             raise ValueError('three_wing_valve_gradient_direction')
         stops = list(gradient)
         colors = [ImageColor.getrgb(e.get('stop-color','black')) for e in stops]
@@ -113,6 +130,15 @@ def validate_three_wing_valve(svg):
             raise ValueError('three_wing_valve_gradient_colors')
     if sorted(directions)!=['bottom','left','top']:
         raise ValueError('three_wing_valve_orientation')
+    if circular:
+        center, radius, fill, stroke = circles[0]
+        endpoints = np.array([apex, center-[radius, 0]])
+        if (radius<=0 or fill!='none' or stroke=='none' or center[0]-radius<=apex[0]
+                or abs(center[1]-apex[1])>1e-4 or lines[0][1]=='none'
+                or not (np.allclose(lines[0][0],endpoints,atol=1e-4)
+                        or np.allclose(lines[0][0][::-1],endpoints,atol=1e-4))):
+            raise ValueError('three_wing_valve_empty_circle_handle')
+        return
     corners,fill,rim = squares[0]
     if gray(fill)-gray(rim)<12:
         raise ValueError('three_wing_valve_light_square')
@@ -134,8 +160,10 @@ def validate_three_wing_valve(svg):
 
 
 def fit_three_wing_valve(width, height, *, description, image, render_fn, error_fn):
-    if three_wing_valve_spec(description) is None:
+    spec = three_wing_valve_spec(description)
+    if spec is None:
         return None
+    circular = spec['motor'] == 'circle'
     pixels = _image(width,height,image)
     if pixels is None:
         return None
@@ -187,6 +215,14 @@ def fit_three_wing_valve(width, height, *, description, image, render_fn, error_
         ax,ay,lx,lt,lb,tl,tr,ty,bl,br,by,cx,r,sw,bw,cw=v[:16]
         edge,fill,rim,bg=v[22:26]
         triangles=[(ax,ay,lx,lt,lx,lb),(ax,ay,tl,ty,tr,ty),(ax,ay,bl,by,br,by)]
+        if circular:
+            # Equal sides are a construction constraint, never a soft pixel preference.
+            left_half=(lb-lt)/2
+            top_half=(tr-tl)/2
+            bottom_half=(br-bl)/2
+            triangles=[(ax,ay,lx,ay-left_half,lx,ay+left_half),
+                       (ax,ay,ax-top_half,ty,ax+top_half,ty),
+                       (ax,ay,ax-bottom_half,by,ax+bottom_half,by)]
         gradients=''.join(f'<linearGradient id="wing{i}" x1="0%" y1="100%" x2="100%" y2="0%">'
                           f'<stop offset="0" stop-color="{_hex([lo]*3)}"/>'
                           f'<stop offset="1" stop-color="{_hex([hi]*3)}"/></linearGradient>'
@@ -197,12 +233,15 @@ def fit_three_wing_valve(width, height, *, description, image, render_fn, error_
         diagonals=''.join(f'<line x1="{cx-r:.5f}" y1="{a:.5f}" x2="{cx+r:.5f}" y2="{b:.5f}" '
                           f'stroke="{_hex([rim]*3)}" stroke-width="{sw:.5f}"/>'
                           for a,b in ((ay-r,ay+r),(ay+r,ay-r)))
+        actuator = (f'<circle cx="{cx:.5f}" cy="{ay:.5f}" r="{r:.5f}" fill="none" '
+                    f'stroke="{_hex([rim]*3)}" stroke-width="{sw:.5f}"/>' if circular else
+                    f'<rect x="{cx-r:.5f}" y="{ay-r:.5f}" width="{2*r:.5f}" height="{2*r:.5f}" '
+                    f'fill="{_hex([fill]*3)}" stroke="{_hex([rim]*3)}" stroke-width="{sw:.5f}"/>'+diagonals)
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 f'<defs>{gradients}</defs><rect width="{width}" height="{height}" fill="{_hex([bg]*3)}"/>'
                 f'<line x1="{ax:.5f}" y1="{ay:.5f}" x2="{cx-r:.5f}" y2="{ay:.5f}" '
                 f'stroke="{_hex([rim]*3)}" stroke-width="{cw:.5f}"/>'+wings+
-                f'<rect x="{cx-r:.5f}" y="{ay-r:.5f}" width="{2*r:.5f}" height="{2*r:.5f}" '
-                f'fill="{_hex([fill]*3)}" stroke="{_hex([rim]*3)}" stroke-width="{sw:.5f}"/>'+diagonals+'</svg>')
+                actuator+'</svg>')
 
     def valid(v):
         ax,ay,lx,lt,lb,tl,tr,ty,bl,br,by,cx,r,sw,bw,cw=v[:16]
@@ -220,6 +259,6 @@ def fit_three_wing_valve(width, height, *, description, image, render_fn, error_
     quality=pixel_quality(image,result['rendered'])
     if not quality or not quality['passed']:
         return None
-    validate_three_wing_valve(result['svg'])
+    validate_three_wing_valve(result['svg'], spec)
     result['quality']=quality
     return result

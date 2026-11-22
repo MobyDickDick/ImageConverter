@@ -2,6 +2,7 @@
 let nativeFileDialogs = false, preparingPlanB = false, serverNeedsRestart = false;
 let editableSearchSeed = false;
 let currentSvgReuse = false;
+let automaticSeedRetry = false;
 let imageRecognition = false;
 let descriptionCheck = false;
 let descriptionAutosave = false, descriptionDirty = false, descriptionSaveTimer, descriptionSaving = null;
@@ -71,6 +72,10 @@ function controls() {
   $("drop-zone").setAttribute("aria-disabled", String(running));
   $("cancel").hidden = !activeId;
   $("cancel").disabled = busy;
+  const repeating = Boolean(current?.seed_retry?.active);
+  $("repeat").disabled = busy || !current || !automaticSeedRetry || !$("description").value.trim();
+  $("repeat").textContent = repeating ? "Automatische Fortsetzung beenden" : "Automatisch mit neuen Seeds fortsetzen";
+  $("repeat").setAttribute("aria-pressed", String(repeating));
   $("convert").querySelector("span").textContent = activeId ? "Konvertierung läuft …" : current?.sample ? "Sample weiter verbessern" : "In SVG konvertieren";
   for (const id of ["zoom-in", "zoom-out", "fit"]) $(id).disabled = !current;
   for (const button of $("history").querySelectorAll("button")) button.disabled = running;
@@ -196,10 +201,11 @@ function renderRecognition(job) {
 function renderJob(job, select = false) {
   // Selection, reload and polling must all restore the same active job.
   // Cancellation must not depend on having started it in this page instance.
-  if (job.status === "running") {
-    activeId = job.id;
+  const repeating = Boolean(job.seed_retry?.active);
+  if (job.status === "running" || repeating) {
+    activeId = repeating ? job.seed_retry.current_job_id : job.id;
     schedulePoll();
-  } else if (activeId === job.id) {
+  } else if (activeId === job.id || current?.seed_retry?.root_id === job.seed_retry?.root_id && job.seed_retry) {
     activeId = null;
     clearTimeout(pollTimer);
   }
@@ -241,12 +247,12 @@ function renderJob(job, select = false) {
   document.querySelector(".comparison").classList.toggle("with-sample", Boolean(usingSample));
   const sampleUrl = `/api/jobs/${job.id}/sample`;
   if (job.sample && $("sample-image").getAttribute("src") !== sampleUrl) $("sample-image").src = sampleUrl;
-  const running = job.status === "running";
+  const running = job.status === "running" || repeating;
   const canSave = job.export_available ?? Boolean(job.result && !running);
   const exportUrl = job.export_available ? `/api/jobs/${job.id}/export?v=${job.export_revision}` : `/api/jobs/${job.id}/result`;
   const manualDraft = Boolean(job.export_draft && !running);
   $("open-attempts").hidden = !$("show-intermediate").checked;
-  const showingPreview = Boolean($("show-intermediate").checked && (job.preview || canSave) && running);
+  const showingPreview = Boolean(($("show-intermediate").checked || job.seed_retry?.best_job_id) && (job.preview || canSave) && running);
   const showingResult = showingPreview || Boolean(canSave && !running);
   $("result-image").hidden = !showingResult;
   $("result-empty").hidden = showingResult;
@@ -256,6 +262,10 @@ function renderJob(job, select = false) {
   $("result-empty").querySelector("p").textContent = running ? ($("show-intermediate").checked ? "Die Suche läuft. Sobald ein erster SVG-Zwischenstand vorliegt, erscheint er hier automatisch." : "Die Suche läuft. Hier erscheint das Endergebnis. Du kannst die Zwischenergebnisse jederzeit einschalten.") : "Nach der Konvertierung siehst du hier das Ergebnis.";
   const draft = draftQuality(job);
   $("status").textContent = draft?.message || job.message;
+  if (job.seed_retry) {
+    $("status").textContent = `${job.seed_retry.message} ${job.seed_retry.attempts} Versuche gestartet.`;
+    if (job.seed_retry.best_seed) $("status").textContent += ` Bestes Ergebnis: Seed ${job.seed_retry.best_seed}.`;
+  }
   if (manualDraft && !job.result) $("status").textContent += " Ein Vektorentwurf ist zur manuellen Beurteilung und zum Speichern verfügbar.";
   $("status-dot").className = `status-dot ${job.status === "running" ? "running" : job.quality === "warning" ? "warning" : ["error", "timeout", "interrupted"].includes(job.status) ? "error" : ""}`;
   $("elapsed").textContent = job.elapsed ? `${Math.round(job.elapsed)} s` : "";
@@ -279,6 +289,12 @@ function renderJob(job, select = false) {
     $("sample-metrics").textContent = `Sample-Vergleich: ${percent.toFixed(1)} % weniger mittlerer Pixelfehler · ${report.evaluations} geprüfte Anpassungen. Vorhandene Formen werden optimiert.`;
   }
   $("result-meta").textContent = showingPreview ? "SVG · Zwischenstand · Suche läuft" : running ? "SVG · Suche läuft" : manualDraft || job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
+  if (job.seed_retry?.best_job_id) {
+    $("result-meta").textContent = "SVG · Bestes Ergebnis aller Versuche";
+    const accepted = job.seed_retry.best_quality?.passed && !job.seed_retry.best_description_error;
+    $("quality").textContent = `Bestes Ergebnis · ${accepted ? "Bild- und Beschreibungsprüfung bestanden" : "Entwurf · Qualitätsprüfung nicht bestanden"}${repeating ? " · Suche läuft weiter" : ""}`;
+    $("quality").className = `hint ${accepted ? "quality-passed" : "quality-warning"}`;
+  }
   controls();
   zoom();
 }
@@ -472,6 +488,18 @@ $("cancel").addEventListener("click", () => {
   if (!activeId || busy) return;
   return update(() => post(`/api/jobs/${activeId}/cancel`, {}));
 });
+$("repeat").addEventListener("click", () => {
+  if (!current || busy || !automaticSeedRetry) return;
+  if (!current.seed_retry?.active && !activeId) {
+    validateSeed();
+    if (!$("seed").reportValidity()) return;
+    if ($("show-intermediate").checked) openAttemptWindow();
+  }
+  return update(() => post(`/api/jobs/${current.id}/repeat`, {
+    description: $("description").value, profile: $("profile").value,
+    seed: $("seed").value, use_current_svg: $("use-current-svg").checked,
+  }), false, null, !activeId);
+});
 $("save-as").addEventListener("click", async () => {
   if (!(current?.export_available ?? current?.result) || saving) return;
   const jobId = current.id;
@@ -550,6 +578,7 @@ async function init() {
       const config = await request("/api/config");
       nativeFileDialogs = config.native_file_dialogs;
       editableSearchSeed = config.editable_search_seed === true;
+      automaticSeedRetry = config.automatic_seed_retry === true;
       imageRecognition = config.image_recognition === true;
       descriptionCheck = config.description_check === true;
       descriptionAutosave = config.description_autosave === true;
