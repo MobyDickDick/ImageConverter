@@ -74,9 +74,10 @@ def test_hard_deadline_stops_between_component_renders_without_partial_success()
     session=ImageSearch(SearchPolicy(seconds=.8,max_seconds=.8),clock=lambda:now[0])
     def slow(svg,w,h):
         assert now[0] < .8
-        now[0] += .4
         calls.append(svg)
-        return render(svg,w,h)
+        raster = render(svg,w,h)
+        now[0] += .4
+        return raster
     with image_search(session):
         result=fit_spray_panel(40,80,description=DESCRIPTION,image=image,render_fn=slow,
                               error_fn=lambda a,b:float(np.square(a.astype(float)-b).mean()))

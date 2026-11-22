@@ -9,15 +9,17 @@ import sys
 def main():
     import pytest
     observed = 0
-    modules = {'imageCompositeConverterGradientArrow.py', 'imageCompositeConverterHollowCrossPanel.py',
+    modules = {'imageCompositeConverterAxialPanel.py', 'imageCompositeConverterHollowCrossPanel.py',
                'imageCompositeConverterLabeledSquare.py', 'imageCompositeConverterSquareStem.py',
-               'imageCompositeConverterAlarmBell.py', 'imageCompositeConverterDiagonalSquareKelle.py',
-               'imageCompositeConverterRotatedSquareKelle.py'}
+               'imageCompositeConverterPairedLinePanel.py', 'imageCompositeConverterNestedPanel.py',
+               'imageCompositeConverterStackedGradientPanel.py', 'imageCompositeConverterInteriorMark.py'}
 
     def describe(value):
         if value is None or isinstance(value, (str, bool, int, float)):
             return value if not isinstance(value, str) else value[:300]
         if hasattr(value, 'shape'):
+            if value.size <= 32:
+                return value.tolist()
             return dict(shape=list(value.shape), dtype=str(value.dtype))
         if isinstance(value, dict):
             return {str(k): describe(v) for k, v in value.items() if k not in {'svg', 'rendered'}}

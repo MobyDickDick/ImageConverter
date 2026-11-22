@@ -13,6 +13,19 @@ from tools.evaluate_axial_panel import independent_cases
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import ImageSearch, SearchPolicy, image_search
 
 
+@pytest.mark.parametrize('index', range(17))
+def test_frozen_five_row_pink_panel_keeps_its_subpixel_variations(index):
+    from tools.run_plan_b_variations import make_variations
+    root = Path(__file__).resolve().parents[1]
+    svg = (root/'artifacts/samples/z_201.svg').read_text(encoding='utf-8')
+    manifest = json.loads((root/'artifacts/evaluation/axial_panel_issue_v1/manifest.json').read_text(encoding='utf-8'))
+    description = manifest['replays'][0]['source_description']
+    case = make_variations(svg, description.strip(), 347146220485913939)[index]
+    result = fit(case)
+    assert result is not None
+    assert measure_quality(render(case['svg'], case['width'], case['height']), result['svg'])['satisfactory']
+
+
 def fit(case, image=None):
     image = render(case['svg'], case['width'], case['height']) if image is None else image
     return fit_axial_panel(case['width'], case['height'], description=case['description'], image=image,

@@ -13,7 +13,6 @@ from src.iCCModules.imageCompositeConverterFallbackStructure import explore_stru
 from src.iCCModules.imageCompositeConverterRuledPanel import fit_ruled_panel
 from src.iCCModules.imageCompositeConverterSearchPortfolio import search_configuration, configured_image_search
 from src.imageConverterSample import render_svg
-from src import imageConverterRecovery as recovery
 
 ROOT = Path(__file__).resolve().parents[1]
 DESCRIPTION = ('Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, '
@@ -100,7 +99,7 @@ def test_measured_panel_supports_other_sizes_counts_and_both_axes(axis, count):
                           image=source, render_fn=render, error_fn=error) is None
 
 
-def test_ac0110_recovery_replaces_bad_axis_and_sloping_marks_with_measured_scene(tmp_path):
+def test_ac0110_description_refit_replaces_bad_axis_and_sloping_marks(tmp_path):
     source = ROOT/'artifacts/images_to_convert/AC0110.jpg'
     # Deliberately wrong proportions, gradient axis, number and length of marks.
     seed = tmp_path/'wrong.svg'
@@ -111,10 +110,10 @@ def test_ac0110_recovery_replaces_bad_axis_and_sloping_marks_with_measured_scene
                     '<rect x="13" y="8" width="14" height="60" fill="url(#g)"/>'
                     '<line x1="14" y1="30" x2="25" y2="28" stroke="#777777"/></svg>')
     output = tmp_path/'result.svg'
-    report = recovery.recover(source, output, DESCRIPTION, 12., seed=7, candidate=seed)
-    assert report['passed'] and report['stop_reason'] in {'quality_target_reached', 'time_limit',
-        'search_space_exhausted', 'construction_frontier_exhausted'}, report
-    assert report['elapsed_seconds'] < 12.5
+    from src.imageConverterSample import refine
+    report = refine(source, seed, output, DESCRIPTION, 12., seed=7)
+    assert report['passed'] and report['restarted_from_description'], report
+    assert report['elapsed'] < 12.5
     image = cv2.imread(str(source))
     assert pixel_quality(image, render(output.read_text(), 40, 80))['passed']
     root = ET.parse(output).getroot()

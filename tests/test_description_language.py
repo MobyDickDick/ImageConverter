@@ -385,3 +385,19 @@ def test_disk_and_quoted_capital_letter_are_both_declared_objects():
 def test_diagonal_gradient_does_not_declare_a_diagonal_stroke():
     assertions = description_assertions('Ein Dreieck mit einem diagonalen Grauverlauf.')
     assert assertions['objects'] == {'triangle': 1}
+
+
+def test_rectangular_field_and_its_two_chevron_legs_are_a_complete_inventory():
+    assertions = description_assertions('Rechteckiges Feld mit dünnem Rahmen und vertikalem Farbverlauf. '
+        'Eine offene Dachlinie besteht aus zwei geraden Schenkeln.')
+    assert assertions['objects'] == {'rect': 1, 'line': 2}
+
+
+def test_directed_triangles_do_not_imply_unmentioned_arrow_shafts():
+    assertions = description_assertions('Zwei Dreiecke. Links ein blaues Dreieck mit Spitze nach oben. '
+        'Rechts ein rotes Dreieck mit Spitze nach oben.')
+    assert assertions['objects'] == {'triangle': 2}
+
+
+def test_nested_rectangular_fields_declare_both_regions():
+    assert description_assertions('Rechteckfläche mit heller rechteckiger Innenfläche.')['objects'] == {'rect': 2}

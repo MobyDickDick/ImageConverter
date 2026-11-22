@@ -133,7 +133,7 @@ def test_wrong_template_can_switch_to_a_fresh_construction_from_its_own_raster(t
     output = tmp_path/'new.svg'
     before = pixel_quality(image,render(template.read_text(),width,height))
     report = refine(neutral,template,output,description,15.,seed=17)
-    assert report['passed'] and report['continuation']
+    assert report['passed'] and report['restarted_from_description']
     final = render(output.read_text(),width,height)
     assert pixel_quality(image,final)['normalized_mse'] < before['normalized_mse']*.6
     observed = observe_hollow_cross(final)
@@ -159,7 +159,7 @@ def test_globally_passing_sample_requires_real_detail_repair_before_acceptance(t
     with pytest.raises(ValueError, match='hollow_cross_panel'):
         validate_svg_assertions(sample.read_text(), description_assertions(DESCRIPTION))
     if report['passed']:
-        assert report['improved'] and report['continuation']
+        assert report['improved'] and report['restarted_from_description']
         validate_svg_assertions(output.read_text(), description_assertions(DESCRIPTION))
     else:
         assert 'hollow_cross_panel' in report['description_error']

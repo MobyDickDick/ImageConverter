@@ -123,7 +123,7 @@ def test_catalog_sample_uses_its_source_bound_sidecar_instead_of_the_jpeg_descri
         ROOT/'artifacts/images_to_convert/Finale_Wurzelformen_V3.xml',1237139773188156879,
         excluded_svg_paths={ROOT/'artifacts/samples/AC0838_M.svg', ROOT/'artifacts/samples/AC0814_L.svg'})
     assert path.name == 'AC0130_L.svg'
-    assert path.read_bytes() == (ROOT/'tests/fixtures/plan_b_templates/AC0130_L.svg').read_bytes()
+    assert path.resolve() == (ROOT/'artifacts/samples/AC0130_L.svg').resolve()
     assert description == TEMPLATE_DESCRIPTION.strip()
     assert 'Liniengruppe' in description and 'Balken' in description
 

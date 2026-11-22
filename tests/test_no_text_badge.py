@@ -56,7 +56,7 @@ def test_no_text_contract_applies_to_failed_drafts():
             writer('<svg><circle r="10"/><text>M</text></svg>', failed=failed)
     assert saved == []
     writer('<svg><circle cx="20" cy="12" r="10"/>'
-           '<line x1="0" y1="12" x2="10" y2="12"/></svg>', failed=True)
+           '<line x1="0" y1="12" x2="10" y2="12" stroke="gray"/></svg>', failed=True)
     assert len(saved) == 1
 
 

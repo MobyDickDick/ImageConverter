@@ -215,7 +215,7 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
         initial_mse=initial_mse, initial_quality=initial_quality,
         template_rejection=template_error, restarted_from_description=True,
         description_fit_directory=str(folder), stop_reason='description_fit_failed',
-        description_error='', message='Die Vorlage passt nicht zur Beschreibung. '
+        description_error=template_error, message='Die Vorlage passt nicht zur Beschreibung. '
         'Auch die neue Konvertierung aus der Beschreibung hat noch kein passendes SVG ergeben.')
     print('Vorlage verworfen: '+template_error+'. Starte neue Konvertierung aus der Bildbeschreibung.', flush=True)
     import hashlib
@@ -381,6 +381,13 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
                 atomic_json(output.with_suffix('.json'),report)
                 return report
     constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
+    rendered = render_svg(prepared, width, height)
+    if rendered is None:
+        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
+                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
+    initial_rendered = rendered.copy()
+    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
+    initial_quality = pixel_quality(target, rendered)
     initial_description_error = ''
     try:
         validate_svg_assertions(constrained, assertions)
@@ -391,15 +398,8 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
         # conversion. First allow orientation to satisfy directional claims.
         if not compatible_sample_pose(ET.fromstring(constrained), width, height, assertions, deadline=hard_deadline):
             return refit_description(source, output, description, seed=effective_seed,
-                hard_deadline=hard_deadline, initial_mse=None, initial_quality=None,
+                hard_deadline=hard_deadline, initial_mse=initial_mse, initial_quality=initial_quality,
                 template_error=str(exc), started=started)
-    rendered = render_svg(prepared, width, height)
-    if rendered is None:
-        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
-                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
-    initial_rendered = rendered.copy()
-    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
-    initial_quality = pixel_quality(target, rendered)
     if constrained != prepared:
         root = ET.fromstring(constrained)
         rendered = render_svg(constrained, width, height)

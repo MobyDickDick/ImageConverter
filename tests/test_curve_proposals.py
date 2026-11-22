@@ -89,8 +89,9 @@ def test_fitting_renders_stop_at_the_shared_deadline_and_zero_probes_do_no_fitti
     session=ImageSearch(SearchPolicy(seconds=1,max_seconds=1),clock=lambda:now[0])
     def slow(svg,w,h):
         assert now[0]<1
+        raster=render(svg,w,h)
         now[0]+=.4
-        return render(svg,w,h)
+        return raster
     with image_search(session):
         assert not list(curve_groups(image,session,slow))
     assert session.evaluations==3

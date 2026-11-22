@@ -80,6 +80,8 @@ def description_object_limits(text):
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', text).casefold()
     # Keep the fitter's original wording intact; this is an inventory synonym.
     words = re.sub(r'\brechteckig[enrms]*\s+feld\b', 'rechteck', words)
+    words = re.sub(r'\brechteckfl(?:ä|ae)che\b', 'ein rechteck', words)
+    words = re.sub(r'\brechteckig[enrms]*\s+innenfl(?:ä|ae)che\b', 'ein rechteck', words)
     square_head = bool(re.search(r'\bquadrat\s+(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', words))
     if square_head:
         words = re.sub(r'\b(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', '', words)

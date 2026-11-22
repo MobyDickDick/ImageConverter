@@ -226,10 +226,10 @@ def image_bytes(mode="RGB", color="white", size=(32, 24)):
 def test_hollow_diagonal_and_diamond_survive_fresh_and_sample_gui_paths(jobs,reuse_sample):
     from tests.test_hollow_cross_panel_runtime import DESCRIPTION,drawing
     from src.iCCModules.imageCompositeConverterHollowCrossPanel import validate_hollow_cross_panel
-    from src.imageConverterSample import render_svg
+    from tools.run_plan_b_variations import render
     from PIL import Image
     buffer = io.BytesIO()
-    Image.fromarray(render_svg(drawing(),60,400)).save(buffer,format='PNG')
+    Image.fromarray(render(drawing(),60,400)[:, :, ::-1]).save(buffer,format='PNG')
     uploaded = jobs.upload('neutrales-diagonalmotiv.png',buffer.getvalue())
     if reuse_sample:
         jobs.attach_sample(uploaded['id'],'old.svg',drawing(diamond=False,slit=False).encode())
