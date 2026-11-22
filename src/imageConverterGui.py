@@ -43,7 +43,7 @@ MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240),
             "explore5": (300, 315), "explore10": (600, 615)}
-DESCRIPTION_VALIDATION_VERSION = 12
+DESCRIPTION_VALIDATION_VERSION = 13
 
 
 class RequestError(ValueError):
@@ -481,7 +481,8 @@ class Jobs:
             try:
                 prepare_sample(project.read_bytes(),job['width'],job['height'])
                 quality = saved_svg_quality(folder/'source.png',project)
-                if quality and (not quality['observed_foreground_pixels'] or quality['output_foreground_pixels']):
+                if (quality and not result_description_error(project, job['description'])
+                        and (not quality['observed_foreground_pixels'] or quality['output_foreground_pixels'])):
                     shutil.copyfile(project,folder/'sample.svg')
                     job.update(sample=True,sample_name=project.name,sample_origin='Gespeichertes Projekt-SVG',
                                starting_svg_quality=quality,message='Aktuelles Projekt-SVG wird am Original weiter verbessert …')
@@ -990,7 +991,7 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     report.update(passed=bool(report['passed'] and quality and quality['passed'] and not error),
                   description_error=error or report.get('description_error', ''))
     shutil.copyfile(result, folder / "result.svg")
-    message = "Sample am Original verbessert." if report["improved"] else "Keine messbare Verbesserung gefunden. Der Sample-Stand bleibt erhalten."
+    message = "Sample am Original verbessert." if report.get("improved") else "Keine messbare Verbesserung gefunden. Der Sample-Stand bleibt erhalten."
     if report.get('stop_reason') == 'quality_target_reached':
         message = 'Das Sample erfüllt die Pixelprüfung bereits; seine Formen bleiben erhalten.'
     elif report.get('stop_reason') == 'sample_alignment_accepted':
@@ -999,6 +1000,8 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         message = 'Vorlagenaufbau neu bearbeitet; Bildvergleich und Beschreibungsprüfung bestanden.'
     elif report.get('stop_reason') == 'svg_components_composed':
         message = 'Referenzierte SVG-Bauteile zusammengesetzt und am Original platziert.'
+    elif report.get('primitive_evolution'):
+        message = 'Grundformen mit allen beschriebenen Rändern und Verläufen neu angepasst.'
     elif report.get('restarted_from_description'):
         message = 'Unpassende Vorlage verworfen. SVG neu aus der Bildbeschreibung erstellt.'
     message += " Pixelprüfung bestanden." if report["passed"] else " Bitte den Entwurf prüfen; die Pixel- oder explizite Beschreibungsprüfung ist noch offen."
@@ -1508,6 +1511,7 @@ class Handler(BaseHTTPRequestHandler):
                         description_autosave=True,
                         current_svg_reuse=True,
                         primitive_exploration=True,
+                        scoped_primitive_paint=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]

@@ -38,9 +38,17 @@ Drehung, Verschiebung und Skalierung sind enthalten.
 Die Transformation gilt gemeinsam für das Motiv einschliesslich Schrift und
 Farbverläufen. Einzelne Teile werden dabei nicht unabhängig gedreht oder
 gespiegelt. Ein führendes weisses Rechteck über der gesamten Zeichenfläche
-bleibt als Hintergrund auf der Zeichenfläche. Lokale Formkoordinaten und die
-hochgeladene Datei bleiben erhalten; gekoppelte Farben und eine ausdrücklich
-verlangte gemeinsame Strichbreite können weiterhin angepasst werden.
+bleibt als Hintergrund auf der Zeichenfläche. Die hochgeladene Datei bleibt
+erhalten; gekoppelte Farben und eine ausdrücklich verlangte gemeinsame
+Strichbreite können weiterhin angepasst werden. Lokale Formkoordinaten bleiben
+gewöhnlich erhalten. Bei einem umrandeten Verlaufsrechteck über einer einfarbigen
+Rechteckfläche darf die Suche kleine Versätze der Rahmenkanten korrigieren.
+Dadurch kann ein versehentlich freiliegender Hintergrundstreifen verschwinden.
+Diese Vorschläge müssen die Beschreibung und den Vergleich mit dem Original
+bestehen; eine im Original vorhandene zusätzliche Kante wird nicht pauschal
+entfernt. Eine bereits bestandene Vorlage darf durch weitere Farbanpassung weder
+die Qualitätsgrenzen unterschreiten noch ihre gemeinsame Kontur-/Flächenbewertung
+verschlechtern.
 
 Richtungsangaben der Beschreibung werden nach der Transformation geprüft.
 Eine zunächst anders ausgerichtete Vorlage wird dafür vor dem Verwerfen auf

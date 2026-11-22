@@ -1408,7 +1408,10 @@ def runNonCompositeIterationImpl(
     if session is not None:
         session.bind_reference(perc_img)
     from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
-    if (settings() or {}).get('primitive_exploration'):
+    from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+    program = scene_program(description)
+    if ((settings() or {}).get('primitive_exploration')
+            or (program is not None and program.get('paint_claims'))):
         from src.iCCModules.imageCompositeConverterPrimitiveEvolution import evolve_primitives
         from src.imageConverterPreview import publish_preview
         fitted = evolve_primitives(perc_img, description, render_svg_to_numpy_fn,

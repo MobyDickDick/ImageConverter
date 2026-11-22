@@ -1,5 +1,16 @@
 # ImageConverter
 
+Gleich breite Ränder bestimmter Grundformen und ein eigener Grauverlauf je Form
+werden jetzt als verbindliche Beschreibungsangaben gesucht und geprüft. Ein
+altes SVG mit ungleichen Dreiecksrändern kann damit keinen neuen Versuch mehr
+als bereits bestanden beenden. Der interne Renderer schliesst ausserdem alle
+Polygonkonturen korrekt; bisher fehlte die letzte Konturkante in der Bewertung.
+AC0204_L ist mit unverändertem Beschreibungstext neu gespeichert und besteht
+MuPDF und den unabhängigen librsvg-Vergleich. Auch die freie GUI-Suche besteht.
+[Ursachen, Prüfungen und Grenzen](artifacts/evaluation/scoped_paint_2026-11-22/README.md).
+Der laufende Hintergrunddienst wurde nicht unterbrochen; den Webserver nach
+seinem Abschluss neu starten, damit auch der GUI-Prozess die Änderungen lädt.
+
 Sample-SVGs dürfen jetzt auch gedreht oder gespiegelt zum Original vorliegen.
 Die gemeinsame Vorlagensuche prüft Drehungen über den ganzen Kreis, horizontale
 und vertikale Spiegelungen sowie deren Kombination mit Skalierung und Verschiebung.

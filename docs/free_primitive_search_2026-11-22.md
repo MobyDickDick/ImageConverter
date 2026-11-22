@@ -12,7 +12,9 @@ vermessen oder aus einem Referenz-SVG übernommen.
 
 Bild und Beschreibung laden, ein freies Suchprofil wählen und starten. Ein
 bestandener vollständiger Bild- und Beschreibungsvergleich beendet die Suche
-früher. Andernfalls rechnet sie bis zur Zeitgrenze weiter. Ein kleiner Rest des
+früher. Bei den unten beschriebenen Rand- und Verlaufsvorgaben wird bis zum
+strengeren bestehenden Suchziel weiter verbessert; bereits bestandene Stände
+bleiben dabei erhalten. Andernfalls rechnet sie bis zur Zeitgrenze weiter. Ein kleiner Rest des
 gemeinsamen Bildbudgets bleibt für Speichern und Rückgabe an den Worker frei.
 
 Alle fünf Sekunden werden Population, bester Stand, bisher geprüfte Kandidaten
@@ -77,8 +79,24 @@ einfache Abschnitte „Links:“ und „Rechts:“. Wiederholte Referenzen auf d
 Dreiecke werden nicht als zusätzliche Dreiecke gezählt. Dreieckvorschläge sind
 derzeit gleichschenklig, auch wenn der Text diese Eigenschaft offenlässt.
 
+Zusätzliche vollständige Sätze dürfen die Ränder und Verläufe einer Formgruppe
+festlegen, beispielsweise „Beide Dreiecke haben gleich breite Ränder“ und
+„Beide Dreiecke haben je einen Farbübergang (hellgrau nach dunkelgrau)“.
+Dies gilt ebenso für Kreise, Ellipsen, Rechtecke und Quadrate; „alle“ und „die
+beiden“ sind weitere unterstützte Gruppenangaben. Nur die genannte Formgruppe
+teilt ihre Randbreite. Jeder verlangte Verlauf braucht unterschiedliche,
+sichtbare Farbstopps. Die Grauangaben bestimmen einen Helligkeitsbereich und
+die Reihenfolge der Stopps; sie legen keinen einzelnen RGB-Code fest.
+
+Diese Vorgaben gelten auch für normale Profile, Vorlagen und Entwürfe. Native
+Kreis-/Linien-/Dreieckvorlagen können als Anfangsgeometrie weiterverwendet werden;
+die freie Suche beginnt weiterhin unabhängig von solchen Vorlagen. Gespeicherte
+Suchstände mit älterem Programm- oder Rendererstand werden getrennt behandelt.
+Ein anderer Seed erzeugt andere tatsächliche Suchfolgen, garantiert aber kein
+anderes Endergebnis, wenn mehrere Suchen zur gleichen guten Lösung gelangen.
+
 Es ist kein vollständiger Freitextparser. Unter anderem Textzeichen,
-explizite Farbangaben, allgemeine Symmetrie- und Parallelitätsbedingungen,
+weitere explizite Farbangaben, allgemeine Symmetrie- und Parallelitätsbedingungen,
 gestrichelte Linien und weitere komplexe Motive werden von diesem neuen Pfad
 noch nicht vollständig unterstützt und deshalb vor dem Start abgewiesen.
 Andere vorhandene Profile behalten ihre bisherigen Beschreibungsmodelle.

@@ -308,8 +308,11 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
 
 def refine(source: Path, sample: Path, output: Path, description: str, seconds: float, *, seed=None, deadline=None) -> dict:
     from src.iCCModules.imageCompositeConverterSearchPortfolio import standalone_image_search
+    from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+    program=scene_program(description)
     with standalone_image_search(str(source.resolve()), seconds=seconds, seed=seed,
-                                 directory=output.parent/'search') as session:
+                                 directory=output.parent/'search',
+                                 render_budget=4096 if program and program.get('paint_claims') else 384) as session:
         report = _refine(source, sample, output, description, seconds, seed=seed, deadline=deadline)
         report['search_context'] = session.report()
         report['evaluations'] = session.renderings
@@ -347,6 +350,35 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
     prepared = contain_svg(ET.tostring(root, encoding="unicode"), width, height)
     root = ET.fromstring(prepared)
     assertions = description_assertions(description)
+    from src.iCCModules.imageCompositeConverterSceneProgram import scene_program, sample_parameters
+    program=scene_program(description)
+    if program and program.get('paint_claims'):
+        initial=sample_parameters(program,prepared,width,height)
+        if initial is not None:
+            from src.iCCModules.imageCompositeConverterPrimitiveEvolution import evolve_primitives
+            from src.imageConverterRecovery import atomic_svg
+            from src.imageConverterCatalog import atomic_json
+            initial_rendered,_=current_search().render_candidate(target,prepared,render_svg,width,height)
+            initial_quality=pixel_quality(target,initial_rendered) if initial_rendered is not None else None
+            fitted=evolve_primitives(target,description,render_svg,
+                seed=effective_seed,seconds=max(.001,hard_deadline-time.monotonic()),
+                initial_parameters=initial,color_order='RGB')
+            if fitted and fitted['valid']:
+                if fitted['quality']['passed']:
+                    from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_scope
+                    with candidate_scope('full_scene','scoped_sample'):
+                        current_search().validate(fitted,target)
+                atomic_svg(output,fitted['svg'])
+                report=dict(result=True,passed=fitted['quality']['passed'],final_mse=fitted['error'],
+                    initial_mse=initial_quality['normalized_mse'] if initial_quality else None,
+                    initial_quality=initial_quality,
+                    improved=bool(initial_quality and fitted['error']<initial_quality['normalized_mse']-1e-10),
+                    final_quality=fitted['quality'],description_error='',
+                    search_seed=str(effective_seed),stop_reason=fitted['search_report']['stop_reason'],
+                    primitive_evolution=fitted['search_report'],elapsed=round(time.monotonic()-started,2),
+                    message='Vorlagenformen mit allen beschriebenen Rändern und Verläufen neu angepasst.')
+                atomic_json(output.with_suffix('.json'),report)
+                return report
     constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
     initial_description_error = ''
     try:

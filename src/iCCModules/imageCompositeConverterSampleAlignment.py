@@ -1,4 +1,4 @@
-"""Fit a whole uploaded assembly without moving or deleting its individual parts."""
+"""Align an uploaded assembly and repair bounded frame insets without deleting parts."""
 from __future__ import annotations
 
 import copy
@@ -137,6 +137,50 @@ def lightened_sample_details(*args,**kwargs):
     return []
 
 
+def framed_surface_variants(root):
+    """Offer flush frame edges over a solid backing, retaining every element.
+
+    A raster-derived backing can accidentally show as a second rim when the
+    foreground rectangle is inset asymmetrically. These are only proposals:
+    the source pixels and description must still approve each adjustment.
+    Work in each parent's local coordinates, including grouped templates.
+    """
+    for parent_index, parent in enumerate(root.iter()):
+        children = list(parent)
+        for index, (back, front) in enumerate(zip(children, children[1:])):
+            if (back.tag.rsplit('}', 1)[-1] != 'rect' or front.tag != back.tag
+                    or back.get('transform') or front.get('transform')
+                    or back.get('stroke', 'none') != 'none'
+                    or back.get('fill', 'black') in {'none', 'transparent'}
+                    or back.get('fill', '').startswith('url(')
+                    or front.get('stroke', 'none') == 'none'
+                    or not front.get('fill', '').startswith('url(')):
+                continue
+            try:
+                bx, by, bw, bh = (float(back.get(k, '0')) for k in ('x', 'y', 'width', 'height'))
+                x, y, w, h = (float(front.get(k, '0')) for k in ('x', 'y', 'width', 'height'))
+                stroke = float(front.get('stroke-width', '1'))
+            except ValueError:
+                continue
+            gaps = np.array([x-bx, y-by, bx+bw-x-w, by+bh-y-h])-stroke/2
+            if (not np.isfinite([bx, by, bw, bh, x, y, w, h, stroke]).all()
+                    or not 0 < stroke < min(bw, bh)
+                    or np.max(abs(gaps)) > max(2*stroke, 2.)
+                    or np.max(abs(gaps)) < 1e-6):
+                continue
+            for axes in ((0,), (1,), (0, 1)):
+                candidate = copy.deepcopy(root)
+                rect = list(list(candidate.iter())[parent_index])[index+1]
+                if 0 in axes:
+                    rect.set('x', f'{bx+stroke/2:.8g}')
+                    rect.set('width', f'{bw-stroke:.8g}')
+                if 1 in axes:
+                    rect.set('y', f'{by+stroke/2:.8g}')
+                    rect.set('height', f'{bh-stroke:.8g}')
+                if ET.tostring(candidate) != ET.tostring(root):
+                    yield candidate
+
+
 def align_sample(root, target, render_fn, *, deadline, initial, assertions=None, seed=0):
     from src.iCCModules.imageCompositeConverterSearchPortfolio import standalone_image_search
     with standalone_image_search('template_alignment', seconds=max(.001, deadline-time.monotonic()), seed=seed) as session:
@@ -149,7 +193,7 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
     from PIL import ImageColor
     from src.iCCModules.imageCompositeConverterStrokeConstraints import constrain_stroke_width, width_bindings
     from src.iCCModules.imageCompositeConverterSearchPortfolio import proposal_rng
-    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality, preferred_quality
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search, pixel_quality, preferred_quality, vector_quality_score
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
 
     height, width = target.shape[:2]
@@ -183,8 +227,8 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
         values.extend([float(np.mean(rgb))] if gray else rgb)
     parameters = np.array(values, dtype=float)
 
-    def build(p):
-        candidate = copy.deepcopy(root)
+    def build(p, assembly=None):
+        candidate = copy.deepcopy(root if assembly is None else assembly)
         elements = list(candidate.iter())
         for rgb, (offset, gray) in zip(palette, paint_indices):
             color = np.repeat(p[offset], 3) if gray else p[offset:offset+3]
@@ -220,6 +264,7 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
         return float((squared*weights).mean()), float(squared.mean())
 
     best, mse = measure(initial)
+    best_quality = pixel_quality(target, initial)
     pixels, svg = initial, ET.tostring(root, encoding='unicode')
     try:
         validate_svg_assertions(svg, assertions)
@@ -230,15 +275,15 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
     cache = {}
     rejected, restarts = 0, 0
 
-    def consider(p):
-        nonlocal parameters, best, mse, pixels, svg, evaluations, accepted, rejected
+    def consider(p, assembly=None):
+        nonlocal root, parameters, best, mse, pixels, svg, evaluations, accepted, rejected, best_quality
         if time.monotonic() >= deadline or audit.reason() or not valid(p):
             return False
-        key = tuple(p)
-        if key in cache:
-            return False
         try:
-            candidate = build(p)
+            candidate = build(p, assembly)
+            key = candidate
+            if key in cache:
+                return False
             validate_svg_assertions(candidate, assertions)
             raster, fresh = audit.render_candidate(target,candidate,render_fn,width,height)
         except ValueError:
@@ -248,13 +293,26 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
         if raster is None:
             return False
         loss, error = measure(raster)
+        quality = pixel_quality(target, raster)
         audit.measured(candidate, error, source='template_alignment', scope='full_scene', valid=True)
         cache[key] = loss
+        # Paint can lower MSE while blurring a rim enough to fail the edge
+        # gate. Retain a valid, passing assembly's contour/foreground quality.
+        if (math.isfinite(best) and best_quality['passed']
+                and (not quality['passed'] or vector_quality_score(quality) > vector_quality_score(best_quality)+1e-12)):
+            return False
         if loss < best-1e-10 and error <= mse+1e-12:
+            if assembly is not None:
+                root = assembly
             parameters, best, mse, pixels, svg = p.copy(), loss, error, raster, candidate
+            best_quality = quality
             accepted += 1
             return True
         return False
+
+    frame_adjustments = 0
+    for assembly in framed_surface_variants(root):
+        frame_adjustments += int(consider(parameters.copy(), assembly))
 
     # Calibrate paint before geometry can shrink a wrongly colored surface.
     # Black/white renders measure coverage only; final proposals still pass
@@ -386,6 +444,7 @@ def _align_sample(root, target, render_fn, *, deadline, initial, assertions=None
     return dict(svg=svg, rendered=pixels, error=mse, weighted_error=best,
                 evaluations=evaluations, accepted=accepted,
                 search_control=dict(seed=str(seed),restarts=restarts,rejected_candidates=rejected,
+                    frame_adjustments=frame_adjustments,
                     **audit.report(),scope='whole_assembly',
                     stop_reason=('quality_target_reached' if pixel_quality(target,pixels)['passed'] else
                                  audit.reason() or ('time_limit' if time.monotonic()>=deadline else 'schedule_exhausted'))),

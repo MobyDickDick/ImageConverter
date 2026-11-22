@@ -108,6 +108,40 @@ def _normalize_rounded_rectangles_for_fitz(svg):
     return ET.tostring(root, encoding='unicode') if changed else svg
 
 
+def _close_polygons_for_fitz(svg: str) -> str:
+    """MuPDF omits a polygon's last stroke edge; paths need an explicit Z.
+
+    Normalize the private input after gradient expansion, including its outline
+    polygons. Saved SVGs keep their native polygon elements and point order.
+    Polylines deliberately remain open.
+    """
+    if 'polygon' not in svg:
+        return svg
+    try:
+        root=ET.fromstring(svg)
+    except ET.ParseError:
+        return svg
+    if any(node.tag.rsplit('}',1)[-1]=='style' for node in root.iter()):
+        return svg
+    changed=False
+    number=r'[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?'
+    for node in root.iter():
+        if node.tag.rsplit('}',1)[-1]!='polygon' or len(node):
+            continue
+        raw=node.get('points','')
+        if re.sub(number+'|[\\s,]+','',raw):
+            continue
+        values=re.findall(number,raw)
+        if len(values)<6 or len(values)%2 or not all(math.isfinite(float(v)) for v in values):
+            continue
+        points=[x+' '+y for x,y in zip(values[::2],values[1::2])]
+        node.tag=node.tag[:-7]+'path'
+        node.attrib.pop('points',None)
+        node.set('d','M '+' L '.join(points)+' Z')
+        changed=True
+    return ET.tostring(root,encoding='unicode') if changed else svg
+
+
 def _resolve_local_gradient_references(svg: str) -> str:
     """Materialize inherited paint attributes/stops in the private render input.
 
@@ -299,13 +333,21 @@ def _uniform_svg_transform(value):
     """Return positive uniform scale and translation, or reject unsupported syntax."""
     scale, tx, ty = 1., 0., 0.
     cursor = 0
-    for match in re.finditer(r'(translate|scale)\s*\(([^)]*)\)', value):
+    for match in re.finditer(r'(translate|scale|matrix)\s*\(([^)]*)\)', value):
         if value[cursor:match.start()].strip(' \t\r\n,'):
             raise ValueError('unsupported transform')
         numbers = [float(v) for v in re.split(r'[\s,]+', match[2].strip())]
-        if not 1 <= len(numbers) <= 2 or not all(math.isfinite(v) for v in numbers):
+        if (len(numbers) not in ((6,) if match[1] == 'matrix' else (1, 2))
+                or not all(math.isfinite(v) for v in numbers)):
             raise ValueError('invalid transform')
-        if match[1] == 'translate':
+        if match[1] == 'matrix':
+            a, b, c, d, x, y = numbers
+            if a <= 0 or a != d or b != 0 or c != 0:
+                raise ValueError('nonuniform, rotated or reflected transform')
+            tx += scale*x
+            ty += scale*y
+            scale *= a
+        elif match[1] == 'translate':
             tx += scale*numbers[0]
             ty += scale*(numbers[1] if len(numbers) == 2 else 0.)
         else:
@@ -854,6 +896,7 @@ def render_svg_to_numpy_inprocess(
     renderer_svg = _expand_polygon_linear_gradients_for_fitz(renderer_svg)
     renderer_svg = _expand_centered_radial_gradients_for_fitz(renderer_svg)
     renderer_svg = _normalize_rounded_rectangles_for_fitz(renderer_svg)
+    renderer_svg = _close_polygons_for_fitz(renderer_svg)
     attempts = [renderer_svg]
     normalized_svg = re.sub(r">\s+<", "><", renderer_svg.strip())
     if normalized_svg and normalized_svg != renderer_svg:

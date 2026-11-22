@@ -32,7 +32,10 @@ def runPreparedIterationModeImpl(
     print_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
-    if (settings() or {}).get('primitive_exploration'):
+    from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+    program=scene_program(description)
+    if ((settings() or {}).get('primitive_exploration')
+            or (program is not None and program.get('paint_claims'))):
         mode = 'non_composite'
     if mode == "semantic_badge":
         semantic_result = run_semantic_badge_iteration_fn(

@@ -11,7 +11,7 @@ from xml.etree import ElementTree as ET
 
 import numpy as np
 
-VERSION = 'primitive_scene_program_v1'
+VERSION = 'primitive_scene_program_v2'
 KINDS = ('circle', 'ellipse', 'rect', 'square', 'triangle', 'line')
 # Each object has centre, size, angle, stroke width, RGB fill/stroke, and a
 # second fill stop. Paint is independent of geometry; the last two values select
@@ -19,10 +19,111 @@ KINDS = ('circle', 'ellipse', 'rect', 'square', 'triangle', 'line')
 STRIDE = 17
 
 
+def sample_parameters(program, svg, width, height):
+    """Import a native primitive sample as an optional ordinary-search start.
+
+    No image pixels or catalog identifiers are read. Unsupported encodings
+    return None so the caller can use its existing fresh-construction path.
+    """
+    from PIL import ImageColor
+    from src.iCCModules.imageCompositeConverterSvgStyles import inline_simple_svg_styles
+    from src.iCCModules.imageCompositeConverterRepresentation import path_points, EXCLUDED
+    from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
+    root=ET.fromstring(inline_simple_svg_styles(svg))
+    gradients={node.get('id'):node for node in root.iter() if node.tag.rsplit('}',1)[-1]=='linearGradient'}
+    found=[]
+    def visit(node,parent=(1.,0.,0.,1.,0.,0.),inherited=None):
+        tag=node.tag.rsplit('}',1)[-1]
+        if tag in EXCLUDED:
+            return
+        style=dict(inherited or {'fill':'black','stroke':'none','stroke-width':'1'})
+        for key in style:
+            style[key]=node.get(key,style[key])
+        matrix=_compose(parent,_transform(node.get('transform','')))
+        a,b,c,d,tx,ty=matrix
+        def mapped(points):
+            return np.asarray(points)@np.array([[a,b],[c,d]])+[tx,ty]
+        row=np.full(STRIDE,.5); kind=tag
+        if tag=='circle':
+            if not np.isclose(math.hypot(a,b),math.hypot(c,d)) or not np.isclose(a*c+b*d,0):
+                raise ValueError('Deformed sample circle')
+            center=mapped([[float(node.get('cx','0')),float(node.get('cy','0'))]])[0]
+            sx=sy=2*float(node.get('r'))*math.hypot(a,b); angle=0.
+        elif tag=='line':
+            points=mapped([[float(node.get(k,'0')) for k in ('x1','y1')],
+                           [float(node.get(k,'0')) for k in ('x2','y2')]])
+            center=points.mean(axis=0); direction=points[1]-points[0]
+            sx=np.linalg.norm(direction); sy=sx; angle=math.atan2(direction[1],direction[0])
+        elif tag in {'polygon','path'}:
+            paths=path_points(node)
+            if len(paths)!=1 or not paths[0][1]:
+                raise ValueError('Unsupported sample path')
+            points=paths[0][0]
+            if len(points)>3 and np.allclose(points[0],points[-1]):
+                points=points[:-1]
+            if len(points)!=3:
+                raise ValueError('Unsupported sample polygon')
+            points=mapped(points); kind='triangle'
+            # Program triangles store their apex first. Generic triangles
+            # identify it by the two equal edges instead of relying on IDs.
+            lengths=np.linalg.norm(np.roll(points,-1,axis=0)-points,axis=1)
+            apex=min(range(3),key=lambda i:abs(lengths[i]-lengths[(i-1)%3]))
+            tip=points[apex]; base=np.delete(points,apex,axis=0)
+            direction=tip-base.mean(axis=0); center=(tip+base.mean(axis=0))/2
+            sx=np.linalg.norm(direction); sy=np.linalg.norm(base[0]-base[1])
+            angle=math.atan2(direction[1],direction[0])
+        elif tag in {'rect','ellipse'}:
+            # Backgrounds are inventory-free; other encodings retain their
+            # established importer rather than guessing a different shape.
+            if tag=='rect' and style['stroke']=='none' and node.get('width')==root.get('width') and node.get('height')==root.get('height'):
+                return
+            raise ValueError('Unsupported sample shape')
+        else:
+            for child in node:
+                visit(child,matrix,style)
+            return
+        row[:6]=[* (center/[width,height]),sx/width,sy/height,(angle/(2*math.pi))%1,
+                  float(style['stroke-width'])*math.hypot(a,b)/(.1*min(width,height))]
+        row[9:12]=np.array(ImageColor.getrgb(style['stroke']))/255
+        fill=style['fill']; row[15]=0. if fill=='none' else .5
+        gradient=re.fullmatch(r'url\(#([^)]*)\)',fill)
+        if gradient:
+            node_gradient=gradients[gradient[1]]
+            stops=list(node_gradient)
+            row[6:9]=np.array(ImageColor.getrgb(stops[0].get('stop-color')))/255
+            row[12:15]=np.array(ImageColor.getrgb(stops[-1].get('stop-color')))/255
+            def number(key,default):
+                value=node_gradient.get(key,default)
+                return float(value.removesuffix('%'))/(100 if value.endswith('%') else 1)
+            dx=number('x2','1')-number('x1','0'); dy=number('y2','0')-number('y1','0')
+            row[16]=(math.atan2(dy,dx)/(2*math.pi))%1; row[15]=1.
+        elif fill!='none':
+            row[6:9]=np.array(ImageColor.getrgb(fill))/255
+        found.append((kind,row))
+    try:
+        visit(root)
+        values=[]
+        for obj in program['objects']:
+            index=next(i for i,(kind,row) in enumerate(found) if kind==obj['kind'])
+            values.append(found.pop(index)[1])
+        if found:
+            return None
+        values=np.array(values)
+        for claim in program.get('paint_claims',[]):
+            if claim['claim']=='equal_stroke':
+                indices=[i for i,obj in enumerate(program['objects']) if obj['kind']==claim['kind']]
+                values[indices,5]=np.median(values[indices,5])
+        return values.ravel()
+    except (ValueError,KeyError,TypeError,StopIteration):
+        return None
+
+
 def scene_program(description):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     text = normalize_description(description).casefold()
+    from src.iCCModules.imageCompositeConverterScopedPaint import scoped_paint_claims
+    paint_claims, text = scoped_paint_claims(text)
     # This is a bounded primitive language, not permission to ignore objects.
     unsupported = (r'\b(?:text|beschriftung|buchstabe\w*|schrift\w*|ziffer\w*|stern\w*|'
                    r'pfeil\w*|bogen\w*|spirale\w*|schraff\w*|sinus\w*|raute\w*|'
@@ -74,6 +175,7 @@ def scene_program(description):
         else:
             return None  # ambiguous referents cannot silently become constraints
     return dict(schema=VERSION, objects=objects, relations=relations,
+                paint_claims=paint_claims,
                 isosceles='gleichschenklig' in text,
                 outline=bool(re.search(r'\b(?:ungefüllt|ohne füllung|nur umriss)\b', text)),
                 no_gradient=bool(re.search(r'\b(?:ohne|kein\w*)\s+(?:farb)?verlauf\b',text)))
@@ -135,6 +237,8 @@ def relation_error(program, shapes, width, height):
 
 
 def program_svg(program, parameters, width, height, background=(255,255,255)):
+    from src.iCCModules.imageCompositeConverterScopedPaint import constrain_parameters
+    parameters=constrain_parameters(program,parameters)
     shapes=geometry(program,parameters,width,height)
     defs,parts=[],[]
     def color(rgb):
@@ -147,7 +251,10 @@ def program_svg(program, parameters, width, height, background=(255,255,255)):
             fill='none'
         elif not program['no_gradient'] and paint[9]>.65:
             gradient=obj['id']+'_paint'
-            defs.append(f'<linearGradient id="{gradient}" x1="0" y1="0" x2="{math.cos(paint[10]*2*math.pi):.6f}" y2="{math.sin(paint[10]*2*math.pi):.6f}">'
+            dx,dy=math.cos(paint[10]*2*math.pi),math.sin(paint[10]*2*math.pi)
+            extent=(abs(dx)+abs(dy))/2
+            defs.append(f'<linearGradient id="{gradient}" x1="{.5-dx*extent:.6f}" y1="{.5-dy*extent:.6f}" '
+                        f'x2="{.5+dx*extent:.6f}" y2="{.5+dy*extent:.6f}">'
                         f'<stop offset="0" stop-color="{fill}"/><stop offset="1" stop-color="{color(paint[6:9])}"/></linearGradient>')
             fill=f'url(#{gradient})'
         attrs=f'id="{obj["id"]}" fill="{fill}" stroke="{color(paint[3:6])}" stroke-width="{s["stroke"]:.5f}" stroke-linejoin="round"'
@@ -174,6 +281,8 @@ def program_svg(program, parameters, width, height, background=(255,255,255)):
 def validate_program_svg(svg, program, tolerance=.01):
     """Recheck relationships on actual exported points, including template edits."""
     root=ET.fromstring(svg)
+    from src.iCCModules.imageCompositeConverterScopedPaint import validate_scoped_paint
+    validate_scoped_paint(svg,program.get('paint_claims'))
     # Export uses native primitives in source coordinates. A later common
     # transform is handled by the representation parser's matrix helpers.
     from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform

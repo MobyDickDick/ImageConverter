@@ -23,20 +23,20 @@ from src.iCCModules.imageCompositeConverterSceneProgram import (
     STRIDE, geometry, program_svg, relation_error, scene_program, validate_program_svg,
 )
 from src.iCCModules.imageCompositeConverterAdaptiveSearch import (
-    candidate_identity, current_search, pixel_quality,
+    candidate_identity, current_search, pixel_quality, preferred_quality,
 )
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, settings
 
-SCHEMA='primitive_evolution_v1'
+SCHEMA='primitive_evolution_v3'
 
 
-def search_binding(image,description,program):
+def search_binding(image,description,program,color_order='BGR'):
     return dict(schema=SCHEMA,source=hashlib.sha256(np.asarray(image).tobytes()).hexdigest(),
-                shape=list(image.shape),description=description,program=program)
+                shape=list(image.shape),description=description,program=program,color_order=color_order)
 
 
-def memory_folder(image,description,seed,directory):
-    binding=search_binding(image,description,scene_program(description))
+def memory_folder(image,description,seed,directory,color_order='BGR'):
+    binding=search_binding(image,description,scene_program(description),color_order)
     key=hashlib.sha256(json.dumps([binding,seed],sort_keys=True,ensure_ascii=False).encode()).hexdigest()
     return Path(directory)/key
 
@@ -76,7 +76,7 @@ def locked_memory(function):
         seed=options.get('seed') if options.get('seed') is not None else config.get('seed',0)
         if not directory:
             return function(image,description,render_fn,**options)
-        with memory_lock(memory_folder(image,description,seed,directory)):
+        with memory_lock(memory_folder(image,description,seed,directory,options.get('color_order','BGR'))):
             return function(image,description,render_fn,**options)
     return run
 
@@ -91,7 +91,10 @@ def atomic_json(path, value):
 
 @locked_memory
 def evolve_primitives(image, description, render_fn, *, seconds=None, max_evaluations=None,
-                      seed=None, directory=None, resume=True, on_improvement=None):
+                      seed=None, directory=None, resume=True, on_improvement=None, initial_parameters=None,
+                      color_order='BGR'):
+    if color_order not in {'RGB','BGR'}:
+        raise ValueError('Unsupported raster color order')
     program=scene_program(description)
     if program is None:
         raise ValueError('Diese Beschreibung wird von der freien Grundformensuche noch nicht vollständig unterstützt.')
@@ -111,12 +114,13 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         seconds=min(seconds,max(.001,session.limit-session.elapsed-min(2.,seconds*.02)))
     started=time.monotonic()
     rng=np.random.default_rng(seed)
-    binding=search_binding(image,description,program)
+    binding=search_binding(image,description,program,color_order)
     directory=Path(directory) if directory else config.get('primitive_memory') or config.get('directory')
-    folder=memory_folder(image,description,seed,directory) if directory else None
+    folder=memory_folder(image,description,seed,directory,color_order) if directory else None
     if folder:
         folder.mkdir(parents=True,exist_ok=True)
     background=np.median(np.concatenate((image[0],image[-1],image[:,0],image[:,-1])),axis=0)
+    background_rgb=background[::-1] if color_order=='BGR' else background
     gray=bool(np.percentile(np.ptp(image.astype(float),axis=2),99)<10)
     target=image.astype(np.float32)/255.
     bg=background.astype(np.float32)/255.
@@ -126,6 +130,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     target_distance=(np.minimum(cv2.distanceTransform((~target_edges).astype('uint8'),cv2.DIST_L2,3)/min(w,h),1.)
                      if target_edges.any() else np.zeros((h,w),dtype='float32'))
     count=len(program['objects']); dimension=count*STRIDE
+    constrained_paint=bool(program.get('paint_claims'))
     active=[]
     for i,obj in enumerate(program['objects']):
         fields=[0,1,2,5,9]
@@ -141,10 +146,14 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                 fields.extend([7,8,13,14])
         active.extend(i*STRIDE+field for field in fields)
     population=[]; seen=set(); best=None; best_raster=None; best_valid=None; valid_raster=None
+    best_passed=None; passed_raster=None
     evaluations=0; total=0; resumed=False; restarts=0
     operators=Counter(); geometry_seen=set(); trace_hash='00'*32
     previous_elapsed=0.; last_save=started; last_notice=started
     archive=[]
+    local_fields=list(active); rng.shuffle(local_fields)
+    local_index=0; local_scale=.08; local_direction=1.
+    local_progress=False
 
     def repair(p):
         p=np.clip(np.asarray(p,dtype=float),0.,1.).reshape(count,STRIDE).copy()
@@ -157,6 +166,8 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
             if gray:
                 for offset in (6,9,12):
                     row[offset:offset+3]=row[offset:offset+3].mean()
+        from src.iCCModules.imageCompositeConverterScopedPaint import constrain_parameters
+        p=constrain_parameters(program,p).reshape(count,STRIDE)
         # Bound the actual rotated geometry, including stroke, in original
         # source coordinates; this never clips away an inconvenient object.
         for i,obj in enumerate(program['objects']):
@@ -244,6 +255,13 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                     item['valid']=False
                 best_valid=None
                 rng.bit_generator.state=state['rng']
+                local=state.get('local_refinement')
+                if local:
+                    local_fields=local['fields']; local_index=local['index']; local_scale=local['scale']
+                    local_direction=local['direction']; local_progress=local['progress']
+                    if (sorted(local_fields)!=sorted(active) or not 0<=local_index<len(local_fields)
+                            or not .0001<=local_scale<=1 or local_direction not in {-1.,1.}):
+                        raise ValueError('Invalid local refinement checkpoint')
                 total=state['total_evaluations']; previous_elapsed=state['elapsed_seconds']
                 seen=set(state['seen']); geometry_seen=set(state['geometry_seen'])
                 trace_hash=state['trace_hash']; operators.update(state['operators'])
@@ -267,7 +285,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     # Reloaded success flags are evidence, never a substitute for re-rendering
     # and checking the saved program against these exact source pixels.
     if resumed and best is not None:
-        svg=program_svg(program,best['parameters'],w,h,background[::-1])
+        svg=program_svg(program,best['parameters'],w,h,background_rgb)
         best_raster,fresh=session.render_candidate(image,svg,render_fn,w,h) if session else (render_fn(svg,w,h),True)
         evaluations+=int(fresh); total+=int(fresh)
         operators['checkpoint_validation']+=int(fresh)
@@ -279,6 +297,8 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         best.update(quality=quality,valid=valid)
         if valid:
             best_valid=best; valid_raster=best_raster.copy()
+            if quality['passed']:
+                best_passed=best; passed_raster=best_raster.copy()
 
     def save(reason):
         if not folder or best is None:
@@ -288,20 +308,28 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
             rows.append(dict(best,parameters=best['parameters'].tolist()))
         if best_valid is not None and not any(np.array_equal(item['parameters'],best_valid['parameters']) for item in population):
             rows.append(dict(best_valid,parameters=best_valid['parameters'].tolist()))
+        if best_passed is not None and not any(row['parameters']==best_passed['parameters'].tolist() for row in rows):
+            rows.append(dict(best_passed,parameters=best_passed['parameters'].tolist()))
         state=dict(binding=binding,seed=seed,rng=rng.bit_generator.state,population=rows,
                    total_evaluations=total,elapsed_seconds=previous_elapsed+time.monotonic()-started,
                    seen=sorted(seen),geometry_seen=sorted(geometry_seen),trace_hash=trace_hash,
-                   operators=dict(operators),restarts=restarts,archive=archive,stop_reason=reason)
+                   operators=dict(operators),restarts=restarts,archive=archive,stop_reason=reason,
+                   local_refinement=dict(fields=local_fields,index=local_index,scale=local_scale,
+                                         direction=local_direction,progress=local_progress))
         atomic_json(folder/'checkpoint.json',state)
-        svg=program_svg(program,best['parameters'],w,h,background[::-1])
+        svg=program_svg(program,best['parameters'],w,h,background_rgb)
         (folder/'best.svg').write_text(svg,encoding='utf-8')
         atomic_json(folder/'solution.json',dict(binding=binding,parameters=best['parameters'].tolist(),
                     quality=best.get('quality'),validated=best.get('valid',False),seed=seed,trace_hash=trace_hash))
 
     def measure(p,operator):
-        nonlocal evaluations,total,best,best_raster,best_valid,valid_raster,trace_hash
+        nonlocal evaluations,total,best,best_raster,best_valid,valid_raster,trace_hash,best_passed,passed_raster
         p=repair(p)
-        svg=program_svg(program,p,w,h,background[::-1])
+        if constrained_paint and program['relations']:
+            # Keep declared connections on the search manifold. Otherwise a
+            # harmless paint mutation can lose its valid connected branch.
+            p=repair(join(p))
+        svg=program_svg(program,p,w,h,background_rgb)
         identity=candidate_identity(svg)
         if identity in seen:
             return None
@@ -339,7 +367,9 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
             item.update(quality=quality,valid=valid)
             if valid and (best_valid is None or score<best_valid['score']):
                 best_valid=item; valid_raster=raster.copy()
-            if improved or (valid and quality['passed']):
+            if valid and quality['passed'] and (best_passed is None or score<best_passed['score']):
+                best_passed=item; passed_raster=raster.copy()
+            if improved:
                 best=item; best_raster=raster.copy()
                 if session:
                     session.measured(svg,float(quality['normalized_mse']),source=SCHEMA,scope='full_scene',valid=valid,passed=valid and quality['passed'])
@@ -360,9 +390,14 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     progress(SCHEMA,event='primitive_evolution_started',objects=program['objects'],seed=seed,resumed=resumed,
              seconds=seconds,checkpoint=str(folder) if folder else None)
     try:
+        if initial_parameters is not None and not resumed:
+            initial=measure(initial_parameters,'template_initialization')
+            if initial:
+                population.append(initial)
         # At least 32 independent layouts, none derived from measured contours.
         while evaluations<budget and time.monotonic()-started<seconds and not (session and session.reason()):
-            if best and best.get('valid') and best.get('quality',{}).get('passed'):
+            if best and best.get('valid') and (preferred_quality(best.get('quality')) if constrained_paint
+                                              else best.get('quality',{}).get('passed')):
                 reason='satisfactory'; break
             if len(population)<32:
                 child=random_layout(); operator='random_layout'; parent=None
@@ -379,11 +414,40 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                     parent=min(range(len(population)),key=lambda i:population[i]['score'])
                 child=population[parent]['parameters'].copy()
                 choice=rng.random(); obj=int(rng.integers(count))
-                if choice<.06:
+                if constrained_paint and rng.random()<.45:
+                    # Complete signed coordinate sweeps refine the incumbent,
+                    # while the remaining operators continue exploring basins.
+                    child=best['parameters'].copy()
+                    field=local_fields[local_index]
+                    child[field]+=local_direction*local_scale
+                    if gray and field%STRIDE in {6,9,12}:
+                        child[field:field+3]=child[field]
+                    if local_direction<0:
+                        local_index+=1
+                        if local_index==len(local_fields):
+                            local_index=0
+                            if not local_progress:
+                                local_scale*=.5
+                                if local_scale<.001:
+                                    local_scale=.08
+                            local_progress=False
+                            rng.shuffle(local_fields)
+                    local_direction=-local_direction
+                    operator='coordinate_refinement'
+                    parent=min(range(len(population)),key=lambda i:population[i]['score'])
+                elif choice<.06:
                     child=random_layout(); operator='random_layout'; restarts+=1
+                elif constrained_paint and choice<.15:
+                    child.reshape(count,STRIDE)[obj,4]=float(rng.integers(4))*.25
+                    operator='rotate_object'
                 elif choice<.15:
                     child.reshape(count,STRIDE)[obj]=random_layout().reshape(count,STRIDE)[obj]
                     operator='replace_object'
+                elif constrained_paint and choice<.30:
+                    row=child.reshape(count,STRIDE)[obj]
+                    row[2:4]=rng.uniform(.05,.75,2)
+                    row[4]=float(rng.integers(4))*.25
+                    operator='replace_object_geometry'
                 elif choice<.21 and count>1:
                     other=int(rng.choice([i for i in range(count) if i!=obj]))
                     child=child.reshape(count,STRIDE)
@@ -424,7 +488,10 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                     for offset in (6,9,12):
                         child[:,offset:offset+3]=child[:,offset:offset+3].mean(axis=1)[:,None]
                     child=child.ravel()
+            previous_score=best['score'] if best is not None else float('inf')
             trial=measure(child,operator)
+            if operator=='coordinate_refinement' and trial and trial['score']<previous_score:
+                local_progress=True
             if trial:
                 if len(population)<32:
                     population.append(trial)
@@ -445,7 +512,9 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                 last_notice=now
         else:
             reason=(session.reason() if session else None) or ('time_limit' if time.monotonic()-started>=seconds else 'evaluation_limit')
-        if best is not None and not best.get('valid') and best_valid is not None:
+        if best_passed is not None:
+            best=best_passed; best_raster=passed_raster
+        elif best is not None and not best.get('valid') and best_valid is not None:
             best=best_valid
             if valid_raster is not None:
                 best_raster=valid_raster
@@ -457,7 +526,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         return None
     # A complete but disconnected draft is retained in search memory, never
     # published as a description-conforming conversion.
-    svg=program_svg(program,best['parameters'],w,h,background[::-1])
+    svg=program_svg(program,best['parameters'],w,h,background_rgb)
     raster=best_raster
     quality,valid=check(svg,raster)
     report=dict(schema=SCHEMA,program=program,parameters=best['parameters'].tolist(),evaluations=evaluations,

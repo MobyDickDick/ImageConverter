@@ -146,6 +146,10 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    from src.iCCModules.imageCompositeConverterScopedPaint import scoped_paint_claims
+    paint_claims, _ = scoped_paint_claims(words)
+    if paint_claims:
+        assertions['scoped_paint'] = paint_claims
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
     valve = two_way_valve_spec(normalized)
     if valve:
@@ -259,7 +263,7 @@ def gradient_direction(text: str, direction: str) -> bool:
 def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
     for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
-                'svg_component_description', 'two_way_valve', 'primitive_program'):
+                'svg_component_description', 'two_way_valve', 'primitive_program', 'scoped_paint'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -274,6 +278,12 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         return
     if assertions and assertions.get('inventory_error'):
         raise DescriptionRejected(assertions['inventory_error'])
+    if assertions and assertions.get('scoped_paint'):
+        from src.iCCModules.imageCompositeConverterScopedPaint import validate_scoped_paint
+        try:
+            validate_scoped_paint(svg, assertions['scoped_paint'])
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if assertions and assertions.get('two_way_valve'):
         from src.iCCModules.imageCompositeConverterTwoWayValve import validate_two_way_valve
         try:
