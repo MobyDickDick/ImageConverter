@@ -367,3 +367,16 @@ def test_pump_description_counts_both_primitives_despite_adjectives(description)
 def test_unquantified_nouns_do_not_reintroduce_negated_shapes(phrase):
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     assert description_object_limits('Ein Dreieck, '+phrase+'.') == {'triangle': 1}
+
+
+def test_square_handle_replacement_does_not_add_the_replaced_circle():
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
+    assert description_object_limits('Kelle mit Quadrat anstelle von Kreis oben.') == {'square': 1, 'line': 1}
+    assert description_object_limits('Keine Kelle. Ein Kreis mit Beschriftung "VOC".') == {'circle': 1}
+
+
+def test_disk_and_quoted_capital_letter_are_both_declared_objects():
+    assertions = description_assertions('Ein Griff führt zu einer hellen Kreisscheibe. '
+        'Darin steht der einzelne dunkle Großbuchstabe "M".')
+    assert assertions['labels'] == ['M']
+    assert assertions['objects'] == {'line': 1, 'circle': 1, 'text': 1}

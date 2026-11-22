@@ -179,7 +179,7 @@ def description_assertions(description: str) -> dict:
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalized).casefold()
     no_text = bool(re.search(r'\b(?:keine schriftzeichen|ohne text|ohne schriftzeichen)\b', words))
     label_claim = bool(labels and re.search(
-        r'\b(?:beschriftung|aufschrift|text|buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
+        r'\b(?:beschriftung|aufschrift|text|(?:groß|gross|klein)?buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
         r'["“][^.?!]{0,100}\bals\b[^.?!]{0,40}\b(?:beschriftung|aufschrift|text|label)\b', normalized,
         flags=re.IGNORECASE) or re.search(
             r'\bin der (?:kelle|kreisscheibe) ist ein ["„][^"“\n]+["“] geschrieben',

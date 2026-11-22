@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="50"
+   height="50"
+   viewBox="0 0 50 50"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="AC0202_1.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="16.26"
+     inkscape:cx="25.03075"
+     inkscape:cy="25"
+     inkscape:window-width="1920"
+     inkscape:window-height="1094"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <title
+     id="title">Kompressor-Symbol</title>
+  <desc
+     id="desc">Grüner Kreis mit dünnem grauem Rand und zwei schrägen weißen, horizontal gespiegelten Linien.</desc>
+  <defs
+     id="defs1">
+    <clipPath
+       id="clip-circle">
+      <circle
+         cx="25"
+         cy="25"
+         r="22.5"
+         id="circle1" />
+    </clipPath>
+  </defs>
+  <!-- Hintergrundfläche des Symbols -->
+  <circle
+     cx="25"
+     cy="25"
+     r="22.5"
+     fill="#4cab5a"
+     id="circle2"
+     style="fill:#ea0616;fill-opacity:1" />
+  <!-- Zwei schräge, bezüglich des horizontalen Durchmessers symmetrische Linien -->
+  <g
+     clip-path="url(#clip-circle)"
+     fill="none"
+     stroke="#f4f4f4"
+     stroke-width="1.35"
+     stroke-linecap="round"
+     id="g3">
+    <line
+       x1="12.6"
+       y1="6.8"
+       x2="47.4"
+       y2="20.2"
+       id="line2" />
+    <line
+       x1="12.6"
+       y1="43.2"
+       x2="47.4"
+       y2="29.8"
+       id="line3" />
+  </g>
+  <!-- Dünner grauer Rand -->
+  <circle
+     cx="25"
+     cy="25"
+     r="22.5"
+     fill="none"
+     stroke="#b8b8b8"
+     stroke-width="0.9"
+     id="circle3" />
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Kompressor-Symbol</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

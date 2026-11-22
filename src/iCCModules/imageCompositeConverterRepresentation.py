@@ -76,6 +76,9 @@ def description_object_limits(text):
         return (dict(square=1, diagonal=2, line=1, triangle=2) if valve['motor']=='square'
                 else dict(circle=1, line=1, triangle=2))
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', text).casefold()
+    square_head = bool(re.search(r'\bquadrat\s+(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', words))
+    if square_head:
+        words = re.sub(r'\b(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', '', words)
     numbers = dict(ein=1, eine=1, einen=1, einem=1, einer=1, eins=1, zwei=2, drei=3, vier=4,
                    fünf=5, sechs=6, sieben=7, acht=8, neun=9, zehn=10, beide=2, beiden=2)
     count = r'('+ '|'.join(numbers)+r'|[0-9]+)'
@@ -84,7 +87,7 @@ def description_object_limits(text):
                  r'durchgehend|gestrichelt|dünn|schmal|breit|klein|gross|groß|ungefüllt|gefüllt|'
                  r'ganz|sehr|hochkantig|hoh|lang)[enrms]*[,\s]+|'
                  r'[a-zäöüß-]+(?:en|er|es|em|e)[,\s]+){0,6}')
-    noun = r'(kreis(?:e[n]?)?|rechteck(?:e[n]?)?|quadrat(?:e[n]?)?|rauten?|ellipsen?|dreieck(?:e[n]?)?|geraden?|linien?|diagonalen?|striche?)'
+    noun = r'(kreis(?:scheiben?|e[n]?)?|rechteck(?:e[n]?)?|quadrat(?:e[n]?)?|rauten?|ellipsen?|dreieck(?:e[n]?)?|geraden?|linien?|diagonalen?|striche?|griff(?:e[n]?)?)'
     limits, covered = {}, []
     for match in re.finditer(r'\b'+count+r'\s+'+adjective+noun+r'\b', words):
         number, form = match.groups()
@@ -128,9 +131,9 @@ def description_object_limits(text):
     # A singular noun also declares an instance without an article, e.g.
     # "Pumpensymbol: Kreis mit einem gefüllten Dreieck". Later references to
     # the same singular shape do not create additional objects.
-    for form, kind in (('kreis', 'circle'), ('rechteck', 'rect'), ('quadrat', 'square'),
+    for form, kind in (('kreis', 'circle'), ('kreisscheibe', 'circle'), ('rechteck', 'rect'), ('quadrat', 'square'),
                        ('raute', 'rhombus'), ('ellipse', 'ellipse'), ('dreieck', 'triangle'),
-                       ('gerade', 'line'), ('linie', 'line')):
+                       ('gerade', 'line'), ('linie', 'line'), ('griff', 'line')):
         for match in re.finditer(r'\b'+form+r'\b', words):
             if any(start <= match.start() < end for start, end in covered):
                 continue
@@ -148,10 +151,12 @@ def description_object_limits(text):
             limits['diagonal'] = 2
     # Composite vocabulary expands once; references to the same handle are not
     # additional scene objects. A Kelle is a circular head and a straight stem.
-    if (re.search(r'(?<!keine )\bkelle\b', words) and re.search(r'\bgriff\b', words)
+    if (re.search(r'\bkelle\b', words)
             and not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:eine?\s+)?kelle\b', words)):
-        limits['circle'] = max(1, limits.get('circle', 0))
-        limits['line'] = max(1, limits.get('line', 0))
+        head = 'square' if square_head else 'circle'
+        limits[head] = max(1, limits.get(head, 0))
+        if not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:einen?\s+)?griff\b', words):
+            limits['line'] = max(1, limits.get('line', 0))
     return limits
 
 
