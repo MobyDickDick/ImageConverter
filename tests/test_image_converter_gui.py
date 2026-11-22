@@ -604,7 +604,8 @@ def test_save_as_proposes_original_name_and_preserves_svg(jobs, job, monkeypatch
     target = tmp_path / "Anderer Name.svg"
 
     def dialog(path, suggested, initial_directory):
-        assert path == source
+        assert path != source
+        assert path.read_bytes() == source.read_bytes()
         assert suggested == "Mein Bild mit Umlaut ä.svg"
         assert initial_directory == ''
         target.write_bytes(path.read_bytes())
@@ -618,11 +619,12 @@ def test_save_as_proposes_original_name_and_preserves_svg(jobs, job, monkeypatch
 
 def test_cancelled_save_keeps_result_and_releases_dialog_lock(jobs, job, monkeypatch):
     source = jobs.folder(job["id"]) / "result.svg"
-    source.write_text("svg contents")
+    content = '<svg xmlns="http://www.w3.org/2000/svg"/>'
+    source.write_text(content)
     job["result"] = True
     monkeypatch.setattr(gui, "save_svg_dialog", lambda *args: {"saved": False})
     assert jobs.save_as(job["id"]) == {"saved": False}
-    assert source.read_text() == "svg contents"
+    assert source.read_text() == content
     assert jobs.save_as(job["id"]) == {"saved": False}
     jobs.save_lock.acquire()
     try:
@@ -638,6 +640,77 @@ def test_save_requires_an_existing_result(jobs):
     with pytest.raises(gui.RequestError) as exc:
         jobs.save_as(uploaded["id"])
     assert exc.value.status == 404
+
+
+@pytest.mark.parametrize('status', ['running', 'cancelled', 'timeout', 'interrupted', 'error'])
+def test_manual_save_keeps_live_draft_stable_without_accepting_it(jobs, job, monkeypatch, tmp_path, status):
+    folder = jobs.folder(job['id'])
+    content = '<svg xmlns="http://www.w3.org/2000/svg"><circle r="7"/></svg>'
+    preview = folder/'live-preview.svg'
+    preview.write_text(content, encoding='utf-8')
+    job.update(status=status, started=gui.time.time(), result=False, quality='warning')
+    snapshot = jobs.snapshot(job['id'])
+    assert snapshot['export_available'] and snapshot['export_draft']
+    target = tmp_path/'chosen.svg'
+    def dialog(path, *args):
+        # A new search observation must not replace the user's chosen version
+        # while the native file dialog is still open.
+        preview.write_text(content.replace('7', '8'), encoding='utf-8')
+        assert path.read_text(encoding='utf-8') == content
+        target.write_bytes(path.read_bytes())
+        return dict(saved=True, path=str(target))
+    monkeypatch.setattr(gui, 'save_svg_dialog', dialog)
+    assert jobs.save_as(job['id'])['saved']
+    assert target.read_text(encoding='utf-8') == content
+    assert job['status'] == status and not job['result'] and job['quality'] == 'warning'
+    assert not list(folder.glob('export-*'))
+    assert not jobs.project_svg(job).exists()
+
+
+@pytest.mark.parametrize('relative', ['output/converted_svgs/UPLOAD.svg', 'output/refined.svg'])
+def test_description_rejection_allows_manual_export(jobs, job, monkeypatch, relative):
+    folder = jobs.folder(job['id'])
+    candidate = folder/relative
+    candidate.parent.mkdir(parents=True, exist_ok=True)
+    content = '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>'
+    candidate.write_text(content, encoding='utf-8')
+    job['description'] = 'Zwei Kreise.'
+    assert gui.reject_description_result(candidate, job)
+    assert not job['result']
+    assert jobs.snapshot(job['id'])['export_available']
+    def dialog(path, *args):
+        assert path.read_text(encoding='utf-8') == content
+        return dict(saved=False)
+    monkeypatch.setattr(gui, 'save_svg_dialog', dialog)
+    assert jobs.save_as(job['id']) == dict(saved=False)
+    assert not job['result'] and job['result_rejection'] == 'description_inventory'
+
+
+@pytest.mark.parametrize('content', ['broken XML',
+    '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/png;base64,AA"/></svg>'])
+def test_manual_export_requires_a_native_svg(jobs, job, content):
+    (jobs.folder(job['id'])/'live-preview.svg').write_text(content)
+    assert not jobs.snapshot(job['id'])['export_available']
+    with pytest.raises(gui.RequestError) as exc:
+        jobs.save_as(job['id'])
+    assert exc.value.status == 404
+
+
+def test_manual_export_recovers_best_rejected_journal_draft_once(jobs, job, monkeypatch):
+    from src.imageConverterPreview import AttemptJournal
+    folder = jobs.folder(job['id'])
+    job.update(status='error', result=False, quality='unknown', description='Zwei Kreise.')
+    svg = '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>'
+    journal = AttemptJournal(folder)
+    journal.append(svg.replace('10', '5'), 200)
+    journal.append(svg, 100)
+    assert jobs.snapshot(job['id'])['export_available']
+    assert jobs.export_file(job['id']).read_text(encoding='utf-8') == svg
+    def forbidden(*args, **kwargs):
+        pytest.fail('The historical journal should only be scanned once')
+    monkeypatch.setattr(AttemptJournal, 'best', forbidden)
+    assert jobs.snapshot(job['id'])['export_draft']
+    assert not job['result'] and job['quality'] == 'unknown'
 
 
 def finished_svg(jobs, job, color='#225599'):
@@ -761,6 +834,41 @@ def test_restart_recovers_result_and_marks_unfinished_jobs(jobs, job):
     assert restored.snapshot(job["id"])["status"] == "interrupted"
     assert restored.snapshot(job["id"])["description"] == job["description"]
     job["status"] = "ready"
+
+
+def test_restart_caches_rejected_recovery_check_until_validation_changes(jobs, job, monkeypatch):
+    folder = jobs.folder(job['id'])
+    svg = '<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>'
+    (folder/'result.svg').write_text(svg, encoding='utf-8')
+    (folder/'recovery.svg').write_text(svg, encoding='utf-8')
+    job.update(status='done', result=True, recovery=True, quality='warning',
+               description_validation_version=gui.DESCRIPTION_VALIDATION_VERSION-1)
+    jobs.save(job)
+    checks = []
+    monkeypatch.setattr(gui, 'saved_svg_quality', lambda source, result:
+                        dict(passed=True, observed_foreground_pixels=100, output_foreground_pixels=100))
+    def reject_candidate(result, description):
+        checks.append(result.name)
+        return 'unexpected_described_objects'
+    monkeypatch.setattr(gui, 'result_description_error', reject_candidate)
+
+    for expected_checks in (1, 1):
+        restored = gui.Jobs(jobs.directory)
+        try:
+            result = restored.snapshot(job['id'])
+            assert result['quality'] == 'warning'
+            assert result['recovery_validation_version'] == gui.DESCRIPTION_VALIDATION_VERSION
+            # A rejected candidate must not certify the retained result.
+            assert result['description_validation_version'] != gui.DESCRIPTION_VALIDATION_VERSION
+            assert len(checks) == expected_checks
+            assert (folder/'result.svg').read_text(encoding='utf-8') == svg
+        finally:
+            restored.close()
+
+    monkeypatch.setattr(gui, 'DESCRIPTION_VALIDATION_VERSION', gui.DESCRIPTION_VALIDATION_VERSION+1)
+    restored = gui.Jobs(jobs.directory)
+    restored.close()
+    assert len(checks) == 2
 
 
 def test_restart_rechecks_a_false_positive_blank_result(jobs, job):
@@ -917,12 +1025,16 @@ def test_routes_do_not_serve_arbitrary_files_or_cross_origin_requests(jobs, requ
     uploaded = json.loads(body)
     assert b"200" in send("/api/jobs/" + uploaded["id"] + "/source")[0]
     assert b"404" in send("/api/jobs/" + uploaded["id"] + "/result")[0]
+    export_path = '/api/jobs/' + uploaded['id'] + '/export'
+    assert send(export_path)[0] == b'404'
     preview_path = '/api/jobs/' + uploaded['id'] + '/preview'
     assert send(preview_path)[0] == b'404'
     folder = jobs.folder(uploaded['id'])
     live_svg = b'<svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10"/></svg>'
     (folder/'live-preview.svg').write_bytes(live_svg)
     assert send(preview_path) == (b'200', live_svg)
+    assert send(export_path + '?download=1') == (b'200', live_svg)
+    assert json.loads(send('/api/jobs/' + uploaded['id'])[1])['export_available']
     recovery_svg = live_svg.replace(b'10', b'12')
     (folder/'recovery.svg').write_bytes(recovery_svg)
     assert send(preview_path) == (b'200', live_svg)

@@ -470,6 +470,8 @@ def test_cmd_launchers_start_and_stop_a_real_server(tmp_path):
         creationflags=subprocess.CREATE_NO_WINDOW)
     try:
         first_line = process.stdout.readline().strip()
+        assert first_line.startswith('ImageConverter wird gestartet;'), first_line
+        first_line = process.stdout.readline().strip()
         assert first_line.startswith('ImageConverter: http://127.0.0.1:'), first_line
         port = first_line.rsplit(':',1)[1]
         stopped = subprocess.run(

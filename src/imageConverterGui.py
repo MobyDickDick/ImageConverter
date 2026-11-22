@@ -43,7 +43,7 @@ MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240),
             "explore5": (300, 315), "explore10": (600, 615)}
-DESCRIPTION_VALIDATION_VERSION = 13
+DESCRIPTION_VALIDATION_VERSION = 15
 
 
 class RequestError(ValueError):
@@ -182,6 +182,7 @@ class Jobs:
             self.dialog_locations = {}
         self.jobs: dict[str, dict] = {}
         self.processes: dict[str, subprocess.Popen] = {}
+        self.manual_export_scans: dict[str, int] = {}
         self.threads: list[threading.Thread] = []
         self.closed = False
         self.on_result = None
@@ -201,9 +202,14 @@ class Jobs:
                 if job.get('result') and reject_raster_result(path.parent/'result.svg', job):
                     self.save(job)
                 if (job.get('recovery') and job.get('status') == 'done' and job.get('result')
-                        and job.get('description_validation_version') != DESCRIPTION_VALIDATION_VERSION):
+                        and job.get('description_validation_version') != DESCRIPTION_VALIDATION_VERSION
+                        and job.get('recovery_validation_version') != DESCRIPTION_VALIDATION_VERSION):
                     collect_recovery_result(path.parent, job,
                         stop_reason=(job.get('recovery_report') or {}).get('stop_reason', 'worker_finished'))
+                    # Rejected/missing recovery candidates return without updating
+                    # description_validation_version. Remember the attempted check
+                    # too, so every restart does not render the same old drafts.
+                    job['recovery_validation_version'] = DESCRIPTION_VALIDATION_VERSION
                     self.save(job)
                 if (job.get('quality') == 'passed' and job.get('result')
                         and ('pixel_quality' not in job or
@@ -263,6 +269,12 @@ class Jobs:
             if preview.is_file():
                 job['preview_revision'] = preview.stat().st_mtime_ns
                 job['preview'] = True
+            export = self.export_file(job_id)
+            job['export_available'] = export is not None
+            job['export_draft'] = bool(export and (job['status'] == 'running'
+                or not job.get('result') or job.get('quality') != 'passed'))
+            if export:
+                job['export_revision'] = export.stat().st_mtime_ns
             from src.imageConverterPreview import AttemptJournal
             job['attempt_count'] = AttemptJournal(folder).count
             log = folder / "console.log"
@@ -278,6 +290,52 @@ class Jobs:
         folder = self.folder(job_id)
         preview = folder / 'live-preview.svg'
         return preview if preview.is_file() else folder / 'recovery.svg'
+
+    def export_file(self, job_id: str) -> Path | None:
+        """Offer native drafts for manual saving, independently of acceptance gates."""
+        from src.imageConverterSample import prepare_sample
+        folder = self.folder(job_id)
+        job = self.jobs[job_id]
+        candidates = []
+        if job.get('result') and job['status'] != 'running':
+            candidates.append(folder/'result.svg')
+        candidates.extend((folder/'manual-preview.svg', self.preview_file(job_id), folder/'result.svg'))
+        if job['status'] != 'running':
+            candidates.extend((folder/'output/refined.svg',
+                folder/'output/converted_svgs/UPLOAD.svg',
+                folder/'output/converted_svg_failed/Failed_UPLOAD.svg',
+                folder/'output/converted_svg_failed/UPLOAD.svg',
+                folder/'output/converted_svgs/Failed_UPLOAD.svg'))
+        for candidate in dict.fromkeys(candidates):
+            try:
+                # Validate the file format only. Pixel and description checks
+                # remain advisory for an explicit user export.
+                prepare_sample(candidate.read_bytes(), job['width'], job['height'])
+            except (OSError, ValueError, SyntaxError):
+                continue
+            return candidate
+        if job['status'] != 'running':
+            # Older searches may have retained observations only in the journal.
+            # Recover once per journal revision, never rescan it on every poll.
+            from src.imageConverterPreview import AttemptJournal, atomic_preview
+            journal = AttemptJournal(folder)
+            count = journal.count
+            if count and self.manual_export_scans.get(job_id) != count:
+                self.manual_export_scans[job_id] = count
+                def native(svg):
+                    if not isinstance(svg, str):
+                        return False
+                    try:
+                        prepare_sample(svg.encode('utf-8'), job['width'], job['height'])
+                        return True
+                    except (ValueError, SyntaxError):
+                        return False
+                best = journal.best(validator=native)
+                if best:
+                    manual = folder/'manual-preview.svg'
+                    atomic_preview(manual, best['svg'])
+                    return manual
+        return None
 
     def catalog_description(self, name: str) -> str:
         from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
@@ -729,16 +787,23 @@ class Jobs:
             return self.snapshot(job_id)
 
     def save_as(self, job_id: str) -> dict:
-        with self.lock:
-            folder = self.folder(job_id)
-            job = self.jobs[job_id]
-            if not job["result"] or not (folder / "result.svg").is_file():
-                raise RequestError("Noch kein SVG zum Speichern verfügbar.", 404)
-            name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "_", Path(job["name"]).stem).rstrip(". ") or "Bild"
         if not self.save_lock.acquire(blocking=False):
             raise RequestError("Ein Speicherdialog ist bereits geöffnet.", 409)
         try:
-            result = save_svg_dialog(folder / "result.svg", name + ".svg", self.dialog_locations.get('save', ''))
+            with self.lock:
+                folder = self.folder(job_id)
+                job = self.jobs[job_id]
+                source = self.export_file(job_id)
+                if source is None:
+                    raise RequestError("Noch kein SVG zum Speichern verfügbar.", 404)
+                name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "_", Path(job["name"]).stem).rstrip(". ") or "Bild"
+                content = source.read_bytes()
+            # The search may keep improving while the system dialog is open.
+            # Freeze the version chosen at the start of this save operation.
+            with tempfile.TemporaryDirectory(prefix='export-', dir=folder) as temporary:
+                snapshot = Path(temporary)/'result.svg'
+                snapshot.write_bytes(content)
+                result = save_svg_dialog(snapshot, name + ".svg", self.dialog_locations.get('save', ''))
             if result.get('saved'):
                 self.remember_location('save', Path(result['path']).parent)
             return result
@@ -981,8 +1046,10 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
         return
     if returncode != 0:
         report['stop_reason'] = 'interrupted'
+    if reject_raster_result(result, job):
+        return
     contain_result(result, job)
-    if reject_raster_result(result, job) or reject_description_result(result, job):
+    if reject_description_result(result, job):
         return
     # Recheck the actual deliverable, including old worker reports. A low
     # global pixel error cannot certify a described but collapsed arrow head.
@@ -1086,8 +1153,10 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         with failures.open(encoding="utf-8-sig", newline="") as stream:
             has_failures = bool(list(csv.DictReader(stream, delimiter=";")))
     if result:
+        if reject_raster_result(result, job):
+            return
         contain_result(result, job)
-        if reject_raster_result(result, job) or reject_description_result(result, job):
+        if reject_description_result(result, job):
             return
         shutil.copyfile(result, folder / "result.svg")
         # A model can be shifted off-canvas and still receive a successful CLI
@@ -1512,6 +1581,9 @@ class Handler(BaseHTTPRequestHandler):
                         current_svg_reuse=True,
                         primitive_exploration=True,
                         scoped_primitive_paint=True,
+                        three_wing_valve=True,
+                        partitioned_rhombus=True,
+                        manual_svg_export=True,
                         project_root=str(ROOT.resolve()), data_directory=str(jobs.directory)))
                 if path in static:
                     filename, mime = static[path]
@@ -1559,6 +1631,14 @@ class Handler(BaseHTTPRequestHandler):
                         except (ValueError, IndexError):
                             raise RequestError('Dieser Suchversuch wurde nicht gefunden.', 404)
                         return self.json(journal.page(after))
+                    if asset == 'export':
+                        with jobs.lock:
+                            source = jobs.export_file(job_id)
+                            if source is None:
+                                raise RequestError('Noch kein SVG zum Speichern verfügbar.', 404)
+                            content = source.read_bytes()
+                        download = 'result.svg' if 'download' in parse_qs(url.query) else None
+                        return self.respond(content, 'image/svg+xml', download=download)
                     assets = {"source": ("source.png", "image/png"), "sample": ("sample.svg", "image/svg+xml"),
                               "preview": (jobs.preview_file(job_id).name, "image/svg+xml"),
                               "result": ("result.svg", "image/svg+xml"), "log": ("console.log", "text/plain; charset=utf-8")}
@@ -1791,6 +1871,8 @@ def main(argv: list[str] | None = None) -> int:
         return stop_gui(args.port, args.data_dir)
     from src.iCCModules.imageCompositeConverterDependencies import activate_vendored_site_packages
     activate_vendored_site_packages()
+    print('ImageConverter wird gestartet; gespeicherte Aufträge werden geladen '
+          'und bei Bedarf erneut geprüft …', flush=True)
     try:
         server = GuiServer(("127.0.0.1", args.port), directory=args.data_dir)
         jobs = server.jobs

@@ -63,6 +63,13 @@ def representation_cost(svg):
 
 
 def description_object_limits(text):
+    from src.iCCModules.imageCompositeConverterPartitionedRhombus import partitioned_rhombus_spec, partition_inventory
+    partition = partitioned_rhombus_spec(text)
+    if partition:
+        return partition_inventory(partition)
+    from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
+    if three_wing_valve_spec(text):
+        return dict(triangle=3, line=1, square=1, diagonal=2)
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
     valve = two_way_valve_spec(text)
     if valve:
@@ -77,7 +84,7 @@ def description_object_limits(text):
                  r'durchgehend|gestrichelt|dünn|schmal|breit|klein|gross|groß|ungefüllt|gefüllt|'
                  r'ganz|sehr|hochkantig|hoh|lang)[enrms]*[,\s]+|'
                  r'[a-zäöüß-]+(?:en|er|es|em|e)[,\s]+){0,6}')
-    noun = r'(kreise?|rechtecke?|quadrate?|rauten?|ellipsen?|dreiecke?|geraden?|linien?|diagonalen?|striche?)'
+    noun = r'(kreis(?:e[n]?)?|rechteck(?:e[n]?)?|quadrat(?:e[n]?)?|rauten?|ellipsen?|dreieck(?:e[n]?)?|geraden?|linien?|diagonalen?|striche?)'
     limits, covered = {}, []
     for match in re.finditer(r'\b'+count+r'\s+'+adjective+noun+r'\b', words):
         number, form = match.groups()

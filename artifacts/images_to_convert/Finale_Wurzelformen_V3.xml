@@ -1370,7 +1370,7 @@
       <wurzelform />
       <beschreibung>Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.</beschreibung>
       <bilder>
-        <bild>AC0835_L.jpg</bild>
+        <bild beschreibung='Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.' beschreibung_modus="ersetzen">AC0835_L.jpg</bild>
       </bilder>
     </entry>
     <entry kind="unzugeordnet" key="AC0835_M">
@@ -2587,8 +2587,8 @@
       <beschreibung>Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, vor halbem Rechteck mit doppelten grauen Rand</beschreibung>
       <bilder>
         <bild>AC0160.JPG</bild>
-        <bild>AC0160_L.jpg</bild>
-        <bild>AC0160_M.jpg</bild>
+        <bild beschreibung="Auf weissem Hintergrund liegt eine hellgrau gefüllte, grau umrandete Raute, unterteilt in vier kleinere Rauten. Eine der diagonalen Trennlinien ist als schmale Doppellinie ausgeführt. Im oberen Feld stehen ein dunkelgraues Pluszeichen und darunter ein Minuszeichen. Hinter der Raute verläuft ein breites, sehr hellgraues X bis an die Bildränder. Die Darstellung ist flach und geometrisch, ohne Schatten oder Farbverläufe." beschreibung_modus="ersetzen">AC0160_L.jpg</bild>
+        <bild beschreibung="Auf weissem Hintergrund liegt eine hellgrau gefüllte, grau umrandete Raute, unterteilt in vier kleinere Rauten. Eine der diagonalen Trennlinien ist als schmale Doppellinie ausgeführt. Im oberen Feld stehen ein dunkelgraues Pluszeichen und darunter ein Minuszeichen. Hinter der Raute verläuft ein breites, sehr hellgraues X bis an die Bildränder. Die Darstellung ist flach und geometrisch, ohne Schatten oder Farbverläufe." beschreibung_modus="ersetzen">AC0160_M.jpg</bild>
         <bild>AC0160_S.jpg</bild>
       </bilder>
     </entry>
@@ -2648,10 +2648,10 @@
         <bild beschreibung="Grauer Kreis und hellgraue Kreisfläche. Weiter: Zwei graue Linien, welche den Rand berühren. die grauen Linien sind symmetrisch zur horizontalen Symmetrielinie des Kreises. Die Abstände der beiden Linien sind links kleiner als rechts." beschreibung_modus="ersetzen">AC0204.jpg</bild>
         <bild>AC0204_1.jpg</bild>
         <bild>AC0204_2.jpg</bild>
-        <bild beschreibung="Links: Kelle mit Griff rechts. Rechts: Zweiwegventil (zwei gleichschenklige Dreiecke mit den zwei Spitzen an am gleichen Punkt). Die Spitze des Griffs und der Mittelpunkt der zwei gleichschnkligen Dreiek befinden sind am gleichen Punkt.&#10;Beide Dreiecke haben gleich breite Ränder. Beide Dreiecke haben je einen Farbübergang (hellgrau nach dunkelgrau)" beschreibung_modus="ersetzen">AC0204_L.jpg</bild>
+        <bild beschreibung="Links: Kelle aus Kreis und Griff nach rechts. Rechts: Zwei Dreiecke mit Farbverlauf.&#10;&#10;Die Form ist symmetrisch bezüglich einer horizontalen Symmetrieachse. &#10;Die Dreiecke sind zusdem symmetrisch einer vertikalen Symmetrieachse." beschreibung_modus="ersetzen">AC0204_L.jpg</bild>
         <bild>AC0204_L_sia.jpg</bild>
-        <bild>AC0204_M.jpg</bild>
-        <bild>AC0204_M_sia.jpg</bild>
+        <bild beschreibung="Links: Kelle mit Griff nach rechts. Rechts: zwei Dreiecke. Die Formen sind symmetrisch bezüglich einer horizonatlen Symmetrieachse. Die Dreiecke besitzen je einenen grauen Farbverlauf." beschreibung_modus="ersetzen">AC0204_M.jpg</bild>
+        <bild beschreibung='Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.' beschreibung_modus="ersetzen">AC0204_M_sia.jpg</bild>
         <bild>AC0204_S.jpg</bild>
         <bild>AC0204_S_sia.jpg</bild>
       </bilder>
@@ -2783,7 +2783,7 @@
       <wurzelform>AC0233</wurzelform>
       <beschreibung>Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 180° gedreht.</beschreibung>
       <bilder>
-        <bild>AC0233_L.jpg</bild>
+        <bild beschreibung='Oben Drei Dreiecke mit einem gemeinsamen Punkt.  Die Dreiecke sind gleichschenklig. Unten Kelle mit Griff nach oben. Die Kelle besteht aus einem Kreis und einer Linie.  In der Kelle ist ein "M" geschrieben.' beschreibung_modus="ersetzen">AC0233_L.jpg</bild>
         <bild>AC0233_M.jpg</bild>
         <bild>AC0233_S.jpg</bild>
       </bilder>
@@ -2912,7 +2912,7 @@
         <bild>AC0303_1L_sia.jpg</bild>
         <bild>AC0303_1M_sia.jpg</bild>
         <bild>AC0303_1S_sia.jpg</bild>
-        <bild>AC0303_1_L.jpg</bild>
+        <bild beschreibung="Kreis mit grauem Rand und roten Hintergrund. Zwei weisse LInien im Kreis. Die Form ist symmetrisch bezüglich einer vertikalen Symmetrieebenbe" beschreibung_modus="ersetzen">AC0303_1_L.jpg</bild>
         <bild>AC0303_1_M.jpg</bild>
         <bild>AC0303_1_S.jpg</bild>
         <bild>AC0303_2L_sia.jpg</bild>
@@ -2924,7 +2924,7 @@
         <bild>AC0303_L.jpg</bild>
         <bild>AC0303_L_sia.jpg</bild>
         <bild>AC0303_M.jpg</bild>
-        <bild>AC0303_M_sia.jpg</bild>
+        <bild beschreibung="Ventilarorsymbol: Ein gefüllter Kreis mit Randkontur enthält ein offenes Dreieck, dessen Spitze nach unten zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild." beschreibung_modus="ersetzen">AC0303_M_sia.jpg</bild>
         <bild>AC0303_S.jpg</bild>
         <bild>AC0303_S_sia.jpg</bild>
       </bilder>
@@ -2997,7 +2997,7 @@
         <bild>AC0402_2_M.jpg</bild>
         <bild>AC0402_2_S.jpg</bild>
         <bild>AC0402_L.jpg</bild>
-        <bild>AC0402_L_sia.jpg</bild>
+        <bild beschreibung="Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach rechts zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild." beschreibung_modus="ersetzen">AC0402_L_sia.jpg</bild>
         <bild>AC0402_M.jpg</bild>
         <bild>AC0402_M_sia.jpg</bild>
         <bild>AC0402_S.jpg</bild>
@@ -3254,7 +3254,7 @@
         <bild>AC0542_1_L.jpg</bild>
         <bild>AC0542_1_M.jpg</bild>
         <bild>AC0542_1_S.jpg</bild>
-        <bild>AC0542_2_L.jpg</bild>
+        <bild beschreibung="Rechteck mit grauer Rand, weisse Diagonale von oben links nach unten Rechts, in der Mitte ein dunkelgrauer Punkt. Das Innere des Rechtecks besitzt einen vertikalen Farbverlauf Hintergrund: Dunkelgrau, hellgrün, dunkelgrün hellgrün." beschreibung_modus="ersetzen">AC0542_2_L.jpg</bild>
         <bild>AC0542_2_M.jpg</bild>
         <bild>AC0542_2_S.jpg</bild>
         <bild>AC0542_L.jpg</bild>
@@ -4487,7 +4487,7 @@
       <wurzelform>GE0017</wurzelform>
       <beschreibung>Eine einfarbig gefüllte Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollständig innerhalb des Kreises. Gleichmäßiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild.</beschreibung>
       <bilder>
-        <bild>GE0017.jpg</bild>
+        <bild beschreibung="Eine rote Kreisscheibe. Darin liegt ein diagonales Kreuz aus zwei geraden Strichen mit abgerundeten Enden. Die beiden Striche schneiden sich mittig und liegen vollständig innerhalb des Kreises. Gleichmäßiger heller Hintergrund. Keine Schriftzeichen und keine weiteren Objekte. Position, Radius, Strichbreiten und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">GE0017.jpg</bild>
       </bilder>
     </entry>
     <entry kind="wurzelform" key="GE0018">
@@ -4943,7 +4943,7 @@
       <wurzelform>GE0281</wurzelform>
       <beschreibung>Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund.</beschreibung>
       <bilder>
-        <bild>GE0281.jpg</bild>
+        <bild beschreibung="Kugelform: ein gefüllter Kreis mit radialem Farbverlauf, innen hell und außen dunkler, auf weißem Hintergrund." beschreibung_modus="ersetzen">GE0281.jpg</bild>
       </bilder>
     </entry>
     <entry kind="wurzelform" key="GE0282">

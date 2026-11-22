@@ -1,0 +1,245 @@
+{
+  "input": "AC0222_L_sia.jpg",
+  "description_unchanged": true,
+  "old_svg_rejected": true,
+  "worker": {
+    "id": "a34933b7ae764837bb3d149380612cb2",
+    "status": "done",
+    "quality": "passed",
+    "message": "Unpassende Vorlage verworfen. SVG neu aus der Bildbeschreibung erstellt. Pixelprüfung bestanden.",
+    "elapsed": 12.7,
+    "project_save": {
+      "status": "saved",
+      "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0222_L_sia.svg",
+      "normalized_mse": 0.0006134105497039855,
+      "quality": "passed",
+      "message": "Automatisch im Projekt gespeichert: C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0222_L_sia.svg"
+    },
+    "search_summary": null,
+    "pixel_quality": {
+      "normalized_mse": 0.0006134105497039855,
+      "foreground_mse": 0.0014230245724320412,
+      "foreground_iou": 0.9713715046604527,
+      "foreground_iou_binary": 0.9713715046604527,
+      "edge_alignment": 0.9318127632141113,
+      "passed": true,
+      "representation_penalty": 0.000487,
+      "representation_complexity": {
+        "elements": 8,
+        "coordinates": 36,
+        "penalty": 0.000487
+      },
+      "within_canvas": true,
+      "observed_foreground_pixels": 1465,
+      "output_foreground_pixels": 1496
+    }
+  },
+  "saved_svg_sha256": "ba5a421c3859c928efe19c68efb505eaf706fa9bbb4169b91f80ff903e342f38",
+  "saved_quality": {
+    "mupdf": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0006134105497039855,
+        "foreground_mse": 0.0014230245724320412,
+        "edge_alignment": 0.9318127632141113,
+        "foreground_iou": 0.9713715046604527,
+        "foreground_iou_binary": 0.9713715046604527
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.5
+      }
+    },
+    "librsvg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 0.0006677719065919518,
+        "foreground_mse": 0.001572069013491273,
+        "edge_alignment": 0.9042284488677979,
+        "foreground_iou": 0.9764784946236559,
+        "foreground_iou_binary": 0.9764784946236559
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 8,
+        "path_count": 3,
+        "path_command_count": 12,
+        "path_complexity_ratio": 1.5
+      }
+    }
+  },
+  "before_quality": {
+    "satisfactory": false,
+    "failures": [
+      "normalized_mse_outside_limit",
+      "foreground_mse_outside_limit",
+      "edge_alignment_outside_limit",
+      "foreground_iou_outside_limit"
+    ],
+    "metrics": {
+      "normalized_mse": 0.02730044722557068,
+      "foreground_mse": 0.04193020984530449,
+      "edge_alignment": 0.24629783630371094,
+      "foreground_iou": 0.4919653893695921,
+      "foreground_iou_binary": 0.4919653893695921
+    },
+    "limits": {
+      "max_normalized_mse": 0.01,
+      "max_foreground_mse": 0.04,
+      "min_edge_alignment": 0.72,
+      "min_foreground_iou": 0.85,
+      "max_svg_elements": 80,
+      "max_path_commands": 160
+    },
+    "complexity": {
+      "parse_error": null,
+      "embedded_raster_count": 0,
+      "vector_element_count": 2,
+      "path_count": 1,
+      "path_command_count": 2,
+      "path_complexity_ratio": 1.0
+    }
+  },
+  "full_description_validation_passed": true,
+  "http": {
+    "id": "ec47562af20a4763be87c089c184b021",
+    "status": "done",
+    "quality": "passed",
+    "message": "SVG erstellt. Qualitätsprüfung bestanden.",
+    "elapsed": 14.6,
+    "pixel_quality": {
+      "normalized_mse": 0.0006134105497039855,
+      "foreground_mse": 0.0014230245724320412,
+      "foreground_iou": 0.9713715046604527,
+      "foreground_iou_binary": 0.9713715046604527,
+      "edge_alignment": 0.9318127632141113,
+      "passed": true,
+      "representation_penalty": 0.000487,
+      "representation_complexity": {
+        "elements": 8,
+        "coordinates": 36,
+        "penalty": 0.000487
+      },
+      "within_canvas": true,
+      "observed_foreground_pixels": 1465,
+      "output_foreground_pixels": 1496
+    },
+    "project_save": {
+      "status": "unchanged",
+      "path": "C:\\Users\\marku\\myCloud\\imageConverter\\artifacts\\converted_images\\converted_svgs\\AC0222_L_sia.svg",
+      "message": "Die vorhandene Projektversion ist gleich gut oder besser und bleibt erhalten."
+    },
+    "catalog_update": {
+      "status": "done",
+      "catalog_status": "pixel_pass",
+      "message": "Qualitätsliste aktualisiert: Rastergates erfüllt."
+    },
+    "search_summary": {
+      "candidate_evaluations": 339,
+      "stop_reason": "satisfactory",
+      "satisfactory": true,
+      "elapsed_seconds": 11.047,
+      "minimum_seconds": 30.0,
+      "limit_seconds": 35.0,
+      "renderings": 339,
+      "render_budget": 4096,
+      "render_cache_hits": 1,
+      "render_sequence_sha256": "d6ba5d7668cdf53df5abaff04688d321cae35d0ac2e9e28fe644cc60c5c52fb7",
+      "search_seed": "2026",
+      "global_stop_reason": null
+    }
+  },
+  "catalog": {
+    "filename": "AC0222_L_sia.jpg",
+    "status": "pixel_pass",
+    "selected_svg": "artifacts/converted_images/catalog_manual_svgs/ec47562af20a4763be87c089c184b021/AC0222_L_sia.svg",
+    "renderers": {
+      "mupdf": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006134105497039855,
+          "foreground_mse": 0.0014230245724320412,
+          "edge_alignment": 0.9318127632141113,
+          "foreground_iou": 0.9713715046604527,
+          "foreground_iou_binary": 0.9713715046604527
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 8,
+          "path_count": 3,
+          "path_command_count": 12,
+          "path_complexity_ratio": 1.5
+        }
+      },
+      "librsvg": {
+        "satisfactory": true,
+        "failures": [],
+        "metrics": {
+          "normalized_mse": 0.0006677719065919518,
+          "foreground_mse": 0.001572069013491273,
+          "edge_alignment": 0.9042284488677979,
+          "foreground_iou": 0.9764784946236559,
+          "foreground_iou_binary": 0.9764784946236559
+        },
+        "limits": {
+          "max_normalized_mse": 0.01,
+          "max_foreground_mse": 0.04,
+          "min_edge_alignment": 0.72,
+          "min_foreground_iou": 0.85,
+          "max_svg_elements": 80,
+          "max_path_commands": 160
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 8,
+          "path_count": 3,
+          "path_command_count": 12,
+          "path_complexity_ratio": 1.5
+        }
+      }
+    }
+  },
+  "tests": {
+    "focused_passed": 70,
+    "new_contract_tests_passed": 29,
+    "broader_passed": 155,
+    "broader_failed": 5,
+    "all_broader_failures_reproduced_with_head_modules": true,
+    "image_id_hardcoding_check": "passed",
+    "diff_whitespace_check": "passed"
+  }
+}

@@ -242,36 +242,43 @@ function renderJob(job, select = false) {
   const sampleUrl = `/api/jobs/${job.id}/sample`;
   if (job.sample && $("sample-image").getAttribute("src") !== sampleUrl) $("sample-image").src = sampleUrl;
   const running = job.status === "running";
+  const canSave = job.export_available ?? Boolean(job.result && !running);
+  const exportUrl = job.export_available ? `/api/jobs/${job.id}/export?v=${job.export_revision}` : `/api/jobs/${job.id}/result`;
+  const manualDraft = Boolean(job.export_draft && !running);
   $("open-attempts").hidden = !$("show-intermediate").checked;
-  const showingPreview = Boolean($("show-intermediate").checked && job.preview && running);
-  const showingResult = showingPreview || Boolean(job.result && !running);
+  const showingPreview = Boolean($("show-intermediate").checked && (job.preview || canSave) && running);
+  const showingResult = showingPreview || Boolean(canSave && !running);
   $("result-image").hidden = !showingResult;
   $("result-empty").hidden = showingResult;
-  const resultUrl = `/api/jobs/${job.id}/result`;
-  const displayUrl = showingPreview ? `/api/jobs/${job.id}/preview?v=${job.preview_revision}` : resultUrl;
+  const displayUrl = showingPreview && !job.export_available ? `/api/jobs/${job.id}/preview?v=${job.preview_revision}` : exportUrl;
   if (showingResult && $("result-image").getAttribute("src") !== displayUrl) $("result-image").src = displayUrl;
   $("result-empty").querySelector("strong").textContent = job.status === "running" ? (job.sample ? "Dein Sample wird verbessert …" : "Dein SVG entsteht …") : "Platz für dein SVG";
   $("result-empty").querySelector("p").textContent = running ? ($("show-intermediate").checked ? "Die Suche läuft. Sobald ein erster SVG-Zwischenstand vorliegt, erscheint er hier automatisch." : "Die Suche läuft. Hier erscheint das Endergebnis. Du kannst die Zwischenergebnisse jederzeit einschalten.") : "Nach der Konvertierung siehst du hier das Ergebnis.";
   const draft = draftQuality(job);
   $("status").textContent = draft?.message || job.message;
+  if (manualDraft && !job.result) $("status").textContent += " Ein Vektorentwurf ist zur manuellen Beurteilung und zum Speichern verfügbar.";
   $("status-dot").className = `status-dot ${job.status === "running" ? "running" : job.quality === "warning" ? "warning" : ["error", "timeout", "interrupted"].includes(job.status) ? "error" : ""}`;
   $("elapsed").textContent = job.elapsed ? `${Math.round(job.elapsed)} s` : "";
   $("log").textContent = job.log || "Das Protokoll erscheint nach dem Start der Konvertierung.";
-  $("save-actions").hidden = !job.result || running;
+  $("save-actions").hidden = !canSave;
   $("project-status").hidden = !job.project_save;
   $("project-status").textContent = job.project_save?.message || "";
   $("use-plan-b").hidden = serverNeedsRestart || !job.result || job.quality !== "passed" || job.status !== "done";
-  $("download").href = `${resultUrl}?download=1`;
+  $("download").href = `${exportUrl}${exportUrl.includes('?') ? '&' : '?'}download=1`;
   $("download").download = `${job.name.replace(/\.[^.]*$/, "")}.svg`;
   $("quality").className = `hint ${job.quality === "warning" ? "quality-warning" : job.quality === "passed" ? "quality-passed" : ""}`;
   $("quality").textContent = running ? (showingPreview ? "Zwischenstand · Suche und Qualitätsprüfung laufen weiter." : "Suche und Qualitätsprüfung laufen.") : draft ? draft.summary : job.quality === "warning" ? "Entwurf · Qualitätsprüfung noch offen" : job.quality === "passed" ? (job.sample ? "Pixelprüfung bestanden · Sample am Original optimiert" : "Qualitätsprüfung bestanden · Bereit zum Herunterladen") : "Original und Ergebnis lassen sich gemeinsam vergrössern.";
+  if (canSave && (running || manualDraft)) {
+    $("quality").textContent += " Du kannst die aktuelle Version nach eigener Beurteilung speichern.";
+    if (manualDraft) $("quality").className = 'hint quality-warning';
+  }
   $("sample-metrics").hidden = !job.sample_report;
   if (job.sample_report) {
     const report = job.sample_report;
     const percent = report.initial_mse > 0 ? Math.max(0, (1 - report.final_mse / report.initial_mse) * 100) : 0;
     $("sample-metrics").textContent = `Sample-Vergleich: ${percent.toFixed(1)} % weniger mittlerer Pixelfehler · ${report.evaluations} geprüfte Anpassungen. Vorhandene Formen werden optimiert.`;
   }
-  $("result-meta").textContent = showingPreview ? "SVG · Zwischenstand · Suche läuft" : running ? "SVG · Suche läuft" : job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
+  $("result-meta").textContent = showingPreview ? "SVG · Zwischenstand · Suche läuft" : running ? "SVG · Suche läuft" : manualDraft || job.quality === "warning" ? "SVG · Entwurf" : "Vektorgrafik · SVG";
   controls();
   zoom();
 }
@@ -466,7 +473,7 @@ $("cancel").addEventListener("click", () => {
   return update(() => post(`/api/jobs/${activeId}/cancel`, {}));
 });
 $("save-as").addEventListener("click", async () => {
-  if (!current?.result || saving) return;
+  if (!(current?.export_available ?? current?.result) || saving) return;
   const jobId = current.id;
   saving = true;
   $("save-as").disabled = true;
@@ -547,6 +554,10 @@ async function init() {
       descriptionCheck = config.description_check === true;
       descriptionAutosave = config.description_autosave === true;
       currentSvgReuse = config.current_svg_reuse === true;
+      if (!config.manual_svg_export) {
+        $("server-version-warning").textContent = "Zum Speichern von Zwischenständen und abgelehnten Entwürfen bitte den Webserver nach Abschluss laufender Konvertierungen mit stopWebServer.cmd und startWebServer.cmd neu starten und diese Seite neu laden.";
+        $("server-version-warning").hidden = false;
+      }
       for (const option of $("profile").querySelectorAll("option")) {
         if (["explore5", "explore10"].includes(option.value)) option.disabled = config.primitive_exploration !== true;
       }

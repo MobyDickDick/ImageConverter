@@ -1,7 +1,80 @@
-<svg width="40" height="30" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 15.000) rotate(180) scale(0.9000) translate(-20.000 -15.000)">
-<ellipse id="perception_circle_background" cx="9" cy="32" rx="6" ry="6" fill="#D15872" stroke="#C4A0A5" stroke-width="1"/>
-  <rect id="main_rect" x="6.4" y="4.8" width="7.2" height="30.4" fill="#d8d8d8" stroke="#666666" stroke-width="0.7"/>
-  <path id="diagonal_1_tr_bl" d="M 13.15 5.25 L 6.85 34.75" stroke="#707070" stroke-width="0.9" fill="none" stroke-linecap="butt"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="32.279102"
+   height="34.956001"
+   viewBox="0 0 32.279102 34.956001"
+   preserveAspectRatio="xMidYMid"
+   version="1.1"
+   id="svg4"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="vertical-two-way-valve-body-gradient"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#a8a8a8"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#fbfbfb"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="vertical-two-way-valve-circle-gradient"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#ffffff"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#f7f7f7"
+         id="stop4" />
+    </linearGradient>
+  </defs>
+  <path
+     id="right_rotated_top_kelle_three_way_valve_connector"
+     d="M 11.84,17.553 H 23.086"
+     stroke="#808080"
+     stroke-width="1.77"
+     fill="none"
+     stroke-linecap="butt" />
+  <path
+     id="right_rotated_top_kelle_three_way_valve_body_1"
+     d="M 23.086,17.553 14.853,34.284 H 31.206 Z"
+     fill="#bdbdbd"
+     stroke="#959595"
+     stroke-width="1.344"
+     stroke-linejoin="miter" />
+  <path
+     id="right_rotated_top_kelle_three_way_valve_body_2"
+     d="M 23.086,17.553 14.853,0.67199999 h 16.353 z"
+     fill="#bdbdbd"
+     stroke="#959595"
+     stroke-width="1.344"
+     stroke-linejoin="miter" />
+  <rect
+     id="right_rotated_top_kelle_three_way_valve_square"
+     x="0.67199999"
+     y="11.546"
+     width="11.865"
+     height="11.865"
+     fill="#f4f4f4"
+     stroke="#959595"
+     stroke-width="1.344" />
+  <path
+     id="right_rotated_top_kelle_three_way_valve_square_cross"
+     d="M 0.67200019,11.546 12.537,23.41 m 0,-11.864 L 0.67200019,23.41"
+     fill="none"
+     stroke="#959595"
+     stroke-width="1.344" />
 </svg>

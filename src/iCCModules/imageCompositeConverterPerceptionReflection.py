@@ -148,6 +148,22 @@ class Reflection:
         contract_status = str(params["description_contract"].get("status", "ok"))
         params["contract_status"] = contract_status
 
+        if assertions.get('partitioned_rhombus'):
+            params.update(mode='non_composite', label='', geometry_ir=[], contract_status='ok')
+            params['description_contract']['status'] = 'ok'
+            params['elements'].append('GEOMETRIE: Unterteilte Raute mit beschriebenen Trennlinien, Zeichen und Hintergrund')
+            return desc, params
+
+        from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
+        if three_wing_valve_spec(desc_raw):
+            params["mode"] = "non_composite"
+            params["label"] = ""
+            params["geometry_ir"] = []
+            params["contract_status"] = "ok"
+            params["description_contract"]["status"] = "ok"
+            params["elements"].append("GEOMETRIE: Drei verbundene Ventildreiecke, waagerechter Griff und Quadrat mit beiden Diagonalen")
+            return desc, params
+
         from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract
         if two_way_valve_contract(desc_raw):
             params["mode"] = "non_composite"

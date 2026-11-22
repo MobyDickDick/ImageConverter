@@ -1,36 +1,34 @@
 {
   "schema": "catalog_inventory_v1",
-  "generated_at": "2026-11-14T14:55:03.034904+00:00",
-  "catalog_bitmaps": 1787,
+  "generated_at": "2026-11-22T10:50:38.867577+00:00",
+  "catalog_bitmaps": 1786,
   "auxiliary_bitmaps": 0,
-  "unique_catalog_variants": 1787,
+  "unique_catalog_variants": 1786,
   "catalog_statuses": {
-    "pixel_pass": 474,
-    "pixel_fail": 1244,
-    "no_svg": 61,
+    "pixel_pass": 490,
+    "pixel_fail": 1219,
+    "no_svg": 68,
     "reserved": 6,
-    "measurement_error": 2
+    "measurement_error": 3
   },
   "descriptions_present": 1786,
-  "missing_descriptions": [
-    "AC0100_from_sample.jpg"
-  ],
+  "missing_descriptions": [],
   "archived": 379,
-  "not_archived": 1408,
+  "not_archived": 1407,
   "archive_pinned_pairs_valid": 379,
   "archive_description_differences": 8,
   "archive_missing_evidence": 3,
-  "archived_current_pixel_pass": 318,
-  "measurements_computed": 3095,
+  "archived_current_pixel_pass": 287,
+  "measurements_computed": 3889,
   "measurements_reused": 6,
   "groups": {
     "AC": {
-      "total": 930,
+      "total": 929,
       "archived": 174,
       "statuses": {
-        "pixel_pass": 211,
-        "pixel_fail": 697,
-        "no_svg": 18,
+        "pixel_pass": 256,
+        "pixel_fail": 649,
+        "no_svg": 20,
         "reserved": 4
       }
     },
@@ -45,9 +43,9 @@
       "total": 30,
       "archived": 0,
       "statuses": {
-        "pixel_fail": 27,
-        "no_svg": 1,
-        "pixel_pass": 2
+        "pixel_fail": 26,
+        "no_svg": 3,
+        "pixel_pass": 1
       }
     },
     "AW": {
@@ -61,8 +59,8 @@
       "total": 15,
       "archived": 1,
       "statuses": {
-        "pixel_fail": 14,
-        "pixel_pass": 1
+        "pixel_fail": 13,
+        "pixel_pass": 2
       }
     },
     "BA": {
@@ -104,8 +102,8 @@
       "total": 27,
       "archived": 4,
       "statuses": {
-        "pixel_fail": 13,
-        "pixel_pass": 11,
+        "pixel_fail": 14,
+        "pixel_pass": 10,
         "no_svg": 1,
         "measurement_error": 2
       }
@@ -114,9 +112,10 @@
       "total": 610,
       "archived": 198,
       "statuses": {
-        "pixel_fail": 350,
-        "pixel_pass": 232,
-        "no_svg": 28
+        "pixel_fail": 366,
+        "pixel_pass": 214,
+        "no_svg": 29,
+        "measurement_error": 1
       }
     },
     "HC": {
@@ -211,17 +210,16 @@
       "total": 50,
       "archived": 2,
       "statuses": {
-        "pixel_fail": 43,
-        "pixel_pass": 1,
-        "no_svg": 6
+        "pixel_fail": 42,
+        "no_svg": 8
       }
     },
     "SH": {
       "total": 3,
       "archived": 0,
       "statuses": {
-        "pixel_pass": 2,
-        "pixel_fail": 1
+        "pixel_fail": 2,
+        "pixel_pass": 1
       }
     },
     "SI": {
@@ -249,7 +247,7 @@
       "total": 1,
       "archived": 0,
       "statuses": {
-        "pixel_pass": 1
+        "pixel_fail": 1
       }
     },
     "US": {
@@ -284,8 +282,7 @@
       "total": 58,
       "archived": 0,
       "statuses": {
-        "pixel_fail": 49,
-        "pixel_pass": 7,
+        "pixel_fail": 56,
         "no_svg": 2
       }
     }
@@ -295,13 +292,13 @@
   "manual_reviews_systematically_recorded": false,
   "geometry_classes": {
     "schema": "catalog_geometry_classes_v1",
-    "catalog_bitmaps": 1787,
+    "catalog_bitmaps": 1786,
     "classes": {
       "disk_label": {
         "label": "Kreis/Ellipse mit Text und optionalen Anschlüssen",
         "total": 184,
         "archived": 51,
-        "saved_pixel_pass": 22,
+        "saved_pixel_pass": 24,
         "description_issues": {
           "reference_or_vague": 27,
           "placeholder": 37
@@ -322,7 +319,7 @@
         "label": "Kreis mit Dreieck / Pumpe / Kompressor",
         "total": 122,
         "archived": 21,
-        "saved_pixel_pass": 43,
+        "saved_pixel_pass": 53,
         "description_issues": {
           "reference_or_vague": 3
         },
@@ -341,7 +338,7 @@
         "label": "Kreis mit Linien, Kreuz, Balken oder Pfeil",
         "total": 139,
         "archived": 44,
-        "saved_pixel_pass": 36,
+        "saved_pixel_pass": 42,
         "description_issues": {
           "placeholder": 1,
           "reference_or_vague": 6
@@ -381,7 +378,7 @@
         "label": "Kreis/Kugel mit radialem Verlauf",
         "total": 24,
         "archived": 6,
-        "saved_pixel_pass": 8,
+        "saved_pixel_pass": 11,
         "description_issues": {
           "placeholder": 1,
           "reference_or_vague": 18
@@ -400,7 +397,7 @@
         "label": "Kreis/Ellipse, Füllung, Kontur oder Verlauf",
         "total": 9,
         "archived": 3,
-        "saved_pixel_pass": 5,
+        "saved_pixel_pass": 7,
         "description_issues": {},
         "model_modules": [
           "FilledSymbols",
@@ -418,7 +415,7 @@
         "label": "Ventil / Dreiecksflügel mit Stellglied",
         "total": 100,
         "archived": 3,
-        "saved_pixel_pass": 11,
+        "saved_pixel_pass": 10,
         "description_issues": {
           "placeholder": 12,
           "reference_or_vague": 13
@@ -437,12 +434,11 @@
       },
       "panel_marks": {
         "label": "Rechteck mit Linien, Kreuz, Zeichen oder Anschluss",
-        "total": 405,
+        "total": 404,
         "archived": 41,
-        "saved_pixel_pass": 82,
+        "saved_pixel_pass": 98,
         "description_issues": {
-          "missing": 1,
-          "reference_or_vague": 47,
+          "reference_or_vague": 42,
           "placeholder": 81
         },
         "model_modules": [
@@ -465,7 +461,7 @@
         "label": "Rechteck/Quadrat mit Kontur, Füllung oder Verlauf",
         "total": 116,
         "archived": 0,
-        "saved_pixel_pass": 43,
+        "saved_pixel_pass": 31,
         "description_issues": {
           "placeholder": 11,
           "reference_or_vague": 1
@@ -487,7 +483,7 @@
         "label": "Panel/Röhre mit Kurven oder räumlichem Effekt",
         "total": 84,
         "archived": 0,
-        "saved_pixel_pass": 1,
+        "saved_pixel_pass": 4,
         "description_issues": {
           "placeholder": 10,
           "reference_or_vague": 1
@@ -508,7 +504,7 @@
         "label": "Pfeile, Linien, Dreiecke und Verzweigungen",
         "total": 248,
         "archived": 168,
-        "saved_pixel_pass": 174,
+        "saved_pixel_pass": 156,
         "description_issues": {
           "reference_or_vague": 4,
           "placeholder": 1
@@ -531,7 +527,7 @@
         "label": "Achsendiagramm / Stufen / Sinus",
         "total": 20,
         "archived": 3,
-        "saved_pixel_pass": 4,
+        "saved_pixel_pass": 0,
         "description_issues": {
           "reference_or_vague": 3
         },
@@ -551,9 +547,9 @@
         "label": "Mehrere geometrische Formen / Überdeckung / Verschachtelung",
         "total": 42,
         "archived": 4,
-        "saved_pixel_pass": 7,
+        "saved_pixel_pass": 11,
         "description_issues": {
-          "reference_or_vague": 1
+          "reference_or_vague": 4
         },
         "model_modules": [
           "PrimitiveScene",
@@ -572,7 +568,7 @@
         "label": "Geometrisches Piktogramm / Button / Flagge / Haken",
         "total": 107,
         "archived": 13,
-        "saved_pixel_pass": 15,
+        "saved_pixel_pass": 16,
         "description_issues": {
           "placeholder": 7,
           "reference_or_vague": 7
@@ -594,7 +590,7 @@
         "label": "Kurviges Piktogramm / Flamme / Glocke / Tropfen / Werkzeug",
         "total": 120,
         "archived": 4,
-        "saved_pixel_pass": 6,
+        "saved_pixel_pass": 10,
         "description_issues": {
           "placeholder": 6,
           "reference_or_vague": 3
@@ -645,18 +641,17 @@
         ]
       }
     },
-    "assigned": 1781,
+    "assigned": 1780,
     "unresolved": 0,
     "reserved": 6,
-    "visual_audited": 1781,
+    "visual_audited": 1780,
     "automatic_proposals": 0,
     "description_issues": {
-      "reference_or_vague": 135,
-      "missing": 1,
+      "reference_or_vague": 133,
       "placeholder": 189
     },
     "fresh_conversion_performed": false
   },
-  "measurement_signature": "355a9f8b332bdb2349d0344077e4f050c949269a196c43afaa0f2bdbe03a2fad",
-  "elapsed_seconds": 661.86
+  "measurement_signature": "cd7e31c82ca0c7f0a79411d2e72a9684d31017af846e4067d193700adacbd74a",
+  "elapsed_seconds": 290.187
 }

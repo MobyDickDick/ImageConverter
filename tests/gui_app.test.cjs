@@ -39,8 +39,46 @@ function harness(respond = () => []) {
     },
   });
   return {element, timers, requests, run:code => vm.runInContext(code, context),
-    load() {vm.runInContext(app, context);}, context};
+    load() {
+      vm.runInContext(app, context);
+      // Most tests start after init, with a server supporting SVG reuse.
+      vm.runInContext('currentSvgReuse = true', context);
+    }, context};
 }
+
+test('live drafts can be saved during a search without stopping it', async () => {
+  const h = harness(() => ({saved:true, path:'chosen.svg'})); h.load();
+  h.context.job = {...running, result:false, preview:true, preview_revision:'1',
+    export_available:true, export_draft:true, export_revision:'1'};
+  h.run('renderJob(job, true)');
+  assert.equal(h.element('save-actions').hidden, false);
+  assert.match(h.element('download').href, /\/export\?v=1&download=1$/);
+  await h.element('save-as').listeners.click();
+  assert.equal(h.requests[0].url, '/api/jobs/retry/save');
+  assert.equal(h.run('activeId'), running.id);
+  assert.equal(h.element('cancel').hidden, false);
+  assert.match(h.element('save-status').textContent, /chosen.svg/);
+});
+
+test('rejected and stopped drafts remain visible and downloadable with a warning', () => {
+  for (const status of ['error', 'cancelled', 'timeout', 'interrupted']) {
+    const h = harness(); h.load();
+    h.context.job = {...ready, status, result:false, quality:'warning',
+      export_available:true, export_draft:true, export_revision:'2'};
+    h.run('renderJob(job, true)');
+    assert.equal(h.element('result-image').hidden, false);
+    assert.match(h.element('result-image').src, /\/export\?v=2$/);
+    assert.equal(h.element('save-actions').hidden, false);
+    assert.match(h.element('quality').textContent, /eigener Beurteilung speichern/);
+    assert.equal(h.element('quality').className, 'hint quality-warning');
+  }
+});
+
+test('saving stays hidden until an SVG exists', () => {
+  const h = harness(); h.load(); h.context.job = {...running, export_available:false};
+  h.run('renderJob(job, true)');
+  assert.equal(h.element('save-actions').hidden, true);
+});
 
 test('rendering a running job restores cancellation even with an older server', () => {
   const h = harness(); h.load();

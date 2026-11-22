@@ -148,6 +148,14 @@ def test_better_contours_cannot_publish_an_unverified_inventory(tmp_path):
     publisher.close()
     assert not output.exists()
     assert preview.AttemptJournal(tmp_path).count == 2  # diagnostic evidence is kept
+    assert (tmp_path/'manual-preview.svg').read_text(encoding='utf-8') == preview.AttemptJournal(tmp_path).best()['svg']
+    # A new search phase must not replace the best manual draft with a worse seed.
+    restarted = preview.PreviewPublisher(source, output,
+        description=(fixture/'description.txt').read_text(encoding='utf-8'))
+    previous = (tmp_path/'manual-preview.svg').read_bytes()
+    restarted.consider(simpler, b, bgr=False)
+    restarted.close()
+    assert (tmp_path/'manual-preview.svg').read_bytes() == previous
 
 
 def test_preview_prefers_one_native_form_and_checks_description(tmp_path):

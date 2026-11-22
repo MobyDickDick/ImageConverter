@@ -8,10 +8,24 @@ from __future__ import annotations
 import os
 import json
 from pathlib import Path
+import time
 from xml.etree import ElementTree as ET
 
 _publisher = None
 _configuration = None
+
+
+def atomic_preview(path: Path, svg: str) -> None:
+    temporary = path.with_suffix('.svg.tmp')
+    temporary.write_text(svg, encoding='utf-8')
+    for attempt in range(6):
+        try:
+            temporary.replace(path)
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(.02 * 2**attempt)
 
 
 class AttemptJournal:
@@ -129,6 +143,8 @@ class PreviewPublisher:
         with Image.open(source) as image:
             self.target = np.asarray(image.convert('RGB'), dtype=np.float32)
         self.output = output
+        self.manual_output = output.parent/'manual-preview.svg'
+        self.manual_rank = (True, float('inf'))
         self.attempts = AttemptJournal(output.parent,persistent=True)
         self.best_error = float('inf')
         self.best_rank = (True, float('inf'))
@@ -158,6 +174,19 @@ class PreviewPublisher:
                 if raster is not None and raster.shape == self.target.shape:
                     self.best_error = float(np.square(self.target-raster[:, :, ::-1].astype(np.float32)).mean())
                     self.best_rank = self.rank(bounded, raster[:, :, ::-1])
+            except (OSError, ValueError, TypeError):
+                pass
+        if self.manual_output.is_file():
+            try:
+                import cv2
+                import fitz
+                from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+                h, w = self.target.shape[:2]
+                previous = self.manual_output.read_text(encoding='utf-8')
+                raster = render_svg_to_numpy_inprocess(previous, w, h,
+                    fitz_module=fitz, np_module=np, cv2_module=cv2)
+                if raster is not None and raster.shape == self.target.shape:
+                    self.manual_rank = self.rank(previous, raster[:, :, ::-1])
             except (OSError, ValueError, TypeError):
                 pass
 
@@ -196,8 +225,13 @@ class PreviewPublisher:
         # search seeds. Best-result selection below remains independent.
         rank = self.rank(svg, pixels)
         self.attempts.append(svg, error, selection_rank=rank)
-        # The attempt journal remains a diagnostic record. Only the full
-        # described inventory may become the displayed/downloadable draft.
+        # Manual drafts are observations the user may choose to save, even
+        # when their inventory fails. Keep automatic acceptance separate.
+        if rank < self.manual_rank and not (self.target.min() < 220 and pixels.min() >= 245):
+            self.manual_output.parent.mkdir(parents=True, exist_ok=True)
+            atomic_preview(self.manual_output, svg)
+            self.manual_rank = rank
+        # Only the full described inventory may become an automatic result.
         from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
         if self.assertion_error:
             return
@@ -210,9 +244,7 @@ class PreviewPublisher:
         if rank >= self.best_rank:
             return
         self.output.parent.mkdir(parents=True, exist_ok=True)
-        temporary = self.output.with_suffix('.svg.tmp')
-        temporary.write_text(svg, encoding='utf-8')
-        temporary.replace(self.output)
+        atomic_preview(self.output, svg)
         self.best_error = error
         self.best_rank = rank
 

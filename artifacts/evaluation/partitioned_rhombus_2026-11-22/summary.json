@@ -1,0 +1,138 @@
+{
+  "image": "AC0160_M.jpg",
+  "description_unchanged": true,
+  "template_used": false,
+  "search_seed": 2026,
+  "image_sha256": "5e6420125ebfbae0d7dbb2e466627aa6e7a8cb042335e678c1e67540cb03cc8c",
+  "description_sha256": "b86dadaf624601fb72b1867ecb74899e11097843cc55924629015d1c1a532302",
+  "svg_path": "artifacts/converted_images/converted_svgs/AC0160_M.svg",
+  "svg_sha256": "805d8cb1507fea22a0949046aa7ad6c079376b6be98064c4279f2bd8c08201de",
+  "within_canvas": true,
+  "before": {
+    "job": "303b495654134d07ac3a89bfb8d2afe1",
+    "status": "error",
+    "inventory": {
+      "rhombus": 5,
+      "diagonal": 1
+    }
+  },
+  "after": {
+    "job": "1e0b8cc77bb04c90ad6ce6e3f4a7fcfb",
+    "status": "done",
+    "quality": "passed",
+    "elapsed": 20.8,
+    "inventory": {
+      "rhombus": 1,
+      "diagonal": 5,
+      "line": 4
+    },
+    "catalog_update": {
+      "status": "done",
+      "catalog_status": "pixel_pass",
+      "message": "Qualitätsliste aktualisiert: Rastergates erfüllt."
+    }
+  },
+  "renderers": {
+    "mupdf": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 7.681413990212604e-05,
+        "foreground_mse": 0.00048577264533378184,
+        "edge_alignment": 0.9584630727767944,
+        "foreground_iou": 0.9468256831169128,
+        "foreground_iou_binary": 0.5251527973671838
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 10,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    },
+    "librsvg": {
+      "satisfactory": true,
+      "failures": [],
+      "metrics": {
+        "normalized_mse": 7.89404075476341e-05,
+        "foreground_mse": 0.0005089245387353003,
+        "edge_alignment": 0.9565959572792053,
+        "foreground_iou": 0.9478769898414612,
+        "foreground_iou_binary": 0.5247572042668365
+      },
+      "limits": {
+        "max_normalized_mse": 0.01,
+        "max_foreground_mse": 0.04,
+        "min_edge_alignment": 0.72,
+        "min_foreground_iou": 0.85,
+        "max_svg_elements": 80,
+        "max_path_commands": 160
+      },
+      "complexity": {
+        "parse_error": null,
+        "embedded_raster_count": 0,
+        "vector_element_count": 10,
+        "path_count": 0,
+        "path_command_count": 0,
+        "path_complexity_ratio": 0.0
+      }
+    }
+  },
+  "tests": {
+    "new_description_geometry_and_worker": 30,
+    "new_canvas": 3,
+    "final_joint_run": {
+      "passed": 47,
+      "failed": 1
+    },
+    "broad_description_shapes": {
+      "passed": 154,
+      "failed": 16
+    },
+    "new_route_disabled_baseline": {
+      "passed": 5,
+      "failed": 16
+    },
+    "infrastructure": {
+      "passed": 39,
+      "failed": 2
+    },
+    "infrastructure_without_both_fixes": {
+      "failed": 2
+    },
+    "legacy_gui_search": {
+      "passed": 77,
+      "failed": 36,
+      "stage": "before_canvas_fix"
+    },
+    "full_suite_run": false,
+    "compileall": true,
+    "cli_help": true,
+    "image_id_hardcoding": false,
+    "diff_check": true,
+    "diff_check_scope": "task_files_and_generated_catalog"
+  },
+  "limitations": [
+    "Bounded language for a flat gray four-field rhombus and optional owned elements.",
+    "Arbitrary natural language and other shapes are not generally solved.",
+    "Existing unrelated test failures remain."
+  ],
+  "catalog_inventory": {
+    "fully_rebuilt": true,
+    "rows": 1786,
+    "measured": 3889,
+    "reused": 6,
+    "target_status": "pixel_pass",
+    "elapsed_seconds": 290.187
+  }
+}

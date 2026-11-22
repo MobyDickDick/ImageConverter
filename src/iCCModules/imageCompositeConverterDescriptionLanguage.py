@@ -146,6 +146,13 @@ def description_assertions(description: str) -> dict:
         if not any(c['kind'] == 'triangle' for c in counts):
             counts.append(dict(kind='triangle', count=2))
     assertions = dict(counts=counts, no_text=no_text)
+    from src.iCCModules.imageCompositeConverterPartitionedRhombus import partitioned_rhombus_spec
+    partition = partitioned_rhombus_spec(normalized)
+    if partition:
+        assertions['partitioned_rhombus'] = partition
+    from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
+    if three_wing_valve_spec(normalized):
+        assertions['three_wing_valve'] = True
     from src.iCCModules.imageCompositeConverterScopedPaint import scoped_paint_claims
     paint_claims, _ = scoped_paint_claims(words)
     if paint_claims:
@@ -263,7 +270,8 @@ def gradient_direction(text: str, direction: str) -> bool:
 def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
     for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
-                'svg_component_description', 'two_way_valve', 'primitive_program', 'scoped_paint'):
+                'svg_component_description', 'two_way_valve', 'three_wing_valve', 'primitive_program', 'scoped_paint',
+                'partitioned_rhombus'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -272,6 +280,18 @@ def draft_assertions(assertions):
 
 
 def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
+    if assertions and assertions.get('partitioned_rhombus'):
+        from src.iCCModules.imageCompositeConverterPartitionedRhombus import validate_partitioned_rhombus
+        try:
+            validate_partitioned_rhombus(svg, assertions['partitioned_rhombus'])
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
+    if assertions and assertions.get('three_wing_valve'):
+        from src.iCCModules.imageCompositeConverterThreeWingValve import validate_three_wing_valve
+        try:
+            validate_three_wing_valve(svg)
+        except ValueError as exc:
+            raise DescriptionRejected(str(exc)) from exc
     if assertions and assertions.get('svg_component_description'):
         from src.iCCModules.imageCompositeConverterSvgComponents import validate_components
         validate_components(svg, assertions['svg_component_description'])

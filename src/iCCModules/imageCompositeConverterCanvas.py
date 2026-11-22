@@ -103,6 +103,11 @@ def _measure(root, width, height):
     wrapper.append(viewport)
     # Bound memory for large inputs; tiny symbols are measured at 4x resolution.
     zoom = min(4., 4096/max(w, h), math.sqrt(2_000_000/(w*h)))
+    # Align canvas edges to raster pixels. A fractional zoom makes a pixel
+    # straddle an exact canvas edge and reports its far edge as overflowing
+    # paint, shrinking even a completely contained full-canvas background.
+    if zoom >= 1:
+        zoom = float(math.floor(zoom))
     with fitz.open('svg', ET.tostring(wrapper)) as doc:
         pix = doc[0].get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=True)
     rgba = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, 4)

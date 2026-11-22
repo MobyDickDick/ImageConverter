@@ -83,6 +83,21 @@ def test_in_bounds_content_is_unchanged_and_deliberate_clipping_is_preserved():
     assert ET.fromstring(contain_svg(clipped)).find('{*}g').get('transform') is None
 
 
+@pytest.mark.parametrize('size', [230, 410, 600])
+def test_exact_canvas_background_and_flat_band_caps_are_not_shrunk(size):
+    # Conservative display-list bounds reserve a large measurement viewport
+    # for thick joins. Fractional raster zoom used to invent outside ink even
+    # though all horizontal butt caps and the backing end exactly at the edge.
+    original = scene(f'<rect width="{size}" height="{size}" fill="white"/>'
+        f'<polyline points="0,20 20,20 {size-20},{size-20} {size},{size-20}" '
+        'fill="none" stroke="#e6e6e6" stroke-width="20"/>', width=size,height=size)
+    assert painted_bounds(original)==(0.,0.,float(size),float(size))
+    assert within_canvas(original)
+    bounded=ET.fromstring(contain_svg(original))
+    assert bounded.find('{*}g') is None
+    assert len(list(bounded))==2
+
+
 def test_preview_journal_and_saved_artifacts_use_the_bounded_vector(tmp_path):
     from src.imageConverterPreview import PreviewPublisher, AttemptJournal
     from src.iCCModules.imageCompositeConverterIterationArtifacts import writeAttemptArtifactsImpl

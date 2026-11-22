@@ -1,5 +1,22 @@
 # ImageConverter
 
+`AC0160_M.jpg` wird mit unveränderter Beschreibung vollständig konvertiert:
+eine unterteilte Raute mit parallelen Trennstrichen, Plus/Minus und Hintergrund-X.
+Teilflächen gehören jetzt zum gemeinsamen Umriss; die Anpassung bestimmt
+Proportionen, Strichbreiten und Grautöne aus dem jeweiligen Bild. Eine zentrale
+Rasterrundung in der Randmessung ist ebenfalls behoben, damit exakt begrenzte
+Hintergründe nicht unnötig verkleinert werden. Der echte GUI-Lauf und zwei
+unabhängige Renderer bestehen; SVG und aktualisierter Server sind verfügbar.
+[Ursachen, Variantenprüfungen und verbleibende Grenzen](artifacts/evaluation/partitioned_rhombus_2026-11-22/README.md).
+
+`AC0222_L_sia.jpg` wird mit unveränderter Beschreibung vollständig konvertiert:
+drei verbundene Ventildreiecke mit Grauverläufen, ein waagerechter Griff und ein
+Quadrat mit beiden Diagonalen. Der Parser zählt jetzt auch „drei spitzen
+Dreiecken“ korrekt. Unvollständige Quadratentwürfe werden verworfen; das neue
+Projekt-SVG besteht die Bildprüfung mit zwei unabhängigen Renderern. Der lokale
+Webserver ist aktualisiert, der Katalogeintrag besteht ebenfalls.
+[Ursachen, Prüfungen und Grenzen](artifacts/evaluation/ac0222_three_wing_2026-11-22/README.md).
+
 Gleich breite Ränder bestimmter Grundformen und ein eigener Grauverlauf je Form
 werden jetzt als verbindliche Beschreibungsangaben gesucht und geprüft. Ein
 altes SVG mit ungleichen Dreiecksrändern kann damit keinen neuen Versuch mehr
@@ -691,6 +708,11 @@ Unter Windows **`startWebServer.cmd` doppelklicken**. Der lokale Server nutzt
 `--port 8767` wählt einen anderen Port, `--no-browser` unterdrückt den Browserstart;
 Strg+C beendet den Server.
 
+Beim ersten Start nach einer Änderung der Qualitätsprüfung werden gespeicherte
+Ergebnisse erneut geprüft. Bei vielen alten Aufträgen kann das etwas dauern;
+die Startmeldung erscheint sofort. Auch verworfene ältere Suchentwürfe merken
+sich die erfolgte Prüfung, damit sie weitere Neustarts nicht erneut verzögern.
+
 Über **Konvertierungsqualität** öffnet sich die vollständige
 [Katalogliste im Webserver](http://127.0.0.1:8766/catalog): Original-/SVG-Vergleich,
 Rasterbefunde, Archivstatus, Suche, Filter und CSV-/JSON-Export aller Bilder.
@@ -708,6 +730,12 @@ letzte vollständige Liste. Dabei wird keine neue Konvertierung gestartet.
    sich nebeneinander betrachten und gemeinsam vergrössern. **Speichern unter …**
    öffnet unter Windows den Speicherdialog mit frei wählbarem Namen und Ordner;
    **Browser-Download** bleibt als Alternative verfügbar.
+   Sobald ein SVG-Zwischenstand vorliegt, kannst Du ihn auch während der Suche
+   speichern. Auch nach Abbruch oder einer fehlgeschlagenen Qualitäts- oder
+   Beschreibungsprüfung bleibt ein vorhandener Vektorentwurf manuell speicherbar.
+   Du entscheidest selbst, ob er ausreicht; die Prüfhinweise bleiben sichtbar.
+   Während der Speicherdialog geöffnet ist, bleibt die gewählte Version fest,
+   auch wenn die Suche inzwischen ein neues Ergebnis findet.
 
 Optional ein gespeichertes **Sample-SVG** hinzufügen (eigenständige SVG-Formen,
 maximal 2 MB). **Sample weiter verbessern** optimiert dessen vorhandene Formen

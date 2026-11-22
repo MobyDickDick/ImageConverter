@@ -1403,6 +1403,7 @@ def runNonCompositeIterationImpl(
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_contract, fit_two_way_valve
+    from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec, fit_three_wing_valve
     from src.iCCModules.imageCompositeConverterAdaptiveSearch import current_search
     session = current_search()
     if session is not None:
@@ -1428,6 +1429,18 @@ def runNonCompositeIterationImpl(
         write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
         return base_name, description, params, 1, fitted['error']
     from src.iCCModules.imageCompositeConverterSymmetricCircleLines import symmetric_circle_lines_spec, fit_symmetric_circle_lines
+    from src.iCCModules.imageCompositeConverterPartitionedRhombus import partitioned_rhombus_spec, fit_partitioned_rhombus
+    if partitioned_rhombus_spec(description):
+        fitted = fit_partitioned_rhombus(width, height, description=description, image=perc_img,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+        if fitted is None:
+            write_validation_log_fn(['status=description_partitioned_rhombus_fit_failed'])
+            return None
+        validated_result(fitted, perc_img)
+        params['partitioned_rhombus_registration'] = {k:v for k,v in fitted.items() if k not in {'svg','rendered'}}
+        write_validation_log_fn(['status=description_partitioned_rhombus'])
+        write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+        return base_name, description, params, 1, fitted['error']
     if symmetric_circle_lines_spec(description):
         fitted = fit_symmetric_circle_lines(width, height, description=description, image=perc_img,
             render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
@@ -1437,6 +1450,17 @@ def runNonCompositeIterationImpl(
         validated_result(fitted, perc_img)
         params['symmetric_circle_lines_registration'] = {k:v for k,v in fitted.items() if k not in {'svg','rendered'}}
         write_validation_log_fn(['status=description_symmetric_circle_lines'])
+        write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
+        return base_name, description, params, 1, fitted['error']
+    if three_wing_valve_spec(description):
+        fitted = fit_three_wing_valve(width, height, description=description, image=perc_img,
+            render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn)
+        if fitted is None:
+            write_validation_log_fn(['status=description_three_wing_valve_fit_failed'])
+            return None
+        validated_result(fitted, perc_img)
+        params['three_wing_valve_registration'] = {k:v for k,v in fitted.items() if k not in {'svg','rendered'}}
+        write_validation_log_fn(['status=description_three_wing_valve'])
         write_attempt_artifacts_fn(fitted['svg'], fitted['rendered'])
         return base_name, description, params, 1, fitted['error']
     if two_way_valve_contract(description):
