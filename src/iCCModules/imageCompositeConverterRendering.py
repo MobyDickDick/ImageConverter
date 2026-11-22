@@ -403,7 +403,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
         return svg_string
     if root.get('transform'):
         return svg_string
-    if root.get('preserveAspectRatio', 'xMidYMid meet') not in {'xMidYMid', 'xMidYMid meet'}:
+    if root.get('preserveAspectRatio', 'xMidYMid meet') not in {'xMidYMid', 'xMidYMid meet', 'none'}:
         return svg_string
     namespace = '{http://www.w3.org/2000/svg}'
     ET.register_namespace('', 'http://www.w3.org/2000/svg')
@@ -575,11 +575,15 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 # Preserve the root's default centered aspect-ratio mapping.
                 zoom = min(w/viewport[2],h/viewport[3])
                 padding = [(w-viewport[2]*zoom)/2,(h-viewport[3]*zoom)/2]
+                zooms = [zoom, zoom]
+                if root.get('preserveAspectRatio') == 'none':
+                    zooms = [w/viewport[2], h/viewport[3]]
+                    padding = [0., 0.]
                 if x1 != x2 and y1 != y2:
                     # SVG linear paint follows the projection onto its axis,
                     # including diagonal axes and ancestor translation/scale.
-                    px = (viewport[0]+(np.arange(w)+.5-padding[0])/zoom-tx)/scale
-                    py = (viewport[1]+(np.arange(h)+.5-padding[1])/zoom-ty)/scale
+                    px = (viewport[0]+(np.arange(w)+.5-padding[0])/zooms[0]-tx)/scale
+                    py = (viewport[1]+(np.arange(h)+.5-padding[1])/zooms[1]-ty)/scale
                     gx1, gx2, gy1, gy2 = x1, x2, y1, y2
                     if not user:
                         # objectBoundingBox defines the gradient in a unit
@@ -593,7 +597,7 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                     colors = np.stack([np.interp(position,[v[0] for v in stops],[v[1][c] for v in stops]) for c in range(3)],axis=-1)
                 else:
                     axis,low,high = (1,y1,y2) if x1==x2 else (0,x1,x2)
-                    coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zoom
+                    coordinates = viewport[axis]+(np.arange((h,w)[1-axis])+.5-padding[axis])/zooms[axis]
                     coordinates = (coordinates-(tx, ty)[axis])/scale
                     if not user:
                         coordinates = (coordinates-(bx, by)[axis])/(bw, bh)[axis]
@@ -621,8 +625,8 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                         and not any(e.get('stroke-width') or e.get('stroke-linejoin') for e in [root, *chain])):
                     def coverage(left, top, right, bottom):
                         xs, ys = np.arange(w), np.arange(h)
-                        left, right = ((v*scale+tx-viewport[0])*zoom+padding[0] for v in (left, right))
-                        top, bottom = ((v*scale+ty-viewport[1])*zoom+padding[1] for v in (top, bottom))
+                        left, right = ((v*scale+tx-viewport[0])*zooms[0]+padding[0] for v in (left, right))
+                        top, bottom = ((v*scale+ty-viewport[1])*zooms[1]+padding[1] for v in (top, bottom))
                         return (np.clip(np.minimum(xs+1, right)-np.maximum(xs, left), 0, 1)[None, :]
                                 * np.clip(np.minimum(ys+1, bottom)-np.maximum(ys, top), 0, 1)[:, None])
                     fill_alpha = coverage(bx, by, bx+bw, by+bh)
@@ -654,9 +658,9 @@ def _expand_bezier_linear_gradients_for_fitz(svg_string: str, *, fitz_module=Non
                 continue
             group = ET.Element(namespace+'g')
             # Full-canvas pixel alignment also preserves antialiasing at curves.
-            image = ET.SubElement(group,namespace+'image',x=str((viewport[0]-padding[0]/zoom-tx)/scale),
-                                  y=str((viewport[1]-padding[1]/zoom-ty)/scale),
-                                  width=str(w/zoom/scale),height=str(h/zoom/scale))
+            image = ET.SubElement(group,namespace+'image',x=str((viewport[0]-padding[0]/zooms[0]-tx)/scale),
+                                  y=str((viewport[1]-padding[1]/zooms[1]-ty)/scale),
+                                  width=str(w/zooms[0]/scale),height=str(h/zooms[1]/scale))
             image.set('href','data:image/png;base64,'+encoded)
             outline = copy.deepcopy(path)
             outline.set('fill','none')
