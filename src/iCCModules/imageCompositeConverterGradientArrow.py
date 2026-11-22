@@ -100,7 +100,11 @@ def _fit_upward_gradient_arrow(width, height, *, description, image, render_fn, 
                 f'<polygon points="{tx:g},{ty:g} {x2:g},{by:g} {x1:g},{by:g}" fill="{color(head_color)}"/>'
                 f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" fill="url(#shaft_color)"/></svg>\n')
 
-    parameters = [tip_x, tip_y, lx, rx, float(base), float(sx), float(start), float(ex-sx), float(bottom-start), 0., 0., 0.]
+    # Antialiased edge regressions can intersect just outside a cropped tip.
+    # Start inside the same native canvas constraints used by every proposal;
+    # otherwise changing any unrelated parameter leaves that proposal invalid.
+    parameters = [float(np.clip(tip_x, 0, width)), max(0., tip_y), max(0., lx), min(float(width), rx),
+                  float(base), float(sx), float(start), float(ex-sx), float(bottom-start), 0., 0., 0.]
 
     def measure(p):
         content = svg(p)

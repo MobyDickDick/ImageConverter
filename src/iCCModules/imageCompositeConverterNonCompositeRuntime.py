@@ -1528,12 +1528,10 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in scene_reconstruction_fitters():
-            fit_description = description
-            if fit_fn is fit_short_label_disk:
-                # Dispatch is case-insensitive; labels are not. Recover the
-                # original spelling for auto-mode short labels as in badge mode.
-                fit_description = params.get('effective_description') or ' '.join(str(f.get('text', '')) for f in
-                    params.get('description_fragments', []) if isinstance(f, dict)) or description
+            from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+            # Fitters normalize their dispatch vocabulary themselves. Keep the
+            # original quoted glyph case for every model, including motors.
+            fit_description = normalize_description(original_description)
             fitted = fit_fn(
                 width, height, description=fit_description, image=perc_img,
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,

@@ -20,6 +20,7 @@ _DESCRIPTION = re.compile(
     rf'(?:ein\s+)?(?:(?:einfacher|unbeschrifteter)\s+)?(?:{_COLOR}\s+)?kreis'
     rf'(?:\s+mit\s+(?:{_COLOR}\s+)?(?:rand|kontur|umrandung)'
     rf'(?:\s+und\s+{_COLOR}\s+(?:hintergrund|füllung|fuellung))?)?'
+    rf'(?:\s+auf\s+{_COLOR}\s+hintergrund)?'
     r'\.?'
     rf'(?:\s*(?:(?:keine beschriftung|keine schriftzeichen|ohne text|keine anschlüsse|ohne anschluss)'
     rf'\.?|hintergrund:\s*{_COLOR}\.?)){{0,3}}'
