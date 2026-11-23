@@ -1,5 +1,12 @@
 # ImageConverter
 
+`AC0202_1.jpg` wird mit der vorhandenen Benutzerbeschreibung als roter Kreis
+mit grauem Rand und zwei horizontal gespiegelten weissen Linien konvertiert.
+Die Symmetrieachse zählt nicht als zusätzliche Linie; Randkontakt und echte
+Kreisform werden auch bei wiederverwendeten SVGs geprüft. Vier echte GUI-Läufe
+und der unabhängige librsvg-Vergleich bestehen. Das geprüfte SVG liegt im
+Projekt. [Ursachen, GitHub-Nachweise und bekannte CI-Fehler](docs/ac0202_circle_lines_2026-11-23.md).
+
 Die Einzelkonvertierung bietet **Automatisch mit neuen Seeds fortsetzen**:
 Jedes Suchende startet einen neuen Versuch; ein erneuter Klick stoppt den Lauf.
 Das beste Ergebnis aller Versuche bleibt sichtbar und speicherbar, auch nach
