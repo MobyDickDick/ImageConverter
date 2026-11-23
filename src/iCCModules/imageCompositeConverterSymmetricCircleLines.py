@@ -121,7 +121,17 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
     distance = np.sqrt(max(0., (radius-.5)**2-closest@closest))
     endpoints = np.array([closest-distance*direction, closest+distance*direction])+center
     rim = np.percentile(pixels[(radial > outer-1.5) & (radial < outer+.5)], 15, axis=0)
+    if spec.get('touches_rim'):
+        # Avoid seeding a gray rim with the colored interior or white canvas.
+        neutral_rim = pixels[(radial > outer-1.5) & (radial < outer+.5)
+                             & (np.ptp(pixels, axis=2) < 20) & (gray < 240)]
+        if len(neutral_rim):
+            rim = np.median(neutral_rim, axis=0)
     ink = np.percentile(pixels[y, x], 85 if light_lines else 15, axis=0)
+    if light_lines:
+        # A subpixel white stroke may have no unblended source pixel. Its
+        # declared white paint is a better seed than the pink/blue edge blend.
+        ink = np.repeat(max(235., float(ink.max())), 3)
     # Circle, line widths and one free segment. Reflection defines the other;
     # neither pixels nor optimization can introduce additional objects.
     initial = np.r_[center, radius, 1., 1., (endpoints-center).ravel(), fill, rim, ink]

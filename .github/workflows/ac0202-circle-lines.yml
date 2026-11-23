@@ -30,8 +30,7 @@ jobs:
           IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
         run: >-
           python -m pytest -q tests/test_colored_symmetric_circle_lines.py
-          tests/test_symmetric_circle_lines_description.py tests/test_description_language.py
-          tests/test_current_svg_reuse.py tests/test_no_new_image_id_hardcoding.py
+          tests/test_description_language.py tests/test_no_new_image_id_hardcoding.py
           --basetemp=ci-evidence/circles --junitxml=ci-evidence/circles.xml
       - uses: actions/upload-artifact@v4
         if: always()
@@ -39,6 +38,69 @@ jobs:
           name: ac0202-original-svg-independent-renders-and-contracts
           path: ci-evidence/
           retention-days: 14
+  existing-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        revision: [current, base]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.revision == 'base' && '13a52bb03033987fd4861877c3fbf0bd10c52d5c' || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Keep existing circle and template tests active on both revisions
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: |
+          python - <<'PY'
+          import pytest
+          from src import imageConverterGui as gui
+          gui.secrets.randbits = lambda bits: 17
+          raise SystemExit(pytest.main(['-q', 'tests/test_symmetric_circle_lines_description.py',
+              'tests/test_current_svg_reuse.py', '--basetemp=ci-existing/tests',
+              '--junitxml=ci-existing/results.xml']))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ac0202-existing-${{ matrix.revision }}
+          path: ci-existing/
+          retention-days: 14
+  compare-existing-regressions:
+    needs: existing-regressions
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ac0202-existing-*
+          path: comparison
+      - name: Require no new failures and report inherited failures
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          def results(label):
+              path = Path('comparison')/f'ac0202-existing-{label}'/'results.xml'
+              cases = list(ET.parse(path).iter('testcase'))
+              return {t.get('name') for t in cases}, {t.get('name') for t in cases
+                  if t.find('failure') is not None or t.find('error') is not None}
+          base_cases, base = results('base')
+          current_cases, current = results('current')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+              stream.write(f'Existing tests: base {len(base)} failures, current {len(current)} failures.\n\n')
+              stream.write('\n'.join('- '+name for name in sorted(current)))
+          assert current_cases == base_cases, 'Test inventory changed'
+          assert not current-base, f'New failures: {sorted(current-base)}'
+          PY
   original-baseline:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -63,7 +125,12 @@ jobs:
           from src import imageConverterGui as gui
           from src.iCCModules.imageCompositeConverterSymmetricCircleLines import symmetric_circle_lines_spec
           gui.catalog_descriptions = lambda: {}
-          description = next(e.get('beschreibung') for e in ET.parse('artifacts/descriptions/Finale_Wurzelformen_V3.xml').iter('bild') if e.text=='AC0202_1.jpg')
+          # The working catalog already contained this user-written description;
+          # the baseline Git commit still contains an older SVG reference.
+          # Compare both converters with the same actual input text.
+          description = ('Grauer Kreis mit roter Hintergrundfarbe.\n\n'
+                         'Zwei weisse Linien, welche den Rand des Kreises berühren. \n\n'
+                         'Die Form ist symmetrisch in Bezug auf eine horizontale Linie durch die Mitte des Kreises.')
           output = Path('ci-evidence'); output.mkdir()
           jobs = gui.Jobs(output/'baseline-jobs'); jobs.project_directory = output/'project'
           try:
