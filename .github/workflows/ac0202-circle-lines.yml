@@ -1,0 +1,86 @@
+name: AC0202 colored symmetric circle lines
+
+on:
+  push:
+    branches: ['codex/ac0202-circle-lines']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ac0202-circle-lines-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  circle-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-evidence
+      - name: Original description, anonymous workers, stale SVG, colors and both axes
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: >-
+          python -m pytest -q tests/test_colored_symmetric_circle_lines.py
+          tests/test_symmetric_circle_lines_description.py tests/test_description_language.py
+          tests/test_current_svg_reuse.py tests/test_no_new_image_id_hardcoding.py
+          --basetemp=ci-evidence/circles --junitxml=ci-evidence/circles.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ac0202-original-svg-independent-renders-and-contracts
+          path: ci-evidence/
+          retention-days: 14
+  original-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 13a52bb03033987fd4861877c3fbf0bd10c52d5c
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Record the unchanged converter with the original description and anonymous image
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          from src import imageConverterGui as gui
+          from src.iCCModules.imageCompositeConverterSymmetricCircleLines import symmetric_circle_lines_spec
+          gui.catalog_descriptions = lambda: {}
+          description = next(e.get('beschreibung') for e in ET.parse('artifacts/descriptions/Finale_Wurzelformen_V3.xml').iter('bild') if e.text=='AC0202_1.jpg')
+          output = Path('ci-evidence'); output.mkdir()
+          jobs = gui.Jobs(output/'baseline-jobs'); jobs.project_directory = output/'project'
+          try:
+              uploaded = jobs.upload('anonymous.jpg', Path('artifacts/images_to_convert/AC0202_1.jpg').read_bytes())
+              started = jobs.start(uploaded['id'], description, 'quick', seed=17, use_current_svg=False)
+              jobs.threads[-1].join(75)
+              result = jobs.snapshot(started['id'])
+              result['recognized_symmetric_model'] = symmetric_circle_lines_spec(description)
+              (output/'baseline.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
+              print(json.dumps(result, indent=2))
+              assert result['status'] != 'running'
+          finally:
+              jobs.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ac0202-unchanged-baseline
+          path: ci-evidence/
+          retention-days: 14

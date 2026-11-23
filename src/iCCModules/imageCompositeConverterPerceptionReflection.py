@@ -158,6 +158,12 @@ class Reflection:
             params['elements'].append('GEOMETRIE: Vollständige beschriebene Szene mit mehreren Formen')
             return desc, params
 
+        if assertions.get('symmetric_circle_lines'):
+            params.update(mode='non_composite', label='', geometry_ir=[], contract_status='ok')
+            params['description_contract']['status'] = 'ok'
+            params['elements'].append('GEOMETRIE: Kreis mit zwei gespiegelten Linien')
+            return desc, params
+
         if assertions.get('partitioned_rhombus'):
             params.update(mode='non_composite', label='', geometry_ir=[], contract_status='ok')
             params['description_contract']['status'] = 'ok'

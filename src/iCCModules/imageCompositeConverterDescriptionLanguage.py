@@ -245,6 +245,8 @@ def description_assertions(description: str) -> dict:
         assertions['anchor_relations'] = relations
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     objects = description_object_limits(normalized)
+    if symmetric_lines:
+        objects = dict(circle=1, line=2)
     from src.iCCModules.imageCompositeConverterDiskArrow import disk_arrow_direction
     direction = disk_arrow_direction(normalized)
     if direction:
@@ -350,7 +352,7 @@ def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
     for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
                 'svg_component_description', 'two_way_valve', 'three_wing_valve', 'primitive_program', 'scoped_paint',
-                'partitioned_rhombus'):
+                'partitioned_rhombus', 'symmetric_circle_lines'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
