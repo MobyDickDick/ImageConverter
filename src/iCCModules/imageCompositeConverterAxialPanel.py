@@ -61,7 +61,12 @@ def _zones_match(profile):
         return False
     if len(light) >= 8 and light[:len(light)//2].max() < light[0]+1:
         return False
-    saturation = profile[:, 2]-(profile[:, 0]+profile[:, 1])/2
+    # A fractional bottom edge mixes pigment with white. Compare chroma in
+    # pigment coordinates: white coverage scales both this numerator and the
+    # strongest channel deficit equally. A pale antialiased edge must neither
+    # hide a real pink recovery nor manufacture one from an unchanged color.
+    saturation = 255*(profile[:, 2]-(profile[:, 0]+profile[:, 1])/2)/np.maximum(
+        1., np.max(255-profile, axis=1))
     return saturation[-1] >= saturation[-2]+.5
 
 

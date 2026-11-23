@@ -64,6 +64,24 @@ def test_raster_cache_is_independent_of_masked_objectives_but_not_backend():
     assert len(calls) == session.renderings == 3
 
 
+def test_publishing_default_viewport_clipping_reuses_pixels_after_budget_exhaustion():
+    from src.iCCModules.imageCompositeConverterAdaptiveSearch import svg_identity
+    session = ImageSearch(SearchPolicy(), render_budget=1)
+    pixels = np.zeros((16, 16, 3), np.uint8)
+    bounded = SVG.replace('<svg ', '<svg overflow="hidden" ', 1)
+    visible = SVG.replace('<svg ', '<svg overflow="visible" ', 1)
+    assert svg_identity(SVG) != svg_identity(bounded)
+    with image_search(session):
+        session.bind_reference(pixels)
+        _, fresh = session.render_candidate(pixels, SVG, lambda *a: pixels, 16, 16, renderer='fixed')
+        reused, fresh_again = session.render_candidate(pixels, bounded,
+            lambda *a: pytest.fail('Default clipping needs no second render'), 16, 16, renderer='fixed')
+        assert fresh and not fresh_again
+        np.testing.assert_array_equal(reused, pixels)
+        assert session.render_candidate(pixels, visible, lambda *a: pixels, 16, 16, renderer='fixed') == (None, False)
+        assert not session.validated
+
+
 @pytest.mark.parametrize('mode,adaptive', [('legacy', False), ('portfolio', False), ('portfolio', True)])
 def test_every_policy_shares_budget_and_full_seed_across_models_and_reentry(mode, adaptive):
     with search_configuration(mode=mode, adaptive=adaptive, seed=2**64-1, budget=32):

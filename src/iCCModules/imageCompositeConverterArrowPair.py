@@ -191,10 +191,14 @@ def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, r
         for index in range(2):
             cx, top, bottom, sw, tcx, tip, base, half = p[index*8:index*8+8]
             color = _hex(np.array(p[full_geometry_count+index*3:full_geometry_count+index*3+3]))
-            parts.append(f'<rect x="{cx-sw/2:.6f}" y="{top:.6f}" width="{sw:.6f}" height="{bottom-top:.6f}" fill="{color}"/>')
+            left, right = np.clip([cx-sw/2, cx+sw/2], 0, width)
+            top, bottom = np.clip([top, bottom], 0, height)
+            parts.append(f'<rect x="{left:.6f}" y="{top:.6f}" width="{right-left:.6f}" height="{bottom-top:.6f}" fill="{color}"/>')
             # Raster edge coverage can put the estimated triangle just beyond
             # the viewport. Keep its native vertices in the observed canvas so
             # publication does not rescale the shafts and the whole assembly.
+            tcx = float(np.clip(tcx, 0, width))
+            half = min(half, tcx, width-tcx)
             points = [(tcx, tip), (tcx-half, base), (tcx+half, base)]
             points = ' '.join(f'{np.clip(x, 0, width):.6f},{np.clip(y, 0, height):.6f}'
                               for x, y in points)
@@ -203,9 +207,11 @@ def _fit_arrow_pair(width, height, *, description, image, render_fn, error_fn, r
             x1, y, x2, h = p[16:20]
             if equal_width:
                 y -= h/2
+            x1, x2 = np.clip([x1, x2], 0, width)
+            y, bottom = np.clip([y, y+h], 0, height)
             index = bars[0][0]
             color = _hex(np.array(p[full_geometry_count+index*3:full_geometry_count+index*3+3]))
-            parts.append(f'<rect x="{x1:.6f}" y="{y:.6f}" width="{x2-x1:.6f}" height="{h:.6f}" fill="{color}"/>')
+            parts.append(f'<rect x="{x1:.6f}" y="{y:.6f}" width="{x2-x1:.6f}" height="{bottom-y:.6f}" fill="{color}"/>')
         return ''.join(parts)+'</svg>'
 
     def valid(p):

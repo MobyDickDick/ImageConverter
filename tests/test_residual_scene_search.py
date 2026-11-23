@@ -102,9 +102,10 @@ def test_poor_first_structure_cannot_starve_a_complete_alternative(monkeypatch):
         return deepcopy(objects if residual_threshold == 16 else poor)
 
     def timed_render(svg, width, height):
-        now[0] += .03
         rendered.append(svg)
-        return render(svg, width, height)
+        raster = render(svg, width, height)
+        now[0] += .03
+        return raster
 
     monkeypatch.setattr(mixed, 'detect_instances', detect)
     from src.iCCModules.imageCompositeConverterSearchScheduler import drain

@@ -423,6 +423,16 @@ class ImageDeadline:
                 if not failed and row is not None:
                     self.best_row = row
                 self._publish(staged, spec)
+                # A completed worker can exhaust its render budget after a
+                # verified incumbent was saved. Its bound PNG is already in
+                # the checkpoint; publishing it needs no parent-side renderer.
+                png_target = Path(spec['png_out_dir'])/(Path(spec['filename']).stem+'.png')
+                svg_target = Path(spec['svg_out_dir'])/(Path(spec['filename']).stem+'.svg')
+                if (checked is not None and not png_target.exists() and svg_target.exists()
+                        and self._valid_checkpoint(checked, self._source_hash(spec))
+                        and hashlib.sha256(svg_target.read_text(encoding='utf-8').strip().encode('utf-8')).hexdigest() == checked['svg_hash']):
+                    png_target.parent.mkdir(parents=True, exist_ok=True)
+                    png_target.write_bytes(checked['png'])
                 self.trace.mark('outputs_published')
                 return (row, failed), completed['failures']
             self.closed = True
