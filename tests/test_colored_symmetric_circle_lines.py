@@ -72,7 +72,7 @@ def independent_svg(axis, size, color):
 @pytest.mark.parametrize('axis', ['horizontal', 'vertical'])
 @pytest.mark.parametrize('size,word,color', [(48, 'roter', '#b62a40'), (80, 'blauer', '#295cb6')])
 def test_independent_colored_sources_in_both_axes(axis, size, word, color):
-    description = DESCRIPTION.replace('horizontale', axis.replace('horizontal', 'horizontale').replace('vertical', 'vertikale'))
+    description = DESCRIPTION.replace('horizontale', {'horizontal': 'horizontale', 'vertical': 'vertikale'}[axis])
     description = description.replace('roter', word)
     source = render_librsvg(independent_svg(axis, size, color), size, size)
     with search_configuration(mode='portfolio', seed=42):
@@ -115,7 +115,7 @@ def test_real_worker_and_independent_renderer(tmp_path, monkeypatch, profile, se
         if reuse:
             target = jobs.project_svg(jobs.jobs[uploaded['id']])
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes((ROOT/'artifacts/converted_images/converted_svgs/AC0202_1.svg').read_bytes())
+            target.write_bytes((ROOT/'tests/fixtures/colored_circle_wrong_axis.svg').read_bytes())
             assert gui.result_description_error(target, DESCRIPTION)
         started = jobs.start(uploaded['id'], DESCRIPTION, profile, seed=seed, use_current_svg=reuse)
         jobs.threads[-1].join(gui.PROFILES[profile][1]+25)
@@ -137,3 +137,12 @@ def test_real_worker_and_independent_renderer(tmp_path, monkeypatch, profile, se
         assert quality['passed'], quality
     finally:
         jobs.close()
+
+
+def test_published_svg_passes_both_renderers_with_the_original_description():
+    svg = (ROOT/'artifacts/converted_images/converted_svgs/AC0202_1.svg').read_text(encoding='utf-8')
+    validate_svg_assertions(svg, description_assertions(DESCRIPTION))
+    source = cv2.imread(str(ROOT/'artifacts/images_to_convert/AC0202_1.jpg'))
+    for renderer in (render, render_librsvg):
+        quality = pixel_quality(source, renderer(svg, source.shape[1], source.shape[0]))
+        assert quality['passed'], quality

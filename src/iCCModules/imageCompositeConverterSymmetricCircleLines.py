@@ -126,7 +126,7 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
         neutral_rim = pixels[(radial > outer-1.5) & (radial < outer+.5)
                              & (np.ptp(pixels, axis=2) < 20) & (gray < 240)]
         if len(neutral_rim):
-            rim = np.median(neutral_rim, axis=0)
+            rim = np.percentile(neutral_rim, 15, axis=0)
     ink = np.percentile(pixels[y, x], 85 if light_lines else 15, axis=0)
     if light_lines:
         # A subpixel white stroke may have no unblended source pixel. Its
@@ -134,7 +134,7 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
         ink = np.repeat(max(235., float(ink.max())), 3)
     # Circle, line widths and one free segment. Reflection defines the other;
     # neither pixels nor optimization can introduce additional objects.
-    initial = np.r_[center, radius, 1., 1., (endpoints-center).ravel(), fill, rim, ink]
+    initial = np.r_[center, radius, 1., 1., (endpoints-center).ravel(), fill, rim.mean(), ink.mean()]
 
     def segment(p):
         first = p[5:9].reshape(2, 2)
@@ -159,7 +159,8 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
         first = segment(p)+[cx, cy]
         second = first.copy()
         second[:, axis] = 2*p[axis]-second[:, axis]
-        fill, rim, ink = p[9:].reshape(3, 3)
+        fill = p[9:12]
+        rim, ink = (np.repeat(shade, 3) for shade in p[12:])
         cap = 'butt' if spec.get('touches_rim') else 'round'
         lines = ''.join(f'<line x1="{a[0]:.5f}" y1="{a[1]:.5f}" x2="{b[0]:.5f}" y2="{b[1]:.5f}" '
                         f'stroke="{_hex(ink)}" stroke-width="{lw:.5f}" stroke-linecap="{cap}"/>'
@@ -182,7 +183,7 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
     result = _register(initial, 9, build, valid, image, render_fn, error_fn,
                        'description_symmetric_circle_lines_v1', allow_portfolio=False,
                        max_evaluations=1800, reconsider_after=0,
-                       refinement_steps=(1., .5, .25, .125, .0625, .03125))
+                       refinement_steps=(4., 2., 1., .5, .25, .125, .0625, .03125))
     if result is not None and not pixel_quality(image, result['rendered'])['passed']:
         def quality_loss(a, b):
             quality = pixel_quality(a, b)

@@ -59,6 +59,7 @@ jobs:
           OPENBLAS_NUM_THREADS: '1'
           IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
         run: |
+          mkdir -p ci-existing
           python - <<'PY'
           import pytest
           from src import imageConverterGui as gui
@@ -91,6 +92,7 @@ jobs:
           def results(label):
               path = Path('comparison')/f'ac0202-existing-{label}'/'results.xml'
               cases = list(ET.parse(path).iter('testcase'))
+              assert not any(t.find('error') is not None for t in cases), 'Test setup failed'
               return {t.get('name') for t in cases}, {t.get('name') for t in cases
                   if t.find('failure') is not None or t.find('error') is not None}
           base_cases, base = results('base')
