@@ -1346,7 +1346,7 @@
       <wurzelform />
       <beschreibung>Unzugeordnete Wurzelform aus der Serie AC0573. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.</beschreibung>
       <bilder>
-        <bild>AC0573_L.jpg</bild>
+        <bild beschreibung="Es ist ein graues Rechteck. Es gibt zwei schräge Linien welche bezüglich der horizontalen Mittellinie der symmetrisch ist. Es gibt eine Abstufung der Grauwerte. In der horizontalen Mittellinie ist der Farrbwert ein wenig dunkler oben und unterhalb ein wenig heller." beschreibung_modus="ersetzen">AC0573_L.jpg</bild>
       </bilder>
     </entry>
     <entry kind="unzugeordnet" key="AC0573_M">
@@ -1402,7 +1402,7 @@
       <wurzelform />
       <beschreibung>Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC". Der Griff liegt auf einer Symmetrieachse des Kreises.</beschreibung>
       <bilder>
-        <bild>AC0836_M.jpg</bild>
+        <bild beschreibung='Eine einfarbig gefüllte Kreisscheibe mit dünner dunkler Randkontur. Am unteren Rand schließt mittig ein gerader senkrechter dunkler Griff nach unten an. Im Inneren steht mittig "VOC" in fetter serifenloser Schrift. Weißer Hintergrund. Keine weiteren Objekte. Lage, Radius, Konturbreite, Grifflänge, Griffbreite, Schriftgröße und Farben ergeben sich aus dem Bild.' beschreibung_modus="ersetzen">AC0836_M.jpg</bild>
       </bilder>
     </entry>
     <entry kind="unzugeordnet" key="AC0836_S">
@@ -2616,8 +2616,8 @@
         <bild>AC0202.jpg</bild>
         <bild beschreibung="Grauer Kreis mit roter Hintergrundfarbe.&#10;&#10;Zwei weisse Linien, welche den Rand des Kreises berühren. &#10;&#10;Die Form ist symmetrisch in Bezug auf eine horizontale Linie durch die Mitte des Kreises." beschreibung_modus="ersetzen">AC0202_1.jpg</bild>
         <bild>AC0202_2.jpg</bild>
-        <bild>AC0202_L.jpg</bild>
-        <bild>AC0202_L_sia.jpg</bild>
+        <bild beschreibung="Links: Zwei spitze gleichseitige Dreiecke mit Farbübergang.&#10;Rechts: Kelle gefülltem Kreis und Griff gegen links." beschreibung_modus="ersetzen">AC0202_L.jpg</bild>
+        <bild beschreibung="Links zwei gleichseitige Dreiecke, welcche sich im spitzen Winkel berühren. Rechts: Kelle mit einem Quadrat, bei welchem die Diagonalen dunkelgrau gezeicnet werden. Der Griff der Kelle geht nach links." beschreibung_modus="ersetzen">AC0202_L_sia.jpg</bild>
         <bild>AC0202_M.jpg</bild>
         <bild>AC0202_M_sia.jpg</bild>
         <bild>AC0202_S.jpg</bild>
@@ -2633,7 +2633,7 @@
         <bild>AC0203_1.jpg</bild>
         <bild>AC0203_2.jpg</bild>
         <bild>AC0203_L.jpg</bild>
-        <bild>AC0203_L_sia.jpg</bild>
+        <bild beschreibung="Oben: zwei Gleichseitige Dreiecke, welche sich an einem Punkt berühren. &#10;&#10;Unten Quadrat, dessen Diagonale dunkelgrau gezeichnet sind.&#10;Das Quadrat ist als Kelle gezeichnet. Der Griff geht senkrecht nach oben." beschreibung_modus="ersetzen">AC0203_L_sia.jpg</bild>
         <bild>AC0203_M.jpg</bild>
         <bild>AC0203_M_sia.jpg</bild>
         <bild>AC0203_S.jpg</bild>
@@ -2650,8 +2650,8 @@
         <bild>AC0204_2.jpg</bild>
         <bild beschreibung="Links: Kelle aus Kreis und Griff nach rechts. Rechts: Zwei Dreiecke mit Farbverlauf.&#10;&#10;Die Form ist symmetrisch bezüglich einer horizontalen Symmetrieachse. &#10;Die Dreiecke sind zusdem symmetrisch einer vertikalen Symmetrieachse." beschreibung_modus="ersetzen">AC0204_L.jpg</bild>
         <bild>AC0204_L_sia.jpg</bild>
-        <bild beschreibung="Links: Kelle mit Griff nach rechts. Rechts: zwei Dreiecke. Die Formen sind symmetrisch bezüglich einer horizonatlen Symmetrieachse. Die Dreiecke besitzen je einenen grauen Farbverlauf." beschreibung_modus="ersetzen">AC0204_M.jpg</bild>
-        <bild beschreibung="Links: quadratische Kelle mit Griff gegen rechts&#10;&#10;Rechts: Zwei gleichschenklige Dreiecke, welche sich im der der Spitze berühren. Das Ende der Kelle berührt ebenfalls die spitzen Ecken der drei Dreiecke." beschreibung_modus="ersetzen">AC0204_M_sia.jpg</bild>
+        <bild beschreibung="Links: Kelle aus Kreis und Griff nach rechts. Rechts: Zwei Dreiecke mit Farbverlauf.&#10;&#10;Die beiden Dreiecke rechts sind symmetrisch bezüglich einer vertikalen Symmetriachse" beschreibung_modus="ersetzen">AC0204_M.jpg</bild>
+        <bild beschreibung="Links: quadratische Kelle mit Griff gegen rechts&#10;&#10;Rechts: Drei gleichschenklige Dreieck, welche sich im der der Spitze berühren. Das Ende der Kelle berührt ebenfalls die spitzen Ecken der drei Dreiecke." beschreibung_modus="ersetzen">AC0204_M_sia.jpg</bild>
         <bild>AC0204_S.jpg</bild>
         <bild>AC0204_S_sia.jpg</bild>
       </bilder>
@@ -2661,7 +2661,7 @@
       <wurzelform>AC0211</wurzelform>
       <beschreibung>Kopressor grau nach oben</beschreibung>
       <bilder>
-        <bild>AC0211.jpg</bild>
+        <bild beschreibung="Ein gefüllter Kreis mit Kontur enthält zwei schräge Linien, die bis an den Kreisrand reichen und sich nach oben annähern. Die Form ist symmetrisch bezüglich einer vertikalen Symmetrieachse. Weißer Hintergrund. Lage, Abmessungen, Strichbreiten und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0211.jpg</bild>
         <bild>AC0211_L.jpg</bild>
         <bild>AC0211_M.jpg</bild>
         <bild>AC0211_S.jpg</bild>
@@ -2718,8 +2718,8 @@
         <bild>AC0222.jpg</bild>
         <bild beschreibung="Links: drei je gleichschenklige Dreiecke, welche sich in einem Punkt berühren.&#10;Das Innere der Dreieck hat jeweils einen Farbübergang.&#10;Rechts ist eine Kelle mit einem leeren Kreis und einem Griff nach links vorhanden." beschreibung_modus="ersetzen">AC0222_L.jpg</bild>
         <bild beschreibung="Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einem hellen Quadrat mit dunkler Randkontur. Die Diagonalen des Quadrats sind dunkelgrau gezeichnet. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0222_L_sia.jpg</bild>
-        <bild>AC0222_M.jpg</bild>
-        <bild beschreibung="Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einem hellen Quadrat mit dunkler Randkontur. Die Diagonalen des Quadrats sind dunkelgrau. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0222_M_sia.jpg</bild>
+        <bild beschreibung="Links: drei je gleichschenklige Dreiecke, welche sich in einem Punkt berühren.&#10;Das Innere der Dreieck hat jeweils einen Farbübergang.&#10;Rechts ist eine Kelle mit einem leeren Kreis und einem Griff nach links vorhanden." beschreibung_modus="ersetzen">AC0222_M.jpg</bild>
+        <bild beschreibung="Ein 3-Wege-Ventil mit drei spitzen Dreiecken links, oben und unten, die sich in einer gemeinsamen Spitze treffen. Die Dreiecke haben einen diagonalen Grauverlauf von dunkel links unten nach hell rechts oben und eine graue Randkontur. Von der gemeinsamen Spitze führt ein waagerechter gerader Griff nach rechts zur linken Seite einem hellen Quadrat mit dunkler Randkontur. Die Diagonalen des Quadrats sind dunkelgrau gezeichnet. Keine weiteren Objekte. Maße und Farben ergeben sich aus dem Bild." beschreibung_modus="ersetzen">AC0222_M_sia.jpg</bild>
         <bild>AC0222_S.jpg</bild>
         <bild>AC0222_S_sia.jpg</bild>
       </bilder>
@@ -2751,7 +2751,7 @@
       <beschreibung>Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.</beschreibung>
       <bilder>
         <bild>AC0224_L.jpg</bild>
-        <bild beschreibung="Quadrat mit grauem Rand, Diagonalen grau gezeichnet. Linie rechts vom Quadrat.&#10;&#10;Rechts drei gleichschenklige Dreiecke mit graume Rand und Farbübergang. Die Dreiecke und die Linie treffen sich in einem Punkt." beschreibung_modus="ersetzen">AC0224_L_sia.jpg</bild>
+        <bild beschreibung="Links: Quadrat mit grauem Rand, Diagonalen grau gezeichnet. Linie rechts vom Quadrat.&#10;&#10;Rechts drei gleichschenklige Dreiecke mit grauem Rand und Farbübergang. Die Dreiecke und die Linie treffen sich in einem Punkt." beschreibung_modus="ersetzen">AC0224_L_sia.jpg</bild>
         <bild>AC0224_M.jpg</bild>
         <bild beschreibung="Links: quadratische Kelle mit Griff gegen rechts&#10;&#10;Rechts: Drei gleichschenklige Dreieck, welche sich im der der Spitze berühren. Das Ende der Kelle berührt ebenfalls die spitzen Ecken der drei Dreiecke." beschreibung_modus="ersetzen">AC0224_M_sia.jpg</bild>
         <bild>AC0224_S.jpg</bild>
@@ -2784,8 +2784,8 @@
       <beschreibung>Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 180° gedreht.</beschreibung>
       <bilder>
         <bild beschreibung='Oben Drei Dreiecke mit einem gemeinsamen Punkt. Der Rand der drei Dreiecke besitzt immer den gleichen Farbwert. Der Rand der Drei Dreiecke ist immer gleich Breit. Die Dreiecke sind gleichschenklig alle Winkel der Dreiecke sind gleich, Unten Kelle mit Griff nach oben. Die Kelle besteht aus einem Kreis und einer Linie.  In der Kelle ist ein "M" geschrieben.' beschreibung_modus="ersetzen">AC0233_L.jpg</bild>
-        <bild>AC0233_M.jpg</bild>
-        <bild>AC0233_S.jpg</bild>
+        <bild beschreibung='Oben Drei Dreiecke mit einem gemeinsamen Punkt. Der Rand der drei Dreiecke besitzt immer den gleichen Farbwert. Der Rand der Drei Dreiecke ist immer gleich Breit. Die Dreiecke sind gleichschenklig alle Winkel der Dreiecke sind gleich, Unten Kelle mit Griff nach oben. Die Kelle besteht aus einem Kreis und einer Linie.  In der Kelle ist ein "M" geschrieben.' beschreibung_modus="ersetzen">AC0233_M.jpg</bild>
+        <bild beschreibung='Oben Drei Dreiecke mit einem gemeinsamen Punkt. Der Rand der drei Dreiecke besitzt immer den gleichen Farbwert. Der Rand der Drei Dreiecke ist immer gleich Breit. Die Dreiecke sind gleichschenklig alle Winkel der Dreiecke sind gleich, Unten Kelle mit Griff nach oben. Die Kelle besteht aus einem Kreis und einer Linie.  In der Kelle ist ein "M" geschrieben.' beschreibung_modus="ersetzen">AC0233_S.jpg</bild>
       </bilder>
     </entry>
     <entry kind="wurzelform" key="AC0234">
@@ -2794,7 +2794,7 @@
       <beschreibung>Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: Hauptdiagonal gespiegelt.</beschreibung>
       <bilder>
         <bild beschreibung='Rechts: Drei Dreiecke mit einem gemeinsamen Punkt. Der Rand der drei Dreiecke besitzt immer den gleichen Farbwert. Der Rand der Drei Dreiecke ist immer gleich Breit. Die Dreiecke sind gleichschenklig alle Winkel der Dreiecke sind gleich, Links Kelle mit Griff nach rechts. Die Kelle besteht aus einem Kreis und einer Linie.  In der Kelle ist ein "M" geschrieben.' beschreibung_modus="ersetzen">AC0234_L.jpg</bild>
-        <bild>AC0234_M.jpg</bild>
+        <bild beschreibung='Rechts: Drei Dreiecke mit einem gemeinsamen Punkt. Der Rand der drei Dreiecke besitzt immer den gleichen Farbwert. Der Rand der Drei Dreiecke ist immer gleich Breit. Die Dreiecke sind gleichschenklig alle Winkel der Dreiecke sind gleich, Links Kelle mit Griff nach rechts. Die Kelle besteht aus einem Kreis und einer Linie.  In der Kelle ist ein "M" geschrieben.' beschreibung_modus="ersetzen">AC0234_M.jpg</bild>
         <bild>AC0234_S.jpg</bild>
       </bilder>
     </entry>
@@ -2823,7 +2823,7 @@
       <wurzelform>AC0253</wurzelform>
       <beschreibung>Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 180° gedreht.</beschreibung>
       <bilder>
-        <bild>AC0253.jpg</bild>
+        <bild beschreibung="Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach unten zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild." beschreibung_modus="ersetzen">AC0253.jpg</bild>
         <bild>AC0253_1.jpg</bild>
         <bild beschreibung="Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck, dessen Spitze nach unten zeigt. Weißer Hintergrund. Lage, Größe, Konturbreite und Farben ergeben sich aus dem Rasterbild.&#10;Das Dreieck ist gleichseitig, die obere Seite ist genau waagrecht." beschreibung_modus="ersetzen">AC0253_2.jpg</bild>
       </bilder>
@@ -2834,7 +2834,7 @@
       <beschreibung>Wie AC0521, aber nach links gedreht</beschreibung>
       <bilder>
         <bild>AC0254.jpg</bild>
-        <bild>AC0254_1.jpg</bild>
+        <bild beschreibung="Pumpensymbol: Kreis mit einem gefüllten Dreieck, dessen Spitze nach links zeigt. Weißer Hintergrund." beschreibung_modus="ersetzen">AC0254_1.jpg</bild>
         <bild>AC0254_2.jpg</bild>
       </bilder>
     </entry>
@@ -2887,7 +2887,7 @@
         <bild>AC0302_1L_sia.jpg</bild>
         <bild>AC0302_1M_sia.jpg</bild>
         <bild>AC0302_1S_sia.jpg</bild>
-        <bild>AC0302_1_L.jpg</bild>
+        <bild beschreibung="Ein rot gefüllter Kreis mit Kontur enthält zwei schräge Linien: links von oben aussen nach rechts innen und unten spiegelbildlich. Beide Linien reichen bis an den Kreisrand. Die Linien kontrastieren mit der Kreisfüllung." beschreibung_modus="ersetzen">AC0302_1_L.jpg</bild>
         <bild>AC0302_1_M.jpg</bild>
         <bild>AC0302_1_S.jpg</bild>
         <bild>AC0302_2L_sia.jpg</bild>
@@ -2968,7 +2968,7 @@
         <bild>AC0401_2L_sia.jpg</bild>
         <bild>AC0401_2M_sia.jpg</bild>
         <bild>AC0401_2S_sia.jpg</bild>
-        <bild>AC0401_2_L.jpg</bild>
+        <bild beschreibung="Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer)" beschreibung_modus="ersetzen">AC0401_2_L.jpg</bild>
         <bild>AC0401_2_M.jpg</bild>
         <bild>AC0401_2_S.jpg</bild>
         <bild>AC0401_L.jpg</bild>
@@ -3775,7 +3775,7 @@
       <beschreibung>Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.</beschreibung>
       <bilder>
         <bild>AC0883_L.jpg</bild>
-        <bild>AC0883_M.jpg</bild>
+        <bild beschreibung='Kelle mit Griff gegen oben. Die Kelle besteht aus einem Kreis und einer Geraden.&#10;&#10;Im Innern des Kreises steht ein "T".' beschreibung_modus="ersetzen">AC0883_M.jpg</bild>
         <bild>AC0883_S.jpg</bild>
       </bilder>
     </entry>
@@ -5931,7 +5931,7 @@
       <bilder>
         <bild>GE9044_1M.jpg</bild>
         <bild>GE9044_1S.jpg</bild>
-        <bild>GE9044_2M.jpg</bild>
+        <bild beschreibung="Von links nach oben gebogene Röhre. &#10;&#10;Geometrisch Form: zwei gerade Rechtecke zusammen mit einem Viertel-Kreisring. &#10;&#10;Es gibt einen Farbübergang von Blaugrau nach hellgrau nach Blaugrau." beschreibung_modus="ersetzen">GE9044_2M.jpg</bild>
         <bild>GE9044_2S.jpg</bild>
         <bild>GE9044_3M.jpg</bild>
         <bild>GE9044_3S.jpg</bild>

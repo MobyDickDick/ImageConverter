@@ -1566,7 +1566,14 @@ class Handler(BaseHTTPRequestHandler):
         if download:
             self.send_header("Content-Disposition", f'attachment; filename="{download}"')
         self.end_headers()
-        self.wfile.write(data)
+        try:
+            self.wfile.write(data)
+        except (ConnectionAbortedError,
+                ConnectionResetError,
+                BrokenPipeError):
+            # Client connection no longer available
+            self.log_message("Client disconnected")
+            return
 
     def json(self, payload: object, status: int = 200) -> None:
         self.respond(json.dumps(payload, ensure_ascii=False).encode("utf-8"),

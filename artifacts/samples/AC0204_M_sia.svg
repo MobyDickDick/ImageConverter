@@ -1,93 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="45"
-   height="30"
-   viewBox="0 0 45 30"
-   preserveAspectRatio="xMidYMid meet"
-   overflow="hidden"
-   version="1.1"
-   id="svg4"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs4">
-    <linearGradient
-       id="vertical-two-way-valve-body-gradient"
-       x1="0%"
-       y1="0%"
-       x2="100%"
-       y2="100%">
-      <stop
-         offset="0%"
-         stop-color="#a8a8a8"
-         id="stop1" />
-      <stop
-         offset="100%"
-         stop-color="#fbfbfb"
-         id="stop2" />
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 30.73183 29.58259" preserveAspectRatio="xMidYMid" overflow="hidden" version="1.1" id="svg5">
+  <defs id="defs4">
+    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a8a8a8" id="stop1" />
+      <stop offset="100%" stop-color="#fbfbfb" id="stop2" />
     </linearGradient>
-    <linearGradient
-       id="vertical-two-way-valve-circle-gradient"
-       x1="0%"
-       y1="0%"
-       x2="100%"
-       y2="100%">
-      <stop
-         offset="0%"
-         stop-color="#ffffff"
-         id="stop3" />
-      <stop
-         offset="100%"
-         stop-color="#f7f7f7"
-         id="stop4" />
+    <linearGradient id="vertical-two-way-valve-circle-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" id="stop3" />
+      <stop offset="100%" stop-color="#f7f7f7" id="stop4" />
     </linearGradient>
   </defs>
-  <line
-     x1="11.479481"
-     y1="14.79112"
-     x2="27.508533"
-     y2="14.79112"
-     stroke="#858585"
-     stroke-width="3.2"
-     id="line2" />
-  <path
-     id="right_rotated_top_kelle_three_way_valve_body_1"
-     d="M 27.45 15 L 20.475 29.4 L 34.425 29.4 Z"
-     fill="#d7d7d7"
-     stroke="#969696"
-     stroke-width="1.2"
-     stroke-linejoin="miter" />
-  <path
-     id="right_rotated_top_kelle_three_way_valve_body_2"
-     d="M 27.45 15 L 20.475 0.6 L 34.425 0.6 Z"
-     fill="#d7d7d7"
-     stroke="#969696"
-     stroke-width="1.2"
-     stroke-linejoin="miter" />
-  <rect
-     x="8.7388544"
-     y="5.3190079"
-     width="12.104529"
-     height="12.320949"
-     fill="#f2f1f2"
-     stroke="#838485"
-     stroke-width="1.875"
-     id="rect3"
-     transform="matrix(0,1,1,0,0,0)" />
-  <line
-     x1="5.3190079"
-     y1="8.7388544"
-     x2="17.639956"
-     y2="20.843384"
-     stroke="#838485"
-     stroke-width="1.875"
-     id="line3" />
-  <line
-     x1="17.639956"
-     y1="8.7388544"
-     x2="5.3190079"
-     y2="20.843384"
-     stroke="#838485"
-     stroke-width="1.875"
-     id="line4" />
-</svg>
+  <g transform="matrix(0.9999998 0 0 0.9999998 0.739566689184 2.95825899954e-06)"><g transform="matrix(0.882352764706 0 0 0.882352764706 -0.512446241786 1.74015496317)"><path id="right_rotated_top_kelle_three_way_valve_connector" d="M 11.272461,14.836612 H 21.979392" stroke="#808080" stroke-width="1.68516" fill="none" stroke-linecap="butt" />
+  <path id="right_rotated_top_kelle_three_way_valve_body_1" d="M 21.979392,14.836612 14.141035,30.765624 H 29.710166 Z" fill="#bdbdbd" stroke="#959595" stroke-width="1.27958" stroke-linejoin="miter" />
+  <path id="right_rotated_top_kelle_three_way_valve_body_2" d="M 21.979392,14.836612 14.141035,-1.23521 h 15.569131 z" fill="#bdbdbd" stroke="#959595" stroke-width="1.27958" stroke-linejoin="miter" />
+  <rect id="right_rotated_top_kelle_three_way_valve_square" x="0.63979" y="9.1175528" width="11.29626" height="11.29626" fill="#f4f4f4" stroke="#959595" stroke-width="1.27958" />
+  <path id="right_rotated_top_kelle_three_way_valve_square_cross" d="M 0.63979024,9.1175529 11.936051,20.412861 m 0,-11.2953081 L 0.63979024,20.412861" fill="none" stroke="#959595" stroke-width="1.27958" />
+</g></g></svg>
