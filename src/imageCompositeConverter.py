@@ -6,6 +6,7 @@ for direct CLI and module-based execution.
 
 from __future__ import annotations
 
+from src import function_tracer
 import argparse
 import base64
 import contextlib
@@ -3023,4 +3024,9 @@ for _name, _obj in list(globals().items()):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    
+    function_tracer.start()
+    try:
+        raise SystemExit(main())
+    finally:
+        function_tracer.stop()
