@@ -94,18 +94,33 @@ def _atomic_pickle(path, value):
 
 
 def _entry(connection, payload, worker):
-    if os.name != 'nt':
-        os.setsid()
-    # No conversion or renderer may start until containment is installed.
-    connection.send(('ready', clock_observation()))
-    connection.recv()
+    from src import function_tracer
+
+    function_tracer.start()
+
     try:
-        connection.send(('worker_started', clock_observation()))
-        worker(connection, payload)
-    except BaseException as exc:
-        connection.send(('error', f'{type(exc).__name__}: {exc}'[:1000]))
+        if os.name != 'nt':
+            os.setsid()
+
+        connection.send(('ready', clock_observation()))
+        connection.recv()
+
+        try:
+            connection.send(
+                ('worker_started', clock_observation())
+            )
+            worker(connection, payload)
+
+        except BaseException as exc:
+            connection.send(
+                ('error', f'{type(exc).__name__}: {exc}'[:1000])
+            )
+
+        finally:
+            connection.close()
+
     finally:
-        connection.close()
+        function_tracer.stop()
 
 
 def _read_messages(connection, mailbox):
