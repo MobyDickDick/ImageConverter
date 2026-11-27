@@ -148,6 +148,9 @@ def test_completed_template_checkpoint_survives_worker_exit_without_reconstructi
     from src import imageConverterGui as gui
     monkeypatch.setattr(gui, 'catalog_descriptions', lambda: {})
     original = SVG.replace('<rect x="7" y="20" width="12" height="35" fill="#448855"/>', '')
+    # This test declares one circle. A transformed coloured canvas rectangle
+    # becomes an additional visible object and invalidates that fixture.
+    original = original.replace('<rect width="64" height="80" fill="#bbbbbb"/>','')
     sample_svg = original.replace('cx="32"', 'cx="32.4"')
     Image.fromarray(render_svg(original, 64, 80)).save(tmp_path/'source.png')
     (tmp_path/'sample.svg').write_text(sample_svg)
@@ -157,11 +160,12 @@ def test_completed_template_checkpoint_survives_worker_exit_without_reconstructi
         pytest.fail('retired native search was invoked')
     monkeypatch.setattr(search, 'continue_native_search', interrupted)
     refine(tmp_path/'source.png', tmp_path/'sample.svg', folder/'refined.svg', 'Ein Kreis.', 2., seed=17)
+    completed = (folder/'refined.svg').read_text()
     job = dict(width=64, height=80, description='Ein Kreis.', result=False)
     gui.collect_sample_result(tmp_path, job, -9)
     assert job['result'] and job['quality'] == 'passed'
     assert job['sample_report']['stop_reason'] == 'interrupted'
-    assert np.array_equal(render_svg((tmp_path/'result.svg').read_text(), 64, 80), render_svg(sample_svg, 64, 80))
+    assert np.array_equal(render_svg((tmp_path/'result.svg').read_text(), 64, 80), render_svg(completed, 64, 80))
 
 
 @pytest.mark.parametrize('seed', [-1, 2**64, True])

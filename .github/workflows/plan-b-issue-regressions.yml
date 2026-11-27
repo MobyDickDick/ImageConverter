@@ -30,6 +30,10 @@ on:
       - '.github/workflows/plan-b-issue-regressions.yml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   downward-chevron-panels:
     runs-on: ubuntu-latest

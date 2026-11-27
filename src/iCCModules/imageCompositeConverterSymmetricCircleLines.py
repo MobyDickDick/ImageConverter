@@ -21,6 +21,17 @@ def symmetric_circle_lines_spec(description):
         r'(?P<axis>horizontale|waagerechte|vertikale|senkrechte) symmetrieachse des kreises sind[.;]?', text)
     if match:
         return dict(axis='horizontal' if match['axis'] in {'horizontale', 'waagerechte'} else 'vertical')
+    # A circle's Hintergrundfarbe describes its interior, not the canvas.
+    # Consume the whole description so additional objects/negations cannot
+    # silently enter this closed, three-object model.
+    match = re.fullmatch(
+        r'(?:ein )?grauer kreis mit (?P<fill>roter|grüner|blauer|grauer|gelber) hintergrundfarbe[.;] '
+        r'zwei (?P<ink>weisse|weiße|schwarze|dunkelgraue) linien, (?:welche|die) den rand des kreises berühren[.;] '
+        r'die form ist symmetrisch in bezug auf eine (?P<axis>horizontale|waagerechte|vertikale|senkrechte) '
+        r'linie durch die mitte des kreises[.;]?', text)
+    if match:
+        return dict(axis='horizontal' if match['axis'] in {'horizontale', 'waagerechte'} else 'vertical',
+                    light_lines=match['ink'] in {'weisse', 'weiße'}, touches_rim=True)
     return None
 
 
@@ -44,7 +55,7 @@ def validate_symmetric_circle_lines(svg, spec):
             if not np.isclose(sx, sy) or not np.isclose(a*c+b*d, 0.):
                 raise ValueError('symmetric_circle_lines:deformed_circle')
             circles.append((mapped([[float(node.get('cx', '0')), float(node.get('cy', '0'))]])[0],
-                            float(node.get('r', '0'))*sx))
+                            float(node.get('r', '0'))*sx, float(node.get('stroke-width', '1'))*sx))
         elif kind == 'line':
             lines.append(mapped([[float(node.get('x1', '0')), float(node.get('y1', '0'))],
                                  [float(node.get('x2', '0')), float(node.get('y2', '0'))]]))
@@ -53,11 +64,15 @@ def validate_symmetric_circle_lines(svg, spec):
     visit(ET.fromstring(inline_simple_svg_styles(svg)))
     if len(circles) != 1 or len(lines) != 2:
         raise ValueError('symmetric_circle_lines:incomplete')
-    center, radius = circles[0]
+    center, radius, rim_width = circles[0]
     tolerance = max(1e-4, radius*1e-5)
     if radius <= 0 or any(np.linalg.norm(line[1]-line[0]) < tolerance
                           or np.max(np.linalg.norm(line-center, axis=1)) > radius+tolerance for line in lines):
         raise ValueError('symmetric_circle_lines:outside_circle')
+    if spec.get('touches_rim') and any(
+            not np.allclose(np.linalg.norm(line-center, axis=1), radius-rim_width/2,
+                            atol=tolerance*2, rtol=0.) for line in lines):
+        raise ValueError('symmetric_circle_lines:detached_from_rim')
     reflection = lines[0].copy()
     axis = 1 if spec['axis'] == 'horizontal' else 0
     reflection[:, axis] = 2*center[axis]-reflection[:, axis]
@@ -89,8 +104,9 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
     yy, xx = np.indices(gray.shape, dtype=float)+.5
     radial = np.hypot(xx-center[0], yy-center[1])
     interior = radial < outer*.88
-    fill = np.percentile(pixels[interior], 85, axis=0)
-    marks = interior & (gray < fill.mean()-25)
+    fill = np.median(pixels[interior], axis=0)
+    light_lines = spec.get('light_lines', False)
+    marks = interior & ((gray > fill.mean()+25) if light_lines else (gray < fill.mean()-25))
     axis = 1 if spec['axis'] == 'horizontal' else 0
     marks &= (yy if axis else xx) < center[axis]-outer*.12
     y, x = np.nonzero(marks)
@@ -105,19 +121,49 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
     distance = np.sqrt(max(0., (radius-.5)**2-closest@closest))
     endpoints = np.array([closest-distance*direction, closest+distance*direction])+center
     rim = np.percentile(pixels[(radial > outer-1.5) & (radial < outer+.5)], 15, axis=0)
-    ink = np.percentile(pixels[y, x], 15, axis=0)
+    if spec.get('touches_rim'):
+        # Avoid seeding a gray rim with the colored interior or white canvas.
+        neutral_rim = pixels[(radial > outer-1.5) & (radial < outer+.5)
+                             & (np.ptp(pixels, axis=2) < 20) & (gray < 240)]
+        if len(neutral_rim):
+            rim = np.percentile(neutral_rim, 15, axis=0)
+    ink = np.percentile(pixels[y, x], 85 if light_lines else 15, axis=0)
+    if light_lines:
+        # A subpixel white stroke may have no unblended source pixel. Its
+        # declared white paint is a better seed than the pink/blue edge blend.
+        ink = np.repeat(max(235., float(ink.max())), 3)
     # Circle, line widths and one free segment. Reflection defines the other;
     # neither pixels nor optimization can introduce additional objects.
-    initial = np.r_[center, radius, 1., 1., (endpoints-center).ravel(), fill.mean(), rim.mean(), ink.mean()]
+    initial = np.r_[center, radius, 1., 1., (endpoints-center).ravel(), fill, rim.mean(), ink.mean()]
+
+    def segment(p):
+        first = p[5:9].reshape(2, 2)
+        if not spec.get('touches_rim'):
+            return first
+        # Optimize one infinite line; both endpoints are derived from its
+        # intersection with the inner rim. Contact survives every refinement.
+        direction = first[1]-first[0]
+        length = np.linalg.norm(direction)
+        if length < 1e-9:
+            return None
+        direction = direction/length
+        closest = first[0]-(first[0]@direction)*direction
+        squared = (p[2]-p[3]/2)**2-closest@closest
+        if squared <= 0:
+            return None
+        distance = np.sqrt(squared)
+        return np.array([closest-distance*direction, closest+distance*direction])
 
     def build(p):
         cx, cy, radius, sw, lw = p[:5]
-        first = p[5:9].reshape(2, 2)+[cx, cy]
+        first = segment(p)+[cx, cy]
         second = first.copy()
         second[:, axis] = 2*p[axis]-second[:, axis]
-        fill, rim, ink = [np.repeat(shade, 3) for shade in p[9:]]
+        fill = p[9:12]
+        rim, ink = (np.repeat(shade, 3) for shade in p[12:])
+        cap = 'butt' if spec.get('touches_rim') else 'round'
         lines = ''.join(f'<line x1="{a[0]:.5f}" y1="{a[1]:.5f}" x2="{b[0]:.5f}" y2="{b[1]:.5f}" '
-                        f'stroke="{_hex(ink)}" stroke-width="{lw:.5f}" stroke-linecap="round"/>'
+                        f'stroke="{_hex(ink)}" stroke-width="{lw:.5f}" stroke-linecap="{cap}"/>'
                         for a, b in (first, second))
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 f'<rect width="{width}" height="{height}" fill="{_hex(background)}"/>'
@@ -126,8 +172,9 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
 
     def valid(p):
         cx, cy, radius, sw, lw = p[:5]
-        first = p[5:9].reshape(2, 2)
+        first = segment(p)
         return (np.isfinite(p).all() and radius > 3 and .25 <= min(sw, lw) <= max(sw, lw) < radius*.4
+                and first is not None
                 and radius+sw/2 <= min(cx, width-cx, cy, height-cy)+1e-7
                 and np.max(np.linalg.norm(first, axis=1)) <= radius
                 and np.linalg.norm(first[1]-first[0]) > radius*.25
@@ -136,7 +183,7 @@ def fit_symmetric_circle_lines(width, height, *, description, image, render_fn, 
     result = _register(initial, 9, build, valid, image, render_fn, error_fn,
                        'description_symmetric_circle_lines_v1', allow_portfolio=False,
                        max_evaluations=1800, reconsider_after=0,
-                       refinement_steps=(1., .5, .25, .125, .0625, .03125))
+                       refinement_steps=(4., 2., 1., .5, .25, .125, .0625, .03125))
     if result is not None and not pixel_quality(image, result['rendered'])['passed']:
         def quality_loss(a, b):
             quality = pixel_quality(a, b)

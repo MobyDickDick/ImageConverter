@@ -188,6 +188,7 @@ def test_triangle_count_is_enforced_before_a_pixel_perfect_checkpoint():
     session = ImageSearch(SearchPolicy())
     session.description_assertions = description_assertions('Es gibt genau zwei Dreiecke.')
     image = np.full((10,10,3), 255, dtype=np.uint8)
+    session.bind_reference(image)
     with image_search(session), pytest.raises(DescriptionRejected, match='object_count:triangle'):
         validated_result(dict(svg='<svg><polygon points="0,0 4,0 2,4"/><circle r="3"/></svg>',
                               rendered=image), image)
@@ -235,6 +236,7 @@ def test_count_violation_cannot_be_saved_as_deadline_checkpoint():
     checkpoints=[]
     session.on_validated=lambda *args: checkpoints.append(args)
     image=np.full((10,10,3),255,dtype=np.uint8)
+    session.bind_reference(image)
     with image_search(session),pytest.raises(DescriptionRejected,match='object_count'):
         validated_result(dict(svg='<svg><circle r="4"/></svg>',rendered=image),image)
     assert not checkpoints and not session.validated
@@ -327,6 +329,26 @@ def test_described_label_is_checked_as_content_not_only_as_an_element_count():
         validate_svg_assertions('<svg><circle r="5"/><text>M</text></svg>', assertions)
 
 
+def test_adjacent_positioned_glyphs_form_one_label_without_accepting_distant_text():
+    assertions = description_assertions('Ein Kreis mit Beschriftung "VOC".')
+    svg = ('<svg><circle r="5"/><text x="10" y="20" font-size="10">V</text>'
+           '<text x="17" y="20" font-size="10">O</text>'
+           '<text x="24" y="20" font-size="10">C</text></svg>')
+    validate_svg_assertions(svg, assertions)
+    with pytest.raises(DescriptionRejected, match='wrong_described_labels'):
+        validate_svg_assertions(svg.replace('x="24"', 'x="240"'), assertions)
+
+
+def test_index_notation_requires_a_smaller_raised_native_index():
+    assertions = description_assertions('Ein Kreis mit Beschriftung "CO^2".')
+    svg = ('<svg><circle r="5"/><text x="10" y="20" font-size="10">CO</text>'
+           '<text x="20" y="15" font-size="6">2</text></svg>')
+    validate_svg_assertions(svg, assertions)
+    for damaged in (svg.replace('y="15"', 'y="22"'), svg.replace('font-size="6"', 'font-size="10"')):
+        with pytest.raises(DescriptionRejected, match='wrong_described_labels'):
+            validate_svg_assertions(damaged, assertions)
+
+
 @pytest.mark.parametrize('description', [
     'Pumpensymbol: Ein gefüllter Kreis mit Randkontur enthält ein kontrastierendes gefülltes Dreieck.',
     'Pumpensymbol: Kreis mit einem gefüllten Dreieck.',
@@ -345,3 +367,37 @@ def test_pump_description_counts_both_primitives_despite_adjectives(description)
 def test_unquantified_nouns_do_not_reintroduce_negated_shapes(phrase):
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     assert description_object_limits('Ein Dreieck, '+phrase+'.') == {'triangle': 1}
+
+
+def test_square_handle_replacement_does_not_add_the_replaced_circle():
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
+    assert description_object_limits('Kelle mit Quadrat anstelle von Kreis oben.') == {'square': 1, 'line': 1}
+    assert description_object_limits('Keine Kelle. Ein Kreis mit Beschriftung "VOC".') == {'circle': 1}
+
+
+def test_disk_and_quoted_capital_letter_are_both_declared_objects():
+    assertions = description_assertions('Ein Griff führt zu einer hellen Kreisscheibe. '
+        'Darin steht der einzelne dunkle Großbuchstabe "M".')
+    assert assertions['labels'] == ['M']
+    assert assertions['objects'] == {'line': 1, 'circle': 1, 'text': 1}
+
+
+def test_diagonal_gradient_does_not_declare_a_diagonal_stroke():
+    assertions = description_assertions('Ein Dreieck mit einem diagonalen Grauverlauf.')
+    assert assertions['objects'] == {'triangle': 1}
+
+
+def test_rectangular_field_and_its_two_chevron_legs_are_a_complete_inventory():
+    assertions = description_assertions('Rechteckiges Feld mit dünnem Rahmen und vertikalem Farbverlauf. '
+        'Eine offene Dachlinie besteht aus zwei geraden Schenkeln.')
+    assert assertions['objects'] == {'rect': 1, 'line': 2}
+
+
+def test_directed_triangles_do_not_imply_unmentioned_arrow_shafts():
+    assertions = description_assertions('Zwei Dreiecke. Links ein blaues Dreieck mit Spitze nach oben. '
+        'Rechts ein rotes Dreieck mit Spitze nach oben.')
+    assert assertions['objects'] == {'triangle': 2}
+
+
+def test_nested_rectangular_fields_declare_both_regions():
+    assert description_assertions('Rechteckfläche mit heller rechteckiger Innenfläche.')['objects'] == {'rect': 2}

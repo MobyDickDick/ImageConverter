@@ -56,6 +56,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
     progress(source, event='registration_started', evaluations=0)
 
     def reconsider():
+        if session and session.minimum_pending and semantic_incumbent is not None:
+            return None
         # A construction cannot monopolize the image deadline while making
         # tiny gains. Leave time for another topology and independent objects.
         if (session and reconsider_after and
@@ -161,7 +163,7 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         registration_seconds += session.elapsed-checked_started
         # A minimum exploration time is no reason to keep changing a result
         # that already passes the caller's semantics and the pixel gates.
-        return passed
+        return passed and (not session.minimum_pending or preferred)
 
     # Raster-derived alternate seeds share this registration's cache, counters,
     # error bound and image deadline; yield between them for the fair scheduler.
@@ -250,7 +252,8 @@ def _register_steps(parameters, geometry_count, build, valid, image, render_fn, 
         parameters, best = semantic_incumbent
     if best[1] > initial_error+1e-9:
         return None
-    progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1])
+    progress(source, event='registration_finished', evaluations=evaluations, best_error=best[1],
+             quality=pixel_quality(image, best[3]))
     control = dict(stop_reason=stop_reason or (search or {}).get('stop_reason','schedule_exhausted'),
                    **session.report()) if session else None
     return {'svg': best[2], 'rendered': best[3], 'error': best[1],

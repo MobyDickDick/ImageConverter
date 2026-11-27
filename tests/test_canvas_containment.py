@@ -40,6 +40,30 @@ def test_reported_pump_stroke_is_fitted_inside_original_canvas_without_cutting()
     assert within_canvas(result) and contain_svg(result) == result
 
 
+def test_containment_preserves_the_colored_canvas_backing():
+    original = scene('<rect width="31" height="31" fill="#d0d0d0"/>'
+                     '<circle cx="15" cy="15" r="16" fill="green"/>')
+    bounded = contain_svg(original)
+    root = ET.fromstring(bounded)
+    assert root[0].tag.rsplit('}', 1)[-1] == 'rect'
+    assert root[0].get('width') == root[0].get('height') == '31'
+    assert root.find('{*}g/{*}circle') is not None
+    assert within_canvas(bounded)
+    validate_svg_assertions(bounded, description_assertions('Ein Kreis auf grauem Hintergrund.'))
+
+
+def test_search_renderer_does_not_move_off_canvas_shapes_into_the_viewport():
+    import cv2
+    import fitz
+    from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+    svg = scene('<rect x="-20" y="4" width="5" height="5" fill="black"/>')
+    native = render_svg_to_numpy_inprocess(svg, 31, 31, fitz_module=fitz, np_module=np, cv2_module=cv2)
+    assert native is not None and native.min() == 255
+    bounded = render_svg_to_numpy_inprocess(contain_svg(svg), 31, 31,
+        fitz_module=fitz, np_module=np, cv2_module=cv2)
+    assert bounded is not None and bounded.min() == 0
+
+
 @pytest.mark.parametrize('body', [
     '<circle cx="15" cy="15" r="16" fill="green" stroke="gray" stroke-width="2"/>',
     '<g transform="translate(-8 12) rotate(25)"><rect width="40" height="12" stroke="black" stroke-width="4"/></g>',
@@ -138,6 +162,7 @@ def test_model_validation_binds_the_bounded_svg_not_the_overflowing_candidate():
     image = render_svg(PUMP, 31, 31)[:, :, ::-1].copy()
     session = ImageSearch(SearchPolicy())
     session.description_assertions = description_assertions('Ein Kreis und ein Dreieck.')
+    session.bind_reference(image)
     result = dict(svg=PUMP, rendered=image)
     with image_search(session):
         assert validated_result(result, image)

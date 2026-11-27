@@ -1,0 +1,109 @@
+{
+  "workflow_url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/45117688880",
+  "tested_commit": "180a99491d01dd083a16906f9d9ff939f167269d",
+  "focused_tests_passed": 94,
+  "existing_tests_passed": 22,
+  "inherited_failures": 5,
+  "baseline_commit": "13a52bb03033987fd4861877c3fbf0bd10c52d5c",
+  "conversions": [
+    {
+      "seed": 17,
+      "profile": "quick",
+      "reuse": false,
+      "independent_quality": {
+        "normalized_mse": 0.0016661384142935276,
+        "foreground_mse": 0.0022393607068806887,
+        "foreground_iou": 0.9912942542077772,
+        "foreground_iou_binary": 0.9912942542077772,
+        "edge_alignment": 0.861810564994812,
+        "passed": true
+      },
+      "search": {
+        "candidate_evaluations": 347,
+        "stop_reason": "satisfactory",
+        "satisfactory": true,
+        "elapsed_seconds": 2.3103,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 35.0,
+        "renderings": 347,
+        "render_budget": 4096,
+        "render_cache_hits": 1,
+        "render_sequence_sha256": "6f6d38dc8ff83d205980ef2a5372b00197d5b9e4716d0f937ded481db1948398",
+        "search_seed": "17",
+        "global_stop_reason": null
+      },
+      "elapsed": 3.0
+    },
+    {
+      "seed": 18,
+      "profile": "quick",
+      "reuse": false,
+      "independent_quality": {
+        "normalized_mse": 0.0016774942632764578,
+        "foreground_mse": 0.0022563578095287085,
+        "foreground_iou": 0.9930354033662218,
+        "foreground_iou_binary": 0.9930354033662218,
+        "edge_alignment": 0.8507481813430786,
+        "passed": true
+      },
+      "search": {
+        "candidate_evaluations": 353,
+        "stop_reason": "satisfactory",
+        "satisfactory": true,
+        "elapsed_seconds": 2.186474,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 35.0,
+        "renderings": 353,
+        "render_budget": 4096,
+        "render_cache_hits": 1,
+        "render_sequence_sha256": "4ab3fe95685f5cd4084f587cf8be4cae0c9a29da4eea8c82491d5ad36fa02272",
+        "search_seed": "18",
+        "global_stop_reason": null
+      },
+      "elapsed": 2.6
+    },
+    {
+      "seed": 17,
+      "profile": "normal",
+      "reuse": false,
+      "independent_quality": {
+        "normalized_mse": 0.0016661384142935276,
+        "foreground_mse": 0.0022393607068806887,
+        "foreground_iou": 0.9912942542077772,
+        "foreground_iou_binary": 0.9912942542077772,
+        "edge_alignment": 0.861810564994812,
+        "passed": true
+      },
+      "search": {
+        "candidate_evaluations": 347,
+        "stop_reason": "satisfactory",
+        "satisfactory": true,
+        "elapsed_seconds": 2.134827,
+        "minimum_seconds": 30.0,
+        "limit_seconds": 60.0,
+        "renderings": 347,
+        "render_budget": 4096,
+        "render_cache_hits": 1,
+        "render_sequence_sha256": "6f6d38dc8ff83d205980ef2a5372b00197d5b9e4716d0f937ded481db1948398",
+        "search_seed": "17",
+        "global_stop_reason": null
+      },
+      "elapsed": 2.5
+    },
+    {
+      "seed": 17,
+      "profile": "quick",
+      "reuse": true,
+      "independent_quality": {
+        "normalized_mse": 0.0016661384142935276,
+        "foreground_mse": 0.0022393607068806887,
+        "foreground_iou": 0.9912942542077772,
+        "foreground_iou_binary": 0.9912942542077772,
+        "edge_alignment": 0.861810564994812,
+        "passed": true
+      },
+      "search": null,
+      "elapsed": 2.7
+    }
+  ]
+}

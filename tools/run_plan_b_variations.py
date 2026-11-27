@@ -126,7 +126,8 @@ def render(svg: str, width: int, height: int):
     cv2 = sys.modules.get("cv2") or import_with_vendored_fallback("cv2")
     fitz = sys.modules.get("fitz") or import_with_vendored_fallback("fitz")
     raster = render_svg_to_numpy_inprocess(
-        svg, width, height, fitz_module=fitz, np_module=np, cv2_module=cv2)
+        svg, width, height, fitz_module=fitz, np_module=np, cv2_module=cv2,
+        constrain_canvas=False)
     if raster is None:
         raise ValueError("SVG could not be rendered")
     return raster

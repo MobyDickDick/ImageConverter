@@ -1410,13 +1410,19 @@ def runNonCompositeIterationImpl(
         session.bind_reference(perc_img)
     from src.iCCModules.imageCompositeConverterSearchPortfolio import settings
     from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
-    program = scene_program(description)
+    fragments = params.get('description_fragments') or []
+    original_description = (params.get('effective_description') or
+        ' '.join(str(part.get('text','')) for part in fragments if isinstance(part,dict)) or description)
+    program = scene_program(original_description)
     if ((settings() or {}).get('primitive_exploration')
-            or (program is not None and program.get('paint_claims'))):
+            or (program is not None and (program.get('paint_claims')
+                or any(o['kind']=='text' for o in program['objects'])))):
         from src.iCCModules.imageCompositeConverterPrimitiveEvolution import evolve_primitives
         from src.imageConverterPreview import publish_preview
-        fitted = evolve_primitives(perc_img, description, render_svg_to_numpy_fn,
-                                  on_improvement=publish_preview)
+        from src.iCCModules.imageCompositeConverterSceneInitialization import observed_scene_parameters
+        initial = observed_scene_parameters(program, perc_img) if program else None
+        fitted = evolve_primitives(perc_img, original_description, render_svg_to_numpy_fn,
+                                  initial_parameters=initial, on_improvement=publish_preview)
         if fitted is None:
             return None
         params['primitive_evolution'] = fitted['search_report']
@@ -1522,12 +1528,10 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(svg, square_stem['rendered'])
             return base_name, description, params, 1, square_stem['final_error']
         for fit_fn, status in scene_reconstruction_fitters():
-            fit_description = description
-            if fit_fn is fit_short_label_disk:
-                # Dispatch is case-insensitive; labels are not. Recover the
-                # original spelling for auto-mode short labels as in badge mode.
-                fit_description = params.get('effective_description') or ' '.join(str(f.get('text', '')) for f in
-                    params.get('description_fragments', []) if isinstance(f, dict)) or description
+            from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
+            # Fitters normalize their dispatch vocabulary themselves. Keep the
+            # original quoted glyph case for every model, including motors.
+            fit_description = normalize_description(original_description)
             fitted = fit_fn(
                 width, height, description=fit_description, image=perc_img,
                 render_fn=render_svg_to_numpy_fn, error_fn=calculate_error_fn,
@@ -2027,8 +2031,8 @@ def runNonCompositeIterationImpl(
                         ),
                     ]
                 )
+            log_lines.append(f"non_composite_selection={selection_reason}")
             if len(candidates) > 1:
-                log_lines.append(f"non_composite_selection={selection_reason}")
                 for candidate in candidates:
                     log_lines.append(
                         f"non_composite_candidate_error_{candidate['status']}={float(candidate['error']):.6f}"

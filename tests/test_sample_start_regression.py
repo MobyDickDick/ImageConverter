@@ -9,6 +9,7 @@ import sys
 from PIL import Image
 
 from src import imageConverterGui as gui
+from src.imageConverterSample import prepare_sample
 from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
 from src.iCCModules.imageCompositeConverterRepresentation import logical_inventory
 
@@ -45,7 +46,10 @@ def test_reported_pump_starts_through_real_gui_worker_and_drops_extra_template_l
         assert logical_inventory(svg, {'circle': 1, 'triangle': 1}) == {'circle': 1, 'triangle': 1}
         assert 'Traceback' not in (folder/'console.log').read_text(encoding='utf-8')
         assert 'Bildbeschreibung' in result['message']
-        assert (folder/'sample.svg').read_bytes() == before and SAMPLE.read_bytes() == before
+        # Upload preparation fits overflowing paint to the original viewport;
+        # starting the worker must preserve those prepared bytes and the donor.
+        assert (folder/'sample.svg').read_text(encoding='utf-8') == prepare_sample(before, result['width'], result['height'])
+        assert SAMPLE.read_bytes() == before
         # The draft is not certified merely because the conversion now starts.
         if not result['pixel_quality']['passed']:
             assert result['quality'] == 'warning'

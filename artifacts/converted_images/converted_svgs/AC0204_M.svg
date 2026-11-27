@@ -1,16 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 40 30">
-  <defs>
-    <linearGradient id="panelGradient" gradientUnits="userSpaceOnUse" x1="2.060" y1="1.080" x2="37.940" y2="1.080">
-      <stop offset="0%" stop-color="#f4f4f4"/>
-      <stop offset="55%" stop-color="#dcdcdc"/>
-      <stop offset="100%" stop-color="#f4f4f4"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 65 50" data-primitive-scene="1" overflow="hidden" version="1.1" id="svg7">
+  <defs id="defs6">
+    <linearGradient id="circle_0_paint" x1="0.913750" y1="-0.063346" x2="0.086250" y2="1.063346">
+      <stop offset="0" stop-color="#efefef" id="stop1" />
+      <stop offset="1" stop-color="#f6f6f6" id="stop2" />
     </linearGradient>
-  <clipPath id="innerRect"><rect x="2.06" y="1.08" width="35.88" height="27.84"/></clipPath>
+    <linearGradient id="triangle_0_paint" x1="1.000000" y1="0.500000" x2="-0.000000" y2="0.500000">
+      <stop offset="0" stop-color="#cdcdcd" id="stop3" />
+      <stop offset="1" stop-color="#bbbbbb" id="stop4" />
+    </linearGradient>
+    <linearGradient id="triangle_1_paint" x1="1.000000" y1="0.500000" x2="-0.000000" y2="0.500000">
+      <stop offset="0" stop-color="#d8d8d8" id="stop5" />
+      <stop offset="1" stop-color="#bdbdbd" id="stop6" />
+    </linearGradient>
   </defs>
-  <g data-output-variation="1" transform="translate(0.0465 0.0230) rotate(0.0317 20.0000 15.0000)">
-
-  <rect x="0" y="0" width="40" height="30" fill="#ffffff" stroke="none"/>
-  <rect x="2.060" y="1.080" width="35.880" height="27.840" fill="url(#panelGradient)" stroke="none"/>
-  <rect x="2.06" y="1.08" width="35.88" height="27.84" fill="none" stroke="#bebebe" stroke-width="0.80"/>
+  <g transform="matrix(1.0000000000 0.0000000000 0.0000000000 1.0000000000 0.0000000000 0.0000000000)" id="g7">
+    <rect width="65" height="50" fill="#fefefe" data-role="background" id="rect6" />
+    <g transform="matrix(0.9961538462 0.0000000000 0.0000000000 0.9961538462 0.1250000000 0.1586538462)" id="g6">
+      <circle cx="18.76757" cy="25.04661" r="15.85190" id="circle_0" fill="url(#circle_0_paint)" stroke="#7f7f7f" stroke-width="2.54425" stroke-linejoin="round" />
+      <polygon points="50.15895,25.04661 61.02222,48.63833 38.11665,48.05884" id="triangle_0" fill="url(#triangle_0_paint)" stroke="#9b9b9b" stroke-width="2.45146" stroke-linejoin="round" />
+      <polygon points="50.15895,25.04661 38.41485,2.11928 60.92256,1.64296" id="triangle_1" fill="url(#triangle_1_paint)" stroke="#9a9a9a" stroke-width="2.45146" stroke-linejoin="round" />
+      <line x1="34.61947" y1="25.04661" x2="50.15895" y2="25.04661" id="line_0" fill="none" stroke="#868686" stroke-width="3.94893" stroke-linejoin="round" />
+    </g>
   </g>
 </svg>

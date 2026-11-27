@@ -11,7 +11,7 @@ import io
 from pathlib import Path
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
-PREFER_VENDORED_FIRST = {"cv2", "numpy"}
+PREFER_VENDORED_FIRST: set[str] = set()
 
 
 def _snapshot_module_entries(module_name: str) -> dict[str, object]:
@@ -37,34 +37,15 @@ def optional_dependency_base_dir() -> Path:
 def vendored_site_packages_dirs(*, base_dir_fn=optional_dependency_base_dir) -> list[Path]:
     """Return repo-local site-packages directories that may contain bundled deps."""
     base = base_dir_fn()
-    linux_candidates = [
-        base / "vendor" / "linux" / "site-packages",
-        base / "vendor" / "linux-py310" / "site-packages",
-        base / "vendor" / "linux-py311" / "site-packages",
-        base / "vendor" / "linux-py312" / "site-packages",
-        base / "vendor" / "linux-py313" / "site-packages",
-        base / "vendor" / "linux-py314" / "site-packages",
-    ]
-    windows_candidates = [
-        base / "vendor" / "win" / "site-packages",
-        base / "vendor" / "win-py310" / "site-packages",
-        base / "vendor" / "win-py311" / "site-packages",
-        base / "vendor" / "win-py312" / "site-packages",
-        base / "vendor" / "win-py313" / "site-packages",
-        base / "vendor" / "win-py314" / "site-packages",
-        base / ".venv" / "Lib" / "site-packages",
-    ]
-    posix_venv_candidates = [
-        base / ".venv" / "lib" / "python3.10" / "site-packages",
-        base / ".venv" / "lib" / "python3.11" / "site-packages",
-        base / ".venv" / "lib" / "python3.12" / "site-packages",
-        base / ".venv" / "lib" / "python3.13" / "site-packages",
-        base / ".venv" / "lib" / "python3.14" / "site-packages",
-    ]
-    if os.name == "nt":
-        candidates = windows_candidates + linux_candidates + posix_venv_candidates
-    else:
-        candidates = linux_candidates + posix_venv_candidates + windows_candidates
+    # Compiled wheels are specific to both the OS and the Python ABI. Adding
+    # every historical bundle poisoned Windows imports with Linux NumPy/cv2
+    # and could mix a loaded package with submodules from another version.
+    platform = 'win' if os.name == 'nt' else 'linux'
+    version = f'{sys.version_info.major}{sys.version_info.minor}'
+    candidates = [base/'vendor'/f'{platform}-py{version}'/'site-packages',
+                  base/'vendor'/platform/'site-packages']
+    candidates.append(base/'.venv'/'Lib'/'site-packages' if os.name == 'nt' else
+                      base/'.venv'/'lib'/f'python{sys.version_info.major}.{sys.version_info.minor}'/'site-packages')
 
     seen: set[str] = set()
     existing: list[Path] = []
@@ -79,15 +60,15 @@ def vendored_site_packages_dirs(*, base_dir_fn=optional_dependency_base_dir) -> 
 
 
 def activate_vendored_site_packages(*, vendored_dirs_fn=vendored_site_packages_dirs) -> list[Path]:
-    """Prepend repo-local site-packages so eager submodule imports can resolve bundled deps."""
+    """Expose compatible fallbacks without shadowing the active environment."""
     activated: list[Path] = []
-    for site_packages in reversed(vendored_dirs_fn()):
+    for site_packages in vendored_dirs_fn():
         path_str = str(site_packages)
         if path_str in sys.path:
             sys.path.remove(path_str)
-        sys.path.insert(0, path_str)
+        sys.path.append(path_str)
         activated.append(site_packages)
-    return list(reversed(activated))
+    return activated
 
 
 def clear_partial_module_import(module_name: str) -> None:

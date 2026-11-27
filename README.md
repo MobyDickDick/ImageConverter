@@ -1,5 +1,32 @@
 # ImageConverter
 
+`AC0202_1.jpg` wird mit der vorhandenen Benutzerbeschreibung als roter Kreis
+mit grauem Rand und zwei horizontal gespiegelten weissen Linien konvertiert.
+Die Symmetrieachse zählt nicht als zusätzliche Linie; Randkontakt und echte
+Kreisform werden auch bei wiederverwendeten SVGs geprüft. Vier echte GUI-Läufe
+und der unabhängige librsvg-Vergleich bestehen. Das geprüfte SVG liegt im
+Projekt. [Ursachen, GitHub-Nachweise und bekannte CI-Fehler](docs/ac0202_circle_lines_2026-11-23.md).
+
+Die Einzelkonvertierung bietet **Automatisch mit neuen Seeds fortsetzen**:
+Jedes Suchende startet einen neuen Versuch; ein erneuter Klick stoppt den Lauf.
+Das beste Ergebnis aller Versuche bleibt sichtbar und speicherbar, auch nach
+einem schlechteren Versuch. Der Ablauf läuft bei geschlossenem Browser weiter
+und endet beim Beenden des Servers. Zum Aktivieren nach Abschluss laufender
+Aufträge den Webserver neu starten und die Seite neu laden.
+
+`AC0222_L.jpg` wird mit unveränderter Beschreibung vollständig konvertiert:
+drei gleichschenklige Dreiecke mit eigenen Verläufen, gemeinsamer Spitze und
+Griff zum leeren Kreis. Die tatsächlichen GUI-Läufe mit Seeds 17/18 und den
+Profilen quick/normal bestehen auch den unabhängigen librsvg-Vergleich
+(Vordergrund-IoU 0,9646). SVG und Messwerte liegen im Projekt.
+[GitHub-Prüfungen und echter automatischer Mehrfachlauf](https://github.com/MobyDickDick/ImageConverter/actions/runs/45060595171).
+
+Seit 22. November 2026 erhält jede Aufgabe einen eigenen Branch. Tests,
+Testkonvertierungen und Benchmarks laufen ausschliesslich auf GitHub Actions.
+Die Untersuchung von `AC0233_L.jpg` erklärt die unvollständige Modellauswahl,
+die identische Suchfolge trotz verschiedener Seeds und einen Rendererfehler
+bei diagonalen Farbverläufen. [Ursachen, Änderungen und GitHub-Prüfungen](docs/ac0233_seed_budget_2026-11-22.md).
+
 `AC0160_M.jpg` wird mit unveränderter Beschreibung vollständig konvertiert:
 eine unterteilte Raute mit parallelen Trennstrichen, Plus/Minus und Hintergrund-X.
 Teilflächen gehören jetzt zum gemeinsamen Umriss; die Anpassung bestimmt
@@ -914,6 +941,11 @@ python -m src.imageCompositeConverter \
 ```
 
 ## Tests and checks
+
+**Aktuelle Arbeitsregel:** Alle nachfolgenden Testbefehle werden in GitHub
+Actions ausgeführt. Historische Hinweise auf lokale Testläufe sind damit
+abgelöst. Für jede Aufgabe einen eigenen Branch erstellen und die zugehörigen
+Checks und Artefakte auf GitHub prüfen; siehe `AGENTS.md`.
 
 ### Lokale Arbeitskopie bereinigen
 

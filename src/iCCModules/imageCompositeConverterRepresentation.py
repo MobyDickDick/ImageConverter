@@ -68,14 +68,23 @@ def description_object_limits(text):
     if partition:
         return partition_inventory(partition)
     from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
-    if three_wing_valve_spec(text):
-        return dict(triangle=3, line=1, square=1, diagonal=2)
+    three_wing = three_wing_valve_spec(text)
+    if three_wing:
+        return (dict(triangle=3, line=1, circle=1) if three_wing['motor']=='circle'
+                else dict(triangle=3, line=1, square=1, diagonal=2))
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
     valve = two_way_valve_spec(text)
     if valve:
         return (dict(square=1, diagonal=2, line=1, triangle=2) if valve['motor']=='square'
                 else dict(circle=1, line=1, triangle=2))
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', text).casefold()
+    # Keep the fitter's original wording intact; this is an inventory synonym.
+    words = re.sub(r'\brechteckig[enrms]*\s+feld\b', 'rechteck', words)
+    words = re.sub(r'\brechteckfl(?:ä|ae)che\b', 'ein rechteck', words)
+    words = re.sub(r'\brechteckig[enrms]*\s+innenfl(?:ä|ae)che\b', 'ein rechteck', words)
+    square_head = bool(re.search(r'\bquadrat\s+(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', words))
+    if square_head:
+        words = re.sub(r'\b(?:anstelle von|statt(?:\s+eines)?)\s+(?:dem\s+|einem\s+)?kreis(?:es)?\b', '', words)
     numbers = dict(ein=1, eine=1, einen=1, einem=1, einer=1, eins=1, zwei=2, drei=3, vier=4,
                    fünf=5, sechs=6, sieben=7, acht=8, neun=9, zehn=10, beide=2, beiden=2)
     count = r'('+ '|'.join(numbers)+r'|[0-9]+)'
@@ -84,7 +93,7 @@ def description_object_limits(text):
                  r'durchgehend|gestrichelt|dünn|schmal|breit|klein|gross|groß|ungefüllt|gefüllt|'
                  r'ganz|sehr|hochkantig|hoh|lang)[enrms]*[,\s]+|'
                  r'[a-zäöüß-]+(?:en|er|es|em|e)[,\s]+){0,6}')
-    noun = r'(kreis(?:e[n]?)?|rechteck(?:e[n]?)?|quadrat(?:e[n]?)?|rauten?|ellipsen?|dreieck(?:e[n]?)?|geraden?|linien?|diagonalen?|striche?)'
+    noun = r'(kreis(?:scheiben?|e[n]?)?|rechteck(?:e[n]?)?|quadrat(?:e[n]?)?|rauten?|ellipsen?|dreieck(?:e[n]?)?|geraden?|linien?|diagonalen?|striche?|griff(?:e[n]?)?)'
     limits, covered = {}, []
     for match in re.finditer(r'\b'+count+r'\s+'+adjective+noun+r'\b', words):
         number, form = match.groups()
@@ -94,6 +103,8 @@ def description_object_limits(text):
         # "geraden Rand" is an adjective, not a described straight object.
         if form.startswith('gerad') and re.match(r'\s+(?:rand|kanten?|seiten?|linien?)\b', words[match.end():]):
             continue
+        if form.startswith('diagonal') and re.match(r'\s+(?:grau(?:stufen)?|farb|helligkeits)?verlauf\b', words[match.end():]):
+            continue  # the gradient direction is an adjective, not another line
         if number in {'beide', 'beiden'} and re.search(r'\bmit\s*$', words[:match.start()]):
             continue  # a referenced component of an unnamed composite, not all scene strokes
         kind = ('circle' if form.startswith('kreis') else 'rect' if form.startswith('rechteck')
@@ -119,14 +130,18 @@ def description_object_limits(text):
                 else 'square' if form.startswith('quadrat') else 'diagonal' if form.startswith('diagonale')
                 else 'ellipse' if form.startswith('ellipse') else 'triangle' if form.startswith('dreieck')
                 else 'rhombus' if form.startswith('raute') else 'line')
+        if kind in limits and re.search(
+                r'\b(?:(?:die|der|das|diese[nrms]?)\s+(?:(?:link|recht|ober|unter|vertikal|horizontal)[enrms]*\s+)*|(?:link|recht|ober|unter)[enrms]+\s+)$',
+                words[:match.start()]):
+            continue  # a definite reference describes an already counted instance
         limits[kind] = limits.get(kind, 0)+1
         seen.add(match[0])
     # A singular noun also declares an instance without an article, e.g.
     # "Pumpensymbol: Kreis mit einem gefüllten Dreieck". Later references to
     # the same singular shape do not create additional objects.
-    for form, kind in (('kreis', 'circle'), ('rechteck', 'rect'), ('quadrat', 'square'),
+    for form, kind in (('kreis', 'circle'), ('kreisscheibe', 'circle'), ('rechteck', 'rect'), ('quadrat', 'square'),
                        ('raute', 'rhombus'), ('ellipse', 'ellipse'), ('dreieck', 'triangle'),
-                       ('gerade', 'line'), ('linie', 'line')):
+                       ('gerade', 'line'), ('linie', 'line'), ('griff', 'line')):
         for match in re.finditer(r'\b'+form+r'\b', words):
             if any(start <= match.start() < end for start, end in covered):
                 continue
@@ -144,9 +159,12 @@ def description_object_limits(text):
             limits['diagonal'] = 2
     # Composite vocabulary expands once; references to the same handle are not
     # additional scene objects. A Kelle is a circular head and a straight stem.
-    if re.search(r'\bkelle\b', words) and re.search(r'\bgriff\b', words):
-        limits['circle'] = max(1, limits.get('circle', 0))
-        limits['line'] = max(1, limits.get('line', 0))
+    if (re.search(r'\bkelle\b', words)
+            and not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:eine?\s+)?kelle\b', words)):
+        head = 'square' if square_head or ('square' in limits and 'circle' not in limits) else 'circle'
+        limits[head] = max(1, limits.get(head, 0))
+        if not re.search(r'\b(?:kein[enrms]?|ohne)\s+(?:einen?\s+)?griff\b', words):
+            limits['line'] = max(1, limits.get('line', 0))
     return limits
 
 
@@ -224,7 +242,7 @@ def _vertices(points, closed, epsilon=.01):
     return cv2.approxPolyDP(points.astype(np.float32).reshape(-1, 1, 2), epsilon, closed)[:, 0].astype(float)
 
 
-def logical_inventory(svg, limits, symbol_strokes=0):
+def logical_inventory(svg, limits, symbol_strokes=0, diagonal_rails=False):
     root = ET.fromstring(svg)
     inventory = dict.fromkeys(limits, 0)
     viewport_matrix = np.eye(2)
@@ -256,6 +274,7 @@ def logical_inventory(svg, limits, symbol_strokes=0):
             except ValueError:
                 pass
     rectangles = {}
+    rails = []
     visible = list(drawing_nodes(root))
     substantial_rectangles = 0
     for _, n in visible:
@@ -281,6 +300,13 @@ def logical_inventory(svg, limits, symbol_strokes=0):
         return viewport_matrix @ np.array([[a, c], [b, d]]), viewport_matrix @ np.array([tx, ty])
     for location, node in drawing_nodes(root):
         tag = node.tag.rsplit('}', 1)[-1]
+        # A leading neutral backing cannot paint anything on the white canvas,
+        # even when a reference variation transforms it away from the edges.
+        # Later white rectangles can mask foreground and remain real objects.
+        if (visible and node is visible[0][1] and tag == 'rect'
+                and node.get('fill', '').lower() in {'white', '#fff', '#ffffff'}
+                and node.get('stroke', 'none') == 'none'):
+            continue
         kind = tag
         matrix, translation = displayed_matrix(location, node)
         if tag in {'circle', 'ellipse'}:
@@ -352,6 +378,18 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                 continue
         if tag in {'polygon', 'polyline', 'path'}:
             paths = path_points(node)
+            if diagonal_rails and len(paths) == 1 and paths[0][1]:
+                points = paths[0][0] @ matrix.T+translation
+                if len(points) >= 4:
+                    box = cv2.boxPoints(cv2.minAreaRect(points.astype(np.float32)))
+                    edges = np.roll(box, -1, axis=0)-box
+                    lengths = np.linalg.norm(edges, axis=1)
+                    direction = edges[int(np.argmax(lengths))]
+                    if (min(lengths) > 0 and max(lengths) > 8*min(lengths)
+                            and np.ptp(points[:, 0]) > vw*.5 and np.ptp(points[:, 1]) > vh*.6):
+                        if fields.get(node.get('fill', 'none'), 0) < cv2.contourArea(points.astype(np.float32))*4:
+                            rails.append(bool(direction[0]*direction[1] > 0))
+                        continue
             if not paths:
                 # Curves and compound/unknown paths must not disappear from
                 # the closed inventory and hide additional painted objects.
@@ -401,11 +439,18 @@ def logical_inventory(svg, limits, symbol_strokes=0):
                     inventory[kind] = inventory.get(kind, 0)+1
             continue
         inventory[kind] = inventory.get(kind, 0)+1
+    if rails:
+        # Exactly one split diagonal (two rails) and one solid diagonal.
+        # Extra long strokes remain extra inventory rather than disappearing.
+        count = 2 if len(rails) == 3 and len(set(rails)) == 2 else len(rails)
+        inventory['diagonal'] = inventory.get('diagonal', 0)+count
     return inventory
 
 
-def validate_object_limits(svg, limits, *, partial=False, complete=False, symbol_strokes=0):
-    actual = logical_inventory(svg, limits, symbol_strokes)
+def validate_object_limits(svg, limits, *, partial=False, complete=False, symbol_strokes=0, text_count=None, diagonal_rails=False):
+    actual = logical_inventory(svg, limits, symbol_strokes, diagonal_rails)
+    if text_count is not None:
+        actual['text'] = text_count
     for kind, expected in limits.items():
         count = actual.get(kind, 0)
         if count > expected or (not partial and count != expected):

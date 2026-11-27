@@ -43,7 +43,7 @@ MAX_PIXELS = 20_000_000
 # Leave room after the 30-second effort floor for model comparison/finalization.
 PROFILES = {"quick": (35, 45), "normal": (60, 120), "thorough": (120, 240),
             "explore5": (300, 315), "explore10": (600, 615)}
-DESCRIPTION_VALIDATION_VERSION = 15
+DESCRIPTION_VALIDATION_VERSION = 16
 
 
 class RequestError(ValueError):
@@ -232,6 +232,8 @@ class Jobs:
                     self.save(job)
             except (OSError, ValueError, KeyError):
                 continue
+        from src.imageConverterSeedRetry import SeedRetry
+        self.seed_retry = SeedRetry(self)
 
     def folder(self, job_id: str) -> Path:
         if job_id not in self.jobs:
@@ -260,6 +262,9 @@ class Jobs:
                 self._check_description(stored)
                 self.save(stored)
             job = dict(self.jobs[job_id])
+            retry = self.seed_retry.session(job_id)
+            if retry:
+                job['seed_retry'] = dict(retry)
             # JSON numbers lose 64-bit integer precision in the browser.
             if 'search_seed' in job:
                 job['search_seed'] = str(job['search_seed'])
@@ -291,11 +296,16 @@ class Jobs:
         preview = folder / 'live-preview.svg'
         return preview if preview.is_file() else folder / 'recovery.svg'
 
-    def export_file(self, job_id: str) -> Path | None:
+    def export_file(self, job_id: str, *, include_retry=True) -> Path | None:
         """Offer native drafts for manual saving, independently of acceptance gates."""
         from src.imageConverterSample import prepare_sample
         folder = self.folder(job_id)
         job = self.jobs[job_id]
+        retry = self.seed_retry.session(job_id) if include_retry else None
+        if retry and retry.get('best_job_id'):
+            best = self.folder(retry['root_id'])/'seed-best.svg'
+            if best.is_file():
+                return best
         candidates = []
         if job.get('result') and job['status'] != 'running':
             candidates.append(folder/'result.svg')
@@ -435,10 +445,10 @@ class Jobs:
             self._persist_description(job)
             return self.snapshot(job['id'])
 
-    def busy(self, *, background: bool = False) -> bool:
+    def busy(self, *, background: bool = False, retry_root=None) -> bool:
         """Reserve one slot per lane, including workers still cleaning up."""
         with self.lock:
-            return any((job['status'] == 'running' or job_id in self.processes)
+            return (not background and self.seed_retry.busy(exclude=retry_root)) or any((job['status'] == 'running' or job_id in self.processes)
                        and bool(job.get('catalog_background')) == background
                        for job_id, job in self.jobs.items())
 
@@ -461,7 +471,7 @@ class Jobs:
             return self.snapshot(job_id)
 
     def start(self, job_id: str, description: str, profile: str, *, background: bool = False,
-              seed: str | int | None = None, use_current_svg: bool = True) -> dict:
+              seed: str | int | None = None, use_current_svg: bool = True, _retry_root=None) -> dict:
         if not isinstance(description, str) or not description.strip() or len(description) > 12000:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
@@ -491,7 +501,7 @@ class Jobs:
         except (OSError, ValueError, SyntaxError) as exc:
             raise RequestError(str(exc)) from exc
         with self.lock:
-            if self.closed or self.busy(background=background):
+            if self.closed or self.busy(background=background, retry_root=_retry_root):
                 raise RequestError("Es läuft bereits eine Konvertierung. Bitte warten oder abbrechen.", 409)
             self.folder(job_id)
             previous = self.jobs[job_id]
@@ -507,6 +517,11 @@ class Jobs:
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
+            if _retry_root:
+                job['seed_retry_root'] = _retry_root
+                session = self.jobs[_retry_root]['seed_retry']
+                session.update(current_job_id=job_id, attempts=session['attempts']+1)
+                self.save(self.jobs[_retry_root])
             if use_current_svg and not components and profile not in {'explore5', 'explore10'}:
                 self.use_best_svg(job)
             if profile in {'explore5', 'explore10'}:
@@ -627,11 +642,19 @@ class Jobs:
                        "--search-seed", str(job["search_seed"]),
                        "--fail-on-batch-failures", "--log-file", str(folder / "converter.local.log")]
             exploring = job['profile'] in {'explore5', 'explore10'}
-            if exploring:
+            from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
+            program = scene_program(job['description'])
+            complete_scene = program is not None and any(o['kind']=='text' for o in program['objects'])
+            if exploring or complete_scene:
                 memory = self.directory / 'primitive-search-memory'
                 job['primitive_search_memory'] = str(memory)
+                # These profiles specify a maximum time. A failed population
+                # keeps exploring instead of stopping at the old 4096-render
+                # ceiling or at the normal profile's shorter initial slice.
+                search_seconds = seconds if exploring else maximum
                 command += ['--primitive-exploration', '--primitive-memory', str(memory),
-                            '--search-budget', '1000000', '--search-max-seconds', str(seconds)]
+                            '--search-budget', '1000000', '--search-seconds', str(search_seconds),
+                            '--search-max-seconds', str(search_seconds)]
             if component_mode:
                 description_file = folder / 'description.txt'
                 description_file.write_text(job['description'], encoding='utf-8')
@@ -741,6 +764,8 @@ class Jobs:
                 job["elapsed"] = round(time.time() - job["started"], 1)
                 self.save(job)
 
+                self.seed_retry.finished(job_id)
+
             if self.on_result is not None:
                 self.on_result(job_id)
 
@@ -752,6 +777,9 @@ class Jobs:
         with self.lock:
             self.folder(job_id)
             job = self.jobs[job_id]
+            session = self.seed_retry.session(job_id)
+            if session and session['active']:
+                return self.seed_retry.stop(job_id)
             if job["status"] == "running":
                 process = self.processes.get(job_id)
                 if process:
@@ -1049,7 +1077,11 @@ def collect_sample_result(folder: Path, job: dict, returncode: int) -> None:
     if reject_raster_result(result, job):
         return
     contain_result(result, job)
+    quality = saved_svg_quality(folder/'source.png', result)
+    job['pixel_quality'] = quality
     if reject_description_result(result, job):
+        report.update(passed=False, description_error=job['description_error'], pixel_quality=quality)
+        job['sample_report'] = report
         return
     # Recheck the actual deliverable, including old worker reports. A low
     # global pixel error cannot certify a described but collapsed arrow head.
@@ -1142,6 +1174,9 @@ def reject_raster_result(result: Path, job: dict) -> bool:
 def collect_result(folder: Path, job: dict, returncode: int) -> None:
     """Never equate a zero CLI exit code or an existing SVG with passed quality."""
     output = folder / "output"
+    summary = search_summary(output)
+    if summary is not None:
+        job['search_summary'] = summary
     candidates = [output / "converted_svgs" / "UPLOAD.svg"]
     for subdirectory in ("converted_svg_failed", "converted_svgs"):
         candidates.append(output / subdirectory / "Failed_UPLOAD.svg")
@@ -1156,6 +1191,8 @@ def collect_result(folder: Path, job: dict, returncode: int) -> None:
         if reject_raster_result(result, job):
             return
         contain_result(result, job)
+        quality = saved_svg_quality(folder / 'source.png', result)
+        job['pixel_quality'] = quality
         if reject_description_result(result, job):
             return
         shutil.copyfile(result, folder / "result.svg")
@@ -1529,7 +1566,14 @@ class Handler(BaseHTTPRequestHandler):
         if download:
             self.send_header("Content-Disposition", f'attachment; filename="{download}"')
         self.end_headers()
-        self.wfile.write(data)
+        try:
+            self.wfile.write(data)
+        except (ConnectionAbortedError,
+                ConnectionResetError,
+                BrokenPipeError):
+            # Client connection no longer available
+            self.log_message("Client disconnected")
+            return
 
     def json(self, payload: object, status: int = 200) -> None:
         self.respond(json.dumps(payload, ensure_ascii=False).encode("utf-8"),
@@ -1573,6 +1617,7 @@ class Handler(BaseHTTPRequestHandler):
                         workbench_description_updates=True,
                         parallel_background_conversion=True,
                         editable_search_seed=True,
+                        automatic_seed_retry=True,
                         seeded_template_search=True,
                         simple_native_forms=True,
                         image_recognition=True,
@@ -1728,6 +1773,13 @@ class Handler(BaseHTTPRequestHandler):
                             return self.json(jobs.start(job_id, payload.get("description", ""),
                                                         payload.get("profile", "normal"), seed=payload.get('seed'),
                                                         use_current_svg=payload.get('use_current_svg',True)))
+                    if not remove and action == 'repeat':
+                        with jobs.lock:
+                            if self.server.workbench.busy():
+                                raise RequestError('In der Workbench läuft eine Konvertierung.', 409)
+                            return self.json(jobs.seed_retry.toggle(job_id, payload.get('description', ''),
+                                payload.get('profile', 'normal'), seed=payload.get('seed'),
+                                use_current_svg=payload.get('use_current_svg', True)))
                     if not remove and action == 'recognize':
                         return self.json(jobs.recognize(job_id))
                     if not remove and action == 'description':

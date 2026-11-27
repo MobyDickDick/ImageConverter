@@ -1,6 +1,17 @@
+
 {
   "version": "0.2.0",
   "configurations": [
+    {
+      "name": "ImageConverter: GUI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.imageConverterGui",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "args": [],
+      "justMyCode": false
+    },
     {
       "name": "ImageConverter: convert interactive range",
       "type": "debugpy",

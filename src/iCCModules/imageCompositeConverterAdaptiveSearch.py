@@ -263,7 +263,8 @@ class ImageSearch:
         import zlib
         renderer = renderer or getattr(render_fn, 'search_renderer',
             render_fn.__module__+'.'+getattr(render_fn, '__qualname__', type(render_fn).__name__))
-        key = (str(renderer), int(width), int(height), candidate_identity(svg))
+        source_identity = raster_identity(image) if image is not None else self.reference_identity or 'unbound'
+        key = (source_identity, str(renderer), int(width), int(height), candidate_identity(svg))
         if key in self.render_memo:
             self.render_cache_hits += 1
             self.render_memo.move_to_end(key)
@@ -344,6 +345,8 @@ class SearchRun:
         reason = self.session.reason()
         if reason:
             return reason
+        if self.session.minimum_pending:
+            return None
         if self.session.finish_model_searches:
             return 'candidate_comparison'
         if self.proposals >= self.maximum:
@@ -495,7 +498,7 @@ def tracked_renderer(function):
             return function(svg, width, height, *args, **kwargs)
         pixels, _ = session.render_candidate(None, svg,
             lambda s, w, h: function(s, w, h, *args, **kwargs), width, height,
-            renderer=namespace)
+            renderer=namespace+(':contained' if kwargs.get('constrain_canvas') else ''))
         return pixels
     render.search_renderer = namespace
     return render

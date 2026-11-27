@@ -1,0 +1,27 @@
+{
+  "seed": 18,
+  "profile": "quick",
+  "independent_quality": {
+    "normalized_mse": 0.0007824190543033183,
+    "foreground_mse": 0.0012048919452354312,
+    "foreground_iou": 0.9645776566757494,
+    "foreground_iou_binary": 0.9645776566757494,
+    "edge_alignment": 0.9117457866668701,
+    "passed": true
+  },
+  "search": {
+    "candidate_evaluations": 326,
+    "stop_reason": "satisfactory",
+    "satisfactory": true,
+    "elapsed_seconds": 5.494999,
+    "minimum_seconds": 30.0,
+    "limit_seconds": 35.0,
+    "renderings": 326,
+    "render_budget": 4096,
+    "render_cache_hits": 1,
+    "render_sequence_sha256": "eff7310dea84d64d5357d00fc2dfa0a8fd2c07c94d1dbf5edb7460b0266325bd",
+    "search_seed": "18",
+    "global_stop_reason": null
+  },
+  "elapsed": 6.3
+}

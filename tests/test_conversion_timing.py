@@ -46,7 +46,9 @@ def test_delayed_process_creation_is_charged_to_outer_budget(tmp_path, monkeypat
         invoke(tmp_path, 'import time; time.sleep(30)', .2)
     records = read_trace(tmp_path/'process.timing.jsonl')
     assert records[1]['phase'] == 'process_created'
-    assert records[1]['observation_gap_seconds'] >= .35
+    # Windows Python 3.10 observes monotonic time on a coarse tick clock;
+    # elapsed readings can straddle two ticks even when sleep is accurate.
+    assert records[1]['observation_gap_seconds'] >= .35 - 2*time.get_clock_info('monotonic').resolution
     assert records[2]['error'] == 'TimeoutExpired'
 
 

@@ -11,7 +11,7 @@ from xml.etree import ElementTree as ET
 
 import numpy as np
 
-VERSION = 'primitive_scene_program_v2'
+VERSION = 'primitive_scene_program_v3'
 KINDS = ('circle', 'ellipse', 'rect', 'square', 'triangle', 'line')
 # Each object has centre, size, angle, stroke width, RGB fill/stroke, and a
 # second fill stop. Paint is independent of geometry; the last two values select
@@ -121,7 +121,15 @@ def sample_parameters(program, svg, width, height):
 def scene_program(description):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
-    text = normalize_description(description).casefold()
+    normalized = normalize_description(description)
+    # A quoted label belongs to the declared circle, not to a replacement
+    # circle-only model. Consume the complete supported sentence before the
+    # unsupported-language check, preserving the original letter case.
+    label_pattern = r'\bin der (?:kelle|kreisscheibe) ist ein ["„]([A-Za-z0-9])["“] geschrieben[.]?'
+    labels = re.findall(label_pattern, normalized, re.IGNORECASE)
+    text = re.sub(label_pattern, '', normalized, flags=re.IGNORECASE).casefold()
+    if len(labels) > 1 or re.search(r'["„“]', text):
+        return None
     from src.iCCModules.imageCompositeConverterScopedPaint import scoped_paint_claims
     paint_claims, text = scoped_paint_claims(text)
     # This is a bounded primitive language, not permission to ignore objects.
@@ -149,9 +157,13 @@ def scene_program(description):
     for kind in KINDS:
         for i in range(counts.get(kind, 0)):
             objects.append(dict(id=f'{kind}_{i}', kind=kind))
+    if labels:
+        if counts.get('circle') != 1:
+            return None
+        objects.append(dict(id='label_0', kind='text', label=labels[0]))
     nouns=dict(circle=r'kreis\w*|kelle',ellipse=r'ellipse\w*',rect=r'rechteck\w*',
                square=r'quadrat\w*',triangle=r'dreieck\w*',line=r'linie\w*|gerade\w*|kelle')
-    for section in re.finditer(r'\b(links|rechts)\s*:\s*([^.]+)',text):
+    for section in re.finditer(r'\b(links|rechts|oben|unten)\s*:?\s+([^.]+)',text):
         for kind,pattern in nouns.items():
             if re.search(r'\b(?:'+pattern+r')\b',section[2]):
                 for obj in objects:
@@ -162,14 +174,17 @@ def scene_program(description):
     if match:
         stem_direction = dict(rechts=0., unten=math.pi/2, links=math.pi, oben=-math.pi/2)[match[1]]
     relations = []
+    if labels:
+        relations.append(dict(kind='inside', objects=['circle_0','label_0']))
     circles = [o['id'] for o in objects if o['kind']=='circle']
     lines = [o['id'] for o in objects if o['kind']=='line']
     triangles = [o['id'] for o in objects if o['kind']=='triangle']
     if 'kelle' in text and len(circles)==len(lines)==1:
         relations.append(dict(kind='attached', objects=[circles[0], lines[0]], direction=stem_direction))
     if re.search(r'(?:gleich\w*|gemeinsam\w*)\s+(?:punkt|spitze)', text):
-        if len(triangles)==2:
-            relations.append(dict(kind='coincident', objects=triangles, anchors=['apex','apex']))
+        if len(triangles) in {2,3}:
+            relations.extend(dict(kind='coincident', objects=[triangles[0],other], anchors=['apex','apex'])
+                             for other in triangles[1:])
             if re.search(r'\bgriff\w*\b', text) and len(lines)==1:
                 relations.append(dict(kind='coincident', objects=[lines[0],triangles[0]], anchors=['end','apex']))
         else:
@@ -217,9 +232,16 @@ def relation_error(program, shapes, width, height):
     right=[shapes[o['id']]['center'][0] for o in program['objects'] if o.get('side')=='rechts']
     if left and right:
         error+=max(0.,(max(left)-min(right))/width)**2
+    upper=[shapes[o['id']]['center'][1] for o in program['objects'] if o.get('side')=='oben']
+    lower=[shapes[o['id']]['center'][1] for o in program['objects'] if o.get('side')=='unten']
+    if upper and lower:
+        error+=max(0.,(max(upper)-min(lower))/height)**2
     for relation in program['relations']:
         a,b=(shapes[key] for key in relation['objects'])
-        if relation['kind']=='coincident':
+        if relation['kind']=='inside':
+            error+=float(np.square((a['center']-b['center'])/[width,height]).sum())
+            error+=max(0.,np.linalg.norm(b['size'])/2-a['size'][0]*.48)**2/min(width,height)**2
+        elif relation['kind']=='coincident':
             pa=a['points'][1 if relation['anchors'][0]=='end' else 0]
             pb=b['points'][1 if relation['anchors'][1]=='end' else 0]
             error+=float(np.square((pa-pb)/[width,height]).sum())
@@ -259,7 +281,17 @@ def program_svg(program, parameters, width, height, background=(255,255,255)):
             fill=f'url(#{gradient})'
         attrs=f'id="{obj["id"]}" fill="{fill}" stroke="{color(paint[3:6])}" stroke-width="{s["stroke"]:.5f}" stroke-linejoin="round"'
         cx,cy=s['center']; sx,sy=s['size']; angle=math.degrees(s['angle'])
-        if s['kind']=='circle':
+        if s['kind']=='text':
+            # Native text stays upright. A measured font width gives independent
+            # width/height parameters without relying on SVG textLength support.
+            import fitz
+            from xml.sax.saxutils import escape
+            label=escape(obj['label'])
+            natural=fitz.Font('hebo').text_length(obj['label'],fontsize=sy)
+            part=(f'<text id="{obj["id"]}" x="0" y="0" text-anchor="middle" '
+                  f'font-family="Arial" font-weight="700" font-size="{sy:.5f}" fill="{color(paint[:3])}" '
+                  f'transform="translate({cx:.5f} {cy+sy*.35:.5f}) scale({sx/max(natural,1e-8):.7f} 1)">{label}</text>')
+        elif s['kind']=='circle':
             part=f'<circle cx="{cx:.5f}" cy="{cy:.5f}" r="{sx/2:.5f}" {attrs}/>'
         elif s['kind']=='ellipse':
             part=f'<ellipse cx="{cx:.5f}" cy="{cy:.5f}" rx="{sx/2:.5f}" ry="{sy/2:.5f}" transform="rotate({angle:.5f} {cx:.5f} {cy:.5f})" {attrs}/>'
@@ -295,7 +327,14 @@ def validate_program_svg(svg, program, tolerance=.01):
         identifier=node.get('id')
         kind=node.tag.rsplit('}',1)[-1]
         if identifier:
-            if kind=='circle':
+            if kind=='text':
+                size=float(node.get('font-size','0'))
+                import fitz
+                label=''.join(node.itertext())
+                width=fitz.Font('hebo').text_length(label,fontsize=size)
+                shapes[identifier]=dict(center=mapped([[0,-size*.35]])[0],label=label,
+                    size=np.array([width*math.hypot(a,b),size*math.hypot(c,d)]))
+            elif kind=='circle':
                 shapes[identifier]=dict(center=mapped([[float(node.get('cx')),float(node.get('cy'))]])[0],
                                         radius=float(node.get('r'))*math.hypot(a,b))
             elif kind=='line':
@@ -314,11 +353,19 @@ def validate_program_svg(svg, program, tolerance=.01):
     right=[shapes[o['id']]['center'][0] for o in program['objects'] if o.get('side')=='rechts' and o['id'] in shapes]
     if left and right and max(left)>=min(right):
         raise ValueError('primitive_relation:wrong_left_right_order')
+    upper=[shapes[o['id']]['center'][1] for o in program['objects'] if o.get('side')=='oben' and o['id'] in shapes]
+    lower=[shapes[o['id']]['center'][1] for o in program['objects'] if o.get('side')=='unten' and o['id'] in shapes]
+    if upper and lower and max(upper)>=min(lower):
+        raise ValueError('primitive_relation:wrong_top_bottom_order')
     for rel in program['relations']:
         if any(key not in shapes for key in rel['objects']):
             raise ValueError('primitive_relation:missing_objects')
         a,b=(shapes[key] for key in rel['objects'])
-        if rel['kind']=='coincident':
+        if rel['kind']=='inside':
+            expected=next(o['label'] for o in program['objects'] if o['id']==rel['objects'][1])
+            if b.get('label')!=expected or np.linalg.norm(b['center']-a['center'])+np.linalg.norm(b['size'])/2>a['radius']+tolerance:
+                raise ValueError('primitive_relation:label_outside_circle')
+        elif rel['kind']=='coincident':
             pa=a['points'][1 if rel['anchors'][0]=='end' else 0]
             pb=b['points'][1 if rel['anchors'][1]=='end' else 0]
             if np.linalg.norm(pa-pb)>tolerance:

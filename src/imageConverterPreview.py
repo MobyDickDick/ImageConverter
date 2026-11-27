@@ -1,7 +1,8 @@
 """Publish rendered SVG attempts and improving previews for the local GUI only.
 
-Uses the raster already computed by the search, without another render. Preview
-scores never influence candidate selection or the converter's quality gates.
+Uses the search raster unless publication fits overflowing geometry. In that
+case the preview measures the fitted vector. Preview scores never influence
+candidate selection or the converter's quality gates.
 """
 from __future__ import annotations
 
@@ -219,8 +220,19 @@ class PreviewPublisher:
                 node.tag.rsplit('}', 1)[-1] in {'image', 'foreignObject', 'script'}
                 for node in root.iter()):
             return
-        from src.iCCModules.imageCompositeConverterCanvas import contain_svg
+        from src.iCCModules.imageCompositeConverterCanvas import contain_svg, within_canvas
+        original = svg
         svg = contain_svg(svg, self.target.shape[1], self.target.shape[0])
+        if not within_canvas(original, self.target.shape[1], self.target.shape[0]):
+            import cv2
+            import fitz
+            from src.iCCModules.imageCompositeConverterRendering import render_svg_to_numpy_inprocess
+            bounded_pixels = render_svg_to_numpy_inprocess(svg, self.target.shape[1], self.target.shape[0],
+                fitz_module=fitz, np_module=np, cv2_module=cv2)
+            if bounded_pixels is None:
+                return
+            pixels = cv2.cvtColor(bounded_pixels, cv2.COLOR_BGR2RGB)
+            error = float(np.square(self.target-pixels.astype(np.float32)).mean())
         # Keep every rendered native attempt, including worse/duplicate/blank
         # search seeds. Best-result selection below remains independent.
         rank = self.rank(svg, pixels)

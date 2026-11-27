@@ -165,7 +165,7 @@ def render_svg(svg, width, height):
     # Use the same private gradient adapters as the converter: this PyMuPDF
     # build otherwise paints native SVG gradients black during GUI validation.
     image = render_svg_to_numpy_inprocess(svg, width, height,
-        fitz_module=fitz, np_module=np, cv2_module=cv2)
+        fitz_module=fitz, np_module=np, cv2_module=cv2, constrain_canvas=True)
     if image is None:
         raise ValueError("Das SVG konnte nicht gerendert werden.")
     if image.shape[:2] != (height, width):
@@ -215,7 +215,7 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
         initial_mse=initial_mse, initial_quality=initial_quality,
         template_rejection=template_error, restarted_from_description=True,
         description_fit_directory=str(folder), stop_reason='description_fit_failed',
-        description_error='', message='Die Vorlage passt nicht zur Beschreibung. '
+        description_error=template_error, message='Die Vorlage passt nicht zur Beschreibung. '
         'Auch die neue Konvertierung aus der Beschreibung hat noch kein passendes SVG ergeben.')
     print('Vorlage verworfen: '+template_error+'. Starte neue Konvertierung aus der Bildbeschreibung.', flush=True)
     import hashlib
@@ -276,12 +276,13 @@ def refit_description(source, output, description, *, seed, hard_deadline, initi
             validate_svg_assertions(svg, assertions)
             # Reuse the exact child render, including when its final proposal
             # spent the remaining budget. The CLI cache uses BGR pixels.
-            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity
+            from src.iCCModules.imageCompositeConverterAdaptiveSearch import candidate_identity, raster_identity
             renderer = 'src.imageCompositeConverter.Action.renderSvgToNumpy'
-            key = (renderer, w, h, candidate_identity(svg))
+            bgr_target = target[:, :, ::-1].copy()
+            key = (raster_identity(bgr_target), renderer, w, h, candidate_identity(svg))
             if key in session.render_memo:
                 import cv2
-                bgr, _ = session.render_candidate(target, svg, lambda *a: None, w, h, renderer=renderer)
+                bgr, _ = session.render_candidate(bgr_target, svg, lambda *a: None, w, h, renderer=renderer)
                 pixels = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB) if bgr is not None else None
             else:
                 pixels = render_svg(svg, w, h)
@@ -380,6 +381,13 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
                 atomic_json(output.with_suffix('.json'),report)
                 return report
     constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
+    rendered = render_svg(prepared, width, height)
+    if rendered is None:
+        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
+                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
+    initial_rendered = rendered.copy()
+    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
+    initial_quality = pixel_quality(target, rendered)
     initial_description_error = ''
     try:
         validate_svg_assertions(constrained, assertions)
@@ -390,15 +398,8 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
         # conversion. First allow orientation to satisfy directional claims.
         if not compatible_sample_pose(ET.fromstring(constrained), width, height, assertions, deadline=hard_deadline):
             return refit_description(source, output, description, seed=effective_seed,
-                hard_deadline=hard_deadline, initial_mse=None, initial_quality=None,
+                hard_deadline=hard_deadline, initial_mse=initial_mse, initial_quality=initial_quality,
                 template_error=str(exc), started=started)
-    rendered = render_svg(prepared, width, height)
-    if rendered is None:
-        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
-                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
-    initial_rendered = rendered.copy()
-    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
-    initial_quality = pixel_quality(target, rendered)
     if constrained != prepared:
         root = ET.fromstring(constrained)
         rendered = render_svg(constrained, width, height)

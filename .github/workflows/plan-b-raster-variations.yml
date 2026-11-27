@@ -21,6 +21,10 @@ on:
       - '.github/workflows/plan-b-raster-variations.yml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   distinct-raster-preparation:
     runs-on: ubuntu-latest

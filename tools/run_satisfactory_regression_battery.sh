@@ -9,15 +9,6 @@ SATISFACTORY_REGRESSION_TIMEOUT_SECONDS="${SATISFACTORY_REGRESSION_TIMEOUT_SECON
 export RUN_HEAVY_CONVERSION_TESTS="${RUN_HEAVY_CONVERSION_TESTS:-1}"
 export PYTHONUNBUFFERED="${PYTHONUNBUFFERED:-1}"
 
-PY_TAG="$(${PYTHON_BIN} - <<'PYTAG'
-import sys
-print(f"py{sys.version_info.major}{sys.version_info.minor}")
-PYTAG
-)"
-VENDOR_SITE_PACKAGES="vendor/linux-${PY_TAG}/site-packages"
-if [[ -d "${VENDOR_SITE_PACKAGES}" ]]; then
-  export PYTHONPATH="${VENDOR_SITE_PACKAGES}:${PYTHONPATH:-}"
-fi
 
 PYTEST_ARGS=(
   -vv

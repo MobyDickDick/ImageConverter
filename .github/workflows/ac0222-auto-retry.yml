@@ -1,0 +1,133 @@
+name: AC0222 circle valve and automatic seed retries
+
+on:
+  push:
+    branches: ['codex/ac0222-auto-retry']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ac0222-auto-retry-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  retry-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-evidence
+      - name: Retry lifecycle, cancellation, best retention and existing GUI contracts
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: >-
+          python -m pytest -q tests/test_seed_retry.py
+          tests/test_gui_preview.py tests/test_three_wing_valve_description.py
+          --basetemp=ci-evidence/contracts --junitxml=ci-evidence/contracts.xml
+      - name: Browser controls, polling and existing interface behavior
+        if: always()
+        run: node --test tests/test_app_background.js tests/gui_app.test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seed-retry-contracts
+          path: ci-evidence/
+          retention-days: 7
+  existing-gui-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        revision: [current, base]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.revision == 'base' && '80453dc9096324101a0b2b560aa2b7607e9f5580' || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-evidence
+      - name: Record two complete GUI runs per revision with the same seed
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: |
+          python - <<'PY'
+          import pytest
+          from src import imageConverterGui as gui
+          gui.secrets.randbits = lambda bits: 17
+          codes = [pytest.main(['-q', 'tests/test_image_converter_gui.py',
+              f'--basetemp=ci-evidence/gui-{trial}', f'--junitxml=ci-evidence/gui-{trial}.xml'])
+              for trial in (1, 2)]
+          raise SystemExit(max(codes))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: existing-gui-${{ matrix.revision }}
+          path: ci-evidence/
+          retention-days: 7
+  compare-existing-gui:
+    needs: existing-gui-regressions
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: existing-gui-*
+          path: baseline-comparison
+      - name: Require no new failures and disclose the inherited failures
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          def failures(label):
+              paths = list((Path('baseline-comparison')/f'existing-gui-{label}').glob('gui-*.xml'))
+              assert len(paths)==2, paths
+              return {t.get('name') for path in paths for t in ET.parse(path).iter('testcase')
+                      if t.find('failure') is not None or t.find('error') is not None}
+          base, current = failures('base'), failures('current')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+              stream.write(f'Existing GUI suite (union of two seeded runs): base {len(base)} failing cases, current {len(current)} failing cases.\n\n')
+              stream.write('\n'.join('- '+name for name in sorted(current)))
+          assert not current-base, f'New failures: {sorted(current-base)}'
+          PY
+  actual-circle-conversion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin fonts-liberation
+      - run: python -m pip install -r requirements-dev.txt
+      - run: mkdir -p ci-evidence
+      - name: Unmodified description, two seeds, two profiles and independent librsvg acceptance
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+        run: >-
+          python -m pytest -q tests/test_three_wing_circle.py
+          --basetemp=ci-evidence/circle --junitxml=ci-evidence/circle.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: circle-valve-original-svg-and-independent-renders
+          path: ci-evidence/
+          retention-days: 7

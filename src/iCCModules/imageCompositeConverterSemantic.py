@@ -423,6 +423,11 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
     normalized = _normalize_semantic_text(desc)
     if not normalized:
         return False
+    from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
+    if description_object_limits(desc).get('triangle',0)>=2:
+        # A labelled circle is only one part of this scene. A badge optimiser
+        # cannot create the other declared objects, regardless of its seed.
+        return False
 
     # An explicitly decomposed interior line scene is not a connector badge.
     # In particular, an interior T made from strokes must not acquire the

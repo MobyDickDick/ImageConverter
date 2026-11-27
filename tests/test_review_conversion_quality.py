@@ -230,7 +230,7 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
 
 
 def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:
-    record = review_variant("AC0022", source="diff_inventory")
+    record = _review_committed_snapshot("AC0022", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 36
@@ -269,7 +269,7 @@ def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
 
 
 def test_ac0531_1_s_committed_svg_preserves_flap_primitives_and_quality() -> None:
-    record = review_variant("AC0531_1_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0531_1_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 20
@@ -284,7 +284,7 @@ def test_ac0531_1_s_committed_svg_preserves_flap_primitives_and_quality() -> Non
 
 
 def test_ac0502_1_m_committed_svg_preserves_rotated_flap_quality() -> None:
-    record = review_variant("AC0502_1_M", source="diff_inventory")
+    record = _review_committed_snapshot("AC0502_1_M", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 60
@@ -401,7 +401,7 @@ def test_ac0922_s_committed_snapshot_preserves_circle_connector_quality() -> Non
 
 
 def test_ac0414_s_committed_svg_preserves_partitioned_circle_quality() -> None:
-    record = review_variant("AC0414_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0414_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 20
@@ -417,7 +417,7 @@ def test_ac0414_s_committed_svg_preserves_partitioned_circle_quality() -> None:
 
 
 def test_ac0130_m_committed_svg_preserves_visible_vertical_partition_quality() -> None:
-    record = review_variant("AC0130_M", source="diff_inventory")
+    record = _review_committed_snapshot("AC0130_M", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 30
@@ -434,7 +434,7 @@ def test_ac0130_m_committed_svg_preserves_visible_vertical_partition_quality() -
 
 
 def test_ac0130_committed_svg_preserves_full_size_cross_quality() -> None:
-    record = review_variant("AC0130", source="diff_inventory")
+    record = _review_committed_snapshot("AC0130", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 40
@@ -468,7 +468,7 @@ def test_ac0551_2_m_committed_svg_preserves_chevron_quality() -> None:
 
 
 def test_ac0254_2_committed_svg_preserves_left_rotated_circular_damper_quality() -> None:
-    record = review_variant("AC0254_2", source="diff_inventory")
+    record = _review_committed_snapshot("AC0254_2", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 31
@@ -598,7 +598,7 @@ def test_ac0722_1_l_committed_svg_preserves_horizontal_t_kelle_quality() -> None
 
 
 def test_ac0722_1_s_committed_svg_preserves_small_horizontal_t_kelle_quality() -> None:
-    record = review_variant("AC0722_1_S", source="diff_inventory")
+    record = _review_committed_snapshot("AC0722_1_S", source="diff_inventory")
 
     assert record.status == "ok"
     assert record.width == 25

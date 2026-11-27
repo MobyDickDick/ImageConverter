@@ -151,7 +151,8 @@ def test_normal_gui_result_checks_relations_even_when_exit_code_and_pixels_pass(
     job=dict(description=desc)
     gui.collect_result(tmp_path,job,0)
     assert job['pixel_quality']['passed']
-    assert job['result'] and job['quality']=='warning'
+    assert not job['result'] and job['quality']=='warning'
+    assert job['result_rejection']=='description_inventory'
     assert 'anchor_relation:' in job['description_error']
     assert job['description_validation_version']==gui.DESCRIPTION_VALIDATION_VERSION
 

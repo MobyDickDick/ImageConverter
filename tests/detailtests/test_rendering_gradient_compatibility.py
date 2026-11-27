@@ -291,7 +291,7 @@ def test_bezier_adapter_preserves_unsupported_gradients(extra):
 
 
 def test_bezier_adapter_does_not_expand_an_unsupported_viewport_mapping():
-    svg = curved_gradient_svg().replace('width="40"','preserveAspectRatio="none" width="40"')
+    svg = curved_gradient_svg().replace('width="40"','preserveAspectRatio="xMidYMid slice" width="40"')
     assert rendering._expand_bezier_linear_gradients_for_fitz(svg)==svg
 
 

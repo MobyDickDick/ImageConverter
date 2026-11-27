@@ -8,6 +8,14 @@ und vorhandene SVG-Vorlagen. Die ursprüngliche Beschreibung bestimmt die
 erlaubten Elemente. Positionen, Grössen und Winkel werden nicht aus Konturen
 vermessen oder aus einem Referenz-SVG übernommen.
 
+Ergänzung zur vollständigen beschrifteten Konstruktion vom 22. November:
+Bei drei verbundenen Dreiecken und einer beschrifteten Kelle ergänzt jetzt ein
+beobachteter Geometrievorschlag die unabhängige Zufallspopulation. Die obige
+Aussage zur ausschliesslich zufälligen Anfangsgeometrie gilt für diesen Pfad
+damit nicht mehr. Der Vorschlag durchläuft dieselben Bild- und Beschreibungsprüfungen.
+„In der Kelle ist ein \"M\" geschrieben“ wird mit unveränderter Grossschreibung
+unterstützt; freie allgemeine Textbeschreibungen bleiben begrenzt.
+
 ## Bedienung und Speicherung
 
 Bild und Beschreibung laden, ein freies Suchprofil wählen und starten. Ein

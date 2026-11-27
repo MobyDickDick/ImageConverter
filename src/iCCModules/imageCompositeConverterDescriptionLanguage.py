@@ -15,6 +15,74 @@ class DescriptionRejected(ValueError):
     pass
 
 
+def _validate_labels(root, expected):
+    """Match native text runs by content and adjacent, transformed typography.
+
+    Separate glyph positioning and a smaller raised/lowered index remain one
+    logical label. Arbitrary distant text runs cannot satisfy that label.
+    """
+    from src.iCCModules.imageCompositeConverterArrowAssertions import _compose, _transform
+    runs = []
+    def visit(node, parent=(1., 0., 0., 1., 0., 0.), size=16.):
+        kind = node.tag.rsplit('}', 1)[-1]
+        if kind in {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}:
+            return
+        matrix = _compose(parent, _transform(node.get('transform', '')))
+        size = float(node.get('font-size', str(size)).removesuffix('px'))
+        if kind == 'text':
+            text = ''.join(node.itertext()).strip()
+            if text:
+                a,b,c,d,tx,ty = matrix
+                x, y = float(node.get('x', '0')), float(node.get('y', '0'))
+                runs.append((text, a*x+c*y+tx, b*x+d*y+ty, size*math.hypot(c,d)))
+            return
+        for child in node:
+            visit(child, matrix, size)
+    try:
+        visit(root)
+    except (ValueError, TypeError):
+        raise DescriptionRejected('unsupported_label_typography')
+
+    def matches(group, label):
+        script = re.fullmatch(r'(.+?)([\^_])([0-9]+)', label)
+        content = script[1]+script[3] if script else label
+        if ''.join(run[0] for run in group) != content:
+            return False
+        if len(group) == 1:
+            return not script
+        for previous, current in zip(group, group[1:]):
+            _, px, py, ps = previous
+            _, cx, cy, cs = current
+            if not all(math.isfinite(v) for v in (px, py, ps, cx, cy, cs)) or min(ps,cs) <= 0:
+                return False
+            if not 0 < cx-px <= max(ps,cs)*(len(previous[0])+1):
+                return False
+            if not script and abs(cy-py) > max(ps,cs)*.35:
+                return False
+        if script:
+            base, index = group[:-1], group[-1]
+            if ''.join(run[0] for run in base) != script[1] or index[0] != script[3]:
+                return False
+            _, _, by, bs = base[-1]
+            _, _, iy, ins = index
+            return ins < bs*.9 and (iy < by if script[2] == '^' else iy > by)
+        return True
+
+    def consume(offset, remaining):
+        if offset == len(runs):
+            return not remaining
+        for label in remaining:
+            rest = list(remaining)
+            rest.remove(label)
+            for end in range(offset+1, len(runs)+1):
+                if matches(runs[offset:end], label) and consume(end, rest):
+                    return True
+        return False
+    if not consume(0, expected):
+        raise DescriptionRejected('wrong_described_labels')
+    return len(expected)
+
+
 def normalize_description(description: str, *, orientations: bool = False) -> str:
     """Normalize equivalent vocabulary, keeping polarity and quoted text.
 
@@ -111,9 +179,11 @@ def description_assertions(description: str) -> dict:
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', normalized).casefold()
     no_text = bool(re.search(r'\b(?:keine schriftzeichen|ohne text|ohne schriftzeichen)\b', words))
     label_claim = bool(labels and re.search(
-        r'\b(?:beschriftung|aufschrift|text|buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
+        r'\b(?:beschriftung|aufschrift|text|(?:groß|gross|klein)?buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
         r'["“][^.?!]{0,100}\bals\b[^.?!]{0,40}\b(?:beschriftung|aufschrift|text|label)\b', normalized,
-        flags=re.IGNORECASE))
+        flags=re.IGNORECASE) or re.search(
+            r'\bin der (?:kelle|kreisscheibe) ist ein ["„][^"“\n]+["“] geschrieben',
+            normalized, re.IGNORECASE))
     unnamed_text = bool(not label_claim and re.search(
         r'\b(?:mit\s+(?:einer?\s+)?|eine?\s+)(?:beschriftung|aufschrift|buchstabe|text|ziffer)\b', words))
     if no_text and (label_claim or re.search(r'\b(?:ausrufezeichen|fragezeichen)\b', words)):
@@ -151,8 +221,9 @@ def description_assertions(description: str) -> dict:
     if partition:
         assertions['partitioned_rhombus'] = partition
     from src.iCCModules.imageCompositeConverterThreeWingValve import three_wing_valve_spec
-    if three_wing_valve_spec(normalized):
-        assertions['three_wing_valve'] = True
+    three_wing = three_wing_valve_spec(normalized)
+    if three_wing:
+        assertions['three_wing_valve'] = three_wing
     from src.iCCModules.imageCompositeConverterScopedPaint import scoped_paint_claims
     paint_claims, _ = scoped_paint_claims(words)
     if paint_claims:
@@ -174,6 +245,8 @@ def description_assertions(description: str) -> dict:
         assertions['anchor_relations'] = relations
     from src.iCCModules.imageCompositeConverterRepresentation import description_object_limits
     objects = description_object_limits(normalized)
+    if symmetric_lines:
+        objects = dict(circle=1, line=2)
     from src.iCCModules.imageCompositeConverterDiskArrow import disk_arrow_direction
     direction = disk_arrow_direction(normalized)
     if direction:
@@ -186,6 +259,10 @@ def description_assertions(description: str) -> dict:
         assertions['labels'] = sorted(set(labels))
     if arrow_pair:
         objects['triangle'] = 2
+        # Directed triangles alone do not imply shafts. Arrow/tube vocabulary
+        # does, including prose that calls the shafts Rohre rather than Linien.
+        if re.search(r'\b(?:pfeil\w*|rohr\w*|röhr\w*|schaft\w*|schäft\w*|lini\w*)\b', words):
+            objects['line'] = max(objects.get('line', 0), 2 + bool(horizontal_bar_colors(normalized)))
     if objects:
         assertions['objects'] = objects
         # The description is always the complete inventory. Pixel evidence
@@ -208,8 +285,9 @@ def description_assertions(description: str) -> dict:
         # consists of two rails. Its visible-structure validator checks both
         # rails and the other axis; a flat SVG-wide count would count three
         # strokes as three diagonals or confuse the rails with all scene lines.
-        for kind in ('line', 'diagonal'):
+        for kind in ('line',):
             assertions.get('objects', {}).pop(kind, None)
+        assertions.setdefault('objects', {})['diagonal'] = 2
     # Global, positive claims only. Quoted labels and negative clauses must
     # never turn into an instruction to regularize the drawing.
     uniform = (r'\b(?:alle|sämtliche)\s+(?:linien|striche|konturen)\s+'
@@ -244,7 +322,10 @@ def description_assertions(description: str) -> dict:
         ray_count = re.search(r'\b(\d+)\s+(?:sprüh)?strahlen\b', words)
         if ray_count and spray_contract(description) and _dashed_spray_rays(description):
             assertions['dashed_spray_rays'] = int(ray_count.group(1))
-    if not objects:
+    # A global width condition can constrain an explicitly supplied SVG
+    # without declaring a new scene. Fresh generation still has no objects
+    # to construct; existing native geometry must satisfy the condition.
+    if not objects and not assertions.get('equal_stroke_width'):
         assertions['inventory_error'] = 'missing_described_object_inventory'
     elif unnamed_text:
         assertions['inventory_error'] = 'unresolved_described_label'
@@ -271,7 +352,7 @@ def draft_assertions(assertions):
     result = dict(counts=[], no_text=assertions.get('no_text', False))
     for key in ('equal_stroke_width', 'objects', 'objects_complete', 'symbol_strokes', 'inventory_error',
                 'svg_component_description', 'two_way_valve', 'three_wing_valve', 'primitive_program', 'scoped_paint',
-                'partitioned_rhombus'):
+                'partitioned_rhombus', 'symmetric_circle_lines'):
         if assertions.get(key):
             result[key] = assertions[key]
     if result.get('objects'):
@@ -289,7 +370,8 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
     if assertions and assertions.get('three_wing_valve'):
         from src.iCCModules.imageCompositeConverterThreeWingValve import validate_three_wing_valve
         try:
-            validate_three_wing_valve(svg)
+            spec = assertions['three_wing_valve']
+            validate_three_wing_valve(svg, spec if isinstance(spec, dict) else None)
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc
     if assertions and assertions.get('svg_component_description'):
@@ -356,10 +438,7 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         if any(node.tag.rsplit('}', 1)[-1] in {'image', 'use', 'foreignObject', 'script'} for node in root.iter()):
             raise DescriptionRejected('unsupported_inventory_element')
     if assertions.get('labels'):
-        actual_labels = sorted(''.join(node.itertext()).strip() for node in root.iter()
-                               if node.tag.rsplit('}', 1)[-1] == 'text')
-        if actual_labels != assertions['labels']:
-            raise DescriptionRejected('wrong_described_labels')
+        _validate_labels(root, assertions['labels'])
     excluded = {'defs', 'clipPath', 'mask', 'symbol', 'pattern', 'marker'}
     def visible_nodes(element):
         kind = element.tag.rsplit('}',1)[-1]
@@ -448,6 +527,8 @@ def validate_svg_assertions(svg: str, assertions: dict | None) -> None:
         from src.iCCModules.imageCompositeConverterRepresentation import validate_object_limits
         try:
             validate_object_limits(svg, assertions['objects'], partial=assertions.get('objects_partial', False),
-                                   complete=assertions.get('objects_complete', False), symbol_strokes=assertions.get('symbol_strokes', 0))
+                                   complete=assertions.get('objects_complete', False), symbol_strokes=assertions.get('symbol_strokes', 0),
+                                   text_count=len(assertions['labels']) if assertions.get('labels') else None,
+                                   diagonal_rails=bool(assertions.get('hollow_cross_panel')))
         except ValueError as exc:
             raise DescriptionRejected(str(exc)) from exc

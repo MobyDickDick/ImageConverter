@@ -27,7 +27,7 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import (
 )
 from src.iCCModules.imageCompositeConverterSearchPortfolio import progress, settings
 
-SCHEMA='primitive_evolution_v3'
+SCHEMA='primitive_evolution_v4'
 
 
 def search_binding(image,description,program,color_order='BGR'):
@@ -111,7 +111,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     if session:
         # Finish the durable checkpoint and hand it back before the supervising
         # process enforces the same hard image deadline.
-        seconds=min(seconds,max(.001,session.limit-session.elapsed-min(2.,seconds*.02)))
+        seconds=min(seconds,max(.001,session.limit-session.elapsed-min(5.,seconds*.10)))
     started=time.monotonic()
     rng=np.random.default_rng(seed)
     binding=search_binding(image,description,program,color_order)
@@ -131,9 +131,25 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                      if target_edges.any() else np.zeros((h,w),dtype='float32'))
     count=len(program['objects']); dimension=count*STRIDE
     constrained_paint=bool(program.get('paint_claims'))
+    has_label=any(o['kind']=='text' for o in program['objects'])
+    structured=constrained_paint or has_label
+
+    def search_goal(quality):
+        if constrained_paint:
+            return preferred_quality(quality)
+        if has_label:
+            # A marginal MuPDF pass can fail the same limits in a browser or
+            # librsvg because of glyph/edge antialiasing. Keep refining with
+            # headroom; the final absolute acceptance limits stay unchanged.
+            return bool(quality and quality['passed'] and quality['foreground_iou']>=.92
+                        and quality['edge_alignment']>=.82)
+        return bool(quality and quality['passed'])
     active=[]
     for i,obj in enumerate(program['objects']):
         fields=[0,1,2,5,9]
+        if obj['kind']=='text':
+            active.extend(i*STRIDE+field for field in (2,3,6,7,8))
+            continue
         if obj['kind']!='circle':
             fields.append(4)
         if obj['kind'] not in {'circle','square','line'}:
@@ -221,7 +237,11 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         for rel in ordered*max(1,len(ordered)):
             shapes=geometry(program,p,w,h)
             aid,bid=rel['objects']; a,b=shapes[aid],shapes[bid]
-            if rel['kind']=='attached':
+            if rel['kind']=='inside':
+                p[indices[bid],:2]=a['center']/[w,h]
+                extent=np.linalg.norm(p[indices[bid],2:4]*[w,h])
+                p[indices[bid],2:4]*=min(1.,a['size'][0]*.92/max(extent,1e-8))
+            elif rel['kind']=='attached':
                 angle=rel['direction'] if rel['direction'] is not None else b['angle']
                 unit=np.array([math.cos(angle),math.sin(angle)])
                 p[indices[bid],4]=(angle/(2*math.pi))%1
@@ -325,7 +345,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
     def measure(p,operator):
         nonlocal evaluations,total,best,best_raster,best_valid,valid_raster,trace_hash,best_passed,passed_raster
         p=repair(p)
-        if constrained_paint and program['relations']:
+        if structured and program['relations']:
             # Keep declared connections on the search manifold. Otherwise a
             # harmless paint mutation can lose its valid connected branch.
             p=repair(join(p))
@@ -362,9 +382,12 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
         score=float(mse+.035*(1-overlap)+.04*chamfer+.12*relations)
         item=dict(parameters=p,score=score,candidate=identity)
         improved=best is None or score<best['score']
-        if improved or score<.025 or operator=='join_declared_anchors':
+        if structured or improved or score<.025 or operator=='join_declared_anchors':
             quality,valid=check(svg,raster)
             item.update(quality=quality,valid=valid)
+            if structured:
+                improved=(best is None or (not valid,not quality['passed'],score)<
+                          (not best.get('valid'),not best.get('quality',{}).get('passed'),best['score']))
             if valid and (best_valid is None or score<best_valid['score']):
                 best_valid=item; valid_raster=raster.copy()
             if valid and quality['passed'] and (best_passed is None or score<best_passed['score']):
@@ -383,7 +406,8 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
             session.evaluations+=int(fresh)
         if journal:
             journal.write(json.dumps(dict(evaluation=total,operator=operator,candidate=identity,geometry=geometry_id,
-                           score=score,parameters=np.round(p,8).tolist(),improved=improved),allow_nan=False)+'\n')
+                           score=score,mse=mse,overlap=overlap,chamfer=chamfer,relations=relations,
+                           parameters=np.round(p,8).tolist(),improved=improved),allow_nan=False)+'\n')
         return item
 
     reason='evaluation_limit'
@@ -396,8 +420,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                 population.append(initial)
         # At least 32 independent layouts, none derived from measured contours.
         while evaluations<budget and time.monotonic()-started<seconds and not (session and session.reason()):
-            if best and best.get('valid') and (preferred_quality(best.get('quality')) if constrained_paint
-                                              else best.get('quality',{}).get('passed')):
+            if best and best.get('valid') and search_goal(best.get('quality')):
                 reason='satisfactory'; break
             if len(population)<32:
                 child=random_layout(); operator='random_layout'; parent=None
@@ -414,7 +437,7 @@ def evolve_primitives(image, description, render_fn, *, seconds=None, max_evalua
                     parent=min(range(len(population)),key=lambda i:population[i]['score'])
                 child=population[parent]['parameters'].copy()
                 choice=rng.random(); obj=int(rng.integers(count))
-                if constrained_paint and rng.random()<.45:
+                if structured and rng.random()<.45:
                     # Complete signed coordinate sweeps refine the incumbent,
                     # while the remaining operators continue exploring basins.
                     child=best['parameters'].copy()

@@ -173,7 +173,12 @@ def conversion_worker(connection, payload):
 
     for name, value in payload['action'].items():
         setattr(app.Action, name, value)
-    app.SVG_RENDER_SUBPROCESS_ENABLED = payload['render_isolated']
+    # This process already has a hard deadline and process-tree containment.
+    # Starting another interpreter for every candidate can spend a short image
+    # budget on imports alone. Honour an explicit renderer override; otherwise
+    # render inside this supervised worker.
+    app.SVG_RENDER_SUBPROCESS_ENABLED = (payload['render_isolated']
+        if 'IMAGE_CONVERTER_ISOLATE_SVG_RENDER' in os.environ else False)
     app.SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = payload['render_timeout']
     config = payload['config']
     session = pickle.loads(payload['session'])

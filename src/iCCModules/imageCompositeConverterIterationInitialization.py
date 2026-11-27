@@ -68,11 +68,22 @@ def prepareIterationRuntimeImpl(
 
         def write_checked_artifacts(svg_content, *args, **kwargs):
             from src.iCCModules.imageCompositeConverterDescriptionLanguage import validate_svg_assertions
-            from src.iCCModules.imageCompositeConverterCanvas import contain_svg
-            svg_content = contain_svg(svg_content, width, height)
+            from src.iCCModules.imageCompositeConverterCanvas import contain_svg, within_canvas
+            bounded = contain_svg(svg_content, width, height)
+            if bounded != svg_content and not within_canvas(svg_content, width, height):
+                # Positional arguments are the supplied render and diff. They
+                # describe the old geometry and cannot certify the saved SVG.
+                args = (None,)*len(args)
+                for key in ('rendered_img', 'diff_img'):
+                    if key in kwargs:
+                        kwargs[key] = None
+            svg_content = bounded
             # Failed files are deliverables too: no partial inventory and
             # no raster reconstruction after the description-based fit.
             validate_svg_assertions(svg_content, assertions)
+            if params.get('stem_disk_registration'):
+                validate_svg_assertions(svg_content, dict(no_text=True, counts=[
+                    dict(kind='circle', count=1), dict(kind='line', count=1)]))
             return write_artifacts(svg_content, *args, **kwargs)
 
         artifact_callbacks['write_attempt_artifacts'] = write_checked_artifacts
