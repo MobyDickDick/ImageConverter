@@ -381,13 +381,6 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
                 atomic_json(output.with_suffix('.json'),report)
                 return report
     constrained = contain_svg(constrain_stroke_width(prepared, assertions), width, height)
-    rendered = render_svg(prepared, width, height)
-    if rendered is None:
-        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
-                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
-    initial_rendered = rendered.copy()
-    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
-    initial_quality = pixel_quality(target, rendered)
     initial_description_error = ''
     try:
         validate_svg_assertions(constrained, assertions)
@@ -397,9 +390,19 @@ def _refine(source: Path, sample: Path, output: Path, description: str, seconds:
         # A stale current SVG is optional input, never a prerequisite for
         # conversion. First allow orientation to satisfy directional claims.
         if not compatible_sample_pose(ET.fromstring(constrained), width, height, assertions, deadline=hard_deadline):
+            initial = None if current_search().reason() else render_svg(prepared, width, height)
+            initial_quality = pixel_quality(target, initial) if initial is not None else None
+            initial_mse = initial_quality['normalized_mse'] if initial_quality else None
             return refit_description(source, output, description, seed=effective_seed,
                 hard_deadline=hard_deadline, initial_mse=initial_mse, initial_quality=initial_quality,
                 template_error=str(exc), started=started)
+    rendered = render_svg(prepared, width, height)
+    if rendered is None:
+        return dict(passed=False, result=False, stop_reason=current_search().reason() or 'render_failure',
+                    description_error='', search_seed=str(effective_seed), elapsed=time.monotonic()-started)
+    initial_rendered = rendered.copy()
+    initial_mse = float(np.square(target.astype(np.float32)-rendered.astype(np.float32)).mean()/255**2)
+    initial_quality = pixel_quality(target, rendered)
     if constrained != prepared:
         root = ET.fromstring(constrained)
         rendered = render_svg(constrained, width, height)

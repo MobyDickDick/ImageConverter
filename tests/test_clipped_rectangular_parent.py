@@ -19,7 +19,9 @@ pytestmark = pytest.mark.per_test_timeout(30, fail_on_timeout=True)
 def fit_independent(case, session=None):
     image = render_librsvg(case['svg'], case['width'], case['height'])
     original = image.copy()
-    with image_search(session or ImageSearch(SearchPolicy(seconds=5, max_seconds=5))):
+    session = session or ImageSearch(SearchPolicy(seconds=5, max_seconds=5))
+    session.bind_reference(image)
+    with image_search(session):
         result = fit_primitive_scene(case['width'], case['height'], description=case['description'],
             image=image, render_fn=render, error_fn=lambda a, b: float(abs(a.astype(float)-b).mean()))
     np.testing.assert_array_equal(image, original)

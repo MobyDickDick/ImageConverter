@@ -211,6 +211,8 @@ def fit_hollow_cross_panel(width, height, *, description, image, render_fn, erro
         return '#'+f'{int(np.clip(round(v),0,255)):02x}'*3
     def build(v):
         l,t,r,b,rim,peak,a0,a1,aw,b0,b1,bw,slit,cx,cy,radius,dw = v[:17]
+        fl, ft = max(l, rim/2), max(t, rim/2)
+        fr, fb = min(r, width-rim/2), min(b, height-rim/2)
         stops = ''.join(f'<stop offset="{offset:.8f}" stop-color="{color(c)}"/>'
                         for offset,c in zip((0,(peak-l)/(r-l),1),v[17:20]))
         # Explicit intersection avoids depending on renderer clipPath support.
@@ -244,7 +246,7 @@ def fit_hollow_cross_panel(width, height, *, description, image, render_fn, erro
                 +band(b0,b1,(bw-slit)/2,color(v[22]),(bw+slit)/4)
                 +band(a0,a1,aw,color(v[21]))
                 +center
-                +f'<rect x="{l:.6f}" y="{t:.6f}" width="{r-l:.6f}" height="{b-t:.6f}" fill="none" stroke="{color(v[20])}" stroke-width="{rim:.6f}"/></svg>')
+                +f'<rect x="{fl:.6f}" y="{ft:.6f}" width="{fr-fl:.6f}" height="{fb-ft:.6f}" fill="none" stroke="{color(v[20])}" stroke-width="{rim:.6f}"/></svg>')
     def valid(v):
         return (np.isfinite(v).all() and np.max(abs(v[:4]-p[:4])) < 2
                 and x <= v[0] < v[2] <= right and y <= v[1] < v[3] <= bottom

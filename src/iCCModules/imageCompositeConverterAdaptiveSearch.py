@@ -380,6 +380,14 @@ def candidate_identity(svg):
         root = ET.fromstring(svg)
     except ET.ParseError:
         return svg_identity(svg)
+    # The standalone raster viewport already clips at its canvas boundary.
+    # Publishing that default explicitly must not spend another rendering or
+    # lose a measured candidate when the image render budget is exhausted.
+    if root.get('overflow') == 'hidden' and not any(
+            'overflow' in node.get('style', '').lower() or
+            (node.tag.rsplit('}', 1)[-1] == 'style' and 'overflow' in (node.text or '').lower())
+            for node in root.iter()):
+        root.attrib.pop('overflow')
     identities = {'translate(0 0)', 'translate(0.000000 0.000000) scale(1.000000)',
                   'matrix(1 0 0 1 0 0)', 'scale(1)', 'scale(1.000000)'}
     def normalize(node, in_text=False):

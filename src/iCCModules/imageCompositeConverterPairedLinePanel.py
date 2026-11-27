@@ -130,6 +130,12 @@ def fit_paired_line_panel(width, height, *, description, image, render_fn, error
 
     def build(v):
         ox, oy, ow, oh, sw = v[:5]
+        # The observed rim may be clipped at a raster edge. Fit its visible
+        # native rectangle inside the canvas rather than shrink every mark at
+        # publication after a good full-scene fit has spent its render budget.
+        right, bottom = min(width-sw/2, ox+ow), min(height-sw/2, oy+oh)
+        ox, oy = max(sw/2, ox), max(sw/2, oy)
+        ow, oh = right-ox, bottom-oy
         stops = ''.join(f'<stop offset="{t:.7g}" stop-color="{color(c)}"/>'
                         for t, c in zip((offsets-offsets[0])/(offsets[-1]-offsets[0]), v[15:]))
         lines = ''
