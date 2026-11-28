@@ -14,10 +14,14 @@ Beschreibungsmodelle versucht. Für den Ausweichpfad bleiben bis zu zehn Sekunde
 innerhalb des bisherigen Zeitlimits reserviert. Abbrechen beendet auch diesen
 Worker als Prozessbaum.
 
+Auch fehlende oder nicht auswertbare Ähnlichkeitsreferenzen blockieren manuelle
+Aufträge nicht mehr. Der Originaltext und die Referenzdiagnose bleiben erhalten;
+der Bildflächenpfad übernimmt dann direkt.
+
 Der Ausweichpfad vergleicht bis zu fünf Farbquantisierungen (4–64 Farben),
 übernimmt Löcher und dünne Linien und speichert die beste tatsächlich gerenderte
 Version. Die Ausgabe enthält native SVG-Pfade ohne eingebettetes Bild. Grosse
-Vorlagen werden für diesen Entwurf auf höchstens 384 Pixel Kantenlänge reduziert;
+Vorlagen werden für diesen Entwurf auf höchstens 256 Pixel Kantenlänge reduziert;
 die SVG-Zeichenfläche behält die Originalgrösse. Solche Flächen sind noch keine
 semantischen Grundformen; Farbverläufe und Buchstaben werden als Flächen angenähert.
 Die Suche garantiert damit keine geometrisch perfekte Rekonstruktion.

@@ -20,7 +20,11 @@ permissions:
 
 jobs:
   gui-conversion:
-    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 8
     env:
       OPENBLAS_NUM_THREADS: '1'
@@ -35,14 +39,80 @@ jobs:
         with:
           node-version: '22'
       - name: Real draft workers, unknown descriptions, saved SVGs and legacy quality guards
-        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py tests/test_image_converter_gui.py --junitxml=.tmp/description-guided-evidence/tests.xml
+        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py --junitxml=.tmp/description-guided-evidence/tests.xml
       - name: Browser controls and draft labels
         if: ${{ !cancelled() }}
         run: node --test tests/gui_app.test.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: description-guided-evidence
+          name: description-guided-evidence-${{ matrix.os }}
           path: .tmp/description-guided-evidence/
+          include-hidden-files: true
+          retention-days: 14
+
+  gui-regression-comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Record all GUI tests on the proposed change
+        id: proposed
+        continue-on-error: true
+        run: python -m pytest -q tests/test_image_converter_gui.py --junitxml=.tmp/gui-regression/proposed.xml
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || 'main' }}
+          path: .tmp/baseline
+      - name: Record the same GUI suite on the unchanged base
+        id: baseline
+        continue-on-error: true
+        working-directory: .tmp/baseline
+        run: python -m pytest -q tests/test_image_converter_gui.py --junitxml=../gui-regression/baseline.xml
+      - name: Require no additional GUI failures and disclose inherited failures
+        env:
+          PROPOSED_OUTCOME: ${{ steps.proposed.outcome }}
+          BASELINE_OUTCOME: ${{ steps.baseline.outcome }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          def failures(name, outcome):
+              root = ET.parse(f'.tmp/gui-regression/{name}.xml').getroot()
+              cases = root.findall('.//testcase')
+              if not cases or root.findall('.//error'):
+                  raise SystemExit(f'{name}: missing cases or test infrastructure error')
+              failed = {f"{c.get('classname')}::{c.get('name')}" for c in cases if c.find('failure') is not None}
+              if outcome == 'failure' and not failed:
+                  raise SystemExit(f'{name}: failed process without complete test evidence')
+              return failed
+          proposed = failures('proposed', os.environ['PROPOSED_OUTCOME'])
+          baseline = failures('baseline', os.environ['BASELINE_OUTCOME'])
+          added = proposed - baseline
+          summary = (f'GUI regression comparison: proposed {len(proposed)} failed, base {len(baseline)} failed; '
+                     f'{len(added)} additional failures.\n\n'
+                     'Inherited GUI failures (these individual tests remain failed):\n'
+                     + '\n'.join(f'- {case}' for case in sorted(proposed & baseline))
+                     + '\n\nAdditional failures:\n' + '\n'.join(f'- {case}' for case in sorted(added)) + '\n')
+          print(summary)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as stream:
+              stream.write(summary)
+          Path('.tmp/gui-regression/comparison.txt').write_text(summary, encoding='utf-8')
+          if added:
+              raise SystemExit('New GUI regressions must be fixed')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gui-regression-comparison
+          path: .tmp/gui-regression/
           include-hidden-files: true
           retention-days: 14

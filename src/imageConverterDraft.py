@@ -17,7 +17,7 @@ def region_svg(image, colors):
 
     height, width = image.shape[:2]
     reduced = Image.fromarray(image)
-    reduced.thumbnail((384, 384))
+    reduced.thumbnail((256, 256))
     palette_image = reduced.quantize(colors=colors, method=Image.Quantize.FASTOCTREE)
     labels = np.asarray(palette_image)
     palette = palette_image.getpalette()

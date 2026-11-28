@@ -483,15 +483,19 @@ class Jobs:
                     or not 0 <= int(seed) < 2**64):
                 raise RequestError("Der Seed muss eine ganze Zahl zwischen 0 und 18446744073709551615 sein.")
             seed = int(seed)
+        resolution_error = ''
         try:
             from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
             resolve_similarity_description(description, catalog_descriptions(), base_name=getBaseNameFromFileImpl)
+        except SimilarityReferenceError as exc:
+            if background:
+                raise RequestError(str(exc)) from exc
+            resolution_error = str(exc)
+        try:
             from src.iCCModules.imageCompositeConverterSvgComponents import parse_components, load_component
             components = parse_components(description)
             for index, component in enumerate(components):
                 load_component(component['name'], index)
-        except SimilarityReferenceError as exc:
-            raise RequestError(str(exc)) from exc
         except (OSError, ValueError, SyntaxError) as exc:
             raise RequestError(str(exc)) from exc
         with self.lock:
@@ -508,6 +512,7 @@ class Jobs:
             job.update(description=description.strip(), profile=profile, status="running",
                        use_current_svg=use_current_svg,
                        catalog_background=background,
+                       description_resolution_error=resolution_error,
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
@@ -642,7 +647,8 @@ class Jobs:
             exploring = job['profile'] in {'explore5', 'explore10'}
             from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
             program = scene_program(job['description'])
-            image_draft_only = relaxed and exploring and program is None and not component_mode
+            image_draft_only = (relaxed and not component_mode
+                                and ((exploring and program is None) or job.get('description_resolution_error')))
             complete_scene = program is not None and any(o['kind']=='text' for o in program['objects'])
             if exploring or complete_scene:
                 memory = self.directory / 'primitive-search-memory'
@@ -663,7 +669,7 @@ class Jobs:
                            '--description', str(description_file),
                            '--seed', str(job['search_seed']),
                            '--seconds', str(max(0.01, deadline-time.monotonic()-1))]
-            elif not exploring and job.get("sample") and job.get('use_current_svg',True):
+            elif not image_draft_only and not exploring and job.get("sample") and job.get('use_current_svg',True):
                 description_file = folder / "description.txt"
                 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
                 resolved = resolve_similarity_description(job["description"], catalog, base_name=getBaseNameFromFileImpl)
@@ -674,6 +680,7 @@ class Jobs:
                            "--seconds", str(maximum), '--seed', str(job['search_seed']),
                            '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
             if image_draft_only:
+                job['message'] = 'Beschreibung nur teilweise auswertbar; Vektorentwurf aus den Bildflächen erstellen …'
                 command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
                            '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),
                            '--deadline', str(time.time()+min(15., deadline-time.monotonic()))]
@@ -687,7 +694,8 @@ class Jobs:
             environment.setdefault("IMAGE_CONVERTER_REUSE_RENDER_WORKER", "1")
             if not job.get('catalog_background'):
                 preview_description = folder/'preview-description.txt'
-                preview_description.write_text(resolve_similarity_description(job['description'], catalog).text, encoding='utf-8')
+                preview_description.write_text(job['description'] if job.get('description_resolution_error')
+                    else resolve_similarity_description(job['description'], catalog).text, encoding='utf-8')
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
                                    ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'),
                                    ICC_GUI_PREVIEW_DESCRIPTION_FILE=str(preview_description),
@@ -695,7 +703,7 @@ class Jobs:
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
-                if not component_mode and not exploring and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
+                if not image_draft_only and not component_mode and not exploring and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
                     for reference in resolved.references:
                         aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
                         log.write(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}\n".encode('utf-8'))
@@ -722,14 +730,16 @@ class Jobs:
                 # Collect into a temporary snapshot: a failed first attempt
                 # must not appear terminal while Plan B still has search time.
                 collected = dict(job)
-                collect = collect_sample_result if component_mode or (not exploring and job.get('sample') and job.get('use_current_svg',True)) else collect_result
-                collect(folder, collected, process.returncode)
-                retain_best_preview(folder, collected)
+                if not image_draft_only:
+                    collect = collect_sample_result if component_mode or (not exploring and job.get('sample') and job.get('use_current_svg',True)) else collect_result
+                    collect(folder, collected, process.returncode)
+                    retain_best_preview(folder, collected)
             if (relaxed and not image_draft_only
                     and (not collected.get('result') or collected.get('description_error'))):
                 with self.lock:
                     if job['status'] != 'running':
                         return
+                    job['message'] = 'Kein bestätigtes Beschreibungsmodell; Vektorentwurf aus den Bildflächen erstellen …'
                     command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
                                '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),
                                '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
@@ -1680,6 +1690,7 @@ class Handler(BaseHTTPRequestHandler):
                         description_autosave=True,
                         current_svg_reuse=True,
                         primitive_exploration=True,
+                        description_guided_conversion=True,
                         scoped_primitive_paint=True,
                         three_wing_valve=True,
                         partitioned_rhombus=True,

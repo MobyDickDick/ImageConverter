@@ -142,6 +142,7 @@ def test_unchanged_draft_is_reported_even_after_description_edit(jobs, monkeypat
         (folder/'result.svg').write_text('<svg/>' if identical else '<svg><circle/></svg>')
         job.update(status='done', quality='warning', result=True, message='Entwurf.')
     monkeypatch.setattr(gui, 'collect_result', collect)
+    monkeypatch.setattr(gui, 'retain_best_preview', lambda *args: None)
     monkeypatch.setattr(jobs, 'publish_best', lambda *args: None)
     jobs.run(retry['id'])
     assert retry['same_as_previous'] == identical

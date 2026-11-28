@@ -116,19 +116,44 @@ def test_expired_draft_does_not_overwrite_an_existing_vector(jobs):
     assert output.read_text() == 'existing'
 
 
-def test_reported_motor_valve_gets_visible_native_draft(jobs):
+@pytest.mark.parametrize('profile', ['quick', 'explore5'])
+def test_reported_motor_valve_gets_visible_native_draft(jobs, monkeypatch, profile):
+    from src.iCCModules.imageCompositeConverterDescriptions import loadCatalogDescriptionMappingImpl
+    monkeypatch.setattr(gui, 'catalog_descriptions', lambda: loadCatalogDescriptionMappingImpl(gui.ROOT))
     job = jobs.upload('AC0211_L.jpg', (gui.ROOT/'artifacts/images_to_convert/AC0211_L.jpg').read_bytes())
-    started = jobs.start(job['id'], 'Ein motorgetriebenes Ventil, oben ein Kreis mit M.', 'explore5', use_current_svg=False)
-    jobs.threads[-1].join(timeout=25)
+    description = ('Die Form ist wie AC0201_M.jpg .\n'
+        'Es ist ein motorgetriebenes Zweiwegventil. Die beiden Ventile sind horizontal angeordnet. '
+        'Der Motor ist als Kelle mit Griff nach unten realisiert. Im Kreis der Kelle steht "M". '
+        'Bei den Ventilen werden die beiden Formen zusammengehängt und ein Farbübergang gezeichnet.')
+    started = jobs.start(job['id'], description, profile, use_current_svg=False)
+    jobs.threads[-1].join(timeout=60)
     result = jobs.snapshot(started['id'])
     assert result['status'] == 'done' and result['result'], result
     assert result['quality'] == 'warning'
     assert result['pixel_quality']['foreground_iou'] >= .95
     # Persist reviewable CI evidence outside pytest's temporary data tree.
-    evidence = gui.ROOT/'.tmp/description-guided-evidence'
+    evidence = gui.ROOT/'.tmp/description-guided-evidence'/profile
     evidence.mkdir(parents=True, exist_ok=True)
     import shutil
     folder = jobs.folder(result['id'])
     for source, target in [('source.png','original.png'), ('result.svg','draft.svg'), ('image-draft.json','metrics.json')]:
         shutil.copyfile(folder/source, evidence/target)
     (evidence/'job.json').write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+def test_unknown_reference_does_not_block_manual_conversion(jobs):
+    job, _ = upload(jobs)
+    description = 'Die Form ist wie AC9999.jpg. Ein unbekanntes Symbol.'
+    started = jobs.start(job['id'], description, 'quick', use_current_svg=False)
+    jobs.threads[-1].join(timeout=25)
+    result = jobs.snapshot(started['id'])
+    assert result['status'] == 'done' and result['result'], result
+    assert result['description'] == description
+    assert result['description_resolution_error']
+    assert result['image_driven_draft'] and result['quality'] == 'warning'
+
+
+def test_unknown_reference_keeps_background_release_policy(jobs):
+    job, _ = upload(jobs)
+    with pytest.raises(gui.RequestError):
+        jobs.start(job['id'], 'Die Form ist wie AC9999.jpg.', 'quick', background=True)
