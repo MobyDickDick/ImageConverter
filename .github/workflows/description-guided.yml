@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: '22'
       - name: Real draft workers, unknown descriptions, saved SVGs and legacy quality guards
-        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py tests/test_two_way_valve_description.py --junitxml=.tmp/description-guided-evidence/tests.xml
+        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py --junitxml=.tmp/description-guided-evidence/tests.xml
       - name: Browser controls and draft labels
         if: ${{ !cancelled() }}
         run: node --test tests/gui_app.test.cjs
@@ -54,7 +54,7 @@ jobs:
 
   gui-regression-comparison:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 10
     env:
       OPENBLAS_NUM_THREADS: '1'
       IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
@@ -67,7 +67,7 @@ jobs:
       - name: Record all GUI tests on the proposed change
         id: proposed
         continue-on-error: true
-        run: python -m pytest -q tests/test_image_converter_gui.py --junitxml=.tmp/gui-regression/proposed.xml
+        run: python -m pytest -q tests/test_image_converter_gui.py tests/test_two_way_valve_description.py --junitxml=.tmp/gui-regression/proposed.xml
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.sha || 'main' }}
@@ -76,7 +76,7 @@ jobs:
         id: baseline
         continue-on-error: true
         working-directory: .tmp/baseline
-        run: python -m pytest -q tests/test_image_converter_gui.py --junitxml=../gui-regression/baseline.xml
+        run: python -m pytest -q tests/test_image_converter_gui.py tests/test_two_way_valve_description.py --junitxml=../gui-regression/baseline.xml
       - name: Require no additional GUI failures and disclose inherited failures
         env:
           PROPOSED_OUTCOME: ${{ steps.proposed.outcome }}

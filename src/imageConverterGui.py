@@ -707,6 +707,7 @@ class Jobs:
                 job['message'] = 'Beschreibung nur teilweise auswertbar; geometrische Modelle prüfen …'
                 command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
                            '--source', str(folder/'source.png'), '--output', str(folder/'geometric-draft.svg'),
+                           '--description', str(folder/'preview-description.txt'), '--seed', str(job['search_seed']),
                            '--deadline', str(time.time()+min(15., deadline-time.monotonic()))]
             environment = os.environ.copy()
             environment.update(PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8",
@@ -766,6 +767,7 @@ class Jobs:
                     job['message'] = 'Weitere geometrische Modelle prüfen …'
                     command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
                                '--source', str(folder/'source.png'), '--output', str(folder/'geometric-draft.svg'),
+                               '--description', str(folder/'preview-description.txt'), '--seed', str(job['search_seed']),
                                '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
                     with (folder/'draft-console.log').open('wb') as log:
                         process = subprocess.Popen(command, cwd=ROOT, env=environment, stdout=log,
