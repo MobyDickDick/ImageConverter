@@ -1,5 +1,8 @@
 # Dokumentationsindex
 
+- [Explorativer Neustart: vereinbarte Roadmap nach AP 2](exploratory/Weiteres_Vorgehen_nach_AP2.md)
+- [Etappe 2 abgeschlossen: vollständiges CI-Inventar, Ursachen und begrenzte Reparaturen](exploratory/Etappe2_CI_Ursachen_und_Reparaturplan.md)
+
 - [Gemeinsame Suchsteuerung: AP 1 umgesetzt, Modellfortsetzung und Adapter offen (2026-11-21)](next_arbeitspakete_2026-11-21_gemeinsame_suchsteuerung.md)
 - [Untersuchung der Suchpfade: Inventar, ausgeführte Korrekturen und verbleibende Umstellung (2026-11-21)](../artifacts/evaluation/search_routes_2026-11-21/README.md)
 

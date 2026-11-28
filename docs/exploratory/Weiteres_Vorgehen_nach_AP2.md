@@ -6,8 +6,11 @@
 
 **Vereinbarung:** Der Anwender unterstützt die nachfolgende Reihenfolge.
 Etappe 1 ist als [CI-Galerie und Codeübersicht](Etappe1_Demo_und_Codeweg.md)
-implementiert; der konkrete CI-Nachweis steht im zugehörigen Pull Request.
-Etappen 2–4 stehen weiterhin aus.
+implementiert und auf Windows/Ubuntu mit jeweils 41 Tests geprüft.
+Etappe 2 ist mit [vollständigem CI-Inventar, Ursachenliste und begrenztem
+Reparaturplan](Etappe2_CI_Ursachen_und_Reparaturplan.md) abgeschlossen.
+Als Nächstes folgt Etappe 3, Paket R1: negative Workerabschlüsse und deren
+Nachweise erhalten. Die Reparaturen sowie AP 3/4 stehen weiterhin aus.
 
 Zuerst entstehen eine sichtbare Demo und eine verständliche Architekturübersicht.
 Danach werden CI-Fehler nach Ursachen gruppiert und in begrenzten Paketen behoben.
@@ -165,7 +168,7 @@ primäre Entwicklungsstrategie. AP 5–8 bleiben gemäss AP 0 eingeplant.
 ## Fortschritt und Rahmen
 
 - [x] Etappe 1: Betrachtbare CI-Demo und verständliche Architekturübersicht implementiert; CI-Ergebnis im zugehörigen PR, persönliche Durchsicht durch den Anwender offen.
-- [ ] Etappe 2: Ursachenliste und begrenzter Reparaturumfang festgehalten.
+- [x] Etappe 2: Ursachenliste und begrenzter Reparaturumfang festgehalten; 18 gemeinsame rote Jobs auf main/AP 2, zwei ungeklärte zusätzliche Statusabweichungen. Nächstes Paket: R1 gemäss [Reparaturplan](Etappe2_CI_Ursachen_und_Reparaturplan.md).
 - [ ] Etappe 3: Vereinbarte Reparaturpakete geprüft; übrige Fehler dokumentiert.
 - [ ] Etappe 4: AP 3 und anschliessend AP 4 umgesetzt und geprüft.
 

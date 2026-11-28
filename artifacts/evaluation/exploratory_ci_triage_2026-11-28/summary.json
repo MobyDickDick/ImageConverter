@@ -1,0 +1,1852 @@
+{
+  "schema": "exploratory_ci_triage_v1",
+  "observed_at_utc": "2026-11-28 10:15:49 UTC",
+  "scope": "Read-only diagnosis of existing GitHub Actions runs; no local test or conversion execution.",
+  "pagination": "GET /actions/runs/{id}/jobs?per_page=100&page=1; total_count equals retrieved_count for each run.",
+  "runs": [
+    {
+      "id": 46065788763,
+      "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763",
+      "total_count": 49,
+      "retrieved_count": 49,
+      "counts": {
+        "success": 26,
+        "failure": 20,
+        "cancelled": 3
+      },
+      "jobs": [
+        {
+          "name": "shared-search-context",
+          "id": 140730640126,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640126",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "same-paint-overlap",
+          "id": 140730640372,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640372",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify another equal-paint scene seed"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "same_paint_outlined_rounded_overlap_07 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "component-splits",
+          "id": 140730640441,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640441",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise and independently verify the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "edit_04 False ['missing_or_ambiguous_output']",
+            "edit_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "island-group-search",
+          "id": 140730640447,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640447",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "fused-primitive-scenes",
+          "id": 140730640451,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640451",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert with supervised workers and check native objects and regions"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "fused_02 False ['missing_or_ambiguous_output']",
+            "fused_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "completion-profile",
+          "id": 140730640474,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640474",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "image-id-hardcoding-ratchet",
+          "id": 140730640475,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640475",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "neural-real-regions-experiment",
+          "id": 140730640498,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640498",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "neural-elements-experiment",
+          "id": 140730640501,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640501",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "named-scene-references",
+          "id": 140730640523,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640523",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert and independently verify native objects and regions"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "reference_00 False ['missing_or_ambiguous_output']",
+            "reference_02 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "svg-text-baseline",
+          "id": 140730640529,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640529",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Accept freshly saved CLI vectors with librsvg against original pixels"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "ValueError: Expected one saved CLI SVG: anonymous_square_02/after"
+          ]
+        },
+        {
+          "name": "layered-primitive-scenes",
+          "id": 140730640537,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640537",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert and independently check supervised CLI outputs"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "layer_00 False ['normalized_mse_outside_limit', 'foreground_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "layer_04 False ['missing_or_ambiguous_output']",
+            "ValueError: Unverified missing-output timeout"
+          ]
+        },
+        {
+          "name": "full-heavy-conversion-suite",
+          "id": 140730640543,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640543",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run full heavy image composite suite"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "_______ test_run_iteration_pipeline_converts_non_composite_to_usable_svg _______",
+            "___ test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel ____",
+            "_________ test_convert_range_does_not_skip_variants_in_quality_passes __________",
+            "_____ test_convert_range_uses_existing_conversion_rows_as_template_donors ______",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] _",
+            "____ test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width _____",
+            "________________ test_ac08_semantic_anchor_variants_ac0811_only ________________",
+            "9 failed, 397 passed, 3 skipped in 363.48s (0:06:03)"
+          ]
+        },
+        {
+          "name": "dot-panel-registration",
+          "id": 140730640551,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640551",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Replay the failing original and all sixteen variations"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "[Plan B] original: FAIL normalized_mse_outside_limit,edge_alignment_outside_limit,foreground_iou_outside_limit (33.87s)",
+            "[Plan B] Original quality check failed; 16 variations were not started"
+          ]
+        },
+        {
+          "name": "conversion-persistence (ubuntu-latest)",
+          "id": 140730640623,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640623",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "mixed-gradient-scenes",
+          "id": 140730640644,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640644",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise and independently verify the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "mixed_01 False ['missing_or_ambiguous_output']",
+            "mixed_02 False ['missing_or_ambiguous_output']",
+            "mixed_04 False ['missing_or_ambiguous_output']",
+            "mixed_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "full-catalog-conversion (1)",
+          "id": 140730640658,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640658",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (5)",
+          "id": 140730640670,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640670",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "repeated-fill-overlap",
+          "id": 140730640675,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640675",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (4)",
+          "id": 140730640699,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640699",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "pytest-profile-matrix (extended, 60)",
+          "id": 140730640704,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640704",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (0)",
+          "id": 140730640709,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640709",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert catalog shard"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": []
+        },
+        {
+          "name": "rounded-gradient-scenes",
+          "id": 140730640733,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640733",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise the supervised production CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "gradient_00 False ['missing_or_ambiguous_output']",
+            "gradient_01 False []",
+            "gradient_02 False []",
+            "gradient_03 False ['missing_or_ambiguous_output']",
+            "gradient_04 False ['missing_or_ambiguous_output']",
+            "ValueError: Unverified missing-output timeout"
+          ]
+        },
+        {
+          "name": "rounded-gradient-parent",
+          "id": 140730640738,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640738",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "component-value",
+          "id": 140730640746,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640746",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Paired production bot ablations and attribution controls"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "ValueError: Missing supervised worker audit: case_04"
+          ]
+        },
+        {
+          "name": "full-catalog-conversion (7)",
+          "id": 140730640747,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640747",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (3)",
+          "id": 140730640755,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640755",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-outlines",
+          "id": 140730640756,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640756",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (6)",
+          "id": 140730640758,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640758",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "visible-primitive-scenes",
+          "id": 140730640769,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640769",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert and independently check native shapes, outlines and regions"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "visibility_05 False []",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "mixed-overlap-composition",
+          "id": 140730640773,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640773",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify mixed scenes and release temporary data"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "rounded_mixed_overlap_02 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "clipped-gradient-parent",
+          "id": 140730640780,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640780",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify frame edges and the previously failing variants"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_00 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_01 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_02 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_03 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_04 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_05 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_06 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_07 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_08 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_09 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_10 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_11 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "pytest-profile-matrix (core-green, 15)",
+          "id": 140730640788,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640788",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-persistence (windows-latest)",
+          "id": 140730640792,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640792",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (2)",
+          "id": 140730640813,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640813",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "batch-artifact-drift-gate",
+          "id": 140730640814,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640814",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "regression-checks",
+          "id": 140730640847,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640847",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "overlap-composition",
+          "id": 140730640862,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640862",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "satisfactory-regression-battery",
+          "id": 140730640875,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640875",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "disconnected-overlap-groups",
+          "id": 140730640886,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640886",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-svg-renderer",
+          "id": 140730640897,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640897",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-power (windows-latest)",
+          "id": 140730640922,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640922",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "fallback-structure",
+          "id": 140730640938,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640938",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Require decomposed humidifier parts and true dashed rectangle rendering"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "visible_Q_1 17 False [True, True]",
+            "visible_Q_1 29 False [True, True]",
+            "visible_Q_1 43 False [True, True]",
+            "visible_Q_2 17 False [True, True]",
+            "visible_Q_2 29 False [True, True]",
+            "visible_Q_2 43 False [True, True]",
+            "visible_C_0 17 False [True, True]",
+            "visible_C_0 29 False [True, True]",
+            "visible_C_0 43 False [True, True]",
+            "visible_C_1 17 False [True, True]",
+            "visible_C_1 29 False [True, True]",
+            "visible_C_1 43 False [True, True]",
+            "visible_C_2 17 False [True, True]",
+            "visible_C_2 29 False [True, True]",
+            "visible_C_2 43 False [True, True]",
+            "_ test_catalog_sample_uses_its_source_bound_sidecar_instead_of_the_jpeg_description _",
+            "_ test_exact_ci_crop_and_nearby_frame_edges_preserve_observed_structure[1237139773188156879-11] _",
+            "FAILED tests/test_zigzag_panel_runtime.py::test_catalog_sample_uses_its_source_bound_sidecar_instead_of_the_jpeg_description - AssertionError: assert 'Luftbefeucht...hriftzeichen.' == 'Luftbefeucht...hriftzeichen.'",
+            "FAILED tests/test_zigzag_panel_runtime.py::test_exact_ci_crop_and_nearby_frame_edges_preserve_observed_structure[1237139773188156879-11] - assert False",
+            "2 failed, 106 passed in 48.88s"
+          ]
+        },
+        {
+          "name": "rounded-composition",
+          "id": 140730640965,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640965",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise and independently verify the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "rounded_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "rectangular-gradient-parent",
+          "id": 140730640966,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640966",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "safe-baseline",
+          "id": 140730640973,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640973",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run safe baseline"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "_______ test_run_iteration_pipeline_converts_non_composite_to_usable_svg _______",
+            "___ test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel ____",
+            "_________ test_convert_range_does_not_skip_variants_in_quality_passes __________",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] _",
+            "____ test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width _____",
+            "________________ test_ac08_semantic_anchor_variants_ac0811_only ________________",
+            "FAILED tests/test_image_composite_converter.py::test_run_iteration_pipeline_converts_non_composite_to_usable_svg - assert None is not None",
+            "FAILED tests/test_image_composite_converter.py::test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel - assert None is not None",
+            "FAILED tests/test_image_composite_converter.py::test_convert_range_does_not_skip_variants_in_quality_passes - FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/ImageConverter/ImageConverter/.tmp/pytest-q5es6do4/tests/test_convert_range_does_not_sk0/out/converted_svgs/AC0812_M.svg'",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok] - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: logical_object_count:all:1:2",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: wrong_described_labels",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: logical_object_count:all:2:3",
+            "FAILED tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: wrong_described_labels",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only - AssertionError: assert 'status=semantic_ok' in 'run-meta: run_seed=315182029 pass_seed_offset=1 trace_id=318018667362\\nstatus=semantic_raster_stem_disk\\n'",
+            "====== 8 failed, 394 passed, 3 skipped, 6 deselected in 313.54s (0:05:13) ======"
+          ]
+        },
+        {
+          "name": "semantic-wording-robustness",
+          "id": 140730640979,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640979",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise three real families through the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "ValueError: Runtime changed during measurement"
+          ]
+        },
+        {
+          "name": "conversion-power (ubuntu-latest)",
+          "id": 140730640992,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730640992",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "clipped-rectangular-gradient-parent",
+          "id": 140730641031,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46065788763/job/140730641031",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Verify visible boundary constraints and negative evidence"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "_ test_only_semantically_complete_incumbents_are_saved_during_minimum_effort[False] _",
+            "FAILED tests/test_clipped_rectangular_parent.py::test_only_semantically_complete_incumbents_are_saved_during_minimum_effort[False] - assert []",
+            "1 failed, 147 passed in 140.60s (0:02:20)"
+          ]
+        }
+      ],
+      "commit": "c241d3e424ddd47868585e4865ed51a7a65464f1"
+    },
+    {
+      "id": 46131454133,
+      "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133",
+      "total_count": 49,
+      "retrieved_count": 49,
+      "counts": {
+        "success": 18,
+        "failure": 20,
+        "cancelled": 11
+      },
+      "jobs": [
+        {
+          "name": "disconnected-overlap-groups",
+          "id": 140937373337,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373337",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "same-paint-overlap",
+          "id": 140937373453,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373453",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify another equal-paint scene seed"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "same_paint_outlined_rounded_overlap_07 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "dot-panel-registration",
+          "id": 140937373458,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373458",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Replay the failing original and all sixteen variations"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "[Plan B] original: FAIL normalized_mse_outside_limit,edge_alignment_outside_limit,foreground_iou_outside_limit (26.757s)",
+            "[Plan B] Original quality check failed; 16 variations were not started"
+          ]
+        },
+        {
+          "name": "shared-search-context",
+          "id": 140937373469,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373469",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "clipped-rectangular-gradient-parent",
+          "id": 140937373486,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373486",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Verify visible boundary constraints and negative evidence"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "_ test_only_semantically_complete_incumbents_are_saved_during_minimum_effort[False] _",
+            "FAILED tests/test_clipped_rectangular_parent.py::test_only_semantically_complete_incumbents_are_saved_during_minimum_effort[False] - assert []",
+            "1 failed, 147 passed in 116.68s (0:01:56)"
+          ]
+        },
+        {
+          "name": "mixed-overlap-composition",
+          "id": 140937373507,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373507",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify mixed scenes and release temporary data"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "rounded_mixed_overlap_02 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "rounded-outlines",
+          "id": 140937373510,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373510",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "svg-text-baseline",
+          "id": 140937373513,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373513",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Accept freshly saved CLI vectors with librsvg against original pixels"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "ValueError: Expected one saved CLI SVG: anonymous_square_02/after"
+          ]
+        },
+        {
+          "name": "overlap-composition",
+          "id": 140937373549,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373549",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-persistence (windows-latest)",
+          "id": 140937373551,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373551",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "visible-primitive-scenes",
+          "id": 140937373555,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373555",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert and independently check native shapes, outlines and regions"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "visibility_05 False []",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "clipped-gradient-parent",
+          "id": 140937373557,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373557",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify frame edges and the previously failing variants"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_00 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_01 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_02 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_03 False ['edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_04 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_05 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_06 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_07 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_08 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_09 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_10 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "clipped_outlined_groups2_multi4_rounded_mixed_overlap_11 False ['normalized_mse_outside_limit', 'edge_alignment_outside_limit']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "rounded-svg-renderer",
+          "id": 140937373560,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373560",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "island-group-search",
+          "id": 140937373564,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373564",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-gradient-parent",
+          "id": 140937373565,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373565",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "semantic-wording-robustness",
+          "id": 140937373569,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373569",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise three real families through the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "ValueError: Runtime changed during measurement"
+          ]
+        },
+        {
+          "name": "mixed-gradient-scenes",
+          "id": 140937373572,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373572",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rectangular-gradient-parent",
+          "id": 140937373579,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373579",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (5)",
+          "id": 140937373581,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373581",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "completion-profile",
+          "id": 140937373594,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373594",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "component-splits",
+          "id": 140937373598,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373598",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise and independently verify the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "edit_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "neural-elements-experiment",
+          "id": 140937373600,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373600",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "layered-primitive-scenes",
+          "id": 140937373608,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373608",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert and independently check supervised CLI outputs"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "layer_00 False ['normalized_mse_outside_limit', 'foreground_mse_outside_limit', 'edge_alignment_outside_limit', 'foreground_iou_outside_limit']",
+            "layer_04 False ['missing_or_ambiguous_output']",
+            "ValueError: Unverified missing-output timeout"
+          ]
+        },
+        {
+          "name": "neural-real-regions-experiment",
+          "id": 140937373613,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373613",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "component-value",
+          "id": 140937373616,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373616",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Paired production bot ablations and attribution controls"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "ValueError: Missing supervised worker audit: case_04"
+          ]
+        },
+        {
+          "name": "repeated-fill-overlap",
+          "id": 140937373622,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373622",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "named-scene-references",
+          "id": 140937373623,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373623",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert and independently verify native objects and regions"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "reference_00 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "conversion-persistence (ubuntu-latest)",
+          "id": 140937373629,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373629",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "batch-artifact-drift-gate",
+          "id": 140937373635,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373635",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-power (ubuntu-latest)",
+          "id": 140937373637,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373637",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "fused-primitive-scenes",
+          "id": 140937373640,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373640",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Convert with supervised workers and check native objects and regions"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "fused_02 False ['missing_or_ambiguous_output']",
+            "fused_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "regression-checks",
+          "id": 140937373645,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373645",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run documented regression checks"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "___________ test_ac08_regression_smoke_run_creates_expected_outputs ____________",
+            "FAILED tests/test_conversion_regression_smoke.py::test_ac08_regression_smoke_run_creates_expected_outputs - AssertionError: assert False"
+          ]
+        },
+        {
+          "name": "pytest-profile-matrix (core-green, 15)",
+          "id": 140937373650,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373650",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "safe-baseline",
+          "id": 140937373656,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373656",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run safe baseline"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "_______ test_run_iteration_pipeline_converts_non_composite_to_usable_svg _______",
+            "___ test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel ____",
+            "_________ test_convert_range_does_not_skip_variants_in_quality_passes __________",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] _",
+            "____ test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width _____",
+            "________________ test_ac08_semantic_anchor_variants_ac0811_only ________________",
+            "FAILED tests/test_image_composite_converter.py::test_run_iteration_pipeline_converts_non_composite_to_usable_svg - assert None is not None",
+            "FAILED tests/test_image_composite_converter.py::test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel - assert None is not None",
+            "FAILED tests/test_image_composite_converter.py::test_convert_range_does_not_skip_variants_in_quality_passes - FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/ImageConverter/ImageConverter/.tmp/pytest-qg0csb7h/tests/test_convert_range_does_not_sk0/out/converted_svgs/AC0812_L.svg'",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok] - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: logical_object_count:all:1:2",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: wrong_described_labels",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: logical_object_count:all:2:3",
+            "FAILED tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width - src.iCCModules.imageCompositeConverterDescriptionLanguage.DescriptionRejected: wrong_described_labels",
+            "FAILED tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only - AssertionError: assert 'status=semantic_ok' in 'run-meta: run_seed=953108198 pass_seed_offset=1 trace_id=961686171883\\nstatus=semantic_raster_stem_disk\\n'",
+            "====== 8 failed, 394 passed, 3 skipped, 6 deselected in 355.42s (0:05:55) ======"
+          ]
+        },
+        {
+          "name": "fallback-structure",
+          "id": 140937373660,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373660",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Require decomposed humidifier parts and true dashed rectangle rendering"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "visible_Q_1 17 False [True, True]",
+            "visible_Q_1 29 False [True, True]",
+            "visible_Q_1 43 False [True, True]",
+            "visible_Q_2 17 False [True, True]",
+            "visible_Q_2 29 False [True, True]",
+            "visible_Q_2 43 False [True, True]",
+            "visible_C_0 17 False [True, True]",
+            "visible_C_0 29 False [True, True]",
+            "visible_C_0 43 False [True, True]",
+            "visible_C_1 17 False [True, True]",
+            "visible_C_1 29 False [True, True]",
+            "visible_C_1 43 False [True, True]",
+            "visible_C_2 17 False [True, True]",
+            "visible_C_2 29 False [True, True]",
+            "visible_C_2 43 False [True, True]",
+            "_ test_catalog_sample_uses_its_source_bound_sidecar_instead_of_the_jpeg_description _",
+            "_ test_exact_ci_crop_and_nearby_frame_edges_preserve_observed_structure[1237139773188156879-11] _",
+            "FAILED tests/test_zigzag_panel_runtime.py::test_catalog_sample_uses_its_source_bound_sidecar_instead_of_the_jpeg_description - AssertionError: assert 'Luftbefeucht...hriftzeichen.' == 'Luftbefeucht...hriftzeichen.'",
+            "FAILED tests/test_zigzag_panel_runtime.py::test_exact_ci_crop_and_nearby_frame_edges_preserve_observed_structure[1237139773188156879-11] - assert False",
+            "2 failed, 106 passed in 64.47s (0:01:04)"
+          ]
+        },
+        {
+          "name": "image-id-hardcoding-ratchet",
+          "id": 140937373666,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373666",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-power (windows-latest)",
+          "id": 140937373676,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373676",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "satisfactory-regression-battery",
+          "id": 140937373679,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373679",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Reconvert satisfactory baseline and compare quality"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "________________ test_satisfactory_baseline_reconversion_smoke _________________",
+            "FAILED tests/test_satisfactory_regression_battery.py::test_satisfactory_baseline_reconversion_smoke - AssertionError: No SVG output produced for family AC0800.",
+            "=================== 1 failed, 5 passed in 357.89s (0:05:57) ===================="
+          ]
+        },
+        {
+          "name": "full-catalog-conversion (1)",
+          "id": 140937373683,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373683",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-composition",
+          "id": 140937373685,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373685",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise and independently verify the supervised CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "rounded_00 False ['missing_or_ambiguous_output']",
+            "rounded_02 False ['missing_or_ambiguous_output']",
+            "rounded_04 False ['missing_or_ambiguous_output']",
+            "rounded_05 False ['missing_or_ambiguous_output']",
+            "ValueError: One or more CLI scenes failed independent acceptance"
+          ]
+        },
+        {
+          "name": "rounded-gradient-scenes",
+          "id": 140937373705,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373705",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise the supervised production CLI"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "gradient_00 False ['missing_or_ambiguous_output']",
+            "gradient_01 False []",
+            "gradient_02 False []",
+            "gradient_03 False ['missing_or_ambiguous_output']",
+            "gradient_04 False ['missing_or_ambiguous_output']",
+            "ValueError: Unverified missing-output timeout"
+          ]
+        },
+        {
+          "name": "full-catalog-conversion (7)",
+          "id": 140937373709,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373709",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (0)",
+          "id": 140937373716,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373716",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-heavy-conversion-suite",
+          "id": 140937373721,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373721",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run full heavy image composite suite"
+          ],
+          "log_reviewed": true,
+          "log_excerpts": [
+            "_______ test_run_iteration_pipeline_converts_non_composite_to_usable_svg _______",
+            "___ test_run_iteration_pipeline_uses_non_stripe_fallback_for_gradient_panel ____",
+            "_________ test_convert_range_does_not_skip_variants_in_quality_passes __________",
+            "_____ test_convert_range_uses_existing_conversion_rows_as_template_donors ______",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] _",
+            "_ test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] _",
+            "____ test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width _____",
+            "________________ test_ac08_semantic_anchor_variants_ac0811_only ________________",
+            "9 failed, 397 passed, 3 skipped in 237.64s (0:03:57)"
+          ]
+        },
+        {
+          "name": "full-catalog-conversion (6)",
+          "id": 140937373725,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373725",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "pytest-profile-matrix (extended, 60)",
+          "id": 140937373741,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373741",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (4)",
+          "id": 140937373772,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373772",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (2)",
+          "id": 140937373782,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373782",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (3)",
+          "id": 140937373797,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/job/140937373797",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "failed_steps": [],
+          "log_reviewed": false
+        }
+      ],
+      "commit": "af518904fe2cb8c9cb4f5c12fa9b0c7c4536c07f"
+    },
+    {
+      "id": 46133560901,
+      "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901",
+      "total_count": 49,
+      "retrieved_count": 49,
+      "counts": {
+        "failure": 10,
+        "success": 10,
+        "in_progress": 11,
+        "queued": 18
+      },
+      "jobs": [
+        {
+          "name": "svg-text-baseline",
+          "id": 140943801766,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801766",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Accept freshly saved CLI vectors with librsvg against original pixels"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "same-paint-overlap",
+          "id": 140943801844,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801844",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify another equal-paint scene seed"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "clipped-rectangular-gradient-parent",
+          "id": 140943801849,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801849",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Verify visible boundary constraints and negative evidence"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "mixed-overlap-composition",
+          "id": 140943801875,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801875",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Independently verify mixed scenes and release temporary data"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-persistence (ubuntu-latest)",
+          "id": 140943801885,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801885",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-gradient-parent",
+          "id": 140943801896,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801896",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-svg-renderer",
+          "id": 140943801898,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801898",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "disconnected-overlap-groups",
+          "id": 140943801903,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801903",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "repeated-fill-overlap",
+          "id": 140943801904,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801904",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-persistence (windows-latest)",
+          "id": 140943801907,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801907",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "satisfactory-regression-battery",
+          "id": 140943801909,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801909",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Reconvert satisfactory baseline and compare quality"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "dot-panel-registration",
+          "id": 140943801916,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801916",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Replay the failing original and all sixteen variations"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-composition",
+          "id": 140943801919,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801919",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise and independently verify the supervised CLI"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "shared-search-context",
+          "id": 140943801920,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801920",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "fallback-structure",
+          "id": 140943801925,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801925",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Require decomposed humidifier parts and true dashed rectangle rendering"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (0)",
+          "id": 140943801935,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801935",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (5)",
+          "id": 140943801943,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801943",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "island-group-search",
+          "id": 140943801949,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801949",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-power (ubuntu-latest)",
+          "id": 140943801961,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801961",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (1)",
+          "id": 140943801965,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801965",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (6)",
+          "id": 140943801974,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801974",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (4)",
+          "id": 140943801975,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801975",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "conversion-power (windows-latest)",
+          "id": 140943801983,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801983",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (2)",
+          "id": 140943801989,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943801989",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "neural-real-regions-experiment",
+          "id": 140943802001,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802001",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "completion-profile",
+          "id": 140943802012,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802012",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (3)",
+          "id": 140943802021,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802021",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "semantic-wording-robustness",
+          "id": 140943802027,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802027",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-gradient-scenes",
+          "id": 140943802032,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802032",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Exercise the supervised production CLI"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "fused-primitive-scenes",
+          "id": 140943802056,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802056",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "layered-primitive-scenes",
+          "id": 140943802073,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802073",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "batch-artifact-drift-gate",
+          "id": 140943802076,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802076",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "pytest-profile-matrix (extended, 60)",
+          "id": 140943802093,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802093",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "component-splits",
+          "id": 140943802098,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802098",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-heavy-conversion-suite",
+          "id": 140943802103,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802103",
+          "status": "in_progress",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "full-catalog-conversion (7)",
+          "id": 140943802109,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802109",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "component-value",
+          "id": 140943802123,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802123",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Paired production bot ablations and attribution controls"
+          ],
+          "log_reviewed": false
+        },
+        {
+          "name": "neural-elements-experiment",
+          "id": 140943802128,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802128",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "clipped-gradient-parent",
+          "id": 140943802141,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802141",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rectangular-gradient-parent",
+          "id": 140943802145,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802145",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "visible-primitive-scenes",
+          "id": 140943802152,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802152",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "image-id-hardcoding-ratchet",
+          "id": 140943802157,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802157",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "safe-baseline",
+          "id": 140943802158,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802158",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "named-scene-references",
+          "id": 140943802168,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802168",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "pytest-profile-matrix (core-green, 15)",
+          "id": 140943802185,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802185",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "mixed-gradient-scenes",
+          "id": 140943802189,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802189",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "regression-checks",
+          "id": 140943802207,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802207",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "overlap-composition",
+          "id": 140943802294,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802294",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        },
+        {
+          "name": "rounded-outlines",
+          "id": 140943802325,
+          "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46133560901/job/140943802325",
+          "status": "queued",
+          "conclusion": null,
+          "failed_steps": [],
+          "log_reviewed": false
+        }
+      ],
+      "commit": "41c1ed751b7f193956f4d001167eb4ff3df1b43e"
+    }
+  ],
+  "inspected_artifacts": [
+    {
+      "id": 15258031448,
+      "name": "gradient",
+      "run_id": 46131454133,
+      "archive_sha256": "a4e13e3f2200c0f368bfaa72170f754b4ecda272bb00bdbe326aae3010b120d7",
+      "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/artifacts/15258031448"
+    },
+    {
+      "id": 15258565437,
+      "name": "wording",
+      "run_id": 46131454133,
+      "archive_sha256": "6eb5ad99cd4473361d72316d551f612b0c7896c432a1de3ebeb9233e24c75700",
+      "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/artifacts/15258565437"
+    },
+    {
+      "id": 15257547330,
+      "name": "components",
+      "run_id": 46131454133,
+      "archive_sha256": "b730973145c8070f8d0cfed70bad6467c9c3df0e371e19db0aada6f27a3bcf5c",
+      "url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46131454133/artifacts/15257547330"
+    }
+  ],
+  "extracted_deadlines": [
+    {
+      "case_id": "gradient_00",
+      "deadline": {
+        "elapsed_seconds": 2.000645,
+        "limit_seconds": 5,
+        "minimum_seconds": 5,
+        "max_seconds": 5,
+        "time_extensions": 0,
+        "candidate_evaluations": 42,
+        "model_evaluations": 41,
+        "render_cache_hits": 0,
+        "renderings": 42,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "b2935976810a81d40f38b32690c3e7d1bbe59073856d7b97e9d27de0d2cf4e70",
+        "isolated": true,
+        "timing_trace": "gradient_00_timing.jsonl",
+        "observation_interruptions": [],
+        "stop_reason": "no_result"
+      }
+    },
+    {
+      "case_id": "gradient_03",
+      "deadline": {
+        "elapsed_seconds": 1.980746,
+        "limit_seconds": 5,
+        "minimum_seconds": 5,
+        "max_seconds": 5,
+        "time_extensions": 0,
+        "candidate_evaluations": 42,
+        "model_evaluations": 41,
+        "render_cache_hits": 0,
+        "renderings": 42,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "e34de69e11a5852122bd26c9621afb4df62cf0e9656cb6b7fd0a89e646374206",
+        "isolated": true,
+        "timing_trace": "gradient_03_timing.jsonl",
+        "observation_interruptions": [],
+        "stop_reason": "no_result"
+      }
+    },
+    {
+      "case_id": "gradient_04",
+      "deadline": {
+        "elapsed_seconds": 5.024264,
+        "limit_seconds": 5,
+        "minimum_seconds": 5,
+        "max_seconds": 5,
+        "time_extensions": 0,
+        "candidate_evaluations": 124,
+        "model_evaluations": 0,
+        "render_cache_hits": 0,
+        "renderings": 124,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "c32c44b8253ec2a765e0fa95bd9a2cf8ed76fb89ba7e0609ad2d08bf44c94903",
+        "stop_reason": "time_limit",
+        "isolated": true,
+        "timing_trace": "gradient_04_timing.jsonl",
+        "observation_interruptions": [],
+        "external_max_seconds": null,
+        "recovered_checkpoint": false,
+        "retained_output": false
+      }
+    }
+  ]
+}
