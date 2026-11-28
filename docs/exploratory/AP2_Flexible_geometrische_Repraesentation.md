@@ -113,3 +113,7 @@ Das Budget von beispielsweise 300 Sekunden wird in AP 2 nicht durch künstliche
 Wartezeit ausgeschöpft. AP 5 behandelt Sprachhinweise und explizite Anforderungen;
 AP 6–8 ergänzen persistente Ausgabe, Generalisierung und Integration.
 Keine bildspezifische Sonderlösung und keine Änderung an Legacy-Dateien.
+
+Die abgestimmten nächsten Etappen, ihre Abnahmekriterien und die Grenzen für
+Aufwand und CI-Bereinigung stehen im
+[weiteren Vorgehen nach AP 2](Weiteres_Vorgehen_nach_AP2.md).

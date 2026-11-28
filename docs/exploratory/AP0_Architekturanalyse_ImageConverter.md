@@ -199,6 +199,12 @@ Windows/Python 3.10.11 mit neun bestandenen Tests in 12,25 Sekunden abgenommen
 AP 2 ergänzt die flexible Szenenrepräsentation gemäss
 [AP 2](AP2_Flexible_geometrische_Repraesentation.md); AP 3–8 stehen noch aus.
 
+Das am 28. November 2026 mit dem Anwender abgestimmte
+[weitere Vorgehen nach AP 2](Weiteres_Vorgehen_nach_AP2.md) stellt eine sichtbare
+Demo und Architekturübersicht, eine begrenzte CI-Diagnose sowie überschaubare
+Reparaturpakete vor AP 3 und AP 4. Eine vollständige Altbestandsbereinigung ist
+keine Voraussetzung für diese Weiterentwicklung. Die AP-Reihenfolge bleibt erhalten.
+
 | AP  | Ziel                                 | Erwartetes Ergebnis                                                          |
 | --- | ------------------------------------ | ---------------------------------------------------------------------------- |
 | 0   | Architekturanalyse                   | Bestandsaufnahme, Blockaden, Wiederverwendungsentscheidungen, offene Risiken |
