@@ -262,6 +262,12 @@ class Jobs:
                 self._check_description(stored)
                 self.save(stored)
             job = dict(self.jobs[job_id])
+            if job.get('sample'):
+                from src.imageConverterSample import prepare_sample
+                try:
+                    prepare_sample((folder/'sample.svg').read_bytes(), job['width'], job['height'])
+                except (OSError, ValueError, SyntaxError):
+                    job.update(sample=False, sample_rejection='Nicht geometrische oder ungültige Vorlage verworfen.')
             retry = self.seed_retry.session(job_id)
             if retry:
                 job['seed_retry'] = dict(retry)
@@ -294,7 +300,14 @@ class Jobs:
     def preview_file(self, job_id: str) -> Path:
         folder = self.folder(job_id)
         preview = folder / 'live-preview.svg'
-        return preview if preview.is_file() else folder / 'recovery.svg'
+        from src.imageConverterSample import prepare_sample
+        for candidate in (preview, folder/'recovery.svg'):
+            try:
+                prepare_sample(candidate.read_bytes(), self.jobs[job_id]['width'], self.jobs[job_id]['height'])
+                return candidate
+            except (OSError, ValueError, SyntaxError):
+                continue
+        return folder/'no-geometric-preview.svg'
 
     def export_file(self, job_id: str, *, include_retry=True) -> Path | None:
         """Offer native drafts for manual saving, independently of acceptance gates."""
@@ -305,7 +318,11 @@ class Jobs:
         if retry and retry.get('best_job_id'):
             best = self.folder(retry['root_id'])/'seed-best.svg'
             if best.is_file():
-                return best
+                try:
+                    prepare_sample(best.read_bytes(), job['width'], job['height'])
+                    return best
+                except (OSError, ValueError, SyntaxError):
+                    pass
         candidates = []
         if job.get('result') and job['status'] != 'running':
             candidates.append(folder/'result.svg')
@@ -476,12 +493,6 @@ class Jobs:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
-        if profile in {'explore5', 'explore10'}:
-            from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
-            if scene_program(description) is None:
-                raise RequestError('Die freie Suche unterstützt derzeit einfache Listen aus Kreis, Ellipse, Rechteck, '
-                                   'Quadrat, Dreieck und Linie sowie Kelle mit Griff und gemeinsame Spitzen. '
-                                   'Weitere Angaben in dieser Beschreibung kann sie noch nicht vollständig auswerten.')
         if type(use_current_svg) is not bool:
             raise RequestError('Die SVG-Wiederverwendung muss ein Wahrheitswert sein.')
         if seed is not None:
@@ -489,15 +500,19 @@ class Jobs:
                     or not 0 <= int(seed) < 2**64):
                 raise RequestError("Der Seed muss eine ganze Zahl zwischen 0 und 18446744073709551615 sein.")
             seed = int(seed)
+        resolution_error = ''
         try:
             from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
             resolve_similarity_description(description, catalog_descriptions(), base_name=getBaseNameFromFileImpl)
+        except SimilarityReferenceError as exc:
+            if background:
+                raise RequestError(str(exc)) from exc
+            resolution_error = str(exc)
+        try:
             from src.iCCModules.imageCompositeConverterSvgComponents import parse_components, load_component
             components = parse_components(description)
             for index, component in enumerate(components):
                 load_component(component['name'], index)
-        except SimilarityReferenceError as exc:
-            raise RequestError(str(exc)) from exc
         except (OSError, ValueError, SyntaxError) as exc:
             raise RequestError(str(exc)) from exc
         with self.lock:
@@ -514,6 +529,7 @@ class Jobs:
             job.update(description=description.strip(), profile=profile, status="running",
                        use_current_svg=use_current_svg,
                        catalog_background=background,
+                       description_resolution_error=resolution_error,
                        description_origin=origin,
                        search_seed=secrets.randbits(64) if seed is None else seed,
                        started=time.time(), message="Sample wird am Original verbessert …" if job.get("sample") else "Bild wird konvertiert …")
@@ -545,6 +561,12 @@ class Jobs:
         """Seed from this image's current native vector, never a stale name alone."""
         from src.imageConverterSample import prepare_sample
         folder = self.folder(job['id'])
+        if job.get('sample') and (folder/'sample.svg').is_file():
+            try:
+                prepare_sample((folder/'sample.svg').read_bytes(), job['width'], job['height'])
+            except (ValueError, SyntaxError):
+                job.update(sample=False, sample_pending=False, sample_origin='',
+                           sample_rejection='Nicht geometrische oder ungültige Vorlage verworfen.')
         if job.get('sample_pending') and job.get('sample') and (folder/'sample.svg').is_file():
             job.update(sample_pending=False,sample_origin='Geladene Vorlage',
                        message='Geladene Vorlage wird am Original weiter verbessert …')
@@ -625,7 +647,11 @@ class Jobs:
         deadline = time.monotonic() + PROFILES[job['profile']][1]
         try:
             input_dir = folder / "input"
-            job['conversion_policy'] = 'description_only_v1'
+            relaxed = not job.get('catalog_background')
+            job['conversion_policy'] = 'description_guided_v1' if relaxed else 'description_only_v1'
+            # Reserve time for a useful visual draft if a strict model fails.
+            reserve = min(10., PROFILES[job['profile']][1] / 4) if relaxed else 0.
+            model_deadline = deadline - reserve
             input_dir.mkdir()
             shutil.copyfile(folder / "source.png", input_dir / "UPLOAD.png")
             descriptions = folder / "description.csv"
@@ -644,6 +670,8 @@ class Jobs:
             exploring = job['profile'] in {'explore5', 'explore10'}
             from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
             program = scene_program(job['description'])
+            image_draft_only = (relaxed and not component_mode
+                                and ((exploring and program is None) or job.get('description_resolution_error')))
             complete_scene = program is not None and any(o['kind']=='text' for o in program['objects'])
             if exploring or complete_scene:
                 memory = self.directory / 'primitive-search-memory'
@@ -664,7 +692,7 @@ class Jobs:
                            '--description', str(description_file),
                            '--seed', str(job['search_seed']),
                            '--seconds', str(max(0.01, deadline-time.monotonic()-1))]
-            elif not exploring and job.get("sample") and job.get('use_current_svg',True):
+            elif not image_draft_only and not exploring and job.get("sample") and job.get('use_current_svg',True):
                 description_file = folder / "description.txt"
                 from src.iCCModules.imageCompositeConverterNaming import getBaseNameFromFileImpl
                 resolved = resolve_similarity_description(job["description"], catalog, base_name=getBaseNameFromFileImpl)
@@ -674,6 +702,13 @@ class Jobs:
                            "--output", str(output / "refined.svg"), "--description", str(description_file),
                            "--seconds", str(maximum), '--seed', str(job['search_seed']),
                            '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
+            if image_draft_only:
+                deadline = min(deadline, time.monotonic()+15.)
+                job['message'] = 'Beschreibung nur teilweise auswertbar; geometrische Modelle prüfen …'
+                command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
+                           '--source', str(folder/'source.png'), '--output', str(folder/'geometric-draft.svg'),
+                           '--description', str(folder/'preview-description.txt'), '--seed', str(job['search_seed']),
+                           '--deadline', str(time.time()+min(15., deadline-time.monotonic()))]
             environment = os.environ.copy()
             environment.update(PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8",
                                ICC_MAX_QUALITY_PASSES="0", ICC_CONVERSION_TIMEOUT_SEC=str(maximum))
@@ -684,7 +719,8 @@ class Jobs:
             environment.setdefault("IMAGE_CONVERTER_REUSE_RENDER_WORKER", "1")
             if not job.get('catalog_background'):
                 preview_description = folder/'preview-description.txt'
-                preview_description.write_text(resolve_similarity_description(job['description'], catalog).text, encoding='utf-8')
+                preview_description.write_text(job['description'] if job.get('description_resolution_error')
+                    else resolve_similarity_description(job['description'], catalog).text, encoding='utf-8')
                 environment.update(ICC_GUI_PREVIEW_SOURCE=str(folder / 'source.png'),
                                    ICC_GUI_PREVIEW_OUTPUT=str(folder / 'live-preview.svg'),
                                    ICC_GUI_PREVIEW_DESCRIPTION_FILE=str(preview_description),
@@ -692,7 +728,7 @@ class Jobs:
             options = ({"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt"
                        else {"start_new_session": True})
             with (folder / "console.log").open("wb") as log:
-                if not component_mode and not exploring and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
+                if not image_draft_only and not component_mode and not exploring and job.get('sample') and job.get('use_current_svg',True) and resolved.references:
                     for reference in resolved.references:
                         aspect = {'shape': 'Form', 'color': 'Farben', 'gradient': 'Farbverlauf'}[reference['aspect']]
                         log.write(f"Ähnlichkeitsreferenz ({aspect}): {reference['key']}\n".encode('utf-8'))
@@ -707,7 +743,7 @@ class Jobs:
                     self.processes[job_id] = process
                 try:
                     # Cancellation terminates the process tree and releases this wait.
-                    process.wait(timeout=max(.01, deadline-time.monotonic()))
+                    process.wait(timeout=max(.01, (deadline if image_draft_only else model_deadline)-time.monotonic()))
                 except subprocess.TimeoutExpired:
                     with self.lock:
                         stop_process_tree(process)
@@ -719,9 +755,30 @@ class Jobs:
                 # Collect into a temporary snapshot: a failed first attempt
                 # must not appear terminal while Plan B still has search time.
                 collected = dict(job)
-                collect = collect_sample_result if component_mode or (not exploring and job.get('sample') and job.get('use_current_svg',True)) else collect_result
-                collect(folder, collected, process.returncode)
-                retain_best_preview(folder, collected)
+                if not image_draft_only:
+                    collect = collect_sample_result if component_mode or (not exploring and job.get('sample') and job.get('use_current_svg',True)) else collect_result
+                    collect(folder, collected, process.returncode)
+                    retain_best_preview(folder, collected)
+            if (relaxed and not image_draft_only
+                    and (not collected.get('result') or collected.get('description_error'))):
+                with self.lock:
+                    if job['status'] != 'running':
+                        return
+                    job['message'] = 'Weitere geometrische Modelle prüfen …'
+                    command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
+                               '--source', str(folder/'source.png'), '--output', str(folder/'geometric-draft.svg'),
+                               '--description', str(folder/'preview-description.txt'), '--seed', str(job['search_seed']),
+                               '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
+                    with (folder/'draft-console.log').open('wb') as log:
+                        process = subprocess.Popen(command, cwd=ROOT, env=environment, stdout=log,
+                                                   stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, **options)
+                    self.processes[job_id] = process
+                try:
+                    process.wait(timeout=max(.01, deadline-time.monotonic()))
+                except subprocess.TimeoutExpired:
+                    stop_process_tree(process)
+            if relaxed:
+                collect_geometric_draft(folder, collected)
             retain_best_preview(folder, collected)
             with self.lock:
                 if job["status"] == "running":
@@ -939,13 +996,18 @@ def retain_best_preview(folder: Path, job: dict) -> None:
     from src.iCCModules.imageCompositeConverterCanvas import contain_svg
     result = folder/'result.svg'
     candidates = [folder/'live-preview.svg']
+    relaxed = job.get('conversion_policy') == 'description_guided_v1'
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     try:
         assertions = description_assertions(resolve_similarity_description(
             job.get('description', ''), catalog_descriptions()).text)
     except ValueError:
-        return
+        if not relaxed:
+            return
+        assertions = {}
     def valid_inventory(svg):
+        if relaxed:
+            return True
         try:
             svg = contain_svg(svg, job['width'], job['height'])
             validate_svg_assertions(svg, assertions)
@@ -979,7 +1041,7 @@ def retain_best_preview(folder: Path, job: dict) -> None:
         if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
             continue
         error = result_description_error(candidate, job.get('description', ''))
-        if error:
+        if error and not relaxed:
             continue
         # Prefer a valid deliverable over a numerically closer contradiction.
         rank = (bool(error), not quality['passed'], vector_comparison_score(quality))
@@ -1148,12 +1210,47 @@ def reject_description_result(result: Path, job: dict) -> bool:
     error = result_description_error(result, job.get('description', ''))
     if not error:
         return False
+    if job.get('conversion_policy') == 'description_guided_v1':
+        job.update(description_error=error, description_validation_version=DESCRIPTION_VALIDATION_VERSION)
+        return False
     job.update(status='error', result=False, quality='warning',
                result_rejection='description_inventory', description_error=error,
                description_validation_version=DESCRIPTION_VALIDATION_VERSION,
                message='Konvertierung ungenügend: Die beschriebenen Elemente konnten nicht exakt '
                        'umgesetzt werden. Bitte die Bildbeschreibung präzisieren. Details stehen im Protokoll.')
     return True
+
+
+def collect_geometric_draft(folder: Path, job: dict) -> None:
+    """Keep an image-driven draft without awarding semantic acceptance."""
+    candidate = folder/'geometric-draft.svg'
+    if not candidate.is_file():
+        if not job.get('result'):
+            job.update(status='error', result=False, quality='warning',
+                       message='Noch kein geometrisches SVG-Modell gefunden. Die Beschreibung blockiert den Start nicht; '
+                               'eine Pixelkopie wird nicht als Ersatz erzeugt.')
+        return
+    if job.get('quality') == 'passed':
+        return
+    from src.imageConverterSample import prepare_sample
+    try:
+        prepare_sample(candidate.read_bytes(), job['width'], job['height'])
+    except (OSError, ValueError, SyntaxError):
+        return
+    quality = saved_svg_quality(folder/'source.png', candidate)
+    if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
+        return
+    previous = saved_svg_quality(folder/'source.png', folder/'result.svg') if job.get('result') else None
+    if previous and (not previous['passed'], vector_comparison_score(previous)) <= (not quality['passed'], vector_comparison_score(quality)):
+        return
+    shutil.copyfile(candidate, folder/'result.svg')
+    job.pop('result_rejection', None)
+    job.update(status='done', result=True, quality='warning', pixel_quality=quality,
+               geometric_draft=True,
+               description_error=result_description_error(candidate, job.get('description', '')),
+               description_validation_version=DESCRIPTION_VALIDATION_VERSION,
+               message='Geometrischen SVG-Entwurf erstellt. Die vollständige Beschreibungsprüfung '
+                       'ist noch offen; bitte das Ergebnis prüfen.')
 
 
 def reject_raster_result(result: Path, job: dict) -> bool:
@@ -1163,9 +1260,15 @@ def reject_raster_result(result: Path, job: dict) -> bool:
         root = ET.parse(result).getroot()
     except (OSError, ET.ParseError):
         return False  # Invalid/unrenderable output is handled by the quality check.
-    if not any(node.tag.rsplit('}', 1)[-1] == 'image' for node in root.iter()):
+    from src.iCCModules.imageCompositeConverterVectorPolicy import pixel_copy_reason
+    reason = pixel_copy_reason(root)
+    if not reason:
         return False
-    job.update(status='error', result=False, quality='warning', result_rejection='embedded_raster',
+    if reason == 'pixel_trace':
+        job.update(status='error', result=False, quality='warning', result_rejection=reason,
+                   message='Pixelstreifen-SVG verworfen. Bitte erneut geometrisch konvertieren.')
+        return True
+    job.update(status='error', result=False, quality='warning', result_rejection=reason,
                message='Vektorisierung fehlgeschlagen. Die Ausgabe enthält ein eingebettetes Rasterbild '
                        'und wird deshalb nicht als SVG-Ergebnis angeboten. Details stehen im Protokoll.')
     return True
@@ -1625,6 +1728,8 @@ class Handler(BaseHTTPRequestHandler):
                         description_autosave=True,
                         current_svg_reuse=True,
                         primitive_exploration=True,
+                        description_guided_conversion=True,
+                        geometric_svg_only=True,
                         scoped_primitive_paint=True,
                         three_wing_valve=True,
                         partitioned_rhombus=True,

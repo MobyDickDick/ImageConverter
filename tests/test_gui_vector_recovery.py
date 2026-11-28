@@ -34,7 +34,7 @@ def case(tmp_path, monkeypatch):
 @pytest.mark.parametrize('output_kind', ['passed', 'failed', 'missing'])
 def test_gui_stops_after_description_fit_even_with_remaining_time(case, monkeypatch, output_kind):
     jobs, job, folder = case
-    job.update(status='running', started=gui.time.time(), profile='thorough')
+    job.update(status='running', started=gui.time.time(), profile='thorough', catalog_background=True)
     commands = []
     class Process:
         returncode = 0 if output_kind == 'passed' else 1

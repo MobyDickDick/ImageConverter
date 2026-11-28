@@ -182,7 +182,8 @@ def description_assertions(description: str) -> dict:
         r'\b(?:beschriftung|aufschrift|text|(?:groß|gross|klein)?buchstabe[n]?|label|ziffer[n]?)\b[^.?!]{0,100}["„]|'
         r'["“][^.?!]{0,100}\bals\b[^.?!]{0,40}\b(?:beschriftung|aufschrift|text|label)\b', normalized,
         flags=re.IGNORECASE) or re.search(
-            r'\bin der (?:kelle|kreisscheibe) ist ein ["„][^"“\n]+["“] geschrieben',
+            r'\bin der (?:kelle|kreisscheibe) ist ein ["„][^"“\n]+["“] geschrieben|'
+            r'\bim (?:kreis(?: der kelle)?|quadrat) steht ["„][^"“\n]+["“]',
             normalized, re.IGNORECASE))
     unnamed_text = bool(not label_claim and re.search(
         r'\b(?:mit\s+(?:einer?\s+)?|eine?\s+)(?:beschriftung|aufschrift|buchstabe|text|ziffer)\b', words))

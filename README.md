@@ -1,5 +1,14 @@
 # ImageConverter
 
+Die manuelle Webkonvertierung behält geometrische SVG-Entwürfe auch bei offener
+Beschreibungsprüfung. Unbekannte Formulierungen blockieren den Start nicht.
+Der Ausweichpfad prüft geometrische Modelle; er erzeugt keine Pixelstreifen oder
+eingebetteten Rasterbilder. Alte Pixelstreifen-SVGs sind als Vorlage, Vorschau
+und Ergebnis ausgeschlossen. Das Motorventil unterstützt einen echten Kreis,
+Griff, zwei Dreiecke mit gemeinsamem Farbverlauf und eine native SVG-Beschriftung.
+Zur Verwendung nach Abschluss laufender Aufträge den Webserver neu starten
+und die Seite neu laden. [Änderung und CI-Prüfung](docs/description_guided_conversion.md).
+
 `AC0202_1.jpg` wird mit der vorhandenen Benutzerbeschreibung als roter Kreis
 mit grauem Rand und zwei horizontal gespiegelten weissen Linien konvertiert.
 Die Symmetrieachse zählt nicht als zusätzliche Linie; Randkontakt und echte

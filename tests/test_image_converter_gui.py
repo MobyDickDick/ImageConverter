@@ -142,6 +142,7 @@ def test_unchanged_draft_is_reported_even_after_description_edit(jobs, monkeypat
         (folder/'result.svg').write_text('<svg/>' if identical else '<svg><circle/></svg>')
         job.update(status='done', quality='warning', result=True, message='Entwurf.')
     monkeypatch.setattr(gui, 'collect_result', collect)
+    monkeypatch.setattr(gui, 'retain_best_preview', lambda *args: None)
     monkeypatch.setattr(jobs, 'publish_best', lambda *args: None)
     jobs.run(retry['id'])
     assert retry['same_as_previous'] == identical
@@ -568,9 +569,11 @@ def test_free_search_profiles_reach_cli_with_durable_memory_and_skip_samples(job
     assert commands and 'Captured population search' in jobs.snapshot(job['id'])['message']
 
 
-def test_free_search_rejects_unsupported_claim_before_launch(jobs,job):
-    with pytest.raises(gui.RequestError,match='noch nicht vollständig'):
-        jobs.start(job['id'],'Ein Kreis mit Schrift "M".','explore5')
+def test_free_search_accepts_unsupported_claim_before_launch(jobs,job,monkeypatch):
+    monkeypatch.setattr(jobs, 'run', lambda job_id: None)
+    started = jobs.start(job['id'],'Ein Kreis mit Schrift "M".','explore5')
+    assert started['status'] == 'running'
+    assert started['description'] == 'Ein Kreis mit Schrift "M".'
 
 
 def test_free_search_completion_does_not_rescan_every_rendered_attempt(jobs,job,monkeypatch):
