@@ -1018,8 +1018,8 @@ def retain_best_preview(folder: Path, job: dict) -> None:
         if error and not relaxed:
             continue
         # Prefer a valid deliverable over a numerically closer contradiction.
-        rank = (bool(error) and not relaxed, not quality['passed'], vector_comparison_score(quality))
-        old_rank = ((bool(previous_error) and not relaxed, not previous['passed'], vector_comparison_score(previous))
+        rank = (bool(error), not quality['passed'], vector_comparison_score(quality))
+        old_rank = ((bool(previous_error), not previous['passed'], vector_comparison_score(previous))
                     if previous else (True, True, float('inf')))
         if previous and rank >= old_rank:
             continue

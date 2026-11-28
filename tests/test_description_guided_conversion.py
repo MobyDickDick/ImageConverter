@@ -116,6 +116,17 @@ def test_expired_draft_does_not_overwrite_an_existing_vector(jobs):
     assert output.read_text() == 'existing'
 
 
+def test_guided_preview_prefers_existing_description_matching_geometry(jobs):
+    job, folder = upload(jobs)
+    job.update(description='Ein Kreis.', conversion_policy='description_guided_v1', result=True, quality='warning')
+    (folder/'result.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24"><circle cx="16" cy="12" r="7" fill="#285078"/></svg>')
+    with Image.open(folder/'source.png') as image:
+        (folder/'live-preview.svg').write_text(region_svg(np.asarray(image.convert('RGB')), 8))
+    gui.retain_best_preview(folder, job)
+    assert any(n.tag.rsplit('}', 1)[-1] == 'circle' for n in ET.parse(folder/'result.svg').getroot().iter())
+    assert not job.get('retained_preview')
+
+
 @pytest.mark.parametrize('profile', ['quick', 'explore5'])
 def test_reported_motor_valve_gets_visible_native_draft(jobs, monkeypatch, profile):
     from src.iCCModules.imageCompositeConverterDescriptions import loadCatalogDescriptionMappingImpl
