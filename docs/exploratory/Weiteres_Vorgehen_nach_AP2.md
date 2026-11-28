@@ -5,7 +5,9 @@
 **Entwicklungszweig:** `experimental/explorative-conversion`.
 
 **Vereinbarung:** Der Anwender unterstützt die nachfolgende Reihenfolge.
-Die Umsetzung der Etappen steht noch aus; dieser Auftrag dokumentiert das Vorgehen.
+Etappe 1 ist als [CI-Galerie und Codeübersicht](Etappe1_Demo_und_Codeweg.md)
+implementiert; der konkrete CI-Nachweis steht im zugehörigen Pull Request.
+Etappen 2–4 stehen weiterhin aus.
 
 Zuerst entstehen eine sichtbare Demo und eine verständliche Architekturübersicht.
 Danach werden CI-Fehler nach Ursachen gruppiert und in begrenzten Paketen behoben.
@@ -27,7 +29,8 @@ Lauf verfügbar. Anschauliche Beispiele im Quellcode sind
 `test_real_rendering_paint_order_and_all_primitives` und
 `test_structural_candidates_compete_and_poor_real_draft_survives` in
 [test_exploratory_ap2.py](../../tests/test_exploratory_ap2.py).
-Eine betrachtbare Galerie der erzeugten Bilder und SVGs fehlt bisher.
+Eine betrachtbare Galerie der erzeugten Bilder und SVGs wird nun im Workflow
+`Exploratory acceptance` als herunterladbares HTML-Artefakt erzeugt.
 
 AP 2 ist noch keine automatische Suche über verschiedene Objektstrukturen.
 Der derzeitige Standardanbieter liefert im Wesentlichen Rechteck und Ellipse;
@@ -109,8 +112,9 @@ keine Zusagen für Agentenlaufzeit oder Verbrauch des Wochenkontingents.
 | Klar begrenzte gemeinsame Ursachen beheben | Weitere Stunden bis wenige Tage |
 | Sämtliche alten Konvertierungs- und Qualitätsfälle zuverlässig bereinigen | Mehrere Tage bis deutlich länger; derzeit schlecht begrenzbar |
 
-Für Demo und Übersicht folgt eine eigene kleine Umfangsschätzung beim Start
-von Etappe 1. Ein verbindliches Zahlenbudget wurde noch nicht vereinbart.
+Der Umfang und Aufwandsrahmen für Demo und Übersicht stehen in der
+[Umsetzungsbeschreibung von Etappe 1](Etappe1_Demo_und_Codeweg.md).
+Ein verbindliches Zahlenbudget wurde noch nicht vereinbart.
 Ein seriöser Prozentsatz des Wochenkontingents lässt sich aus diesen Schätzungen
 nicht ableiten. Entwicklungsaufwand und CI-Rechenzeit sind getrennt auszuweisen.
 Die bestehende vollständige Katalogprüfung hat ein Zeitlimit von 330 Minuten
@@ -160,17 +164,18 @@ primäre Entwicklungsstrategie. AP 5–8 bleiben gemäss AP 0 eingeplant.
 
 ## Fortschritt und Rahmen
 
-- [ ] Etappe 1: Betrachtbare Demo und verständliche Architekturübersicht abgenommen.
+- [x] Etappe 1: Betrachtbare CI-Demo und verständliche Architekturübersicht implementiert; CI-Ergebnis im zugehörigen PR, persönliche Durchsicht durch den Anwender offen.
 - [ ] Etappe 2: Ursachenliste und begrenzter Reparaturumfang festgehalten.
 - [ ] Etappe 3: Vereinbarte Reparaturpakete geprüft; übrige Fehler dokumentiert.
 - [ ] Etappe 4: AP 3 und anschliessend AP 4 umgesetzt und geprüft.
 
-Änderungen bleiben auf `experimental/explorative-conversion` und werden über
+Änderungen bauen auf `experimental/explorative-conversion` auf und erhalten
+gemäss `AGENTS.md` je Aufgabe einen eigenen `codex/…`-Branch. Sie werden über
 [PR 2084](https://github.com/MobyDickDick/ImageConverter/pull/2084) oder einen
 passenden nachfolgenden PR bereitgestellt. Tests, Testkonvertierungen und
 Benchmarks laufen ausschliesslich auf GitHub Actions. Fehlgeschlagene und
-ausstehende Prüfungen werden ausdrücklich genannt. Die unversionierte Datei
-`try_exploratory.py` bleibt von diesem Dokumentationsauftrag unberührt.
+ausstehende Prüfungen werden ausdrücklich genannt. Die inzwischen versionierte
+Datei `try_exploratory.py` bleibt vom Demo-Paket unberührt.
 
 Grundlagen: [AP 0](AP0_Architekturanalyse_ImageConverter.md),
 [AP 1](AP1_Isolierter_Konvertierungskern.md),

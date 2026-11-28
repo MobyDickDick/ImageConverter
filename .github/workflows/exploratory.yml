@@ -6,11 +6,13 @@ on:
     paths:
       - 'src/exploratory/**'
       - 'tests/test_exploratory_*.py'
+      - 'tools/exploratory_demo.py'
       - '.github/workflows/exploratory.yml'
   pull_request:
     paths:
       - 'src/exploratory/**'
       - 'tests/test_exploratory_*.py'
+      - 'tools/exploratory_demo.py'
       - '.github/workflows/exploratory.yml'
   workflow_dispatch:
 
@@ -32,11 +34,19 @@ jobs:
         with:
           python-version: '3.10.11'
       - run: python -m pip install -r requirements-dev.txt
-      - name: Verify AP 1 and AP 2 with real rendering and quality metrics
-        run: python -m pytest -q -rA tests/test_exploratory_ap1.py tests/test_exploratory_ap2.py --junitxml=artifacts/exploratory/acceptance.xml
+      - name: Verify AP 1, AP 2 and the offline gallery with real rendering and metrics
+        run: python -m pytest -q -rA tests/test_exploratory_ap1.py tests/test_exploratory_ap2.py tests/test_exploratory_demo.py --junitxml=artifacts/exploratory/acceptance.xml
+      - name: Generate visible AP 1 and AP 2 gallery
+        run: python -m tools.exploratory_demo --output artifacts/exploratory/gallery
+      - name: Link gallery artifact from run summary
+        shell: bash
+        run: |
+          echo '### AP 1/2: sichtbare Demo' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Artefakt exploratory-acceptance-${{ matrix.os }} herunterladen, entpacken und gallery/index.html öffnen. Enthält Originale, SVGs, Unterschiedsbilder und report.json. Alle Ergebnisse sind Entwürfe ohne semantische Freigabe.' >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: exploratory-acceptance-${{ matrix.os }}
-          path: artifacts/exploratory/acceptance.xml
-          if-no-files-found: warn
+          path: artifacts/exploratory/
+          if-no-files-found: error
+          retention-days: 30
