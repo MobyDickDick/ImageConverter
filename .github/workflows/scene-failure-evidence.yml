@@ -1,0 +1,80 @@
+name: Scene failure evidence R1
+
+on:
+  push:
+    branches: ['codex/**']
+    paths:
+      - 'tools/evaluate_layered_scene.py'
+      - 'tools/run_seeded_scene_check.py'
+      - 'tests/test_scene_failure_*.py'
+      - 'tests/test_test_data_lifecycle.py'
+      - '.github/workflows/scene-failure-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-conversions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      ICC_R1_REPRODUCTION: '1'
+      IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.11'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Reproduce three frozen gradients and one same-paint case without relaxing acceptance
+        run: python -m pytest -q -rA tests/test_scene_failure_reproduction.py --junitxml=artifacts/r1/reproduction.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r1-negative-conversion-evidence
+          path: |
+            artifacts/r1/
+            .tmp/scene-failures/
+            config/test_run_seeds.jsonl
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+
+  contracts-and-exploratory:
+    needs: targeted-conversions
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.11'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify negative evidence, cleanup and real process deadlines
+        run: python -m pytest -q -rA tests/test_scene_failure_evidence.py tests/test_test_data_lifecycle.py tests/test_conversion_deadline.py --junitxml=artifacts/r1/contracts.xml
+      - name: Preserve existing saved-output acceptance and tampering checks
+        if: ${{ !cancelled() }}
+        run: python -m pytest -q -rA tests/test_layered_scene_runtime.py::test_saved_cli_evidence_is_rechecked_and_tampering_rejected tests/test_layered_scene_runtime.py::test_an_empty_matrix_cannot_claim_acceptance --junitxml=artifacts/r1/saved-output.xml
+      - name: Verify exploratory AP 1, AP 2 and gallery
+        if: ${{ !cancelled() }}
+        run: python -m pytest -q -rA tests/test_exploratory_ap1.py tests/test_exploratory_ap2.py tests/test_exploratory_demo.py --junitxml=artifacts/r1/exploratory.xml
+      - name: Generate offline gallery
+        if: ${{ !cancelled() }}
+        run: python -m tools.exploratory_demo --output artifacts/r1/gallery
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r1-contracts-${{ matrix.os }}
+          path: artifacts/r1/
+          if-no-files-found: error
+          retention-days: 14

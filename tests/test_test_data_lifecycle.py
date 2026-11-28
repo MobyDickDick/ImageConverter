@@ -136,6 +136,11 @@ def test_scene_check_removes_owned_data_on_every_exit_and_saves_seed_first(tmp_p
     def evaluate(inputs, output, **kwargs):
         output.mkdir()
         (output/'output.svg').write_text('generated')
+        reports = output/'sample/conversion/reports'
+        reports.mkdir(parents=True)
+        (reports/'sample_deadline.json').write_text('{"stop_reason": "no_result"}')
+        (output/'sample/converter.log').write_text('worker rejected candidate')
+        (output/'report.json').write_text(json.dumps({'cases': [{'svg': '<svg/>', 'accepted': False}]}))
         if failure == 'evaluate':
             raise ValueError('Independent acceptance failed')
         if failure == 'interrupt':
@@ -152,8 +157,22 @@ def test_scene_check_removes_owned_data_on_every_exit_and_saves_seed_first(tmp_p
     else:
         assert checks.run('evaluate_example', 8123) == {'accepted': 12, 'completed': 12}
     assert paths and all(not p.exists() for p in paths)
-    recipe = json.loads((tmp_path/'config/test_run_seeds.jsonl').read_text())
+    records = [json.loads(line) for line in (tmp_path/'config/test_run_seeds.jsonl').read_text().splitlines()]
+    recipe = records[0]
     assert recipe['seed'] == 8123 and recipe['search_seed'] == 17
+    bundles = list((tmp_path/'.tmp/scene-failures').glob('*/failure.json'))
+    assert len(bundles) == int(bool(failure))
+    if failure:
+        bundle = bundles[0].parent
+        evidence = json.loads(bundles[0].read_text())
+        assert evidence['recipe'] == recipe
+        assert evidence['error_type'] in {'CalledProcessError', 'ValueError', 'KeyboardInterrupt'}
+        assert records[1]['diagnostics'] == str(bundle)
+        assert not list(bundle.rglob('*.svg')) and not list(bundle.rglob('*.png'))
+        if failure != 'prepare':
+            assert json.loads((bundle/'cli/sample/conversion/reports/sample_deadline.json').read_text())['stop_reason'] == 'no_result'
+            assert (bundle/'cli/sample/converter.log').read_text() == 'worker rejected candidate'
+            assert 'svg' not in json.loads((bundle/'cli/report.json').read_text())['cases'][0]
 
 
 @pytest.mark.parametrize('options', [('--output', 'elsewhere'), ('--prepare', 'elsewhere'), ('--inputs=elsewhere',)])
