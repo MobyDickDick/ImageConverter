@@ -169,7 +169,10 @@ jobs:
         if: always()
         with:
           name: same-paint-overlap-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   island-group-search:
@@ -191,7 +194,10 @@ jobs:
         if: always()
         with:
           name: island-group-search-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   repeated-fill-overlap:
@@ -213,7 +219,10 @@ jobs:
         if: always()
         with:
           name: repeated-fill-overlap-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   disconnected-overlap-groups:
@@ -236,7 +245,10 @@ jobs:
         if: always()
         with:
           name: disconnected-overlap-group-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   clipped-gradient-parent:
@@ -258,7 +270,10 @@ jobs:
         if: always()
         with:
           name: clipped-gradient-parent-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   clipped-rectangular-gradient-parent:
@@ -344,7 +359,10 @@ jobs:
         if: always()
         with:
           name: rounded-gradient-parent-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   rectangular-gradient-parent:
@@ -364,7 +382,10 @@ jobs:
         if: always()
         with:
           name: rectangular-gradient-parent-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   mixed-overlap-composition:
@@ -384,6 +405,15 @@ jobs:
           python -m tools.run_seeded_scene_check evaluate_mixed_overlap --seed 624819 --rounded --variations
           python -m tools.run_seeded_scene_check evaluate_mixed_overlap --seed 918527 --rounded --outlines
           python -m tools.run_seeded_scene_check evaluate_mixed_overlap --seed 342781 --rounded --outlines --variations
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mixed-overlap-composition-diagnostics
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
+          retention-days: 7
 
   overlap-composition:
     runs-on: ubuntu-latest
@@ -409,7 +439,10 @@ jobs:
         if: always()
         with:
           name: overlap-composition-seeds
-          path: config/test_run_seeds.jsonl
+          path: |
+            config/test_run_seeds.jsonl
+            .tmp/scene-failures/
+          include-hidden-files: true
           retention-days: 7
 
   rounded-outlines:

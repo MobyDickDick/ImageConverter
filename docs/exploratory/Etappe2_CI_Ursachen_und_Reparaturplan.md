@@ -189,6 +189,11 @@ Regression der betroffenen Runner-/Deadline-Verträge und die bestehende
 explorative AP-1/2-Abnahme. Erst nach einem sinnvollen Reparaturpaket wird
 breiter geprüft. Die Katalogbatterie wird nicht zur Erstdiagnose wiederholt.
 
+**Fortschreibung:** R1 ist im [ersten Reparaturpaket](Etappe3_R1_Workerabschluesse.md)
+umgesetzt und gezielt geprüft. Die ursprüngliche Diagnosetabelle oben bleibt
+als Ausgangsbefund erhalten. Nächstes Paket ist R2; die vier R1-Qualitätsproben
+bleiben negativ und die übergeordnete CI bleibt ohne Gesamtfreigabe.
+
 Nicht im ersten Reparaturpaket: geometrische Einzelfälle aus D5, Sidecar-
 Vertrag und Incumbent-Callback aus D4, komplette Legacy-Bereinigung sowie
 AP 3/4. Sie bleiben ausdrücklich offen und werden nach R1–R3 neu gewichtet.
