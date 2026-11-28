@@ -680,6 +680,7 @@ class Jobs:
                            "--seconds", str(maximum), '--seed', str(job['search_seed']),
                            '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
             if image_draft_only:
+                deadline = min(deadline, time.monotonic()+15.)
                 job['message'] = 'Beschreibung nur teilweise auswertbar; Vektorentwurf aus den Bildflächen erstellen …'
                 command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
                            '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),

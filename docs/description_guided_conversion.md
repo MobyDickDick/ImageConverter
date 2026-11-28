@@ -33,3 +33,18 @@ Der gezielte Workflow **Description guided conversion** läuft ausschliesslich
 auf GitHub Actions und legt Original, SVG, Messwerte und JUnit-Protokoll als
 Artefakt `description-guided-evidence` ab. Lokale Tests oder Testkonvertierungen
 werden nicht ausgeführt. CI-Ergebnisse werden im Pull Request verlinkt.
+
+Nachweis: [GitHub Actions vom 28. November 2026](https://github.com/MobyDickDick/ImageConverter/actions/runs/46143184475)
+bestätigt je 24 gezielte Python- und 16 Browser-Tests unter Ubuntu und Windows.
+Der Vergleich der gesamten GUI-Datei ergibt zehn fehlgeschlagene Tests auf dem
+Aufgabenbranch, zwölf auf der unveränderten Basis und keine zusätzlichen Fehler.
+Diese zehn bestehenden Fehler sind damit ausdrücklich nicht behoben; die beiden
+JUnit-Dateien und die vollständige Liste stehen im Artefakt
+`gui-regression-comparison`. Die allgemeine Suite hat weitere fehlgeschlagene
+und noch laufende Prüfungen und wird nicht als vollständig bestanden bezeichnet.
+
+Für das gemeldete Bild mit unverändertem Benutzertext besteht der gespeicherte
+SVG-Entwurf die Pixelprüfung: Vordergrund-IoU 0,9802, Kantenübereinstimmung 0,9323.
+Die semantische Beschreibungsprüfung bleibt offen. Der direkte Bildflächenworker
+wird auch als Prozess nach spätestens 15 Sekunden beendet, sodass ein unbekannter
+Text in den freien Profilen keinen fünf- oder zehnminütigen Leerlauf verursacht.
