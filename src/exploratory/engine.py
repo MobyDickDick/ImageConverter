@@ -11,12 +11,20 @@ from xml.etree import ElementTree as ET
 import numpy as np
 
 from . import adapters
+from .scene import Scene
 
 
 @dataclass(frozen=True)
 class Candidate:
     svg: str
     source: str
+    scene: Scene | None = None
+
+    @classmethod
+    def from_scene(cls, scene, source="scene"):
+        if not isinstance(scene, Scene):
+            raise TypeError("scene must be Scene")
+        return cls(scene.to_svg(), source, scene)
 
 
 @dataclass
@@ -137,6 +145,8 @@ def convert(image, description="", *, seconds=300.0, max_candidates=4096,
         try:
             if not isinstance(candidate, Candidate) or not _native_svg(candidate.svg):
                 raise ValueError("Not a self-contained native vector candidate")
+            if candidate.scene is not None and (candidate.scene.width, candidate.scene.height) != (width, height):
+                raise ValueError("Scene canvas does not match the reference raster")
             if candidate.svg in seen:
                 result.duplicates += 1
                 continue

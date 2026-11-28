@@ -192,7 +192,12 @@ Zwischenstände sollen bei Verbesserung sichtbar und nach Möglichkeit dauerhaft
 
 ## 8. Überarbeiteter Arbeitsplan
 
-Diese Reihenfolge ersetzt den ersten groben Vorschlag aus der Diskussion; die Arbeitspakete nach AP 0 sind noch nicht umgesetzt.
+Diese Reihenfolge ersetzt den ersten groben Vorschlag aus der Diskussion.
+Fortschritt am 28. November 2026: AP 1 implementiert und gemäss Anwender unter
+Windows/Python 3.10.11 mit neun bestandenen Tests in 12,25 Sekunden abgenommen
+(Details und Herkunft der Evidenz in [AP 1](AP1_Isolierter_Konvertierungskern.md)).
+AP 2 ergänzt die flexible Szenenrepräsentation gemäss
+[AP 2](AP2_Flexible_geometrische_Repraesentation.md); AP 3–8 stehen noch aus.
 
 | AP  | Ziel                                 | Erwartetes Ergebnis                                                          |
 | --- | ------------------------------------ | ---------------------------------------------------------------------------- |

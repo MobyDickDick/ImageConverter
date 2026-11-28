@@ -49,8 +49,18 @@ Tests: python -m pytest tests/test_exploratory_ap1.py -q
 Die Tests decken optionale Beschreibung, Anbieterfehler, konkurrierende
 Kandidaten, Duplikate, Budget, Entwurfserhalt, Rasterpayload-Ablehnung,
 fehlende semantische Freigabe sowie die bestehenden Renderer/Metriken ab.
-Die Ausführung im vollständigen Repository muss noch bestätigt werden.
-AP 2–8 bleiben offen: insbesondere variable Szenen, Wahrnehmung, Mutationen,
+**Erfolgreiche Testabnahme, am 28. November 2026 durch den Anwender gemeldet:**
+Unter Windows mit Python **3.10.11** bestanden alle **neun Tests in 12,25 Sekunden**,
+einschliesslich des realen Renderings und der Qualitätsmessung. Damit ist die
+AP-1-Testabnahme für diese Umgebung bestätigt. Diese historische Ausführung
+wurde vom Anwender berichtet; ein zugehöriger CI-Link oder ein Testprotokoll
+liegt dieser Meldung nicht bei. Sie wurde im Rahmen von AP 2 nicht lokal wiederholt.
+Der Workflow `Exploratory acceptance` prüft AP 1 und AP 2 künftig gemeinsam auf
+GitHub Actions unter Windows und Linux mit Python 3.10.11 und sichert JUnit-Berichte.
+
+AP 2 ergänzt die variable Szenenrepräsentation; siehe
+[AP2_Flexible_geometrische_Repraesentation.md](AP2_Flexible_geometrische_Repraesentation.md).
+AP 3–8 bleiben offen: insbesondere Wahrnehmung, Mutationen,
 echte 300-Sekunden-Exploration, semantische Hinweise, persistente Diagnose,
 Generalisierung und CLI/GUI-Integration. AP 0 ist nicht vollständig abgenommen.
 Keine Legacy-Datei geändert.

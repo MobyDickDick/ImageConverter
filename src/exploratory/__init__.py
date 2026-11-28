@@ -1,4 +1,5 @@
-"""Independent, synchronous experimental conversion API (AP 1)."""
+"""Independent synchronous conversion and flexible geometric scenes."""
 from .engine import Candidate, ConversionResult, convert
+from .scene import Paint, Primitive, Relation, Scene
 
-__all__ = ["Candidate", "ConversionResult", "convert"]
+__all__ = ["Candidate", "ConversionResult", "convert", "Paint", "Primitive", "Relation", "Scene"]

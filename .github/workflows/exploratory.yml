@@ -1,0 +1,41 @@
+name: Exploratory acceptance
+
+on:
+  push:
+    branches: [experimental/explorative-conversion]
+    paths:
+      - 'src/exploratory/**'
+      - 'tests/test_exploratory_*.py'
+      - '.github/workflows/exploratory.yml'
+  pull_request:
+    paths:
+      - 'src/exploratory/**'
+      - 'tests/test_exploratory_*.py'
+      - '.github/workflows/exploratory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.11'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify AP 1 and AP 2 with real rendering and quality metrics
+        run: python -m pytest -q -rA tests/test_exploratory_ap1.py tests/test_exploratory_ap2.py --junitxml=artifacts/exploratory/acceptance.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: exploratory-acceptance-${{ matrix.os }}
+          path: artifacts/exploratory/acceptance.xml
+          if-no-files-found: warn

@@ -1,5 +1,24 @@
 """Narrow adapters to existing rendering and full-image quality metrics."""
 
+def scene_geometry(scene):
+    """Reuse the legacy math kernel, without parser or fixed inventory limits."""
+    import numpy as np
+    from src.iCCModules.imageCompositeConverterSceneProgram import STRIDE, geometry
+
+    program = {"objects": [{"id": obj.id, "kind": obj.kind} for obj in scene.objects]}
+    values = np.zeros((len(scene.objects), STRIDE))
+    for row, obj in zip(values, scene.objects):
+        row[:5] = (*obj.center, *obj.size, obj.angle)
+    shapes = geometry(program, values, scene.width, scene.height)
+    # Legacy geometry also supplies legacy paint/minimum-stroke metadata.
+    # Replace that metadata with the actual, unconstrained scene paint.
+    for obj in scene.objects:
+        shapes[obj.id]["paint"] = obj.paint
+        shapes[obj.id]["stroke"] = (obj.paint.stroke_width * min(scene.width, scene.height)
+                                     if obj.paint.stroke is not None else 0.)
+    return shapes
+
+
 def render(svg, width, height):
     import cv2
     import fitz
