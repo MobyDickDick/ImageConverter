@@ -72,3 +72,41 @@ def test_saved_proof_is_required_and_tampering_is_rejected(tmp_path):
     report['runtime_integrity_sha256'] = evaluation.digest(evidence)
     with pytest.raises(ValueError, match='Runtime changed'):
         evaluation.verify_runtime_integrity(tmp_path, report)
+
+
+def test_tracing_writes_outside_runtime_and_creates_directory(tmp_path, monkeypatch):
+    from src import function_tracer
+    from src.exploratory import Paint
+    assert not function_tracer.LOG_FILE.is_relative_to(function_tracer.ROOT)
+    before = evaluation.source_hashes()
+    log = tmp_path/'new'/'traces'/'worker.log'
+    monkeypatch.setattr(function_tracer, 'LOG_FILE', log)
+    try:
+        function_tracer.start()
+        # A traced project call supplies actual log contents, not just a path.
+        Paint()
+    finally:
+        function_tracer.stop()
+    assert log.is_file() and log.stat().st_size > 0
+    assert evaluation.source_hashes() == before
+
+
+def test_unchanged_runtime_preserves_original_failure_and_evidence(tmp_path, monkeypatch):
+    runtime = make_runtime(tmp_path)
+    prepared = tmp_path/'inputs'
+    prepared.mkdir()
+    (prepared/'freeze.json').write_text('{}', encoding='utf-8')
+    (prepared/'input.png').write_bytes(b'frozen input')
+    case = dict(case_id='case', family='frozen', image='input.png', description='circle')
+    monkeypatch.setattr(evaluation, 'ROOT', runtime)
+    monkeypatch.setattr(evaluation, 'verify_inputs', lambda _: dict(cases=[case], region_limits={}))
+    from tools import run_plan_b_variations
+    def fail(*args, **kwargs):
+        raise RuntimeError('original worker failure')
+    monkeypatch.setattr(run_plan_b_variations, 'run_case', fail)
+    output = tmp_path/'run'
+    with pytest.raises(RuntimeError, match='original worker failure'):
+        evaluation.run(prepared, output, budget=10., only=['frozen'])
+    report = json.loads((output/'report.json').read_text(encoding='utf-8'))
+    evaluation.verify_runtime_integrity(output, report)
+    assert report['records'] == []

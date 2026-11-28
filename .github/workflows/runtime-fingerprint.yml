@@ -15,6 +15,47 @@ permissions:
 
 jobs:
   integrity-and-frozen-family:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.11'
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Require file differences and reject deliberate code and configuration mutations
+        run: python -m pytest -q -rA tests/test_runtime_fingerprint.py tests/test_semantic_robustness_evaluation.py tests/test_description_language.py --junitxml=artifacts/r2/contracts.xml
+      - name: Freeze the existing real inputs
+        run: python -m tools.evaluate_semantic_robustness --prepare .tmp/r2-inputs
+      - name: Replay the complete diagnostic family with seed 17 and ten seconds
+        run: python -m tools.evaluate_semantic_robustness --run .tmp/r2-inputs --output .tmp/r2-family --families labeled_disk --budget 10
+      - name: Independently verify saved decisions and unchanged runtime
+        if: ${{ !cancelled() }}
+        run: python -m tools.evaluate_semantic_robustness --verify .tmp/r2-family --prepared .tmp/r2-inputs
+      - name: Keep exploratory AP 1, AP 2 and gallery contracts
+        if: ${{ !cancelled() }}
+        run: python -m pytest -q -rA tests/test_exploratory_ap1.py tests/test_exploratory_ap2.py tests/test_exploratory_demo.py --junitxml=artifacts/r2/exploratory.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r2-runtime-evidence-${{ matrix.os }}
+          path: |
+            artifacts/r2/
+            .tmp/r2-inputs/
+            .tmp/r2-family/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+
+  three-family-quality:
+    needs: integrity-and-frozen-family
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     env:
@@ -26,23 +67,20 @@ jobs:
         with:
           python-version: '3.10.11'
       - run: python -m pip install -r requirements-dev.txt
-      - name: Require added, removed and changed file evidence and reject deliberate mutations
-        run: python -m pytest -q -rA tests/test_runtime_fingerprint.py tests/test_semantic_robustness_evaluation.py --junitxml=artifacts/r2/contracts.xml
-      - name: Freeze the existing real inputs
-        run: python -m tools.evaluate_semantic_robustness --prepare .tmp/r2-inputs
-      - name: Diagnose one complete frozen family with seed 17 and ten seconds
-        run: python -m tools.evaluate_semantic_robustness --run .tmp/r2-inputs --output .tmp/r2-family --families labeled_disk --budget 10
-      - name: Independently verify saved decisions and unchanged runtime
+      - name: Freeze unchanged inputs
+        run: python -m tools.evaluate_semantic_robustness --prepare .tmp/r2-three-inputs
+      - name: Measure the three existing families without disguising negative outcomes
+        run: python -m tools.evaluate_semantic_robustness --run .tmp/r2-three-inputs --output .tmp/r2-three --families labeled_disk warning_disk arc_shaft --budget 10
+      - name: Independently verify all decisions and enforce unchanged full quality acceptance
         if: ${{ !cancelled() }}
-        run: python -m tools.evaluate_semantic_robustness --verify .tmp/r2-family --prepared .tmp/r2-inputs
+        run: python -m tools.evaluate_semantic_robustness --verify .tmp/r2-three --prepared .tmp/r2-three-inputs --require-all
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r2-runtime-evidence
+          name: r2-three-family-quality
           path: |
-            artifacts/r2/
-            .tmp/r2-inputs/
-            .tmp/r2-family/
+            .tmp/r2-three-inputs/
+            .tmp/r2-three/
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14

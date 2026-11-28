@@ -6,7 +6,8 @@ from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parent
 
-LOG_FILE = ROOT / f"trace_{os.getpid()}.log"
+# Generated diagnostics must not mutate the measured source/configuration tree.
+LOG_FILE = ROOT.parent / ".tmp" / "traces" / f"trace_{os.getpid()}.log"
 call_counts = defaultdict(int)
 active_frames = {}
 file_cache = {}
@@ -101,6 +102,7 @@ def start():
     call_counts.clear()
     active_frames.clear()
 
+    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     _log = open(
         LOG_FILE, "w", encoding="utf-8"
     )
