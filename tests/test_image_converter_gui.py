@@ -568,9 +568,11 @@ def test_free_search_profiles_reach_cli_with_durable_memory_and_skip_samples(job
     assert commands and 'Captured population search' in jobs.snapshot(job['id'])['message']
 
 
-def test_free_search_rejects_unsupported_claim_before_launch(jobs,job):
-    with pytest.raises(gui.RequestError,match='noch nicht vollständig'):
-        jobs.start(job['id'],'Ein Kreis mit Schrift "M".','explore5')
+def test_free_search_accepts_unsupported_claim_before_launch(jobs,job,monkeypatch):
+    monkeypatch.setattr(jobs, 'run', lambda job_id: None)
+    started = jobs.start(job['id'],'Ein Kreis mit Schrift "M".','explore5')
+    assert started['status'] == 'running'
+    assert started['description'] == 'Ein Kreis mit Schrift "M".'
 
 
 def test_free_search_completion_does_not_rescan_every_rendered_attempt(jobs,job,monkeypatch):

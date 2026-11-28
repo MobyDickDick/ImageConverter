@@ -1,0 +1,48 @@
+name: Description guided conversion
+
+on:
+  push:
+    branches: [codex/relax-description-conversion]
+  pull_request:
+    paths:
+      - 'src/imageConverterGui.py'
+      - 'src/imageConverterDraft.py'
+      - 'tests/test_description_guided_conversion.py'
+      - '.github/workflows/description-guided.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: description-guided-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gui-conversion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      IMAGE_CONVERTER_ISOLATE_SVG_RENDER: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -r requirements-dev.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Real draft workers, unknown descriptions, saved SVGs and legacy quality guards
+        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py tests/test_image_converter_gui.py --junitxml=.tmp/description-guided-evidence/tests.xml
+      - name: Browser controls and draft labels
+        if: ${{ !cancelled() }}
+        run: node --test tests/gui_app.test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: description-guided-evidence
+          path: .tmp/description-guided-evidence/
+          include-hidden-files: true
+          retention-days: 14

@@ -476,12 +476,6 @@ class Jobs:
             raise RequestError("Bitte eine Bildbeschreibung mit 1 bis 12'000 Zeichen eingeben.")
         if profile not in PROFILES:
             raise RequestError("Unbekanntes Suchprofil.")
-        if profile in {'explore5', 'explore10'}:
-            from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
-            if scene_program(description) is None:
-                raise RequestError('Die freie Suche unterstützt derzeit einfache Listen aus Kreis, Ellipse, Rechteck, '
-                                   'Quadrat, Dreieck und Linie sowie Kelle mit Griff und gemeinsame Spitzen. '
-                                   'Weitere Angaben in dieser Beschreibung kann sie noch nicht vollständig auswerten.')
         if type(use_current_svg) is not bool:
             raise RequestError('Die SVG-Wiederverwendung muss ein Wahrheitswert sein.')
         if seed is not None:
@@ -625,7 +619,11 @@ class Jobs:
         deadline = time.monotonic() + PROFILES[job['profile']][1]
         try:
             input_dir = folder / "input"
-            job['conversion_policy'] = 'description_only_v1'
+            relaxed = not job.get('catalog_background')
+            job['conversion_policy'] = 'description_guided_v1' if relaxed else 'description_only_v1'
+            # Reserve time for a useful visual draft if a strict model fails.
+            reserve = min(10., PROFILES[job['profile']][1] / 4) if relaxed else 0.
+            model_deadline = deadline - reserve
             input_dir.mkdir()
             shutil.copyfile(folder / "source.png", input_dir / "UPLOAD.png")
             descriptions = folder / "description.csv"
@@ -644,6 +642,7 @@ class Jobs:
             exploring = job['profile'] in {'explore5', 'explore10'}
             from src.iCCModules.imageCompositeConverterSceneProgram import scene_program
             program = scene_program(job['description'])
+            image_draft_only = relaxed and exploring and program is None and not component_mode
             complete_scene = program is not None and any(o['kind']=='text' for o in program['objects'])
             if exploring or complete_scene:
                 memory = self.directory / 'primitive-search-memory'
@@ -674,6 +673,10 @@ class Jobs:
                            "--output", str(output / "refined.svg"), "--description", str(description_file),
                            "--seconds", str(maximum), '--seed', str(job['search_seed']),
                            '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
+            if image_draft_only:
+                command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
+                           '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),
+                           '--deadline', str(time.time()+min(15., deadline-time.monotonic()))]
             environment = os.environ.copy()
             environment.update(PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8",
                                ICC_MAX_QUALITY_PASSES="0", ICC_CONVERSION_TIMEOUT_SEC=str(maximum))
@@ -707,7 +710,7 @@ class Jobs:
                     self.processes[job_id] = process
                 try:
                     # Cancellation terminates the process tree and releases this wait.
-                    process.wait(timeout=max(.01, deadline-time.monotonic()))
+                    process.wait(timeout=max(.01, (deadline if image_draft_only else model_deadline)-time.monotonic()))
                 except subprocess.TimeoutExpired:
                     with self.lock:
                         stop_process_tree(process)
@@ -722,6 +725,24 @@ class Jobs:
                 collect = collect_sample_result if component_mode or (not exploring and job.get('sample') and job.get('use_current_svg',True)) else collect_result
                 collect(folder, collected, process.returncode)
                 retain_best_preview(folder, collected)
+            if (relaxed and not image_draft_only
+                    and (not collected.get('result') or collected.get('description_error'))):
+                with self.lock:
+                    if job['status'] != 'running':
+                        return
+                    command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
+                               '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),
+                               '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
+                    with (folder/'draft-console.log').open('wb') as log:
+                        process = subprocess.Popen(command, cwd=ROOT, env=environment, stdout=log,
+                                                   stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, **options)
+                    self.processes[job_id] = process
+                try:
+                    process.wait(timeout=max(.01, deadline-time.monotonic()))
+                except subprocess.TimeoutExpired:
+                    stop_process_tree(process)
+            if relaxed:
+                collect_image_draft(folder, collected)
             retain_best_preview(folder, collected)
             with self.lock:
                 if job["status"] == "running":
@@ -939,13 +960,18 @@ def retain_best_preview(folder: Path, job: dict) -> None:
     from src.iCCModules.imageCompositeConverterCanvas import contain_svg
     result = folder/'result.svg'
     candidates = [folder/'live-preview.svg']
+    relaxed = job.get('conversion_policy') == 'description_guided_v1'
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import description_assertions, validate_svg_assertions
     try:
         assertions = description_assertions(resolve_similarity_description(
             job.get('description', ''), catalog_descriptions()).text)
     except ValueError:
-        return
+        if not relaxed:
+            return
+        assertions = {}
     def valid_inventory(svg):
+        if relaxed:
+            return True
         try:
             svg = contain_svg(svg, job['width'], job['height'])
             validate_svg_assertions(svg, assertions)
@@ -979,11 +1005,11 @@ def retain_best_preview(folder: Path, job: dict) -> None:
         if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
             continue
         error = result_description_error(candidate, job.get('description', ''))
-        if error:
+        if error and not relaxed:
             continue
         # Prefer a valid deliverable over a numerically closer contradiction.
-        rank = (bool(error), not quality['passed'], vector_comparison_score(quality))
-        old_rank = ((bool(previous_error), not previous['passed'], vector_comparison_score(previous))
+        rank = (bool(error) and not relaxed, not quality['passed'], vector_comparison_score(quality))
+        old_rank = ((bool(previous_error) and not relaxed, not previous['passed'], vector_comparison_score(previous))
                     if previous else (True, True, float('inf')))
         if previous and rank >= old_rank:
             continue
@@ -1148,12 +1174,41 @@ def reject_description_result(result: Path, job: dict) -> bool:
     error = result_description_error(result, job.get('description', ''))
     if not error:
         return False
+    if job.get('conversion_policy') == 'description_guided_v1':
+        job.update(description_error=error, description_validation_version=DESCRIPTION_VALIDATION_VERSION)
+        return False
     job.update(status='error', result=False, quality='warning',
                result_rejection='description_inventory', description_error=error,
                description_validation_version=DESCRIPTION_VALIDATION_VERSION,
                message='Konvertierung ungenügend: Die beschriebenen Elemente konnten nicht exakt '
                        'umgesetzt werden. Bitte die Bildbeschreibung präzisieren. Details stehen im Protokoll.')
     return True
+
+
+def collect_image_draft(folder: Path, job: dict) -> None:
+    """Keep an image-driven draft without awarding semantic acceptance."""
+    candidate = folder/'image-draft.svg'
+    if not candidate.is_file() or job.get('quality') == 'passed':
+        return
+    from src.imageConverterSample import prepare_sample
+    try:
+        prepare_sample(candidate.read_bytes(), job['width'], job['height'])
+    except (OSError, ValueError, SyntaxError):
+        return
+    quality = saved_svg_quality(folder/'source.png', candidate)
+    if quality is None or (quality['observed_foreground_pixels'] and not quality['output_foreground_pixels']):
+        return
+    previous = saved_svg_quality(folder/'source.png', folder/'result.svg') if job.get('result') else None
+    if previous and (not previous['passed'], vector_comparison_score(previous)) <= (not quality['passed'], vector_comparison_score(quality)):
+        return
+    shutil.copyfile(candidate, folder/'result.svg')
+    job.pop('result_rejection', None)
+    job.update(status='done', result=True, quality='warning', pixel_quality=quality,
+               image_driven_draft=True,
+               description_error=result_description_error(candidate, job.get('description', '')),
+               description_validation_version=DESCRIPTION_VALIDATION_VERSION,
+               message='Vektorentwurf aus den Bildflächen erstellt. Die Beschreibung konnte nicht vollständig '
+                       'bestätigt werden; bitte das Ergebnis prüfen. Die Flächen sind noch keine erkannten Grundformen.')
 
 
 def reject_raster_result(result: Path, job: dict) -> bool:

@@ -1,5 +1,15 @@
 # ImageConverter
 
+Die manuelle Webkonvertierung behält jetzt auch SVG-Entwürfe, deren Beschreibung
+nicht vollständig verstanden oder erfüllt wird. Die freie Suche lässt unbekannte
+Formulierungen zu. Wenn die Beschreibungssuche kein Ergebnis liefert, erzeugt
+ein begrenzter Ausweichpfad native SVG-Flächen aus dem Originalbild. Diese
+Entwürfe bleiben sichtbar und speicherbar, erhalten aber keine semantische
+Freigabe und ersetzen bei offener Beschreibungsprüfung kein Projekt-SVG.
+Die Bildflächen sind noch keine erkannten Kreise, Dreiecke oder Textobjekte.
+Zur Verwendung nach Abschluss laufender Aufträge den Webserver neu starten
+und die Seite neu laden. [Änderung und CI-Prüfung](docs/description_guided_conversion.md).
+
 `AC0202_1.jpg` wird mit der vorhandenen Benutzerbeschreibung als roter Kreis
 mit grauem Rand und zwei horizontal gespiegelten weissen Linien konvertiert.
 Die Symmetrieachse zählt nicht als zusätzliche Linie; Randkontakt und echte
