@@ -23,6 +23,49 @@ def source_hashes(root: Path = ROOT) -> dict:
             if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc'}
 
 
+def runtime_difference(before: dict, after: dict) -> dict:
+    """Name every changed runtime input, including untracked files."""
+    return {kind: {name: dict(before=before.get(name), after=after.get(name))
+                   for name in sorted(names)}
+            for kind, names in (
+                ('added', after.keys() - before.keys()),
+                ('removed', before.keys() - after.keys()),
+                ('changed', {name for name in before.keys() & after.keys()
+                             if before[name] != after[name]}))}
+
+
+def record_runtime_integrity(runtime: Path, before: dict, output: Path) -> str:
+    after = source_hashes(runtime)
+    changes = runtime_difference(before, after)
+    evidence = output/'runtime-integrity.json'
+    write_json(evidence, dict(schema='runtime_integrity_v1', before=before,
+                             after=after, changes=changes,
+                             unchanged=before == after))
+    if before != after:
+        names = [f'{kind}: {name}' for kind, files in changes.items() for name in files]
+        raise ValueError('Runtime changed during measurement; ' + '; '.join(names)
+                         + f'; evidence: {evidence}')
+    return digest(evidence)
+
+
+def verify_runtime_integrity(output: Path, report: dict) -> None:
+    # Historical v1 reports predate the persisted after-snapshot. Never treat
+    # them as evidence for the new integrity contract.
+    if report['schema'] == 'semantic_robustness_run_v1':
+        return
+    if report['schema'] != 'semantic_robustness_run_v2':
+        raise ValueError('Unknown semantic robustness report schema')
+    evidence = output/'runtime-integrity.json'
+    if not evidence.is_file() or digest(evidence) != report.get('runtime_integrity_sha256'):
+        raise ValueError('Missing or changed runtime integrity evidence')
+    proof = json.loads(evidence.read_text(encoding='utf-8'))
+    if (proof.get('schema') != 'runtime_integrity_v1'
+            or proof['before'] != report['runtime_sha256']
+            or proof['changes'] != runtime_difference(proof['before'], proof['after'])
+            or proof['before'] != proof['after'] or proof.get('unchanged') is not True):
+        raise ValueError('Runtime changed during measurement or invalid integrity evidence')
+
+
 def export_baseline(output: Path, ref: str) -> dict:
     import io
     import shutil
@@ -208,34 +251,38 @@ def run(prepared: Path, output: Path, budget: float = 5., only: list[str] | None
     if export and export['runtime_sha256'] != hashes:
         raise ValueError('Exported baseline changed')
     output.mkdir(parents=True, exist_ok=False)
-    report = dict(schema='semantic_robustness_run_v1', freeze_sha256=digest(prepared/'freeze.json'),
+    report = dict(schema='semantic_robustness_run_v2', freeze_sha256=digest(prepared/'freeze.json'),
                   runtime_sha256=hashes, baseline_revision=export['revision'] if export else None,
                   budget_seconds=budget, case_ids=[c['case_id'] for c in cases], records=[])
-    for case in cases:
-        inputs = output/case['case_id']/'input'
-        inputs.mkdir(parents=True)
-        shutil.copyfile(contained(prepared, case['image']), inputs/(case['case_id']+'.png'))
-        root = ET.Element('root')
-        entry = ET.SubElement(root, 'entry')
-        ET.SubElement(entry, 'beschreibung').text = case['description']
-        ET.SubElement(ET.SubElement(entry, 'bilder'), 'bild').text = case['case_id']+'.png'
-        ET.ElementTree(root).write(inputs/'descriptions.xml', encoding='utf-8', xml_declaration=True)
-        raw = run_case(case, output, timeout=budget+30, iterations=64,
-                       extra_cli_args=('--search-seconds', str(budget), '--search-max-seconds', str(budget), '--search-seed', '17'),
-                       runtime_root=runtime)
-        record = observe(case, prepared, output, raw, manifest['region_limits'], budget)
-        report['records'].append(record)
-        report['summary'] = summarize(report['records'])
+    try:
+        for case in cases:
+            inputs = output/case['case_id']/'input'
+            inputs.mkdir(parents=True)
+            shutil.copyfile(contained(prepared, case['image']), inputs/(case['case_id']+'.png'))
+            root = ET.Element('root')
+            entry = ET.SubElement(root, 'entry')
+            ET.SubElement(entry, 'beschreibung').text = case['description']
+            ET.SubElement(ET.SubElement(entry, 'bilder'), 'bild').text = case['case_id']+'.png'
+            ET.ElementTree(root).write(inputs/'descriptions.xml', encoding='utf-8', xml_declaration=True)
+            raw = run_case(case, output, timeout=budget+30, iterations=64,
+                           extra_cli_args=('--search-seconds', str(budget), '--search-max-seconds', str(budget), '--search-seed', '17'),
+                           runtime_root=runtime)
+            record = observe(case, prepared, output, raw, manifest['region_limits'], budget)
+            report['records'].append(record)
+            report['summary'] = summarize(report['records'])
+            write_json(output/'report.json', report)
+            print(case['case_id'], case['family'], case['kind'], record['passed'], flush=True)
+    finally:
+        # Persist the after-snapshot even if a worker or observer raises.
+        report['runtime_integrity_sha256'] = record_runtime_integrity(runtime, hashes, output)
         write_json(output/'report.json', report)
-        print(case['case_id'], case['family'], case['kind'], record['passed'], flush=True)
-    if hashes != source_hashes(runtime):
-        raise ValueError('Runtime changed during measurement')
     return verify(prepared, output)
 
 
 def verify(prepared: Path, output: Path) -> dict:
     manifest = verify_inputs(prepared)
     report = json.loads((output/'report.json').read_text(encoding='utf-8'))
+    verify_runtime_integrity(output, report)
     if digest(prepared/'freeze.json') != report['freeze_sha256']:
         raise ValueError('Input provenance mismatch')
     by_id = {c['case_id']: c for c in manifest['cases']}
