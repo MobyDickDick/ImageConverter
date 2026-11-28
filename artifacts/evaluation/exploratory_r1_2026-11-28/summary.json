@@ -1,0 +1,159 @@
+{
+  "evidence_kind": "github_actions_r1_diagnostics",
+  "implementation_commit": "7322017f9684d2e59c10c5da17d208c277e225da",
+  "run_url": "https://github.com/MobyDickDick/ImageConverter/actions/runs/46140951233",
+  "overall_conclusion": "failure",
+  "pending_jobs": 0,
+  "negative_probes": {
+    "artifact_id": 15261299424,
+    "job_id": 140966538597,
+    "accepted": 0,
+    "completed": 4,
+    "junit_failures": 4,
+    "artifact_zip_sha256": "fdd9325b866f96ae23bbf7c11746d87f38d0434dc054c741463b1e8e8a950343"
+  },
+  "regression_jobs": [
+    {
+      "xfail": "test_conversion_deadline.py::test_production_cli_does_not_render_in_parent_reporting: existing A5 >30s policy",
+      "contracts_xfailed": 1,
+      "conclusion": "success",
+      "exploratory_passed": 41,
+      "job_id": 140966741566,
+      "artifact_id": 15261817249,
+      "saved_output_passed": 6,
+      "contracts_passed": 53,
+      "platform": "ubuntu-24.04"
+    },
+    {
+      "platform": "windows-latest",
+      "job_id": 140966741545,
+      "saved_output_passed": 6,
+      "contracts_passed": 54,
+      "conclusion": "success",
+      "artifact_id": 15261354896,
+      "exploratory_passed": 41,
+      "contracts_xfailed": 0
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "gradient_03",
+      "accepted": false,
+      "absence_reason": "no_result_no_output",
+      "supervision": {
+        "elapsed_seconds": 1.819201,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 43,
+        "model_evaluations": 42,
+        "render_cache_hits": 0,
+        "renderings": 43,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "44ef9c28419855c4cf779dcea2640988ae08deefeeca49f5f25f9cf7e7a685b8",
+        "isolated": true,
+        "timing_trace": "gradient_03_timing.jsonl",
+        "observation_interruptions": [],
+        "stop_reason": "no_result"
+      },
+      "verification_path": ".tmp/scene-failures/scene-0ovkdiar/cli/verification.json"
+    },
+    {
+      "case_id": "gradient_04",
+      "accepted": false,
+      "absence_reason": "time_limit_no_output",
+      "supervision": {
+        "elapsed_seconds": 5.00828,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 133,
+        "model_evaluations": 0,
+        "render_cache_hits": 0,
+        "renderings": 133,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "f634bb54c181360d6aaba08f62ab8d463e53164ae896507c7fdb7a5a809ab882",
+        "stop_reason": "time_limit",
+        "isolated": true,
+        "timing_trace": "gradient_04_timing.jsonl",
+        "observation_interruptions": [],
+        "external_max_seconds": null,
+        "recovered_checkpoint": false,
+        "retained_output": false
+      },
+      "verification_path": ".tmp/scene-failures/scene-cs9tiet3/cli/verification.json"
+    },
+    {
+      "case_id": "same_paint_outlined_rounded_overlap_07",
+      "accepted": false,
+      "absence_reason": "time_limit_no_output",
+      "supervision": {
+        "elapsed_seconds": 5.009996,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 148,
+        "model_evaluations": 0,
+        "render_cache_hits": 0,
+        "renderings": 148,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "5855df46ba7de2b50e1c6ea9f97fe8c554cfc197e37a09abe3873ae62187f0d6",
+        "stop_reason": "time_limit",
+        "isolated": true,
+        "timing_trace": "same_paint_outlined_rounded_overlap_07_timing.jsonl",
+        "observation_interruptions": [],
+        "external_max_seconds": null,
+        "recovered_checkpoint": false,
+        "retained_output": false
+      },
+      "verification_path": ".tmp/scene-failures/scene-j9re0wq9/cli/verification.json"
+    },
+    {
+      "case_id": "gradient_00",
+      "accepted": false,
+      "absence_reason": "no_result_no_output",
+      "supervision": {
+        "elapsed_seconds": 1.861938,
+        "limit_seconds": 5.0,
+        "minimum_seconds": 5.0,
+        "max_seconds": 5.0,
+        "time_extensions": 0,
+        "candidate_evaluations": 45,
+        "model_evaluations": 44,
+        "render_cache_hits": 0,
+        "renderings": 45,
+        "render_budget": 4096,
+        "render_failures": 0,
+        "global_stop_reason": null,
+        "full_scene_validations": 0,
+        "search_seed": "17",
+        "render_sequence_sha256": "583ef50c6c1de85b53ea6373307b4cd7f09198a865ffece25dcc334bb241b519",
+        "isolated": true,
+        "timing_trace": "gradient_00_timing.jsonl",
+        "observation_interruptions": [],
+        "stop_reason": "no_result"
+      },
+      "verification_path": ".tmp/scene-failures/scene-jmc1vpnm/cli/verification.json"
+    }
+  ],
+  "limitations": [
+    "No quality improvement or full repository acceptance claimed.",
+    "R2 fingerprint changes and R3 AC08 contract diagnosis remain open.",
+    "Only existing Actions artifact JSON was read locally; no tests or conversions ran locally."
+  ]
+}

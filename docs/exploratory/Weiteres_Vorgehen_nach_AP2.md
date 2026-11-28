@@ -9,8 +9,11 @@ Etappe 1 ist als [CI-Galerie und Codeübersicht](Etappe1_Demo_und_Codeweg.md)
 implementiert und auf Windows/Ubuntu mit jeweils 41 Tests geprüft.
 Etappe 2 ist mit [vollständigem CI-Inventar, Ursachenliste und begrenztem
 Reparaturplan](Etappe2_CI_Ursachen_und_Reparaturplan.md) abgeschlossen.
-Als Nächstes folgt Etappe 3, Paket R1: negative Workerabschlüsse und deren
-Nachweise erhalten. Die Reparaturen sowie AP 3/4 stehen weiterhin aus.
+Etappe 3, [Paket R1](Etappe3_R1_Workerabschluesse.md), unterscheidet negative
+Workerabschlüsse und erhält ihre Nachweise vor dem Aufräumen. Die vier
+gezielten Qualitätsproben bleiben negativ. Als Nächstes folgt R2:
+Fingerprint-Differenzen benennen und deren Ursache nachweisen. R2/R3 und
+AP 3/4 stehen weiterhin aus.
 
 Zuerst entstehen eine sichtbare Demo und eine verständliche Architekturübersicht.
 Danach werden CI-Fehler nach Ursachen gruppiert und in begrenzten Paketen behoben.
@@ -168,8 +171,10 @@ primäre Entwicklungsstrategie. AP 5–8 bleiben gemäss AP 0 eingeplant.
 ## Fortschritt und Rahmen
 
 - [x] Etappe 1: Betrachtbare CI-Demo und verständliche Architekturübersicht implementiert; CI-Ergebnis im zugehörigen PR, persönliche Durchsicht durch den Anwender offen.
-- [x] Etappe 2: Ursachenliste und begrenzter Reparaturumfang festgehalten; 18 gemeinsame rote Jobs auf main/AP 2, zwei ungeklärte zusätzliche Statusabweichungen. Nächstes Paket: R1 gemäss [Reparaturplan](Etappe2_CI_Ursachen_und_Reparaturplan.md).
-- [ ] Etappe 3: Vereinbarte Reparaturpakete geprüft; übrige Fehler dokumentiert.
+- [x] Etappe 2: Ursachenliste und begrenzter Reparaturumfang festgehalten; 18 gemeinsame rote Jobs auf main/AP 2, zwei ungeklärte zusätzliche Statusabweichungen. Reihenfolge gemäss [Reparaturplan](Etappe2_CI_Ursachen_und_Reparaturplan.md).
+- [x] Etappe 3, R1: Negative Abschlüsse getrennt verifiziert, kompakte Fehlernachweise vor dem Aufräumen gesichert; [CI-Ergebnisse und offene Qualitätsfehler](Etappe3_R1_Workerabschluesse.md). Keine grüne Gesamt-CI.
+- [ ] Etappe 3, R2 (nächstes Paket): Fingerprint-Differenzen benennen und nachgewiesene Ursache korrigieren; zuerst eingefrorene Familie und Integritäts-Negativkontrolle.
+- [ ] Etappe 3, R3: AC08-Verträge und die zwei Statusabweichungen unter kontrollierten Vergleichsbedingungen eingrenzen. Übrige Fehler danach neu gewichten.
 - [ ] Etappe 4: AP 3 und anschliessend AP 4 umgesetzt und geprüft.
 
 Änderungen bauen auf `experimental/explorative-conversion` auf und erhalten
