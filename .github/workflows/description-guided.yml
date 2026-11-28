@@ -5,6 +5,9 @@ on:
     paths:
       - 'src/imageConverterGui.py'
       - 'src/imageConverterDraft.py'
+      - 'src/imageConverterSample.py'
+      - 'src/iCCModules/imageCompositeConverterTwoWayValve.py'
+      - 'src/iCCModules/imageCompositeConverterVectorPolicy.py'
       - 'tests/test_description_guided_conversion.py'
       - '.github/workflows/description-guided.yml'
   workflow_dispatch:
@@ -37,7 +40,7 @@ jobs:
         with:
           node-version: '22'
       - name: Real draft workers, unknown descriptions, saved SVGs and legacy quality guards
-        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py --junitxml=.tmp/description-guided-evidence/tests.xml
+        run: python -m pytest -q -rA tests/test_description_guided_conversion.py tests/test_gui_vector_recovery.py tests/test_two_way_valve_description.py --junitxml=.tmp/description-guided-evidence/tests.xml
       - name: Browser controls and draft labels
         if: ${{ !cancelled() }}
         run: node --test tests/gui_app.test.cjs

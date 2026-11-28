@@ -101,8 +101,8 @@ function draftQuality(job) {
   const error = job.description_error || job.sample_report?.description_error || job.recovery_report?.description_error || "";
   const imageSummary = pixels === true ? "Bildqualität bestanden" : pixels === false ? "Bildqualität nicht bestanden" : "Bildprüfung noch offen";
   const parts = [pixels === true ? "Das SVG besteht den Bildvergleich mit dem Original." : pixels === false ? "Das SVG weicht im Bildvergleich noch zu stark vom Original ab." : "Für das SVG liegt keine abgeschlossene Bildprüfung vor."];
-  if (job.image_driven_draft) {
-    parts.push("Dieser speicherbare Vektorentwurf wurde aus den Bildflächen erzeugt. Die Beschreibung konnte nicht vollständig bestätigt werden; Grundformen und Schrift sind als Flächen angenähert. Bitte vergleiche den Entwurf mit dem Original.");
+  if (job.geometric_draft) {
+    parts.push("Dieser Entwurf besteht aus geometrischen SVG-Formen und gegebenenfalls Text. Die vollständige Beschreibungsprüfung ist noch offen. Bitte vergleiche den Entwurf mit dem Original.");
   } else if (error) {
     const direction = /^wrong_described_arrow_direction:(left|right)$/.exec(error);
     const spray = /^missing_described_dashed_spray_rays: expected=(\d+), observed=(\d+)$/.exec(error);

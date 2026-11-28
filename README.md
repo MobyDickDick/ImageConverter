@@ -1,12 +1,11 @@
 # ImageConverter
 
-Die manuelle Webkonvertierung behält jetzt auch SVG-Entwürfe, deren Beschreibung
-nicht vollständig verstanden oder erfüllt wird. Die freie Suche lässt unbekannte
-Formulierungen zu. Wenn die Beschreibungssuche kein Ergebnis liefert, erzeugt
-ein begrenzter Ausweichpfad native SVG-Flächen aus dem Originalbild. Diese
-Entwürfe bleiben sichtbar und speicherbar, erhalten aber keine semantische
-Freigabe und ersetzen bei offener Beschreibungsprüfung kein Projekt-SVG.
-Die Bildflächen sind noch keine erkannten Kreise, Dreiecke oder Textobjekte.
+Die manuelle Webkonvertierung behält geometrische SVG-Entwürfe auch bei offener
+Beschreibungsprüfung. Unbekannte Formulierungen blockieren den Start nicht.
+Der Ausweichpfad prüft geometrische Modelle; er erzeugt keine Pixelstreifen oder
+eingebetteten Rasterbilder. Alte Pixelstreifen-SVGs sind als Vorlage, Vorschau
+und Ergebnis ausgeschlossen. Das Motorventil unterstützt einen echten Kreis,
+Griff, zwei Dreiecke mit gemeinsamem Farbverlauf und eine native SVG-Beschriftung.
 Zur Verwendung nach Abschluss laufender Aufträge den Webserver neu starten
 und die Seite neu laden. [Änderung und CI-Prüfung](docs/description_guided_conversion.md).
 

@@ -262,6 +262,12 @@ class Jobs:
                 self._check_description(stored)
                 self.save(stored)
             job = dict(self.jobs[job_id])
+            if job.get('sample'):
+                from src.imageConverterSample import prepare_sample
+                try:
+                    prepare_sample((folder/'sample.svg').read_bytes(), job['width'], job['height'])
+                except (OSError, ValueError, SyntaxError):
+                    job.update(sample=False, sample_rejection='Nicht geometrische oder ungültige Vorlage verworfen.')
             retry = self.seed_retry.session(job_id)
             if retry:
                 job['seed_retry'] = dict(retry)
@@ -294,7 +300,14 @@ class Jobs:
     def preview_file(self, job_id: str) -> Path:
         folder = self.folder(job_id)
         preview = folder / 'live-preview.svg'
-        return preview if preview.is_file() else folder / 'recovery.svg'
+        from src.imageConverterSample import prepare_sample
+        for candidate in (preview, folder/'recovery.svg'):
+            try:
+                prepare_sample(candidate.read_bytes(), self.jobs[job_id]['width'], self.jobs[job_id]['height'])
+                return candidate
+            except (OSError, ValueError, SyntaxError):
+                continue
+        return folder/'no-geometric-preview.svg'
 
     def export_file(self, job_id: str, *, include_retry=True) -> Path | None:
         """Offer native drafts for manual saving, independently of acceptance gates."""
@@ -305,7 +318,11 @@ class Jobs:
         if retry and retry.get('best_job_id'):
             best = self.folder(retry['root_id'])/'seed-best.svg'
             if best.is_file():
-                return best
+                try:
+                    prepare_sample(best.read_bytes(), job['width'], job['height'])
+                    return best
+                except (OSError, ValueError, SyntaxError):
+                    pass
         candidates = []
         if job.get('result') and job['status'] != 'running':
             candidates.append(folder/'result.svg')
@@ -544,6 +561,12 @@ class Jobs:
         """Seed from this image's current native vector, never a stale name alone."""
         from src.imageConverterSample import prepare_sample
         folder = self.folder(job['id'])
+        if job.get('sample') and (folder/'sample.svg').is_file():
+            try:
+                prepare_sample((folder/'sample.svg').read_bytes(), job['width'], job['height'])
+            except (ValueError, SyntaxError):
+                job.update(sample=False, sample_pending=False, sample_origin='',
+                           sample_rejection='Nicht geometrische oder ungültige Vorlage verworfen.')
         if job.get('sample_pending') and job.get('sample') and (folder/'sample.svg').is_file():
             job.update(sample_pending=False,sample_origin='Geladene Vorlage',
                        message='Geladene Vorlage wird am Original weiter verbessert …')
@@ -681,9 +704,9 @@ class Jobs:
                            '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
             if image_draft_only:
                 deadline = min(deadline, time.monotonic()+15.)
-                job['message'] = 'Beschreibung nur teilweise auswertbar; Vektorentwurf aus den Bildflächen erstellen …'
+                job['message'] = 'Beschreibung nur teilweise auswertbar; geometrische Modelle prüfen …'
                 command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
-                           '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),
+                           '--source', str(folder/'source.png'), '--output', str(folder/'geometric-draft.svg'),
                            '--deadline', str(time.time()+min(15., deadline-time.monotonic()))]
             environment = os.environ.copy()
             environment.update(PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8",
@@ -740,9 +763,9 @@ class Jobs:
                 with self.lock:
                     if job['status'] != 'running':
                         return
-                    job['message'] = 'Kein bestätigtes Beschreibungsmodell; Vektorentwurf aus den Bildflächen erstellen …'
+                    job['message'] = 'Weitere geometrische Modelle prüfen …'
                     command = [sys.executable, '-u', '-m', 'src.imageConverterDraft',
-                               '--source', str(folder/'source.png'), '--output', str(folder/'image-draft.svg'),
+                               '--source', str(folder/'source.png'), '--output', str(folder/'geometric-draft.svg'),
                                '--deadline', str(time.time()+max(0., deadline-time.monotonic()))]
                     with (folder/'draft-console.log').open('wb') as log:
                         process = subprocess.Popen(command, cwd=ROOT, env=environment, stdout=log,
@@ -753,7 +776,7 @@ class Jobs:
                 except subprocess.TimeoutExpired:
                     stop_process_tree(process)
             if relaxed:
-                collect_image_draft(folder, collected)
+                collect_geometric_draft(folder, collected)
             retain_best_preview(folder, collected)
             with self.lock:
                 if job["status"] == "running":
@@ -1196,10 +1219,16 @@ def reject_description_result(result: Path, job: dict) -> bool:
     return True
 
 
-def collect_image_draft(folder: Path, job: dict) -> None:
+def collect_geometric_draft(folder: Path, job: dict) -> None:
     """Keep an image-driven draft without awarding semantic acceptance."""
-    candidate = folder/'image-draft.svg'
-    if not candidate.is_file() or job.get('quality') == 'passed':
+    candidate = folder/'geometric-draft.svg'
+    if not candidate.is_file():
+        if not job.get('result'):
+            job.update(status='error', result=False, quality='warning',
+                       message='Noch kein geometrisches SVG-Modell gefunden. Die Beschreibung blockiert den Start nicht; '
+                               'eine Pixelkopie wird nicht als Ersatz erzeugt.')
+        return
+    if job.get('quality') == 'passed':
         return
     from src.imageConverterSample import prepare_sample
     try:
@@ -1215,11 +1244,11 @@ def collect_image_draft(folder: Path, job: dict) -> None:
     shutil.copyfile(candidate, folder/'result.svg')
     job.pop('result_rejection', None)
     job.update(status='done', result=True, quality='warning', pixel_quality=quality,
-               image_driven_draft=True,
+               geometric_draft=True,
                description_error=result_description_error(candidate, job.get('description', '')),
                description_validation_version=DESCRIPTION_VALIDATION_VERSION,
-               message='Vektorentwurf aus den Bildflächen erstellt. Die Beschreibung konnte nicht vollständig '
-                       'bestätigt werden; bitte das Ergebnis prüfen. Die Flächen sind noch keine erkannten Grundformen.')
+               message='Geometrischen SVG-Entwurf erstellt. Die vollständige Beschreibungsprüfung '
+                       'ist noch offen; bitte das Ergebnis prüfen.')
 
 
 def reject_raster_result(result: Path, job: dict) -> bool:
@@ -1229,9 +1258,15 @@ def reject_raster_result(result: Path, job: dict) -> bool:
         root = ET.parse(result).getroot()
     except (OSError, ET.ParseError):
         return False  # Invalid/unrenderable output is handled by the quality check.
-    if not any(node.tag.rsplit('}', 1)[-1] == 'image' for node in root.iter()):
+    from src.iCCModules.imageCompositeConverterVectorPolicy import pixel_copy_reason
+    reason = pixel_copy_reason(root)
+    if not reason:
         return False
-    job.update(status='error', result=False, quality='warning', result_rejection='embedded_raster',
+    if reason == 'pixel_trace':
+        job.update(status='error', result=False, quality='warning', result_rejection=reason,
+                   message='Pixelstreifen-SVG verworfen. Bitte erneut geometrisch konvertieren.')
+        return True
+    job.update(status='error', result=False, quality='warning', result_rejection=reason,
                message='Vektorisierung fehlgeschlagen. Die Ausgabe enthält ein eingebettetes Rasterbild '
                        'und wird deshalb nicht als SVG-Ergebnis angeboten. Details stehen im Protokoll.')
     return True
@@ -1692,6 +1727,7 @@ class Handler(BaseHTTPRequestHandler):
                         current_svg_reuse=True,
                         primitive_exploration=True,
                         description_guided_conversion=True,
+                        geometric_svg_only=True,
                         scoped_primitive_paint=True,
                         three_wing_valve=True,
                         partitioned_rhombus=True,

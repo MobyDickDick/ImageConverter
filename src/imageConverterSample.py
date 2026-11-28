@@ -31,6 +31,9 @@ def prepare_sample(data: bytes, width: int, height: int) -> str:
     if re.search(r"<!\s*(?:DOCTYPE|ENTITY)|<\?xml-stylesheet", text, re.I):
         raise ValueError("Bitte ein eigenständiges SVG ohne externe Ressourcen hochladen.")
     root = ET.fromstring(text)
+    from src.iCCModules.imageCompositeConverterVectorPolicy import pixel_copy_reason
+    if pixel_copy_reason(root):
+        raise ValueError('Pixelkopien und eingebettete Rasterbilder sind keine geometrische SVG-Vorlage.')
     if root.tag not in {"svg", f"{{{SVG_NS}}}svg"}:
         raise ValueError("Die Sample-Datei muss ein SVG sein.")
     elements = list(root.iter())

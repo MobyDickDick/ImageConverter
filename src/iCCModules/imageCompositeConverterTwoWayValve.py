@@ -17,7 +17,12 @@ from src.iCCModules.imageCompositeConverterAdaptiveSearch import pixel_quality
 
 def two_way_valve_spec(description):
     from src.iCCModules.imageCompositeConverterDescriptionLanguage import normalize_description
-    words = ' '.join(normalize_description(description).casefold().split())
+    normalized = ' '.join(normalize_description(description).split())
+    label_pattern = r'(?:im (?:kreis(?: der kelle)?|quadrat) steht|in der kelle ist ein) ["„]([^"“]+)["“](?: geschrieben)?'
+    labels = re.findall(label_pattern, normalized, re.I)
+    if len(set(labels)) > 1:
+        return None
+    words = re.sub(label_pattern, '', normalized, flags=re.I).casefold()
     # Consume the whole description: an unrecognized addition must never
     # silently authorize an incomplete inventory or a different motor symbol.
     clauses = (
@@ -28,23 +33,31 @@ def two_way_valve_spec(description):
     rest = words
     motor = None
     for clause in clauses:
-        match = re.match(clause+r'(?:[.;]\s*|\s+|$)', rest)
-        if match is None:
+        pattern = r'(?<!\w)'+clause+r'(?:[.;]\s*|\s+|$)'
+        matches = list(re.finditer(pattern, rest))
+        if not matches:
             return None
-        if 'motor' in match.groupdict():
-            motor = 'square' if match['motor'] == 'quadrat' else 'circle'
-        rest = rest[match.end():]
+        if 'motor' in matches[0].groupdict():
+            motors = {match['motor'] for match in matches}
+            if len(motors) != 1:
+                return None
+            motor = 'square' if matches[0]['motor'] == 'quadrat' else 'circle'
+        rest = re.sub(pattern, '', rest)
     clauses = (
         *((r'die (?:beiden )?diagonalen des quadrats sind dunkelgrau, genau gleich wie der rand des quadrats',)
           if motor == 'square' else ()),
         r'bei den ventilen werden die beiden formen zusammengehängt und ein farbverlauf gezeichnet',
     )
     for clause in clauses:
-        match = re.match(clause+r'(?:[.;]\s*|\s+|$)', rest)
-        if match is None:
+        pattern = r'(?<!\w)'+clause+r'(?:[.;]\s*|\s+|$)'
+        if re.search(pattern, rest) is None:
             return None
-        rest = rest[match.end():]
-    return dict(motor=motor) if not rest.strip(' .;') else None
+        rest = re.sub(pattern, '', rest)
+    # Expanding "Die Form ist wie …" can leave only its introductory article.
+    rest = re.sub(r'\bdie\s*[.;]', '', rest)
+    if rest.strip(' .;'):
+        return None
+    return dict(motor=motor, **({'label': labels[0]} if labels else {}))
 
 
 def two_way_valve_contract(description):
@@ -96,6 +109,10 @@ def validate_two_way_valve(svg, spec=None):
         for child in node:
             visit(child,matrix,fill)
     visit(root)
+    if isinstance(spec, dict) and spec.get('label'):
+        texts = [node for node in root.iter() if node.tag.rsplit('}', 1)[-1] == 'text']
+        if len(texts) != 1 or ''.join(texts[0].itertext()) != spec['label']:
+            raise ValueError('two_way_valve_missing_label')
     if (len(circles)!=int(not square) or len(squares)!=int(square)
             or len(lines)!=(3 if square else 1) or len(triangles)!=2):
         raise ValueError('two_way_valve_incomplete')
@@ -139,7 +156,7 @@ def validate_two_way_valve(svg, spec=None):
         raise ValueError('two_way_valve_unshared_gradient')
 
 
-def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn):
+def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn, require_quality=True):
     spec = two_way_valve_spec(description)
     if spec is None:
         return None
@@ -190,6 +207,25 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
     yy, xx = np.indices(mask.shape, dtype=float)
     radial = np.hypot(xx+.5-cx, yy+.5-cy)
     fill = np.median(pixels[radial < outer*.65], axis=0)
+    glyph = None
+    if spec.get('label'):
+        from html import escape
+        fill = np.percentile(pixels[radial < outer*.7], 90, axis=0)
+        lettering = (radial < outer*.8) & (np.max(fill-pixels, axis=2) > 35)
+        gy, gx = np.nonzero(lettering)
+        if not len(gx):
+            return None
+        ink = np.percentile(pixels[lettering], 15, axis=0)
+        text = (f'<text x="0" y="100" font-family="Arial" font-size="100" '
+                f'font-weight="bold">{escape(spec["label"])}</text>')
+        measure = render_fn('<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="150">'
+                            '<rect width="1000" height="150" fill="white"/>'+text+'</svg>', 1000, 150)
+        my, mx = np.nonzero(np.min(measure, axis=2) < 225)
+        if not len(mx):
+            return None
+        glyph = (text, ink, (gx.min()-cx)/outer, (gy.min()-cy)/outer,
+                 (gx.max()-gx.min()+1)/outer, (gy.max()-gy.min()+1)/outer,
+                 mx.min(), my.min(), mx.max()-mx.min()+1, my.max()-my.min()+1)
     rim = np.percentile(pixels[(radial > outer*.8)&(radial < outer+1)], 12, axis=0)
     if square:
         interior = (abs(xx+.5-cx)<outer*.75)&(abs(yy+.5-cy)<outer*.75)
@@ -239,6 +275,11 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
                                for a,b in ((cy-r,cy+r),(cy+r,cy-r))))
         else:
             motor = f'<circle cx="{cx:.5f}" cy="{cy:.5f}" r="{r:.5f}" fill="{_hex(fill)}" stroke="{_hex(rim)}" stroke-width="{sw:.5f}"/>'
+        if glyph is not None:
+            text, ink, ox, oy, gw, gh, mx, my, mw, mh = glyph
+            motor += (f'<g transform="translate({cx+ox*r:.5f} {cy+oy*r:.5f}) '
+                      f'scale({gw*r/mw:.8f} {gh*r/mh:.8f}) translate({-mx} {-my})" '
+                      f'fill="{_hex(ink)}">{text}</g>')
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
                 f'<defs><linearGradient id="valve" gradientUnits="userSpaceOnUse" x1="{start[0]:.5f}" y1="{start[1]:.5f}" '
                 f'x2="{end[0]:.5f}" y2="{end[1]:.5f}"><stop offset="0" stop-color="{_hex(low)}"/>'
@@ -260,7 +301,7 @@ def fit_two_way_valve(width, height, *, description, image, render_fn, error_fn)
     if result is None:
         return None
     quality = pixel_quality(image,result['rendered'])
-    if not quality or not quality['passed']:
+    if require_quality and (not quality or not quality['passed']):
         return None
     validate_two_way_valve(result['svg'],spec)
     result['quality'] = quality

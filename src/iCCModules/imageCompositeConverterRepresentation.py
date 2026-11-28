@@ -75,8 +75,11 @@ def description_object_limits(text):
     from src.iCCModules.imageCompositeConverterTwoWayValve import two_way_valve_spec
     valve = two_way_valve_spec(text)
     if valve:
-        return (dict(square=1, diagonal=2, line=1, triangle=2) if valve['motor']=='square'
-                else dict(circle=1, line=1, triangle=2))
+        inventory = (dict(square=1, diagonal=2, line=1, triangle=2) if valve['motor']=='square'
+                     else dict(circle=1, line=1, triangle=2))
+        if valve.get('label'):
+            inventory['text'] = 1
+        return inventory
     words = re.sub(r'"[^"\n]*"|„[^“\n]*“', '', text).casefold()
     # Keep the fitter's original wording intact; this is an inventory synonym.
     words = re.sub(r'\brechteckig[enrms]*\s+feld\b', 'rechteck', words)
